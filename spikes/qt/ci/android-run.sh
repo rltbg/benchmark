@@ -26,11 +26,12 @@ adb exec-out screencap -p > "$out/android-final.png"
 adb shell dumpsys meminfo "$pkg" > "$out/meminfo.txt" 2>&1
 adb logcat -d > "$out/logcat-full.log" 2>&1
 grep -E 'SPIKE:' "$out/run.log" | head -40
-# captures par onglet : relance rapide (le parcours dure ~8 s) -> captures à t=1 s (liste), 5 s (canvas), 8 s (cœur)
+# captures par onglet, calées sur les marqueurs (relance : le parcours dure ~8 s après SPIKE:autorun start)
 adb shell am force-stop "$pkg"; adb logcat -c
 adb shell am start -n "$act" --ez autorun true >/dev/null 2>&1
-sleep 3; adb exec-out screencap -p > "$out/android-tab1-list.png"
-sleep 4; adb exec-out screencap -p > "$out/android-tab2-canvas.png"
-sleep 3; adb exec-out screencap -p > "$out/android-tab3-core.png"
+waitm() { for i in $(seq 1 $2); do adb logcat -d -s SPIKE:I | grep -q "$1" && return 0; sleep 0.5; done; return 1; }
+waitm 'SPIKE:autorun start' 80; sleep 1.5; adb exec-out screencap -p > "$out/android-tab1-list.png"
+sleep 3; adb exec-out screencap -p > "$out/android-tab2-canvas.png"
+waitm 'SPIKE:heavy done' 40; sleep 0.5; adb exec-out screencap -p > "$out/android-tab3-core.png"
 adb logcat -d -s SPIKE:I > "$out/run2.log" 2>&1
 grep -q 'SPIKE:done' "$out/run.log"

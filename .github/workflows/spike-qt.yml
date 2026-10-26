@@ -94,9 +94,9 @@ jobs:
         id: build
         shell: bash
         run: |
-          mkdir -p res; SECONDS=0
-          python -m pip install --quiet ninja
-          { cl 2>&1 | head -1; cmake --version | head -1; ninja --version; "$QT_ROOT_DIR/bin/qmake" -v | tail -1; } > res/versions.txt 2>&1
+          mkdir -p res; exec > >(tee -a res/build.log) 2>&1; SECONDS=0
+          command -v ninja || python -m pip install ninja
+          { cl 2>&1 | head -1 || true; cmake --version | head -1; ninja --version; "$QT_ROOT_DIR/bin/qmake" -v | tail -1; } > res/versions.txt 2>&1 || true
           cmake -S spikes/qt -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR" 2>&1 | tee res/build.log
           cmake --build build 2>&1 | tee -a res/build.log
           cmake --install build --prefix deploy 2>&1 | tee -a res/build.log
@@ -409,6 +409,7 @@ jobs:
           { emcc --version | head -1; cmake --version | head -1; echo "QT_HOST_PATH=${{ steps.qt_mt.outputs.qt-host-path }}"; } > res/versions.txt 2>&1
           for k in mt st; do
             case $k in mt) qt="${{ steps.qt_mt.outputs.qt-root-dir }}";; st) qt="${{ steps.qt_st.outputs.qt-root-dir }}";; esac
+            chmod +x "$qt"/bin/* 2>/dev/null || true   # qt-cmake du kit singlethread : « Permission denied » au 1er essai
             t=$SECONDS
             "$qt/bin/qt-cmake" -S spikes/qt -B build-$k -G Ninja -DCMAKE_BUILD_TYPE=Release \
               -DQT_HOST_PATH="${{ steps.qt_mt.outputs.qt-host-path }}" 2>&1 | tee -a res/build.log

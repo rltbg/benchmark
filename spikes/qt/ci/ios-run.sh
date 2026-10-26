@@ -23,14 +23,15 @@ t0=$(python3 -c 'import time;print(int(time.time()*1000))')
 # --console-pty relaie stdout/stderr de l'app (marqueurs SPIKE: sur stderr)
 xcrun simctl launch --console-pty "$udid" "$bid" --autorun > "$log" 2>&1 &
 lp=$!
-ready=""; for i in $(seq 1 600); do
+ready=""; as=""; for i in $(seq 1 600); do
   if [ -z "$ready" ] && grep -q 'SPIKE:ready' "$log"; then ready=$(( $(python3 -c 'import time;print(int(time.time()*1000))') - t0 )); fi
-  [ "$i" = 40 ] && xcrun simctl io "$udid" screenshot "$out/$label-tab1-list.png" >/dev/null 2>&1
-  [ "$i" = 90 ] && xcrun simctl io "$udid" screenshot "$out/$label-tab2-canvas.png" >/dev/null 2>&1
+  if [ -z "$as" ] && grep -q 'SPIKE:autorun start' "$log"; then as=$i; fi   # captures calées sur le marqueur (pas de 0,2 s)
+  [ -n "$as" ] && [ "$i" = $((as+8)) ] && xcrun simctl io "$udid" screenshot "$out/$label-tab1-list.png" >/dev/null 2>&1
+  [ -n "$as" ] && [ "$i" = $((as+23)) ] && xcrun simctl io "$udid" screenshot "$out/$label-tab2-canvas.png" >/dev/null 2>&1
   grep -q 'SPIKE:done' "$log" && break
   sleep 0.2
 done
-xcrun simctl io "$udid" screenshot "$out/$label-tab3-core.png" >/dev/null 2>&1
+sleep 0.3; xcrun simctl io "$udid" screenshot "$out/$label-tab3-core.png" >/dev/null 2>&1
 pid=$(xcrun simctl spawn "$udid" launchctl list | awk -v b="$bid" '$3 ~ b {print $1}' | head -1)
 footprint=""; [ -n "$pid" ] && footprint=$( (footprint "$pid" 2>/dev/null || ps -o rss= -p "$pid") | tr '\n' ' ')
 echo "{\"label\":\"$label\",\"cold_start_to_ready_ms\":${ready:-null},\"pid\":\"$pid\",\"footprint\":\"$footprint\"}" | tee "$out/run-$label.json"
