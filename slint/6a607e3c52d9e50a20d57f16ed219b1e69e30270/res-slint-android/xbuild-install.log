@@ -1,0 +1,5 @@
+   Compiling shlex v1.3.0
+   Compiling xbuild v0.2.0 (/home/runner/.cargo/git/checkouts/xbuild-7ada1d01b20e4efd/e67b501/xbuild)
+    Finished `release` profile [optimized] target(s) in 3m 38s
+  Installing /home/runner/.cargo/bin/x
+   Installed package `xbuild v0.2.0 (https://github.com/rust-mobile/xbuild.git#e67b501c)` (executable `x`)

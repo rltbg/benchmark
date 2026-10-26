@@ -1,0 +1,37 @@
+{
+ "stack": "slint",
+ "platform": "linux",
+ "status": "fail",
+ "build_seconds": 294.0,
+ "artifacts": [
+  {
+   "path": "/home/runner/work/benchmark/benchmark/out/linux/slintspike-skia-pulse",
+   "bytes": 20126104,
+   "gzip": 9581989,
+   "brotli": 7539901
+  },
+  {
+   "path": "/home/runner/work/benchmark/benchmark/out/linux/slintspike-femtovg-pulse",
+   "bytes": 13256248,
+   "gzip": 6661580,
+   "brotli": 5291209
+  },
+  {
+   "path": "/home/runner/work/benchmark/benchmark/out/linux/slintspike-skia-rust",
+   "bytes": 20124952,
+   "gzip": 9581586,
+   "brotli": 7536273
+  }
+ ],
+ "notes": [
+  "artefacts dans l'ordre : skia+pulse (principal), femtovg+pulse, skia+coeur rust",
+  "build femtovg: 153 s;build skia + coeur rust: 87 s;",
+  "SPIKE:done absent du run.log",
+  "selftest non ok",
+  "execution: Xvfb 1280x800, SLINT_BACKEND=winit-skia-software (rendu CPU), chiffres de CI et non d'appareil",
+  "metrics: ready absent spike_lines=0 "
+ ],
+ "runner": "Linux/X64",
+ "sha": "6a607e3c52d9e50a20d57f16ed219b1e69e30270",
+ "date": "2026-10-26T16:15:43Z"
+}

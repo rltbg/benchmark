@@ -1,0 +1,2 @@
+slintspike v0.1.0 (/home/runner/work/benchmark/benchmark/spikes/slint)
+└── slint v1.18.1

@@ -1,0 +1,11 @@
+{
+ "stack": "slint",
+ "platform": "web",
+ "status": "fail",
+ "build_seconds": 130.0,
+ "artifacts": [],
+ "notes": [],
+ "runner": "Linux/X64",
+ "sha": "6a607e3c52d9e50a20d57f16ed219b1e69e30270",
+ "date": "2026-10-26T16:04:24Z"
+}

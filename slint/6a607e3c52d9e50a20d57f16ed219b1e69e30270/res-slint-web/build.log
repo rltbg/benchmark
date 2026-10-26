@@ -1,0 +1,1384 @@
+[INFO]: 🎯  Checking for the Wasm target...
+[INFO]: 🌀  Compiling to Wasm...
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling autocfg v1.5.1
+   Compiling crc32fast v1.5.3
+   Compiling portable-atomic v1.15.0
+   Compiling critical-section v1.2.0
+   Compiling libm v0.2.16
+   Compiling cfg-if v1.0.5
+   Compiling version_check v0.9.5
+   Compiling memchr v2.8.3
+   Compiling num-traits v0.2.19
+   Compiling syn v3.0.9
+   Compiling syn v2.0.119
+   Compiling once_cell v1.21.4
+   Compiling rustversion v1.0.23
+   Compiling bitflags v2.13.2
+   Compiling stable_deref_trait v1.2.1
+   Compiling icu_properties_data v2.4.0
+   Compiling serde_core v1.0.229
+   Compiling icu_normalizer_data v2.4.0
+   Compiling icu_locale_fallback_data v2.4.0
+   Compiling wasm-bindgen-shared v0.2.129
+   Compiling simd-adler32 v0.3.10
+   Compiling adler2 v2.0.1
+   Compiling libc v0.2.191
+   Compiling writeable v0.6.4
+   Compiling miniz_oxide v0.9.1
+   Compiling log v0.4.34
+   Compiling smallvec v1.16.4
+   Compiling synstructure v0.14.0
+   Compiling flate2 v1.1.10
+   Compiling libloading v0.8.9
+   Compiling cfg_aliases v0.2.2
+   Compiling icu_decimal_data v2.4.0
+   Compiling heck v0.5.0
+   Compiling bumpalo v3.20.3
+   Compiling litemap v0.8.3
+   Compiling pkg-config v0.3.34
+   Compiling wasm-bindgen-macro-support v0.2.129
+   Compiling wasm-bindgen v0.2.129
+   Compiling memoffset v0.9.1
+   Compiling winnow v1.0.4
+   Compiling unicode-segmentation v1.13.3
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling zerovec-derive v0.11.7
+   Compiling displaydoc v0.2.7
+   Compiling bytemuck_derive v1.12.1
+   Compiling zerofrom v0.1.8
+   Compiling yoke v0.8.4
+   Compiling zerovec v0.11.9
+   Compiling bytemuck v1.25.2
+   Compiling zerotrie v0.2.5
+   Compiling tinystr v0.8.5
+   Compiling potential_utf v0.1.6
+   Compiling icu_locale_core v2.4.0
+   Compiling arrayvec v0.7.8
+   Compiling pulldown-cmark v0.13.5
+   Compiling pin-project-lite v0.2.17
+   Compiling wasm-bindgen-macro v0.2.129
+   Compiling icu_provider v2.4.0
+   Compiling toml_parser v1.1.5+spec-1.1.0
+   Compiling convert_case v0.10.0
+   Compiling thiserror-impl v2.0.21
+   Compiling toml_datetime v1.1.2+spec-1.1.0
+   Compiling unicode-xid v0.2.6
+   Compiling futures-task v0.3.34
+   Compiling slab v0.4.12
+   Compiling futures-core v0.3.34
+   Compiling toml_writer v1.1.3+spec-1.1.0
+   Compiling futures-util v0.3.34
+   Compiling derive_more-impl v2.1.1
+   Compiling font-types v0.12.7
+   Compiling foldhash v0.2.0
+   Compiling either v1.19.0
+   Compiling read-fonts v0.41.0
+   Compiling js-sys v0.3.106
+   Compiling hashbrown v0.17.1
+   Compiling utf8_iter v1.0.4
+   Compiling icu_collections v2.4.0
+   Compiling slotmap v1.1.1
+   Compiling float-cmp v0.9.0
+   Compiling strict-num v0.1.1
+   Compiling polycool v0.4.0
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling arrayref v0.3.9
+   Compiling zmij v1.0.23
+   Compiling tiny-skia-path v0.12.0
+   Compiling skrifa v0.44.0
+   Compiling png v0.18.1
+   Compiling kurbo v0.13.1
+   Compiling strum_macros v0.28.0
+   Compiling yeslogic-fontconfig-sys v6.0.1
+   Compiling tinyvec v1.13.3
+   Compiling byteorder-lite v0.1.0
+   Compiling glob v0.3.4
+   Compiling zune-core v0.5.3
+   Compiling siphasher v1.0.4
+   Compiling serde_json v1.0.154
+   Compiling svgtypes v0.16.1
+   Compiling zune-jpeg v0.5.15
+   Compiling clang-sys v1.9.1
+   Compiling fontdb v0.24.0
+   Compiling web-sys v0.3.106
+   Compiling icu_properties v2.4.0
+   Compiling harfrust v0.12.0
+   Compiling dlib v0.5.3
+   Compiling simplecss v0.2.2
+   Compiling roxmltree v0.21.2
+   Compiling equivalent v1.0.3
+   Compiling unicode-vo v0.1.0
+   Compiling unicode-script v0.5.8
+   Compiling data-url v0.3.2
+   Compiling pico-args v0.5.0
+   Compiling weezl v0.1.12
+   Compiling unicode-bidi v0.3.18
+   Compiling itoa v1.0.18
+   Compiling color_quant v1.1.0
+   Compiling crossbeam-utils v0.8.23
+   Compiling base64 v0.23.1
+   Compiling xmlwriter v0.1.0
+   Compiling semver v1.0.28
+   Compiling imagesize v0.15.0
+   Compiling rustix v1.1.5
+   Compiling thiserror v2.0.21
+   Compiling prettyplease v0.2.37
+   Compiling quick-error v2.0.1
+   Compiling image-webp v0.2.4
+   Compiling usvg v0.48.1
+   Compiling rustc_version v0.4.1
+   Compiling gif v0.14.2
+   Compiling icu_locale_fallback v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling tiny-skia v0.12.0
+   Compiling rgb v0.8.53
+   Compiling fixed_decimal v0.7.3
+   Compiling memmap2 v0.9.12
+   Compiling aho-corasick v1.1.5
+   Compiling shlex v2.0.1
+   Compiling find-msvc-tools v0.1.15
+   Compiling regex-syntax v0.8.11
+   Compiling linebender_resource_handle v0.1.1
+   Compiling unicase v2.10.0
+   Compiling parlance v0.1.1
+   Compiling minimal-lexical v0.2.1
+   Compiling raw-window-handle v0.6.2
+   Compiling crossbeam-epoch v0.9.21
+   Compiling linux-raw-sys v0.12.1
+   Compiling nom v7.1.3
+   Compiling regex-automata v0.4.18
+   Compiling fontique v0.11.1
+   Compiling indexmap v2.14.2
+   Compiling cc v1.10.0
+   Compiling icu_decimal v2.4.0
+   Compiling resvg v0.48.1
+   Compiling field-offset v0.3.6
+   Compiling euclid v0.22.14
+   Compiling derive_more v2.1.1
+   Compiling bindgen v0.72.1
+   Compiling crossbeam-deque v0.8.8
+   Compiling icu_segmenter_data v2.4.0
+   Compiling htmlparser v0.2.1
+   Compiling i-slint-common v1.18.1
+   Compiling lyon_geom v1.0.20
+   Compiling toml_edit v0.25.17+spec-1.1.0
+   Compiling regex v1.13.1
+   Compiling xattr v1.6.1
+   Compiling cexpr v0.6.0
+   Compiling itertools v0.13.0
+   Compiling serde_spanned v1.1.2
+   Compiling filetime v0.2.29
+   Compiling rayon-core v1.13.0
+   Compiling shlex v1.3.0
+   Compiling rustc-hash v2.1.3
+   Compiling rustc-hash v1.1.0
+   Compiling naga-types v30.0.1
+   Compiling tar v0.4.46
+   Compiling toml v1.1.8+spec-1.1.0
+   Compiling idna_adapter v1.2.2
+   Compiling proc-macro-crate v3.5.0
+   Compiling lyon_path v1.0.19
+   Compiling const-field-offset-macro v0.2.1
+   Compiling pin-project-internal v1.1.13
+   Compiling snafu-derive v0.8.9
+   Compiling wgpu v30.0.1
+   Compiling rspolib v0.1.2
+   Compiling pxfm v0.1.30
+   Compiling litrs v1.0.1
+   Compiling static_assertions v1.1.0
+   Compiling unicode-width v0.2.2
+   Compiling allocator-api2 v0.2.21
+   Compiling percent-encoding v2.3.2
+   Compiling form_urlencoded v1.2.2
+   Compiling hashbrown v0.16.1
+   Compiling moxcms v0.8.1
+   Compiling wgpu-types v30.0.1
+   Compiling document-features v0.2.12
+   Compiling snafu v0.8.9
+   Compiling pin-project v1.1.13
+   Compiling const-field-offset v0.2.1
+   Compiling skia-bindings v0.153.3
+   Compiling icu_segmenter v2.4.0
+   Compiling num_enum_derive v0.7.6
+   Compiling idna v1.1.0
+   Compiling parley_data v0.11.1
+   Compiling web-time v1.1.0
+   Compiling vtable-macro v0.5.0
+   Compiling natord v1.0.9
+   Compiling profiling v1.0.18
+   Compiling zeno v0.3.3
+   Compiling hashbrown v0.14.5
+   Compiling text-size v1.1.1
+   Compiling anstyle v1.0.14
+   Compiling lazy_static v1.5.1
+   Compiling i-slint-compiler v1.18.1
+   Compiling countme v3.0.1
+   Compiling yazi v0.2.1
+   Compiling unicode-linebreak v0.1.5
+   Compiling tracing-core v0.1.36
+   Compiling swash v0.2.10
+   Compiling tracing v0.1.44
+   Compiling rowan v0.17.0
+   Compiling annotate-snippets v0.12.17
+   Compiling vtable v0.5.0
+   Compiling lyon_extra v1.1.0
+   Compiling parley v0.11.1
+   Compiling url v2.5.8
+   Compiling rayon v1.12.0
+   Compiling num_enum v0.7.6
+   Compiling image v0.25.10
+   Compiling clru v0.6.3
+   Compiling lyon_algorithms v1.0.22
+   Compiling sys-locale v0.3.2
+   Compiling glow v0.18.0
+   Compiling i-slint-core-macros v1.18.1
+   Compiling strum v0.28.0
+   Compiling chrono v0.4.45
+   Compiling taffy v0.10.1
+   Compiling itertools v0.15.0
+   Compiling glutin v0.32.3
+   Compiling typed-index-collections v3.5.0
+   Compiling smol_str v0.3.7
+   Compiling by_address v1.2.1
+   Compiling scopeguard v1.2.0
+   Compiling pin-weak v1.1.0
+   Compiling pin-utils v0.1.1
+   Compiling spin_on v0.1.1
+   Compiling i-slint-core v1.18.1
+   Compiling winit v0.30.13
+   Compiling i-slint-renderer-skia v1.18.1
+   Compiling imgref v1.12.3
+   Compiling fnv v1.0.7
+   Compiling femtovg v0.27.0
+error: Please select at least one api backend
+  --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:28:1
+   |
+28 | compile_error!("Please select at least one api backend");
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+
+error[E0392]: type parameter `T` is never used
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:278:18
+    |
+278 | pub enum Surface<T: SurfaceTypeTrait> {
+    |                  ^ unused type parameter
+    |
+    = help: consider removing `T`, referring to it in a field, or using a marker such as `PhantomData`
+
+
+error[E0277]: `()` doesn't implement `std::fmt::Display`
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:524:57
+    |
+524 |         f.write_fmt(format_args!("DisplayApiPreference::{api}"))
+    |                                                         ^^^^^ `()` cannot be formatted with the default formatter
+    |
+    = help: the trait `std::fmt::Display` is not implemented for `()`
+    = note: in format strings you may be able to use `{:?}` (or `{:#?}` for pretty-print) instead
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:451:9
+    |
+451 |         gl_api_dispatch!(self; Self(config) => config.color_buffer_type())
+    |         ------------------------------------------------------------------ in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:455:9
+    |
+455 |         gl_api_dispatch!(self; Self(config) => config.float_pixels())
+    |         ------------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:459:9
+    |
+459 |         gl_api_dispatch!(self; Self(config) => config.alpha_size())
+    |         ----------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:463:9
+    |
+463 |         gl_api_dispatch!(self; Self(config) => config.depth_size())
+    |         ----------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:467:9
+    |
+467 |         gl_api_dispatch!(self; Self(config) => config.stencil_size())
+    |         ------------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:471:9
+    |
+471 |         gl_api_dispatch!(self; Self(config) => config.num_samples())
+    |         ------------------------------------------------------------ in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:475:9
+    |
+475 |         gl_api_dispatch!(self; Self(config) => config.srgb_capable())
+    |         ------------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:479:9
+    |
+479 |         gl_api_dispatch!(self; Self(config) => config.config_surface_types())
+    |         --------------------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:483:9
+    |
+483 |         gl_api_dispatch!(self; Self(config) => config.hardware_accelerated())
+    |         --------------------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:487:9
+    |
+487 |         gl_api_dispatch!(self; Self(config) => config.supports_transparency())
+    |         ---------------------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:491:9
+    |
+491 |         gl_api_dispatch!(self; Self(config) => config.api())
+    |         ---------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:61:19
+    |
+ 61 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:499:9
+    |
+499 |         gl_api_dispatch!(self; Self(config) => config.display(); as Display)
+    |         -------------------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 61 ~             match $what {
+ 62 +                 _ => todo!(),
+ 63 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Config` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:534:9
+    |
+534 |         gl_api_dispatch!(self; Self(config) => config.raw_config())
+    |         ----------------------------------------------------------- in this macro invocation
+    |
+note: `Config` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/config.rs:431:10
+    |
+431 | pub enum Config {
+    |          ^^^^^^
+    = note: the matched value is of type `&Config`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&NotCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:471:9
+    |
+471 |         gl_api_dispatch!(self; Self(context) => context.context_api())
+    |         -------------------------------------------------------------- in this macro invocation
+    |
+note: `NotCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:391:10
+    |
+391 | pub enum NotCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&NotCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&NotCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:475:9
+    |
+475 |         gl_api_dispatch!(self; Self(context) => context.priority())
+    |         ----------------------------------------------------------- in this macro invocation
+    |
+note: `NotCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:391:10
+    |
+391 | pub enum NotCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&NotCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&NotCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:61:19
+    |
+ 61 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:483:9
+    |
+483 |         gl_api_dispatch!(self; Self(context) => context.config(); as Config)
+    |         -------------------------------------------------------------------- in this macro invocation
+    |
+note: `NotCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:391:10
+    |
+391 | pub enum NotCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&NotCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 61 ~             match $what {
+ 62 +                 _ => todo!(),
+ 63 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&NotCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:61:19
+    |
+ 61 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:491:9
+    |
+491 |         gl_api_dispatch!(self; Self(context) => context.display(); as Display)
+    |         ---------------------------------------------------------------------- in this macro invocation
+    |
+note: `NotCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:391:10
+    |
+391 | pub enum NotCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&NotCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 61 ~             match $what {
+ 62 +                 _ => todo!(),
+ 63 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&NotCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:497:9
+    |
+497 |         gl_api_dispatch!(self; Self(context) => context.raw_context())
+    |         -------------------------------------------------------------- in this macro invocation
+    |
+note: `NotCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:391:10
+    |
+391 | pub enum NotCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&NotCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&PossiblyCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:543:9
+    |
+543 |         gl_api_dispatch!(self; Self(context) => context.is_current())
+    |         ------------------------------------------------------------- in this macro invocation
+    |
+note: `PossiblyCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:520:10
+    |
+520 | pub enum PossiblyCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&PossiblyCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&PossiblyCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:553:12
+    |
+553 |         Ok(gl_api_dispatch!(self; Self(context) => context.make_not_current_in_place()?))
+    |            ----------------------------------------------------------------------------- in this macro invocation
+    |
+note: `PossiblyCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:520:10
+    |
+520 | pub enum PossiblyCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&PossiblyCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&PossiblyCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:599:9
+    |
+599 |         gl_api_dispatch!(self; Self(context) => context.context_api())
+    |         -------------------------------------------------------------- in this macro invocation
+    |
+note: `PossiblyCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:520:10
+    |
+520 | pub enum PossiblyCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&PossiblyCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&PossiblyCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:603:9
+    |
+603 |         gl_api_dispatch!(self; Self(context) => context.priority())
+    |         ----------------------------------------------------------- in this macro invocation
+    |
+note: `PossiblyCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:520:10
+    |
+520 | pub enum PossiblyCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&PossiblyCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&PossiblyCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:61:19
+    |
+ 61 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:611:9
+    |
+611 |         gl_api_dispatch!(self; Self(context) => context.config(); as Config)
+    |         -------------------------------------------------------------------- in this macro invocation
+    |
+note: `PossiblyCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:520:10
+    |
+520 | pub enum PossiblyCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&PossiblyCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 61 ~             match $what {
+ 62 +                 _ => todo!(),
+ 63 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&PossiblyCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:61:19
+    |
+ 61 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:619:9
+    |
+619 |         gl_api_dispatch!(self; Self(context) => context.display(); as Display)
+    |         ---------------------------------------------------------------------- in this macro invocation
+    |
+note: `PossiblyCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:520:10
+    |
+520 | pub enum PossiblyCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&PossiblyCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 61 ~             match $what {
+ 62 +                 _ => todo!(),
+ 63 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&PossiblyCurrentContext` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:625:9
+    |
+625 |         gl_api_dispatch!(self; Self(context) => context.raw_context())
+    |         -------------------------------------------------------------- in this macro invocation
+    |
+note: `PossiblyCurrentContext` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/context.rs:520:10
+    |
+520 | pub enum PossiblyCurrentContext {
+    |          ^^^^^^^^^^^^^^^^^^^^^^
+    = note: the matched value is of type `&PossiblyCurrentContext`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&display::Display` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:271:15
+    |
+271 |         match self {
+    |               ^^^^
+    |
+note: `display::Display` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:178:10
+    |
+178 | pub enum Display {
+    |          ^^^^^^^
+    = note: the matched value is of type `&display::Display`
+    = note: references are always considered inhabited
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+271 ~         match self {
+272 +             _ => todo!(),
+273 +         }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&display::Display` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:396:9
+    |
+396 |         gl_api_dispatch!(self; Self(display) => display.get_proc_address(addr))
+    |         ----------------------------------------------------------------------- in this macro invocation
+    |
+note: `display::Display` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:178:10
+    |
+178 | pub enum Display {
+    |          ^^^^^^^
+    = note: the matched value is of type `&display::Display`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&display::Display` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:400:9
+    |
+400 |         gl_api_dispatch!(self; Self(display) => display.version_string())
+    |         ----------------------------------------------------------------- in this macro invocation
+    |
+note: `display::Display` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:178:10
+    |
+178 | pub enum Display {
+    |          ^^^^^^^
+    = note: the matched value is of type `&display::Display`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&display::Display` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:404:9
+    |
+404 |         gl_api_dispatch!(self; Self(display) => display.supported_features())
+    |         --------------------------------------------------------------------- in this macro invocation
+    |
+note: `display::Display` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:178:10
+    |
+178 | pub enum Display {
+    |          ^^^^^^^
+    = note: the matched value is of type `&display::Display`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&display::Display` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:410:9
+    |
+410 |         gl_api_dispatch!(self; Self(display) => display.raw_display())
+    |         -------------------------------------------------------------- in this macro invocation
+    |
+note: `display::Display` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/display.rs:178:10
+    |
+178 | pub enum Display {
+    |          ^^^^^^^
+    = note: the matched value is of type `&display::Display`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Surface<T>` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:301:9
+    |
+301 |         gl_api_dispatch!(self; Self(surface) => surface.buffer_age())
+    |         ------------------------------------------------------------- in this macro invocation
+    |
+note: `Surface<T>` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:278:10
+    |
+278 | pub enum Surface<T: SurfaceTypeTrait> {
+    |          ^^^^^^^
+    = note: the matched value is of type `&Surface<T>`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Surface<T>` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:305:9
+    |
+305 |         gl_api_dispatch!(self; Self(surface) => surface.width())
+    |         -------------------------------------------------------- in this macro invocation
+    |
+note: `Surface<T>` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:278:10
+    |
+278 | pub enum Surface<T: SurfaceTypeTrait> {
+    |          ^^^^^^^
+    = note: the matched value is of type `&Surface<T>`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Surface<T>` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:309:9
+    |
+309 |         gl_api_dispatch!(self; Self(surface) => surface.height())
+    |         --------------------------------------------------------- in this macro invocation
+    |
+note: `Surface<T>` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:278:10
+    |
+278 | pub enum Surface<T: SurfaceTypeTrait> {
+    |          ^^^^^^^
+    = note: the matched value is of type `&Surface<T>`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Surface<T>` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:313:9
+    |
+313 |         gl_api_dispatch!(self; Self(surface) => surface.is_single_buffered())
+    |         --------------------------------------------------------------------- in this macro invocation
+    |
+note: `Surface<T>` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:278:10
+    |
+278 | pub enum Surface<T: SurfaceTypeTrait> {
+    |          ^^^^^^^
+    = note: the matched value is of type `&Surface<T>`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Surface<T>` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:61:19
+    |
+ 61 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:456:9
+    |
+456 |         gl_api_dispatch!(self; Self(surface) => surface.display(); as Display)
+    |         ---------------------------------------------------------------------- in this macro invocation
+    |
+note: `Surface<T>` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:278:10
+    |
+278 | pub enum Surface<T: SurfaceTypeTrait> {
+    |          ^^^^^^^
+    = note: the matched value is of type `&Surface<T>`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 61 ~             match $what {
+ 62 +                 _ => todo!(),
+ 63 +             }
+    |
+
+
+error[E0004]: non-exhaustive patterns: type `&Surface<T>` is non-empty
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/lib.rs:73:19
+    |
+ 73 |             match $what {
+    |                   ^^^^^
+    |
+   ::: /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:462:9
+    |
+462 |         gl_api_dispatch!(self; Self(surface) => surface.raw_surface())
+    |         -------------------------------------------------------------- in this macro invocation
+    |
+note: `Surface<T>` defined here
+   --> /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/glutin-0.32.3/src/surface.rs:278:10
+    |
+278 | pub enum Surface<T: SurfaceTypeTrait> {
+    |          ^^^^^^^
+    = note: the matched value is of type `&Surface<T>`
+    = note: references are always considered inhabited
+    = note: this error originates in the macro `gl_api_dispatch` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
+    |
+ 73 ~             match $what {
+ 74 +                 _ => todo!(),
+ 75 +             }
+    |
+
+
+Some errors have detailed explanations: E0004, E0277, E0392.
+
+For more information about an error, try `rustc --explain E0004`.
+
+error: could not compile `glutin` (lib) due to 39 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: failed to run custom build command for `skia-bindings v0.153.3`
+note: To improve backtraces for build dependencies, set the CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true environment variable to enable debug information generation.
+
+Caused by:
+  process didn't exit successfully: `/home/runner/work/benchmark/benchmark/spikes/slint/target/release/build/skia-bindings-2d7f19e2d96743a4/build-script-build` (exit status: 101)
+  --- stdout
+  cargo:rerun-if-env-changed=DOCS_RS
+  cargo:rerun-if-env-changed=SKIA_DEBUG
+  cargo:rerun-if-env-changed=SKIA_SOURCE_DIR
+  cargo:rerun-if-env-changed=FORCE_SKIA_BUILD
+  cargo:rerun-if-env-changed=FORCE_SKIA_BINARIES_DOWNLOAD
+  TRYING TO DOWNLOAD AND INSTALL SKIA BINARIES: 0.153.3/b7f043e0b1e2a850e702-wasm32-unknown-unknown-ganesh-gl-jpegd-jpege-pdf-vulkan
+  cargo:rerun-if-env-changed=SKIA_BINARIES_URL
+    FROM: https://github.com/rust-skia/skia-binaries/releases/download/0.153.3/skia-binaries-b7f043e0b1e2a850e702-wasm32-unknown-unknown-ganesh-gl-jpegd-jpege-pdf-vulkan.tar.gz
+  DOWNLOAD AND INSTALL FAILED: curl error code: "22"
+  curl stderr: "curl: (22) The requested URL returned error: 404\n"
+  STARTING A FULL BUILD
+  HOST: x86_64-unknown-linux-gnu
+  cargo:rerun-if-env-changed=CLANGCC
+  cargo:rerun-if-env-changed=CC
+  cargo:rerun-if-env-changed=CLANGCXX
+  cargo:rerun-if-env-changed=CXX
+  cargo:rerun-if-env-changed=OPT_LEVEL
+  cargo:rerun-if-env-changed=SKIA_USE_SYSTEM_LIBRARIES
+  cargo:rerun-if-env-changed=SDKTARGETSYSROOT
+  cargo:rerun-if-env-changed=SDKROOT
+  cargo:rerun-if-env-changed=SKIA_NINJA_COMMAND
+  cargo:rerun-if-env-changed=SKIA_GN_COMMAND
+  Probing 'python'
+  Python 3 found: "python"
+  Synchronizing Skia dependencies
+  DOWNLOADING: https://codeload.github.com/rust-skia/skia/tar.gz/m153-0.101.2
+  Skipping "agents/internal".
+  Skipping "bin".
+  Skipping "infra/skia-infra".
+  Skipping "task_drivers".
+  skia/agents/shared                   > e75efa515896f6bf1dea92eaffbcf8ee711a65d8
+  ...ird_party/externals/libjpeg-turbo > e14cbfaa85529d47f9f55b0f104a579c1061f9ad
+  ...rd_party/externals/d3d12allocator > 169895d529dfce00390a20e69c2f516066fe7a3b
+  skia/third_party/externals/zlib      > 646b7f569718921d7d4b5b8e22572ff6c76f2596
+  skia/third_party/externals/libpng    > d5515b5b8be3901aac04e5bd8bd5c89f287bcd33
+  ...third_party/externals/spirv-cross > b8fcf307f1f347089e3c46eb4451d27f32ebc8d3
+  ...y/externals/vulkanmemoryallocator > eb744ea7a2b17040121b4bbb4d6f9e8a77e3cae7
+  skia/third_party/externals/wuffs     > e3f919ccfe3ef542cfc983a82146070258fb57f8
+  skia/third_party/externals/expat     > 6154446fccefbf3ca644894f598969113b0c7bcd
+  skia/third_party/externals/freetype  > 264b5fbf5b912b39f98d038bf75d39be0a73f21b
+  skia/third_party/externals/libwebp   > 845d5476a866141ba35ac133f856fa62f0b7445f
+  skia/third_party/externals/harfbuzz  > 9cb1fee51069b206effb4736e443b038d230789d
+  skia/third_party/externals/brotli    > 6d03dfbedda1615c4cba1211f8d81735575209c8
+  skia/third_party/externals/icu       > d578f2e8b7bd5938e21cfb6bf15c079e0aa5b738
+  cargo:rerun-if-env-changed=SKIA_GN_ARGS
+  Skia args: is_skia_standalone=false is_official_build=true skia_use_partition_alloc=false is_debug=false skia_enable_svg=false skia_enable_ganesh=true skia_enable_graphite=false skia_enable_skottie=false skia_enable_pdf=true skia_use_gl=true skia_use_egl=false skia_use_x11=false skia_use_system_libpng=false skia_use_libwebp_encode=false skia_use_libwebp_decode=false skia_use_system_zlib=false skia_use_xps=false skia_use_dng_sdk=false skia_use_libjpeg_turbo_decode=true skia_use_libjpeg_turbo_encode=true cc="clang" cxx="clang++" skia_use_vulkan=true skia_enable_spirv_validation=false skia_use_icu=false skia_use_harfbuzz=false skia_use_freetype=true skia_use_freetype_woff2=false skia_system_freetype2_include_path="/does/not/exist" skia_use_system_libjpeg_turbo=false skia_use_expat=true skia_use_system_expat=false target_os="unknown" target_cpu="wasm32" extra_cflags=["-I=/usr/include/freetype2","-I/usr/include/freetype2","-O3","--target=wasm32-unknown-unknown"] extra_asmflags=["--target=wasm32-unknown-unknown"]
+  WARNING at the command-line "--args":1:20: Build argument has no effect.
+  is_skia_standalone=false is_official_build=true skia_use_partition_alloc=false is_debug=false skia_enable_svg=false skia_enable_ganesh=true skia_enable_graphite=false skia_enable_skottie=false skia_enable_pdf=true skia_use_gl=true skia_use_egl=false skia_use_x11=false skia_use_system_libpng=false skia_use_libwebp_encode=false skia_use_libwebp_decode=false skia_use_system_zlib=false skia_use_xps=false skia_use_dng_sdk=false skia_use_libjpeg_turbo_decode=true skia_use_libjpeg_turbo_encode=true cc="clang" cxx="clang++" skia_use_vulkan=true skia_enable_spirv_validation=false skia_use_icu=false skia_use_harfbuzz=false skia_use_freetype=true skia_use_freetype_woff2=false skia_system_freetype2_include_path="/does/not/exist" skia_use_system_libjpeg_turbo=false skia_use_expat=true skia_use_system_expat=false target_os="unknown" target_cpu="wasm32" extra_cflags=["-I=/usr/include/freetype2","-I/usr/include/freetype2","-O3","--target=wasm32-unknown-unknown"] extra_asmflags=["--target=wasm32-unknown-unknown"]
+                     ^----
+  The variable "is_skia_standalone" was set as a build argument
+  but never appeared in a declare_args() block in any buildfile.
+
+  To view all possible args, run "gn args --list <out_dir>"
+
+  The build continued as if that argument was unspecified.
+
+  Done. Made 100 targets from 43 files in 81ms
+  ninja: Entering directory `/home/runner/work/benchmark/benchmark/spikes/slint/target/wasm32-unknown-unknown/release/build/skia-bindings-9e4d2f22700821ce/out/skia'
+  [1/1098] compile ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/adler32.c
+  FAILED: [code=1] obj/third_party/externals/zlib/libzlib.adler32.o 
+  clang -MD -MF obj/third_party/externals/zlib/libzlib.adler32.o.d -DCPU_NO_SIMD -DNDEBUG -DZLIB_IMPLEMENTATION  -w -Wno-attributes -ffp-contract=off -fPIC -fvisibility=hidden -fstrict-aliasing -O3 -fdata-sections -ffunction-sections -I=/usr/include/freetype2 -I/usr/include/freetype2 -O3 --target=wasm32-unknown-unknown -Wno-incompatible-pointer-types -Wunused-variable -isystem /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib  -c ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/adler32.c -o obj/third_party/externals/zlib/libzlib.adler32.o
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/adler32.c:8:
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zutil.h:22:
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zlib.h:34:
+  ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zconf.h:469:14: fatal error: 'sys/types.h' file not found
+    469 | #    include <sys/types.h>      /* for off_t */
+        |              ^~~~~~~~~~~~~
+  1 error generated.
+  [2/1098] compile ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/compress.c
+  FAILED: [code=1] obj/third_party/externals/zlib/libzlib.compress.o 
+  clang -MD -MF obj/third_party/externals/zlib/libzlib.compress.o.d -DCPU_NO_SIMD -DNDEBUG -DZLIB_IMPLEMENTATION  -w -Wno-attributes -ffp-contract=off -fPIC -fvisibility=hidden -fstrict-aliasing -O3 -fdata-sections -ffunction-sections -I=/usr/include/freetype2 -I/usr/include/freetype2 -O3 --target=wasm32-unknown-unknown -Wno-incompatible-pointer-types -Wunused-variable -isystem /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib  -c ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/compress.c -o obj/third_party/externals/zlib/libzlib.compress.o
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/compress.c:9:
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zlib.h:34:
+  ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zconf.h:469:14: fatal error: 'sys/types.h' file not found
+    469 | #    include <sys/types.h>      /* for off_t */
+        |              ^~~~~~~~~~~~~
+  1 error generated.
+  [3/1098] compile ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/crc32.c
+  FAILED: [code=1] obj/third_party/externals/zlib/libzlib.crc32.o 
+  clang -MD -MF obj/third_party/externals/zlib/libzlib.crc32.o.d -DCPU_NO_SIMD -DNDEBUG -DZLIB_IMPLEMENTATION  -w -Wno-attributes -ffp-contract=off -fPIC -fvisibility=hidden -fstrict-aliasing -O3 -fdata-sections -ffunction-sections -I=/usr/include/freetype2 -I/usr/include/freetype2 -O3 --target=wasm32-unknown-unknown -Wno-incompatible-pointer-types -Wunused-variable -isystem /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib  -c ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/crc32.c -o obj/third_party/externals/zlib/libzlib.crc32.o
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/crc32.c:30:
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/deflate.h:16:
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zutil.h:22:
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zlib.h:34:
+  ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zconf.h:469:14: fatal error: 'sys/types.h' file not found
+    469 | #    include <sys/types.h>      /* for off_t */
+        |              ^~~~~~~~~~~~~
+  1 error generated.
+  [4/1098] compile ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/gzclose.c
+  FAILED: [code=1] obj/third_party/externals/zlib/libzlib.gzclose.o 
+  clang -MD -MF obj/third_party/externals/zlib/libzlib.gzclose.o.d -DCPU_NO_SIMD -DNDEBUG -DZLIB_IMPLEMENTATION  -w -Wno-attributes -ffp-contract=off -fPIC -fvisibility=hidden -fstrict-aliasing -O3 -fdata-sections -ffunction-sections -I=/usr/include/freetype2 -I/usr/include/freetype2 -O3 --target=wasm32-unknown-unknown -Wno-incompatible-pointer-types -Wunused-variable -isystem /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib  -c ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/gzclose.c -o obj/third_party/externals/zlib/libzlib.gzclose.o
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/gzclose.c:6:
+  ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/gzguts.h:20:10: fatal error: 'stdio.h' file not found
+     20 | #include <stdio.h>
+        |          ^~~~~~~~~
+  1 error generated.
+  [5/1098] compile ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/cpu_features.c
+  FAILED: [code=1] obj/third_party/externals/zlib/libzlib.cpu_features.o 
+  clang -MD -MF obj/third_party/externals/zlib/libzlib.cpu_features.o.d -DCPU_NO_SIMD -DNDEBUG -DZLIB_IMPLEMENTATION  -w -Wno-attributes -ffp-contract=off -fPIC -fvisibility=hidden -fstrict-aliasing -O3 -fdata-sections -ffunction-sections -I=/usr/include/freetype2 -I/usr/include/freetype2 -O3 --target=wasm32-unknown-unknown -Wno-incompatible-pointer-types -Wunused-variable -isystem /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib  -c ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/cpu_features.c -o obj/third_party/externals/zlib/libzlib.cpu_features.o
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/cpu_features.c:8:
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/cpu_features.h:8:
+  In file included from ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zlib.h:34:
+  ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/zconf.h:469:14: fatal error: 'sys/types.h' file not found
+    469 | #    include <sys/types.h>      /* for off_t */
+        |              ^~~~~~~~~~~~~
+  1 error generated.
+  [6/1098] compile ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/deflate.c
+  FAILED: [code=1] obj/third_party/externals/zlib/libzlib.deflate.o 
+  clang -MD -MF obj/third_party/externals/zlib/libzlib.deflate.o.d -DCPU_NO_SIMD -DNDEBUG -DZLIB_IMPLEMENTATION  -w -Wno-attributes -ffp-contract=off -fPIC -fvisibility=hidden -fstrict-aliasing -O3 -fdata-sections -ffunction-sections -I=/usr/include/freetype2 -I/usr/include/freetype2 -O3 --target=wasm32-unknown-unknown -Wno-incompatible-pointer-types -Wunused-variable -isystem /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib  -c ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/deflate.c -o obj/third_party/externals/zlib/libzlib.deflate.o
+  ../../../../../../../../../../../../.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/skia/third_party/externals/zlib/deflate.c:51:10: fatal error: 'assert.h' file not found
+     51 | #include <assert.h>
+        |          ^~~~~~~~~~
+  1 error generated.
+  ninja: build stopped: subcommand failed.
+
+  --- stderr
+
+  thread 'main' (6347) panicked at /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/skia-bindings-0.153.3/build_support/skia/config.rs:374:5:
+  `ninja` returned an error, please check the output for details.
+  stack backtrace:
+  note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+Error: `cargo build` failed, see the output above for details
+Caused by: `cargo build` failed, see the output above for details

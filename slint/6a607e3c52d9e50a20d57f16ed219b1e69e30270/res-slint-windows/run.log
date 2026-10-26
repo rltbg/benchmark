@@ -1,0 +1,13 @@
+SPIKE:ready platform=windows stack=slint core=pulse-c
+SPIKE:info first_frame_source=timer-1s fps_source=timer-tick
+SPIKE:selftest ok
+SPIKE:autorun start
+SPIKE:tab index=1 name=list
+SPIKE:tab index=2 name=canvas
+SPIKE:fps tab=canvas value=61
+SPIKE:fps tab=canvas value=42
+SPIKE:fps tab=canvas value=43
+SPIKE:tab index=3 name=core
+SPIKE:heavy start
+SPIKE:heavy done elapsed_ms=101 max_ui_gap_ms=17
+SPIKE:done

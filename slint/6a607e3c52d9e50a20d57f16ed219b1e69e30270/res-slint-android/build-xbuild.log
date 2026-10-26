@@ -1,0 +1,666 @@
+[1/3] Fetch precompiled artifacts
+info: component rust-std for target x86_64-linux-android is up to date
+Downloading `platforms;android-33`
+Extracting `platforms;android-33`
+[1/3] Fetch precompiled artifacts [2026ms]
+[2/3] Build rust `slintspike`
+    Updating crates.io index
+ Downloading crates ...
+  Downloaded siphasher v1.0.4
+  Downloaded simplecss v0.2.2
+  Downloaded windows-future v0.3.2
+  Downloaded zerocopy-derive v0.8.63
+  Downloaded zvariant_derive v5.15.1
+  Downloaded simd_cesu8 v1.2.0
+  Downloaded webbrowser v1.2.5
+  Downloaded windows-collections v0.3.2
+  Downloaded windows-numerics v0.3.1
+  Downloaded jni-sys v0.4.1
+  Downloaded zune-jpeg v0.5.15
+  Downloaded windows-interface v0.59.3
+  Downloaded skia-bindings v0.153.3
+  Downloaded unty v0.0.4
+  Downloaded wgpu-hal v30.0.1
+  Downloaded i-slint-backend-selector v1.18.1
+  Downloaded i-slint-backend-linuxkms v1.18.1
+  Downloaded i-slint-backend-testing v1.18.1
+  Downloaded i-slint-backend-winit v1.18.1
+  Downloaded image-webp v0.2.4
+  Downloaded parley_data v0.11.1
+  Downloaded raw-window-handle v0.6.2
+  Downloaded toml_writer v1.1.3+spec-1.1.0
+  Downloaded roxmltree v0.21.2
+  Downloaded snafu v0.8.9
+  Downloaded tiny-skia-path v0.11.4
+  Downloaded wgpu-core-deps-windows-linux-android v30.0.1
+  Downloaded xkbcommon-dl v0.4.2
+  Downloaded usvg v0.48.1
+  Downloaded unicode-vo v0.1.0
+  Downloaded yazi v0.2.1
+  Downloaded zune-core v0.5.3
+  Downloaded snafu-derive v0.8.9
+  Downloaded windows-core v0.62.2
+  Downloaded pxfm v0.1.30
+  Downloaded strum v0.28.0
+  Downloaded unicode-script v0.5.8
+  Downloaded memmap2 v0.9.12
+  Downloaded parking_lot_core v0.9.12
+  Downloaded parlance v0.1.1
+  Downloaded signal-hook-registry v1.4.8
+  Downloaded smol_str v0.2.2
+  Downloaded smol_str v0.3.7
+  Downloaded spirv v0.4.0+sdk-1.4.341.0
+  Downloaded sys-locale v0.3.2
+  Downloaded text-size v1.1.1
+  Downloaded windows-threading v0.2.1
+  Downloaded ab_glyph_rasterizer v0.1.10
+  Downloaded gl_generator v0.14.0
+  Downloaded linebender_resource_handle v0.1.1
+  Downloaded lyon_algorithms v1.0.22
+  Downloaded lyon_extra v1.1.0
+  Downloaded lyon_geom v1.0.20
+  Downloaded nom v8.0.0
+  Downloaded proc-macro-crate v3.5.0
+  Downloaded softbuffer v0.4.8
+  Downloaded tinyvec v1.13.3
+  Downloaded toml_edit v0.25.17+spec-1.1.0
+  Downloaded toml_parser v1.1.5+spec-1.1.0
+  Downloaded wl-clipboard-rs v0.9.5
+  Downloaded ab_glyph v0.2.32
+  Downloaded jni-sys v0.3.1
+  Downloaded kurbo v0.13.1
+  Downloaded litrs v1.0.1
+  Downloaded lyon_path v1.0.19
+  Downloaded moxcms v0.8.1
+  Downloaded ndk-sys v0.5.0+25.2.9519653
+  Downloaded num_enum v0.7.6
+  Downloaded ordered-stream v0.2.0
+  Downloaded os_pipe v1.2.3
+  Downloaded png v0.18.1
+  Downloaded polling v3.11.0
+  Downloaded quick-xml v0.41.0
+  Downloaded slint-macros v1.18.1
+  Downloaded unicode-segmentation v1.13.3
+  Downloaded wgpu-naga-bridge v30.0.1
+  Downloaded windows-implement v0.60.2
+  Downloaded zcheapstr v1.1.0
+  Downloaded android-build v0.1.4
+  Downloaded async-io v2.6.0
+  Downloaded i-slint-core-macros v1.18.1
+  Downloaded libloading v0.8.9
+  Downloaded lock_api v0.4.14
+  Downloaded ndk-context v0.1.1
+  Downloaded profiling v1.0.18
+  Downloaded rgb v0.8.53
+  Downloaded rowan v0.17.0
+  Downloaded serde_spanned v1.1.2
+  Downloaded static_assertions v1.1.0
+  Downloaded toml_datetime v1.1.2+spec-1.1.0
+  Downloaded tree_magic_mini v3.2.2
+  Downloaded wayland-protocols-wlr v0.3.12
+  Downloaded wayland-scanner v0.31.11
+  Downloaded zbus_macros v5.19.0
+  Downloaded ctor v0.10.1
+  Downloaded skrifa v0.44.0
+  Downloaded wayland-sys v0.31.11
+  Downloaded windows-link v0.2.1
+  Downloaded i-slint-renderer-software v1.18.1
+  Downloaded ndk-sys v0.6.0+11769913
+  Downloaded num_enum_derive v0.7.6
+  Downloaded prettyplease v0.2.37
+  Downloaded renderdoc-sys v1.1.0
+  Downloaded bit-set v0.10.0
+  Downloaded quick-error v2.0.1
+  Downloaded typed-index-collections v3.5.0
+  Downloaded wgpu v30.0.1
+  Downloaded async-task v4.7.1
+  Downloaded owned_ttf_parser v0.25.1
+  Downloaded pico-args v0.5.0
+  Downloaded pin-weak v1.1.0
+  Downloaded sctk-adwaita v0.10.1
+  Downloaded data-url v0.3.2
+  Downloaded windows-strings v0.5.1
+  Downloaded grid v1.0.1
+  Downloaded icu_locale_fallback_data v2.4.0
+  Downloaded scoped-tls v1.0.1
+  Downloaded vtable-macro v0.5.0
+  Downloaded async-signal v0.2.14
+  Downloaded concurrent-queue v2.5.0
+  Downloaded gif v0.14.2
+  Downloaded imagesize v0.15.0
+  Downloaded jni-macros v0.22.4
+  Downloaded wayland-protocols-plasma v0.3.12
+  Downloaded bincode v2.0.1
+  Downloaded countme v3.0.1
+  Downloaded dtor v0.8.1
+  Downloaded smithay-client-toolkit v0.19.2
+  Downloaded windows-result v0.4.1
+  Downloaded x11rb v0.13.2
+  Downloaded document-features v0.2.12
+  Downloaded drm-fourcc v2.2.0
+  Downloaded natord v1.0.9
+  Downloaded rustc-hash v2.1.3
+  Downloaded winnow v1.0.4
+  Downloaded x11rb-protocol v0.13.2
+  Downloaded ash v0.38.0+1.3.281
+  Downloaded async-trait v0.1.92
+  Downloaded cursor-icon v1.2.0
+  Downloaded field-offset v0.3.6
+  Downloaded skia-safe v0.153.3
+  Downloaded tiny-skia v0.12.0
+  Downloaded wgpu-core v30.0.1
+  Downloaded winit v0.30.13
+  Downloaded async-lock v3.4.2
+  Downloaded fixed_decimal v0.7.3
+  Downloaded wgpu-types v30.0.1
+  Downloaded xmlwriter v0.1.0
+  Downloaded zbus_names v4.3.5
+  Downloaded bit-vec v0.9.1
+  Downloaded blocking v1.7.0
+  Downloaded dpi v0.1.2
+  Downloaded fixedbitset v0.5.7
+  Downloaded femtovg v0.27.0
+  Downloaded hashbrown v0.15.5
+  Downloaded cesu8 v1.1.0
+  Downloaded fontique v0.11.1
+  Downloaded hashbrown v0.14.5
+  Downloaded arrayref v0.3.9
+  Downloaded bytemuck_derive v1.12.1
+  Downloaded hashbrown v0.16.1
+  Downloaded weezl v0.1.12
+  Downloaded wayland-cursor v0.31.14
+  Downloaded wayland-client v0.31.15
+  Downloaded zvariant v5.15.1
+  Downloaded slint v1.18.1
+  Downloaded futures-lite v2.6.1
+  Downloaded drm-ffi v0.9.1
+  Downloaded xcursor v0.3.11
+  Downloaded x11-dl v2.21.0
+  Downloaded slint-build v1.18.1
+  Downloaded zeno v0.3.3
+  Downloaded taffy v0.10.1
+  Downloaded spin_on v0.1.1
+  Downloaded vtable v0.5.0
+  Downloaded android-properties v0.2.2
+  Downloaded svgtypes v0.16.1
+  Downloaded tiny-xlib v0.2.5
+  Downloaded byteorder-lite v0.1.0
+  Downloaded drm-sys v0.8.1
+  Downloaded strict-num v0.1.1
+  Downloaded tiny-skia-path v0.12.0
+  Downloaded toml v1.1.8+spec-1.1.0
+  Downloaded ahash v0.8.12
+  Downloaded arboard v3.7.0
+  Downloaded strum_macros v0.28.0
+  Downloaded xkeysym v0.2.1
+  Downloaded icu_locale_fallback v2.4.0
+  Downloaded jni-sys-macros v0.4.1
+  Downloaded memoffset v0.9.1
+  Downloaded naga-types v30.0.1
+  Downloaded gethostname v1.1.0
+  Downloaded unicode-linebreak v0.1.5
+  Downloaded zbus v5.19.0
+  Downloaded tiny-skia v0.11.4
+  Downloaded unicode-bidi v0.3.18
+  Downloaded windows v0.62.2
+  Downloaded scoped-tls-hkt v0.1.5
+  Downloaded downcast-rs v1.2.1
+  Downloaded glutin-winit v0.5.0
+  Downloaded wayland-backend v0.3.17
+  Downloaded wayland-protocols v0.32.13
+  Downloaded enumflags2_derive v0.7.12
+  Downloaded yeslogic-fontconfig-sys v6.0.1
+  Downloaded event-listener-strategy v0.5.4
+  Downloaded icu_plurals_data v2.4.0
+  Downloaded icu_plurals v2.4.0
+  Downloaded icu_decimal v2.4.0
+  Downloaded gbm-sys v0.4.0
+  Downloaded dlib v0.5.3
+  Downloaded calloop-wayland-source v0.3.0
+  Downloaded float-cmp v0.9.0
+  Downloaded serde_repr v0.1.21
+  Downloaded cfg_aliases v0.2.2
+  Downloaded wayland-csd-frame v0.3.0
+  Downloaded glutin_egl_sys v0.7.1
+  Downloaded glutin_glx_sys v0.6.1
+  Downloaded icu_decimal_data v2.4.0
+  Downloaded imgref v1.12.3
+  Downloaded presser v0.3.1
+  Downloaded const-field-offset v0.2.1
+  Downloaded swash v0.2.10
+  Downloaded foldhash v0.2.0
+  Downloaded parking v2.2.1
+  Downloaded async-broadcast v0.7.2
+  Downloaded async-process v2.5.0
+  Downloaded polycool v0.4.0
+  Downloaded enumflags2 v0.7.12
+  Downloaded piper v0.2.5
+  Downloaded zvariant_utils v4.2.0
+  Downloaded bindgen v0.72.1
+  Downloaded parley v0.11.1
+  Downloaded event-listener v5.4.2
+  Downloaded rspolib v0.1.2
+  Downloaded parking_lot v0.12.5
+  Downloaded slotmap v1.1.1
+  Downloaded async-executor v1.14.0
+  Downloaded async-recursion v1.2.0
+  Downloaded clru v0.6.3
+  Downloaded const-field-offset-macro v0.2.1
+  Downloaded convert_case v0.10.0
+  Downloaded critical-section v1.2.0
+  Downloaded arrayvec v0.7.8
+  Downloaded font-types v0.12.7
+  Downloaded ttf-parser v0.25.1
+  Downloaded as-raw-xcb-connection v1.0.1
+  Downloaded resvg v0.48.1
+  Downloaded async-channel v2.5.0
+  Downloaded calloop v0.13.0
+  Downloaded clang-sys v1.9.1
+  Downloaded foldhash v0.1.5
+  Downloaded ordered-float v5.5.1
+  Downloaded allocator-api2 v0.2.21
+  Downloaded calloop v0.14.5
+  Downloaded codespan-reporting v0.13.1
+  Downloaded i-slint-renderer-femtovg v1.18.1
+  Downloaded itertools v0.13.0
+  Downloaded jni v0.21.1
+  Downloaded ndk v0.8.0
+  Downloaded ndk v0.9.0
+  Downloaded atomic-waker v1.1.2
+  Downloaded euclid v0.22.14
+  Downloaded getrandom v0.3.4
+  Downloaded glutin v0.32.3
+  Downloaded half v2.7.1
+  Downloaded i-slint-backend-android-activity v1.18.1
+  Downloaded i-slint-renderer-skia v1.18.1
+  Downloaded pulldown-cmark v0.13.5
+  Downloaded cexpr v0.6.0
+  Downloaded endi v1.1.1
+  Downloaded derive_more-impl v2.1.1
+  Downloaded combine v4.6.9
+  Downloaded derive_more v2.1.1
+  Downloaded gpu-allocator v0.28.0
+  Downloaded android_system_properties v0.1.6
+  Downloaded itertools v0.15.0
+  Downloaded fontdb v0.24.0
+  Downloaded glow v0.18.0
+  Downloaded jni v0.22.4
+  Downloaded by_address v1.2.1
+  Downloaded drm v0.14.1
+  Downloaded i-slint-common v1.18.1
+  Downloaded borsh v1.8.1
+  Downloaded image v0.25.10
+  Downloaded nix v0.31.3
+  Downloaded harfrust v0.12.0
+  Downloaded android-activity v0.5.2
+  Downloaded annotate-snippets v0.12.17
+  Downloaded android-activity v0.6.1
+  Downloaded htmlparser v0.2.1
+  Downloaded gbm v0.18.0
+  Downloaded i-slint-core v1.18.1
+  Downloaded read-fonts v0.41.0
+  Downloaded khronos_api v3.1.0
+  Downloaded naga v30.0.1
+  Downloaded petgraph v0.8.3
+  Downloaded i-slint-compiler v1.18.1
+  Downloaded linux-raw-sys v0.9.4
+  Downloaded icu_segmenter_data v2.4.0
+  Downloaded icu_segmenter v2.4.0
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.27
+   Compiling quote v1.0.47
+   Compiling libc v0.2.191
+   Compiling autocfg v1.5.1
+   Compiling crc32fast v1.5.3
+   Compiling cfg-if v1.0.5
+   Compiling libm v0.2.16
+   Compiling memchr v2.8.3
+   Compiling num-traits v0.2.19
+   Compiling serde_core v1.0.229
+   Compiling syn v3.0.9
+   Compiling syn v2.0.119
+   Compiling version_check v0.9.5
+   Compiling log v0.4.34
+   Compiling bitflags v2.13.2
+   Compiling simd-adler32 v0.3.10
+   Compiling stable_deref_trait v1.2.1
+   Compiling icu_locale_fallback_data v2.4.0
+   Compiling adler2 v2.0.1
+   Compiling miniz_oxide v0.9.1
+   Compiling winnow v1.0.4
+   Compiling writeable v0.6.4
+   Compiling smallvec v1.16.4
+   Compiling toml_parser v1.1.5+spec-1.1.0
+   Compiling toml_datetime v1.1.2+spec-1.1.0
+   Compiling flate2 v1.1.10
+   Compiling synstructure v0.14.0
+   Compiling libloading v0.8.9
+   Compiling icu_properties_data v2.4.0
+   Compiling toml_writer v1.1.3+spec-1.1.0
+   Compiling foldhash v0.2.0
+   Compiling hashbrown v0.17.1
+   Compiling icu_decimal_data v2.4.0
+   Compiling pkg-config v0.3.34
+   Compiling heck v0.5.0
+   Compiling icu_normalizer_data v2.4.0
+   Compiling litemap v0.8.3
+   Compiling arrayvec v0.7.8
+   Compiling memoffset v0.9.1
+   Compiling portable-atomic v1.15.0
+   Compiling unicode-segmentation v1.13.3
+   Compiling zerofrom-derive v0.1.8
+   Compiling yoke-derive v0.8.4
+   Compiling zerovec-derive v0.11.7
+   Compiling displaydoc v0.2.7
+   Compiling bytemuck_derive v1.12.1
+   Compiling pulldown-cmark v0.13.5
+   Compiling once_cell v1.21.4
+   Compiling zerofrom v0.1.8
+   Compiling yoke v0.8.4
+   Compiling zerovec v0.11.9
+   Compiling zerotrie v0.2.5
+   Compiling bytemuck v1.25.2
+   Compiling font-types v0.12.7
+   Compiling convert_case v0.10.0
+   Compiling tinystr v0.8.5
+   Compiling potential_utf v0.1.6
+   Compiling icu_locale_core v2.4.0
+   Compiling critical-section v1.2.0
+   Compiling unicode-xid v0.2.6
+   Compiling either v1.19.0
+   Compiling derive_more-impl v2.1.1
+   Compiling read-fonts v0.41.0
+   Compiling icu_provider v2.4.0
+   Compiling thiserror-impl v2.0.21
+   Compiling semver v1.0.28
+   Compiling equivalent v1.0.3
+   Compiling indexmap v2.14.2
+   Compiling rustc_version v0.4.1
+   Compiling slotmap v1.1.1
+   Compiling float-cmp v0.9.0
+   Compiling strict-num v0.1.1
+   Compiling toml_edit v0.25.17+spec-1.1.0
+   Compiling polycool v0.4.0
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling jobserver v0.1.35
+   Compiling find-msvc-tools v0.1.15
+   Compiling shlex v2.0.1
+   Compiling arrayref v0.3.9
+   Compiling rustversion v1.0.23
+   Compiling tiny-skia-path v0.12.0
+   Compiling cc v1.10.0
+   Compiling png v0.18.1
+   Compiling skrifa v0.44.0
+   Compiling kurbo v0.13.1
+   Compiling proc-macro-crate v3.5.0
+   Compiling yeslogic-fontconfig-sys v6.0.1
+   Compiling glob v0.3.4
+   Compiling zmij v1.0.23
+   Compiling siphasher v1.0.4
+   Compiling byteorder-lite v0.1.0
+   Compiling tinyvec v1.13.3
+   Compiling zune-core v0.5.3
+   Compiling clang-sys v1.9.1
+   Compiling zune-jpeg v0.5.15
+   Compiling svgtypes v0.16.1
+   Compiling fontdb v0.24.0
+   Compiling num_enum_derive v0.7.6
+   Compiling harfrust v0.12.0
+   Compiling strum_macros v0.28.0
+   Compiling dlib v0.5.3
+   Compiling simplecss v0.2.2
+   Compiling roxmltree v0.21.2
+   Compiling unicode-bidi v0.3.18
+   Compiling utf8_iter v1.0.4
+   Compiling pico-args v0.5.0
+   Compiling xmlwriter v0.1.0
+   Compiling quick-error v2.0.1
+   Compiling weezl v0.1.12
+   Compiling base64 v0.23.1
+   Compiling unicode-vo v0.1.0
+   Compiling imagesize v0.15.0
+   Compiling prettyplease v0.2.37
+   Compiling serde_json v1.0.154
+   Compiling rustix v1.1.5
+   Compiling unicode-script v0.5.8
+   Compiling crossbeam-utils v0.8.23
+   Compiling data-url v0.3.2
+   Compiling color_quant v1.1.0
+   Compiling gif v0.14.2
+   Compiling usvg v0.48.1
+   Compiling image-webp v0.2.4
+   Compiling icu_collections v2.4.0
+   Compiling icu_locale_fallback v2.4.0
+   Compiling tiny-skia v0.12.0
+   Compiling rgb v0.8.53
+   Compiling fixed_decimal v0.7.3
+   Compiling memmap2 v0.9.12
+   Compiling aho-corasick v1.1.5
+   Compiling minimal-lexical v0.2.1
+   Compiling cfg_aliases v0.2.2
+   Compiling regex-syntax v0.8.11
+   Compiling itoa v1.0.18
+   Compiling linebender_resource_handle v0.1.1
+   Compiling parlance v0.1.1
+   Compiling linux-raw-sys v0.12.1
+   Compiling unicase v2.10.0
+   Compiling khronos_api v3.1.0
+   Compiling crossbeam-epoch v0.9.21
+   Compiling regex-automata v0.4.18
+   Compiling fontique v0.11.1
+   Compiling nom v7.1.3
+   Compiling resvg v0.48.1
+   Compiling icu_decimal v2.4.0
+   Compiling derive_more v2.1.1
+   Compiling crossbeam-deque v0.8.8
+   Compiling thiserror v2.0.21
+   Compiling htmlparser v0.2.1
+   Compiling bindgen v0.72.1
+   Compiling i-slint-common v1.18.1
+   Compiling cexpr v0.6.0
+   Compiling icu_normalizer v2.4.0
+   Compiling icu_properties v2.4.0
+   Compiling regex v1.13.1
+   Compiling xattr v1.6.1
+   Compiling euclid v0.22.14
+   Compiling field-offset v0.3.6
+   Compiling itertools v0.13.0
+   Compiling jni-sys-macros v0.4.1
+   Compiling serde_spanned v1.1.2
+   Compiling filetime v0.2.29
+   Compiling xml-rs v0.8.29
+   Compiling icu_segmenter_data v2.4.0
+   Compiling rayon-core v1.13.0
+   Compiling shlex v1.3.0
+   Compiling rustc-hash v2.1.3
+   Compiling gl_generator v0.14.0
+   Compiling tar v0.4.46
+   Compiling toml v1.1.8+spec-1.1.0
+   Compiling jni-sys v0.4.1
+   Compiling lyon_geom v1.0.20
+   Compiling idna_adapter v1.2.2
+   Compiling snafu-derive v0.8.9
+   Compiling percent-encoding v2.3.2
+   Compiling jni-sys v0.3.1
+   Compiling pxfm v0.1.30
+   Compiling rspolib v0.1.2
+   Compiling unicode-width v0.2.2
+   Compiling same-file v1.0.6
+   Compiling walkdir v2.5.0
+   Compiling moxcms v0.8.1
+   Compiling snafu v0.8.9
+   Compiling form_urlencoded v1.2.2
+   Compiling lyon_path v1.0.19
+   Compiling idna v1.1.0
+   Compiling skia-bindings v0.153.3
+   Compiling glutin_egl_sys v0.7.1
+   Compiling android_system_properties v0.1.6
+   Compiling jni-macros v0.22.4
+   Compiling const-field-offset-macro v0.2.1
+   Compiling hashbrown v0.14.5
+   Compiling raw-window-handle v0.6.2
+   Compiling zeno v0.3.3
+   Compiling anstyle v1.0.14
+   Compiling i-slint-compiler v1.18.1
+   Compiling natord v1.0.9
+   Compiling simdutf8 v0.1.5
+   Compiling text-size v1.1.1
+   Compiling allocator-api2 v0.2.21
+   Compiling lazy_static v1.5.1
+   Compiling thiserror v1.0.69
+   Compiling countme v3.0.1
+   Compiling yazi v0.2.1
+   Compiling rustc-hash v1.1.0
+   Compiling unicode-linebreak v0.1.5
+   Compiling rowan v0.17.0
+   Compiling swash v0.2.10
+   Compiling hashbrown v0.16.1
+   Compiling simd_cesu8 v1.2.0
+   Compiling annotate-snippets v0.12.17
+   Compiling const-field-offset v0.2.1
+   Compiling iana-time-zone v0.1.65
+   Compiling lyon_extra v1.1.0
+   Compiling parley_data v0.11.1
+   Compiling icu_segmenter v2.4.0
+   Compiling url v2.5.8
+   Compiling image v0.25.10
+   Compiling rayon v1.12.0
+   Compiling jni v0.22.4
+   Compiling glutin v0.32.3
+   Compiling strum v0.28.0
+   Compiling num_enum v0.7.6
+   Compiling itertools v0.15.0
+   Compiling vtable-macro v0.5.0
+   Compiling pin-project-internal v1.1.13
+   Compiling thiserror-impl v1.0.69
+   Compiling bytes v1.12.1
+   Compiling typed-index-collections v3.5.0
+   Compiling smol_str v0.3.7
+   Compiling by_address v1.2.1
+   Compiling pin-utils v0.1.1
+   Compiling spin_on v0.1.1
+   Compiling combine v4.6.9
+   Compiling pin-project v1.1.13
+   Compiling vtable v0.5.0
+   Compiling ndk-sys v0.6.0+11769913
+   Compiling parley v0.11.1
+   Compiling chrono v0.4.45
+   Compiling clru v0.6.3
+   Compiling lyon_algorithms v1.0.22
+   Compiling taffy v0.10.1
+   Compiling i-slint-core-macros v1.18.1
+   Compiling i-slint-renderer-skia v1.18.1
+   Compiling android-activity v0.6.1
+   Compiling sys-locale v0.3.2
+   Compiling android-build v0.1.4
+   Compiling scopeguard v1.2.0
+   Compiling slab v0.4.12
+   Compiling pin-weak v1.1.0
+   Compiling i-slint-backend-android-activity v1.18.1
+   Compiling i-slint-core v1.18.1
+   Compiling ndk v0.9.0
+   Compiling skia-safe v0.153.3
+   Compiling scoped-tls-hkt v0.1.5
+   Compiling android-properties v0.2.2
+   Compiling ndk-context v0.1.1
+   Compiling glow v0.18.0
+   Compiling i-slint-backend-selector v1.18.1
+   Compiling slint-build v1.18.1
+   Compiling slint-macros v1.18.1
+   Compiling slintspike v0.1.0 (/home/runner/work/benchmark/benchmark/spikes/slint)
+error: failed to run custom build command for `slintspike v0.1.0 (/home/runner/work/benchmark/benchmark/spikes/slint)`
+note: To improve backtraces for build dependencies, set the CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true environment variable to enable debug information generation.
+
+Caused by:
+  process didn't exit successfully: `/home/runner/work/benchmark/benchmark/spikes/slint/target/x/release/android/x64/cargo/release/build/slintspike-3faf4f9f27c7dfc2/build-script-build` (exit status: 1)
+  --- stdout
+  cargo:rerun-if-changed=/home/runner/work/benchmark/benchmark/spikes/slint/ui/app.slint
+  cargo:rerun-if-env-changed=SLINT_STYLE
+  cargo:rerun-if-env-changed=SLINT_FONT_SIZES
+  cargo:rerun-if-env-changed=SLINT_SCALE_FACTOR
+  cargo:rerun-if-env-changed=SLINT_ASSET_SECTION
+  cargo:rerun-if-env-changed=SLINT_EMBED_RESOURCES
+  cargo:rerun-if-env-changed=SLINT_EMIT_DEBUG_INFO
+  cargo:rerun-if-env-changed=SLINT_LIVE_PREVIEW
+  cargo:rerun-if-env-changed=SLINT_BUNDLE_TRANSLATIONS
+  cargo:rustc-env=SLINT_INCLUDE_GENERATED=/home/runner/work/benchmark/benchmark/spikes/slint/target/x/release/android/x64/cargo/x86_64-linux-android/release/build/slintspike-83e443176caac331/out/app.rs
+  cargo:rerun-if-changed=ui/app.slint
+  cargo:rerun-if-changed=core-c
+  cargo:rerun-if-env-changed=CC_FORCE_DISABLE
+  CC_FORCE_DISABLE = None
+  cargo:rerun-if-env-changed=CC_x86_64-linux-android
+  CC_x86_64-linux-android = Some(clang)
+  cargo:rerun-if-env-changed=CC_KNOWN_WRAPPER_CUSTOM
+  CC_KNOWN_WRAPPER_CUSTOM = None
+  cargo:rerun-if-env-changed=CC_ENABLE_DEBUG_OUTPUT
+  cargo:rerun-if-env-changed=CPATH
+  cargo:rerun-if-env-changed=C_INCLUDE_PATH
+  cargo:rerun-if-env-changed=CPLUS_INCLUDE_PATH
+  cargo:rerun-if-env-changed=OBJC_INCLUDE_PATH
+  cargo:rerun-if-env-changed=OBJCPLUS_INCLUDE_PATH
+  cargo:rerun-if-env-changed=COMPILER_PATH
+  cargo:rerun-if-env-changed=SOURCE_DATE_EPOCH
+  cargo:rerun-if-env-changed=CCC_OVERRIDE_OPTIONS
+  cargo:rerun-if-env-changed=CLANG_NO_DEFAULT_CONFIG
+  cargo:rerun-if-env-changed=CRATE_CC_NO_DEFAULTS
+  CRATE_CC_NO_DEFAULTS = None
+  cargo:rerun-if-env-changed=CFLAGS
+  CFLAGS = None
+  cargo:rerun-if-env-changed=TARGET_CFLAGS
+  TARGET_CFLAGS = None
+  cargo:rerun-if-env-changed=CFLAGS_x86_64_linux_android
+  CFLAGS_x86_64_linux_android = None
+  cargo:rerun-if-env-changed=CFLAGS_x86_64-linux-android
+  CFLAGS_x86_64-linux-android = Some(--sysroot=/home/runner/.cache/x/Android.ndk --target=x86_64-linux-android33 )
+  cargo:rerun-if-env-changed=CC_SHELL_ESCAPED_FLAGS
+  CC_SHELL_ESCAPED_FLAGS = None
+  CC_FORCE_DISABLE = None
+  cargo:rerun-if-env-changed=AR_x86_64-linux-android
+  AR_x86_64-linux-android = Some(llvm-ar)
+  CC_KNOWN_WRAPPER_CUSTOM = None
+  cargo:rerun-if-env-changed=ARFLAGS
+  ARFLAGS = None
+  cargo:rerun-if-env-changed=TARGET_ARFLAGS
+  TARGET_ARFLAGS = None
+  cargo:rerun-if-env-changed=ARFLAGS_x86_64_linux_android
+  ARFLAGS_x86_64_linux_android = None
+  cargo:rerun-if-env-changed=ARFLAGS_x86_64-linux-android
+  ARFLAGS_x86_64-linux-android = None
+  AR_x86_64-linux-android = Some(llvm-ar)
+  CC_KNOWN_WRAPPER_CUSTOM = None
+  ARFLAGS = None
+  TARGET_ARFLAGS = None
+  ARFLAGS_x86_64_linux_android = None
+  ARFLAGS_x86_64-linux-android = None
+  AR_x86_64-linux-android = Some(llvm-ar)
+  CC_KNOWN_WRAPPER_CUSTOM = None
+  ARFLAGS = None
+  TARGET_ARFLAGS = None
+  ARFLAGS_x86_64_linux_android = None
+  ARFLAGS_x86_64-linux-android = None
+
+  --- stderr
+
+
+  error occurred in cc-rs: failed to find tool "llvm-ar": No such file or directory (os error 2)
+
+
+warning: build failed, waiting for other jobs to finish...
+Error: [ERROR] `cd "/home/runner/work/benchmark/benchmark/spikes/slint" && AR_x86_64-linux-android="llvm-ar" BINDGEN_EXTRA_CLANG_ARGS_x86_64_linux_android="--sysroot=/home/runner/.cache/x/Android.ndk --target=x86_64-linux-android33 " CARGO_TARGET_X86_64_LINUX_ANDROID_LINKER="clang" CARGO_TARGET_X86_64_LINUX_ANDROID_RUSTFLAGS="-Clink-arg=--sysroot=/home/runner/.cache/x/Android.ndk -Clink-arg=-fuse-ld=lld -Clink-arg=--target=x86_64-linux-android33 -Clink-arg=-B/home/runner/.cache/x/Android.ndk/usr/lib/x86_64-linux-android/33 -Clink-arg=-L/home/runner/.cache/x/Android.ndk/usr/lib/x86_64-linux-android/33 -Clink-arg=-L/home/runner/.cache/x/Android.ndk/usr/lib/x86_64-linux-android " CC_x86_64-linux-android="clang" CFLAGS_x86_64-linux-android="--sysroot=/home/runner/.cache/x/Android.ndk --target=x86_64-linux-android33 " CXXFLAGS_x86_64-linux-android="--sysroot=/home/runner/.cache/x/Android.ndk --target=x86_64-linux-android33 -stdlib=libc++ " CXX_x86_64-linux-android="clang++" "cargo" "build" "--target-dir" "/home/runner/work/benchmark/benchmark/spikes/slint/target/x/release/android/x64/cargo" "--release" "--target" "x86_64-linux-android" "--lib"` exited with 101
+
+Stack backtrace:
+   0: <anyhow::Error>::msg::<alloc::string::String>
+   1: xbuild::task::run
+   2: <xbuild::cargo::CargoBuild>::exec
+   3: xbuild::command::build::build
+   4: x::main
+   5: std::sys::backtrace::__rust_begin_short_backtrace::<fn() -> core::result::Result<(), anyhow::Error>, core::result::Result<(), anyhow::Error>>
+   6: std::rt::lang_start::<core::result::Result<(), anyhow::Error>>::{closure#0}
+   7: std::rt::lang_start_internal
+   8: main
+   9: <unknown>
+  10: __libc_start_main
+  11: _start
+x build exit=1
+=== voie xbuild en échec : repli cargo-ndk ===

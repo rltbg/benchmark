@@ -1,0 +1,172 @@
+    Building arm64-v8a (aarch64-linux-android)
+   Compiling stable_deref_trait v1.2.1
+   Compiling zerofrom v0.1.8
+   Compiling bytemuck v1.25.2
+   Compiling bitflags v2.13.2
+   Compiling writeable v0.6.4
+   Compiling yoke v0.8.4
+   Compiling zerovec v0.11.9
+   Compiling portable-atomic v1.15.0
+   Compiling cfg-if v1.0.5
+   Compiling arrayvec v0.7.8
+   Compiling smallvec v1.16.4
+   Compiling critical-section v1.2.0
+   Compiling libm v0.2.16
+   Compiling libc v0.2.191
+   Compiling litemap v0.8.3
+   Compiling simd-adler32 v0.3.10
+   Compiling memchr v2.8.3
+   Compiling once_cell v1.21.4
+   Compiling zerotrie v0.2.5
+   Compiling tinystr v0.8.5
+   Compiling potential_utf v0.1.6
+   Compiling num-traits v0.2.19
+   Compiling icu_locale_core v2.4.0
+   Compiling log v0.4.34
+   Compiling adler2 v2.0.1
+   Compiling font-types v0.12.7
+   Compiling icu_provider v2.4.0
+   Compiling crc32fast v1.5.3
+   Compiling read-fonts v0.41.0
+   Compiling miniz_oxide v0.9.1
+   Compiling slotmap v1.1.1
+   Compiling flate2 v1.1.10
+   Compiling icu_locale_fallback_data v2.4.0
+   Compiling float-cmp v0.9.0
+   Compiling foldhash v0.2.0
+   Compiling utf8_iter v1.0.4
+   Compiling icu_collections v2.4.0
+   Compiling strict-num v0.1.1
+   Compiling miniz_oxide v0.8.9
+   Compiling roxmltree v0.21.2
+   Compiling fdeflate v0.3.7
+   Compiling polycool v0.4.0
+   Compiling arrayref v0.3.9
+   Compiling thiserror v2.0.21
+   Compiling tiny-skia-path v0.12.0
+   Compiling kurbo v0.13.1
+   Compiling png v0.18.1
+   Compiling icu_locale_fallback v2.4.0
+   Compiling euclid v0.22.14
+   Compiling memoffset v0.9.1
+   Compiling icu_properties_data v2.4.0
+   Compiling siphasher v1.0.4
+   Compiling tinyvec v1.13.3
+   Compiling zune-core v0.5.3
+   Compiling byteorder-lite v0.1.0
+   Compiling icu_segmenter_data v2.4.0
+   Compiling fontdb v0.24.0
+   Compiling zune-jpeg v0.5.15
+   Compiling svgtypes v0.16.1
+   Compiling skrifa v0.44.0
+   Compiling harfrust v0.12.0
+   Compiling jni-sys v0.4.1
+   Compiling field-offset v0.3.6
+   Compiling lyon_geom v1.0.20
+   Compiling hashbrown v0.17.1
+   Compiling simplecss v0.2.2
+   Compiling memmap2 v0.9.12
+   Compiling icu_decimal_data v2.4.0
+   Compiling icu_normalizer_data v2.4.0
+   Compiling linebender_resource_handle v0.1.1
+   Compiling imagesize v0.15.0
+   Compiling unicode-vo v0.1.0
+   Compiling parlance v0.1.1
+   Compiling pico-args v0.5.0
+   Compiling unicode-script v0.5.8
+   Compiling base64 v0.23.1
+   Compiling quick-error v2.0.1
+   Compiling weezl v0.1.12
+   Compiling unicode-bidi v0.3.18
+   Compiling xmlwriter v0.1.0
+   Compiling data-url v0.3.2
+   Compiling color_quant v1.1.0
+   Compiling gif v0.14.2
+   Compiling usvg v0.48.1
+   Compiling image-webp v0.2.4
+   Compiling jni-sys v0.3.1
+   Compiling fontique v0.11.1
+   Compiling lyon_path v1.0.19
+   Compiling icu_properties v2.4.0
+   Compiling tiny-skia v0.12.0
+   Compiling android_system_properties v0.1.6
+   Compiling fixed_decimal v0.7.3
+   Compiling rgb v0.8.53
+   Compiling pulldown-cmark v0.13.5
+   Compiling pxfm v0.1.30
+   Compiling allocator-api2 v0.2.21
+   Compiling equivalent v1.0.3
+   Compiling unicase v2.10.0
+   Compiling raw-window-handle v0.6.2
+   Compiling moxcms v0.8.1
+   Compiling hashbrown v0.16.1
+   Compiling thiserror v1.0.69
+   Compiling resvg v0.48.1
+   Compiling const-field-offset v0.2.1
+   Compiling icu_decimal v2.4.0
+   Compiling iana-time-zone v0.1.65
+   Compiling parley_data v0.11.1
+   Compiling icu_segmenter v2.4.0
+   Compiling glutin_egl_sys v0.7.1
+   Compiling skia-bindings v0.153.3
+   Compiling icu_normalizer v2.4.0
+   Compiling derive_more v2.1.1
+   Compiling bytes v1.12.1
+   Compiling simdutf8 v0.1.5
+   Compiling htmlparser v0.2.1
+   Compiling i-slint-common v1.18.1
+   Compiling combine v4.6.9
+   Compiling simd_cesu8 v1.2.0
+   Compiling pin-project v1.1.13
+   Compiling vtable v0.5.0
+   Compiling glutin v0.32.3
+   Compiling jni v0.22.4
+   Compiling ndk-sys v0.6.0+11769913
+   Compiling parley v0.11.1
+   Compiling chrono v0.4.45
+   Compiling image v0.25.10
+   Compiling clru v0.6.3
+   Compiling lyon_algorithms v1.0.22
+   Compiling lyon_extra v1.1.0
+   Compiling taffy v0.10.1
+   Compiling strum v0.28.0
+   Compiling num_enum v0.7.6
+   Compiling sys-locale v0.3.2
+   Compiling libloading v0.8.9
+   Compiling scopeguard v1.2.0
+   Compiling slab v0.4.12
+   Compiling pin-weak v1.1.0
+   Compiling unicode-linebreak v0.1.5
+   Compiling unicode-segmentation v1.13.3
+   Compiling i-slint-core v1.18.1
+   Compiling android-activity v0.6.1
+   Compiling ndk v0.9.0
+   Compiling i-slint-renderer-skia v1.18.1
+   Compiling skia-safe v0.153.3
+   Compiling ndk-context v0.1.1
+   Compiling glow v0.18.0
+   Compiling android-properties v0.2.2
+   Compiling scoped-tls-hkt v0.1.5
+   Compiling i-slint-backend-android-activity v1.18.1
+error: failed to run custom build command for `i-slint-backend-android-activity v1.18.1`
+note: To improve backtraces for build dependencies, set the CARGO_PROFILE_RELEASE_BUILD_OVERRIDE_DEBUG=true environment variable to enable debug information generation.
+
+Caused by:
+  process didn't exit successfully: `/home/runner/work/benchmark/benchmark/spikes/slint/target/release/build/i-slint-backend-android-activity-c48c3bf940b7a452/build-script-build` (exit status: 101)
+  --- stdout
+  cargo:rustc-check-cfg=cfg(slint_nightly_test)
+  cargo:rerun-if-env-changed=ANDROID_JAR
+  cargo:rerun-if-env-changed=ANDROID_HOME
+  cargo:rerun-if-env-changed=ANDROID_PLATFORM
+  cargo:rerun-if-env-changed=ANDROID_SDK_EXTENSION
+
+  --- stderr
+
+  thread 'main' (21530) panicked at /home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/i-slint-backend-android-activity-1.18.1/build.rs:34:56:
+  No Android platforms found
+  stack backtrace:
+  note: Some details are omitted, run with `RUST_BACKTRACE=full` for a verbose backtrace.
+warning: build failed, waiting for other jobs to finish...
+note: If the build failed due to a missing target, you can run this command:
+note: 
+note:     rustup target install aarch64-linux-android

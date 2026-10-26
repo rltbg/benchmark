@@ -1,0 +1,558 @@
+{
+ "summary": {
+  "tag": "egui-stream-r10000-m96",
+  "stack": "egui",
+  "scenario": "stream",
+  "runs": 3,
+  "ok_runs": 3,
+  "oom_runs": 0,
+  "markers_ok": 3,
+  "agg": {
+   "fps_mean": {
+    "median": 59.92929199677124,
+    "p95": 59.92988203801553,
+    "min": 59.92887298902959,
+    "max": 59.92988203801553,
+    "n": 3
+   },
+   "frame_p50": {
+    "median": 16.667,
+    "p95": 16.674,
+    "min": 16.663,
+    "max": 16.674,
+    "n": 3
+   },
+   "frame_p95": {
+    "median": 17.015,
+    "p95": 17.103,
+    "min": 16.987,
+    "max": 17.103,
+    "n": 3
+   },
+   "frame_p99": {
+    "median": 18.745,
+    "p95": 19.094,
+    "min": 18.088,
+    "max": 19.094,
+    "n": 3
+   },
+   "frame_max": {
+    "median": 33.206,
+    "p95": 33.209,
+    "min": 32.982,
+    "max": 33.209,
+    "n": 3
+   },
+   "dropped_gt16_7": {
+    "median": 352,
+    "p95": 357,
+    "min": 341,
+    "max": 357,
+    "n": 3
+   },
+   "dropped_gt8_3": {
+    "median": 840,
+    "p95": 840,
+    "min": 840,
+    "max": 840,
+    "n": 3
+   },
+   "dropped_gt25": {
+    "median": 2,
+    "p95": 2,
+    "min": 1,
+    "max": 2,
+    "n": 3
+   },
+   "rss_kb_median": {
+    "median": 154816,
+    "p95": 154832,
+    "min": 154808,
+    "max": 154832,
+    "n": 3
+   },
+   "rss_kb_peak": {
+    "median": 154996,
+    "p95": 155076,
+    "min": 154812,
+    "max": 155076,
+    "n": 3
+   },
+   "pss_kb_median": {
+    "median": 132271,
+    "p95": 132313,
+    "min": 132259,
+    "max": 132313,
+    "n": 3
+   },
+   "pss_kb_peak": {
+    "median": 132477,
+    "p95": 132519,
+    "min": 132275,
+    "max": 132519,
+    "n": 3
+   },
+   "cpu_pct_core_mean": {
+    "median": 105.29812739715305,
+    "p95": 107.29052833038534,
+    "min": 105.1170386310505,
+    "max": 107.29052833038534,
+    "n": 3
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 114.01912255410694,
+    "p95": 117.7970300199291,
+    "min": 113.5191785388953,
+    "max": 117.7970300199291,
+    "n": 3
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.114177257000847,
+    "p95": 2.1154640629974892,
+    "min": 2.0229368769978464,
+    "max": 2.1154640629974892,
+    "n": 3
+   },
+   "wall_s": {
+    "median": 16.115846824999608,
+    "p95": 16.134075100999326,
+    "min": 16.045337398998527,
+    "max": 16.134075100999326,
+    "n": 3
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 16.045337398998527,
+   "markers": true,
+   "mem_failcnt": 0,
+   "mem_charged_peak_kb": 72072,
+   "oom_kills": 0,
+   "oom": false,
+   "startup_to_measure_s": 2.0229368769978464,
+   "frames": 840,
+   "ops": {
+    "sum_heights": 8799584,
+    "final_offset": 20646.182,
+    "rows_drawn": 7190,
+    "updates_generated": 140150,
+    "updates_applied": 139979,
+    "updates_dropped": 0,
+    "pacing": "60",
+    "unchanged_frames_excluded": 1,
+    "frame_cpu_usage_ms_mean": 3.901,
+    "not_rendered": []
+   },
+   "checksum": "dfed5248",
+   "unsupported": null,
+   "version": "egui 0.37.0 / eframe 0.37.0 / epaint 0.37.0 / wgpu 30.0.1 / glow 0.17.0 / winit 0.30.13 / image 0.25.10 / rustc 1.99.1 / renderer wgpu",
+   "fps_mean": 59.92988203801553,
+   "frame_p50": 16.667,
+   "frame_p95": 17.015,
+   "frame_p99": 18.088,
+   "frame_max": 33.206,
+   "dropped_gt16_7": 352,
+   "dropped_gt8_3": 840,
+   "dropped_gt25": 1,
+   "dropped_ms_gt16_7": 81.22000000000025,
+   "window": "markers",
+   "rss_kb_median": 154816,
+   "rss_kb_peak": 155076,
+   "pss_kb_median": 132259,
+   "pss_kb_peak": 132519,
+   "pss_kb_first_quarter": 132178,
+   "pss_kb_last_quarter": 132519,
+   "cpu_pct_core_mean": 105.1170386310505,
+   "cpu_pct_core_peak_1s": 113.5191785388953,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     6224,
+     4327
+    ],
+    [
+     1.1,
+     1.22,
+     152980,
+     130454
+    ],
+    [
+     2.1,
+     2.37,
+     154592,
+     132066
+    ],
+    [
+     3.2,
+     3.49,
+     154704,
+     132178
+    ],
+    [
+     4.2,
+     4.6,
+     154708,
+     132182
+    ],
+    [
+     5.3,
+     5.66,
+     154724,
+     132198
+    ],
+    [
+     6.3,
+     6.72,
+     154792,
+     132235
+    ],
+    [
+     7.4,
+     7.84,
+     154796,
+     132239
+    ],
+    [
+     8.4,
+     8.95,
+     154816,
+     132259
+    ],
+    [
+     9.5,
+     10.02,
+     155068,
+     132511
+    ],
+    [
+     10.5,
+     11.15,
+     155068,
+     132511
+    ],
+    [
+     11.6,
+     12.36,
+     155072,
+     132515
+    ],
+    [
+     12.7,
+     13.5,
+     155072,
+     132515
+    ],
+    [
+     13.7,
+     14.59,
+     155076,
+     132519
+    ],
+    [
+     14.8,
+     15.73,
+     155076,
+     132519
+    ],
+    [
+     15.8,
+     16.79,
+     155076,
+     132519
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 16.115846824999608,
+   "markers": true,
+   "mem_failcnt": 0,
+   "mem_charged_peak_kb": 71992,
+   "oom_kills": 0,
+   "oom": false,
+   "startup_to_measure_s": 2.114177257000847,
+   "frames": 840,
+   "ops": {
+    "sum_heights": 8799584,
+    "final_offset": 20646.632,
+    "rows_drawn": 7189,
+    "updates_generated": 140152,
+    "updates_applied": 139982,
+    "updates_dropped": 0,
+    "pacing": "60",
+    "unchanged_frames_excluded": 1,
+    "frame_cpu_usage_ms_mean": 4.181,
+    "not_rendered": []
+   },
+   "checksum": "dfed5248",
+   "unsupported": null,
+   "version": "egui 0.37.0 / eframe 0.37.0 / epaint 0.37.0 / wgpu 30.0.1 / glow 0.17.0 / winit 0.30.13 / image 0.25.10 / rustc 1.99.1 / renderer wgpu",
+   "fps_mean": 59.92929199677124,
+   "frame_p50": 16.674,
+   "frame_p95": 17.103,
+   "frame_p99": 18.745,
+   "frame_max": 33.209,
+   "dropped_gt16_7": 357,
+   "dropped_gt8_3": 840,
+   "dropped_gt25": 2,
+   "dropped_ms_gt16_7": 109.41200000000023,
+   "window": "markers",
+   "rss_kb_median": 154808,
+   "rss_kb_peak": 154812,
+   "pss_kb_median": 132271,
+   "pss_kb_peak": 132275,
+   "pss_kb_first_quarter": 131934,
+   "pss_kb_last_quarter": 132275,
+   "cpu_pct_core_mean": 107.29052833038534,
+   "cpu_pct_core_peak_1s": 117.7970300199291,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2700,
+     1531
+    ],
+    [
+     1.1,
+     1.26,
+     152712,
+     130202
+    ],
+    [
+     2.1,
+     2.37,
+     154332,
+     131822
+    ],
+    [
+     3.2,
+     3.48,
+     154444,
+     131934
+    ],
+    [
+     4.2,
+     4.59,
+     154444,
+     131934
+    ],
+    [
+     5.3,
+     5.69,
+     154724,
+     132214
+    ],
+    [
+     6.3,
+     6.78,
+     154800,
+     132263
+    ],
+    [
+     7.4,
+     7.95,
+     154800,
+     132263
+    ],
+    [
+     8.4,
+     9.05,
+     154808,
+     132271
+    ],
+    [
+     9.5,
+     10.21,
+     154808,
+     132271
+    ],
+    [
+     10.5,
+     11.43,
+     154808,
+     132271
+    ],
+    [
+     11.6,
+     12.62,
+     154812,
+     132275
+    ],
+    [
+     12.7,
+     13.77,
+     154812,
+     132275
+    ],
+    [
+     13.7,
+     14.92,
+     154812,
+     132275
+    ],
+    [
+     14.8,
+     15.95,
+     154812,
+     132275
+    ],
+    [
+     15.8,
+     17.04,
+     154812,
+     132275
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 16.134075100999326,
+   "markers": true,
+   "mem_failcnt": 0,
+   "mem_charged_peak_kb": 72084,
+   "oom_kills": 0,
+   "oom": false,
+   "startup_to_measure_s": 2.1154640629974892,
+   "frames": 840,
+   "ops": {
+    "sum_heights": 8799584,
+    "final_offset": 20646.526,
+    "rows_drawn": 7187,
+    "updates_generated": 140153,
+    "updates_applied": 139984,
+    "updates_dropped": 0,
+    "pacing": "60",
+    "unchanged_frames_excluded": 1,
+    "frame_cpu_usage_ms_mean": 4.088,
+    "not_rendered": []
+   },
+   "checksum": "dfed5248",
+   "unsupported": null,
+   "version": "egui 0.37.0 / eframe 0.37.0 / epaint 0.37.0 / wgpu 30.0.1 / glow 0.17.0 / winit 0.30.13 / image 0.25.10 / rustc 1.99.1 / renderer wgpu",
+   "fps_mean": 59.92887298902959,
+   "frame_p50": 16.663,
+   "frame_p95": 16.987,
+   "frame_p99": 19.094,
+   "frame_max": 32.982,
+   "dropped_gt16_7": 341,
+   "dropped_gt8_3": 840,
+   "dropped_gt25": 2,
+   "dropped_ms_gt16_7": 105.31500000000024,
+   "window": "markers",
+   "rss_kb_median": 154832,
+   "rss_kb_peak": 154996,
+   "pss_kb_median": 132313,
+   "pss_kb_peak": 132477,
+   "pss_kb_first_quarter": 131997,
+   "pss_kb_last_quarter": 132321,
+   "cpu_pct_core_mean": 105.29812739715305,
+   "cpu_pct_core_peak_1s": 114.01912255410694,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3216,
+     1858
+    ],
+    [
+     1.1,
+     1.19,
+     152776,
+     130257
+    ],
+    [
+     2.1,
+     2.24,
+     154372,
+     131853
+    ],
+    [
+     3.2,
+     3.33,
+     154516,
+     131997
+    ],
+    [
+     4.2,
+     4.42,
+     154784,
+     132265
+    ],
+    [
+     5.3,
+     5.53,
+     154796,
+     132277
+    ],
+    [
+     6.3,
+     6.58,
+     154808,
+     132289
+    ],
+    [
+     7.4,
+     7.64,
+     154816,
+     132297
+    ],
+    [
+     8.4,
+     8.75,
+     154832,
+     132313
+    ],
+    [
+     9.5,
+     9.93,
+     154832,
+     132313
+    ],
+    [
+     10.5,
+     11.01,
+     154832,
+     132313
+    ],
+    [
+     11.6,
+     12.11,
+     154840,
+     132321
+    ],
+    [
+     12.6,
+     13.23,
+     154840,
+     132321
+    ],
+    [
+     13.7,
+     14.44,
+     154840,
+     132321
+    ],
+    [
+     14.8,
+     15.59,
+     154840,
+     132321
+    ],
+    [
+     15.8,
+     16.7,
+     154840,
+     132321
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,21 @@
+{
+ "stack": "slint",
+ "platform": "windows",
+ "status": "ok",
+ "build_seconds": 435.0,
+ "artifacts": [
+  {
+   "path": "D:\\a\\benchmark\\benchmark\\out\\windows/slintspike.exe",
+   "bytes": 17175552,
+   "gzip": 8581593,
+   "brotli": 6883013
+  }
+ ],
+ "notes": [
+  "execution: session du runner windows-2025, SLINT_BACKEND=winit-skia-software, chiffres de CI",
+  "metrics: cold_start_ms_to_ready=1485 working_set_kb_canvas=36852 working_set_kb_end=34092"
+ ],
+ "runner": "Windows/X64",
+ "sha": "6a607e3c52d9e50a20d57f16ed219b1e69e30270",
+ "date": "2026-10-26T16:10:30Z"
+}

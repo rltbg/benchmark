@@ -1,0 +1,114 @@
+{
+ "summary": {
+  "tag": "flutter-list-m128",
+  "stack": "flutter",
+  "scenario": "list",
+  "runs": 3,
+  "ok_runs": 0,
+  "oom_runs": 3,
+  "markers_ok": 0,
+  "agg": {
+   "fps_mean": null,
+   "frame_p50": null,
+   "frame_p95": null,
+   "frame_p99": null,
+   "frame_max": null,
+   "dropped_gt16_7": null,
+   "dropped_gt8_3": null,
+   "dropped_gt25": null,
+   "rss_kb_median": null,
+   "rss_kb_peak": null,
+   "pss_kb_median": null,
+   "pss_kb_peak": null,
+   "cpu_pct_core_mean": null,
+   "cpu_pct_core_peak_1s": null,
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": null,
+   "wall_s": null
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": -9,
+   "wall_s": 0.6550636380015931,
+   "markers": false,
+   "mem_failcnt": 82,
+   "mem_charged_peak_kb": 131072,
+   "oom_kills": 1,
+   "oom": true,
+   "window": "whole_run",
+   "rss_kb_median": 180404.0,
+   "rss_kb_peak": 228116,
+   "pss_kb_median": 157332.0,
+   "pss_kb_peak": 205000,
+   "pss_kb_first_quarter": 1718,
+   "pss_kb_last_quarter": 205000,
+   "cpu_pct_core_mean": 73.59650627501212,
+   "cpu_pct_core_peak_1s": null,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2128,
+     1718
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": -9,
+   "wall_s": 0.650301921999926,
+   "markers": false,
+   "mem_failcnt": 86,
+   "mem_charged_peak_kb": 131072,
+   "oom_kills": 1,
+   "oom": true,
+   "window": "whole_run",
+   "rss_kb_median": 173686.0,
+   "rss_kb_peak": 228216,
+   "pss_kb_median": 150573.0,
+   "pss_kb_peak": 205061,
+   "pss_kb_first_quarter": 2104,
+   "pss_kb_last_quarter": 205061,
+   "cpu_pct_core_mean": 76.39037729427916,
+   "cpu_pct_core_peak_1s": null,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2564,
+     2104
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": -9,
+   "wall_s": 0.6382306000014069,
+   "markers": false,
+   "mem_failcnt": 139,
+   "mem_charged_peak_kb": 131072,
+   "oom_kills": 1,
+   "oom": true,
+   "window": "whole_run",
+   "rss_kb_median": 135124.0,
+   "rss_kb_peak": 227760,
+   "pss_kb_median": 112055.0,
+   "pss_kb_peak": 204570,
+   "pss_kb_first_quarter": 2480,
+   "pss_kb_last_quarter": 0,
+   "cpu_pct_core_mean": 60.64997359905782,
+   "cpu_pct_core_peak_1s": null,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3004,
+     2480
+    ]
+   ]
+  }
+ ]
+}

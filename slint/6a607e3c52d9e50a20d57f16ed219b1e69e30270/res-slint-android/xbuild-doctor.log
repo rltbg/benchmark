@@ -1,0 +1,33 @@
+--------------------clang/llvm toolchain--------------------
+clang                version             /usr/bin/clang
+clang++              version             /usr/bin/clang++
+llvm-ar              not found
+llvm-lib             not found
+llvm-readobj         not found
+lld                  not found
+lld-link             not found
+lldb                 not found
+lldb-server          not found
+
+----------------------------rust----------------------------
+rustup               1.29.1              /home/runner/.cargo/bin/rustup
+cargo                1.99.1              /home/runner/.cargo/bin/cargo
+
+--------------------------android---------------------------
+adb                  not found
+javac                17.0.20.1           /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64/bin/javac
+java                 17.0.20.1           /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-1/x64/bin/java
+kotlin               2.4.21              /usr/bin/kotlin
+gradle               unknown             /usr/bin/gradle
+
+----------------------------ios-----------------------------
+idevice_id           not found
+ideviceinfo          not found
+ideviceinstaller     not found
+ideviceimagemounter  not found
+idevicedebug         not found
+idevicedebugserverproxy not found
+
+---------------------------linux----------------------------
+mksquashfs           4.6.1               /usr/bin/mksquashfs
+
