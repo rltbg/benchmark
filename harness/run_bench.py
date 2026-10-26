@@ -104,11 +104,17 @@ class FrameBuffer:
         # 10x10 points dans le carré 200x200 en (100,100), marge de 20 px
         self.idx = [self.off + ((120 + 16 * j) * self.W + (120 + 16 * i)) * 4 for j in range(10) for i in range(10)]
 
+    def listarea(self):
+        """Pixels échantillonnés dans la zone centrale (400..1000 x 250..600), hors carré de latence (molette)."""
+        if not hasattr(self, "lidx"):
+            self.lidx = [self.off + ((250 + 35 * j) * self.W + (400 + 60 * i)) * 4 for j in range(10) for i in range(10)]
+        return bytes(self.m[k] ^ self.m[k + 1] ^ self.m[k + 2] for k in self.lidx)
+
     def square(self):
         return bytes(self.m[k] ^ self.m[k + 1] ^ self.m[k + 2] for k in self.idx)
 
 
-def input_latency(fb, disp, stop, result, n=40, seed=7):
+def input_latency(fb, disp, stop, result, n=40, seed=7, mode="key"):
     """Envoie jusqu'à n appuis sur Espace (XTest) à intervalles aléatoires et mesure le délai jusqu'au changement
     des pixels du carré. S'arrête dès que `stop` est levé (fin de la mesure de l'app) : un appui envoyé après
     n'est ni compté ni déclaré perdu. Tourne dans un thread pour ne pas bloquer l'échantillonnage CPU/RAM."""
@@ -127,11 +133,12 @@ def input_latency(fb, disp, stop, result, n=40, seed=7):
     for _ in range(n):
         if stop.wait(rnd.uniform(0.15, 0.35)):
             break
-        before = fb.square(); t0 = time.perf_counter()
-        xd.stdin.write("key space\n"); xd.stdin.flush()
+        probe = fb.square if mode == "key" else fb.listarea
+        before = probe(); t0 = time.perf_counter()
+        xd.stdin.write("key space\n" if mode == "key" else "click 5\n"); xd.stdin.flush()
         while True:
             now = time.perf_counter()
-            if fb.square() != before:
+            if probe() != before:
                 lat.append((now - t0) * 1000); break
             if stop.is_set():
                 break  # la mesure s'est terminée pendant l'attente : appui non compté
@@ -142,6 +149,25 @@ def input_latency(fb, disp, stop, result, n=40, seed=7):
     result["lat"], result["lost"] = lat, lost
 
 
+def resize_storm(disp, stop, result, count, pause=0.1):
+    """U1 : redimensionne `count` fois la plus grande fenêtre de premier niveau (1280x720 <-> 1100x650)."""
+    env = dict(os.environ, DISPLAY=disp)
+    wid = None
+    for l in subprocess.run(["xwininfo", "-root", "-tree"], capture_output=True, text=True, env=env).stdout.splitlines():
+        l = l.strip()
+        if l.startswith("0x") and "1280x720" in l:
+            wid = l.split()[0]; break
+    if not wid:
+        result["resizes"] = 0; return
+    n = 0
+    for k in range(count):
+        if stop.is_set(): break
+        w, h = (1100, 650) if k % 2 == 0 else (1280, 720)
+        subprocess.run(["xdotool", "windowsize", wid, str(w), str(h)], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        n += 1; time.sleep(pause)
+    result["resizes"] = n
+
+
 def one_run(a, i, tag):
     out = f"{a.outdir}/{tag}.run{i}.json"; so = f"{a.outdir}/{tag}.run{i}.stdout"
     for f in (out,):
@@ -150,7 +176,7 @@ def one_run(a, i, tag):
     while os.path.exists(f"/tmp/.X11-unix/X{n}") or os.path.exists(f"/tmp/.X{n}-lock"):
         n += 10  # display occupé par un autre processus : en prendre un libre
     disp = f":{n}"; fbdir = tempfile.mkdtemp(prefix="fb")
-    xargs = ["Xvfb", disp, "-screen", "0", "1280x720x24", "-nolisten", "tcp"] + (["-fbdir", fbdir] if a.scenario == "input" else [])
+    xargs = ["Xvfb", disp, "-screen", "0", "1280x720x24", "-nolisten", "tcp"] + (["-fbdir", fbdir] if (a.scenario == "input" or a.latency) else [])
     xv = subprocess.Popen(xargs, stderr=subprocess.DEVNULL); time.sleep(0.8)
     env = dict(os.environ, DISPLAY=disp, LIBGL_ALWAYS_SOFTWARE="1", BENCH_ROOT=ROOT)
     for e in a.env:
@@ -162,10 +188,11 @@ def one_run(a, i, tag):
     for v in a.variant: cmd += ["--variant", v]
     if a.cpus: cmd = ["taskset", "-c", a.cpus] + cmd
     cg = Cgroup(f"bench-{os.getpid()}-{i}", a.mem_limit, a.cpu_quota) if (a.mem_limit or a.cpu_quota) else None
+    hogs = [subprocess.Popen(["sh", "-c", "while :; do :; done"]) for _ in range(a.cpuhog or 0)]
     t0 = time.perf_counter()
     p = subprocess.Popen(cmd, env=env, stdout=open(so, "w"), stderr=subprocess.STDOUT, preexec_fn=cg.enter if cg else None)
     samples, last, marks = [], {}, {}
-    lat = lost = None; inp = None; stop = threading.Event(); result = {}
+    lat = lost = None; inp = None; rsz = None; stop = threading.Event(); result = {}; rresult = {}
     while p.poll() is None:
         now = time.perf_counter() - t0
         if now > a.duration + 120:
@@ -183,11 +210,17 @@ def one_run(a, i, tag):
             if END in txt and "end" not in marks: marks["end"] = now; stop.set()
         except OSError:
             pass
-        if a.scenario == "input" and "start" in marks and inp is None:
-            inp = threading.Thread(target=input_latency, args=(FrameBuffer(fbdir), disp, stop, result), daemon=True); inp.start()
+        if (a.scenario == "input" or a.latency) and "start" in marks and inp is None:
+            inp = threading.Thread(target=input_latency, args=(FrameBuffer(fbdir), disp, stop, result),
+                                   kwargs=dict(mode=a.latency or "key"), daemon=True); inp.start()
+        if a.resize and "start" in marks and rsz is None:
+            rsz = threading.Thread(target=resize_storm, args=(disp, stop, rresult, a.resize), daemon=True); rsz.start()
         time.sleep(0.1)
     rc = p.wait(); wall = time.perf_counter() - t0
     stop.set()
+    for h in hogs: h.kill()
+    if rsz is not None:
+        rsz.join(timeout=10)
     if inp is not None:
         inp.join(timeout=5); lat, lost = result.get("lat"), result.get("lost")
     # l'app peut imprimer le marqueur de fin puis quitter entre deux lectures : relire une dernière fois
@@ -200,7 +233,7 @@ def one_run(a, i, tag):
     cgs = cg.stats() if cg else {}
     if cg: cg.remove()
     xv.terminate(); xv.wait()
-    res = {"run": i, "rc": rc, "wall_s": wall, "markers": "start" in marks and "end" in marks, **cgs}
+    res = {"run": i, "rc": rc, **({"resizes_sent": rresult.get("resizes")} if a.resize else {}), "wall_s": wall, "markers": "start" in marks and "end" in marks, **cgs}
     res["oom"] = bool(cgs.get("oom_kills")) or rc == -9
     if "start" in marks: res["startup_to_measure_s"] = marks["start"]
     if os.path.exists(out):
@@ -240,6 +273,9 @@ def main():
     ap.add_argument("--cpus"); ap.add_argument("--cpu-quota", type=float); ap.add_argument("--mem-limit", type=float)
     ap.add_argument("--outdir", default=os.path.join(ROOT, "results")); ap.add_argument("--assets", default=os.path.join(ROOT, "assets"))
     ap.add_argument("--env", action="append", default=[])
+    ap.add_argument("--latency", choices=["key", "wheel"], help="mesure externe touche/molette -> pixel (latency-load, latency-wheel, tout scénario)")
+    ap.add_argument("--cpuhog", type=int, default=0, help="K processus à 100 %% de CPU hors de l'app (I1 cpuhog)")
+    ap.add_argument("--resize", type=int, default=0, help="tempête de redimensionnement : K redimensionnements 1280x720 <-> 1100x650 (U1)")
     ap.add_argument("--n", type=int, help="paramètre d'échelle du scénario v3 (--n N)")
     ap.add_argument("--variant", action="append", default=[], help="k=v, transmis tel quel à l'app (v3)")
     a = ap.parse_args(); os.makedirs(a.outdir, exist_ok=True)

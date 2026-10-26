@@ -100,7 +100,8 @@ def main():
     def probe(n, i=0):
         ns = types.SimpleNamespace(stack=a.stack, cmd=cmd, scenario=a.scenario, duration=a.duration, runs=1, rate=None, shapes=None, cpus=None,
                                    cpu_quota=a.cpu_quota, mem_limit=None, outdir=raw, assets=os.path.join(ROOT, "assets"),
-                                   env=list(a.env) + [e for e in extra_env], n=n, variant=list(a.variant))
+                                   env=list(a.env) + [e for e in extra_env], n=n, variant=list(a.variant),
+                                   latency=None, cpuhog=0, resize=100 if spec.get("resize") else 0)
         res = rb.one_run(ns, i, f"n{n}")
         res.pop("samples", None)
         ok, m, reasons = evaluate(res, spec)
