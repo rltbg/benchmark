@@ -18,3 +18,14 @@ T4 textblock n=1000                            rc=0 n=  167 fps= 20.6 p50=  44.3
 T4 textblock n=10000                           rc=0 n=   62 fps=  7.5 p50= 122.5 p99= 335.0 max= 335.0 gt25=  62 gc=8/8/5 pause=479.852 alloc=644MB setup_ms=3183.3 ui_stall_ms_max=236.5
 G2 solid n=100                                 rc=0 n=  359 fps= 44.7 p50=  21.7 p99=  31.1 max=  71.0 gt25=  53 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=61.9 ui_stall_ms_max=67.4
 G2 solid n=1000                                rc=0 n=   45 fps=  5.4 p50= 180.6 p99= 211.5 max= 211.5 gt25=  45 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=230.1 ui_stall_ms_max=28.6
+G2 dashed n=100                                rc=0 n=  297 fps= 36.9 p50=  25.2 p99=  37.4 max=  54.5 gt25= 161 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=58.1 ui_stall_ms_max=13.6
+G3 n=10k                                       rc=0 n=  486 fps= 60.6 p50=  16.3 p99=  25.3 max=  96.0 gt25=   5 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=43.8 ui_stall_ms_max=42.9
+G3 n=100k                                      rc=0 n=  122 fps= 15.1 p50=  64.6 p99=  85.7 max= 100.1 gt25= 122 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=95.1 ui_stall_ms_max=36.5
+G3 n=1M                                        rc=0 n=   16 fps=  1.9 p50= 519.9 p99= 597.1 max= 597.1 gt25=  16 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=641.0 ui_stall_ms_max=7.3
+G4 n=10                                        rc=0 n=  407 fps= 50.6 p50=  17.8 p99=  31.2 max=  40.3 gt25=  57 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=1275.0 ui_stall_ms_max=8.4
+G4 n=100                                       rc=0 n=   50 fps=  6.1 p50= 162.5 p99= 209.1 max= 209.1 gt25=  50 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=1098.0 ui_stall_ms_max=43.4
+G4 n=1000                                      rc=0 n=    6 fps=  0.6 p50=1642.9 p99=1783.3 max=1783.3 gt25=   6 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=2647.4 ui_stall_ms_max=9.6
+G4 big 4096                                    rc=0 n=   55 fps=  6.8 p50= 158.8 p99= 267.7 max= 267.7 gt25=  55 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=320.3 ui_stall_ms_max=11.2
+G4 big 8192                                    rc=0 n=   33 fps=  4.0 p50= 259.4 p99= 358.0 max= 358.0 gt25=  33 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=755.3 ui_stall_ms_max=16.0
+G5 n=4                                         rc=0 n=  491 fps= 61.2 p50=  16.3 p99=  22.3 max=  34.3 gt25=   3 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=46.5 ui_stall_ms_max=16.2
+G5 n=16                                        rc=0 n=  460 fps= 57.2 p50=  16.9 p99=  26.3 max=  37.3 gt25=   5 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=66.0 ui_stall_ms_max=12.2
