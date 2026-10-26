@@ -1,0 +1,266 @@
+{
+ "summary": {
+  "tag": "flutter-core",
+  "stack": "flutter",
+  "scenario": "core",
+  "runs": 1,
+  "ok_runs": 1,
+  "oom_runs": 0,
+  "markers_ok": 1,
+  "agg": {
+   "fps_mean": {
+    "median": 33.46387612455987,
+    "p95": 33.46387612455987,
+    "min": 33.46387612455987,
+    "max": 33.46387612455987,
+    "n": 1
+   },
+   "frame_p50": {
+    "median": 27.926,
+    "p95": 27.926,
+    "min": 27.926,
+    "max": 27.926,
+    "n": 1
+   },
+   "frame_p95": {
+    "median": 45.938,
+    "p95": 45.938,
+    "min": 45.938,
+    "max": 45.938,
+    "n": 1
+   },
+   "frame_p99": {
+    "median": 59.506,
+    "p95": 59.506,
+    "min": 59.506,
+    "max": 59.506,
+    "n": 1
+   },
+   "frame_max": {
+    "median": 70.77,
+    "p95": 70.77,
+    "min": 70.77,
+    "max": 70.77,
+    "n": 1
+   },
+   "dropped_gt16_7": {
+    "median": 259,
+    "p95": 259,
+    "min": 259,
+    "max": 259,
+    "n": 1
+   },
+   "dropped_gt8_3": {
+    "median": 265,
+    "p95": 265,
+    "min": 265,
+    "max": 265,
+    "n": 1
+   },
+   "dropped_gt25": {
+    "median": 210,
+    "p95": 210,
+    "min": 210,
+    "max": 210,
+    "n": 1
+   },
+   "rss_kb_median": {
+    "median": 351164,
+    "p95": 351164,
+    "min": 351164,
+    "max": 351164,
+    "n": 1
+   },
+   "rss_kb_peak": {
+    "median": 356672,
+    "p95": 356672,
+    "min": 356672,
+    "max": 356672,
+    "n": 1
+   },
+   "pss_kb_median": {
+    "median": 318813,
+    "p95": 318813,
+    "min": 318813,
+    "max": 318813,
+    "n": 1
+   },
+   "pss_kb_peak": {
+    "median": 323965,
+    "p95": 323965,
+    "min": 323965,
+    "max": 323965,
+    "n": 1
+   },
+   "cpu_pct_core_mean": {
+    "median": 270.3068879470645,
+    "p95": 270.3068879470645,
+    "min": 270.3068879470645,
+    "max": 270.3068879470645,
+    "n": 1
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 290.72983664302205,
+    "p95": 290.72983664302205,
+    "min": 290.72983664302205,
+    "max": 290.72983664302205,
+    "n": 1
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.2794420990003346,
+    "p95": 2.2794420990003346,
+    "min": 2.2794420990003346,
+    "max": 2.2794420990003346,
+    "n": 1
+   },
+   "wall_s": {
+    "median": 10.55770723400019,
+    "p95": 10.55770723400019,
+    "min": 10.55770723400019,
+    "max": 10.55770723400019,
+    "n": 1
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 10.55770723400019,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.2794420990003346,
+   "frames": 265,
+   "ops": {
+    "sum_heights": 8799584,
+    "shapes": 1000,
+    "not_rendered": [],
+    "canvas_mode": "atlas",
+    "atlas_px": [
+     512,
+     3681
+    ],
+    "atlas_pages": 8,
+    "atlas_record_ms": 6.199,
+    "checksum": "1b1b2bc",
+    "calls_per_s": 43679925.9613879,
+    "heavy_calls": 8,
+    "core_lib": "/home/user/benchmark/core/target/release/libbenchcore.so",
+    "core_acc": 926981138039709696,
+    "frames_ticks": 267,
+    "build_ms": {
+     "n": 266.0,
+     "p50": 0.191,
+     "p95": 0.282,
+     "p99": 0.527,
+     "max": 1.808,
+     "mean": 0.20868796992481192
+    },
+    "raster_ms": {
+     "n": 266.0,
+     "p50": 23.077,
+     "p95": 42.023,
+     "p99": 56.719,
+     "max": 65.141,
+     "mean": 23.1111090225564
+    },
+    "vsync_to_rasterfinish_ms": {
+     "n": 266.0,
+     "p50": 37.206,
+     "p95": 77.905,
+     "p99": 95.735,
+     "max": 103.526,
+     "mean": 40.41902255639097
+    },
+    "gc": null,
+    "pacing": "60",
+    "max_frame_stall_ms": 70.77
+   },
+   "checksum": "1b1b2bc",
+   "unsupported": null,
+   "version": "Flutter 3.47.8 (framework 737ba8f885, engine cf636b1dfb), Dart 3.13.7, package:ffi 2.2.0, Impeller-GLES",
+   "fps_mean": 33.46387612455987,
+   "frame_p50": 27.926,
+   "frame_p95": 45.938,
+   "frame_p99": 59.506,
+   "frame_max": 70.77,
+   "dropped_gt16_7": 259,
+   "dropped_gt8_3": 265,
+   "dropped_gt25": 210,
+   "dropped_ms_gt16_7": 3505.6620000000003,
+   "window": "markers",
+   "rss_kb_median": 351164,
+   "rss_kb_peak": 356672,
+   "pss_kb_median": 318813,
+   "pss_kb_peak": 323965,
+   "pss_kb_first_quarter": 314281,
+   "pss_kb_last_quarter": 319809,
+   "cpu_pct_core_mean": 270.3068879470645,
+   "cpu_pct_core_peak_1s": 290.72983664302205,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2608,
+     1625
+    ],
+    [
+     1.1,
+     1.81,
+     345236,
+     297818
+    ],
+    [
+     2.3,
+     3.81,
+     349868,
+     301858
+    ],
+    [
+     3.5,
+     6.18,
+     350248,
+     318019
+    ],
+    [
+     4.7,
+     9.57,
+     347132,
+     314903
+    ],
+    [
+     5.8,
+     12.83,
+     354224,
+     320499
+    ],
+    [
+     6.9,
+     16.06,
+     355464,
+     323177
+    ],
+    [
+     8.1,
+     19.33,
+     349872,
+     317585
+    ],
+    [
+     9.2,
+     22.48,
+     354008,
+     321721
+    ],
+    [
+     10.3,
+     25.6,
+     355440,
+     321425
+    ]
+   ]
+  }
+ ]
+}

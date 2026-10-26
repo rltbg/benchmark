@@ -1,0 +1,190 @@
+{
+ "summary": {
+  "tag": "flutter-idle",
+  "stack": "flutter",
+  "scenario": "idle",
+  "runs": 1,
+  "ok_runs": 1,
+  "oom_runs": 0,
+  "markers_ok": 1,
+  "agg": {
+   "fps_mean": null,
+   "frame_p50": null,
+   "frame_p95": null,
+   "frame_p99": null,
+   "frame_max": null,
+   "dropped_gt16_7": null,
+   "dropped_gt8_3": null,
+   "dropped_gt25": null,
+   "rss_kb_median": {
+    "median": 249076.0,
+    "p95": 249076.0,
+    "min": 249076.0,
+    "max": 249076.0,
+    "n": 1
+   },
+   "rss_kb_peak": {
+    "median": 249872,
+    "p95": 249872,
+    "min": 249872,
+    "max": 249872,
+    "n": 1
+   },
+   "pss_kb_median": {
+    "median": 201005.0,
+    "p95": 201005.0,
+    "min": 201005.0,
+    "max": 201005.0,
+    "n": 1
+   },
+   "pss_kb_peak": {
+    "median": 201801,
+    "p95": 201801,
+    "min": 201801,
+    "max": 201801,
+    "n": 1
+   },
+   "cpu_pct_core_mean": {
+    "median": 0.0,
+    "p95": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 0.0,
+    "p95": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.2579576459993405,
+    "p95": 2.2579576459993405,
+    "min": 2.2579576459993405,
+    "max": 2.2579576459993405,
+    "n": 1
+   },
+   "wall_s": {
+    "median": 11.852472108999791,
+    "p95": 11.852472108999791,
+    "min": 11.852472108999791,
+    "max": 11.852472108999791,
+    "n": 1
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 11.852472108999791,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.2579576459993405,
+   "frames": 0,
+   "ops": {
+    "sum_heights": 8799584,
+    "final_offset": 0.0,
+    "rows_drawn": 0,
+    "rows_built": 0,
+    "checksum": "4b95f515",
+    "frames_ticks": 0,
+    "build_ms": {
+     "n": 0.0
+    },
+    "raster_ms": {
+     "n": 0.0
+    },
+    "vsync_to_rasterfinish_ms": {
+     "n": 0.0
+    },
+    "gc": null,
+    "pacing": "60",
+    "max_frame_stall_ms": 0.0
+   },
+   "checksum": "4b95f515",
+   "unsupported": null,
+   "version": "Flutter 3.47.8 (framework 737ba8f885, engine cf636b1dfb), Dart 3.13.7, package:ffi 2.2.0, Impeller-GLES",
+   "window": "markers",
+   "rss_kb_median": 249076.0,
+   "rss_kb_peak": 249872,
+   "pss_kb_median": 201005.0,
+   "pss_kb_peak": 201801,
+   "pss_kb_first_quarter": 192892,
+   "pss_kb_last_quarter": 201005,
+   "cpu_pct_core_mean": 0.0,
+   "cpu_pct_core_peak_1s": 0.0,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2804,
+     1707
+    ],
+    [
+     1.1,
+     0.36,
+     248948,
+     191006
+    ],
+    [
+     2.2,
+     0.36,
+     248948,
+     191006
+    ],
+    [
+     3.2,
+     0.36,
+     248956,
+     197159
+    ],
+    [
+     4.3,
+     0.36,
+     248956,
+     191007
+    ],
+    [
+     5.4,
+     0.36,
+     248956,
+     191007
+    ],
+    [
+     6.5,
+     0.36,
+     249076,
+     201005
+    ],
+    [
+     7.5,
+     0.36,
+     249076,
+     201005
+    ],
+    [
+     8.6,
+     0.36,
+     249076,
+     201005
+    ],
+    [
+     9.7,
+     0.36,
+     249076,
+     201005
+    ],
+    [
+     10.8,
+     0.36,
+     249880,
+     201809
+    ]
+   ]
+  }
+ ]
+}

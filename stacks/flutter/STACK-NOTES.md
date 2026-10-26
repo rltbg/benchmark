@@ -1,62 +1,74 @@
-# Flutter (Linux desktop, GTK3 embedder, Dart AOT) - notes
+# Flutter (Linux desktop, GTK3 embedder, Dart AOT release) — notes, passe 2 (spec v2 / v2.1)
 
-## Versions
-- Flutter 3.47.8 (stable, framework 737ba8f885, engine cf636b1dfb), Dart 3.13.7, DevTools 2.60.0 (SDK = `git clone --depth 1 -b stable` into `sdk/`, 3 s).
-- Engine/Dart SDK artifacts downloaded from storage.googleapis.com and packages from pub.dev: **no blocked host encountered**. Packages: `ffi 2.2.0` (only direct dep besides flutter), vector_math 2.4.0, characters 1.4.1, material_color_utilities 0.13.0 (see logs/pubspec.lock).
-- Analytics disabled: `flutter config --no-analytics`, `dart --disable-analytics`, `FLUTTER_SUPPRESS_ANALYTICS=true`. Flutter warns "running as root" (harmless).
-- Build: `/home/user/eval/stacks/flutter/build.sh` (= `flutter pub get` + `flutter build linux --release -v`, `CMAKE_BUILD_PARALLEL_LEVEL=2 NINJAFLAGS=-j2`). Wall time **27.3 s** for the first app build (SDK artifacts already cached; max RSS 416 MB, logs/build-run1.out), 16 s for later rebuilds (logs/build-release.log = last build). The gen_snapshot AOT step is single-threaded. No compiler/analyzer warnings (`flutter analyze`: no issues).
-- Run (harness): `--cmd /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/benchapp` (bundle must stay intact, the binary is a 23 KB GTK launcher). Args reach `main(List<String>)` (verified; the runner template passes argv through FlDartProject). `exit(0)` after writing JSON works (rc=0).
-- `smoke.sh SCENARIO DURATION TAG [args]` = my own Xvfb (random :200-:599) smoke test, outputs in logs/smoke-*.json.
-
-## Bundle (build/linux/x64/release/bundle) - 21 659 001 bytes total
-| file | bytes |
-|---|---|
-| benchapp (launcher) | 23 840 |
-| lib/libflutter_linux_gtk.so (engine) | 17 256 536 |
-| lib/libapp.so (AOT snapshot, **not** data/app.so in this version) | 3 376 008 |
-| data/icudtl.dat | 864 880 |
-| data/flutter_assets (NOTICES.Z 98 130, 2 unused shaders, manifests) | ~140 000 |
-System libs from `ldd` (GTK3 stack: libgtk-3 8.2 MB, gdk, pango, cairo, harfbuzz, epoxy, fontconfig, X11/Xi/..., glib, ...) full list with sizes in logs/env-and-bundle.txt. Runtime needs GTK3 + libepoxy + a GL (Mesa llvmpipe here) installed.
-Idle RSS (harness): ~249 MB, idle CPU mean 3.5 % of a core (peak 38 % at start-up). RSS during list: 267-282 MB.
-
-## Rendering backend (important)
-- This Flutter version (3.47) **always uses Impeller (OpenGLES/SDF) on Linux**: log line `Using the Impeller rendering backend (OpenGLESSDF)` under Xvfb + llvmpipe (`LIBGL_ALWAYS_SOFTWARE=1`). Skia is not selectable: `--enable-impeller`/`--no-enable-impeller` are not accepted by the Linux embedder from the command line; `FLUTTER_ENGINE_SWITCHES=1 FLUTTER_ENGINE_SWITCH_1=enable-impeller=false` is ignored (still Impeller, tested). The `--no-enable-impeller` opt-out is flagged deprecated in the engine strings.
-- The embedder has a CPU path `FLUTTER_LINUX_RENDERER=software` (Skia raster + Cairo; prints "Using the software renderer ... not recommended"). It **works for scenes without text** (canvas, core: tested) but **aborts as soon as text is drawn**: `[FATAL:flutter/display_list/skia/dl_sk_dispatcher.cc(328)] Check failed: blob. Impeller DlText cannot be drawn to a Skia canvas.` (list smoke: rc=134, logs/smoke-sw.stdout). So the complete suite can only run on the default Impeller-GLES/llvmpipe path; `--env FLUTTER_LINUX_RENDERER=software` is usable for canvas and core only (report it as a variant).
-
-## Frame measurement (exact)
-`SchedulerBinding.addTimingsCallback` records every `FrameTiming` (vsyncStart, buildStart/Finish, rasterStart/Finish). `frame_ms` = difference between consecutive `rasterFinish` timestamps of frames whose rasterFinish lies in the measured window (clock verified identical to `Timeline.now`). rasterFinish = engine raster thread finished and handed the frame to the GTK GL presenter - it is NOT an X11 present/screen-update timestamp. Only frames really rasterized are reported (Flutter produces no frame when nothing is dirty; continuous redraw = `Ticker` that dirties the scene every tick, content really changes each frame in all animated scenarios; during warm-up scripted time is frozen at 0 for list/stream/text/images). Engine batches timings: app waits 800 ms after the window end. `ops` also contains build_ms / raster_ms / total_span_ms / vsync_to_rasterfinish_ms {n,p50,p95,p99,max,mean}, `frames_ticks` (Ticker callbacks) and `max_frame_stall_ms`. Observed cadence (list/stream: p50 ~20-25 ms with only ~9 ms of build+raster, min ~4 ms) suggests a ~60 Hz vsync-like pacing by the GTK embedder that cannot be disabled; I did not remove it ("no vsync pacing" of the spec is not achievable by the app).
-
-## Scenario status (smoke 8-10 s, Impeller-GLES/llvmpipe, 4 vCPU shared)
-| scenario | status | smoke result |
+## Versions (vérifiées le 2026-10-26)
+| élément | version | source |
 |---|---|---|
-| idle | OK | 0 frames, RSS 249 MB, CPU 3.5 % |
-| list | OK | sum_heights=8799584; ~28-40 fps, raster p50 7.7 ms/p95 21 ms, build p50 0.9 ms |
-| stream (rate 10000) | OK | ~50 fps; generated 80148, applied 80142, dropped 0 |
-| canvas 5000 shapes | OK functionally, **unplayable**: 1 frame in 8 s (raster 7.4 s/frame) | see below |
-| core | OK functionally: calls_per_s ~4.5e7, heavy_calls 8/8 s; UI (1000 gradient shapes) 14 frames in 8 s (raster 580 ms) | software renderer variant: 49 fps |
-| stress | OK functionally, **unplayable**: 1 frame in 10 s (raster 4.4 s) | |
-| text | OK (partial semantics) | ~29 fps; time_to_first_display 260 ms, layout_ms 14.7 |
-| images | OK | 600 decoded, ~35 fps |
-| nav | OK | ~19 fps, 21 transitions + 5 modals in 10 s |
+| Flutter SDK | **3.47.8 stable**, framework `737ba8f885dc774b53b442759999a312c9461e4e` (tag `3.47.8`), engine `cf636b1dfb` (hash dfd2e6cb7d) | storage.googleapis.com/flutter_infra_release/releases/releases_linux.json (`current_release.stable`, publié 2026-10-23) + `git ls-remote --tags` |
+| Dart | 3.13.7 (fourni par le SDK) | idem (`dart_sdk_version`) |
+| package:ffi | **2.2.0** (dernière, 2026-02-11), épinglée `ffi: 2.2.0` | pub.dev/api/packages/ffi |
+| transitifs | vector_math 2.4.0, meta 1.18.3, material_color_utilities 0.13.0, characters… : épinglés par le SDK Flutter (des versions plus récentes existent sur pub.dev mais sont refusées par les contraintes du SDK) | `flutter pub get` |
+| renderer | Impeller, backend OpenGL ES (« OpenGLESSDF »), Mesa llvmpipe sous Xvfb ; variante Skia (GL) | log moteur |
 
-### Why canvas/stress are so slow (diagnosed with the `FB_VARIANT` env, diagnostic only, default 0 = spec)
-Impeller-GLES on llvmpipe: gradient-filled draws cost ~0.5 ms each (1000 shapes: 580 ms/frame; solid colour fill `FB_VARIANT=1`: 57-65 ms; no clip (2) does not help; one single shared gradient Paint (8) is just as slow -> per-draw gradient cost, not cache misses). Also the 10 000-point 1 px polyline (drawRawPoints polygon, CPU tessellation of the stroke) alone costs ~80 ms raster per frame (canvas --shapes 10 solid: 11.7 fps). 5000 solid shapes + shadows + graph: 8.5 fps. With `FLUTTER_LINUX_RENDERER=software` (Skia CPU) canvas 5000 shapes = 8.4 fps (raster p50 105 ms). These are characteristics of the Linux engine on a software GL, not of the Dart code (build p50 < 8 ms). The spec-compliant variant (gradients) is what the binary runs by default.
+Pas de bêta/RC (3.50.0-0.2.pre existe en beta, non utilisée). Analytics désactivés (`flutter config --no-analytics`, `dart --disable-analytics`, `FLUTTER_SUPPRESS_ANALYTICS=true`). Le JSON contient `"version": "Flutter 3.47.8 (framework 737ba8f885, engine cf636b1dfb), Dart 3.13.7, package:ffi 2.2.0, Impeller-GLES|Skia-GL"` (dart-defines `FLUTTER_VERSION`… injectés par l'outil flutter).
 
-## Implementation (lib/, 1256 lines of Dart; runner C++ untouched, template)
-- bench.dart: CLI parse, timings, JSON; model.dart: fnv, heights, prefix sums, RowItem, price stream isolate, FFI workers; scene.dart: canvas; scenarios.dart: Host(list/stream/canvas/core/stress), text, images, nav.
-- list: `ListView.builder` with real per-row heights (SizedBox(height)); `itemExtent`/`prototypeItem` not applicable (variable heights). (Flutter 3.24+ has `itemExtentBuilder`, which is O(index) per layout on this version - not used, brief asked for the builder.) Scroll position set with `ScrollController.jumpTo` from the closed-form script (4 s @3000 px/s + 6 flings, v0*exp(-2t)), clamped. Rows: circle, title, subtitle (repeated, clipped by maxLines), price `PriceCell` (registered State; stream update -> setState of the visible cell only). ops: rows_drawn = sum over ticks of visible rows (binary search on prefix sums), rows_built = itemBuilder invocations.
-- stream: producer `Isolate` (xorshift32 seed 0x2545F491, index=x%100000, price=x/100) paced by a 0.7 ms sleep loop, sends `Uint32List` batches (one per ~1 ms, i.e. 1-10 updates) over a `SendPort`; bounded 100k in-flight window enforced producer-side via a shared-memory (dart:ffi calloc) applied counter acked by the UI; UI drains the queue once per frame. generated/dropped/applied are shared-memory counters (deltas over the window).
-- canvas: one `CustomPainter` (repaint = Scene listenable, RepaintBoundary), per-shape `Paint` with a cached `ui.Gradient.linear` in local coordinates (save/translate/draw/restore), shadow = `MaskFilter.blur(normal, sigma 4)` offset (2,2) on 1 shape in 10, `clipRRect` 1000x600, graph = `drawRawPoints(PointMode.polygon)` 10 000 points updated per frame (one point added per frame).
-- core: 2 worker Isolates; tight loop `core_validate+core_parse+core_hash` via `dart:ffi` leaf calls on the 8-byte "hello" frame (A5 01 05 'hello'), counter in shared memory; second isolate calls `core_heavy(100)` every 1 s; UI animates 1000 gradient shapes, no shadow/graph ("allege").
-- stress: list(880 px) + stream 5000/s + canvas 5000 shapes in a 400x720 side panel (clip 380x600, graph 380x100) + core workers. `heap_samples` every 10 s contain `rss_kb` (ProcessInfo.currentRss) but `managed_heap_kb: null` (VM service / heap stats not available in product AOT).
-- text: no virtualized huge-text widget in Flutter; the file is split into 9599 lines, `ListView.builder` of `Text` inside `SelectableRegion` (selectAll at t=5 s via `SelectableRegionState.selectAll()`, only built lines get selected - approximation). Scroll: triangle wave over 0..15000 px at 3000 px/s. time_to_first_display_ms measured from main() (excludes VM/engine start-up ~1.4 s to first frame incl. GTK/GL init); layout_ms = read+split + build duration of first frame (Flutter lays out lazily). Emoji/CJK/bidi text rendering was not visually inspected (no screenshot taken).
-- images: custom loader (`File.readAsBytes` + `ui.instantiateImageCodec(targetWidth/Height 128)`, decode on engine worker threads, at most 4 loads in flight), `GridView.builder` 10 columns, scroll triangle wave at 3000 px/s, zoom 1->3->1 over 6 s via `Transform` with sinusoidal pan. decode_total_ms (~37 s for 600 in the last smoke) is a sum of wall times under heavy CPU contention (llvmpipe), not pure decode cost.
-- nav: `Navigator` + `PageRouteBuilder` slide 300 ms, `RawDialogRoute` fade 200 ms, cycles push B, push C, pop, pop (x5 = 20 transitions) + modal after each cycle, repeated until the duration ends (smoke: transitions_done counts all); busy Isolate spins an integer loop (~1 core). Screens use plain solid-colour rounded cards (an earlier version with gradient+shadow cards gave 195 ms raster/frame on llvmpipe; changed because the spec does not define screen content).
+## Build / exécution
+- `build.sh` : clone `-b 3.47.8` (vérifie le commit), `PUB_CACHE=stacks/flutter/pub-cache`, `flutter pub get`, `flutter build linux --release` avec `CMAKE_BUILD_PARALLEL_LEVEL=2 NINJAFLAGS=-j2` ; `CLEAN=1 ./build.sh` = rebuild complet. Échec détecté par le code retour (log complet : `logs/build-release.log`).
+- Temps : build complet (`CLEAN=1`, artefacts SDK déjà en cache) **16,2 s** mur, RSS max 393 Mo (logs/build-clean.log) ; ~25 s sous charge. Clone SDK : logs/00-sdk-clone.log.
+- Bug de build trouvé : supprimer seulement `app/build/` fait échouer le build suivant (`CMake Error at cmake_install.cmake:112`, libapp.so absente, tampons périmés dans `.dart_tool/flutter_build`) et l'ancien build.sh masquait l'échec (pipe `tee | grep || true`) — log exact `logs/build-failed-stale-dart_tool.log`. Corrigé (code retour vérifié, `CLEAN=1` → `flutter clean`).
+- **Commandes `harness/stacks.tsv`** :
+  - `flutter	${ROOT}/stacks/flutter/app/build/linux/x64/release/bundle/benchapp	`
+  - `flutter-skia	${ROOT}/stacks/flutter/app/build/linux/x64/release/bundle/benchapp	--env BENCH_FLUTTER_IMPELLER=0`
+  - pas de variante `uncapped` (voir Cadence : `ops.pacing = "60-only"`).
+- Chemins : `--assets` (défaut `$BENCH_ROOT/assets`), racine = `BENCH_ROOT` sinon premier ancêtre de l'exécutable contenant `core/benchcore.h` ; cœur = `BENCHCORE_LIB` puis `$BENCH_ROOT/core/target/release/libbenchcore.so` (dart:ffi, lien dynamique). Plus aucun chemin `/home/user/eval` (bench.dart, smoke.sh ; `.idea/` et `benchapp.iml` supprimés).
+- `smoke.sh SCENARIO DURATION TAG [args]` : fumée locale sur Xvfb privé (:200–:599).
 
-## Deviations / limits
-- Frame boundary = rasterFinish (see above), vsync pacing present, Skia unavailable, text scenarios impossible on the software renderer.
-- Stream producer sends batches, not one message per update.
-- Window: GTK default size 1280x720 (runner template), no window manager in Xvfb -> no decorations; Flutter shows the window after first frame. Atk/GSettings CRITICAL messages on stderr are harmless (no a11y bus / gsettings schema).
-- Dart `Isolate.spawn` workers rather than OS threads; shared counters through native memory.
-- Diagnostics env `FB_VARIANT` (bit 1 solid fill, 2 no clip, 8 shared gradient) exists in the binary but is off by default.
-- Not run: official measurements, manual IME protocol, screenshot validation of rendering.
+## Déploiement (bundle `build/linux/x64/release/bundle`, 21 790 177 octets)
+| fichier | octets |
+|---|---|
+| lib/libflutter_linux_gtk.so (moteur) | 17 256 536 |
+| lib/libapp.so (snapshot AOT) | 3 507 080 |
+| data/icudtl.dat | 864 880 |
+| data/flutter_assets (NOTICES.Z 98 130, shaders, manifestes) | ~140 000 |
+| benchapp (lanceur GTK) | 23 944 |
+
+`ldd` : 71 bibliothèques système (GTK3, GDK, Pango, Cairo, HarfBuzz, libepoxy, fontconfig, X11…, 32,3 Mo au total) — liste complète : logs/bundle-and-ldd.txt. Il faut GTK3 + libepoxy + un GL (Mesa). Code : 1 571 lignes Dart (lib/, après `dart format -l 120`) + runner C++ du template (154 lignes, +5 lignes de sélection du renderer).
+
+## Revue contre la documentation officielle (écarts trouvés → correction)
+1. **Renderer Linux** — la passe 1 disait « Skia non sélectionnable ». Faux : docs.flutter.dev/perf/impeller#linux documente l'opt-out en déploiement `fl_dart_project_set_enable_impeller(project, FALSE)` dans `linux/runner/my_application.cc` (API publique, https://api.flutter.dev/linux-embedder/fl__dart__project_8h.html). Ajouté au runner, piloté par `BENCH_FLUTTER_IMPELLER=0` → variante **flutter-skia** (Skia GL, texte compris). Les `FLUTTER_ENGINE_SWITCHES` ne sont lus que hors release (`#ifndef FLUTTER_RELEASE`, engine/…/common/engine_switches.cc) : d'où l'« ignoré » de la passe 1. `FLUTTER_LINUX_RENDERER=software` **n'est pas documenté** (absent de docs.flutter.dev, seulement dans fl_engine.cc) → non utilisé ; il plante toujours dès qu'il y a du texte : `[FATAL:flutter/display_list/skia/dl_sk_dispatcher.cc(328)] Check failed: blob. Impeller DlText cannot be drawn to a Skia canvas.` (logs/smoke-undocumented-software-renderer.stdout). https://docs.flutter.dev/platform-integration/linux/building ne documente aucune autre option de rendu.
+2. **Cadence 60 Hz** — non documentée sur docs.flutter.dev. Source : l'embedder Linux ne fournit pas de `vsync_callback`, le moteur utilise `VsyncWaiterFallback` à tick fixe 1/60 s (engine/src/flutter/shell/common/vsync_waiter_fallback.cc). Aucune option publique → gardée, documentée (`notes`, `ops.pacing`).
+3. **Canvas** — passe 1 : un draw par forme avec shader dégradé, ≈0,5 ms/draw sous Impeller-GLES/llvmpipe (5 000 formes : 1 frame en 8 s). Idiomes vérifiés : `repaint:` Listenable (déjà OK, https://api.flutter.dev/flutter/rendering/CustomPainter-class.html), `shouldRepaint` corrigé (`true` → `!identical(old.s, s)`), `Paint`/`Shader` créés une fois par forme (déjà le cas). Nouveau rendu par défaut : chaque forme (dégradé propre + ombre floue sigma 4 décalée (2,2) pour 1/10) est **pré-rendue une fois** dans des pages d'atlas 512 px (`PictureRecorder` + `Picture.toImageSync`, https://api.flutter.dev/flutter/dart-ui/Picture/toImageSync.html), puis chaque frame = un `Canvas.drawRawAtlas` par page (transforms de translation, échantillonnage bilinéaire) dans le `clipRRect` 1000×600 — idiome « sprites » de https://api.flutter.dev/flutter/dart-ui/Canvas/drawAtlas.html et « precalculate… cache it » de https://docs.flutter.dev/perf/best-practices. Les formes sont assignées aux pages dans l'ordre d'indice → ordre z identique. Ombres de l'atlas : une couche `saveLayer` + `ImageFilter.blur(sigma 4)` par page (sprites disjoints ⇒ même résultat que `MaskFilter.blur` par forme ; `BENCH_ATLAS_SHADOW=mask` pour l'ancien). Mesures 5 000 formes (fumée, charge machine variable) : direct 0–1 frame/8 s ; atlas une page 4096 : 2,8–4,6 fps, RSS 1,5 Go ; pages 1024 : 881 Mo ; pages 512 : ~6–11 fps, ~830 Mo. Variante `drawVertices` (dégradé affine exact en couleurs par sommet, formes tessellées) essayée : **pire** (Impeller : 1 frame/8 s, 3,5 s de raster ; Skia : 2,8 fps) → abandonnée (logs/canvas-modes/). Graphe : `drawRawPoints(PointMode.polygon)` 10 000 points, trait 1 px (hairline essayé : pas de gain mesurable) ; historique pré-rempli pour que les 10 000 points existent dès la 1re frame (avant : seul un trait vertical était visible, capture vérifiée). `BENCH_CANVAS_MODE=direct` garde l'ancien chemin (diagnostic).
+4. **Liste** — `ListView.builder` + **`itemExtentBuilder`** (existe en 3.47 : « more efficient than letting the children determine their own extent », https://api.flutter.dev/flutter/widgets/ListView/itemExtentBuilder.html). Coût : SliverVariedExtentList recalcule l'offset en O(index) par layout (sliver_fixed_extent_list.dart) ; build p50 mesuré 0,8 ms, acceptable. `cacheExtent` est déprécié depuis 3.41 (non utilisé). **Flux** : Isolate + `SendPort` (lots `Uint32List`), file bornée 100k comptée côté producteur via compteurs en mémoire native, drop + compte ; ajout `updates_backlog_at_start`. **Texte** : pas de widget officiel pour un texte géant virtualisé ; lignes dans `ListView.builder` sous `SelectableRegion` (base de `SelectionArea`, qui exige MaterialLocalizations), `selectAll()` public (https://api.flutter.dev/flutter/widgets/SelectableRegionState/selectAll.html). **Bug** : sous `WidgetsApp` il n'y a pas de `DefaultSelectionStyle` → la sélection n'était pas peinte ; ajouté (https://api.flutter.dev/flutter/widgets/DefaultSelectionStyle-class.html), vérifié sur capture. **Images** : chargeur maison remplacé par l'idiome documenté `Image(image: ResizeImage(FileImage(f), width: 128, height: 128))` (https://api.flutter.dev/flutter/painting/ResizeImage-class.html, `cacheWidth` d'`Image.file`) : décodage 128×128 par le moteur hors isolate UI, ImageCache.
+5. **Mesure** — `frame_ms` = écarts entre `FrameTiming.rasterFinish` (SchedulerBinding.addTimingsCallback). **Bug** : en release les timings sont livrés « within about 1 second » (https://api.flutter.dev/flutter/dart-ui/PlatformDispatcher/onReportTimings.html) mais l'app n'attendait que 800 ms → frames de fin perdues ; maintenant attente d'un timing postérieur à la fenêtre (≤1,5 s). Marqueurs `BENCH:measure_start/end` via `stdout` (bloquant, https://api.dart.dev/dart-io/Stdout-class.html) + `flush`. `ops.gc = null` : Dart n'expose aucun compteur GC en AOT release (pas de VM service). `input` : `Focus(autofocus)` + `onKeyEvent` (KeyDownEvent Espace, répétitions ignorées), carré 200×200 en (100,100) noir/blanc, `ops.key_events`.
+6. **FFI** — `size_t` était typé `IntPtr` ; corrigé en `Size` (type ABI de dart:ffi, https://api.dart.dev/dart-ffi/Size-class.html). Le résultat accumulé est publié en mémoire partagée (`ops.core_acc`) ; avant, seul un `if (acc == -1) print` le protégeait. Appels `isLeaf: true` pour validate/parse/hash, non-leaf pour `core_heavy` (bloquant 100 ms).
+7. Divers : `analysis_options`, `flutter analyze` : 0 problème.
+
+## Cadence (spec v2.1)
+`BENCH_PACING=60` (défaut) : cadence native = frames Ticker/SchedulerBinding pilotées par le vsync du moteur (repli 60 Hz fixe, cf. revue 2) → `ops.pacing = "60"`. `BENCH_PACING=uncapped` : aucune API publique ne débride → `ops.pacing = "60-only"` (vérifié en fumée, logs/smoke-harness-impeller/flutter-list-uncapped.run0.json).
+
+## Vérification visuelle (verify_gui, PNG relus)
+list/stream/idle/input : lignes, pastilles, titres, sous-titres clippés, prix ; carré noir en (100,100) au-dessus de la liste. canvas/core : dégradés, ombres floues, clip arrondi, graphe (après correctif). text : CJK, hangul, hébreu/arabe RTL, accents OK, surlignage de sélection OK après t=5 s pour les lignes construites ; **emoji monochromes** (glyphes DejaVu Sans choisis par le repli fontconfig, alors que Noto Color Emoji est installé ; forcer `fontFamilyFallback: ['Noto Color Emoji']` donne la couleur mais Noto Color Emoji fournit alors espaces/chiffres → espacement faux) et séquence ZWJ famille non composée → `ops.not_rendered` du scénario text. images : vignettes, zoom. nav : écrans/cartes. Même rendu sous Skia. Note : :390 (verify_gui) était occupé par d'autres agents ; une copie du script dans le scratchpad avec un display privé a été utilisée pour les dernières captures.
+
+## Fumée harnais (8 s, 1 run, Impeller par défaut, 4 vCPU partagés ; logs/smoke-harness-impeller, -skia)
+| scénario | frames / fps moy. / p50 ms | RSS médian | ops clés |
+|---|---|---|---|
+| idle | 0 | 249 Mo | CPU 0 % |
+| list | 379 / 47,5 / 20,3 | 268 Mo | sum_heights 8799584 |
+| input | 360 / 45,1 / 22,1 | 265 Mo | latence p50 34,8 ms p95 64,1, 0 perdu, key_events 27 |
+| stream 1k / 10k | 427 / 53,4 ; 414 / 51,8 | 267 Mo | 10k : généré 80186, appliqué 80130, drop 0 |
+| canvas 5000 | 49 / 10,9 / 85,8 | 831 Mo | not_rendered [] |
+| canvas 20000 | **0** (1re frame ≈17 s : rastérisation de l'atlas, 20 000 dégradés) ; 25 s : 2,1–3,4 fps | 627 Mo | |
+| text | 230 / 28,8 / 33,2 | 333 Mo | ttfd 193 ms, layout 14,6 ms |
+| images | 401 / 50,2 / 19,1 | 382 Mo | 600 décodées |
+| nav | 186 / 23,4 / 40,9 | 268 Mo | 18 transitions + 4 modales en 8 s |
+| core | 265 / 33,5 / 27,9 | 351 Mo | 4,37e7 calls/s, heavy 8 |
+| stress (15 s) | 61 / 5,3 / 186 | 872 Mo | backlog stream 9037 au départ, drop 0 |
+Skia : list 42 fps (241 Mo), input p50 28,6 ms, canvas 5000 10,5 fps (331 Mo), canvas 20000 6,2 fps (539 Mo), text 37,5 fps, stress 9,8 fps (351 Mo).
+
+## Écarts / limites restants
+- Frame = `rasterFinish` (pas de timestamp de présentation X11 public) ; plafond 60 Hz non désactivable.
+- Impeller-GLES sur llvmpipe : très lent pour les dégradés/flous et gourmand en mémoire dès qu'il y a un canvas (10 formes : ~510 Mo RSS ; Skia 5000 formes : 331 Mo) ; canvas 20000 sans frame dans une fenêtre courte.
+- Atlas : rendu identique en contenu mais formes rastérisées une fois puis échantillonnées (bilinéaire) aux positions fractionnaires.
+- Texte : sélection « tout » limitée aux lignes construites (liste paresseuse) ; emoji monochromes.
+- `decode_total_ms` = somme des latences demande→1re frame par image (lecture + décodage + attente), pas un temps CPU de décodage ; aucune API publique ne donne ce dernier.
+- Workers Dart = Isolates (pas de threads OS bruts) ; flux envoyé par lots.
+- Non exécuté : mesures officielles, protocole IME manuel.

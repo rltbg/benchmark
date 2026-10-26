@@ -1,0 +1,16 @@
+Resolving dependencies...
+Downloading packages...
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  vector_math 2.4.0 (2.4.3 available)
+Got dependencies!
+3 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+[   +2 ms] ✓ Built build/linux/x64/release/bundle/benchapp
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:16.24
+	Maximum resident set size (kbytes): 392752
+21790177	build/linux/x64/release/bundle
+
+real	0m16.986s
+user	0m19.906s
+sys	0m1.861s

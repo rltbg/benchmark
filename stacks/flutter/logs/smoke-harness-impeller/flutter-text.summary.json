@@ -1,0 +1,261 @@
+{
+ "summary": {
+  "tag": "flutter-text",
+  "stack": "flutter",
+  "scenario": "text",
+  "runs": 1,
+  "ok_runs": 1,
+  "oom_runs": 0,
+  "markers_ok": 1,
+  "agg": {
+   "fps_mean": {
+    "median": 28.814811715250528,
+    "p95": 28.814811715250528,
+    "min": 28.814811715250528,
+    "max": 28.814811715250528,
+    "n": 1
+   },
+   "frame_p50": {
+    "median": 33.221,
+    "p95": 33.221,
+    "min": 33.221,
+    "max": 33.221,
+    "n": 1
+   },
+   "frame_p95": {
+    "median": 54.366,
+    "p95": 54.366,
+    "min": 54.366,
+    "max": 54.366,
+    "n": 1
+   },
+   "frame_p99": {
+    "median": 64.908,
+    "p95": 64.908,
+    "min": 64.908,
+    "max": 64.908,
+    "n": 1
+   },
+   "frame_max": {
+    "median": 71.01,
+    "p95": 71.01,
+    "min": 71.01,
+    "max": 71.01,
+    "n": 1
+   },
+   "dropped_gt16_7": {
+    "median": 220,
+    "p95": 220,
+    "min": 220,
+    "max": 220,
+    "n": 1
+   },
+   "dropped_gt8_3": {
+    "median": 230,
+    "p95": 230,
+    "min": 230,
+    "max": 230,
+    "n": 1
+   },
+   "dropped_gt25": {
+    "median": 187,
+    "p95": 187,
+    "min": 187,
+    "max": 187,
+    "n": 1
+   },
+   "rss_kb_median": {
+    "median": 333072,
+    "p95": 333072,
+    "min": 333072,
+    "max": 333072,
+    "n": 1
+   },
+   "rss_kb_peak": {
+    "median": 359316,
+    "p95": 359316,
+    "min": 359316,
+    "max": 359316,
+    "n": 1
+   },
+   "pss_kb_median": {
+    "median": 288240,
+    "p95": 288240,
+    "min": 288240,
+    "max": 288240,
+    "n": 1
+   },
+   "pss_kb_peak": {
+    "median": 309864,
+    "p95": 309864,
+    "min": 309864,
+    "max": 309864,
+    "n": 1
+   },
+   "cpu_pct_core_mean": {
+    "median": 114.95521817862198,
+    "p95": 114.95521817862198,
+    "min": 114.95521817862198,
+    "max": 114.95521817862198,
+    "n": 1
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 135.34443630938387,
+    "p95": 135.34443630938387,
+    "min": 135.34443630938387,
+    "max": 135.34443630938387,
+    "n": 1
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.2262339610006165,
+    "p95": 2.2262339610006165,
+    "min": 2.2262339610006165,
+    "max": 2.2262339610006165,
+    "n": 1
+   },
+   "wall_s": {
+    "median": 10.936609490000592,
+    "p95": 10.936609490000592,
+    "min": 10.936609490000592,
+    "max": 10.936609490000592,
+    "n": 1
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 10.936609490000592,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.2262339610006165,
+   "frames": 230,
+   "ops": {
+    "final_offset": 6074.243999999999,
+    "lines": 9599,
+    "select_all_done": true,
+    "not_rendered": [
+     "colour emoji (monochrome glyphs)",
+     "emoji ZWJ sequence composition"
+    ],
+    "checksum": "e29871a6",
+    "frames_ticks": 231,
+    "build_ms": {
+     "n": 231.0,
+     "p50": 7.296,
+     "p95": 16.888,
+     "p99": 25.899,
+     "max": 27.042,
+     "mean": 8.253792207792207
+    },
+    "raster_ms": {
+     "n": 231.0,
+     "p50": 13.388,
+     "p95": 26.304,
+     "p99": 31.667,
+     "max": 49.976,
+     "mean": 14.970593073593081
+    },
+    "vsync_to_rasterfinish_ms": {
+     "n": 231.0,
+     "p50": 31.052,
+     "p95": 51.599,
+     "p99": 60.006,
+     "max": 70.629,
+     "mean": 32.7427012987013
+    },
+    "gc": null,
+    "pacing": "60",
+    "time_to_first_display_ms": 193.437,
+    "layout_ms": 14.581999999999999,
+    "read_split_ms": 14.433
+   },
+   "checksum": "e29871a6",
+   "unsupported": null,
+   "version": "Flutter 3.47.8 (framework 737ba8f885, engine cf636b1dfb), Dart 3.13.7, package:ffi 2.2.0, Impeller-GLES",
+   "fps_mean": 28.814811715250528,
+   "frame_p50": 33.221,
+   "frame_p95": 54.366,
+   "frame_p99": 64.908,
+   "frame_max": 71.01,
+   "dropped_gt16_7": 220,
+   "dropped_gt8_3": 230,
+   "dropped_gt25": 187,
+   "dropped_ms_gt16_7": 4158.04,
+   "window": "markers",
+   "rss_kb_median": 333072,
+   "rss_kb_peak": 359316,
+   "pss_kb_median": 288240,
+   "pss_kb_peak": 309864,
+   "pss_kb_first_quarter": 276830.0,
+   "pss_kb_last_quarter": 307222.0,
+   "cpu_pct_core_mean": 114.95521817862198,
+   "cpu_pct_core_peak_1s": 135.34443630938387,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2548,
+     1605
+    ],
+    [
+     1.1,
+     1.17,
+     321536,
+     271812
+    ],
+    [
+     2.2,
+     2.49,
+     318612,
+     270616
+    ],
+    [
+     3.4,
+     3.71,
+     324944,
+     276948
+    ],
+    [
+     4.5,
+     4.91,
+     330068,
+     282072
+    ],
+    [
+     5.5,
+     6.39,
+     329928,
+     281972
+    ],
+    [
+     6.7,
+     7.72,
+     324444,
+     274630
+    ],
+    [
+     7.8,
+     9.1,
+     340656,
+     292642
+    ],
+    [
+     8.9,
+     10.27,
+     356116,
+     308102
+    ],
+    [
+     10.0,
+     11.46,
+     349196,
+     301182
+    ]
+   ]
+  }
+ ]
+}

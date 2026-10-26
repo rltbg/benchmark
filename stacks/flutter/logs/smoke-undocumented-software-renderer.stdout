@@ -1,0 +1,9 @@
+
+** (dev.bench.benchapp:22279): WARNING **: 02:35:55.859: Using the software renderer. Not all features are supported. This is not recommended.
+
+To switch back to the default renderer, unset the FLUTTER_LINUX_RENDERER environment variable.
+
+(dev.bench.benchapp:22279): Atk-CRITICAL **: 02:35:55.859: atk_socket_embed: assertion 'plug_id != NULL' failed
+
+** (dev.bench.benchapp:22279): CRITICAL **: 02:35:55.881: void fl_gnome_settings_set_interface_settings(FlGnomeSettings *, GSettings *): assertion 'G_IS_SETTINGS(settings)' failed
+[FATAL:flutter/display_list/skia/dl_sk_dispatcher.cc(328)] Check failed: blob. Impeller DlText cannot be drawn to a Skia canvas.

@@ -17,9 +17,17 @@ export CMAKE_BUILD_PARALLEL_LEVEL=2 NINJAFLAGS="-j2"
 flutter config --no-analytics --enable-linux-desktop >/dev/null
 dart --disable-analytics >/dev/null || true
 cd "$HERE/app"
+# CLEAN=1: full rebuild (flutter clean also drops .dart_tool/flutter_build, whose stamps
+# otherwise make a build fail when only build/ was deleted)
+if [ "${CLEAN:-0}" = 1 ]; then flutter clean >/dev/null; fi
 flutter pub get --enforce-lockfile 2>/dev/null || flutter pub get
 mkdir -p "$HERE/logs"
 FFI_VER="$(awk '/^  ffi:/{f=1} f&&/version:/{gsub(/"/,"",$2);print $2;exit}' pubspec.lock)"
-/usr/bin/time -v flutter build linux --release --dart-define=BENCH_FFI_VERSION="$FFI_VER" -v 2>&1 | tee "$HERE/logs/build-release.log" | grep -E "Built |error|Error|Elapsed|Maximum resident" || true
-test -x build/linux/x64/release/bundle/benchapp
+set +e
+/usr/bin/time -v flutter build linux --release --dart-define=BENCH_FFI_VERSION="$FFI_VER" -v > "$HERE/logs/build-release.log" 2>&1
+rc=$?
+set -e
+grep -E "Built build|Build process failed|Elapsed|Maximum resident" "$HERE/logs/build-release.log" || true
+[ $rc = 0 ] || { echo "flutter build failed (rc=$rc), see logs/build-release.log" >&2; exit $rc; }
+test -x build/linux/x64/release/bundle/benchapp && test -f build/linux/x64/release/bundle/lib/libapp.so
 du -sb build/linux/x64/release/bundle

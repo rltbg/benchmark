@@ -1,0 +1,6 @@
+
+(dev.bench.benchapp:22074): Atk-CRITICAL **: 02:34:51.903: atk_socket_embed: assertion 'plug_id != NULL' failed
+
+** (dev.bench.benchapp:22074): CRITICAL **: 02:34:51.971: void fl_gnome_settings_set_interface_settings(FlGnomeSettings *, GSettings *): assertion 'G_IS_SETTINGS(settings)' failed
+BENCH:measure_start
+BENCH:measure_end
