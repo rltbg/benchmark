@@ -1,26 +1,16 @@
 #!/bin/bash
-# Builds the NSH reference app (GTK 4 backend, Rust-only) and, optionally, the TSX variant.
-#   ./build.sh          -> app/target/release/nshbench          (Rust-only, no QuickJS)
-#   ./build.sh tsx      -> + app-tsx-target/release/nshbench + .nsh-out/bundle.nshc (QuickJS, TSX List/stream)
-#   ./build.sh gpui     -> + gpui-app/target/release/nshbench-gpui (GPUI backend, Vulkan; ~15 min, 650 crates)
-# Needs: GTK 4.14 dev files (pkg-config gtk4), clang (QuickJS only), network to index.crates.io/static.crates.io
-# and git clone of github.com/longbridge/nsh (anonymous) into ./src. CARGO_BUILD_JOBS=2 as per the brief.
+# Builds the NSH reference app: Rust-only app on NSH's GTK 4 backend (no QuickJS, no WebKitGTK).
+#   ./build.sh              -> app/target/release/nshbench
+# Pinned: nsh-core / nsh-base / nsh-platform-linux =0.2.0 from crates.io (= git tag v0.2.0),
+# exact dependency versions in app/Cargo.lock (cargo --locked). Toolchain: NSH's
+# rust-toolchain.toml says channel "stable" (no nightly); this build pins that stable, 1.99.1.
+# Needs: GTK >= 4.14 dev files (pkg-config gtk4), network to index.crates.io / static.crates.io.
+# The benchmark core (../../core) is a path dependency (rlib, compiled into target/).
 set -euo pipefail
-cd "$(dirname "$0")"
-mkdir -p logs
-export CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS:-2}
-if [ ! -d src/.git ]; then
-  git clone --depth 1 https://github.com/longbridge/nsh src
-fi
-# NB: src/rust-toolchain.toml makes rustup install `stable` + 7 mobile targets (static.rust-lang.org)
-# the first time cargo runs inside src/. The app itself is a separate workspace (app/).
-( cd app && time cargo build --release ) 2>&1 | tee logs/build-app.log
-if [ "${1:-}" = "tsx" ]; then
-  ( cd src && time cargo build --release -p nsh-cli ) 2>&1 | tee logs/build-nsh-cli.log
-  mkdir -p .nsh-out
-  ./src/target/release/nsh build tsx --release -o .nsh-out 2>&1 | tee logs/build-tsx-bundle.log
-  ( cd app && time cargo build --release --features tsx --target-dir ../app-tsx-target ) 2>&1 | tee logs/build-app-tsx.log
-fi
-if [ "${1:-}" = "gpui" ]; then
-  ( cd gpui-app && time cargo build --release ) 2>&1 | tee logs/build-gpui.log
-fi
+here="$(cd "$(dirname "$0")" && pwd)"
+export CARGO_BUILD_JOBS="${CARGO_BUILD_JOBS:-2}"
+export RUSTUP_TOOLCHAIN="${RUSTUP_TOOLCHAIN:-1.99.1}"
+mkdir -p "$here/logs"
+cd "$here/app"
+{ rustc --version; cargo --version; pkg-config --modversion gtk4; } | tee "$here/logs/build-toolchain.txt"
+( time cargo build --release --locked ) 2>&1 | tee "$here/logs/build-app.log"

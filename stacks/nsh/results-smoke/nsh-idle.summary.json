@@ -5,48 +5,74 @@
   "scenario": "idle",
   "runs": 1,
   "ok_runs": 1,
+  "oom_runs": 0,
+  "markers_ok": 1,
   "agg": {
    "fps_mean": null,
+   "frame_p50": null,
    "frame_p95": null,
    "frame_p99": null,
    "frame_max": null,
    "dropped_gt16_7": null,
    "dropped_gt8_3": null,
+   "dropped_gt25": null,
    "rss_kb_median": {
-    "median": 119180,
-    "p95": 119180,
-    "min": 119180,
-    "max": 119180
+    "median": 116632.0,
+    "p95": 116632.0,
+    "min": 116632.0,
+    "max": 116632.0,
+    "n": 1
    },
    "rss_kb_peak": {
-    "median": 119180,
-    "p95": 119180,
-    "min": 119180,
-    "max": 119180
+    "median": 116632,
+    "p95": 116632,
+    "min": 116632,
+    "max": 116632,
+    "n": 1
    },
-   "rss_kb_last_quarter": {
-    "median": 119180.0,
-    "p95": 119180.0,
-    "min": 119180.0,
-    "max": 119180.0
+   "pss_kb_median": {
+    "median": 73108.0,
+    "p95": 73108.0,
+    "min": 73108.0,
+    "max": 73108.0,
+    "n": 1
+   },
+   "pss_kb_peak": {
+    "median": 86423,
+    "p95": 86423,
+    "min": 86423,
+    "max": 86423,
+    "n": 1
    },
    "cpu_pct_core_mean": {
-    "median": 1.8587607660263223,
-    "p95": 1.8587607660263223,
-    "min": 1.8587607660263223,
-    "max": 1.8587607660263223
+    "median": 0.0,
+    "p95": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1
    },
    "cpu_pct_core_peak_1s": {
-    "median": 15.0,
-    "p95": 15.0,
-    "min": 15.0,
-    "max": 15.0
+    "median": 0.0,
+    "p95": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.1979001050003717,
+    "p95": 2.1979001050003717,
+    "min": 2.1979001050003717,
+    "max": 2.1979001050003717,
+    "n": 1
    },
    "wall_s": {
-    "median": 8.177410751000025,
-    "p95": 8.177410751000025,
-    "min": 8.177410751000025,
-    "max": 8.177410751000025
+    "median": 10.197665731000598,
+    "p95": 10.197665731000598,
+    "min": 10.197665731000598,
+    "max": 10.197665731000598,
+    "n": 1
    }
   }
  },
@@ -54,58 +80,89 @@
   {
    "run": 0,
    "rc": 0,
-   "wall_s": 8.177410751000025,
+   "wall_s": 10.197665731000598,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1979001050003717,
    "frames": 0,
    "ops": {
+    "list_content_height_reported": 0.0,
+    "pacing": "60",
+    "paints_without_change": 0,
     "sum_heights": 8799584
    },
    "checksum": "00000000",
-   "rss_kb_median": 119180,
-   "rss_kb_peak": 119180,
-   "rss_kb_first_quarter": 119180.0,
-   "rss_kb_last_quarter": 119180.0,
-   "cpu_pct_core_mean": 1.8587607660263223,
-   "cpu_pct_core_peak_1s": 15.0,
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "window": "markers",
+   "rss_kb_median": 116632.0,
+   "rss_kb_peak": 116632,
+   "pss_kb_median": 73108.0,
+   "pss_kb_peak": 86423,
+   "pss_kb_first_quarter": 82852,
+   "pss_kb_last_quarter": 65510,
+   "cpu_pct_core_mean": 0.0,
+   "cpu_pct_core_peak_1s": 0.0,
    "samples": [
     [
      0.0,
      0.0,
-     1332
+     3436,
+     681
     ],
     [
-     1.1,
-     0.15,
-     119180
+     1.0,
+     0.13,
+     116632,
+     86423
     ],
     [
-     2.2,
-     0.15,
-     119180
+     2.1,
+     0.13,
+     116632,
+     86423
     ],
     [
-     3.2,
-     0.15,
-     119180
+     3.1,
+     0.13,
+     116632,
+     82852
     ],
     [
-     4.3,
-     0.15,
-     119180
+     4.2,
+     0.13,
+     116632,
+     73261
     ],
     [
-     5.4,
-     0.15,
-     119180
+     5.2,
+     0.13,
+     116632,
+     73261
     ],
     [
-     6.8,
-     0.15,
-     119180
+     6.3,
+     0.13,
+     116632,
+     73108
     ],
     [
-     7.9,
-     0.15,
-     119180
+     7.4,
+     0.13,
+     116632,
+     71669
+    ],
+    [
+     8.4,
+     0.13,
+     116632,
+     65510
+    ],
+    [
+     9.5,
+     0.13,
+     116632,
+     65510
     ]
    ]
   }

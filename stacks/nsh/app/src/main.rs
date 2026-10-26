@@ -208,6 +208,30 @@ fn version() -> String {
     )
 }
 
+/// FNV-1a over the run's deterministic results (and the core worker's accumulated value).
+fn checksum() -> u32 {
+    let mut h: u32 = 0x811c_9dc5;
+    let vals = [
+        sum_heights(),
+        APPLIED.load(Relaxed),
+        DROPPED.load(Relaxed),
+        KEY_EVENTS.load(Relaxed),
+        TRANSITIONS.load(Relaxed),
+        IMAGES_DECODED.load(Relaxed),
+        TEXT_BYTES.load(Relaxed),
+        CORE_SINK.load(Relaxed),
+        CALLS.load(Relaxed),
+        CHECK.load(Relaxed),
+    ];
+    for v in vals {
+        for b in v.to_le_bytes() {
+            h ^= b as u32;
+            h = h.wrapping_mul(0x0100_0193);
+        }
+    }
+    h
+}
+
 fn write_json() {
     use serde_json::json;
     let c = cfg();
@@ -284,7 +308,7 @@ fn write_json() {
         "frames": frames.len(),
         "frame_ms": frames,
         "ops": ops,
-        "checksum": format!("{:08x}", (CORE_SINK.load(Relaxed) ^ CALLS.load(Relaxed) ^ CHECK.load(Relaxed)) as u32),
+        "checksum": format!("{:08x}", checksum()),
         "notes": format!(
             "NSH 0.2.0 GTK4 backend, Rust-only app (no QuickJS). Frame end = GdkFrameClock after-paint on the GTK main thread \
              (last public post-render signal: GSK render done, X11 frame submitted; presentation not reported without a compositor). \

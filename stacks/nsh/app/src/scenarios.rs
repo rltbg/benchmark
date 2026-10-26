@@ -209,9 +209,12 @@ fn list_pane(scripted: bool, stream: bool) -> impl IntoElement {
                     let batch = std::mem::take(&mut *QUEUE.lock().unwrap());
                     if !batch.is_empty() {
                         let mut p = prices.borrow_mut();
+                        let mut ck = 0u64;
                         for (i, c) in &batch {
                             p[*i as usize] = *c;
+                            ck = ck.wrapping_add(*c as u64);
                         }
+                        CHECK.fetch_add(ck, Relaxed);
                         APPLIED.fetch_add(batch.len() as u64, Relaxed);
                         drop(p);
                         version.update(|v| *v += 1);

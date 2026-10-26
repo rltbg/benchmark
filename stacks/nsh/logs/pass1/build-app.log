@@ -1,0 +1,15 @@
+   Compiling nshbench v0.1.0 (/home/user/eval/stacks/nsh/app)
+warning: static `CANVAS_OPS` is never used
+  --> src/shared.rs:65:12
+   |
+65 | pub static CANVAS_OPS: AtomicU64 = AtomicU64::new(0);
+   |            ^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `nshbench` (bin "nshbench") generated 1 warning
+    Finished `release` profile [optimized] target(s) in 1m 43s
+
+real	1m44.016s
+user	3m13.782s
+sys	0m6.831s
