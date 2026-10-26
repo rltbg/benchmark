@@ -1,0 +1,14 @@
++ fstar.exe --cache_checked_modules --cache_dir cache --codegen FSharp  --custard_entry Core.magic --custard_entry Core.version --custard_entry Core.max_payload --custard_entry Core.header_len --custard_entry Core.validate --custard_entry Core.parse --custard_entry Core.encode --custard_entry Core.checked_add --custard_entry Core.fnv_offset --custard_entry Core.fnv_prime --custard_entry Core.fnv_step --custard_entry Core.fnv_fold --custard_entry Core.hash --custard_entry Core.hash_frame Core.fst -o out/Core.fs
+Verified module: Core
+All verification conditions discharged successfully
+
+real	0m0.492s
+user	0m0.427s
+sys	0m0.063s
+exit=0
+total 32
+drwxr-xr-x 2 root root  4096 Oct 26 01:29 .
+drwxr-xr-x 5 root root  4096 Oct 26 01:29 ..
+-rw-rw-r-- 1 root root  1740 Oct 26 01:29 Core.fs
+-rw-rw-r-- 1 root root   550 Oct 26 01:29 Core.fsproj
+-rw-rw-r-- 1 root root 14653 Oct 26 01:29 FStarCustard.fs

@@ -1,4 +1,5 @@
 import QtQuick
+import Bench
 
 Item {
     Flickable {
@@ -8,16 +9,17 @@ Item {
         interactive: false
         contentWidth: width
         contentHeight: te.height
-        Component.onCompleted: bench.registerItem("flick", fl)
+        Component.onCompleted: App.registerItem("flick", fl)
         TextEdit {
             id: te
             width: fl.width
             readOnly: true
+            textFormat: TextEdit.PlainText
             selectByMouse: true
             wrapMode: TextEdit.Wrap
             font.pixelSize: 14
             color: "#1a202c"
-            Component.onCompleted: { bench.registerItem("textedit", te); bench.loadText(te) }
+            Component.onCompleted: { App.registerItem("textedit", te); App.loadText(te) }
         }
     }
 }

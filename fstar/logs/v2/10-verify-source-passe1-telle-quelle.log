@@ -1,0 +1,10 @@
+* Warning 285 at Core.fst(4,11-4,14):
+  - No modules in namespace FStar.Mul and no file with that name either
+
+Could not resolve namespace FStar.Mul
+ valid namespaces are ["fstar", "fstar.algebra", "fstar.algebra.commmonoid", "fstar.algebra.commmonoid.fold", "fstar.cardinality", "fstar.class", "fstar.class.eq", "fstar.class.ord", "fstar.class.totalorder", "fstar.classical", "fstar.constanttime", "fstar.errors", "fstar.finitemap", "fstar.finiteset", "fstar.immutablearray", "fstar.int", "fstar.int.cast", "fstar.list", "fstar.list.pure", "fstar.list.tot", "fstar.math", "fstar.pervasives", "fstar.pure", "fstar.rational", "fstar.real", "fstar.real.dedekind", "fstar.realliteral", "fstar.reflection", "fstar.reflection.termeq", "fstar.reflection.termspec", "fstar.reflection.typing", "fstar.reflection.v2", "fstar.reflection.v2.derived", "fstar.sealed", "fstar.seq", "fstar.sequence", "fstar.stubs.reflection", "fstar.stubs.reflection.v2", "fstar.stubs.syntax", "fstar.stubs.tactics", "fstar.stubs.tactics.types", "fstar.stubs.tactics.v2", "fstar.stubs.typechecker", "fstar.tactics", "fstar.tactics.bv", "fstar.tactics.canon", "fstar.tactics.canoncommmonoidsimple", "fstar.tactics.logic", "fstar.tactics.v2", "fstar.universe", "fstar.vector", "fstar.wellfounded", "pulse", "pulse.c", "pulse.c.types", "pulse.c.types.array", "pulse.c.types.struct", "pulse.class", "pulse.lib", "pulse.lib.array", "pulse.lib.bufferedstream", "pulse.lib.bufferedtcp", "pulse.lib.core", "pulse.lib.forall", "pulse.lib.forevery", "pulse.lib.hashtable", "pulse.lib.linkedlist", "pulse.lib.pcm", "pulse.lib.protocol", "pulse.lib.reference", "pulse.lib.seqmatch", "pulse.lib.slice", "pulse.lib.sort", "pulse.lib.sort.merge", "pulse.lib.spec", "pulse.lib.swap", "pulse.lib.tcp", "pulse.lib.trade", "pulsecore"]
+* Error 134 at Core.fst(4,11-4,14):
+  - Namespace ‘FStar.Mul’ cannot be found.
+
+1 error was reported (see above)
+exit=1

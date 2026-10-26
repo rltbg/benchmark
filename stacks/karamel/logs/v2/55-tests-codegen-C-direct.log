@@ -1,0 +1,3 @@
+### tests + différentiel sur la sortie de --codegen C (sans krml ni krmllib)
+2634 verifications, 0 echec(s), 0 divergence(s) vs Rust
+2634 verifications, 0 echec(s), 0 divergence(s) vs Rust

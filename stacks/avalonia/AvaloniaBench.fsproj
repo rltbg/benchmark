@@ -1,4 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
+  <!-- Avalonia 12.1.4 + F# + .NET 10 ; NativeAOT (-p:PublishAot=true) ou JIT (meme code). Versions epinglees (voir STACK-NOTES.md). -->
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
@@ -6,36 +7,42 @@
     <AssemblyName>avalonia-bench</AssemblyName>
     <Nullable>disable</Nullable>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <AvaloniaAccessUnstablePrivateApis>true</AvaloniaAccessUnstablePrivateApis>
     <InvariantGlobalization>true</InvariantGlobalization>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <WarningLevel>3</WarningLevel>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
-    <ServerGarbageCollector>false</ServerGarbageCollector>
-    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
     <DebugType>none</DebugType>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- FSharp.Core epingle explicitement (meme version que celle livree avec le SDK 10.0.403) -->
+    <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
+    <!-- Racine du depot : $(BENCH_ROOT) (variable d'environnement) sinon deduite de l'emplacement du projet -->
+    <BenchRoot Condition="'$(BENCH_ROOT)' != ''">$(BENCH_ROOT)</BenchRoot>
+    <BenchRoot Condition="'$(BENCH_ROOT)' == ''">$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', '..'))</BenchRoot>
   </PropertyGroup>
   <PropertyGroup Condition="'$(PublishAot)' == 'true'">
     <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
     <StripSymbols>true</StripSymbols>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(PublishAot)' == 'true' and '$(LinkCoreStatic)' == 'true'">
+  <!-- NativeAOT : liaison statique de libbenchcore.a (DirectPInvoke + NativeLibrary), cf.
+       https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/interop -->
+  <PropertyGroup Condition="'$(PublishAot)' == 'true' and '$(LinkCoreStatic)' != 'false'">
     <DefineConstants>$(DefineConstants);CORE_STATIC</DefineConstants>
   </PropertyGroup>
-  <ItemGroup Condition="'$(PublishAot)' == 'true' and '$(LinkCoreStatic)' == 'true'">
+  <ItemGroup Condition="'$(PublishAot)' == 'true' and '$(LinkCoreStatic)' != 'false'">
     <DirectPInvoke Include="benchcore" />
-    <NativeLibrary Include="/home/user/eval/core/target/release/libbenchcore.a" />
+    <NativeLibrary Include="$([MSBuild]::NormalizePath('$(BenchRoot)', 'core', 'target', 'release', 'libbenchcore.a'))" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TextStyles.fs" />
     <Compile Include="Program.fs" />
+    <!-- TextStyles.axaml : inclus implicitement comme AvaloniaXaml par Avalonia.Build -->
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FSharp.Core" Version="10.1.403" />
     <PackageReference Include="Avalonia" Version="12.1.4" />
     <PackageReference Include="Avalonia.Skia" Version="12.1.4" />
     <PackageReference Include="Avalonia.HarfBuzz" Version="12.1.4" />
     <PackageReference Include="Avalonia.X11" Version="12.1.4" />
     <PackageReference Include="Avalonia.Themes.Simple" Version="12.1.4" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="12.0.0" />
   </ItemGroup>
 </Project>

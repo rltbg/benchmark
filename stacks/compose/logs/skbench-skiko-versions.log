@@ -1,0 +1,29 @@
+Mon Oct 26 01:46:45 UTC 2026
+4
+== skiko 0.7.85.4
+strict=true LINEAR scale 1 : 0.61 ms/frame
+strict=true LINEAR scale 3 : 3.51 ms/frame
+strict=true NEAREST scale 1 : 0.59 ms/frame
+strict=true NEAREST scale 3 : 0.82 ms/frame
+strict=false LINEAR scale 1 : 0.60 ms/frame
+strict=false LINEAR scale 3 : 3.65 ms/frame
+strict=false NEAREST scale 1 : 0.55 ms/frame
+strict=false NEAREST scale 3 : 0.78 ms/frame
+== skiko 0.150.2
+strict=true LINEAR scale 1 : 0.54 ms/frame
+strict=true LINEAR scale 3 : 22.60 ms/frame
+strict=true NEAREST scale 1 : 0.56 ms/frame
+strict=true NEAREST scale 3 : 6.22 ms/frame
+strict=false LINEAR scale 1 : 0.76 ms/frame
+strict=false LINEAR scale 3 : 24.26 ms/frame
+strict=false NEAREST scale 1 : 0.62 ms/frame
+strict=false NEAREST scale 3 : 7.00 ms/frame
+== skiko 0.156.0
+strict=true LINEAR scale 1 : 0.57 ms/frame
+strict=true LINEAR scale 3 : 23.25 ms/frame
+strict=true NEAREST scale 1 : 0.61 ms/frame
+strict=true NEAREST scale 3 : 4.01 ms/frame
+strict=false LINEAR scale 1 : 0.53 ms/frame
+strict=false LINEAR scale 3 : 22.31 ms/frame
+strict=false NEAREST scale 1 : 0.59 ms/frame
+strict=false NEAREST scale 3 : 4.33 ms/frame

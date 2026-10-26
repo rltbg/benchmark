@@ -27,12 +27,15 @@ pub fn sum_heights() -> u64 {
 }
 
 // ---------------------------------------------------------------- core C-ABI
-extern "C" {
-    fn core_validate(p: *const u8, n: usize) -> i32;
-    fn core_parse(p: *const u8, n: usize, out: *mut u8, cap: usize, out_len: *mut usize) -> i32;
-    fn core_hash(p: *const u8, n: usize) -> u32;
-    fn core_heavy(ms: u32) -> u64;
-}
+// Le cœur est lié comme crate rlib (dépendance path) : une seule libstd, aucun hack d'édition de
+// liens. Les fonctions restent les `extern "C"` #[no_mangle] du cœur ; on les appelle par des
+// pointeurs de fonction `unsafe extern "C" fn` opacifiés par black_box, pour que la LTO ne
+// puisse pas les inliner dans la boucle : chaque appel est un vrai appel avec l'ABI C, comme
+// depuis un autre langage.
+type ValidateFn = unsafe extern "C" fn(*const u8, usize) -> i32;
+type ParseFn = unsafe extern "C" fn(*const u8, usize, *mut u8, usize, *mut usize) -> i32;
+type HashFn = unsafe extern "C" fn(*const u8, usize) -> u32;
+type HeavyFn = unsafe extern "C" fn(u32) -> u64;
 
 struct CoreSim {
     calls: Arc<AtomicU64>,
@@ -48,6 +51,9 @@ impl CoreSim {
         let acc = Arc::new(AtomicU64::new(0));
         let (c, a) = (calls.clone(), acc.clone());
         std::thread::spawn(move || {
+            let core_validate: ValidateFn = std::hint::black_box(benchcore::core_validate as ValidateFn);
+            let core_parse: ParseFn = std::hint::black_box(benchcore::core_parse as ParseFn);
+            let core_hash: HashFn = std::hint::black_box(benchcore::core_hash as HashFn);
             let frame: [u8; 8] = [0xA5, 1, 5, b'h', b'e', b'l', b'l', b'o'];
             let mut out = [0u8; 64];
             let mut x = 0u64;
@@ -64,6 +70,7 @@ impl CoreSim {
             }
         });
         let h = heavy.clone();
+        let core_heavy: HeavyFn = std::hint::black_box(benchcore::core_heavy as HeavyFn);
         std::thread::spawn(move || loop {
             let t = Instant::now();
             let r = unsafe { core_heavy(100) };
@@ -172,7 +179,6 @@ impl ListSim {
         let hi = (hi + 1).min(N - 1);
         let origin = lo - lo % ORIGIN_BLOCK;
         self.cur = (lo, hi);
-        self.rows_drawn += (hi - lo + 1) as u64;
         for slot in 0..POOL {
             let i = lo + (slot + POOL - lo % POOL) % POOL;
             let want = if i <= hi { (i, origin) } else { (usize::MAX, 0) };
@@ -207,7 +213,7 @@ impl ListSim {
 // ---------------------------------------------------------------- stream
 struct Stream {
     rx: mpsc::Receiver<(u32, f64)>,
-    gen: Arc<AtomicU64>,
+    generated: Arc<AtomicU64>,
     dropped: Arc<AtomicU64>,
     applied: u64,
     gen0: u64,
@@ -217,9 +223,9 @@ struct Stream {
 impl Stream {
     fn start(rate: u32) -> Self {
         let (tx, rx) = mpsc::sync_channel::<(u32, f64)>(100_000);
-        let gen = Arc::new(AtomicU64::new(0));
+        let generated = Arc::new(AtomicU64::new(0));
         let dropped = Arc::new(AtomicU64::new(0));
-        let (g, d) = (gen.clone(), dropped.clone());
+        let (g, d) = (generated.clone(), dropped.clone());
         std::thread::spawn(move || {
             let start = Instant::now();
             let mut x: u32 = 0x2545F491;
@@ -244,7 +250,7 @@ impl Stream {
                 std::thread::sleep(Duration::from_micros(500));
             }
         });
-        Stream { rx, gen, dropped, applied: 0, gen0: 0, drop0: 0, applied0: 0 }
+        Stream { rx, generated, dropped, applied: 0, gen0: 0, drop0: 0, applied0: 0 }
     }
 }
 
@@ -354,6 +360,7 @@ pub struct Scenario {
     text: Option<TextSim>,
     images: Option<ImagesSim>,
     nav: Option<NavSim>,
+    key_events: Rc<std::cell::Cell<u64>>,
     pub step_ms_sum: f64,
     pub step_n: u64,
     pub draw_ms_sum: f64,
@@ -381,9 +388,6 @@ struct ImagesSim {
     decode_us: Arc<AtomicU64>,
     started: bool,
     dir: String,
-    pos: f64,
-    last_t: f64,
-    zoom_dbg: f32,
 }
 fn decode_all(dir: String, weak: slint::Weak<MainWindow>, decoded: Arc<AtomicU64>, decode_us: Arc<AtomicU64>) {
     let next = Arc::new(AtomicU64::new(0));
@@ -396,14 +400,17 @@ fn decode_all(dir: String, weak: slint::Weak<MainWindow>, decoded: Arc<AtomicU64
             }
             let t = Instant::now();
             let path = format!("{}/images/img{:03}.png", dir, i);
-            let Ok(img) = slint::Image::load_from_path(std::path::Path::new(&path)) else { continue };
-            let Some(buf) = img.to_rgba8() else { continue };
+            // slint::Image n'est pas Send et Image::load_from_path remplit un cache local au
+            // thread : la doc recommande de décoder hors thread UI avec la crate `image`, puis de
+            // transférer un SharedPixelBuffer (Send) et de créer l'Image dans le thread UI.
+            let Ok(img) = image::open(&path) else { continue };
+            let buf = img.into_rgba8();
             // réduction 256 -> 128 (moyenne 2x2)
             let (w, h) = (buf.width() as usize, buf.height() as usize);
             let (tw, th) = (128usize, 128usize);
             let mut out = slint::SharedPixelBuffer::<slint::Rgba8Pixel>::new(tw as u32, th as u32);
             {
-                let src = buf.as_slice();
+                let src = buf.as_raw();
                 let dst = out.make_mut_slice();
                 let (fx, fy) = (w / tw, h / th);
                 for y in 0..th {
@@ -411,11 +418,11 @@ fn decode_all(dir: String, weak: slint::Weak<MainWindow>, decoded: Arc<AtomicU64
                         let (mut r, mut g, mut b, mut a, mut n) = (0u32, 0u32, 0u32, 0u32, 0u32);
                         for dy in 0..fy {
                             for dx in 0..fx {
-                                let p = src[(y * fy + dy) * w + x * fx + dx];
-                                r += p.r as u32;
-                                g += p.g as u32;
-                                b += p.b as u32;
-                                a += p.a as u32;
+                                let o = ((y * fy + dy) * w + x * fx + dx) * 4;
+                                r += src[o] as u32;
+                                g += src[o + 1] as u32;
+                                b += src[o + 2] as u32;
+                                a += src[o + 3] as u32;
                                 n += 1;
                             }
                         }
@@ -456,9 +463,9 @@ fn spawn_burner() {
 impl Scenario {
     pub fn new(a: &Args, app: &MainWindow) -> Self {
         let kind = a.scenario.clone();
-        let mut sc = Scenario { kind: kind.clone(), list: None, stream: None, canvas: None, core: None, anim: true, max_stall: 0.0, last_step: None, rate: a.rate, shapes: a.shapes, measure_start: None, text: None, images: None, nav: None, step_ms_sum: 0.0, step_n: 0, draw_ms_sum: 0.0, draw_n: 0 };
+        let mut sc = Scenario { kind: kind.clone(), list: None, stream: None, canvas: None, core: None, anim: true, max_stall: 0.0, last_step: None, rate: a.rate, shapes: a.shapes, measure_start: None, text: None, images: None, nav: None, key_events: Rc::new(std::cell::Cell::new(0)), step_ms_sum: 0.0, step_n: 0, draw_ms_sum: 0.0, draw_n: 0 };
         match kind.as_str() {
-            "idle" | "list" | "stream" => {
+            "idle" | "list" | "stream" | "input" => {
                 let mut l = ListSim::new(660.0);
                 app.set_chrome(true);
                 app.set_show_list(true);
@@ -471,6 +478,12 @@ impl Scenario {
                 if kind == "stream" {
                     sc.rate = if a.rate == 0 { 1000 } else { a.rate };
                     sc.stream = Some(Stream::start(sc.rate));
+                }
+                if kind == "input" {
+                    app.set_show_square(true);
+                    app.invoke_focus_keys();
+                    let k = sc.key_events.clone();
+                    app.on_space_pressed(move || k.set(k.get() + 1));
                 }
             }
             "canvas" => {
@@ -532,7 +545,7 @@ impl Scenario {
                 let m = Rc::new(VecModel::from(vec![ImgData { img: Default::default(), loaded: false }; 600]));
                 IMG_MODEL.with(|c| *c.borrow_mut() = Some(m.clone()));
                 app.set_images(ModelRc::from(m));
-                sc.images = Some(ImagesSim { decoded: Arc::new(AtomicU64::new(0)), decode_us: Arc::new(AtomicU64::new(0)), started: false, dir: a.assets.clone(), pos: 0.0, last_t: 0.0, zoom_dbg: 1.0 });
+                sc.images = Some(ImagesSim { decoded: Arc::new(AtomicU64::new(0)), decode_us: Arc::new(AtomicU64::new(0)), started: false, dir: a.assets.clone() });
             }
             "nav" => {
                 app.set_chrome(true);
@@ -559,13 +572,20 @@ impl Scenario {
         }
         self.anim
     }
-    pub fn begin_measure(&mut self, _app: &MainWindow) {
+    pub fn has_core(&self) -> bool {
+        self.core.is_some()
+    }
+    pub fn begin_measure(&mut self, app: &MainWindow) {
+        self.key_events.set(0);
+        if self.kind == "input" {
+            app.invoke_focus_keys(); // la fenêtre est affichée : (re)donner le focus clavier au FocusScope
+        }
         if let Some(l) = &mut self.list {
             l.script = ScrollScript::new();
             l.rows_drawn = 0;
         }
         if let Some(s) = &mut self.stream {
-            s.gen0 = s.gen.load(Ordering::Relaxed);
+            s.gen0 = s.generated.load(Ordering::Relaxed);
             s.drop0 = s.dropped.load(Ordering::Relaxed);
             s.applied0 = s.applied;
         }
@@ -644,7 +664,6 @@ impl Scenario {
             if measuring {
                 let cycle = (t % 6.0) / 3.0; // 0..2
                 let z = 1.0 + 2.0 * (if cycle <= 1.0 { cycle } else { 2.0 - cycle });
-                im.zoom_dbg = z as f32;
                 let cell = 136.0 * z;
                 let total = (600.0f64 / 9.0).ceil() * cell;
                 let maxy = (total - 660.0).max(1.0);
@@ -684,6 +703,10 @@ impl Scenario {
         if self.measure_start.is_some() {
             self.draw_ms_sum += draw.as_secs_f64() * 1000.0;
             self.draw_n += 1;
+            if let Some(l) = &mut self.list {
+                // lignes de la fenêtre virtualisée (visibles + 1 de marge de chaque côté) de cette frame
+                l.rows_drawn += (l.cur.1 - l.cur.0 + 1) as u64;
+            }
         }
         if let Some(x) = &mut self.text {
             if x.first_display_ms < 0.0 {
@@ -694,9 +717,19 @@ impl Scenario {
             }
         }
     }
-    pub fn ops(&self, t: f64) -> serde_json::Value {
+    pub fn ops(&self, t: f64, renderer: &str) -> serde_json::Value {
         let mut o = serde_json::json!({ "sum_heights": sum_heights() });
         let m = o.as_object_mut().unwrap();
+        let sw = renderer == "software";
+        let mut nr: Vec<&str> = vec![];
+        if self.canvas.is_some() && sw {
+            // limites documentées du moteur logiciel de Slint (backends_and_renderers) + code 1.18.1
+            nr.extend(["drop_shadow", "linear_gradient_with_border_radius (circles and rounded rects drawn as square gradients)", "rounded_clip (clip of the rounded panel is rectangular)"]);
+        }
+        m.insert("not_rendered".into(), nr.into());
+        if self.kind == "input" {
+            m.insert("key_events".into(), self.key_events.get().into());
+        }
         m.insert("app_step_ms_mean".into(), (self.step_ms_sum / self.step_n.max(1) as f64).into());
         m.insert("draw_ms_mean".into(), (self.draw_ms_sum / self.draw_n.max(1) as f64).into());
         if let Some(l) = &self.list {
@@ -706,14 +739,14 @@ impl Scenario {
         }
         if let Some(s) = &self.stream {
             m.insert("rate".into(), self.rate.into());
-            m.insert("updates_generated".into(), (s.gen.load(Ordering::Relaxed) - s.gen0).into());
+            m.insert("updates_generated".into(), (s.generated.load(Ordering::Relaxed) - s.gen0).into());
             m.insert("updates_applied".into(), (s.applied - s.applied0).into());
             m.insert("updates_dropped".into(), (s.dropped.load(Ordering::Relaxed) - s.drop0).into());
         }
         if self.canvas.is_some() {
             m.insert("shapes".into(), self.shapes.into());
             m.insert("graph_points".into(), (if self.kind == "canvas" { 10000 } else { 0 }).into());
-            m.insert("shadows_rendered".into(), false.into());
+            m.insert("shadows_rendered".into(), (!sw).into());
         }
         if let Some(x) = &self.text {
             m.insert("time_to_first_display_ms".into(), x.first_display_ms.into());
@@ -752,13 +785,15 @@ impl Scenario {
         }
         format!("{:08x}", h)
     }
-    pub fn notes(&self) -> String {
+    pub fn notes(&self, renderer: &str) -> String {
+        let sw = renderer == "software";
         match self.kind.as_str() {
             "idle" => "idle".into(),
             "text" => "TextEdit (std-widgets, fluent style) read-only, word-wrap, content-y driven by script; layout_ms = time_to_first_display minus the first draw (RedrawRequested->frame end) = set_text + lazy layout before draw; time_to_first_display_ms = text set -> end of first frame".into(),
-            "images" => "grid 9 columns of 600 Rectangle+Image elements (all instantiated, software renderer culls off-screen items); decode on 2 worker threads (Image::load_from_path + 2x2 box downscale to 128px), delivered with upgrade_in_event_loop; zoom implemented by resizing cells (software renderer has no transform scale); scroll 3000px/s and zoom 1-3-1 over 6s run simultaneously".into(),
+            "images" => "grid 9 columns of 600 Rectangle+Image elements (all instantiated; the renderer culls off-screen items); decode on 2 worker threads (image crate PNG decode + 2x2 box downscale to 128px, SharedPixelBuffer sent with Weak::upgrade_in_event_loop, Image created on the UI thread); zoom implemented by resizing cells (portable: the software renderer has no scale transform); scroll 3000px/s and zoom 1-3-1 over 6s run simultaneously".into(),
+            "input" => "list scenario + 200x200 square at (100,100) on top; a FocusScope key-pressed handler in .slint toggles the square colour black/white on each Space (normal Slint/winit key event path); key_events counts Space presses during measurement; redraw is continuous (list scrolling) so the change is shown on the next frame".into(),
             "nav" => "3 screens as Rectangles whose x has animate 300ms ease-in-out; modal opacity animate 200ms; sequence cycle push,push,modal-open,modal-close,pop,pop at one step per 300ms; transitions_done counts steps whose animation window elapsed; one background thread burns a core".into(),
-            "canvas" | "core" | "stress" => "canvas = one Slint Rectangle element per shape (repeater over VecModel, all rows set_row_data each frame); software renderer ignores drop-shadow (BoxShadow draw is a TODO) and rounded clip radius (rect clip only); graph = Path element, commands string rebuilt each frame (10000 pts)".into(),
+            "canvas" | "core" | "stress" => format!("canvas = one Slint Rectangle element per shape (no immediate-mode canvas API in Slint; repeater over VecModel, all rows set_row_data each frame), @linear-gradient background, drop-shadow-* on 1/10; graph = Path element, commands string rebuilt each frame (10000 pts); {}", if sw { "software renderer: drop-shadow not drawn (draw_box_shadow is a TODO), gradient + border-radius drawn square, clip ignores border-radius (all documented limits)" } else { "all primitives rendered by this renderer" }),
             _ => "virtualised list: ring of 32 Row elements fed by a VecModel, window computed from prefix-sum heights (binary search); offset applied by a single scroll-y property".into(),
         }
     }

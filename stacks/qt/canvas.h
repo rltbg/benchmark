@@ -1,5 +1,6 @@
 #pragma once
 #include <QQuickItem>
+#include <QtQml/qqmlregistration.h>
 #include <QQuickPaintedItem>
 #include <QQuickWindow>
 #include <QSGRenderNode>
@@ -119,6 +120,7 @@ struct ShapeSim {
 // Variant A: QQuickPaintedItem (QPainter into a QImage, uploaded as a QSGPainterNode). Works on every backend.
 class CanvasItem : public QQuickPaintedItem {
     Q_OBJECT
+    QML_ELEMENT
 public:
     CanvasItem(QQuickItem *parent = nullptr) : QQuickPaintedItem(parent) { setRenderTarget(QQuickPaintedItem::Image); setAntialiasing(true); }
     void paint(QPainter *p) override { sim.paint(p, width(), height()); }
@@ -131,19 +133,24 @@ public:
     StateFlags changedStates() const override { return {}; }
     RenderingFlags flags() const override { return BoundedRectRendering; }
     QRectF rect() const override { return QRectF(0, 0, w, h); }
-    void render(const RenderState *) override {
+    // Software backend only: the renderer exposes its QPainter (QSGRendererInterface::PainterResource) and saves/restores
+    // it around render(). The node applies matrix(), inheritedOpacity() and the clip region given as a plain QRegion
+    // (QSGRenderNode docs: "software ... use no scissor or stencil. There the clip region is provided as an ordinary QRegion").
+    void render(const RenderState *state) override {
         auto *ri = win->rendererInterface();
         auto *p = static_cast<QPainter *>(ri->getResource(win, QSGRendererInterface::PainterResource));
         if (!p) return;
-        p->save();
+        p->resetTransform();   // clip region is in window coordinates: set it before applying the node matrix
+        if (const QRegion *cr = state->clipRegion(); cr && !cr->isEmpty()) p->setClipRegion(*cr, Qt::IntersectClip);
         p->setTransform(matrix() ? matrix()->toTransform() : QTransform(), false);
+        p->setOpacity(inheritedOpacity());
         sim->paint(p, w, h);
-        p->restore();
     }
     ShapeSim *sim = nullptr; QQuickWindow *win = nullptr; double w = 0, h = 0;
 };
 class CanvasRenderItem : public QQuickItem {
     Q_OBJECT
+    QML_ELEMENT
 public:
     CanvasRenderItem(QQuickItem *parent = nullptr) : QQuickItem(parent) { setFlag(ItemHasContents, true); }
     QSGNode *updatePaintNode(QSGNode *old, UpdatePaintNodeData *) override {

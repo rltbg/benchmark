@@ -19,14 +19,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.math.exp
 
 class Counter { @JvmField var drawn = 0L }
 
-/** Prix par ligne : un MutableDoubleState créé à la demande, de sorte que seule la ligne concernée se recompose. */
+/** Prix par ligne : un MutableDoubleState créé à la demande ; seul le composable PriceText de la ligne concernée se recompose. */
 class PriceStore {
     private val states = arrayOfNulls<MutableDoubleState>(ROWS)
     fun state(i: Int): MutableDoubleState {
@@ -39,25 +38,27 @@ class PriceStore {
 @Composable
 fun ListView(modifier: Modifier, state: LazyListState, prices: PriceStore, counter: Counter) {
     LazyColumn(modifier, state = state) {
-        items(ROWS, key = null, contentType = { 0 }) { i -> ItemRow(i, prices, counter) }
+        // key stable (= index de la donnée) + contentType unique : réutilisation des compositions entre lignes
+        items(ROWS, key = { it }, contentType = { 0 }) { i -> ItemRow(i, prices, counter) }
     }
 }
 
 private val titleStyle = TextStyle(color = Color.White, fontSize = 16.sp, fontWeight = FontWeight.Bold)
 private val subStyle = TextStyle(color = Color(0xFFAAAAAA), fontSize = 13.sp)
 private val priceStyle = TextStyle(color = Color(0xFF7CFC9A), fontSize = 15.sp, textAlign = TextAlign.End)
+private val rowBg0 = Color(0xFF24242B)
+private val rowBg1 = Color(0xFF2A2A32)
 
 @Composable
 fun ItemRow(i: Int, prices: PriceStore, counter: Counter) {
     val h = rowHeight(i)
     val f = fnv(i)
-    val dot = remember(i) { Color(f and 255, (f shr 8) and 255, (f shr 16) and 255) }
-    val sub = remember(i) { val s = "Quote $i — ${initialPrice(i)}  "; s.repeat(8) }
-    val price = prices.state(i)
+    val dot = Color(f and 255, (f shr 8) and 255, (f shr 16) and 255)
+    val sub = remember(i) { "Quote $i — ${fmt2(initialPrice(i))}" }
     Row(
         Modifier.fillMaxWidth().height(h.dp)
             .drawBehind { counter.drawn++ }
-            .background(if (i % 2 == 0) Color(0xFF24242B) else Color(0xFF2A2A32))
+            .background(if (i % 2 == 0) rowBg0 else rowBg1)
             .padding(horizontal = 12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -65,10 +66,16 @@ fun ItemRow(i: Int, prices: PriceStore, counter: Counter) {
         Spacer(Modifier.width(12.dp))
         Column(Modifier.weight(1f)) {
             BasicText("Item #$i", style = titleStyle, maxLines = 1)
-            BasicText(sub, style = subStyle, maxLines = ((h - 28) / 16).coerceAtLeast(1), overflow = TextOverflow.Clip)
+            BasicText(sub, style = subStyle, maxLines = 1, softWrap = false, overflow = TextOverflow.Clip)
         }
-        BasicText(fmtPrice(price.doubleValue), style = priceStyle, modifier = Modifier.width(110.dp), maxLines = 1)
+        PriceText(prices.state(i))
     }
+}
+
+/** Lecture différée de l'état du prix dans son propre scope de recomposition. */
+@Composable
+fun PriceText(price: DoubleState) {
+    BasicText(fmtPrice(price.doubleValue), style = priceStyle, modifier = Modifier.width(110.dp), maxLines = 1)
 }
 
 class ScrollScript {
@@ -82,9 +89,12 @@ class ScrollScript {
     }
 }
 
-/** Producteur de mises à jour : coroutine Dispatchers.Default, file bornée 100k, drop+comptage si pleine. */
+/**
+ * Producteur : coroutine Dispatchers.Default, xorshift32 seed 0x2545F491, file bornée 100k (Channel capacité 100 000,
+ * BufferOverflow.SUSPEND par défaut -> trySend échoue quand la file est pleine : la mise à jour est abandonnée et comptée).
+ */
 class UpdateStream(val rate: Int, scope: CoroutineScope) {
-    val ch = Channel<Long>(100_000, BufferOverflow.DROP_LATEST)
+    val ch = Channel<Long>(100_000)
     val generated = AtomicLong(); val dropped = AtomicLong(); var applied = 0L
     @Volatile var enabled = false
     private var x = 0x2545F491
@@ -104,6 +114,7 @@ class UpdateStream(val rate: Int, scope: CoroutineScope) {
         }
     }
     fun reset() { enabled = false; while (ch.tryReceive().isSuccess) {}; generated.set(0); dropped.set(0); applied = 0; enabled = true }
+    /** Application par lot sur le thread UI (à chaque frame) : écriture des snapshot states des lignes concernées. */
     fun applyAll(p: PriceStore) {
         while (true) {
             val r = ch.tryReceive().getOrNull() ?: break
@@ -114,10 +125,10 @@ class UpdateStream(val rate: Int, scope: CoroutineScope) {
     }
 }
 
-class ListSc(val state: LazyListState, val prices: PriceStore, val counter: Counter, val stream: UpdateStream?) : Sc {
+class ListSc(val state: LazyListState, val prices: PriceStore, val counter: Counter, val stream: UpdateStream?, val input: InputState? = null) : Sc {
     val script = ScrollScript()
     var offset = 0.0
-    override suspend fun reset() { state.scrollToItem(0); offset = 0.0; counter.drawn = 0; stream?.reset() }
+    override suspend fun reset() { state.scrollToItem(0); offset = 0.0; counter.drawn = 0; stream?.reset(); input?.keyEvents = 0 }
     override suspend fun step(t: Double, dt: Double) {
         stream?.applyAll(prices)
         val consumed = state.scrollPx((script.velocity(t) * dt).toFloat())
@@ -131,20 +142,22 @@ class ListSc(val state: LazyListState, val prices: PriceStore, val counter: Coun
             run.ops["rate"] = stream.rate
             run.ops["updates_generated"] = stream.generated.get(); run.ops["updates_applied"] = stream.applied; run.ops["updates_dropped"] = stream.dropped.get()
         }
-        run.notes = FRAME_NOTE + " LazyColumn (variable heights), scroll via LazyListState.scrollBy(v(t)*dt) each frame, offset = sum of consumed px (clamped by bounds)."
+        if (input != null) run.ops["key_events"] = input.keyEvents
+        run.notes = FRAME_NOTE + " LazyColumn (variable heights 48..128, key=index, single contentType), scripted scroll via " +
+            "ScrollableState.scroll { scrollBy(v(t)*dt) } each frame; final_offset = sum of consumed px (clamped). rows_drawn = " +
+            "executions of the row drawBehind block (Compose may reuse recorded row layers: not 'rows rasterized per frame')." +
+            (if (input != null) " input: Window(onKeyEvent) toggles a mutableState read only in the square's drawBehind (draw-phase invalidation)." else "")
     }
 }
 
-const val FRAME_NOTE = "frame_ms = interval between consecutive withFrameNanos callbacks (System.nanoTime at callback start); Compose Desktop dispatches the next frame only after the previous render (Skiko raster+present) completed, so it approximates end-of-frame to end-of-frame."
-
 @Composable
-fun ListScenario(run: Run, rate: Int) {
+fun ListScenario(run: Run, rate: Int, input: InputState? = null) {
     val state = rememberLazyListState()
     val prices = remember { PriceStore() }
     val counter = remember { Counter() }
     val scope = rememberCoroutineScope()
     val stream = remember { if (rate > 0) UpdateStream(rate, scope) else null }
-    val sc = remember { ListSc(state, prices, counter, stream) }
+    val sc = remember { ListSc(state, prices, counter, stream, input) }
     FrameLoop(run, sc)
     Shell { ListView(Modifier.fillMaxSize(), state, prices, counter) }
 }

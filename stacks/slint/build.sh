@@ -1,11 +1,15 @@
 #!/bin/sh
-# Build du binaire release unique slintapp (winit/X11 + rendu logiciel, FemtoVG compilé aussi).
-# Prérequis : /home/user/eval/core/target/release/libbenchcore.a déjà construit.
+# Build reproductible du binaire release slintapp (Slint 1.18.1, winit/X11 ; renderers skia-software
+# [défaut], software, femtovg). Versions épinglées dans app/Cargo.toml (=x.y.z) et app/Cargo.lock.
+# Le cœur benchcore est une dépendance path (../../../core) compilée dans ce build : pas de chemin absolu.
 set -e
-cd "$(dirname "$0")/app"
+HERE=$(cd "$(dirname "$0")" && pwd)
+cd "$HERE/app"
 export CARGO_BUILD_JOBS=${CARGO_BUILD_JOBS:-2}
-cargo build --release 2>&1 | tee ../logs/build-last.log
+mkdir -p "$HERE/logs"
+rustc --version | tee "$HERE/logs/build-last.log"
+cargo --version | tee -a "$HERE/logs/build-last.log"
+start=$(date +%s)
+cargo build --release --locked 2>&1 | tee -a "$HERE/logs/build-last.log"
+echo "build_seconds=$(( $(date +%s) - start ))" | tee -a "$HERE/logs/build-last.log"
 ls -l target/release/slintapp
-# Lancement (logiciel, défaut) : app/target/release/slintapp --scenario list --duration 10 --out x.json
-# Variante FemtoVG (OpenGL ES via llvmpipe) : SLINTAPP_RENDERER=femtovg LIBGL_ALWAYS_SOFTWARE=1 app/target/release/slintapp ...
-# Pacing natif Slint (timer 60 Hz, non conforme à la spec) : SLINTAPP_THROTTLE=1

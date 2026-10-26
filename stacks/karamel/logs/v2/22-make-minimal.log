@@ -1,0 +1,7 @@
+The OCaml toplevel, version 4.14.1
+dune build
+ln -sf _build/default/src/Karamel.exe krml
+
+real	0m31.621s
+user	0m27.716s
+sys	0m5.021s

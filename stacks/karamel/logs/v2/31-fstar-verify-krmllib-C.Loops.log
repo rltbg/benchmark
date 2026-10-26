@@ -1,0 +1,10 @@
++ fstar.exe --include /opt/krml/karamel/krmllib /opt/krml/karamel/krmllib/C.Loops.fst
+* Warning 285 at /opt/krml/karamel/krmllib/C.Loops.fst(6,22-6,24):
+  - No modules in namespace FStar.HyperStack.ST and no file with that name either
+
+Could not resolve namespace FStar.HyperStack.ST
+* Error 134 at /opt/krml/karamel/krmllib/C.Loops.fst(6,22-6,24):
+  - Namespace ‘FStar.HyperStack.ST’ cannot be found.
+
+1 error was reported (see above)
+exit=1

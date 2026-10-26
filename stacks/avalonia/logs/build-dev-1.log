@@ -1,0 +1,14 @@
+  Determining projects to restore...
+  Restored /home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj (in 1.32 sec).
+/home/user/benchmark/stacks/avalonia/Program.fs(258,20): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj]
+/home/user/benchmark/stacks/avalonia/Program.fs(387,20): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj]
+  AvaloniaBench -> /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/art/bin/AvaloniaBench/release_linux-x64/avalonia-bench.dll
+
+Build succeeded.
+
+/home/user/benchmark/stacks/avalonia/Program.fs(258,20): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj]
+/home/user/benchmark/stacks/avalonia/Program.fs(387,20): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj]
+    2 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:12.22

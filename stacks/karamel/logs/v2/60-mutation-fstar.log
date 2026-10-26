@@ -1,0 +1,35 @@
+### mutation F* m1 : borne 64 -> 65 dans validate
+153c153
+<     (U8.eq m magic && U8.eq v version && U8.lte n 64uy &&
+---
+>     (U8.eq m magic && U8.eq v version && U8.lte n 65uy &&
+* Error 19 at Core_Pulse.fst(153,4-154,68):
+  - Failed to prove pure property:
+  - Failed to prove:
+1 error was reported (see above)
+### mutation F* m2 : constante FNV prime fausse
+55c55
+< let fnv_prime  : U32.t = 16777619ul
+---
+> let fnv_prime  : U32.t = 16777618ul
+* Error 19 at Core_Pulse.fst(97,70-97,72):
+  - Failed to prove:
+1 error was reported (see above)
+### mutation F* m3 : décalage de copie 3 -> 2 dans parse
+194c194
+<         let x = b.(SZ.add 3sz vi);
+---
+>         let x = b.(SZ.add 2sz vi);
+* Error 19 at Core_Pulse.fst(196,8-196,26):
+  - Failed to prove pure property:
+  - Failed to prove:
+1 error was reported (see above)
+### mutation F* m4 : out_len := cap au lieu de n
+198c198
+<       out_len := n;
+---
+>       out_len := SZ.add n 0sz; out_len := cap;
+* Error 19 at Core_Pulse.fst(199,6-199,10):
+  - Failed to prove pure property:
+  - Failed to prove:
+1 error was reported (see above)

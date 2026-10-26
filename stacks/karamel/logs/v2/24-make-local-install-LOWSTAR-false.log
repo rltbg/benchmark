@@ -1,0 +1,21 @@
+dune build
+ln -sf _build/default/src/Karamel.exe krml
+make PREFIX=/opt/krml/karamel/out _install
+make[1]: Entering directory '/opt/krml/karamel'
+mkdir -p /opt/krml/karamel/out/bin
+install _build/default/src/Karamel.exe /opt/krml/karamel/out/bin/krml
+mkdir -p /opt/krml/karamel/out/include/krml
+cp -r include/* /opt/krml/karamel/out/include/krml
+mkdir -p /opt/krml/karamel/out/lib/krml
+cp -r krmllib/* /opt/krml/karamel/out/lib/krml
+echo 'obj' >> /opt/krml/karamel/out/lib/krml/fstar.include
+mkdir -p /opt/krml/karamel/out/share/krml/examples
+cp -r test/*.fst /opt/krml/karamel/out/share/krml/examples
+mkdir -p /opt/krml/karamel/out/share/krml/misc
+cp -r misc/* /opt/krml/karamel/out/share/krml/misc
+make[1]: Leaving directory '/opt/krml/karamel'
+ln -sf out/bin/krml krml
+
+real	0m0.595s
+user	0m0.180s
+sys	0m0.074s

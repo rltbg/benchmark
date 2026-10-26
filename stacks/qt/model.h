@@ -2,7 +2,9 @@
 #include <chrono>
 #include <QAbstractListModel>
 #include <QColor>
+#include <QLocale>
 #include <QHash>
+#include <algorithm>
 #include <atomic>
 #include <thread>
 #include <vector>
@@ -25,11 +27,9 @@ public:
         const int i = ix.row();
         switch (role) {
         case TitleRole: ++titleCalls; return QStringLiteral("Item #") + QString::number(i);
-        case SubtitleRole: {
-            const QString q = QStringLiteral("Quote ") + QString::number(i) + QStringLiteral(" — ")
-                              + QString::number((fnv(i + 7) % 100000) / 100.0, 'f', 2) + QStringLiteral("   ");
-            return q.repeated(6);
-        }
+        case SubtitleRole:   // spec: "Quote " + i + " — " + (fnv(i+7) % 100000)/100.0 (shortest round-trip formatting), clipped by the delegate
+            return QStringLiteral("Quote ") + QString::number(i) + QStringLiteral(" — ")
+                   + QString::number((fnv(i + 7) % 100000) / 100.0, 'g', QLocale::FloatingPointShortest);
         case PriceRole: { auto it = prices.constFind(i); return it == prices.constEnd() ? (fnv(i + 7) % 100000) / 100.0 : it.value(); }
         case DotRole: { uint32_t f = fnv(i); return QColor(f & 255, (f >> 8) & 255, (f >> 16) & 255); }
         case RowHRole: return rowHeight(i);
@@ -50,7 +50,7 @@ public:
             emit dataChanged(ix, ix, {PriceRole});
         }
         applied += pending.size();
-        inflight.fetch_sub(int64_t(pending.size()), std::memory_order_relaxed);
+        inflight.fetch_sub(int64_t(pending.size()), std::memory_order_acq_rel);
         pending.clear();
     }
     uint64_t applied = 0;
@@ -85,11 +85,13 @@ private:
                     b.push_back({x % 100000u, x / 100.0});
                 }
                 made = due; generated = made;
-                if (model->inflight.load(std::memory_order_relaxed) + int64_t(n) > 100000) {
-                    dropped += n;                       // bounded queue full: drop + count
-                } else {
-                    model->inflight.fetch_add(int64_t(n), std::memory_order_relaxed);
+                // bounded queue (capacity 100k updates in flight towards the UI thread): accept what fits, drop + count the rest
+                const int64_t room = std::max<int64_t>(0, 100000 - model->inflight.load(std::memory_order_acquire));
+                if (int64_t(n) > room) { dropped += n - uint64_t(room); b.resize(size_t(room)); }
+                if (!b.empty()) {
+                    model->inflight.fetch_add(int64_t(b.size()), std::memory_order_acq_rel);
                     BenchModel *m = model;
+                    // QMetaObject::invokeMethod(context, functor, Qt::QueuedConnection): functor runs in m's (UI) thread
                     QMetaObject::invokeMethod(m, [m, b = std::move(b)]() mutable { m->enqueue(std::move(b)); }, Qt::QueuedConnection);
                 }
             }

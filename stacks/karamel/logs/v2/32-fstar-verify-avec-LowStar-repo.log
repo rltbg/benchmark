@@ -1,0 +1,10 @@
++ fstar.exe --include /opt/krml/lowstar/lib --include /opt/krml/karamel/krmllib Core_Low.fst
+* Error 168 at /opt/krml/lowstar/lib/FStar.HyperStack.ST.fsti(43,14-43,14):
+  - Syntax error
+
+1 error was reported (see above)
+
+real	0m0.263s
+user	0m0.068s
+sys	0m0.040s
+exit=1

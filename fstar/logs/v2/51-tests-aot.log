@@ -1,0 +1,5 @@
+TESTS: 9201 passed, 0 failed
+exit=0
+4F9F2CAB
+bench: 200000 hash(64B) in 16 ms (acc=00000000) => 82 ns/hash
+bench: 2000000 hash(64B) in 162 ms (acc=00000000) => 81 ns/hash

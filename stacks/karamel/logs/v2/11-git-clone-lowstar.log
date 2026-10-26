@@ -1,0 +1,3 @@
+b45e92ee4f55472b26456ec0d0dd6bfe952b6e11 Tue Feb 24 11:04:16 2026 -0800 Add tutorial solution files moved from FStar
+8d96097ea98e69576e17baebfa21858591cb3f01 Mon Feb 23 22:38:21 2026 -0800 Build all self-contained examples and tests
+85b8798b07523fdae306a636aab3762b1fc30ce3 Mon Feb 23 22:11:59 2026 -0800 Fix build: point submodule to fstar2, auto-compute --already_cached

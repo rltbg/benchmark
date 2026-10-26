@@ -1,0 +1,15 @@
+  Determining projects to restore...
+  Restored /opt/krml/p1/build/app/app.fsproj (in 3.45 sec).
+  1 of 2 projects are up-to-date for restore.
+  Core -> /opt/krml/p1/build/gen/bin/Release/net10.0/Core.dll
+  app -> /opt/krml/p1/build/app/bin/Release/net10.0/coreapp.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:06.96
+
+real	0m7.179s
+user	0m8.405s
+sys	0m1.459s

@@ -1,15 +1,16 @@
 module Core
 (* Validateur / parseur d'octets + hash FNV-1a 32 bits, avec spec et lemmes.
    Format d'une trame : [0xA5][version=1][n][payload : n octets], n <= 64. *)
-open FStar.Mul
+(* F* 2026.10.25 : FStar.Mul n'existe plus (Error 134), ( * ) est dans Prims. *)
+module Cast = FStar.Int.Cast
 module U8  = FStar.UInt8
 module U32 = FStar.UInt32
 module L   = FStar.List.Tot.Base
 
 type bytes = list U8.t
 
-let magic       : U8.t = U8.uint_to_t 165
-let version     : U8.t = U8.uint_to_t 1
+let magic       : U8.t = 0xA5uy
+let version     : U8.t = 1uy
 let max_payload : n:nat{n < 256} = 64
 let header_len  : nat = 3
 
@@ -19,7 +20,6 @@ type payload = p:bytes{L.length p <= max_payload}
 type msg = { payload : payload }
 
 (* Prédicat de bonne formation, côté spec (propositionnel). *)
-noextract
 let well_formed (b:bytes) : prop =
   match b with
   | m :: v :: n :: rest ->
@@ -28,11 +28,17 @@ let well_formed (b:bytes) : prop =
 
 (* ---------- validate ---------- *)
 
+(* F* 2026 / Custard : U8.v (vers nat) n'a pas de réalisation F# ni C
+   (Error 395) ; on compare donc en machine : n <= 64 en U8, longueur
+   bornée puis convertie en U8 (cast prouvé sans perte car <= 64). *)
+let len_ok (rest:bytes) (n:U8.t)
+  : r:bool{r <==> (U8.v n <= max_payload /\ L.length rest == U8.v n)} =
+  U8.lte n 64uy && L.length rest <= 64 && U8.eq (U8.uint_to_t (L.length rest)) n
+
 let validate (b:bytes) : r:bool{r <==> well_formed b} =
   match b with
   | m :: v :: n :: rest ->
-      U8.eq m magic && U8.eq v version
-      && U8.v n <= max_payload && L.length rest = U8.v n
+      U8.eq m magic && U8.eq v version && len_ok rest n
   | _ -> false
 
 (* ---------- parse ---------- *)
@@ -40,8 +46,7 @@ let validate (b:bytes) : r:bool{r <==> well_formed b} =
 let parse (b:bytes) : option msg =
   match b with
   | m :: v :: n :: rest ->
-      if U8.eq m magic && U8.eq v version
-         && U8.v n <= max_payload && L.length rest = U8.v n
+      if U8.eq m magic && U8.eq v version && len_ok rest n
       then Some ({ payload = rest })
       else None
   | _ -> None
@@ -101,8 +106,8 @@ let checked_add (a b:U32.t) : r:option U32.t{
     (match r with
      | Some c -> U32.v c == U32.v a + U32.v b
      | None   -> U32.v a + U32.v b >= pow2 32)}
-  = let s = U32.v a + U32.v b in
-    if s < pow2 32 then Some (U32.add a b) else None
+  = (* F* 2026 / Custard : U32.v non réalisable (Error 395) -> test en machine. *)
+    if U32.lte a (U32.sub 0xFFFFFFFFul b) then Some (U32.add a b) else None
 
 (* Lemme 5 : deux trames bornées ne débordent jamais un compteur 32 bits. *)
 let two_frames_fit (a b:msg)
@@ -117,7 +122,7 @@ let fnv_prime  : U32.t = 16777619ul
 (* Étape : h' = (h xor b) * prime  mod 2^32. mul_mod est total : le
    débordement est le comportement voulu et défini. *)
 let fnv_step (h:U32.t) (b:U8.t) : U32.t =
-  U32.mul_mod (U32.logxor h (FStar.UInt32.uint_to_t (U8.v b))) fnv_prime
+  U32.mul_mod (U32.logxor h (Cast.uint8_to_uint32 b)) fnv_prime
 
 let rec fnv_fold (h:U32.t) (b:bytes) : Tot U32.t (decreases b) =
   match b with
@@ -127,19 +132,16 @@ let rec fnv_fold (h:U32.t) (b:bytes) : Tot U32.t (decreases b) =
 let hash (b:bytes) : U32.t = fnv_fold fnv_offset b
 
 (* Spec mathématique, sur entiers non bornés, sans machine words. *)
-noextract
 let fnv_step_spec (h:nat{h < pow2 32}) (b:nat{b < 256}) : (r:nat{r < pow2 32}) =
   let x = FStar.UInt.logxor #32 h b in
   (x * 16777619) % pow2 32
 
-noextract
 let rec fnv_fold_spec (h:nat{h < pow2 32}) (b:list nat{forall (x:nat). L.mem x b ==> x < 256})
   : Tot (r:nat{r < pow2 32}) (decreases b) =
   match b with
   | [] -> h
   | x :: xs -> fnv_fold_spec (fnv_step_spec h x) xs
 
-noextract
 let rec to_nats (b:bytes) : (l:list nat{forall (x:nat). L.mem x l ==> x < 256}) =
   match b with
   | [] -> []

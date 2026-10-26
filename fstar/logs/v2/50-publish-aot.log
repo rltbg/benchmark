@@ -1,0 +1,11 @@
+  Determining projects to restore...
+  Restored /opt/krml/p1/build/app/app.fsproj (in 367 ms).
+  Restored /opt/krml/p1/build/gen/Core.fsproj (in 367 ms).
+  Core -> /opt/krml/p1/build/gen/bin/Release/net10.0/Core.dll
+  app -> /opt/krml/p1/build/app/bin/Release/net10.0/linux-x64/coreapp.dll
+  Generating native code
+  app -> /opt/krml/p1/build/aot-out/
+
+real	0m10.900s
+user	0m16.304s
+sys	0m1.388s

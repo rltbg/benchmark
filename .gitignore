@@ -11,3 +11,19 @@ bin/
 *.jar
 __pycache__/
 *.pyc
+# sorties de build et caches (régénérables)
+stacks/*/build/
+stacks/*/out/
+stacks/*/deploy/
+stacks/*/app/build/
+stacks/*/app/target/
+**/target-*/
+.gradle/
+.dart_tool/
+.kotlin/
+stacks/flutter/sdk/
+stacks/flutter/pub-cache/
+**/opamroot/
+**/krml-clean/
+**/karamel-clean/
+*.log.tmp

@@ -1,10 +1,9 @@
 fn main() {
-    slint_build::compile("ui/app.slint").unwrap();
-    // C-ABI core: static library produced by /home/user/eval/core
-    println!("cargo:rustc-link-search=native=/home/user/eval/core/target/release");
-    println!("cargo:rustc-link-lib=static=benchcore");
-    // libbenchcore.a embeds its own copy of libstd (Rust staticlib): tolerate duplicate std symbols
-    println!("cargo:rustc-link-arg=-Wl,--allow-multiple-definition");
+    slint_build::compile("ui/app.slint").expect("slint compile");
+    // version exacte du compilateur, reportée dans le champ "version" du JSON
+    let rustc = std::env::var("RUSTC").unwrap_or_else(|_| "rustc".into());
+    let v = std::process::Command::new(rustc).arg("--version").output().ok()
+        .and_then(|o| String::from_utf8(o.stdout).ok()).unwrap_or_default();
+    println!("cargo:rustc-env=SLINTAPP_RUSTC={}", v.trim());
     println!("cargo:rerun-if-changed=ui/app.slint");
-    println!("cargo:rerun-if-changed=/home/user/eval/core/target/release/libbenchcore.a");
 }

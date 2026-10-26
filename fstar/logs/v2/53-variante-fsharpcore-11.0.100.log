@@ -1,0 +1,11 @@
+  Determining projects to restore...
+  Restored /opt/krml/p1/fsc11/gen/Core.fsproj (in 1.96 sec).
+  Restored /opt/krml/p1/fsc11/app/app.fsproj (in 1.97 sec).
+  Core -> /opt/krml/p1/fsc11/gen/bin/Release/net10.0/Core.dll
+  app -> /opt/krml/p1/fsc11/app/bin/Release/net10.0/linux-x64/coreapp.dll
+  Generating native code
+  app -> /opt/krml/p1/fsc11/aot-out/
+exit=0
+TESTS: 9201 passed, 0 failed
+-rwxr-xr-x 1 root root 2352864 Oct 26 01:33 ../aot-out/coreapp
+"FSharp.Core/11.0.100"

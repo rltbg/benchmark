@@ -1,0 +1,6 @@
+TESTS: 9201 passed, 0 failed
+
+real	0m0.073s
+user	0m0.053s
+sys	0m0.020s
+exit=0

@@ -1,4 +1,5 @@
 import QtQuick
+import Bench
 
 Item {
     clip: true
@@ -6,7 +7,7 @@ Item {
         id: zoomer
         width: parent.width; height: parent.height
         transformOrigin: Item.Center
-        Component.onCompleted: bench.registerItem("zoomer", zoomer)
+        Component.onCompleted: App.registerItem("zoomer", zoomer)
         GridView {
             id: gv
             anchors.fill: parent
@@ -14,7 +15,7 @@ Item {
             cacheBuffer: 512
             interactive: false
             model: 600
-            Component.onCompleted: bench.registerItem("grid", gv)
+            Component.onCompleted: App.registerItem("grid", gv)
             delegate: Image {
                 required property int index
                 width: 128; height: 128

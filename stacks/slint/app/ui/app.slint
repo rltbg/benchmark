@@ -34,6 +34,8 @@ component Row inherits Rectangle {
         height: parent.height - 32px;
         clip: true;
         Text {
+            // sans y explicite, un élément hors layout est centré dans son parent
+            y: 0px;
             width: parent.width;
             text: d.sub;
             wrap: word-wrap;
@@ -155,6 +157,13 @@ export component MainWindow inherits Window {
     in property <float> zoom: 1;
     in property <length> pan-x;
     in property <length> pan-y;
+    // input scenario : carré 200x200 en (100,100), bascule noir/blanc à chaque Espace
+    in property <bool> show-square: false;
+    in-out property <bool> square-white: false;
+    callback space-pressed();
+    public function focus-keys() {
+        keys.focus();
+    }
     // nav scenario
     in property <bool> show-nav: false;
     in property <int> screen: 0;
@@ -278,6 +287,27 @@ export component MainWindow inherits Window {
                     font-size: 24px;
                 }
             }
+        }
+    }
+    if root.show-square: Rectangle {
+        x: 100px;
+        y: 100px;
+        width: 200px;
+        height: 200px;
+        background: root.square-white ? #ffffff : #000000;
+    }
+    keys := FocusScope {
+        x: 0;
+        y: 0;
+        width: 0;
+        height: 0;
+        key-pressed(e) => {
+            if (root.show-square && e.text == " ") {
+                root.square-white = !root.square-white;
+                root.space-pressed();
+                return accept;
+            }
+            reject
         }
     }
 }

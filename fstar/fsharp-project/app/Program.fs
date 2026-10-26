@@ -1,20 +1,21 @@
 module Program
 // Tests qui reprennent, lemme par lemme, la spec de spec/Core.fst.
+// Passe 2 : F* 2026.10.25, backend F# de Custard. Le code extrait utilise
+// directement uint8/uint32, list<uint8> et l'option F# : plus d'adaptateur
+// option, plus de conversion byte[] <-> bigint list.
 // Mode par défaut : suite de tests (code retour 0 = tout passe).
 //   coreapp            -> tests
 //   coreapp once       -> parse+hash d'une trame, puis exit (mesure du démarrage)
+//   coreapp idle       -> une trame, "ready", puis attente 4 s (mesure RSS)
 //   coreapp bench N    -> N hash de 64 octets (micro-benchmark)
 open System
-open System.Numerics
 
-// Adaptateur : l'option d'F* (FStar_Pervasives_Native.option) n'est pas l'option d'F#.
-let o (x: 'a FStar_Pervasives_Native.option) : 'a option =
-    match x with FStar_Pervasives_Native.Some v -> Some v | FStar_Pervasives_Native.None -> None
-let parse l = o (Core.parse l)
-let hashFrame l = o (Core.hash_frame l)
-let checkedAdd a b = o (Core.checked_add a b)
-let toL (a: byte[]) : bigint list = [ for b in a -> BigInteger(int b) ]
-let ofL (l: bigint list) : byte[] = l |> List.map byte |> Array.ofList
+let parse (l: uint8 list) = Core.core_parse l
+let validate (l: uint8 list) = Core.core_validate l
+let hashFrame l = Core.core_hash_frame l
+let checkedAdd a b = Core.core_checked_add a b
+let toL (a: byte[]) : uint8 list = List.ofArray a
+let ofL (l: uint8 list) : byte[] = Array.ofList l
 let frame (payload: byte[]) = Array.append [| 0xA5uy; 1uy; byte payload.Length |] payload
 
 // Référence indépendante de la spec : FNV-1a 32 en uint64 natif (pas de bigint, pas de F*).
@@ -22,7 +23,7 @@ let fnvRef (a: byte[]) =
     let mutable h = 2166136261UL
     for b in a do h <- ((h ^^^ uint64 b) * 16777619UL) &&& 0xFFFFFFFFUL
     uint32 h
-let hashOf (a: byte[]) : uint32 = Core.hash (toL a)
+let hashOf (a: byte[]) : uint32 = Core.core_hash (toL a)
 
 let mutable passed = 0
 let failures = Collections.Generic.List<string>()
@@ -54,22 +55,22 @@ let runTests () =
     // --- Lemme fold_append : hash incrémental ---
     for _ in 1 .. 200 do
         let a = rndBytes (int (rnd () % 50u)) in let b = rndBytes (int (rnd () % 50u))
-        let direct = Core.fnv_fold Core.fnv_offset (toL (Array.append a b))
-        let incr = Core.fnv_fold (Core.fnv_fold Core.fnv_offset (toL a)) (toL b)
+        let direct = Core.core_fnv_fold Core.core_fnv_offset (toL (Array.append a b))
+        let incr = Core.core_fnv_fold (Core.core_fnv_fold Core.core_fnv_offset (toL a)) (toL b)
         check "fold_append" (direct = incr)
     // --- validate / parse : cas limites ---
-    check "empty rejected" (not (Core.validate []) && (parse []).IsNone)
+    check "empty rejected" (not (validate []) && (parse []).IsNone)
     check "parse_rejects_short len0..2" (
-        [ [||]; [|0xA5uy|]; [|0xA5uy;1uy|] ] |> List.forall (fun a -> (parse (toL a)).IsNone && not (Core.validate (toL a))))
-    check "empty payload ok" (Core.validate (toL (frame [||])) && (parse (toL (frame [||]))).Value.payload.IsEmpty)
-    check "payload 64 ok (max_payload)" (Core.validate (toL (frame (rndBytes 64))))
-    check "payload 65 rejected (len byte=65)" (not (Core.validate (toL (frame (rndBytes 65)))))
-    check "payload 255 rejected" (not (Core.validate (toL (frame (rndBytes 255)))))
+        [ [||]; [|0xA5uy|]; [|0xA5uy;1uy|] ] |> List.forall (fun a -> (parse (toL a)).IsNone && not (validate (toL a))))
+    check "empty payload ok" (validate (toL (frame [||])) && (parse (toL (frame [||]))).Value.IsEmpty)
+    check "payload 64 ok (max_payload)" (validate (toL (frame (rndBytes 64))))
+    check "payload 65 rejected (len byte=65)" (not (validate (toL (frame (rndBytes 65)))))
+    check "payload 255 rejected" (not (validate (toL (frame (rndBytes 255)))))
     let bad_magic = frame (rndBytes 4) in bad_magic.[0] <- 0xA4uy
-    check "bad magic" (not (Core.validate (toL bad_magic)))
+    check "bad magic" (not (validate (toL bad_magic)))
     let bad_ver = frame (rndBytes 4) in bad_ver.[1] <- 2uy
-    check "bad version" (not (Core.validate (toL bad_ver)))
-    check "version 0 rejected" (let f = frame [||] in f.[1] <- 0uy; not (Core.validate (toL f)))
+    check "bad version" (not (validate (toL bad_ver)))
+    check "version 0 rejected" (let f = frame [||] in f.[1] <- 0uy; not (validate (toL f)))
     // Lemme parse_rejects_bad_len : n déclaré <> octets réels
     let f = frame (rndBytes 10)
     check "bad_len too few" (parse (toL f.[0..f.Length-2])).IsNone
@@ -84,23 +85,23 @@ let runTests () =
             else (let p = rndBytes (int (rnd () % 70u)) in let f = frame p in (if rnd () % 4u = 0u then f.[int (rnd () % 3u)] <- byte (rnd ())); f)
         let l = toL a
         let p = parse l
-        check "parse_validate_iff" ((p.IsSome) = Core.validate l)
+        check "parse_validate_iff" ((p.IsSome) = validate l)
         match p with
         | Some m ->
             accepted <- accepted + 1
-            let n = m.payload.Length
+            let n = m.Length
             check "parse_length_bound: payload<=64" (n <= 64)
             check "parse_length_bound: total=3+n<=67" (a.Length = 3 + n && a.Length <= 67)
-            check "payload = drop 3" (ofL m.payload = a.[3..])
+            check "payload = drop 3" (ofL m = a.[3..])
         | None -> ()
     check "assez de trames acceptées pour être significatif" (accepted > 200)
     // --- Lemme roundtrip + encode_length ---
     for n in [0;1;2;32;63;64] do
         let p = rndBytes n
-        let m : Core.msg = { payload = toL p }
-        let e = Core.encode m
+        let m : uint8 list = toL p  // le record msg {payload} est réduit à sa liste par Custard (§5.2)
+        let e = Core.core_encode m
         check ("encode_length n=" + string n) (e.Length = 3 + n && e.Length <= 67)
-        check ("roundtrip validate n=" + string n) (Core.validate e)
+        check ("roundtrip validate n=" + string n) (validate e)
         check ("roundtrip parse n=" + string n) ((parse e) = Some m)
         check ("encode bytes n=" + string n) (ofL e = frame p)
     // --- hash_frame ---
@@ -121,7 +122,7 @@ let runTests () =
         let exp = let s = uint64 a + uint64 b in if s < 4294967296UL then Some (uint32 s) else None
         check "checked_add random" (checkedAdd a b = exp)
     // --- constantes ---
-    check "constants" (Core.magic = BigInteger 165 && Core.version = BigInteger.One && Core.max_payload = BigInteger 64 && Core.header_len = BigInteger 3)
+    check "constants" (Core.core_magic = 0xA5uy && Core.core_version = 1uy && Core.core_max_payload = 64I && Core.core_header_len = 3I && Core.core_fnv_offset = 2166136261u && Core.core_fnv_prime = 16777619u)
     Console.WriteLine("TESTS: " + string passed + " passed, " + string failures.Count + " failed")
     for f in failures |> Seq.truncate 20 do Console.WriteLine("  FAIL: " + f)
     if failures.Count = 0 then 0 else 1
@@ -144,7 +145,7 @@ let main argv =
         let l = toL (rndBytes 64)
         let sw = Diagnostics.Stopwatch.StartNew()
         let mutable acc = 0u
-        for _ in 1 .. int n do acc <- acc ^^^ Core.hash l
+        for _ in 1 .. int n do acc <- acc ^^^ Core.core_hash l
         Console.WriteLine("bench: " + n + " hash(64B) in " + string sw.ElapsedMilliseconds + " ms (acc=" + acc.ToString("X8") + ") => " + string (int (float sw.ElapsedTicks * 1e9 / float Diagnostics.Stopwatch.Frequency / float (int n))) + " ns/hash")
         0
     | _ -> runTests ()

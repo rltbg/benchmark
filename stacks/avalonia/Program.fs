@@ -1,13 +1,13 @@
 module AvaloniaBench
 
-// Bench de reference : Avalonia 12.1.4 + F# + .NET 10 (JIT et NativeAOT), X11, rendu Skia logiciel.
-// UI 100 % en code F# (pas de XAML applicatif, pas de FuncUI, pas de bindings) ; dessin custom via
-// ICustomDrawOperation + SkiaSharp (ISkiaSharpApiLeaseFeature). Aucun printf/sprintf (reflexion F#).
+// Bench de reference v2 : Avalonia 12.1.4 + F# + .NET 10 (JIT et NativeAOT), X11, rendu Skia logiciel.
+// UI 100 % en code F# (pas de XAML applicatif, pas de bindings). Dessin custom via
+// DrawingContext.Custom(ICustomDrawOperation) + ISkiaSharpApiLeaseFeature (idiome documente :
+// https://docs.avaloniaui.net/docs/graphics-animation/custom-rendering). Texte 1 Mo : AvaloniaEdit (virtualisation de lignes).
+// Aucune API privee Avalonia (pas d'AvaloniaAccessUnstablePrivateApis, pas de reflexion). Aucun printf/sprintf F# (reflexion).
 
 open System
-open System.Collections.Generic
 open System.Diagnostics
-open System.Diagnostics.CodeAnalysis
 open System.Globalization
 open System.IO
 open System.Reflection
@@ -17,21 +17,38 @@ open System.Text
 open System.Threading
 open System.Threading.Channels
 open System.Threading.Tasks
-open Avalonia.VisualTree
 open Avalonia
 open Avalonia.Animation
 open Avalonia.Controls
 open Avalonia.Controls.ApplicationLifetimes
+open Avalonia.Input
 open Avalonia.Media
-open Avalonia.Platform
-open Avalonia.Rendering
+open Avalonia.Rendering.Composition
 open Avalonia.Rendering.SceneGraph
 open Avalonia.Skia
 open Avalonia.Threading
 open Avalonia.Themes.Simple
+open Avalonia.VisualTree
 open SkiaSharp
 
+// Toutes nos signatures P/Invoke sont blittables : marshalling runtime desactive (pas de stub IL de marshalling).
+// https://learn.microsoft.com/en-us/dotnet/standard/native-interop/disabled-marshalling
+[<assembly: DisableRuntimeMarshalling>]
+do ()
+
 let inv = CultureInfo.InvariantCulture
+
+// ---------------------------------------------------------------- versions (epinglees dans AvaloniaBench.fsproj / build.sh)
+let PKG_VERSIONS = "Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simple 12.1.4), Avalonia.AvaloniaEdit 12.0.0, SkiaSharp 3.119.4, HarfBuzzSharp 8.3.1.3, FSharp.Core 10.1.403, .NET SDK 10.0.403"
+let isAot = not RuntimeFeature.IsDynamicCodeSupported
+let versionString () =
+    let avInfo =
+        try
+            let a = typeof<Application>.Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+            if isNull a then "?" else a.InformationalVersion.Split('+').[0]
+        with _ -> "?"
+    PKG_VERSIONS + ", runtime " + RuntimeInformation.FrameworkDescription + ", " + (if isAot then "NativeAOT" else "JIT (CoreCLR, self-contained)")
+    + ", Avalonia assembly " + avInfo
 
 // ---------------------------------------------------------------- donnees communes
 let fnv (i: int) : uint32 =
@@ -54,7 +71,7 @@ let rowColor (i: int) =
     SKColor(byte (h &&& 255u), byte ((h >>> 8) &&& 255u), byte ((h >>> 16) &&& 255u))
 let initialPrice (i: int) = float (fnv (i + 7) % 100000u) / 100.0
 
-/// ligne = binaire sur prefix : plus grand i tel que prefix.[i] <= y
+/// ligne = recherche binaire sur prefix : plus grand i tel que prefix.[i] <= y
 let rowAt (y: float) =
     let mutable lo = 0
     let mutable hi = N - 1
@@ -63,46 +80,68 @@ let rowAt (y: float) =
         if prefix.[mid] <= y then lo <- mid else hi <- mid - 1
     lo
 
-// ---------------------------------------------------------------- C-ABI benchcore (P/Invoke statique)
+// ---------------------------------------------------------------- chemins (BENCH_ROOT, sans chemin absolu code en dur)
+let benchRoot =
+    lazy (
+        let env = Environment.GetEnvironmentVariable "BENCH_ROOT"
+        if not (String.IsNullOrEmpty env) then env
+        else
+            // deduit de l'emplacement du binaire : remonte jusqu'au dossier contenant core/benchcore.h
+            let mutable d = DirectoryInfo(AppContext.BaseDirectory)
+            let mutable res = null
+            while isNull res && not (isNull d) do
+                if File.Exists(Path.Combine(d.FullName, "core", "benchcore.h")) then res <- d.FullName
+                d <- d.Parent
+            if isNull res then Directory.GetCurrentDirectory() else res)
+
+// ---------------------------------------------------------------- C-ABI benchcore (P/Invoke DllImport blittable)
+// F# n'a pas de generateurs de source : LibraryImport (generateur C#) n'est pas disponible ; DllImport blittable +
+// DisableRuntimeMarshalling est l'equivalent sans stub de marshalling. En NativeAOT : DirectPInvoke + NativeLibrary (.a, lien statique).
+// SuppressGCTransition sur les 3 appels courts (< 1 us, sans I/O, sans callback, sans verrou : conditions de la doc).
 module Native =
-    [<DllImport("benchcore")>]
-    extern int core_validate(nativeint p, unativeint n)
-    [<DllImport("benchcore")>]
-    extern int core_parse(nativeint p, unativeint n, nativeint out, unativeint cap, nativeint outLen)
-    [<DllImport("benchcore")>]
-    extern uint32 core_hash(nativeint p, unativeint n)
-    [<DllImport("benchcore")>]
-    extern uint64 core_heavy(uint32 ms)
-    // variantes SuppressGCTransition (appels courts uniquement)
     [<DllImport("benchcore", EntryPoint = "core_validate"); SuppressGCTransition>]
     extern int core_validate_s(nativeint p, unativeint n)
     [<DllImport("benchcore", EntryPoint = "core_parse"); SuppressGCTransition>]
     extern int core_parse_s(nativeint p, unativeint n, nativeint out, unativeint cap, nativeint outLen)
     [<DllImport("benchcore", EntryPoint = "core_hash"); SuppressGCTransition>]
     extern uint32 core_hash_s(nativeint p, unativeint n)
+    // variantes avec transition GC (option --no-suppress-gc-transition, pour comparaison)
+    [<DllImport("benchcore")>]
+    extern int core_validate(nativeint p, unativeint n)
+    [<DllImport("benchcore")>]
+    extern int core_parse(nativeint p, unativeint n, nativeint out, unativeint cap, nativeint outLen)
+    [<DllImport("benchcore")>]
+    extern uint32 core_hash(nativeint p, unativeint n)
+    // core_heavy dure 100 ms : jamais SuppressGCTransition
+    [<DllImport("benchcore")>]
+    extern uint64 core_heavy(uint32 ms)
 
+let mutable coreLinkNote = ""
 let installResolver (asm: Assembly) =
 #if CORE_STATIC
-    ()
+    coreLinkNote <- "libbenchcore.a liee statiquement (NativeAOT DirectPInvoke + NativeLibrary)"
 #else
+    // dynamique : BENCHCORE_LIB puis $BENCH_ROOT/core/target/release/libbenchcore.so
     NativeLibrary.SetDllImportResolver(asm, DllImportResolver(fun name _ _ ->
         if name = "benchcore" then
-            let p = Path.Combine(AppContext.BaseDirectory, "libbenchcore.so")
+            let env = Environment.GetEnvironmentVariable "BENCHCORE_LIB"
+            let p =
+                if not (String.IsNullOrEmpty env) then env
+                else Path.Combine(benchRoot.Value, "core", "target", "release", "libbenchcore.so")
+            coreLinkNote <- "libbenchcore.so dynamique (" + p + ")"
             let mutable h = 0n
-            if NativeLibrary.TryLoad(p, &h) then h
-            elif NativeLibrary.TryLoad("/home/user/eval/core/target/release/libbenchcore.so", &h) then h
-            else 0n
+            if NativeLibrary.TryLoad(p, &h) then h else 0n
         else 0n))
 #endif
 
 // ---------------------------------------------------------------- arguments
 type Args =
     { mutable Scenario: string; mutable Duration: float; mutable Out: string; mutable Rate: int
-      mutable Shapes: int; mutable Assets: string; mutable SuppressGc: bool; mutable Uncapped: bool }
+      mutable Shapes: int; mutable Assets: string; mutable SuppressGc: bool; mutable TextControl: string }
 
 let parseArgs (argv: string[]) =
     let a = { Scenario = "idle"; Duration = 10.0; Out = "out.json"; Rate = 1000; Shapes = 5000
-              Assets = "/home/user/eval/assets"; SuppressGc = false; Uncapped = true }
+              Assets = null; SuppressGc = true; TextControl = "avaloniaedit" }
     let mutable durGiven = false
     let mutable i = 0
     while i < argv.Length do
@@ -114,11 +153,12 @@ let parseArgs (argv: string[]) =
         | "--rate" -> a.Rate <- Int32.Parse(nxt (), inv)
         | "--shapes" -> a.Shapes <- Int32.Parse(nxt (), inv)
         | "--assets" -> a.Assets <- nxt ()
-        | "--suppress-gc-transition" -> a.SuppressGc <- true
-        | "--capped" -> a.Uncapped <- false
+        | "--no-suppress-gc-transition" -> a.SuppressGc <- false
+        | "--text-control" -> a.TextControl <- nxt ()
         | _ -> ()
         i <- i + 1
     if a.Scenario = "stress" && not durGiven then a.Duration <- 600.0
+    if isNull a.Assets then a.Assets <- Path.Combine(benchRoot.Value, "assets")
     a
 
 // ---------------------------------------------------------------- stats partagees (thread de rendu)
@@ -128,24 +168,33 @@ module Stats =
     let addRender (ticks: int64) =
         Interlocked.Add(&renderTicks, ticks) |> ignore
         Interlocked.Increment(&renderOps) |> ignore
+    let reset () =
+        Volatile.Write(&renderTicks, 0L)
+        Volatile.Write(&renderOps, 0L)
 
-let skFont =
-    lazy (
-        let tf = SKTypeface.FromFamilyName("Noto Sans")
-        let tf = if isNull tf then SKTypeface.Default else tf
-        new SKFont(tf, 14.0f))
-let skFontSmall =
-    lazy (new SKFont(skFont.Value.Typeface, 12.0f))
-let skFontBold =
-    lazy (
-        let tf = SKTypeface.FromFamilyName("Noto Sans", SKFontStyle.Bold)
-        new SKFont((if isNull tf then skFont.Value.Typeface else tf), 14.0f))
+// ---------------------------------------------------------------- ressources Skia partagees (creees une fois : doc "reuse Pen/Brush")
+module Sk =
+    let typeface =
+        lazy (
+            let tf = SKTypeface.FromFamilyName("Noto Sans")
+            if isNull tf then SKTypeface.Default else tf)
+    let font = lazy (new SKFont(typeface.Value, 14.0f))
+    let fontSmall = lazy (new SKFont(typeface.Value, 12.0f))
+    let fontBold =
+        lazy (
+            let tf = SKTypeface.FromFamilyName("Noto Sans", SKFontStyle.Bold)
+            new SKFont((if isNull tf then typeface.Value else tf), 14.0f))
+    let listBg = lazy (new SKPaint(Color = SKColor(250uy, 250uy, 252uy)))
+    let txt = lazy (new SKPaint(IsAntialias = true, Color = SKColors.Black))
+    let sub = lazy (new SKPaint(IsAntialias = true, Color = SKColor(110uy, 110uy, 120uy)))
+    let sep = lazy (new SKPaint(Color = SKColor(225uy, 225uy, 230uy)))
+    let priceP = lazy (new SKPaint(IsAntialias = true, Color = SKColor(20uy, 110uy, 40uy)))
 
 // ---------------------------------------------------------------- liste virtualisee (100k, hauteurs variables)
-type Prices() =
-    static member val Arr : float[] = Array.init N initialPrice with get
-
-type ListOp(bounds: Rect, offset: float, first: int, count: int, prices: float[], sel: int) =
+// Panneau virtualise maison : VirtualizingStackPanel est documente comme optimise pour des hauteurs uniformes
+// (extent estime -> sauts de scrollbar / re-layout avec hauteurs variables) ; ici l'extent doit etre exact (8 799 584 px)
+// et l'offset scripte au pixel. https://docs.avaloniaui.net/docs/app-development/performance#variable-height-items
+type ListOp(bounds: Rect, offset: float, first: int, count: int, prices: float[]) =
     interface ICustomDrawOperation with
         member _.Bounds = bounds
         member _.HitTest(_) = false
@@ -158,16 +207,15 @@ type ListOp(bounds: Rect, offset: float, first: int, count: int, prices: float[]
                 use lease = f.Lease()
                 let c = lease.SkCanvas
                 let w = float32 bounds.Width
-                use bg = new SKPaint(Color = SKColor(250uy, 250uy, 252uy))
-                c.DrawRect(0.0f, 0.0f, w, float32 bounds.Height, bg)
-                use txt = new SKPaint(IsAntialias = true, Color = SKColors.Black)
-                use sub = new SKPaint(IsAntialias = true, Color = SKColor(110uy, 110uy, 120uy))
-                use sep = new SKPaint(Color = SKColor(225uy, 225uy, 230uy))
+                c.DrawRect(0.0f, 0.0f, w, float32 bounds.Height, Sk.listBg.Value)
+                let txt = Sk.txt.Value
+                let sub = Sk.sub.Value
+                let sep = Sk.sep.Value
+                let priceP = Sk.priceP.Value
+                let font = Sk.font.Value
+                let fontS = Sk.fontSmall.Value
+                let fontB = Sk.fontBold.Value
                 use dot = new SKPaint(IsAntialias = true)
-                use priceP = new SKPaint(IsAntialias = true, Color = SKColor(20uy, 110uy, 40uy))
-                let font = skFont.Value
-                let fontS = skFontSmall.Value
-                let fontB = skFontBold.Value
                 for k in 0 .. count - 1 do
                     let i = first + k
                     let h = float32 heights.[i]
@@ -179,12 +227,17 @@ type ListOp(bounds: Rect, offset: float, first: int, count: int, prices: float[]
                     c.DrawCircle(32.0f, y + h * 0.5f, 16.0f, dot)
                     c.DrawText("Item #" + i.ToString(inv), 64.0f, y + 22.0f, fontB, txt)
                     let q = "Quote " + i.ToString(inv) + " — " + (float (fnv (i + 7) % 100000u) / 100.0).ToString("F2", inv)
-                    // sous-titre repete/tronque (clippe a la hauteur de la ligne)
-                    c.DrawText(q + "  " + q + "  " + q, 64.0f, y + 42.0f, fontS, sub)
-                    if h > 60.0f then c.DrawText(q + "  " + q, 64.0f, y + 60.0f, fontS, sub)
+                    // sous-titre repete (clippe par la ligne et par le prix a droite)
+                    c.Save() |> ignore
+                    c.ClipRect(SKRect(0.0f, y, w - 110.0f, y + h))
+                    c.DrawText(q + "  " + q + "  " + q + "  " + q, 64.0f, y + 42.0f, fontS, sub)
+                    c.Restore()
                     c.DrawText(prices.[k].ToString("F2", inv), w - 16.0f, y + h * 0.5f + 5.0f, SKTextAlign.Right, font, priceP)
                     c.Restore()
             Stats.addRender (Stopwatch.GetTimestamp() - t0)
+
+type Prices() =
+    static member val Arr : float[] = Array.init N initialPrice with get
 
 type ListView() as this =
     inherit Control()
@@ -192,7 +245,6 @@ type ListView() as this =
     member val Offset = 0.0 with get, set
     member val RowsDrawn = 0L with get, set
     member val Prices : float[] = Prices.Arr with get, set
-    member val ViewportH = 0.0 with get, set
     member this.MaxOffset = max 0.0 (prefix.[N] - this.Bounds.Height)
     override this.Render(ctx: DrawingContext) =
         let b = Rect(0.0, 0.0, this.Bounds.Width, this.Bounds.Height)
@@ -203,7 +255,7 @@ type ListView() as this =
         let count = last - first + 1
         let snap = Array.sub this.Prices first count
         this.RowsDrawn <- this.RowsDrawn + int64 count
-        ctx.Custom(ListOp(b, off, first, count, snap, 0))
+        ctx.Custom(new ListOp(b, off, first, count, snap))
 
 // ---------------------------------------------------------------- canvas : formes animees
 type ShapesCfg =
@@ -225,6 +277,8 @@ type ShapesModel(cfg: ShapesCfg) =
     let graph : float32[] = Array.zeroCreate GRAPH_N
     let mutable head = 0
     let mutable frame = 0
+    // anneau de 3 instantanes : le thread de rendu peut dessiner la frame k pendant que l'UI prepare k+1
+    // (MediaContext attend Processed du batch precedent avant d'en committer un autre : au plus 2 en vol)
     let snaps = [| Snap(n); Snap(n); Snap(n) |]
     let mutable cur = 0
     member val Sizes : float32[] = Array.init n (fun i -> 12.0f + float32 (fnv (i * 5 + 3) % 28u))
@@ -263,59 +317,72 @@ type ShapesModel(cfg: ShapesCfg) =
             Array.Copy(graph, 0, s.Graph, GRAPH_N - head, head)
     member _.Current = snaps.[cur]
 
+/// Ressources Skia creees une seule fois (shader de degrade par forme, en coordonnees locales ; paints d'ombre/fond)
 type ShapesRender(model: ShapesModel) =
     let cfg = model.Cfg
-    let paints : SKPaint[] = Array.zeroCreate cfg.N
+    let paints : SKPaint[] =
+        Array.init cfg.N (fun i ->
+            let s = model.Sizes.[i]
+            use sh = SKShader.CreateLinearGradient(SKPoint(0.0f, 0.0f), SKPoint(s, s), [| rowColor (i * 2 + 1); rowColor (i * 2 + 2) |],
+                                                   [| 0.0f; 1.0f |], SKShaderTileMode.Clamp)
+            new SKPaint(IsAntialias = true, Shader = sh))
     let pts : SKPoint[] = Array.zeroCreate GRAPH_N
-    // ombre : meme technique qu'Avalonia pour BoxShadow (masque flou), flou 8 px => sigma 4, offset (2,2)
-    let shadowP = lazy (new SKPaint(IsAntialias = true, Color = SKColor(0uy, 0uy, 0uy, 120uy), MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, 4.0f)))
-    let bgP = lazy (new SKPaint(Color = SKColor(24uy, 28uy, 38uy)))
-    let clipBg = lazy (new SKPaint(Color = SKColor(238uy, 240uy, 246uy), IsAntialias = true))
-    let graphBg = lazy (new SKPaint(Color = SKColor(12uy, 14uy, 20uy)))
-    let line = lazy (new SKPaint(Color = SKColor(80uy, 220uy, 140uy), IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.0f))
-    member _.Paint(i: int) =
-        let p = paints.[i]
-        if not (isNull p) then p
-        else
-            let s = model.Sizes.[i]
-            let c1 = rowColor (i * 2 + 1)
-            let c2 = rowColor (i * 2 + 2)
-            let sh = SKShader.CreateLinearGradient(SKPoint(0.0f, 0.0f), SKPoint(s, s), [| c1; c2 |], [| 0.0f; 1.0f |], SKShaderTileMode.Clamp)
-            let np = new SKPaint(IsAntialias = true, Shader = sh)
-            paints.[i] <- np
-            np
-    member this.Shape(c: SKCanvas, i: int, s: float32, p: SKPaint) =
-        match model.Kinds.[i] with
-        | 0 -> c.DrawRect(0.0f, 0.0f, s, s * 0.7f, p)
-        | 1 -> c.DrawCircle(s * 0.5f, s * 0.5f, s * 0.5f, p)
-        | _ -> c.DrawRoundRect(0.0f, 0.0f, s, s * 0.8f, s * 0.25f, s * 0.25f, p)
+    // ombre portee : flou 8 px => sigma 4 (convention Avalonia BoxShadow : sigma = blur/2), offset (2,2)
+    let shadowP = new SKPaint(IsAntialias = true, Color = SKColor(0uy, 0uy, 0uy, 120uy), MaskFilter = SKMaskFilter.CreateBlur(SKBlurStyle.Normal, 4.0f))
+    let bgP = new SKPaint(Color = SKColor(24uy, 28uy, 38uy))
+    let clipBg = new SKPaint(Color = SKColor(238uy, 240uy, 246uy))
+    let graphBg = new SKPaint(Color = SKColor(12uy, 14uy, 20uy))
+    let line = new SKPaint(Color = SKColor(80uy, 220uy, 140uy), IsAntialias = true, Style = SKPaintStyle.Stroke, StrokeWidth = 1.0f)
+    let clipRR = new SKRoundRect(SKRect(0.0f, 0.0f, cfg.ClipW, cfg.ClipH), 16.0f, 16.0f)
+    member this.Shape(c: SKCanvas, k: int, x: float32, y: float32, s: float32, p: SKPaint) =
+        match k with
+        | 0 -> c.DrawRect(x, y, s, s * 0.7f, p)
+        | 1 -> c.DrawCircle(x + s * 0.5f, y + s * 0.5f, s * 0.5f, p)
+        | _ -> c.DrawRoundRect(x, y, s, s * 0.8f, s * 0.25f, s * 0.25f, p)
+    /// la boite [x0,x1]x[y0,y1] touche-t-elle un des 4 coins arrondis (carres R x R) du clip ?
+    member _.InCorner(x0: float32, y0: float32, x1: float32, y1: float32) =
+        let r = 16.0f
+        (x0 < r || x1 > cfg.ClipW - r) && (y0 < r || y1 > cfg.ClipH - r)
     member this.Draw(c: SKCanvas, snap: Snap) =
-        c.DrawRect(0.0f, 0.0f, cfg.AreaW, cfg.AreaH, bgP.Value)
+        c.DrawRect(0.0f, 0.0f, cfg.AreaW, cfg.AreaH, bgP)
+        // Clip rect. arrondi 1000x600 r=16 : hors des 4 coins, le clip AA d'un rrect aux bords entiers est exactement le
+        // clip rectangulaire (couverture 0 ou 1) ; le raster Skia CPU traite un clip rect aligne sur les pixels sans masque AA,
+        // alors qu'un clip rrect AA force un masque de couverture pour chaque forme (mesure : ~2x plus lent).
+        // => clip rect pour toutes les formes, et clip rrect AA seulement pour celles qui touchent un coin : rendu identique.
         c.Save() |> ignore
-        use rr = new SKRoundRect(SKRect(0.0f, 0.0f, cfg.ClipW, cfg.ClipH), 16.0f, 16.0f)
-        c.ClipRoundRect(rr, SKClipOperation.Intersect, true)
-        c.DrawRect(0.0f, 0.0f, cfg.ClipW, cfg.ClipH, clipBg.Value)
+        c.ClipRect(SKRect(0.0f, 0.0f, cfg.ClipW, cfg.ClipH), SKClipOperation.Intersect, true)
+        c.Save() |> ignore
+        c.ClipRoundRect(clipRR, SKClipOperation.Intersect, true)
+        c.DrawRect(0.0f, 0.0f, cfg.ClipW, cfg.ClipH, clipBg)
+        c.Restore()
+        let sizes = model.Sizes
+        let kinds = model.Kinds
         for i in 0 .. cfg.N - 1 do
-            let s = model.Sizes.[i]
+            let s = sizes.[i]
             let px = snap.Pos.[2 * i]
             let py = snap.Pos.[2 * i + 1]
             if px < cfg.ClipW && py < cfg.ClipH then
-                let p = this.Paint i
-                c.Save() |> ignore
+                let shadow = cfg.Shadows && i % 10 = 0
+                // marge : ombre decalee de 2 px + flou (3 sigma = 12 px)
+                let m = if shadow then 14.0f else 1.0f
+                let corner = this.InCorner(px - m, py - m, px + s + m, py + s + m)
+                if corner then
+                    c.Save() |> ignore
+                    c.ClipRoundRect(clipRR, SKClipOperation.Intersect, true)
+                if shadow then
+                    this.Shape(c, kinds.[i], px + 2.0f, py + 2.0f, s, shadowP)
+                // le shader est en coordonnees locales (0..s) : translation du canvas (pas de shader recree par frame)
                 c.Translate(px, py)
-                if cfg.Shadows && i % 10 = 0 then
-                    c.Translate(2.0f, 2.0f)
-                    this.Shape(c, i, s, shadowP.Value)
-                    c.Translate(-2.0f, -2.0f)
-                this.Shape(c, i, s, p)
-                c.Restore()
+                this.Shape(c, kinds.[i], 0.0f, 0.0f, s, paints.[i])
+                c.Translate(-px, -py)
+                if corner then c.Restore()
         c.Restore()
         if cfg.Graph then
-            c.DrawRect(cfg.GraphX, cfg.GraphY, cfg.GraphW, cfg.GraphH, graphBg.Value)
+            c.DrawRect(cfg.GraphX, cfg.GraphY, cfg.GraphW, cfg.GraphH, graphBg)
             let dx = cfg.GraphW / float32 (GRAPH_N - 1)
             for k in 0 .. GRAPH_N - 1 do
                 pts.[k] <- SKPoint(cfg.GraphX + float32 k * dx, cfg.GraphY + cfg.GraphH * (1.0f - snap.Graph.[k]))
-            c.DrawPoints(SKPointMode.Polygon, pts, line.Value)
+            c.DrawPoints(SKPointMode.Polygon, pts, line)
 
 type ShapesOp(bounds: Rect, r: ShapesRender, snap: Snap) =
     interface ICustomDrawOperation with
@@ -336,7 +403,7 @@ type ShapesView(model: ShapesModel) as this =
     do this.ClipToBounds <- true
     let r = ShapesRender(model)
     override this.Render(ctx: DrawingContext) =
-        ctx.Custom(ShapesOp(Rect(0.0, 0.0, float model.Cfg.AreaW, float model.Cfg.AreaH), r, model.Current))
+        ctx.Custom(new ShapesOp(Rect(0.0, 0.0, float model.Cfg.AreaW, float model.Cfg.AreaH), r, model.Current))
 
 // ---------------------------------------------------------------- scenario : base
 [<AbstractClass>]
@@ -347,13 +414,17 @@ type Scenario() =
     abstract Finish : unit -> unit
     abstract Ops : StringBuilder -> unit
     abstract Notes : string
+    /// la frame en cours a-t-elle un contenu change ? (nav : seulement pendant une transition)
+    abstract Animating : bool
     default _.Reset() = ()
     default _.Finish() = ()
     default _.Notes = ""
+    default _.Animating = true
 
 let kvI (sb: StringBuilder) (k: string) (v: int64) = sb.Append('"').Append(k).Append("\":").Append(v.ToString(inv)).Append(',') |> ignore
 let kvF (sb: StringBuilder) (k: string) (v: float) = sb.Append('"').Append(k).Append("\":").Append(v.ToString("F3", inv)).Append(',') |> ignore
 let kvS (sb: StringBuilder) (k: string) (v: string) = sb.Append('"').Append(k).Append("\":\"").Append(v.Replace("\"", "'")).Append("\",") |> ignore
+let kvRaw (sb: StringBuilder) (k: string) (v: string) = sb.Append('"').Append(k).Append("\":").Append(v).Append(',') |> ignore
 
 let clamp lo hi v = max lo (min hi v)
 
@@ -368,6 +439,7 @@ let scriptOffset (t: float) (maxOff: float) =
         let mutable res = nan
         while Double.IsNaN res do
             let dir = if k % 2 = 0 then 1.0 else -1.0
+            // x(t) = v0/2 * (1 - exp(-2t)) = 10000 * (1 - exp(-2t))
             if tt < 1.5 then res <- clamp 0.0 maxOff (b + dir * 10000.0 * (1.0 - Math.Exp(-2.0 * tt)))
             else
                 b <- clamp 0.0 maxOff (b + dir * 10000.0 * (1.0 - Math.Exp(-3.0)))
@@ -377,6 +449,7 @@ let scriptOffset (t: float) (maxOff: float) =
 
 // ---------------------------------------------------------------- flux de prix (thread de fond -> canal borne -> UI)
 type Stream(rate: int) =
+    // file bornee 100k ; TryWrite echoue quand elle est pleine (FullMode=Wait + TryWrite = pas de blocage) -> drop + compte
     let ch = Channel.CreateBounded<uint32>(BoundedChannelOptions(100000, FullMode = BoundedChannelFullMode.Wait, SingleReader = true, SingleWriter = true))
     let mutable generated = 0L
     let mutable dropped = 0L
@@ -390,7 +463,7 @@ type Stream(rate: int) =
         thread <- Thread((fun () ->
             let sw = Stopwatch.StartNew()
             let mutable x = 0x2545F491u
-            while not stop do
+            while not (Volatile.Read(&stop)) do
                 let due = int64 (sw.Elapsed.TotalSeconds * float rate)
                 let mutable g = Volatile.Read(&generated)
                 while g < due do
@@ -402,8 +475,8 @@ type Stream(rate: int) =
                 Volatile.Write(&generated, g)
                 Thread.Sleep 1), IsBackground = true, Name = "price-producer")
         thread.Start()
-    member _.Stop() = stop <- true
-    /// appele par le thread UI a chaque frame : applique le lot
+    member _.Stop() = Volatile.Write(&stop, true)
+    /// appele par le thread UI a chaque frame : applique le lot en attente
     member _.Drain(prices: float[]) =
         let mutable x = 0u
         let mutable n = 0L
@@ -436,37 +509,41 @@ type CoreRunner(suppress: bool) =
             let mutable local = 0L
             let mutable a = 0UL
             if suppress then
-                while not stop do
+                while not (Volatile.Read(&stop)) do
                     for _ in 1 .. 1000 do
                         a <- a + uint64 (Native.core_validate_s (f, 8un))
                         a <- a + uint64 (Native.core_parse_s (f, 8un, o, 64un, ol))
                         a <- a + uint64 (Native.core_hash_s (f, 8un))
                     local <- local + 1000L
                     Volatile.Write(&calls, local)
+                    Volatile.Write(&acc, a)   // resultat accumule et publie : la boucle ne peut pas etre eliminee
             else
-                while not stop do
+                while not (Volatile.Read(&stop)) do
                     for _ in 1 .. 1000 do
                         a <- a + uint64 (Native.core_validate (f, 8un))
                         a <- a + uint64 (Native.core_parse (f, 8un, o, 64un, ol))
                         a <- a + uint64 (Native.core_hash (f, 8un))
                     local <- local + 1000L
                     Volatile.Write(&calls, local)
-            acc <- a), IsBackground = true, Name = "core-worker")
+                    Volatile.Write(&acc, a)), IsBackground = true, Name = "core-worker")
         let hv = Thread((fun () ->
-            while not stop do
+            // core_heavy(100) toutes les 1 s (echeances absolues)
+            let t = Stopwatch.StartNew()
+            let mutable k = 0L
+            while not (Volatile.Read(&stop)) do
                 Native.core_heavy 100u |> ignore
                 Interlocked.Increment(&heavy) |> ignore
-                let mutable w = 0
-                while w < 900 && not stop do
-                    Thread.Sleep 10
-                    w <- w + 10), IsBackground = true, Name = "core-heavy")
+                k <- k + 1L
+                while not (Volatile.Read(&stop)) && t.ElapsedMilliseconds < k * 1000L do
+                    Thread.Sleep 5), IsBackground = true, Name = "core-heavy")
         worker.Start()
         hv.Start()
-    member _.Stop() = stop <- true
+    member _.Stop() = Volatile.Write(&stop, true)
     member _.MarkStart() =
         baseCalls <- Volatile.Read(&calls); baseHeavy <- Volatile.Read(&heavy); sw.Restart()
     member _.CallsPerS = float (Volatile.Read(&calls) - baseCalls) / sw.Elapsed.TotalSeconds
     member _.Heavy = Volatile.Read(&heavy) - baseHeavy
+    member _.Acc = Volatile.Read(&acc)
 
 // ---------------------------------------------------------------- UI : coquille
 let mkHeader (title: string) =
@@ -502,6 +579,7 @@ type ListScenario(view: ListView, status: TextBlock, stream: Stream option) =
             status.Text <- "offset " + (int view.Offset).ToString(inv) + " / " + (int view.MaxOffset).ToString(inv)
         view.InvalidateVisual()
     override _.Reset() =
+        nextStatus <- 0.0
         view.RowsDrawn <- 0L
         match stream with Some s -> s.ResetCounters() | None -> ()
     override _.Finish() = match stream with Some s -> s.Stop() | None -> ()
@@ -515,7 +593,25 @@ type ListScenario(view: ListView, status: TextBlock, stream: Stream option) =
             kvI sb "updates_applied" s.Applied
             kvI sb "updates_dropped" s.Dropped
         | None -> ()
-    override _.Notes = "UI-thread ListView custom (ICustomDrawOperation+SkiaSharp), virtualise par recherche binaire sur prefix des hauteurs."
+    override _.Notes = "Liste: Control custom virtualise (recherche binaire sur le prefixe des hauteurs, extent exact) dessine par ICustomDrawOperation+SkiaSharp (SKFont.DrawText, sans shaping HarfBuzz)."
+
+type InputScenario(list: ListScenario, square: Border) =
+    inherit Scenario()
+    let mutable keys = 0L
+    let mutable white = false
+    member _.OnKey(e: KeyEventArgs) =
+        if e.Key = Key.Space then
+            keys <- keys + 1L
+            white <- not white
+            square.Background <- (if white then Brushes.White else Brushes.Black)
+            e.Handled <- true
+    override _.Update(t, dt) = list.Update(t, dt)
+    override _.Reset() = list.Reset(); keys <- 0L
+    override _.Finish() = list.Finish()
+    override _.Ops sb =
+        list.Ops sb
+        kvI sb "key_events" keys
+    override _.Notes = list.Notes + " input: Border 200x200 en (100,100) par-dessus la liste ; Window.KeyDown (chemin d'evenements normal, routage bulle) bascule Background noir/blanc sur Key.Space."
 
 type CanvasScenario(model: ShapesModel, view: ShapesView) =
     inherit Scenario()
@@ -526,10 +622,11 @@ type CanvasScenario(model: ShapesModel, view: ShapesView) =
     override _.Ops sb =
         kvI sb "shapes" (int64 model.Cfg.N)
         kvI sb "graph_points" (int64 GRAPH_N)
+        kvRaw sb "not_rendered" "[]"
+    override _.Notes = "Canvas: SKCanvas direct (lease Skia) ; degrade lineaire 2 couleurs = SKShader par forme cree une fois ; ombre = SKMaskFilter blur sigma 4 offset (2,2) sur 1/10 ; clip SKRoundRect AA 1000x600 r=16 ; polyligne DrawPoints(Polygon) 10 000 points 1000x100 en y=610."
 
 type CoreScenario(model: ShapesModel, view: ShapesView, core: CoreRunner, suppress: bool) =
     inherit Scenario()
-    let mutable maxStall = 0.0
     override _.Reset() = model.Reset(); core.MarkStart()
     override _.Update(_, dt) =
         model.Step(float32 dt)
@@ -539,57 +636,69 @@ type CoreScenario(model: ShapesModel, view: ShapesView, core: CoreRunner, suppre
         kvF sb "calls_per_s" core.CallsPerS
         kvI sb "heavy_calls" core.Heavy
         kvS sb "suppress_gc_transition" (if suppress then "true" else "false")
-        // max_frame_stall_ms est complete par le driver (max de frame_ms)
+        kvS sb "acc" (core.Acc.ToString("x", inv))
+    override _.Notes = "core: DllImport blittable" + (if suppress then " + SuppressGCTransition (validate/parse/hash)" else " (avec transition GC)") + ", " + coreLinkNote + " ; UI 1000 formes."
 
-type StressScenario(list: ListScenario, model: ShapesModel, view: ShapesView, core: CoreRunner, suppress: bool) =
+type StressScenario(list: ListScenario, model: ShapesModel, view: ShapesView, core: CoreRunner) =
     inherit Scenario()
     let heap = ResizeArray<string>()
     let mutable nextSample = 0.0
-    override _.Reset() = list.Reset(); model.Reset(); core.MarkStart()
+    override _.Reset() = list.Reset(); model.Reset(); core.MarkStart(); nextSample <- 0.0; heap.Clear()
     override _.Update(t, dt) =
         list.Update(t, dt)
         model.Step(float32 dt)
         view.InvalidateVisual()
         if t >= nextSample then
-            heap.Add("{\"t\":" + (max t 0.0).ToString("F1", inv) + ",\"managed_heap_kb\":" + (GC.GetTotalMemory(false) / 1024L).ToString(inv) + "}")
+            let gi = GC.GetGCMemoryInfo()
+            heap.Add("{\"t\":" + (max t 0.0).ToString("F1", inv) + ",\"managed_heap_kb\":" + (GC.GetTotalMemory(false) / 1024L).ToString(inv)
+                     + ",\"heap_size_kb\":" + (gi.HeapSizeBytes / 1024L).ToString(inv) + ",\"committed_kb\":" + (gi.TotalCommittedBytes / 1024L).ToString(inv) + "}")
             nextSample <- (max t 0.0) + 10.0
     override _.Finish() = list.Finish(); core.Stop()
     override _.Ops sb =
         list.Ops sb
         kvF sb "calls_per_s" core.CallsPerS
         kvI sb "heavy_calls" core.Heavy
+        kvRaw sb "not_rendered" "[]"
         sb.Append("\"heap_samples\":[").Append(String.Join(",", heap)).Append("],") |> ignore
+    override _.Notes = list.Notes + " stress: liste 880 px + panneau formes 400x720 (clip 380x600, graphe 380x100) + flux 5000/s + core."
 
-
-// ---------------------------------------------------------------- text : 1 Mo dans un TextBox lecture seule
-type TextScenario(tb: TextBox, status: TextBlock, tFirstStart: int64, layoutMs: float) =
+// ---------------------------------------------------------------- text : 1 Mo, lecture seule, selection
+// Voie retenue : AvaloniaEdit.TextEditor (paquet officiel AvaloniaUI, MIT) : document en rope + virtualisation de lignes
+// (seules les VisualLines visibles sont mises en forme). TextBox ne virtualise pas (layout du texte entier).
+// --text-control textbox garde l'ancienne voie pour comparaison.
+type TextScenario(ctrl: Control, getSv: unit -> ScrollViewer, selectAll: unit -> unit, kind: string, docMs: float, layoutMs: float) =
     inherit Scenario()
     let mutable sv : ScrollViewer = null
     let mutable selected = false
-    let mutable firstDisplayMs = -1.0
     let mutable maxOff = 0.0
+    let mutable selMs = 0.0
+    member val FirstDisplayMs = -1.0 with get, set
     override _.Reset() =
-        sv <- tb.GetVisualDescendants() |> Seq.tryPick (fun v -> match v with :? ScrollViewer as s -> Some s | _ -> None) |> Option.toObj
+        sv <- getSv ()
         if not (isNull sv) then maxOff <- max 0.0 (sv.Extent.Height - sv.Viewport.Height)
     override _.Update(t, dt) =
-        if firstDisplayMs < 0.0 then
-            firstDisplayMs <- float (Stopwatch.GetTimestamp() - tFirstStart) * 1000.0 / float Stopwatch.Frequency
         if t >= 0.0 && not (isNull sv) then
             // aller-retour 3000 px/s sur [0, min(maxOff, 30000)] (periode 20 s)
-            let range = min maxOff 30000.0
+            maxOff <- max 0.0 (sv.Extent.Height - sv.Viewport.Height)
+            let range = max 1.0 (min maxOff 30000.0)
             let ph = (3000.0 * t) % (2.0 * range)
             let y = if ph < range then ph else 2.0 * range - ph
             sv.Offset <- Vector(0.0, y)
             if t >= 5.0 && not selected then
                 selected <- true
-                tb.Focus() |> ignore
-                tb.SelectAll()
-    override _.Ops sb =
-        kvF sb "time_to_first_display_ms" firstDisplayMs
+                let t0 = Stopwatch.GetTimestamp()
+                selectAll ()
+                selMs <- float (Stopwatch.GetTimestamp() - t0) * 1000.0 / float Stopwatch.Frequency
+    override this.Ops sb =
+        kvF sb "time_to_first_display_ms" this.FirstDisplayMs
         kvF sb "layout_ms" layoutMs
+        kvF sb "document_load_ms" docMs
         kvF sb "extent_height" (if isNull sv then -1.0 else sv.Extent.Height)
         kvI sb "select_all_done" (if selected then 1L else 0L)
-    override _.Notes = "TextBox IsReadOnly+AcceptsReturn+Wrap sur 1 Mo ; layout_ms = Measure() explicite du TextBox apres Text=1Mo ; time_to_first_display = de avant Text= jusqu'au premier callback d'animation apres ouverture."
+        kvF sb "select_all_call_ms" selMs
+        kvS sb "text_control" kind
+    override _.Notes =
+        "text: " + kind + " IsReadOnly, retour a la ligne ; layout_ms = Measure+Arrange explicites de la fenetre apres affectation du document ; document_load_ms = construction du document (TextDocument/Text=) ; time_to_first_display_ms = de la lecture du fichier a la fin de presentation de la 1re frame (CompositionBatch.Rendered) ; defilement via ScrollViewer.Offset ; tout selectionner a t=5 s."
 
 // ---------------------------------------------------------------- images : grille 600 vignettes, decodage asynchrone
 type ImageGrid() as this =
@@ -600,6 +709,7 @@ type ImageGrid() as this =
     member val Bitmaps : Imaging.Bitmap[] = Array.zeroCreate 600
     member val Offset = 0.0 with get, set
     member val Scale = 1.0 with get, set
+    member val PanX = 0.0 with get, set
     static member ContentH = float ((600 + cols - 1) / cols) * cell
     override this.Render(ctx: DrawingContext) =
         let w = this.Bounds.Width
@@ -608,7 +718,7 @@ type ImageGrid() as this =
         let s = this.Scale
         let cx = w / 2.0
         let cy = h / 2.0
-        use _t = ctx.PushTransform(Matrix.CreateTranslation(-cx, -cy) * Matrix.CreateScale(s, s) * Matrix.CreateTranslation(cx, cy))
+        use _t = ctx.PushTransform(Matrix.CreateTranslation(-cx + this.PanX, -cy) * Matrix.CreateScale(s, s) * Matrix.CreateTranslation(cx, cy))
         let off = this.Offset
         let y0 = off + cy - cy / s - cell
         let y1 = off + cy + cy / s
@@ -634,7 +744,7 @@ type ImagesScenario(grid: ImageGrid, assets: string) =
         for k in 0 .. 1 do
             let th = Thread((fun () ->
                 let mutable go = true
-                while go && not stop do
+                while go && not (Volatile.Read(&stop)) do
                     let i = Interlocked.Increment(&next)
                     if i >= 600 then go <- false
                     else
@@ -650,15 +760,17 @@ type ImagesScenario(grid: ImageGrid, assets: string) =
         let range = max 1.0 (ImageGrid.ContentH - grid.Bounds.Height)
         let ph = (3000.0 * tt) % (2.0 * range)
         grid.Offset <- (if ph < range then ph else 2.0 * range - ph)
-        // zoom 1 -> 3 -> 1 sur 6 s (triangle), repete
+        // zoom 1 -> 3 -> 1 sur 6 s (triangle) + pan horizontal sinusoidal, repete
         let z = (tt % 6.0) / 3.0
-        grid.Scale <- 1.0 + 2.0 * (if z < 1.0 then z else 2.0 - z)
+        let tri = if z < 1.0 then z else 2.0 - z
+        grid.Scale <- 1.0 + 2.0 * tri
+        grid.PanX <- 200.0 * tri * Math.Sin(tt * Math.PI / 3.0)
         grid.InvalidateVisual()
     override _.Finish() = stop <- true
     override _.Ops sb =
         kvI sb "images_decoded" (Volatile.Read(&decoded))
         kvF sb "decode_total_ms" (float (Volatile.Read(&decodeTicks)) * 1000.0 / float Stopwatch.Frequency)
-    override _.Notes = "Bitmap.DecodeToWidth(128) sur 2 threads de fond (decodage demarre des le warm-up, compteurs sur toute la vie du process) ; dessin DrawingContext.DrawImage ; placeholder gris tant que non decode."
+    override _.Notes = "images: Bitmap.DecodeToWidth(128) sur 2 threads de fond (demarre au lancement, compteurs sur toute la vie du process) ; DrawingContext.DrawImage ; placeholder gris tant que non decode ; zoom 1->3->1 / 6 s + pan."
 
 // ---------------------------------------------------------------- nav : 3 ecrans, PageSlide 300 ms, modale CrossFade 200 ms, thread de calcul
 type NavScenario(screens: Control[], modal: Control) =
@@ -666,6 +778,7 @@ type NavScenario(screens: Control[], modal: Control) =
     let mutable stop = false
     let mutable transitions = 0L
     let mutable modals = 0L
+    let mutable animating = false
     let cts = new CancellationTokenSource()
     member this.Run() : Task =
         task {
@@ -673,9 +786,11 @@ type NavScenario(screens: Control[], modal: Control) =
             let fade = CrossFade(TimeSpan.FromMilliseconds 200.0)
             let mutable cur = 0
             let mutable k = 0
-            while not stop do
+            // 20 transitions (push,push,pop,pop,...) + une modale (ouverture+fermeture en fondu) toutes les 2 transitions
+            while not stop && k < 20 do
                 let dirFwd = (k % 4) < 2
                 let nxt = if dirFwd then cur + 1 else cur - 1
+                animating <- true
                 do! slide.Start(screens.[cur], screens.[nxt], dirFwd, cts.Token)
                 cur <- nxt
                 transitions <- transitions + 1L
@@ -684,111 +799,215 @@ type NavScenario(screens: Control[], modal: Control) =
                     do! fade.Start(modal, null, cts.Token)
                     modals <- modals + 1L
                 k <- k + 1
+            animating <- false
         } :> Task
     override this.Reset() = transitions <- 0L; modals <- 0L; this.Run() |> ignore
     override _.Update(_, _) = ()
+    override _.Animating = animating
     override _.Finish() = stop <- true; cts.Cancel()
     override _.Ops sb =
         kvI sb "transitions_done" transitions
         kvI sb "modal_cycles" modals
-    override _.Notes = "PageSlide(300 ms, horizontal) entre 3 ecrans (push,push,pop,pop) ; CrossFade(200 ms) ouverture+fermeture de modale toutes les 2 transitions ; thread de fond de calcul ~1 coeur ; la boucle de transitions demarre a la fin du warm-up et se repete jusqu'a duration."
+    override _.Notes = "nav: PageSlide(300 ms, horizontal) entre 3 ecrans (push,push,pop,pop) x20 ; CrossFade(200 ms) ouverture+fermeture de modale toutes les 2 transitions ; thread de fond de calcul ~1 coeur ; frames comptees seulement pendant les animations."
+
+// ---------------------------------------------------------------- GC (ops.gc)
+type GcTracker() =
+    let mutable c0 = 0
+    let mutable c1 = 0
+    let mutable c2 = 0
+    let mutable pause0 = TimeSpan.Zero
+    let mutable lastCount = 0
+    let mutable maxPause = 0.0
+    let observe () =
+        // pause max : pauses du dernier GC de chaque type (GetGCMemoryInfo) relevees quand le compteur change ;
+        // borne inferieure si plusieurs GC du meme type surviennent entre deux relevés
+        for kind in [| GCKind.Ephemeral; GCKind.FullBlocking; GCKind.Background |] do
+            let gi = GC.GetGCMemoryInfo(kind)
+            if gi.Index > 0L && gi.Generation >= 0 then
+                let pd = gi.PauseDurations
+                for k in 0 .. pd.Length - 1 do
+                    let ms = pd.[k].TotalMilliseconds
+                    if ms > maxPause then maxPause <- ms
+    member _.Start() =
+        c0 <- GC.CollectionCount 0; c1 <- GC.CollectionCount 1; c2 <- GC.CollectionCount 2
+        pause0 <- GC.GetTotalPauseDuration()
+        lastCount <- c0
+        maxPause <- 0.0
+    member _.Sample() =
+        let n = GC.CollectionCount 0
+        if n <> lastCount then
+            lastCount <- n
+            observe ()
+    member this.Json() =
+        this.Sample()
+        let n = GC.CollectionCount 0 - c0
+        "{\"collections\":" + n.ToString(inv) + ",\"gen0\":" + n.ToString(inv) + ",\"gen1\":" + (GC.CollectionCount 1 - c1).ToString(inv)
+        + ",\"gen2\":" + (GC.CollectionCount 2 - c2).ToString(inv)
+        + ",\"pause_ms_total\":" + (GC.GetTotalPauseDuration() - pause0).TotalMilliseconds.ToString("F3", inv)
+        + ",\"pause_ms_max\":" + (if n > 0 then maxPause else 0.0).ToString("F3", inv)
+        + ",\"server_gc\":" + (if Runtime.GCSettings.IsServerGC then "true" else "false")
+        + ",\"latency_mode\":\"" + Runtime.GCSettings.LatencyMode.ToString() + "\"}"
+
+let printMarker (s: string) =
+    Console.Out.WriteLine s
+    Console.Out.Flush()
+
+let FRAME_NOTE =
+    "frame_ms = intervalle entre fins de rendu consecutives du thread de rendu Avalonia : CompositionBatch.Rendered (API publique, "
+    + "Compositor.RequestCompositionBatchCommitAsync, horodatee de facon synchrone sur le thread de rendu apres le rendu+present de toutes les cibles), "
+    + "1 frame par batch contenant une modification. Plafond : X11 cree SleepLoopRenderTimer(DesiredFps = max(60, taux XRandR max)) sans option publique "
+    + "pour le changer (X11PlatformOptions n'expose pas de FPS ; ShouldRenderOnUIThread -> UiThreadRenderTimer(60)) : plafond garde (pas d'API privee)."
+
+let jsonHead (sb: StringBuilder) (scenario: string) (duration: float) =
+    sb.Append("{\"stack\":\"avalonia-").Append(if isAot then "aot" else "jit").Append("\",\"version\":\"").Append(versionString().Replace("\"", "'"))
+      .Append("\",\"scenario\":\"").Append(scenario).Append("\",\"duration_s\":").Append(duration.ToString("F1", inv)) |> ignore
+
+/// checksum deterministe du modele de donnees : FNV-1a 32 des hauteurs (le checksum ne depend pas du timing)
+let dataChecksum =
+    lazy (
+        let mutable h = 2166136261u
+        for i in 0 .. N - 1 do
+            let v = uint32 heights.[i]
+            for k in 0 .. 3 do h <- (h ^^^ ((v >>> (8 * k)) &&& 0xFFu)) * 16777619u
+        h.ToString("x8"))
 
 // ---------------------------------------------------------------- driver de frames
-type Driver(top: TopLevel, sc: Scenario, args: Args, notes: string) =
+type Driver(top: TopLevel, sc: Scenario, args: Args, notes: string, onFirstRendered: float -> unit) =
     let frames = ResizeArray<float32>(1 <<< 16)
+    let gate = obj ()
+    let gc = GcTracker()
     let mutable measuring = false
-    let mutable startTs = 0L
-    let mutable lastTs = 0L
-    let mutable warmStart = 0L
     let mutable finished = false
+    let mutable startTs = 0L
+    let mutable lastRaf = 0L
+    let mutable lastRendered = 0L
+    let mutable warmStart = 0L
+    let mutable firstRendered = false
     let mutable cb : Action<TimeSpan> = null
     let freq = float Stopwatch.Frequency
-    member this.WriteJson(extra: string) =
+    let mutable compositor : Compositor = null
+    /// fin de rendu d'un batch : appele sur le thread de rendu (continuation synchrone)
+    let onRendered (count: bool) =
+        let now = Stopwatch.GetTimestamp()
+        lock gate (fun () ->
+            if not firstRendered then
+                firstRendered <- true
+                let ms = float (now - warmStart) * 1000.0 / freq
+                Dispatcher.UIThread.Post(fun () -> onFirstRendered ms)
+            // plusieurs batches rendus dans la meme passe = une seule frame
+            if now - lastRendered > int64 (freq * 0.0001) then
+                if count && measuring && not finished && lastRendered > 0L then
+                    frames.Add(float32 (float (now - lastRendered) * 1000.0 / freq))
+                lastRendered <- now)
+    let renderedAction0 = Action<Task>(fun _ -> onRendered false)
+    let renderedAction1 = Action<Task>(fun _ -> onRendered true)
+    member this.WriteJson() =
         let sb = StringBuilder(1 <<< 20)
-        let aot = if RuntimeFeature.IsDynamicCodeSupported then "jit" else "aot"
-        sb.Append("{\"stack\":\"avalonia-").Append(aot).Append("\",\"scenario\":\"").Append(args.Scenario)
-          .Append("\",\"duration_s\":").Append(args.Duration.ToString("F1", inv))
-          .Append(",\"frames\":").Append(frames.Count).Append(",\"frame_ms\":[") |> ignore
-        for i in 0 .. frames.Count - 1 do
+        jsonHead sb args.Scenario args.Duration
+        let fr = lock gate (fun () -> frames.ToArray())
+        sb.Append(",\"frames\":").Append(fr.Length).Append(",\"frame_ms\":[") |> ignore
+        for i in 0 .. fr.Length - 1 do
             if i > 0 then sb.Append(',') |> ignore
-            sb.Append(frames.[i].ToString("F3", inv)) |> ignore
+            sb.Append(fr.[i].ToString("F3", inv)) |> ignore
         sb.Append("],\"ops\":{") |> ignore
         sc.Ops sb
         let mutable mx = 0.0f
-        for f in frames do if f > mx then mx <- f
+        for f in fr do if f > mx then mx <- f
         kvF sb "max_frame_stall_ms" (float mx)
+        kvRaw sb "gc" (gc.Json())
         let ro = Volatile.Read(&Stats.renderOps)
         kvI sb "render_ops" ro
         kvF sb "render_op_ms_mean" (if ro > 0L then float (Volatile.Read(&Stats.renderTicks)) * 1000.0 / freq / float ro else 0.0)
         sb.Length <- sb.Length - 1
-        sb.Append("},\"checksum\":\"").Append(((fnv (int sumH)) ^^^ uint32 frames.Count).ToString("x8")).Append("\",\"notes\":\"")
-          .Append(notes.Replace("\"", "'")).Append(" ").Append(sc.Notes.Replace("\"", "'")).Append(extra).Append("\"}") |> ignore
+        sb.Append("},\"checksum\":\"").Append(dataChecksum.Value).Append("\",\"notes\":\"")
+          .Append((notes + " " + sc.Notes).Replace("\"", "'")).Append("\",\"unsupported\":null}") |> ignore
         File.WriteAllText(args.Out, sb.ToString())
     member this.Finish() =
         if not finished then
-            finished <- true
+            lock gate (fun () -> finished <- true)
+            printMarker "BENCH:measure_end"
             sc.Finish()
-            this.WriteJson ""
+            this.WriteJson()
             match Application.Current.ApplicationLifetime with
             | :? IClassicDesktopStyleApplicationLifetime as d -> d.Shutdown 0
             | _ -> exit 0
+    member private this.Track() =
+        // le batch qui portera les changements faits dans ce callback
+        let b = compositor.RequestCompositionBatchCommitAsync()
+        b.Rendered.ContinueWith((if sc.Animating then renderedAction1 else renderedAction0), CancellationToken.None,
+                                TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default) |> ignore
     member this.Start() =
+        compositor <- ElementComposition.GetElementVisual(top).Compositor
         warmStart <- Stopwatch.GetTimestamp()
-        lastTs <- warmStart
+        lastRaf <- warmStart
         cb <- Action<TimeSpan>(fun _ ->
             let now = Stopwatch.GetTimestamp()
             if not measuring then
                 let tw = float (now - warmStart) / freq
                 if tw >= 2.0 then
-                    measuring <- true
-                    startTs <- now
-                    lastTs <- now
                     sc.Reset()
+                    Stats.reset ()
+                    gc.Start()
+                    startTs <- now
+                    lastRaf <- now
+                    lock gate (fun () -> measuring <- true)
+                    printMarker "BENCH:measure_start"
                     sc.Update(0.0, 0.016)
                 else
-                    sc.Update(tw - 2.0, float (now - lastTs) / freq)
-                    lastTs <- now
+                    sc.Update(tw - 2.0, float (now - lastRaf) / freq)
+                    lastRaf <- now
+                this.Track()
                 top.RequestAnimationFrame cb
             else
                 let t = float (now - startTs) / freq
-                frames.Add(float32 (float (now - lastTs) * 1000.0 / freq))
-                let dt = float (now - lastTs) / freq
-                lastTs <- now
+                let dt = float (now - lastRaf) / freq
+                lastRaf <- now
+                gc.Sample()
                 if t >= args.Duration then this.Finish()
                 else
                     sc.Update(t, dt)
+                    this.Track()
                     top.RequestAnimationFrame cb)
         top.RequestAnimationFrame cb
 
-// ---------------------------------------------------------------- deplafonnement du timer de rendu (60 Hz)
-// X11 cree en interne SleepLoopRenderTimer(60) puis un Compositor : il n'y a pas de hook public.
-// Contournement : API privees (AvaloniaAccessUnstablePrivateApis) + reflexion sur DefaultRenderLoop.Timer (internal)
-// pour fixer SleepLoopRenderTimer.DesiredFps tres haut. LoopProc n'attend alors plus : tick immediat apres le precedent.
-[<DynamicDependency("Timer", "Avalonia.Rendering.DefaultRenderLoop", "Avalonia.Base")>]
-[<UnconditionalSuppressMessage("Trimming", "IL2075", Justification = "DefaultRenderLoop.Timer preserved by DynamicDependency")>]
-let uncapRenderTimer () : string =
-    try
-        let loop = AvaloniaLocator.Current.GetService<IRenderLoop>()
-        let p = loop.GetType().GetProperty("Timer", BindingFlags.NonPublic ||| BindingFlags.Public ||| BindingFlags.Instance)
-        match p.GetValue(loop) with
-        | :? SleepLoopRenderTimer as t -> t.DesiredFps <- 100000; "uncapped SleepLoopRenderTimer"
-        | o -> "timer type " + o.GetType().Name + " (non deplafonne)"
-    with e -> "uncap failed: " + e.Message
+/// idle : aucune animation ni redessin continu ; 2 s de warm-up puis sommeil `duration` entre les marqueurs
+let runIdle (a: Args) (notes: string) =
+    let gc = GcTracker()
+    let t1 = DispatcherTimer(Interval = TimeSpan.FromSeconds 2.0)
+    t1.Tick.Add(fun _ ->
+        t1.Stop()
+        gc.Start()
+        printMarker "BENCH:measure_start"
+        let t2 = DispatcherTimer(Interval = TimeSpan.FromSeconds a.Duration)
+        t2.Tick.Add(fun _ ->
+            t2.Stop()
+            printMarker "BENCH:measure_end"
+            let sb = StringBuilder()
+            jsonHead sb a.Scenario a.Duration
+            sb.Append(",\"frames\":0,\"frame_ms\":[],\"ops\":{\"sum_heights\":").Append(sumH).Append(",\"gc\":").Append(gc.Json())
+              .Append("},\"checksum\":\"").Append(dataChecksum.Value).Append("\",\"notes\":\"")
+              .Append(notes.Replace("\"", "'")).Append(" idle: coquille (titre, 1re page de liste, statut), aucun redessin ; DispatcherTimer.\",\"unsupported\":null}") |> ignore
+            File.WriteAllText(a.Out, sb.ToString())
+            (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).Shutdown 0)
+        t2.Start())
+    t1.Start()
 
 // ---------------------------------------------------------------- application
 let mutable theArgs : Args = Unchecked.defaultof<Args>
-let mutable uncapNote = "timer 60Hz par defaut"
+
+let findScrollViewer (v: Visual) =
+    v.GetVisualDescendants() |> Seq.tryPick (fun d -> match d with :? ScrollViewer as s -> Some s | _ -> None) |> Option.toObj
 
 let buildWindow () : Window =
     let a = theArgs
     let win = Window(Width = 1280.0, Height = 720.0, CanResize = false, WindowDecorations = WindowDecorations.None,
                      Background = SolidColorBrush(Color.Parse "#FAFAFC"), Title = "avalonia-bench",
                      WindowStartupLocation = WindowStartupLocation.Manual, Position = PixelPoint(0, 0))
-    let aot = if RuntimeFeature.IsDynamicCodeSupported then "JIT" else "NativeAOT"
-    let baseNotes =
-        "Avalonia 12.1.4 X11 RenderingMode=Software, Skia CPU, " + aot + ", " + uncapNote + ". frame_ms = intervalle entre callbacks TopLevel.RequestAnimationFrame consecutifs (UI thread, debut de frame; le commit suivant attend la fin du batch precedent cote render thread). render_op_ms_mean = duree moyenne de Render() des operations custom sur le thread de rendu (hors flush/present X11)."
+    let baseNotes = "Avalonia 12.1.4 X11 RenderingMode=Software, Skia CPU, " + (if isAot then "NativeAOT" else "JIT") + ". " + FRAME_NOTE
+                    + " render_op_ms_mean = duree moyenne de Render() des operations custom (thread de rendu, hors flush/present)."
     let mutable sc : Scenario = Unchecked.defaultof<Scenario>
     let mutable idle = false
+    let mutable onFirst : float -> unit = ignore
     let core () = CoreRunner(a.SuppressGc)
     match a.Scenario with
     | "idle" ->
@@ -802,10 +1021,24 @@ let buildWindow () : Window =
         win.Content <- shell
         let s = if a.Scenario = "stream" then (let s = Stream(a.Rate) in s.Start(); Some s) else None
         sc <- ListScenario(lv, st, s)
+    | "input" ->
+        let lv = ListView()
+        let st, shell = mkShell "Bench - input" lv "..."
+        let square = Border(Width = 200.0, Height = 200.0, Background = Brushes.Black, IsHitTestVisible = false,
+                            HorizontalAlignment = Layout.HorizontalAlignment.Left, VerticalAlignment = Layout.VerticalAlignment.Top,
+                            Margin = Thickness(100.0, 100.0, 0.0, 0.0))
+        let root = Panel()
+        root.Children.Add shell
+        root.Children.Add square
+        win.Content <- root
+        let isc = InputScenario(ListScenario(lv, st, None), square)
+        win.KeyDown.Add(fun e -> isc.OnKey e)
+        sc <- isc
     | "canvas" ->
         let cfg = { N = a.Shapes; Shadows = true; Graph = true; AreaW = 1280.0f; AreaH = 720.0f; ClipW = 1000.0f; ClipH = 600.0f
                     GraphX = 0.0f; GraphY = 610.0f; GraphW = 1000.0f; GraphH = 100.0f }
         let m = ShapesModel(cfg)
+        m.Reset()
         let v = ShapesView(m)
         win.Content <- v
         sc <- CanvasScenario(m, v)
@@ -813,6 +1046,7 @@ let buildWindow () : Window =
         let cfg = { N = 1000; Shadows = false; Graph = false; AreaW = 1280.0f; AreaH = 720.0f; ClipW = 1000.0f; ClipH = 600.0f
                     GraphX = 0.0f; GraphY = 610.0f; GraphW = 1000.0f; GraphH = 100.0f }
         let m = ShapesModel(cfg)
+        m.Reset()
         let v = ShapesView(m)
         win.Content <- v
         let c = core ()
@@ -824,6 +1058,7 @@ let buildWindow () : Window =
         let cfg = { N = a.Shapes; Shadows = true; Graph = true; AreaW = 400.0f; AreaH = 720.0f; ClipW = 380.0f; ClipH = 600.0f
                     GraphX = 0.0f; GraphY = 610.0f; GraphW = 380.0f; GraphH = 100.0f }
         let m = ShapesModel(cfg)
+        m.Reset()
         let v = ShapesView(m)
         v.Width <- 400.0
         let g = Grid()
@@ -838,18 +1073,40 @@ let buildWindow () : Window =
         let ls = ListScenario(lv, st, Some s)
         let c = core ()
         c.Start()
-        sc <- StressScenario(ls, m, v, c, a.SuppressGc)
+        sc <- StressScenario(ls, m, v, c)
     | "text" ->
-        let text = File.ReadAllText(Path.Combine(a.Assets, "text1mb.txt"))
         let t0 = Stopwatch.GetTimestamp()
-        let tb = TextBox(IsReadOnly = true, AcceptsReturn = true, TextWrapping = Media.TextWrapping.Wrap, FontSize = 14.0, BorderThickness = Thickness(0.0))
-        tb.Text <- text
-        let st, shell = mkShell "Bench - text" tb "1 MB"
+        let ms (t: int64) = float (t - t0) * 1000.0 / float Stopwatch.Frequency
+        let text = File.ReadAllText(Path.Combine(a.Assets, "text1mb.txt"))
+        let ctrl, getSv, selAll, kind, tDoc =
+            if a.TextControl = "textbox" then
+                let tb = TextBox(IsReadOnly = true, AcceptsReturn = true, TextWrapping = Media.TextWrapping.Wrap, FontSize = 14.0, BorderThickness = Thickness(0.0))
+                tb.Text <- text
+                let tDoc = Stopwatch.GetTimestamp()
+                (tb :> Control), (fun () -> findScrollViewer tb), (fun () -> tb.Focus() |> ignore; tb.SelectAll()), "TextBox", tDoc
+            else
+                let ed = AvaloniaEdit.TextEditor(IsReadOnly = true, WordWrap = true, FontSize = 14.0, ShowLineNumbers = false,
+                                                 FontFamily = FontFamily("Noto Sans"), Background = Brushes.White)
+                ed.Document <- AvaloniaEdit.Document.TextDocument(text)
+                let tDoc = Stopwatch.GetTimestamp()
+                // NB : TextEditor.ScrollToVerticalOffset est un no-op dans AvaloniaEdit 12.0.0 (corps commente) -> ScrollViewer du template
+                let sel () =
+                    ed.Focus() |> ignore
+                    if ed.CanSelectAll then ed.SelectAll() else ed.Select(0, ed.Document.TextLength)
+                (ed :> Control), (fun () -> findScrollViewer ed), sel, "AvaloniaEdit.TextEditor", tDoc
+        let st, shell = mkShell "Bench - text" ctrl "1 MB"
         win.Content <- shell
+        let tl0 = Stopwatch.GetTimestamp()
         win.Measure(Size(1280.0, 720.0))
-        let lm = float (Stopwatch.GetTimestamp() - t0) * 1000.0 / float Stopwatch.Frequency
         win.Arrange(Rect(0.0, 0.0, 1280.0, 720.0))
-        sc <- TextScenario(tb, st, t0, lm)
+        let lm = float (Stopwatch.GetTimestamp() - tl0) * 1000.0 / float Stopwatch.Frequency
+        let docMs = ms tDoc
+        let tsc = TextScenario(ctrl, getSv, selAll, kind, docMs, lm)
+        // temps jusqu'a la 1re fin de rendu, depuis t0 (lecture du fichier)
+        let warmOffset = ref 0.0
+        win.Opened.Add(fun _ -> warmOffset.Value <- ms (Stopwatch.GetTimestamp()))
+        onFirst <- (fun sinceWarm -> tsc.FirstDisplayMs <- warmOffset.Value + sinceWarm)
+        sc <- tsc
     | "images" ->
         let g = ImageGrid()
         let _, shell = mkShell "Bench - images" g "600 images"
@@ -882,28 +1139,23 @@ let buildWindow () : Window =
         burn.Start()
         sc <- NavScenario(screens, modal :> Control)
     | other ->
-        win.Content <- TextBlock(Text = "unsupported scenario " + other)
-        idle <- true
-    if idle then
-        win.Opened.Add(fun _ ->
-            let timer = DispatcherTimer(Interval = TimeSpan.FromSeconds(a.Duration + 2.0))
-            timer.Tick.Add(fun _ ->
-                timer.Stop()
-                let sb = StringBuilder()
-                sb.Append("{\"stack\":\"avalonia-").Append(if RuntimeFeature.IsDynamicCodeSupported then "jit" else "aot")
-                  .Append("\",\"scenario\":\"").Append(a.Scenario).Append("\",\"duration_s\":").Append(a.Duration.ToString("F1", inv))
-                  .Append(",\"frames\":0,\"frame_ms\":[],\"ops\":{\"sum_heights\":").Append(sumH).Append("},\"checksum\":\"0\",\"notes\":\"")
-                  .Append(baseNotes).Append(" Pas d'animation, thread UI endormi.\"}") |> ignore
-                File.WriteAllText(a.Out, sb.ToString())
-                (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).Shutdown 0)
-            timer.Start())
-    else
-        win.Opened.Add(fun _ -> Driver(win, sc, a, baseNotes).Start())
+        // scenario inconnu : resultat "unsupported" (pas de simulation)
+        let sb = StringBuilder()
+        jsonHead sb other a.Duration
+        sb.Append(",\"frames\":0,\"frame_ms\":[],\"ops\":{},\"checksum\":\"0\",\"notes\":\"\",\"unsupported\":\"scenario inconnu: ").Append(other.Replace("\"", "'")).Append("\"}") |> ignore
+        File.WriteAllText(a.Out, sb.ToString())
+        exit 2
+    if idle then win.Opened.Add(fun _ -> runIdle a baseNotes)
+    else win.Opened.Add(fun _ -> Driver(win, sc, a, baseNotes, onFirst).Start())
     win
 
 type App() =
     inherit Application()
-    override this.Initialize() = this.Styles.Add(SimpleTheme())
+    override this.Initialize() =
+        this.Styles.Add(SimpleTheme())
+        if theArgs.Scenario = "text" && theArgs.TextControl <> "textbox" then
+            // styles AvaloniaEdit requis (README AvaloniaEdit), variante Simple
+            this.Styles.Add(AvaloniaBenchUi.TextStyles())
     override this.OnFrameworkInitializationCompleted() =
         match this.ApplicationLifetime with
         | :? IClassicDesktopStyleApplicationLifetime as d -> d.MainWindow <- buildWindow ()
@@ -914,14 +1166,12 @@ type App() =
 let main argv =
     installResolver (Assembly.GetExecutingAssembly())
     theArgs <- parseArgs argv
-    let b =
-        AppBuilder.Configure<App>()
-            .UseX11()
-            .UseSkia()
-            .UseHarfBuzz()
-            .With(X11PlatformOptions(RenderingMode = [| X11RenderingMode.Software |]))
-    let b =
-        if theArgs.Uncapped && theArgs.Scenario <> "idle" then
-            b.AfterPlatformServicesSetup(fun _ -> uncapNote <- uncapRenderTimer ())
-        else b
-    b.StartWithClassicDesktopLifetime(argv)
+    AppBuilder.Configure<App>()
+        .UseX11()
+        .UseSkia()
+        .UseHarfBuzz()
+        .With(X11PlatformOptions(RenderingMode = [| X11RenderingMode.Software |],
+                                  // garde le framebuffer logiciel entre frames : evite l'allocation de 3,7 Mo (UnmanagedBlob
+                                  // + GC.AddMemoryPressure => GC gen2 a chaque frame) et le blit complet ; option publique documentee
+                                  UseRetainedFramebuffer = Nullable true))
+        .StartWithClassicDesktopLifetime(argv)

@@ -1,16 +1,17 @@
 import QtQuick
+import Bench
 
 Item {
     ListView {
         id: lv
         anchors.fill: parent
-        model: bench.model
+        model: App.model
         cacheBuffer: 600
         reuseItems: true
         clip: true
         interactive: false
         boundsBehavior: Flickable.StopAtBounds
-        Component.onCompleted: bench.registerItem("list", lv)
+        Component.onCompleted: App.registerItem("list", lv)
         delegate: Item {
             id: d
             required property int index

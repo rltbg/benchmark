@@ -1,0 +1,20 @@
+dune build
+ln -sf _build/default/src/Karamel.exe krml
+env \
+  KRML_LIBDIR=/opt/krml/karamel/krmllib \
+  KRML_INCLUDEDIR=/opt/krml/karamel/include \
+  KRML_MISCDIR=/opt/krml/karamel/misc \
+  make -C krmllib KRML_EXE="/opt/krml/karamel/krml"
+make[1]: Entering directory '/opt/krml/karamel/krmllib'
+mkdir obj
+fstar.exe --ext optimize_let_vc --odir .extract --warn_error @332 --cache_dir obj --include runtime --cmi --already_cached 'Prims FStar -FStar.Krml.Endianness LowStar -LowStar.Lib'  --extract '* -Prims  -FStar.Tactics -FStar.Reflection  -FStar.Stubs ' --dep full C.Endianness.fst C.Failure.fst C.Loops.fst C.String.fst C.fst FStar.Krml.Endianness.fst LowStar.Lib.AssocList.fst LowStar.Lib.LinkedList.fst LowStar.Lib.LinkedList2.fst Spec.Loops.fst C.String.fsti LowStar.Lib.AssocList.fsti TestLib.fsti runtime/WasmSupport.fst FStar.UInt128.fst FStar.Date.fsti FStar.HyperStack.IO.fst FStar.IO.fsti FStar.Int.Cast.Full.fst FStar.Bytes.fsti FStar.Dyn.fsti LowStar.Printf.fst LowStar.Endianness.fst -o .depend
+error: unrecognized option '--cmi'
+Use `--help` to see all available options.
+Makefile:84: .depend: No such file or directory
+make[1]: *** [Makefile:77: .depend] Error 1
+make[1]: Leaving directory '/opt/krml/karamel/krmllib'
+make: *** [Makefile:26: krmllib] Error 2
+
+real	0m0.728s
+user	0m0.192s
+sys	0m0.051s

@@ -1,0 +1,29 @@
+Mon Oct 26 01:27:45 UTC 2026
+## fstar --version
+F* 2026.10.25
+platform=Linux_x86_64
+system=Unix
+compiler=OCaml 5.3.0
+date=2026-10-25 15:48:28 +0000
+commit=362e792b3aa882f1766b95c7450e3fe63081163d
+## --locate_z3 5.3.0
+/opt/fstar-2026.10.25/fstar/lib/fstar/z3-5.3.0/bin/z3
+Z3 version 5.3.0 - 64 bit
+## FStarC.Options default
+331:  ("z3version"                                 , String "5.3.0");
+446:    "z3version";
+28:let packaged_z3_versions = ["4.8.5"; "4.13.3"; "4.15.3"; "5.3.0"]
+38:    if List.mem v packaged_z3_versions then
+## git ls-remote --tags FStar (5 derniers)
+v2026.09.20
+v2026.09.27
+v2026.10.11
+v2026.10.18
+v2026.10.25
+fb0cec235858ec907e7c05c44ef3764b6cfb0aaf	refs/tags/v2026.10.25
+362e792b3aa882f1766b95c7450e3fe63081163d	refs/tags/v2026.10.25^{}
+## clone tag
+362e792b3aa882f1766b95c7450e3fe63081163d Sun Oct 25 15:48:28 2026 +0000
+## dotnet
+10.0.403
+10.0.403 [/opt/dotnet10/sdk]

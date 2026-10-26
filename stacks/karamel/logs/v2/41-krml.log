@@ -1,0 +1,22 @@
++ /opt/krml/karamel/out/bin/krml -skip-compilation -skip-makefiles -no-prefix Custard -tmpdir gen krml/Core_Pulse.krml
+[38;5;119m✔[0m [Monomorphization] ⏱️ 5ms
+[38;5;119m✔[0m [Inlining] ⏱️ 6ms
+[38;5;119m✔[0m [Pattern matches compilation] ⏱️ 7ms
+[38;5;119m✔[0m [Structs + Simplify 2] ⏱️ 6ms
+[38;5;119m✔[0m [Drop] ⏱️ <1ms
+[38;5;119m✔[0m [AstToCStar] ⏱️ 3ms
+[38;5;119m✔[0m [CStarToC] ⏱️ <1ms
+[4mKaRaMeL executable is:[0m /opt/krml/karamel/out/bin/krml
+[38;5;119m✔[0m [PrettyPrinting] ⏱️ <1ms
+KaRaMeL: wrote out .c files for Custard
+KaRaMeL: wrote out .h files for Custard
+
+real	0m0.132s
+user	0m0.113s
+sys	0m0.015s
+exit=0
+total 16
+drwxr-xr-x 2 root root 4096 Oct 26 01:41 .
+drwxr-xr-x 5 root root 4096 Oct 26 01:41 ..
+-rw-r--r-- 1 root root 1521 Oct 26 01:41 Custard.c
+-rw-r--r-- 1 root root  610 Oct 26 01:41 Custard.h

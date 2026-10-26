@@ -1,0 +1,8 @@
+### nm / objdump de lib/Custard.o (gcc 13.3.0 -O2)
+0000000000000000 T Core_Pulse_hash
+0000000000000080 T Core_Pulse_parse
+0000000000000040 T Core_Pulse_validate
+   text	   data	    bss	    dec	    hex	filename
+    357	      0	      0	    357	    165	/opt/krml/p2/build/lib/Custard.o
+appels externes (call/jmp vers symbole) :
+(aucun)

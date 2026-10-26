@@ -1,0 +1,11 @@
+### krml embarqué dans la release F* (bin/krml) vs krml HEAD compilé (OCaml 4.14.1)
+KaRaMeL version: 98ffca53b25c8ac50f303dae87c083de65cc1db8
+3c3
+<   KaRaMeL invocation: /opt/fstar-2026.10.25/fstar/bin/krml -skip-compilation -skip-makefiles -no-prefix Custard -tmpdir gen-bundled build/krml/Core_Pulse.krml
+---
+>   KaRaMeL invocation: /opt/krml/karamel/out/bin/krml -skip-compilation -skip-makefiles -no-prefix Custard -tmpdir /opt/krml/p2/build/gen /opt/krml/p2/build/krml/Core_Pulse.krml
+3c3
+<   KaRaMeL invocation: /opt/fstar-2026.10.25/fstar/bin/krml -skip-compilation -skip-makefiles -no-prefix Custard -tmpdir gen-bundled build/krml/Core_Pulse.krml
+---
+>   KaRaMeL invocation: /opt/krml/karamel/out/bin/krml -skip-compilation -skip-makefiles -no-prefix Custard -tmpdir /opt/krml/p2/build/gen /opt/krml/p2/build/krml/Core_Pulse.krml
+diff exit=1

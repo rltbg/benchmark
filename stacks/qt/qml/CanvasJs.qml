@@ -1,11 +1,12 @@
 import QtQuick
+import Bench
 
 // QML Canvas (JS Context2D) - smoke comparison only. Shapes + graph drawn from JS each frame.
 Canvas {
     id: cv
     renderStrategy: Canvas.Cooperative
     renderTarget: Canvas.Image
-    property int n: bench.shapes
+    property int n: App.shapes
     property var px: []; property var py: []; property var pvx: []; property var pvy: []; property var pw: []
     property var gr: []; property int gh: 0
     property double last: Date.now()
@@ -18,7 +19,7 @@ Canvas {
             pvx.push(Math.cos(a) * sp); pvy.push(Math.sin(a) * sp)
         }
         for (var g = 0; g < 10000; g++) gr.push(50)
-        bench.registerItem("qmlcanvas", cv)
+        App.registerItem("qmlcanvas", cv)
     }
     Connections { target: bench; function onFrame() { cv.requestPaint() } }
     onPaint: {

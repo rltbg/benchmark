@@ -1,0 +1,45 @@
+### mutation F* : U8.lte n 64uy -> 65uy
+Verified module: Core
+All verification conditions discharged successfully
+exit=0
+### mutation F* : vecteur hash [] = 0x811C9DC4
+172:let hash_empty () : Lemma (hash [] == 0x811C9DC4ul) = ()
+* Error 19 at Core.fst(172,54-172,56):
+  - Assertion failed
+  - The SMT solver could not prove the query.
+  - Failed to prove: Core.hash [] == (0x811c9dc4ul <: FStar.UInt32.t)
+  - In context: uu___: Prims.unit
+  - See also Core.fst(172,26-172,51)
+
+1 error was reported (see above)
+exit=1
+### (note) la 1re mutation est équivalente : n == length rest <= 64 rend U8.lte n 64uy redondant -> acceptée à raison
+### mutation F* : bornes 64 -> 65 (U8.lte n 65uy && L.length rest <= 65)
+36:  U8.lte n 65uy && L.length rest <= 65 && U8.eq (U8.uint_to_t (L.length rest)) n
+* Error 19 at Core.fst(36,2-36,80):
+  - Subtyping check failed
+  - Expected type
+      r:
+      Prims.bool
+        { r <==>
+          FStar.UInt8.v n <= max_payload /\
+          FStar.List.Tot.Base.length rest == FStar.UInt8.v n }
+    got type Prims.bool
+  - The SMT solver could not prove the query.
+  - Failed to prove:
+      FStar.UInt8.lte n (65uy <: FStar.UInt8.t) &&
+      FStar.List.Tot.Base.length rest <= 65 &&
+      FStar.UInt8.eq (FStar.UInt8.uint_to_t (FStar.List.Tot.Base.length rest)) n <==>
+      FStar.UInt8.v n <= Core.max_payload /\
+      FStar.List.Tot.Base.length rest == FStar.UInt8.v n
+  - In context:
+      rest: Core.bytes
+      n: FStar.UInt8.t
+      FStar.UInt8.lte n (65uy <: FStar.UInt8.t) &&
+      FStar.List.Tot.Base.length rest <= 65 ==>
+      FStar.List.Tot.Base.length rest >= 0 ==>
+      FStar.UInt.size (FStar.List.Tot.Base.length rest) 8
+  - See also Core.fst(35,11-35,68)
+
+1 error was reported (see above)
+exit=1

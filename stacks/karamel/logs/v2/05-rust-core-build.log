@@ -1,0 +1,8 @@
+rustc 1.99.1 (58cf8f9c3 2026-10-13)
+cargo 1.99.1 (5f94df478 2026-08-27)
+   Compiling benchcore v0.1.0 (/home/user/benchmark/core)
+    Finished `release` profile [optimized] target(s) in 0.15s
+
+real	0m0.163s
+user	0m0.066s
+sys	0m0.090s

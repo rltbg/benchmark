@@ -1,0 +1,12 @@
++ fstar.exe --cache_checked_modules --cache_dir cache --codegen KrmlC --custard_entry Core_Pulse.validate --custard_entry Core_Pulse.parse --custard_entry Core_Pulse.hash Core_Pulse.fst -o krml/Core_Pulse.krml
+Verified module: Core_Pulse
+All verification conditions discharged successfully
+
+real	0m2.540s
+user	0m1.196s
+sys	0m0.220s
+exit=0
+total 16
+drwxr-xr-x 2 root root 4096 Oct 26 01:41 .
+drwxr-xr-x 4 root root 4096 Oct 26 01:41 ..
+-rw-rw-r-- 1 root root 4804 Oct 26 01:41 Core_Pulse.krml

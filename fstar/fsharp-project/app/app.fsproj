@@ -5,10 +5,12 @@
     <AssemblyName>coreapp</AssemblyName>
     <InvariantGlobalization>true</InvariantGlobalization>
     <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- PublishAot dans le projet : active aussi les analyseurs AOT/trim au build JIT -->
+    <PublishAot>true</PublishAot>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.fs" />
-    <ProjectReference Include="../core/core.fsproj" />
+    <ProjectReference Include="../gen/Core.fsproj" />
   </ItemGroup>
 </Project>

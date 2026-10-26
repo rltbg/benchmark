@@ -1,10 +1,10 @@
-// Slint benchmark app (voir ../STACK-NOTES.md)
+// Slint benchmark app (voir ../../STACK-NOTES.md)
 mod sim;
 use sim::*;
 
 use slint::winit_030::{winit, CustomApplicationHandler, EventResult, WinitWindowAccessor};
 use std::cell::RefCell;
-use std::sync::atomic::Ordering;
+use std::io::Write;
 use std::time::{Duration, Instant};
 
 slint::include_modules!();
@@ -18,8 +18,21 @@ pub struct Args {
     pub assets: String,
 }
 
+/// Racine du dépôt : $BENCH_ROOT, sinon déduite de l'emplacement du binaire
+/// (<root>/stacks/slint/app/target/release/slintapp).
+fn bench_root() -> std::path::PathBuf {
+    if let Some(r) = std::env::var_os("BENCH_ROOT") {
+        return r.into();
+    }
+    std::env::current_exe()
+        .ok()
+        .and_then(|p| p.canonicalize().ok())
+        .and_then(|p| p.ancestors().nth(6).map(|a| a.to_path_buf()))
+        .unwrap_or_else(|| ".".into())
+}
+
 fn parse_args() -> Args {
-    let mut a = Args { scenario: "idle".into(), duration: 10.0, out: "out.json".into(), rate: 0, shapes: 0, assets: "/home/user/eval/assets".into() };
+    let mut a = Args { scenario: "idle".into(), duration: 10.0, out: "out.json".into(), rate: 0, shapes: 0, assets: String::new() };
     let v: Vec<String> = std::env::args().collect();
     let mut i = 1;
     while i < v.len() {
@@ -38,13 +51,39 @@ fn parse_args() -> Args {
         }
         i += 2;
     }
+    if a.assets.is_empty() {
+        a.assets = bench_root().join("assets").to_string_lossy().into_owned();
+    }
     a
+}
+
+fn marker(s: &str) {
+    let mut o = std::io::stdout().lock();
+    let _ = writeln!(o, "{}", s);
+    let _ = o.flush();
+}
+
+pub fn version_string(renderer: &str) -> String {
+    format!(
+        "slint 1.18.1 (backend winit 0.30.13 x11, renderer {}{}); {}; image 0.25.10",
+        renderer,
+        match renderer {
+            "skia-software" | "skia" => " via skia-safe/skia-bindings 0.153.3, softbuffer 0.4.8",
+            "software" => " (i-slint-renderer-software 1.18.1), softbuffer 0.4.8",
+            "femtovg" => " (femtovg/OpenGL, Mesa llvmpipe)",
+            _ => "",
+        },
+        env!("SLINTAPP_RUSTC")
+    )
 }
 
 thread_local! {
     static DRIVER: RefCell<Option<Driver>> = const { RefCell::new(None) };
 }
 
+/// Hook public (feature `unstable-winit-030`) : toutes les méthodes sont appelées AVANT que
+/// Slint ne voie l'événement. RedrawRequested -> début du draw ; le about_to_wait suivant
+/// arrive après que Slint a rendu et présenté (softbuffer present / swap GL) -> fin de frame.
 struct Handler;
 impl CustomApplicationHandler for Handler {
     fn window_event(
@@ -109,6 +148,7 @@ impl Driver {
             self.t0 = Some(now);
             self.last_end = None;
             self.sc.begin_measure(&self.app);
+            marker("BENCH:measure_start");
         }
         let t = self.t0.map(|t0| now.duration_since(t0).as_secs_f64()).unwrap_or(el);
         if self.t0.is_some() && t >= self.args.duration {
@@ -118,6 +158,8 @@ impl Driver {
         self.sc.step(&self.app, t, self.t0.is_some());
         if self.sc.wants_redraw(t, self.t0.is_some()) {
             if self.unthrottled {
+                // API publique documentée : WinitWindowAccessor::with_winit_window + winit
+                // Window::request_redraw (pas le Timer 60 Hz interne de Slint sur X11)
                 let mut done = false;
                 self.app.window().with_winit_window(|w: &winit::window::Window| {
                     w.request_redraw();
@@ -133,15 +175,27 @@ impl Driver {
     }
 
     fn finish(&mut self, t: f64) {
-        let ops = self.sc.ops(t);
+        marker("BENCH:measure_end");
+        let mut ops = self.sc.ops(t, &self.renderer);
+        if self.sc.has_core() {
+            let mx = self.frame_ms.iter().cloned().fold(0.0, f64::max);
+            ops["max_frame_stall_ms"] = mx.into();
+        }
         let notes = format!(
-            "renderer={}; unthrottled_redraw={}; frame_ms = interval between consecutive about_to_wait calls that follow a winit RedrawRequested (i.e. after Slint render + softbuffer/GL present returned, measured from the winit CustomApplicationHandler); redraw requested continuously from about_to_wait (bypasses Slint's 60Hz Timer frame throttle when unthrottled=true); first 2s warm-up not recorded. {}",
-            self.renderer, self.unthrottled, self.sc.notes()
+            "renderer={}; unthrottled_redraw={}; frame_ms = interval between consecutive frame ends; frame end = first winit about_to_wait after a RedrawRequested (Slint renders and presents synchronously while handling RedrawRequested: softbuffer present_with_damage for software/skia-software, eglSwapBuffers for femtovg), observed through the public slint::winit_030::CustomApplicationHandler; set_rendering_notifier is not usable as frame end (AfterRendering fires before present, and the software renderer returns Unsupported). {} ; 2 s warm-up not recorded. {}",
+            self.renderer,
+            self.unthrottled,
+            if self.unthrottled {
+                "continuous redraw requested from about_to_wait via WinitWindowAccessor::with_winit_window(|w| w.request_redraw()), which bypasses Slint's internal X11 TimerBasedFrameThrottle (60 Hz timer) using public documented APIs only (feature unstable-winit-030)"
+            } else {
+                "redraw requested via slint::Window::request_redraw -> Slint's X11 TimerBasedFrameThrottle paces at the monitor refresh (60 Hz)"
+            },
+            self.sc.notes(&self.renderer)
         );
         let j = serde_json::json!({
-            "stack": "slint", "scenario": self.args.scenario, "duration_s": t,
+            "stack": "slint", "version": version_string(&self.renderer), "scenario": self.args.scenario, "duration_s": t,
             "frames": self.frame_ms.len(), "frame_ms": self.frame_ms,
-            "ops": ops, "checksum": self.sc.checksum(), "notes": notes,
+            "ops": ops, "checksum": self.sc.checksum(), "notes": notes, "unsupported": null,
         });
         std::fs::write(&self.args.out, serde_json::to_vec(&j).unwrap()).expect("write json");
         std::process::exit(0);
@@ -150,7 +204,7 @@ impl Driver {
 
 fn main() {
     let args = parse_args();
-    let renderer = std::env::var("SLINTAPP_RENDERER").unwrap_or_else(|_| "software".into());
+    let renderer = std::env::var("SLINTAPP_RENDERER").unwrap_or_else(|_| "skia-software".into());
     let unthrottled = std::env::var("SLINTAPP_THROTTLE").map(|v| v != "1").unwrap_or(true);
     slint::BackendSelector::new()
         .backend_name("winit".into())
@@ -173,12 +227,15 @@ fn main() {
         *d.borrow_mut() = Some(Driver { app, args, drew: false, draw_start: Instant::now(), start, t0: None, last_end: None, frame_ms: vec![], sc, unthrottled, renderer });
     });
     if !animated {
-        // idle : aucune animation, on dort et on quitte via un Timer
-        let timer = slint::Timer::default();
-        timer.start(slint::TimerMode::SingleShot, Duration::from_secs_f64(WARMUP + dur), move || {
-            let j = serde_json::json!({"stack":"slint","scenario":scen,"duration_s":dur,"frames":0,"frame_ms":[],
-              "ops":{"sum_heights": sim::sum_heights()},"checksum":"00000000",
-              "notes": format!("renderer={}; idle: no redraw loop, event loop sleeps (Timer wakes once at the end)", rname)});
+        // idle : aucune animation ni redessin continu ; deux Timers mono-coup (début / fin de mesure)
+        let t_start = slint::Timer::default();
+        t_start.start(slint::TimerMode::SingleShot, Duration::from_secs_f64(WARMUP), || marker("BENCH:measure_start"));
+        let t_end = slint::Timer::default();
+        t_end.start(slint::TimerMode::SingleShot, Duration::from_secs_f64(WARMUP + dur), move || {
+            marker("BENCH:measure_end");
+            let j = serde_json::json!({"stack":"slint","version":version_string(&rname),"scenario":scen,"duration_s":dur,"frames":0,"frame_ms":[],
+              "ops":{"sum_heights": sim::sum_heights(), "not_rendered": []},"checksum":"00000000","unsupported":null,
+              "notes": format!("renderer={}; idle: shell (title bar, first list page, status bar) drawn once; no redraw loop, the event loop sleeps (two single-shot Timers mark start/end)", rname)});
             std::fs::write(&out, serde_json::to_vec(&j).unwrap()).unwrap();
             std::process::exit(0);
         });
@@ -192,5 +249,5 @@ fn main() {
         wake.start(slint::TimerMode::Repeated, Duration::from_millis(2), || {});
     }
     slint::run_event_loop().unwrap();
-    let _ = (Ordering::Relaxed, &wake);
+    drop(wake);
 }

@@ -1,0 +1,43 @@
+[WARNING] Running as root is not recommended
+No configuration file found, using built-in defaults.
+Checking for available remotes: git.
+  - you won't be able to use rsync and local repositories unless you install the rsync command on your system.
+  - you won't be able to use mercurial repositories unless you install the hg command on your system.
+  - you won't be able to use darcs repositories unless you install the darcs command on your system.
+
+
+<><> Fetching repository information ><><><><><><><><><><><><><><><><><><><><><>
+[default] Initialised
+default (at https://opam.ocaml.org): 
+    [INFO] opam is out-of-date. Please consider updating (https://opam.ocaml.org/doc/Install.html)
+
+default (at https://opam.ocaml.org): 
+    [INFO] please ensure to have GNU patch installed as `patch`. Otherwise update may fail silently (since it can't remove files).
+
+default (at https://opam.ocaml.org): 
+    [WARNING] opam >= 2.5.2 includes important security fixes; please consider upgrading (https://opam.ocaml.org/doc/Install.html)
+
+
+real	0m49.291s
+user	0m9.443s
+sys	0m2.820s
+[WARNING] Running as root is not recommended
+
+<><> Installing new switch packages <><><><><><><><><><><><><><><><><><><><><><>
+Switch invariant: ["ocaml-system"]
+
+<><> Processing actions <><><><><><><><><><><><><><><><><><><><><><><><><><><><>
+-> installed base-bigarray.base
+-> installed base-threads.base
+-> installed base-unix.base
+-> retrieved ocaml-system.4.14.1  (https://opam.ocaml.org/cache)
+-> retrieved ocaml-config.2  (2 extra sources)
+-> installed ocaml-system.4.14.1
+-> installed ocaml-config.2
+-> installed ocaml.4.14.1
+Done.
+# Run eval $(opam env --switch=krml) to update the current shell environment
+
+real	0m30.327s
+user	0m6.936s
+sys	0m3.758s

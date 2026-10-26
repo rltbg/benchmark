@@ -1,0 +1,38 @@
+F* 2026.10.25
+10.0.403
+== 1. vérification F*
+Verified module: Core
+All verification conditions discharged successfully
+== 2. extraction --codegen FSharp
+Verified module: Core
+All verification conditions discharged successfully
+extraction identique à extracted/Core.fs
+== 3. build JIT
+  Determining projects to restore...
+  Restored /opt/krml/p1/build/gen/Core.fsproj (in 319 ms).
+  Restored /opt/krml/p1/build/app/app.fsproj (in 318 ms).
+  Core -> /opt/krml/p1/build/gen/bin/Release/net10.0/Core.dll
+  app -> /opt/krml/p1/build/app/bin/Release/net10.0/coreapp.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:06.85
+== 4. tests JIT
+TESTS: 9201 passed, 0 failed
+== 5. publish AOT
+  Determining projects to restore...
+  Restored /opt/krml/p1/build/gen/Core.fsproj (in 379 ms).
+  Restored /opt/krml/p1/build/app/app.fsproj (in 379 ms).
+  Core -> /opt/krml/p1/build/gen/bin/Release/net10.0/Core.dll
+  app -> /opt/krml/p1/build/app/bin/Release/net10.0/linux-x64/coreapp.dll
+  Generating native code
+  app -> /opt/krml/p1/build/aot-out/
+== 6. tests AOT
+TESTS: 9201 passed, 0 failed
+-rwxr-xr-x 1 root root 2352784 Oct 26 01:33 /opt/krml/p1/build/aot-out/coreapp
+
+real	0m21.879s
+user	0m26.281s
+sys	0m2.376s

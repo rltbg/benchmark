@@ -1,0 +1,26 @@
+### mutation du F# généré : bornes 64 -> 65
+13:  (((n <= (65uy)) && (Prims.op_Less_Equals (FStar_List_Tot_Base.length rest) (65I))) && ((uint8 (FStar_List_Tot_Base.length rest)) = n))
+
+Time Elapsed 00:00:08.72
+TESTS: 9216 passed, 33 failed
+  FAIL: payload 65 rejected (len byte=65)
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+  FAIL: parse_length_bound: total=3+n<=67
+  FAIL: parse_length_bound: payload<=64
+exit=1

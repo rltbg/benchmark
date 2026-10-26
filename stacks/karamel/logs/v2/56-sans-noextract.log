@@ -1,0 +1,37 @@
+### Core_Pulse.fst sans aucun noextract / inline_for_extraction, racines explicites (vérif. puis extraction)
+Verified module: Core_Pulse
+All verification conditions discharged successfully
+Verified module: Core_Pulse
+All verification conditions discharged successfully
+3c3
+<   KaRaMeL invocation: /opt/krml/karamel/out/bin/krml -skip-compilation -skip-makefiles -no-prefix Custard -tmpdir /opt/krml/p2/build/gen /opt/krml/p2/build/krml/Core_Pulse.krml
+---
+>   KaRaMeL invocation: /opt/krml/karamel/out/bin/krml -skip-compilation -skip-makefiles -no-prefix Custard -tmpdir g o.krml
+9a10,18
+> uint32_t Core_Pulse_fnv_offset = 2166136261U;
+> 
+> uint32_t Core_Pulse_fnv_prime = 16777619U;
+> 
+> uint32_t Core_Pulse_fnv_step(uint32_t h, uint8_t b)
+> {
+>   return (h ^ (uint32_t)b) * Core_Pulse_fnv_prime;
+> }
+> 
+13c22
+<   uint32_t h = 2166136261U;
+---
+>   uint32_t h = Core_Pulse_fnv_offset;
+22c31
+<     h = (vh ^ (uint32_t)x) * 16777619U;
+---
+>     h = Core_Pulse_fnv_step(vh, x);
+27a37,40
+> uint8_t Core_Pulse_magic = 0xa5U;
+> 
+> uint8_t Core_Pulse_version = 1U;
+> 
+38c51
+<       m == 0xa5U && v == 1U && n <= 64U &&
+---
+>       m == Core_Pulse_magic && v == Core_Pulse_version && n <= 64U &&
+diff exit=1

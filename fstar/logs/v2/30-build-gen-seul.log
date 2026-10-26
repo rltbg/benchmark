@@ -1,0 +1,13 @@
+  Determining projects to restore...
+  Restored /opt/krml/p1/build/gen/Core.fsproj (in 1.01 sec).
+  Core -> /opt/krml/p1/build/gen/bin/Release/net10.0/Core.dll
+
+Build succeeded.
+    0 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:04.62
+
+real	0m4.868s
+user	0m7.184s
+sys	0m0.676s
