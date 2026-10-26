@@ -38,8 +38,27 @@ const val FRAME_NOTE = "frame_ms = interval between consecutive post-present tim
     "(Compose FrameRecomposer.performFrame, which runs at the START of the frame, before measure/layout/draw) the app posts " +
     "java.awt.EventQueue.invokeLater; Skiko's FrameDispatcher runs update+draw+finishFrame (SOFTWARE_FAST: raster surface -> " +
     "X11 put image) inside the same EDT event, so the posted runnable runs right after finishFrame returned = the latest " +
-    "public post-render signal. Redraw is continuous (each frame requests the next one and changes content); Skiko's " +
-    "refresh-rate frame limiter for software rendering is disabled via the public system property skiko.vsync.enabled=false."
+    "public post-render signal. Redraw is continuous (each frame requests the next one and changes content). Pacing (ops.pacing): " +
+    "'60' (default) = Skiko's native limiter kept on (public property skiko.vsync.enabled=true, Skiko default: software redrawer " +
+    "awaits FrameLimiter = 1000/displayRefreshRate) BUT under Xvfb it does not cap (measured ~170 fps on list: the refresh rate " +
+    "Skiko reads natively from X11 is not 60), so the app paces with a public API: at the start of every frame (withFrameNanos " +
+    "callback, EDT, runs before measure/layout/draw of that frame, including frames driven by Compose animations) it parks " +
+    "(LockSupport.parkNanos) until an absolute deadline grid of 16.667 ms, re-anchored after a missed deadline; " +
+    "'uncapped' = skiko.vsync.enabled=false and no app pacing."
+
+/** Cadence 60 Hz par API publique (voir FRAME_NOTE). */
+object Pacer {
+    @Volatile var enabled = true
+    private const val PERIOD = 16_666_667L
+    private var deadline = 0L
+    fun waitFrame() {
+        if (!enabled) return
+        var now = System.nanoTime()
+        if (deadline == 0L || now - deadline > PERIOD) deadline = now   // 1re frame ou échéance manquée : ré-ancrage
+        while (now < deadline) { java.util.concurrent.locks.LockSupport.parkNanos(deadline - now); now = System.nanoTime() }
+        deadline += PERIOD
+    }
+}
 
 fun finishAndExit(run: Run, sc: Sc?) {
     run.markEnd()
@@ -67,7 +86,7 @@ fun FrameLoop(run: Run, sc: Sc) {
         var t0 = 0L; var prev = 0L; var measuring = false
         var first = true
         while (true) {
-            val now = withFrameNanos { EventQueue.invokeLater(pc.cb); System.nanoTime() }
+            val now = withFrameNanos { Pacer.waitFrame(); EventQueue.invokeLater(pc.cb); System.nanoTime() }
             if (first) {
                 first = false
                 run.ops["startup_to_first_frame_ms"] = System.currentTimeMillis() - ManagementFactory.getRuntimeMXBean().startTime
@@ -101,11 +120,14 @@ fun Shell(content: @Composable () -> Unit) {
 class InputState { val white = mutableStateOf(false); var keyEvents = 0L; var refocus = 0 }
 
 fun main(argv: Array<String>) {
-    // Plafond Skiko (limiteur au taux de rafraîchissement pour le rendu logiciel) : désactivé par propriété publique,
-    // sauf si l'utilisateur l'a déjà fixée (-Dskiko.vsync.enabled=true pour la variante plafonnée).
-    if (System.getProperty("skiko.vsync.enabled") == null) System.setProperty("skiko.vsync.enabled", "false")
+    // Cadence (spec v2.1) : BENCH_PACING=60 (défaut) = limiteur natif de Skiko (skiko.vsync.enabled=true, défaut Skiko :
+    // en rendu logiciel, FrameLimiter au taux de rafraîchissement de l'écran) ; BENCH_PACING=uncapped = skiko.vsync.enabled=false.
+    val pacing = when (System.getenv("BENCH_PACING") ?: "60") { "uncapped" -> "uncapped"; else -> "60" }
+    System.setProperty("skiko.vsync.enabled", if (pacing == "uncapped") "false" else "true")
     val args = parseArgs(argv)
     val run = Run(args)
+    run.ops["pacing"] = pacing
+    Pacer.enabled = pacing == "60"
     run.ops["jvm_start_to_main_ms"] = (System.currentTimeMillis() - ManagementFactory.getRuntimeMXBean().startTime)
     val input = InputState()
     if (System.getenv("BENCH_DEBUG_KEYS") == "1") java.awt.Toolkit.getDefaultToolkit().addAWTEventListener({ e ->

@@ -211,14 +211,15 @@ impl Driver {
             let mx = self.frame_ms.iter().cloned().fold(0.0, f64::max);
             ops["max_frame_stall_ms"] = mx.into();
         }
+        ops["pacing"] = (if self.unthrottled { "uncapped" } else { "60" }).into();
         let notes = format!(
-            "renderer={}; unthrottled_redraw={}; frame_ms = interval between consecutive frame ends; frame end = first winit about_to_wait after a RedrawRequested (Slint renders and presents synchronously while handling RedrawRequested: softbuffer present_with_damage for software/skia-software, eglSwapBuffers for femtovg), observed through the public slint::winit_030::CustomApplicationHandler; set_rendering_notifier is not usable as frame end (AfterRendering fires before present, and the software renderer returns Unsupported). {} ; 2 s warm-up not recorded. {}",
+            "renderer={}; pacing={}; frame_ms = interval between consecutive frame ends; frame end = first winit about_to_wait after a RedrawRequested (Slint renders and presents synchronously while handling RedrawRequested: softbuffer present_with_damage for software/skia-software, eglSwapBuffers for femtovg), observed through the public slint::winit_030::CustomApplicationHandler; set_rendering_notifier is not usable as frame end (AfterRendering fires before present, and the software renderer returns Unsupported). {} ; 2 s warm-up not recorded. {}",
             self.renderer,
-            self.unthrottled,
+            if self.unthrottled { "uncapped" } else { "60" },
             if self.unthrottled {
                 "continuous redraw requested from about_to_wait via WinitWindowAccessor::with_winit_window(|w| w.request_redraw()), which bypasses Slint's internal X11 TimerBasedFrameThrottle (60 Hz timer) using public documented APIs only (feature unstable-winit-030)"
             } else {
-                "redraw requested via slint::Window::request_redraw -> Slint's X11 TimerBasedFrameThrottle paces at the monitor refresh (60 Hz)"
+                "BENCH_PACING=60: native Slint cadence; redraw requested via slint::Window::request_redraw, Slint's winit X11 TimerBasedFrameThrottle fires a repeated Timer of 1000000/refresh_millihertz ms (integer ms: 16 ms at 60 Hz, i.e. 62.5 Hz) and calls winit request_redraw"
             },
             self.sc.notes(&self.renderer)
         );
@@ -235,7 +236,18 @@ impl Driver {
 fn main() {
     let args = parse_args();
     let renderer = std::env::var("SLINTAPP_RENDERER").unwrap_or_else(|_| "skia-software".into());
-    let unthrottled = std::env::var("SLINTAPP_THROTTLE").map(|v| v != "1").unwrap_or(true);
+    // BENCH_PACING=60 (défaut) | uncapped ; alias historique SLINTAPP_THROTTLE=1 (60) / 0 (uncapped)
+    let pacing = std::env::var("BENCH_PACING").ok().or_else(|| {
+        std::env::var("SLINTAPP_THROTTLE").ok().map(|v| if v == "1" { "60".to_string() } else { "uncapped".to_string() })
+    });
+    let unthrottled = match pacing.as_deref() {
+        Some("uncapped") => true,
+        Some("60") | None => false,
+        Some(o) => {
+            eprintln!("BENCH_PACING={o} inconnu, 60 utilisé");
+            false
+        }
+    };
     slint::BackendSelector::new()
         .backend_name("winit".into())
         .renderer_name(renderer.clone())
@@ -264,7 +276,7 @@ fn main() {
         t_end.start(slint::TimerMode::SingleShot, Duration::from_secs_f64(WARMUP + dur), move || {
             marker("BENCH:measure_end");
             let j = serde_json::json!({"stack":"slint","version":version_string(&rname),"scenario":scen,"duration_s":dur,"frames":0,"frame_ms":[],
-              "ops":{"sum_heights": sim::sum_heights(), "not_rendered": []},"checksum":"00000000","unsupported":null,
+              "ops":{"sum_heights": sim::sum_heights(), "not_rendered": [], "pacing": if unthrottled { "uncapped" } else { "60" }},"checksum":"00000000","unsupported":null,
               "notes": format!("renderer={}; idle: shell (title bar, first list page, status bar) drawn once; no redraw loop, the event loop sleeps (two single-shot Timers mark start/end)", rname)});
             std::fs::write(&out, serde_json::to_vec(&j).unwrap()).unwrap();
             std::process::exit(0);

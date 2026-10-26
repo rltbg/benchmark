@@ -1,5 +1,5 @@
 rustc 1.99.1 (58cf8f9c3 2026-10-13)
 cargo 1.99.1 (5f94df478 2026-08-27)
    Compiling slintapp v0.2.0 (/home/user/benchmark/stacks/slint/app)
-    Finished `release` profile [optimized] target(s) in 2m 21s
-build_seconds=141
+    Finished `release` profile [optimized] target(s) in 2m 52s
+build_seconds=173

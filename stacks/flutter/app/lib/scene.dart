@@ -8,6 +8,8 @@
 // (api.flutter.dev Canvas.drawAtlas) and the "precalculate a static shape and cache it" advice
 // of docs.flutter.dev/perf/best-practices. BENCH_CANVAS_MODE=direct (diagnostic) draws every
 // shape with drawRect/drawCircle/drawRRect + gradient shader + MaskFilter.blur every frame.
+// (A drawVertices variant - exact affine gradient as per-vertex colours, tessellated shapes - was
+// measured and was slower than both on Impeller-GLES and Skia under llvmpipe; see STACK-NOTES.md.)
 import 'dart:io' show Platform;
 import 'dart:math' as m;
 import 'dart:typed_data';
@@ -18,7 +20,6 @@ import 'package:flutter/widgets.dart';
 import 'model.dart' show fnv;
 
 final bool canvasDirect = Platform.environment['BENCH_CANVAS_MODE'] == 'direct';
-final int _diag = int.tryParse(Platform.environment['BENCH_DIAG'] ?? '') ?? 0; // TEMP
 
 class Scene extends ChangeNotifier {
   final int n;
@@ -208,7 +209,7 @@ class Scene extends ChangeNotifier {
 
   void paint(Canvas c) {
     c.save();
-    if (_diag & 2 == 0) c.clipRRect(clipRR);
+    c.clipRRect(clipRR);
     c.drawRRect(clipRR, bgPaint);
     final a = atlas;
     if (a != null) {
@@ -231,8 +232,7 @@ class Scene extends ChangeNotifier {
       c.translate(gx, gy);
       c.drawRect(Rect.fromLTWH(0, 0, gw, gh), graphBg);
       c.clipRect(Rect.fromLTWH(0, 0, gw, gh));
-      if (_diag & 1 == 0) c.drawRawPoints(ui.PointMode.polygon, pts, linePaint);
-      if (_diag & 4 != 0) linePaint.strokeWidth = 0;
+      c.drawRawPoints(ui.PointMode.polygon, pts, linePaint);
       c.restore();
     }
   }

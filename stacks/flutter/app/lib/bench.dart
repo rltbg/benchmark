@@ -177,14 +177,19 @@ class Bench {
     ops['vsync_to_rasterfinish_ms'] = stats([for (final f in inW) (f[4] - f[0]) / 1000.0]);
     // Dart: no public GC statistics API in product (AOT release) mode, the VM service is absent.
     ops['gc'] = null;
+    // Spec v2.1 pacing: the native cadence is the engine's 60 Hz vsync (fallback waiter of the
+    // Linux embedder); there is no public API to uncap it, so `uncapped` degrades to "60-only".
+    final pacingReq = Platform.environment['BENCH_PACING'] ?? '60';
+    ops['pacing'] = pacingReq == 'uncapped' ? '60-only' : '60';
     if (finishExtra != null) ops.addAll(finishExtra!(inW));
     final renderer = impellerEnabled ? 'Impeller (OpenGL ES backend, default)' : 'Skia (OpenGL), via fl_dart_project_set_enable_impeller(FALSE)';
     final notes = 'Flutter Dart-AOT release, Linux GTK3 embedder, renderer: $renderer, GL = Mesa (llvmpipe under Xvfb). '
         'frame_ms = interval between consecutive FrameTiming rasterFinish timestamps (SchedulerBinding.addTimingsCallback; '
         'raster thread finished the frame and handed it to the GTK GL compositor; latest public post-render signal, not an X11 present timestamp). '
         'Only frames the engine rasterized are counted (Flutter produces no frame when nothing is dirty; every animated frame changes content). '
-        'Cadence cap ~60 Hz: the Linux embedder registers no vsync callback, so the engine uses its fallback vsync waiter with a fixed 1/60 s tick '
-        '(engine source shell/common/vsync_waiter_fallback.cc); no public option to disable it, kept. '
+        'Pacing (BENCH_PACING, requested=${Platform.environment['BENCH_PACING'] ?? '60'}): native Flutter cadence = Ticker/SchedulerBinding frames driven by the engine vsync; '
+        'the Linux GTK embedder registers no vsync callback, so the engine uses its fallback vsync waiter with a fixed 1/60 s tick '
+        '(engine source shell/common/vsync_waiter_fallback.cc). No public/documented API uncaps it, so uncapped -> pacing "60-only". '
         'gc = null: Dart exposes no GC counters in AOT release. Warm-up 2 s; script time frozen at 0 during warm-up. '
         '${extraNotes.join(' ')}';
     final doc = {

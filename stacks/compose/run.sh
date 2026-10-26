@@ -5,7 +5,7 @@
 # Variantes (jamais la principale) :
 #   BENCH_VARIANT=tuned  -> -Xms512m -Xmx1g -XX:+UseSerialGC -XX:-UsePerfData
 #   BENCH_VARIANT=aot    -> -XX:AOTCache=build/aot/app.aot (cache AOT/CDS JDK 25, JEP 483/514 ; créé par make-aot.sh)
-#   BENCH_VSYNC=1        -> -Dskiko.vsync.enabled=true (limiteur Skiko au taux de rafraîchissement, défaut Skiko)
+#   BENCH_PACING=60 (défaut, limiteur natif Skiko) | uncapped (skiko.vsync.enabled=false) — lu par l'app
 #   BENCH_MODE=jar       -> uber-jar + JDK 25 système ($JAVA_HOME_25)
 # Le runtime jlink de jpackage n'a pas de bin/java : les options de variante passent par JAVA_TOOL_OPTIONS (cumulatif).
 D="$(cd "$(dirname "$0")" && pwd)"
@@ -20,7 +20,7 @@ case "${BENCH_VARIANT:-default}" in
   aot) X="-XX:AOTCache=$D/build/aot/app.aot" ;;
   *) echo "BENCH_VARIANT inconnu: $BENCH_VARIANT" >&2; exit 2 ;;
 esac
-[ "${BENCH_VSYNC:-0}" = 1 ] && X="$X -Dskiko.vsync.enabled=true"
+
 if [ "${BENCH_MODE:-dist}" = "jar" ]; then
   J="${JAVA_HOME_25:-/usr/lib/jvm/java-25-openjdk-amd64}/bin/java"
   exec "$J" -Dskiko.renderApi=SOFTWARE_FAST --enable-native-access=ALL-UNNAMED -Dsun.java2d.uiScale=1 $X \
