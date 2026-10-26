@@ -307,53 +307,78 @@ fn bounce(clock: &AnimatedValue, x0: f32, v: f32, l: f32) -> AnimatedNode {
         .interpolate(&[0.0, l, 2.0 * l], &[0.0, l, 0.0])
 }
 
-fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoElement {
-    // The clock, in seconds, played natively on the UI thread.
-    let clock = animated_value(0.0);
-    clock.timing(100_000.0, 100_000_000.0, Easing::Linear);
-    let shadow_clip = diag("SHADOW_CLIP");
-    let shadow_color: Hsla = col(0x000000).opacity(0.35);
+/// Per-shape constants of the data model.
+struct ShapeDef {
+    size: f32,
+    x0: f32,
+    y0: f32,
+    vx: f32,
+    vy: f32,
+    c1: Hsla,
+    c2: Hsla,
+}
 
+fn shape_def(i: usize, w: f32, h: f32) -> ShapeDef {
+    let f = fnv(i as u32);
+    let g = fnv(i as u32 + 1_000_003);
+    let size = 16.0 + (f % 25) as f32;
+    let ang = (g % 360) as f32 * std::f32::consts::PI / 180.0;
+    let speed = 60.0 + (f % 140) as f32;
+    ShapeDef {
+        size,
+        x0: (fnv(i as u32 + 77) as f32 / u32::MAX as f32) * (w - size),
+        y0: (fnv(i as u32 + 78) as f32 / u32::MAX as f32) * (h - size),
+        vx: ang.cos() * speed,
+        vy: ang.sin() * speed,
+        c1: col(f & 0xffffff),
+        c2: col(g & 0xffffff),
+    }
+}
+
+/// The same triangle wave as [`bounce`], evaluated in Rust (diagnostic re-record path).
+fn bounce_at(t: f32, x0: f32, v: f32, l: f32) -> f32 {
+    let l = l.max(1.0);
+    let s = if v >= 0.0 { x0 } else { 2.0 * l - x0 };
+    let u = (t * v.abs() + s) % (2.0 * l);
+    if u < l { u } else { 2.0 * l - u }
+}
+
+/// Records the shapes. `pos(i)` translates to shape i (animated nodes or numbers).
+fn record_shapes(
+    defs: &[ShapeDef],
+    w: f32,
+    h: f32,
+    rich: bool,
+    grads: &[Arc<CanvasGradient>],
+    pos: &dyn Fn(Painter, usize) -> Painter,
+) -> Painter {
+    let shadow_clip = diag("SHADOW_CLIP");
+    let no_shadow = diag("NOSHADOW");
+    let shadow_color: Hsla = col(0x000000).opacity(0.35);
     let mut p = Painter::new()
         .save()
         .begin_path()
         .round_rect(Bounds::new(pt(0.0, 0.0), Size::new(px(w), px(h))), px(16.0))
         .clip();
-    for i in 0..n {
-        let f = fnv(i as u32);
-        let g = fnv(i as u32 + 1_000_003);
-        let size = 16.0 + (f % 25) as f32;
-        let ang = (g % 360) as f32 * std::f32::consts::PI / 180.0;
-        let speed = 60.0 + (f % 140) as f32;
-        let (vx, vy) = (ang.cos() * speed, ang.sin() * speed);
-        let x0 = (fnv(i as u32 + 77) as f32 / u32::MAX as f32) * (w - size);
-        let y0 = (fnv(i as u32 + 78) as f32 / u32::MAX as f32) * (h - size);
-        let xn = bounce(&clock, x0, vx, w - size);
-        let yn = bounce(&clock, y0, vy, h - size);
-        let c1 = col(f & 0xffffff);
-        let shadow = rich && i % 10 == 0;
-        p = p.save();
+    for (i, d) in defs.iter().enumerate() {
+        let size = d.size;
+        let shadow = rich && i % 10 == 0 && !no_shadow;
+        p = pos(p.save(), i);
         if shadow && shadow_clip {
             // Diagnostic only (BENCH_SHADOW_CLIP=1): bounds NSH's per-shadow mask, which is as
             // large as the current clip, to the shape's box + blur. Not the documented usage.
             p = p
-                .translate(&xn, &yn)
                 .begin_path()
                 .rect(Bounds::new(pt(-16.0, -16.0), Size::new(px(size + 32.0), px(size + 32.0))))
                 .clip();
-        } else {
-            p = p.translate(&xn, &yn);
         }
         if rich {
             if shadow {
                 p = p.shadow(shadow_color, px(8.0), pt(2.0, 2.0));
             }
-            let grad = CanvasGradient::linear(pt(0.0, 0.0), pt(size, size))
-                .add_color_stop(Percentage(0.0), c1)
-                .add_color_stop(Percentage(1.0), col(g & 0xffffff));
-            p = p.fill_style(Arc::new(grad));
+            p = p.fill_style(grads[i].clone());
         } else {
-            p = p.fill_color(c1);
+            p = p.fill_color(d.c1);
         }
         p = p.begin_path();
         let b = Bounds::new(pt(0.0, 0.0), Size::new(px(size), px(size)));
@@ -364,8 +389,55 @@ fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoEl
         };
         p = p.fill().restore();
     }
-    let drawing = p.restore();
-    let main = canvas(drawing).w(px(w)).h(px(h)).flex_shrink_0();
+    p.restore()
+}
+
+fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoElement {
+    let defs: Rc<Vec<ShapeDef>> = Rc::new((0..n).map(|i| shape_def(i, w, h)).collect());
+    // Gradients in each shape's local coordinates, made once and shared by every recording.
+    let grads: Rc<Vec<Arc<CanvasGradient>>> = Rc::new(
+        defs.iter()
+            .map(|d| {
+                Arc::new(
+                    CanvasGradient::linear(pt(0.0, 0.0), pt(d.size, d.size))
+                        .add_color_stop(Percentage(0.0), d.c1)
+                        .add_color_stop(Percentage(1.0), d.c2),
+                )
+            })
+            .collect(),
+    );
+    let main = if diag("RERECORD") {
+        // Diagnostic (BENCH_RERECORD=1): positions computed on the engine thread and the
+        // drawing recorded again every engine frame (a signal per frame).
+        let tick = signal(0u64);
+        std::mem::forget(spawn(async move {
+            loop {
+                next_frame().await;
+                tick.update(|t| *t += 1);
+            }
+        }));
+        let t0 = std::time::Instant::now();
+        canvas(move || {
+            tick.get();
+            let t = t0.elapsed().as_secs_f32();
+            let d2 = defs.clone();
+            record_shapes(&defs, w, h, rich, &grads, &move |p, i| {
+                let d = &d2[i];
+                p.translate(bounce_at(t, d.x0, d.vx, w - d.size), bounce_at(t, d.y0, d.vy, h - d.size))
+            })
+        })
+    } else {
+        // The clock, in seconds, played natively on the UI thread.
+        let clock = animated_value(0.0);
+        clock.timing(100_000.0, 100_000_000.0, Easing::Linear);
+        let nodes: Vec<(AnimatedNode, AnimatedNode)> = defs
+            .iter()
+            .map(|d| (bounce(&clock, d.x0, d.vx, w - d.size), bounce(&clock, d.y0, d.vy, h - d.size)))
+            .collect();
+        let drawing = record_shapes(&defs, w, h, rich, &grads, &|p, i| p.translate(&nodes[i].0, &nodes[i].1));
+        canvas(drawing)
+    };
+    let main = main.w(px(w)).h(px(h)).flex_shrink_0();
     let mut col_view = view().child(main);
     if graph {
         // The polyline gains one point per engine frame: its data changes every frame, so
