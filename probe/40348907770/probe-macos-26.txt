@@ -1,0 +1,136 @@
+== runner: macos-26  2026-10-26T15:24:07Z
+== system
+Darwin sat12-bq167-7aa351c7-e726-445e-a05f-6491f95e4957-6A06C8765506.local 25.6.0 Darwin Kernel Version 25.6.0: Fri Jul 31 19:16:43 PDT 2026; root:xnu-12377.161.14~5/RELEASE_ARM64_VMAPPLE arm64
+arch: arm64
+cpus: 3
+7516192768
+/dev/disk2s5   320Gi   204Gi    96Gi    68%    1.9M  1.0G    0%   /System/Volumes/Data
+== env
+ANDROID_HOME=/Users/runner/Library/Android/sdk
+ANDROID_NDK_HOME=/Users/runner/Library/Android/sdk/ndk/27.3.13750724
+ANDROID_NDK_LATEST_HOME=/Users/runner/Library/Android/sdk/ndk/29.0.14206865
+ANDROID_NDK_ROOT=/Users/runner/Library/Android/sdk/ndk/27.3.13750724
+ANDROID_NDK=/Users/runner/Library/Android/sdk/ndk/27.3.13750724
+ANDROID_SDK_ROOT=/Users/runner/Library/Android/sdk
+DOTNET_MULTILEVEL_LOOKUP=0
+DOTNET_NOLOGO=1
+DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+ImageOS=macos26
+ImageVersion=20261021.0445.8
+JAVA_HOME_11_arm64=/Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/11.0.32-101/arm64/Contents/Home/
+JAVA_HOME_17_arm64=/Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.20-101/arm64/Contents/Home/
+JAVA_HOME_21_arm64=/Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-101.0/arm64/Contents/Home/
+JAVA_HOME_25_arm64=/Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/25.0.4-101.0/arm64/Contents/Home/
+JAVA_HOME=/Users/runner/hostedtoolcache/Java_Temurin-Hotspot_jdk/21.0.12-101.0/arm64/Contents/Home/
+RUNNER_ARCH=ARM64
+RUNNER_ENVIRONMENT=github-hosted
+RUNNER_NAME=GitHub Actions 1000000007
+RUNNER_OS=macOS
+RUNNER_TEMP=/Users/runner/work/_temp
+RUNNER_TOOL_CACHE=/Users/runner/hostedtoolcache
+RUNNER_TRACKING_ID=github_bebb6b74-1c53-4212-9e89-cbac57e62275
+RUNNER_WORKSPACE=/Users/runner/work/benchmark
+XCODE_26_DEVELOPER_DIR=/Applications/Xcode_26.6.app/Contents/Developer
+== outils
+git            git version 2.56.0
+python3        Python 3.15.0
+node           v24.22.0
+java           openjdk version "21.0.12.1" 2026-08-18 LTS
+mvn            Apache Maven 3.10.0 (c43a36b8d67be7e0805a411bc0898af1a51f5472)
+gradle         
+cmake          cmake version 4.4.4
+ninja          1.13.2
+clang          Apple clang version 21.0.0 (clang-2100.1.1.101)
+gcc            Apple clang version 21.0.0 (clang-2100.1.1.101)
+cargo          cargo 1.99.1 (5f94df478 2026-08-27)
+rustc          rustc 1.99.1 (58cf8f9c3 2026-10-13)
+rustup         rustup 1.29.2 (2026-10-21)
+dotnet         10.0.402
+flutter        absent
+pwsh           PowerShell 7.6.7
+msbuild        absent
+cl             absent
+xcodebuild     Xcode 26.6
+Build version 17F113
+emcc           absent
+wasm-pack      absent
+== dotnet
+8.0.101 [/Users/runner/.dotnet/sdk]
+8.0.204 [/Users/runner/.dotnet/sdk]
+8.0.303 [/Users/runner/.dotnet/sdk]
+8.0.426 [/Users/runner/.dotnet/sdk]
+9.0.102 [/Users/runner/.dotnet/sdk]
+9.0.203 [/Users/runner/.dotnet/sdk]
+9.0.319 [/Users/runner/.dotnet/sdk]
+10.0.103 [/Users/runner/.dotnet/sdk]
+10.0.203 [/Users/runner/.dotnet/sdk]
+10.0.302 [/Users/runner/.dotnet/sdk]
+10.0.402 [/Users/runner/.dotnet/sdk]
+Microsoft.AspNetCore.App 8.0.1 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 8.0.4 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 8.0.7 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 8.0.32 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+Microsoft.AspNetCore.App 9.0.1 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+
+Workload version: 10.0.400-manifests.da132f47
+
+Installed Workload Id      Manifest Version      Installation Source
+--------------------------------------------------------------------
+
+Use `dotnet workload search` to find additional workloads to install.
+
+== rust targets
+aarch64-apple-darwin
+== xcode
+/Applications/Xcode_26.0.1.app
+/Applications/Xcode_26.0.app
+/Applications/Xcode_26.1.1.app
+/Applications/Xcode_26.1.app
+/Applications/Xcode_26.2.0.app
+/Applications/Xcode_26.2.app
+/Applications/Xcode_26.3.0.app
+/Applications/Xcode_26.3.app
+/Applications/Xcode_26.4.1.app
+/Applications/Xcode_26.4.app
+/Applications/Xcode_26.5.0.app
+/Applications/Xcode_26.5.app
+/Applications/Xcode_26.6.0.app
+/Applications/Xcode_26.6.app
+/Applications/Xcode.app
+26.5
+== Runtimes ==
+iOS 26.2 (26.2 - 23C54) - com.apple.CoreSimulator.SimRuntime.iOS-26-2
+iOS 26.4 (26.4.1 - 23E254a) - com.apple.CoreSimulator.SimRuntime.iOS-26-4
+iOS 26.5 (26.5 - 23F77) - com.apple.CoreSimulator.SimRuntime.iOS-26-5
+tvOS 26.2 (26.2 - 23K51) - com.apple.CoreSimulator.SimRuntime.tvOS-26-2
+tvOS 26.4 (26.4 - 23L243a) - com.apple.CoreSimulator.SimRuntime.tvOS-26-4
+tvOS 26.5 (26.5 - 23L470) - com.apple.CoreSimulator.SimRuntime.tvOS-26-5
+watchOS 26.2 (26.2 - 23S303) - com.apple.CoreSimulator.SimRuntime.watchOS-26-2
+== Devices ==
+-- iOS 26.2 --
+    iPhone 17 Pro (2263B19F-42E8-4C8B-8AF1-D79508216C90) (Shutdown) 
+    iPhone 17 Pro Max (CDFBE5B7-49AC-41DA-BEF5-734F34972AEC) (Shutdown) 
+    iPhone Air (14818EE9-508F-4481-A5BB-B25046EE207C) (Shutdown) 
+    iPhone 17 (2FB8D9D0-0E7C-4DE0-9836-3F7CBA959484) (Shutdown) 
+    iPhone 16e (582B068E-2ACA-440E-8D01-417AEDF26981) (Shutdown) 
+    iPad Pro 13-inch (M5) (C5A0F722-3377-4D6E-8576-6C3E27DD9E63) (Shutdown) 
+    iPad Pro 11-inch (M5) (EAB7755E-CCCD-4EF7-8673-D78A18AF4083) (Shutdown) 
+    iPad mini (A17 Pro) (714853ED-4EB5-4118-B921-88521B41BCB4) (Shutdown) 
+    iPad (A16) (CBFB76F3-C27E-4A9E-BB6D-FDC1E0CD8179) (Shutdown) 
+    iPad Air 13-inch (M3) (CE87FE46-0774-4422-A008-7737E703E55F) (Shutdown) 
+== android
+ANDROID_HOME=/Users/runner/Library/Android/sdk
+android-35 android-35-ext14 android-35-ext15 android-36 android-36-ext18 android-36-ext19 android-36.1 android-37.0 android-37.1 android-37.2 android-37.2-beta1 android-37.2-beta2 android-37.2-beta3 
+27.3.13750724 28.2.13676358 29.0.14206865 
+35.0.0 35.0.1 36.0.0 36.1.0 37.0.0 
+== kvm
+ls: /dev/kvm: No such file or directory
+== navigateurs
+google-chrome  absent
+chromium       absent
+chromium-browser absent
+msedge         absent
+firefox        Mozilla Firefox 158.0.1
+safaridriver   Included with Safari 26.6.2 (21624.5.1.11.3)
+chromedriver   ChromeDriver 156.0.8078.47 (1d17a2e2ee147bb7d6ae2ab6abdb3a2510c17775-refs/branch-heads/8078@{#1313})
+== qt/emsdk
