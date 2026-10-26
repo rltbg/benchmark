@@ -5,9 +5,10 @@
  3) il change entre deux captures espacées (animation réelle) ;
  4) une capture PNG est enregistrée dans results/verification/ pour inspection.
 usage: verify_gui.py <stack> "<cmd>" <scenario> [extra args]"""
-import sys, os, time, subprocess, json, tempfile, zlib, struct, array, collections
-stack, cmd, sc = sys.argv[1], sys.argv[2].split(), sys.argv[3]; extra = sys.argv[4:]
-OUT = "/home/user/eval/results/verification"; os.makedirs(OUT, exist_ok=True)
+import os, sys, os, time, subprocess, json, tempfile, zlib, struct, array, collections
+ROOT = os.environ.get("BENCH_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+stack, cmd, sc = sys.argv[1], sys.argv[2].replace("${ROOT}", ROOT).split(), sys.argv[3]; extra = sys.argv[4:]
+OUT = os.path.join(ROOT,"results","verification"); os.makedirs(OUT, exist_ok=True)
 d = tempfile.mkdtemp(prefix="vg"); disp = ":390"
 xv = subprocess.Popen(["Xvfb", disp, "-screen","0","1280x720x24","-fbdir",d,"-nolisten","tcp"], stderr=subprocess.DEVNULL); time.sleep(0.8)
 env = dict(os.environ, DISPLAY=disp, LIBGL_ALWAYS_SOFTWARE="1")
@@ -23,7 +24,7 @@ def toplevels():
     return out
 def big(ws): return [w for w in ws if w["w"]>=1000 and w["h"]>=600]
 before_ws = toplevels()
-p = subprocess.Popen(cmd+["--scenario",sc,"--duration",os.environ.get("VG_D","12"),"--out",os.path.join(d,"o.json"),"--assets","/home/user/eval/assets"]+extra, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+p = subprocess.Popen(cmd+["--scenario",sc,"--duration",os.environ.get("VG_D","12"),"--out",os.path.join(d,"o.json"),"--assets",os.path.join(ROOT,"assets")]+extra, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 def tree(pid):
     r=[pid]
     for c in subprocess.run(["pgrep","-P",str(pid)],capture_output=True,text=True).stdout.split(): r+=tree(int(c))

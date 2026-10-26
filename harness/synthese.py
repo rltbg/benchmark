@@ -1,7 +1,8 @@
 #!/usr/bin/env python3 -I
 """Génère results/SYNTHESE.md (tableaux du rapport) à partir des JSON bruts. Aucune valeur n'est saisie à la main."""
-import json, glob, statistics as st, os
-R = os.environ.get("RES", "/home/user/eval/results")
+import math, os, json, glob, statistics as st, os
+ROOT = os.environ.get("BENCH_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+R = os.environ.get("RES", os.path.join(ROOT,"results"))
 MAIN = ["slint","qt-software","avalonia-aot","avalonia-jit","egui-glow","nsh-gtk","compose-jvm","flutter"]
 SEC  = ["slint-femtovg","qt-opengl","egui-wgpu"]
 OUTSCOPE = ["iced-natural","iced-fulldamage"]
@@ -14,7 +15,7 @@ def med(rs, k, scale=1.0):
     return st.median(v)/scale if v else None
 def p95(rs, k):
     v = sorted(r[k] for r in rs if r.get(k) is not None)
-    return v[min(len(v)-1, max(0, int(round(.95*len(v)+.5))-1))] if v else None
+    return v[min(len(v)-1, max(0, math.ceil(.95*len(v))-1))] if v else None
 def fmt(x, nd=1): return "–" if x is None else f"{x:.{nd}f}"
 def fps(stack, sc, suffix=""):
     rs = runs(f"{stack}-{sc}{suffix}")

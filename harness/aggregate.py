@@ -1,8 +1,9 @@
 #!/usr/bin/env python3 -I
-import json, glob, os, statistics as st, sys, collections
-R = "/home/user/eval/results"
+import math, os, json, glob, os, statistics as st, sys, collections
+ROOT = os.environ.get("BENCH_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+R = os.path.join(ROOT,"results")
 def pct(v, p):
-    s = sorted(v); k = min(len(s)-1, max(0, int(round(p/100*len(s)+0.5))-1)); return s[k]
+    s = sorted(v); k = min(len(s)-1, max(0, math.ceil(p/100*len(s))-1)); return s[k]
 rows = collections.defaultdict(dict)
 for f in sorted(glob.glob(R + "/*.summary.json")):
     d = json.load(open(f)); s = d["summary"]; runs = [r for r in d["runs"] if r["rc"] == 0]
@@ -41,4 +42,4 @@ for sc in ("idle", "list", "stream", "canvas", "core", "text", "images", "nav", 
         if extra and r.get(extra[0]): e = f" {r[extra[0]][0]/1e6:.1f} |" if extra[0] == "calls_per_s" else f" {r[extra[0]][0]:.0f} |"
         elif extra: e = " – |"
         out.append(f"| {t} | {r['n']}{'+'+str(r['fail'])+'KO' if r['fail'] else ''} | {f(r.get('fps_mean'))} | {f(r.get('frame_p95'))} | {f(r.get('frame_p99'))} | {f(r.get('drop_pct'))} | {rpm} | {f(r.get('cpu_pct_core_mean'),0)} | {f(r.get('cpu_pct_core_peak_1s'),0)} |{e}")
-open("/home/user/eval/results/TABLES.md", "w").write("\n".join(out) + "\n"); print("\n".join(out))
+open("TABLES.md", "w").write("\n".join(out) + "\n"); print("\n".join(out))
