@@ -1,75 +1,76 @@
-# Stack compose : Kotlin / Compose Multiplatform Desktop (JVM + Skiko), rendu logiciel
+# Stack compose — Compose Multiplatform Desktop (Kotlin/JVM, Skiko), rendu logiciel — passe 2 (spec v2 / v2.1)
 
-## [HISTORIQUE] Version 1.5.12 imposee par le blocage reseau initial
-La derniere stable (1.12.2, Kotlin 2.4.21 ; plugins `org.jetbrains.compose` et `org.jetbrains.kotlin.plugin.compose` se resolvent bien
-sur plugins.gradle.org / Maven Central) NE PEUT PAS etre resolue : toutes les versions >= 1.6.0 dependent (jar JVM) d'artefacts
-`androidx.*` (annotation, collection, lifecycle-*, savedstate, compose.runtime...) qui n'existent que sur Google Maven.
-maven.google.com repond 301 vers `dl.google.com/dl/android/maven2/...` (BLOQUE, 403) et ces artefacts sont absents de Maven Central (404).
-Erreur exacte (logs/build-probe.log, 1.12.2) :
-`Could not resolve androidx.lifecycle:lifecycle-common:2.9.4 ... Could not GET 'https://dl.google.com/dl/android/maven2/androidx/lifecycle/lifecycle-common/2.9.4/lifecycle-common-2.9.4.pom'. Received status code 403 from server: Forbidden`
-(idem androidx.annotation, androidx.collection, androidx.savedstate, androidx.compose.runtime:runtime:1.12.1...).
-Contournement "exclure androidx.*" teste (1.8.2) : build OK mais crash au lancement `NoClassDefFoundError: androidx/collection/MutableObjectList`
-(les org.jetbrains.compose.collection-internal:* ne sont que des stubs javadoc). Teste : 1.12.2, 1.11.1, 1.10.3, 1.9.3, 1.8.2, 1.7.3, 1.6.2, 1.6.0 -> tous KO.
-CMP 1.5.12 (Compose 1.5.x, Kotlin 1.9.22) est la plus recente dont le graphe est 100 % Maven Central + plugin portal : build et run OK.
-Consequence : les chiffres Compose refletent un runtime Compose/Skiko de fin 2023 (skiko 0.7.85.4), plus ancien que la baseline KMP actuelle
-(les versions recentes ont de meilleures perfs, p.ex. LazyList prefetch, scrolling, etc.). A re-mesurer si dl.google.com est debloque (changer 2 numeros de version).
-Pas de plugin `kotlin.plugin.compose` (n'existe que Kotlin >= 2.0, et CMP 1.5.12 exige Kotlin 1.9.x) : compilateur Compose JetBrains 1.5.x integre au plugin CMP.
-
-# MISE A JOUR (cible principale) : Compose Multiplatform 1.12.2 / Skiko 0.150.2 / Kotlin 2.4.21
-Apres deblocage de dl.google.com / maven.google.com par le coordinateur, la stack est reconstruite avec la derniere stable :
-plugins `org.jetbrains.compose` 1.12.2 + `org.jetbrains.kotlin.plugin.compose` 2.4.21, Kotlin 2.4.21, coroutines 1.10.2, repo `google()` + mavenCentral. Resolu : ui-desktop 1.12.2, runtime-desktop 1.12.2, skiko-awt 0.150.2, kotlin-stdlib 2.4.21.
-Code source inchange (815 lignes Kotlin), compile sans modification. Build : `build.sh` ; a froid ~1 min 30 (logs/build-cmp1.12.2.log). Erreurs rencontrees : HTTP 429 "Too Many Requests" transitoires de repo.maven.apache.org
-(gradle-plugin-internal-jdk-version-probe:1.12.2, skiko-awt-runtime-linux-x64:0.150.2) -> relancer le build suffit.
-- Rendu logiciel : `SKIKO_RENDER_API=SOFTWARE_FAST` (ou -Dskiko.renderApi, dans app.cfg) fonctionne ; `SOFTWARE_COMPAT` fonctionne mais ~6x plus lent (30 fps en liste) ; `OPENGL` -> "[SKIKO] warn: Fallback to next API / RenderException: Cannot create Linux GL context" puis repli logiciel (~158 fps).
-- FFM : JDK 21 (preview) conserve, `--enable-preview` ; pas de JDK >= 22 disponible localement (non cherche via toolchains). 21.9 M triplets/s.
-- 9 scenarios OK (fumee 8 s) : sum_heights 8799584 sur list/stream/stress/idle. text : select-all toujours non supporte (LazyColumn+SelectionContainer). nav : 20 transitions en 8 s.
-- Tailles : dist 134 Mo (runtime jlink ~85 Mo ; jars app ~49 Mo, libskiko ~ voir jar), uber-jar 33 Mo. Ancienne build 1.5.12 conservee dans `build-cmp1.5/` (dist/ 130 Mo, uber-jar, build.gradle.kts.cmp1.5, run.sh.cmp1.5).
-- Commande harnais inchangee : `/home/user/eval/stacks/compose/run.sh` (BENCH_VARIANT=tuned, BENCH_MODE=jar possibles).
-- Fumee comparee (6 s, CPU partage, indicatif) : list 1.5.12 ~138 fps (p50 6.6 ms) -> 1.12.2 ~182-190 fps (p50 4.5 ms) ; tuned 209 fps ; canvas 5000 : 2.0 fps (540 ms) -> 5.0 fps (198 ms) ; canvas 20000 : 0.6 -> 1.5 fps ;
-  idle RSS 124 Mo -> 182 Mo ; list RSS max 250 -> 305 Mo ; stream 10k 123 -> 198 fps ; text 56 -> 123 fps ; nav 176 -> 247 fps ; core 8-10 -> 26 fps ; stress ~1 -> 2.9 fps ;
-  **images regresse : 107 -> 28 fps** (cause non investiguee ; probable cout du dessin/zoom des ImageBitmap en 1.12) ; demarrage JVM->1re frame ~1.0-1.3 s (inchange).
-
-# ANCIENNE SECTION (CMP 1.5.12, historique, dl.google.com etait bloque)
-## Versions
-- JDK systeme : OpenJDK 21.0.12.1 (Ubuntu). **FFM = preview en 21** -> `--enable-preview --enable-native-access=ALL-UNNAMED` (pas de JNA/JNI necessaire). Kotlin 1.9.22 appelle java.lang.foreign sans probleme (compile et run avec le flag).
-- Gradle 8.14.3 (`--no-daemon --max-workers=2`), Kotlin 1.9.22 (jvmToolchain 21), Compose Multiplatform 1.5.12 (compose.desktop.linux_x64 + foundation), Skiko 0.7.85.4, kotlinx-coroutines 1.9.0 (core + swing).
-- Depots : mavenCentral, gradlePluginPortal, `maven("https://maven.google.com")` (inutile en pratique, redirige vers dl.google.com).
+## Versions (vérifiées le 2026-10-26 dans les registres officiels)
+| Composant | Version | Source / remarque |
+|---|---|---|
+| Compose Multiplatform (plugin `org.jetbrains.compose`, ui, foundation) | **1.12.2** | Maven Central `compose-gradle-plugin/maven-metadata.xml` (latest = 1.13.0-beta01 = bêta, non retenue) ; base Jetpack Compose 1.12.1 (kotlinlang.org/docs/multiplatform/compose-compatibility-and-versioning.html) |
+| Kotlin (`kotlin("jvm")` + `org.jetbrains.kotlin.plugin.compose`) | **2.4.21** | Maven Central `kotlin-gradle-plugin` (2.5.0-Beta2 = bêta). Doc CMP : « latest CMP always compatible with latest Kotlin », plugin compilateur Compose = même version que Kotlin |
+| kotlinx-coroutines (core + swing) | **1.11.0** | Maven Central (stable la plus récente) |
+| Skiko (skiko-awt + runtime linux-x64) | **0.150.2** | version tirée par CMP 1.12.2 (dernière publiée : 0.156.0, non alignée sur CMP, non utilisée ; testée seulement dans le micro-bench) |
+| Gradle | **9.8.2** | `/opt/gradle-9.8.2` (build.sh vérifie la version) |
+| JDK (compilation `jvmToolchain(25)`, runtime jlink, jpackage) | **OpenJDK 25.0.4.1** (Ubuntu) | `/usr/lib/jvm/java-25-openjdk-amd64` ; FFM final depuis JDK 22 → `--enable-preview` supprimé |
+| Dépôts | mavenCentral, google(), gradlePluginPortal | dl.google.com désormais accessible (artefacts androidx.*) |
+Champ JSON `version` : `Compose Multiplatform 1.12.2 (Jetpack Compose 1.12.1 base); Kotlin 2.4.21; Skiko 0.150.2; kotlinx-coroutines 1.11.0; JVM OpenJDK 64-Bit Server VM 25.0.4.1+1-1-24.04.4-Ubuntu; GC G1…`.
+Dépendances déclarées directement (`ui`, `foundation`, `skiko-awt-runtime-linux-x64`) : les accesseurs `compose.desktop.linux_x64` / `compose.foundation` sont dépréciés en 1.12 (« Specify dependency directly ») et tiraient material inutilement.
 
 ## Build / lancement
-- Build : `/home/user/eval/stacks/compose/build.sh` (createDistributable + packageUberJarForCurrentOS). Compile : ~40 s (Kotlin) ; build complet a froid ~1 min 20 s ; distribution seule ~40 s (logs/build-*.log).
-- **Commande harnais** : `/home/user/eval/stacks/compose/run.sh` (ajouter --scenario ... etc.). Par defaut execute `build/compose/binaries/main/app/app/bin/app` (lanceur jpackage + runtime jlink, JVM par defaut = G1, heap max = 1/4 RAM).
-  Les options JVM sont dans `lib/app/app.cfg` : `-Dskiko.renderApi=SOFTWARE_FAST --enable-preview --enable-native-access=ALL-UNNAMED`.
-- Variantes : `BENCH_VARIANT=tuned` = `-Xms512m -Xmx1g -XX:+UseSerialGC -XX:-UsePerfData -Xshare:auto` (injectes via JAVA_TOOL_OPTIONS car le runtime jlink de jpackage n'a pas de bin/java) ;
-  `BENCH_MODE=jar` = uber-jar + JDK systeme (`java -cp ... bench.MainKt`). Harnais : `--env BENCH_VARIANT=tuned`.
-- Variable de rendu qui marche : `SKIKO_RENDER_API=SOFTWARE_FAST` (aussi `-Dskiko.renderApi=SOFTWARE_FAST`, deja dans app.cfg). Sans cela / avec `OPENGL` : `[SKIKO] warn: Fallback to next API ... RenderException: Cannot create Linux GL context` puis repli logiciel (meme perfs). `SOFTWARE` (compat) marche aussi. Pas de plafond vsync observe (>100 fps en liste).
-- Le core C-ABI est charge par chemin absolu `/home/user/eval/core/target/release/libbenchcore.so` (Core.kt, `SymbolLookup.libraryLookup`).
+- Build : `stacks/compose/build.sh` (Gradle 9.8.2, JDK 25, `--max-workers=2`, `createDistributable packageUberJarForCurrentOS`). Temps : 30–75 s incrémental/à chaud (machine partagée), premier build pass 2 ~56 s compile seule (logs/build-pass2-probe.log, logs/build-final.log). Aucun warning Kotlin. Gradle signale 2 dépréciations venant des plugins (pas du script) : `Configuration.setVisible` (Gradle 11) et `HotReloadUsageType` du plugin hot-reload de CMP (« will fail in Gradle 10 »).
+- **Commande harnais (principale, 60 Hz)** : `${ROOT}/stacks/compose/run.sh` → `harness/stacks.tsv` : `compose-jvm	${ROOT}/stacks/compose/run.sh`
+- **Variante sans plafond** : même commande + `--env BENCH_PACING=uncapped`.
+- Autres variantes (jamais principales) : `--env BENCH_VARIANT=aot` (cache AOT JDK 25, créer d'abord avec `make-aot.sh`), `BENCH_VARIANT=tuned` (SerialGC, Xms512m/Xmx1g), `BENCH_MODE=jar` (uber-jar + JDK 25 système).
+- run.sh : `BENCH_ROOT` déduit de son emplacement, `BENCHCORE_LIB` → `$BENCH_ROOT/core/target/release/libbenchcore.so`, `SKIKO_RENDER_API=SOFTWARE_FAST`. Le code n'a plus aucun chemin absolu (Core.kt : `BENCHCORE_LIB` puis `$BENCH_ROOT/core/...` ; Model.kt : `BENCH_ROOT` sinon remontée depuis l'emplacement du jar jusqu'à `core/benchcore.h` ; assets par défaut `$BENCH_ROOT/assets`).
 
-## Implementation (815 lignes Kotlin, src/main/kotlin/bench/*.kt)
-Boucle de frames : `LaunchedEffect` + `withFrameNanos` en boucle continue ; `frame_ms` = intervalle entre callbacks consecutifs (System.nanoTime au debut du callback ; Compose Desktop ne lance la frame suivante qu'apres le rendu Skiko de la precedente). Warm-up 2 s executant le meme script puis `reset()` et mesure. Fenetre non decoree 1280x720 (barre de titre dessinee par l'app, pas de WM sous Xvfb).
-- idle : OK (shell + 1re page, aucun redessin, dort 1 s + duration).
-- list : OK. LazyColumn, hauteurs variables 48..128 dp, sum_heights = 8799584 verifie. Defilement via `ScrollableState.scroll { scrollBy(v(t)*dt) }`, final_offset = px consommes. `rows_drawn` = nb d'executions de drawBehind des lignes (Compose cache les couches : ne vaut PAS "lignes dessinees par frame", ~320 sur 6 s).
-- stream : OK. Producteur coroutine Dispatchers.Default, xorshift32 seed 0x2545F491, Channel(100_000, DROP_LATEST), application par lots a chaque frame ; un MutableDoubleState par ligne (cree a la demande) -> seules les lignes visibles se recomposent. 10000/s : generated 59382 / applied 59268 / dropped 0 sur 6 s.
-- canvas : OK mais tres lent (voir fumee). Un seul `Canvas`, pinceaux Brush.linearGradient pre-crees (coord. locales, `translate`), ombre portee via Skia natif (`ImageFilter.makeDropShadowOnly`, sigma 4) pour 1 forme / 10 (pas d'API ombre dans DrawScope), clip `clipPath` rect arrondi 1000x600, graphe Path 10 000 lineTo reconstruit par frame (zone 1000x100 en bas). Rebond dans la fenetre 1280x720 (le clip n'en montre qu'une partie). Profil jstack : ~90 % du temps dans `Canvas._nDrawPicture` natif (rastérisation Skia logicielle), pas dans le code Kotlin.
-- core : OK. FFM downcalls (`MethodHandle.invoke`, pas invokeExact depuis Kotlin) validate+parse+hash sur la trame A5 01 05 "hello" ; thread Dispatchers.Default pour core_heavy(100)/s ; 1 000 formes (sans ombre) animees. ~15-22 M triplets/s.
-- stress : OK (list 880 px + stream 5000/s + canvas 400x720 5000 formes + core) ; echantillons `managed_heap_kb` toutes les 10 s dans ops.heap_samples (chaine JSON).
-- text : PARTIEL. 1 Mo coupe en 9 599 paragraphes dans un LazyColumn sous `SelectionContainer` (un seul Text de 1 Mo depasse la contrainte max Compose 2^18 px). Defilement aller-retour 3000 px/s OK. **« Tout selectionner » a t=5 s NON supporte** (pas d'API sur un LazyColumn) -> note dans ops.select_all. `time_to_first_display_ms` = depuis le demarrage JVM ; `layout_ms` = composition->2e frame (1re page seulement, lazy). Bidi/emoji/CJK s'affichent (polices de repli Skia), non verifie de pres.
-- images : OK. LazyVerticalGrid 9 colonnes de 128 dp ; decodage PNG (Skia) + reduction 128x128 sur Dispatchers.IO, cache ; defilement aller-retour 3000 px/s + zoom 1->3->1 / 6 s (graphicsLayer) + pan. 600 images decodees, decode_total_ms ~5400 (cumule, plusieurs threads).
-- nav : OK. AnimatedContent (slide 300 ms) 3 ecrans, modale AnimatedVisibility fondu 200 ms, boucle de calcul sur Dispatchers.Default ; les transitions continuent jusqu'a la fin de duration (13 en 6 s ; 20 atteintes avec duration >= ~10 s).
-- Ecarts : IME non traitee ; text select-all non supporte ; rows_drawn semantique differente ; nav/images : boucle sur toute la duree.
+## Revue (écarts / bugs trouvés et corrections)
+1. **Régression images 107 → 28 fps (1.5.12 → 1.12.2) : cause = framework (Skia/Skiko), pas notre code.** Isolée par bascules : sans zoom 153 fps, sans images 168 fps, zoom + images 27 fps ; FilterQuality.None 63 fps, Medium 15 fps, drawImageRect natif non-strict 30 fps. Micro-bench Skia pur sans Compose (`diag/SkBench.java`, `logs/skbench-skiko-versions.log`) : 63 vignettes 128² dessinées avec `canvas.scale(3)` en LINEAR : **Skiko 0.7.85.4 : 3.3–3.6 ms/frame ; 0.150.2 : 22.6–24.3 ms ; 0.156.0 (dernière) : 22.3–23.3 ms** (NEAREST : 0.8 → 6.2 → 4.0 ms ; échelle 1 identique ~0.6 ms ; strict ou non : pareil). L'échantillonnage d'images agrandies du rasteriseur logiciel de Skia récent est ~7× plus lent : documenté, non corrigeable par API publique sans changer la qualité (FilterQuality reste Low = défaut `DrawScope.DefaultFilterQuality`, bilinéaire sans mipmap : developer.android.com/develop/ui/compose/graphics/images/customize).
+   Défaut d'implémentation corrigé au passage : les vignettes étaient des `Bitmap` Skia **mutables** ; `SkiaBackedCanvas.drawImageRect` (ui-graphics 1.12.2, sources) appelle `Image.makeFromBitmap` à **chaque** dessin, ce qui copie les pixels d'un bitmap mutable (api.skia.org/classSkImage.html, MakeFromBitmap/RasterFromBitmap : partage seulement si immuable). `dst.setImmutable()` comme le fait Compose lui-même (`Image.toBitmap()` dans Actuals.skikoExcludingWeb.kt) : 24.3 → 27.3 fps. Aussi : clés + contentType dans la grille, décodage à la demande (une fois par image) sur 2 threads de fond, lecture d'état zoom/pan dans le bloc `graphicsLayer` (pas de recomposition : developer.android.com/develop/ui/compose/phases).
+2. **Flux : `updates_dropped` ne pouvait jamais compter.** `Channel(100_000, BufferOverflow.DROP_LATEST)` + `trySend` : avec DROP_LATEST, `trySend` renvoie toujours `success` même quand l'élément est jeté (kotlinx-coroutines 1.11.0, `ConflatedBufferedChannel.trySendDropLatest` → `return success(Unit)` ; KDoc : « trySend always succeeds »). Corrigé : `Channel(100_000)` (SUSPEND) → `trySend` échoue si plein → drop + comptage (kotlinlang.org/api/kotlinx.coroutines/…/-send-channel/try-send.html).
+3. **LazyColumn** : `key = null` → `key = { it }` + `contentType = { 0 }` (developer.android.com/develop/ui/compose/lists, « Item keys », « Content types »). Lecture du prix déplacée dans un composable `PriceText(DoubleState)` : seule cette portée se recompose sur une mise à jour (« defer reads », developer.android.com/develop/ui/compose/performance/bestpractices). Sous-titre : une seule chaîne `"Quote i — 123.45"` sur une ligne `softWrap=false`/Clip (avant : chaîne ×8 multi-lignes, coût de mise en page inutile ; aligné sur les autres stacks).
+4. **Canvas** : `nativeCanvas` déprécié (→ `skiaCanvas`) et ombre faite par `ImageFilter.makeDropShadowOnly` Skia à chaque frame → remplacée par l'API publique Compose `ShadowContext.createDropShadowPainter(shape, Shadow(radius = 8.dp, offset = 2,2))` (bitmap flouté mis en cache par painter et par taille ; developer.android.com/develop/ui/compose/graphics/draw/shadows). Un seul nœud `Modifier.drawWithCache` : Path de clip et Path du graphe alloués une fois (`rewind()` + 10 000 `lineTo` par frame au lieu d'un `Path()` neuf ; developer.android.com/develop/ui/compose/graphics/draw/modifiers#drawwithcache) ; Brush dégradés pré-construits par forme (coordonnées locales + translate) ; lecture du tick dans `onDrawBehind` = invalidation de la phase dessin seule. Les formes rebondissent désormais dans le rect de clip 1000×600 (avant : 1280×720, une partie hors clip). Coût dominant = rastérisation Skia (5000 formes ~3.5 fps, avec/sans ombres 3.5/4.2 fps).
+5. **Mesure des frames** (`withFrameNanos`) : vérifié dans les sources CMP 1.12.2 : le callback est exécuté par `FrameRecomposer.performFrame` **au début** de la frame (avant measure/layout/draw), appelé depuis `ComposeSceneMediator.onRender` ; Skiko (`AbstractDirectSoftwareRedrawer`, `FrameDispatcher` sur l'EDT) exécute update + draw + `finishFrame` (surface raster → X11) dans le même événement EDT. Ancienne mesure = intervalle entre débuts de frame (décalé d'une frame). Nouvelle : le callback poste `EventQueue.invokeLater` qui s'exécute juste après le retour de `finishFrame` → `frame_ms` = intervalle entre ces horodatages post-présentation (signal public le plus tardif). Chaque frame modifie le contenu ; nav sans pause statique de 150 ms (sinon frames inchangées comptées).
+6. **Cadence (spec v2.1, `ops.pacing`)** : `BENCH_PACING=60` (défaut) garde le limiteur natif Skiko (`skiko.vsync.enabled=true`, défaut, `FrameLimiter` = 1000/refreshRate) mais **sous Xvfb il ne plafonne pas** (list ~170 fps mesurés : le taux lu nativement via X11 n'est pas 60) → cadence par API publique : au début de chaque frame (callback `withFrameNanos`, y compris les frames pilotées par les animations Compose) `LockSupport.parkNanos` jusqu'à une grille d'échéances absolue de 16,667 ms (ré-ancrée après une échéance manquée). `uncapped` : `skiko.vsync.enabled=false` (propriété publique `SkikoProperties`) et pas de cadence app.
+7. **Rendu logiciel Skiko** : noms officiels (sources `GraphicsApi.kt` 0.150.2) : `SOFTWARE_FAST` (« fast software rendering that works in 95% of cases », fallback SOFTWARE_COMPAT), `SOFTWARE_COMPAT` (« slower… uses BufferedImage »), `OPENGL`, `DIRECT3D`, `ANGLE`, `VULKAN`, `METAL`, `WEBGL` ; sélection par `SKIKO_RENDER_API` (prioritaire) ou `-Dskiko.renderApi` (`SkikoProperties.renderApi`). Gardé **SOFTWARE_FAST** (la plus rapide documentée ; SOFTWARE_COMPAT ~6× plus lent en passe 1). Vérifié à l'exécution : `ops.render_api = "SOFTWARE_FAST"` (`ComposeWindow.renderApi`).
+8. **FFM** : `--enable-preview` supprimé (API finale JDK 22+). `SymbolLookup.libraryLookup(Path, Arena)`, `orElseThrow`. validate/parse/hash liés avec `Linker.Option.critical(false)` (appels courts sans upcall : docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/foreign/Linker.Option.html) ; core_heavy(100 ms) en downcall normal. Résultat accumulé publié (`ops.published_sink`, AtomicLong) au lieu de `if (sink == 42) println()`. `invoke` (pas `invokeExact`, la signature polymorphe Kotlin ne correspond pas au type exact de retour).
+9. **ops.gc** : `GarbageCollectorMXBean.getCollectionCount/getCollectionTime` (différences entre marqueurs) + `pause_ms_max` = max `GcInfo.duration` des notifications `com.sun.management.GarbageCollectionNotificationInfo` (docs.oracle.com/…/GarbageCollectorMXBean.html, …/GarbageCollectionNotificationInfo.html) ; détail par collecteur dans `per_collector`. G1 : « G1 Young/Old Generation » et « G1 Concurrent GC » (pauses Remark/Cleanup). Résolution ms. Module `jdk.management` ajouté au runtime jlink.
+10. **Marqueurs** `BENCH:measure_start/end` (println + flush) autour de la mesure ; JSON écrit après `measure_end`. `unsupported` toujours présent (null), `ops.not_rendered: []` (canvas/core), `heap_samples` en vrai tableau JSON (avant : chaîne).
+11. **Texte** : CMP 1.12 a une API publique `SelectionState.selectAll()` (`SelectionContainer(state)`, `rememberSelectionState()` ; developer.android.com/reference/kotlin/androidx/compose/foundation/text/selection/SelectionState) → appelée à t=5 s. Doc : dans un lazy layout, les textes non composés ne sont pas inclus → sélection **partielle** (~1 900 caractères = lignes composées), documentée dans `ops.select_all`. Essai d'un unique `BasicTextField(TextFieldState, readOnly)` pour tout le 1 Mo : mise en page (SkParagraph `_nLayout` sur l'EDT) non terminée après 68 s puis >2 min (logs/text-single-field-attempt.log) → abandonné.
+12. **Input** : `Window(onKeyEvent)` Espace/KeyDown bascule un `mutableStateOf` lu seulement dans le `drawBehind` du carré 200×200 en (100,100). Problème trouvé avec le harnais (mis à jour à 01:56) : sans WM, il fait `xdotool windowfocus` sur la toplevel ; XToolkit garde le focus X sur sa fenêtre enfant `FocusProxy` → perte de focus (WINDOW_LOST_FOCUS), puis les touches arrivent sur la `ComposeWindow` et non sur le composant Compose (diagnostic par AWTEventListener, `BENCH_DEBUG_KEYS=1`). Correctif (API AWT publique, scénario input seul) : sur perte de focus vers l'extérieur, `window.toFront()` + `mostRecentFocusOwner.requestFocus()` (`ops.focus_rerequests` = 1 par run). Avant : 0/40 touches ; après : 0 perdue.
+13. Divers : `AnimatedContent … with` → `togetherWith` (déprécié) ; `@OptIn(ExperimentalAnimationApi)` inutile retiré ; `idle` imprime les marqueurs et dort `duration`.
 
-## Fumee (Xvfb 1280x720, 6 s, machine partagee avec d'autres agents -> indicatif uniquement)
-list ~120-145 fps (p50 6.6 ms, p99 12-25 ms) ; stream 10k/s ~123 fps ; text ~56 fps ; images ~107 fps ; nav ~176 fps (anim) ;
-canvas 1000 formes ~8 fps (125 ms/frame), **5000 formes ~2 fps (540-560 ms/frame)**, 20000 formes ~0.6 fps (2 s/frame) ; core (1000 formes + 2 threads FFM) ~8-10 fps ; stress ~1 fps (frames ~920 ms).
-Variantes JVM (list) : defaut/dist 138 fps, tuned/dist 140 fps, jar defaut 144 fps : difference negligeable ; RSS max : defaut dist ~250 Mo, jar ~215 Mo, tuned ~270 Mo (Xms512m) ; idle ~124 Mo ; stress ~450 Mo.
-Demarrage (fumee) : JVM->main ~60-120 ms ; JVM -> 1re frame ~0.95-1.1 s (a froid sous charge ~1.8 s).
+## Écarts / limites restants
+- images : ~18–30 fps à cause de la régression Skia ci-dessus (framework). Vignettes affichées en placeholder tant qu'elles ne sont pas décodées (à la demande, warm-up compris).
+- text : select-all partiel (limite documentée de SelectionContainer sur lazy layout). Emoji en glyphes monochromes (police de repli).
+- canvas 5000/20000 et stress : limités par la rastérisation Skia logicielle (~3.5 / ~0.9 / ~1.6–2.2 fps), le mode 60 Hz n'y change rien.
+- 60 Hz : par API publique de l'app (le limiteur natif Skiko ne plafonne pas sous Xvfb). nav à 60 Hz ~51 fps (frames longues sous charge partagée).
+- rows_drawn = exécutions du bloc drawBehind des lignes (Compose réutilise des couches), pas « lignes rastérisées par frame ».
+- Toutes les mesures de fumée ont été faites sur une machine partagée avec d'autres agents : indicatives seulement.
 
-## Taille / dependances d'execution
-- Distribution `build/compose/binaries/main/app/app` : 130 Mo (runtime jlink 85 Mo dont `lib/modules` 56.8 Mo ; jars app 45 Mo dont skiko natif 29.6 Mo dans le jar skiko-awt-runtime, extrait dans ~/.skiko/ au 1er lancement). Uber-jar : 28 Mo (+ JDK systeme ~300 Mo non compte). Lanceur `libapplauncher.so` 204 Ko.
-- `ldd libskiko-linux-x64.so` (29.6 Mo) : libGL, libX11, libfontconfig, libm, libc, libGLdispatch, libGLX, libxcb, libfreetype, libexpat, libXau, libXdmcp, libz, libbz2, libpng16, libbrotlidec/common, libbsd, libmd. `libjvm.so` : libstdc++, libm, libgcc_s, libc. AWT/X11 : libawt_xawt etc. du runtime jlink.
-- libbenchcore.so : 411 Ko.
+## Fumée harnais (8 s, 1 run, `run_bench.py`, logs/smoke-harness-60.log, logs/smoke-harness-uncapped.log, logs/smoke-summary.txt)
+Tous : rc 0, `markers: True`, `sum_heights` 8 799 584 (list/stream/input/stress/idle), `not_rendered: []`.
+| scénario | 60 Hz : fps / p50 ms / CPU % / RSS max Mo | uncapped : fps / p50 / CPU % / RSS max | ops |
+|---|---|---|---|
+| idle | – / – / 0.2 / 157 | – / – / 0.4 / 156 | |
+| list | 59.9 / 16.6 / 66 / 237 | 246.6 / 3.0 / 108 / 292 | final_offset ≈20 560 |
+| stream 1000 | 56.9 / 16.7 / 77 / 275 | 297.9 / 2.9 / 129 / 269 | gen 7979 / app 7951 / drop 0 |
+| stream 10000 | 59.9 / 16.6 / 79 / 257 | 237.4 / 2.9 / 116 / 284 | gen 79 751 / app 79 589 / drop 0 |
+| canvas 5000 | 3.5 / 272 / 101 / 228 | 3.2 / 302 / 100 / 245 | |
+| canvas 20000 | 0.9 / 1098 / 96 / 319 | 0.9 / 1086 / 98 / 317 | |
+| text | 48.9 / 17.3 / 117 / 260 | 37.0 / 22.1 / 95 / 255 | layout_ms 900, ttfd 2347 ms, sel 1900 car. |
+| images | 19.0 / 42.3 / 112 / 296 | 17.7 / 49.2 / 121 / 294 | 600 décodées, decode_total ≈4.1 s |
+| nav | 51.1 / 16.6 / 104 / 200 | 214.0 / 2.9 / 183 / 202 | transitions 19 / 18 |
+| core | 10.0 / 96.5 / 107 / 137 | 20.4 / 45.5 / 203 / 144 | calls/s 23.1 M / 43.8 M, heavy 7, stall 196 / 83 ms |
+| input | 60.0 / 16.6 / 63 / 240 | 207.6 / 3.0 / 107 / 279 | latence p50/p95 24.1/34.6 ms vs 12.8/78.2 ms, 29 touches, 0 perdue |
+| stress (8 s) | 1.6 / 651 / 130 / 287 | 2.2 / 440 / 181 / 261 | gc 4 / 39 ms / max 18 ms |
+GC (60 Hz, list) : 1 collection, 8 ms. Début de mesure (harnais) ~3.7–4.6 s (inclut 2 s de warm-up).
 
-## Problemes rencontres
-- google() Gradle -> dl.google.com 403 (ci-dessus). `kotlin.plugin.compose` 2.4.21 + CMP 1.12.2 : plugins OK, dependances KO. CMP 1.6.2 + Kotlin 2.0.21 : `Compose Multiplatform 1.6.2 doesn't support Kotlin 2.0.21` (logs/build-probe-1.6.2.log, premier essai).
-- Runtime jlink de jpackage sans `bin/java` (exec 127 la 1re fois) -> variante tuned via JAVA_TOOL_OPTIONS.
-- `ScrollableState.scrollBy` absent de CMP 1.5.12 (remplace par `scroll { scrollBy }`) ; `Pixmap.scalePixels` sans param cache.
-- Incident : un `pkill Xvfb` de ma part pendant le debut des essais a pu couper des serveurs X d'autres agents (display :71 partage) ; mes essais ulterieurs utilisent des displays aleatoires :200-699 et ne tuent que leur propre Xvfb. Les chiffres de fumee ont ete pris sur CPU partage.
+## Démarrage (JVM) et variante AOT/CDS
+- Principal : JVM start → main 125–210 ms ; JVM start → 1re frame 1.26–1.39 s au calme (logs/startup-aot-vs-default.log), 2.3–2.4 s sous charge (harnais) ; le runtime jlink de jpackage n'a **pas** d'archive CDS par défaut (`lib/server/` = libjvm.so + libjsig.so seulement).
+- Options documentées : jlink `--generate-cds-archive` (classes JDK seulement ; non exposé par le plugin Compose, dont `AbstractJLinkTask` ne passe que strip/compress) ; JDK 25 cache AOT (JEP 483 + JEP 514, successeur d'AppCDS). `make-aot.sh` : le mode 1 passe `-XX:AOTCacheOutput` échoue (« Cannot run program …/lib/runtime/bin/java », runtime jpackage sans bin/java, logs/make-aot-onestep.log) → mode 2 passes `AOTMode=record` (list 4 s) puis `AOTMode=create`, via JAVA_TOOL_OPTIONS ; cache 49 Mo (`build/aot/app.aot`). À regénérer après chaque build (classpath haché).
+- Résultat variante `BENCH_VARIANT=aot` : 1re frame **0.29–0.41 s** au calme (vs 1.26–1.39 s) ; harnais : début de mesure 2.64–2.80 s vs 4.29–4.45 s, 1re frame 542–747 ms vs 2341–2433 ms (logs/smoke-aot.txt), fps et RSS inchangés.
+
+## Tailles disque / dépendances
+- Distribution `build/compose/binaries/main/app/app` : **135.0 Mo** (`du -sb`), dont runtime jlink JDK 25 **86.7 Mo** (`lib/modules` 54.5 Mo, `libjvm.so` 27.9 Mo ; modules : java.base, datatransfer, xml, prefs, desktop, logging, management, jdk.crypto.ec, jdk.management, jdk.unsupported) et `lib/app` 47.8 Mo (dont `libskiko-linux-x64.so` 28.3 Mo chargée depuis `$APPDIR`, 43 jars). + cache AOT optionnel 49.2 Mo. Uber-jar : 31.3 Mo (+ JDK système).
+- `ldd libskiko-linux-x64.so` : libGL, libX11, libfontconfig, libstdc++, libm, libc, libGLdispatch, libGLX, libxcb, libfreetype, libexpat, libgcc_s, libXau, libXdmcp, libz, libbz2, libpng16, libbrotlidec/common, libbsd, libmd. `bin/app` : libc. `libjvm.so` : libstdc++, libm, libgcc_s, libc. `libawt_xawt.so` : libX11, libXext, libXi, libXrender, libXtst, libxcb…
+- libbenchcore.so (lien dynamique par FFM) : 418 Ko.
+
+## Lignes de code
+Kotlin : 1 056 lignes (`src/main/kotlin/bench/*.kt`) ; build/scripts : build.gradle.kts, settings.gradle.kts, run.sh, build.sh, make-aot.sh (116 lignes) ; diag : `diag/SkBench.java`, `diag/run-skbench.sh`. Passe 1 archivée dans `old-pass1/`.

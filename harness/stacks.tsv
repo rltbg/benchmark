@@ -9,3 +9,6 @@ avalonia-jit	${ROOT}/stacks/avalonia/out/jit/avalonia-bench
 qt-software	${ROOT}/stacks/qt/deploy/bin/qtbench	
 qt-software-uncapped	${ROOT}/stacks/qt/deploy/bin/qtbench	--env BENCH_PACING=uncapped
 qt-opengl	${ROOT}/stacks/qt/deploy/bin/qtbench --backend opengl	
+compose-jvm	${ROOT}/stacks/compose/run.sh	
+compose-jvm-uncapped	${ROOT}/stacks/compose/run.sh	--env BENCH_PACING=uncapped
+compose-jvm-aotcache	${ROOT}/stacks/compose/run.sh	--env BENCH_VARIANT=aot
