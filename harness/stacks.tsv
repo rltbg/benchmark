@@ -17,3 +17,4 @@ egui-uncapped	${ROOT}/stacks/egui/target/release/egui_bench	--env BENCH_PACING=u
 egui-glow	${ROOT}/stacks/egui/target/release/egui_bench	--env EGUI_BENCH_RENDERER=glow
 flutter	${ROOT}/stacks/flutter/app/build/linux/x64/release/bundle/benchapp	
 flutter-skia	${ROOT}/stacks/flutter/app/build/linux/x64/release/bundle/benchapp	--env BENCH_FLUTTER_IMPELLER=0
+nsh	${ROOT}/stacks/nsh/run.sh	

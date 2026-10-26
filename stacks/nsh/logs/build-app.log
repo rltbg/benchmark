@@ -245,3 +245,8 @@
    Compiling nshbench v0.2.0 (/home/user/benchmark/stacks/nsh/app)
    Compiling benchcore v0.1.0 (/home/user/benchmark/core)
    Compiling nsh-platform-linux v0.2.0
+    Finished `release` profile [optimized] target(s) in 4m 01s
+
+real	4m2.005s
+user	7m15.682s
+sys	0m28.096s
