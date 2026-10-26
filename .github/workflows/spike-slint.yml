@@ -1,0 +1,130 @@
+name: spike-slint
+on:
+  push:
+    branches: ['ci/slint']
+permissions:
+  contents: read
+env:
+  CARGO_TERM_COLOR: never
+  RUST_BACKTRACE: "1"
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@v1
+        with: { toolchain: 1.99.1 }
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: spikes/slint, key: linux }
+      - run: pip install brotli
+      - run: bash spikes/slint/ci/linux.sh out/linux
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: res-slint-linux, path: out/linux, if-no-files-found: warn }
+  windows:
+    runs-on: windows-2025
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@v1
+        with: { toolchain: 1.99.1 }
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: spikes/slint, key: windows }
+      - run: pip install brotli
+      - run: pwsh -File spikes/slint/ci/windows.ps1 out/windows
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: res-slint-windows, path: out/windows, if-no-files-found: warn }
+  macos:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@v1
+        with: { toolchain: 1.99.1 }
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: spikes/slint, key: macos }
+      - run: pip3 install --break-system-packages brotli
+      - run: bash spikes/slint/ci/macos.sh out/macos
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: res-slint-macos, path: out/macos, if-no-files-found: warn }
+  ios-sim:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@v1
+        with: { toolchain: 1.99.1, targets: aarch64-apple-ios-sim }
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: spikes/slint, key: ios }
+      - run: pip3 install --break-system-packages brotli
+      - run: bash spikes/slint/ci/ios.sh out/ios-sim
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: res-slint-ios-sim, path: out/ios-sim, if-no-files-found: warn }
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with: { distribution: temurin, java-version: '17' }
+      - uses: dtolnay/rust-toolchain@v1
+        with: { toolchain: 1.99.1 }
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: spikes/slint, key: android }
+      - run: pip install brotli
+      - name: build
+        id: build
+        run: |
+          s=$(date +%s)
+          bash spikes/slint/ci/android_build.sh out/android || true
+          echo "sec=$(( $(date +%s) - s ))" >> "$GITHUB_OUTPUT"
+      - name: activer KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: émulateur + exécution
+        if: hashFiles('out/android/slintspike.apk') != ''
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          force-avd-creation: false
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: bash spikes/slint/ci/android_run.sh out/android
+      - name: enregistrer
+        if: always()
+        run: bash spikes/slint/ci/android_record.sh out/android "${{ steps.build.outputs.sec }}"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: res-slint-android, path: out/android, if-no-files-found: warn }
+  web:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: dtolnay/rust-toolchain@v1
+        with: { toolchain: 1.99.1, targets: wasm32-unknown-unknown }
+      - uses: Swatinem/rust-cache@v2
+        with: { workspaces: spikes/slint, key: web }
+      - run: pip install brotli
+      - run: bash spikes/slint/ci/web.sh out/web
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with: { name: res-slint-web, path: out/web, if-no-files-found: warn }
+  publish:
+    needs: [linux, windows, macos, ios-sim, android, web]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/publish-results
+        with: { stack: slint }

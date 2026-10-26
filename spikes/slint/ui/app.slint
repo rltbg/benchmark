@@ -1,0 +1,364 @@
+// Spike multiplateforme Slint : 3 onglets (Liste, Canvas, Coeur) + bandeau permanent.
+// Le même fichier sert pour Linux, Windows, macOS, iOS, Android et le web.
+import { LineEdit, Button, AboutSlint } from "std-widgets.slint";
+
+export struct RowData { y: length, h: length, title: string, price: string, color: color }
+export struct ShapeData { x0: float, y0: float, vx: float, vy: float, w: float, kind: int, c1: color, c2: color }
+
+component RowView inherits Rectangle {
+    in property <RowData> d;
+    y: d.y;
+    height: d.h;
+    background: d.h > 0px ? #ffffff : transparent;
+    Rectangle {
+        x: 12px;
+        y: (parent.height - 32px) / 2;
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        background: d.color;
+    }
+    Text {
+        x: 60px;
+        y: (parent.height - 40px) / 2;
+        width: parent.width - 60px - 110px;
+        height: 22px;
+        text: d.title;
+        font-size: 16px;
+        font-weight: 700;
+        color: #202020;
+        overflow: elide;
+    }
+    Text {
+        x: 60px;
+        y: (parent.height - 40px) / 2 + 22px;
+        width: parent.width - 60px - 110px;
+        height: 18px;
+        text: "hauteur " + d.h / 1px + " px";
+        font-size: 12px;
+        color: #606060;
+    }
+    Text {
+        x: parent.width - 108px;
+        y: (parent.height - 20px) / 2;
+        width: 100px;
+        height: 20px;
+        horizontal-alignment: right;
+        text: d.price;
+        font-size: 15px;
+        color: #107010;
+    }
+    Rectangle {
+        y: parent.height - 1px;
+        height: 1px;
+        background: #e0e0e0;
+    }
+}
+
+component ShapeCanvas inherits Rectangle {
+    in property <[ShapeData]> shapes;
+    in property <float> t;
+    in property <int> fps;
+    clip: true;
+    background: #1e2630;
+
+    // rebond triangulaire : position dans [0, r]
+    pure function bounce(p: float, r: float) -> float {
+        r - abs(mod(p, 2 * r) - r)
+    }
+
+    for s in shapes: Rectangle {
+        x: bounce(s.x0 + s.vx * root.t, max(1, root.width / 1px - s.w)) * 1px;
+        y: bounce(s.y0 + s.vy * root.t, max(1, root.height / 1px - s.w)) * 1px;
+        width: s.w * 1px;
+        height: s.w * 1px;
+        border-radius: s.kind == 0 ? 0px : (s.kind == 1 ? s.w * 0.5px : s.w * 0.25px);
+        background: @linear-gradient(90deg, s.c1, s.c2);
+    }
+    Rectangle {
+        x: 8px;
+        y: 8px;
+        width: fps-text.preferred-width + 16px;
+        height: 28px;
+        border-radius: 6px;
+        background: #000000b0;
+        fps-text := Text {
+            text: "FPS " + root.fps;
+            color: #80ff80;
+            font-size: 16px;
+            font-weight: 700;
+        }
+    }
+}
+
+component TabButton inherits Rectangle {
+    in property <string> label;
+    in property <bool> active;
+    callback clicked();
+    background: active ? #2b6cb0 : #dde2ea;
+    Text {
+        text: root.label;
+        color: root.active ? white : #202830;
+        font-size: 16px;
+        font-weight: root.active ? 700 : 400;
+    }
+    TouchArea {
+        clicked => {
+            root.clicked();
+        }
+    }
+}
+
+export component MainWindow inherits Window {
+    title: "Slint Spike";
+    preferred-width: 1024px;
+    preferred-height: 720px;
+    background: #f4f4f4;
+
+    in property <bool> mobile: false;
+    in-out property <int> tab: 0;
+    in property <string> banner;
+
+    // onglet 1
+    in property <[RowData]> rows;
+    in property <length> total-h;
+    in-out property <length> list-scroll <=> fl.content-y;
+    out property <length> list-view-h <=> fl.height;
+
+    // onglet 2
+    in property <[ShapeData]> shapes;
+    in property <float> anim-t;
+    in property <int> fps;
+
+    // onglet 3
+    in-out property <string> input-text <=> le.text;
+    in property <string> frame-hex;
+    in property <string> res-validate;
+    in property <string> res-payload;
+    in property <string> res-hash;
+    in property <string> heavy-status;
+    in property <bool> heavy-running;
+    callback edited(string);
+    callback heavy-clicked();
+
+    // à propos (attribution exigée par la licence Slint Royalty-free 2.0, art. 2 a)
+    in-out property <bool> show-about: false;
+
+    callback tab-changed(int);
+
+    property <length> top-inset: root.safe-area-insets.top;
+    property <length> bottom-inset: root.safe-area-insets.bottom;
+    property <length> tabbar-h: root.mobile ? 56px : 40px;
+    property <length> banner-h: 34px;
+    property <length> content-y: top-inset + banner-h + (root.mobile ? 0px : tabbar-h);
+    property <length> content-h: root.height - content-y - bottom-inset - (root.mobile ? tabbar-h : 0px);
+
+    // bandeau permanent
+    Rectangle {
+        x: 0;
+        y: root.top-inset;
+        width: root.width;
+        height: root.banner-h;
+        background: #1f2d44;
+        Text {
+            x: 10px;
+            width: parent.width - 100px;
+            text: root.banner;
+            color: white;
+            font-size: 13px;
+            vertical-alignment: center;
+            overflow: elide;
+        }
+        Rectangle {
+            x: parent.width - 84px;
+            width: 78px;
+            height: 24px;
+            y: 5px;
+            border-radius: 4px;
+            background: #3a5078;
+            Text {
+                text: "À propos";
+                color: white;
+                font-size: 12px;
+            }
+            TouchArea {
+                clicked => {
+                    root.show-about = true;
+                }
+            }
+        }
+    }
+
+    // barre d'onglets : en haut (bureau/web) ou en bas (mobile)
+    Rectangle {
+        x: 0;
+        y: root.mobile ? root.height - root.bottom-inset - root.tabbar-h : root.top-inset + root.banner-h;
+        width: root.width;
+        height: root.tabbar-h;
+        background: #dde2ea;
+        HorizontalLayout {
+            TabButton {
+                label: "Liste";
+                active: root.tab == 0;
+                clicked => {
+                    root.tab-changed(0);
+                }
+            }
+            TabButton {
+                label: "Canvas";
+                active: root.tab == 1;
+                clicked => {
+                    root.tab-changed(1);
+                }
+            }
+            TabButton {
+                label: "Cœur";
+                active: root.tab == 2;
+                clicked => {
+                    root.tab-changed(2);
+                }
+            }
+        }
+    }
+
+    // onglet 1 : liste virtualisée (seules les lignes visibles existent), défilement tactile/molette
+    fl := Flickable {
+        visible: root.tab == 0;
+        x: 0;
+        y: root.content-y;
+        width: root.width;
+        height: root.content-h;
+        content-width: self.width;
+        content-height: root.total-h;
+        for r in root.rows: RowView {
+            d: r;
+            width: root.width;
+        }
+    }
+
+    // onglet 2
+    if root.tab == 1: ShapeCanvas {
+        x: 0;
+        y: root.content-y;
+        width: root.width;
+        height: root.content-h;
+        shapes: root.shapes;
+        t: root.anim-t;
+        fps: root.fps;
+    }
+
+    // onglet 3
+    Rectangle {
+        visible: root.tab == 2;
+        x: 0;
+        y: root.content-y;
+        width: root.width;
+        height: root.content-h;
+        background: #f4f4f4;
+        VerticalLayout {
+            padding: 14px;
+            spacing: 10px;
+            alignment: start;
+            Text {
+                text: "Saisie (encadrée [0xA5][0x01][n][UTF-8 ≤ 64 o])";
+                font-size: 14px;
+                color: #202020;
+                wrap: word-wrap;
+            }
+            le := LineEdit {
+                placeholder-text: "Tapez du texte";
+                edited(t) => {
+                    root.edited(t);
+                }
+            }
+            Text {
+                text: "trame : " + root.frame-hex;
+                font-size: 12px;
+                color: #404040;
+                wrap: word-wrap;
+            }
+            Text {
+                text: "validate = " + root.res-validate;
+                font-size: 16px;
+                color: #202020;
+            }
+            Text {
+                text: "payload (parse) = " + root.res-payload;
+                font-size: 16px;
+                color: #202020;
+                wrap: word-wrap;
+            }
+            Text {
+                text: "hash FNV-1a = " + root.res-hash;
+                font-size: 16px;
+                color: #202020;
+            }
+            Button {
+                text: "charge 100 ms";
+                enabled: !root.heavy-running;
+                clicked => {
+                    root.heavy-clicked();
+                }
+            }
+            Text {
+                text: root.heavy-status;
+                font-size: 13px;
+                color: #404040;
+                wrap: word-wrap;
+            }
+            // témoin d'animation : la charge ne doit pas le figer (sauf sans fil, ex. wasm)
+            Rectangle {
+                height: 24px;
+                background: #d0d6de;
+                clip: true;
+                Rectangle {
+                    x: (abs(mod(root.anim-t * 160, 2 * (parent.width / 1px - 24)) - (parent.width / 1px - 24))) * 1px;
+                    width: 24px;
+                    height: 24px;
+                    border-radius: 12px;
+                    background: @linear-gradient(90deg, #e53e3e, #ed8936);
+                }
+            }
+            Text {
+                text: "FPS " + root.fps;
+                font-size: 12px;
+                color: #404040;
+            }
+        }
+    }
+
+    // fenêtre « À propos » : widget AboutSlint
+    if root.show-about: Rectangle {
+        background: #000000a0;
+        TouchArea {
+            clicked => {
+                root.show-about = false;
+            }
+        }
+        Rectangle {
+            width: min(root.width - 32px, 420px);
+            height: min(root.height - 64px, 460px);
+            border-radius: 10px;
+            background: white;
+            VerticalLayout {
+                padding: 12px;
+                spacing: 8px;
+                Text {
+                    text: "À propos";
+                    font-size: 18px;
+                    font-weight: 700;
+                    color: #202020;
+                }
+                AboutSlint {
+                    vertical-stretch: 1;
+                }
+                Button {
+                    text: "Fermer";
+                    clicked => {
+                        root.show-about = false;
+                    }
+                }
+            }
+        }
+    }
+}

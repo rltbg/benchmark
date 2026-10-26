@@ -1,0 +1,60 @@
+[package]
+name = "slintspike"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.92"
+license = "GPL-3.0-only OR LicenseRef-Slint-Royalty-free-2.0"
+description = "Spike multiplateforme Slint (une base de code Rust + .slint)"
+
+[workspace]
+
+[lib]
+name = "slintspike"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "slintspike"
+path = "src/main.rs"
+
+[features]
+default = ["core-pulse", "skia"]
+# cœur : C généré par F* Pulse + KaRaMeL (stacks/karamel/gen-direct), compilé par la crate cc
+core-pulse = []
+# cœur Rust du dépôt (core/), variante secondaire de comparaison (Linux)
+core-rust = ["dep:benchcore"]
+# renderer sur bureau/iOS (Android : Skia imposé par le backend ; web : FemtoVG imposé par la doc)
+skia = ["slint/renderer-skia"]
+femtovg = ["slint/renderer-femtovg"]
+software = ["slint/renderer-software"]
+
+[dependencies]
+slint = { version = "=1.18.1", default-features = false, features = ["std", "compat-1-18"] }
+benchcore = { path = "../../core", optional = true }
+
+# bureau (Linux, Windows, macOS) et iOS : backend winit
+[target.'cfg(not(any(target_os = "android", target_family = "wasm")))'.dependencies]
+slint = { version = "=1.18.1", default-features = false, features = ["backend-winit"] }
+
+# Android : backend android-activity (Skia imposé)
+[target.'cfg(target_os = "android")'.dependencies]
+slint = { version = "=1.18.1", default-features = false, features = ["backend-android-activity-06"] }
+jni-sys = "=0.4.1"
+
+# web : winit + FemtoVG (WebGL), selon docs.slint.dev/guide/platforms/web
+[target.'cfg(target_family = "wasm")'.dependencies]
+slint = { version = "=1.18.1", default-features = false, features = ["backend-winit", "renderer-femtovg"] }
+wasm-bindgen = "=0.2.129"
+web-sys = { version = "=0.3.106", features = ["Window", "Location", "Performance", "console"] }
+
+[build-dependencies]
+slint-build = "=1.18.1"
+cc = "=1.10.0"
+
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true
+debug = false
