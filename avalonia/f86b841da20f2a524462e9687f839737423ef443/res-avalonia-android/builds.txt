@@ -1,0 +1,10 @@
+fsharp-x64 rc=0 84s
+fsharp-arm64 rc=0 73s
+total 48716
+drwxr-xr-x  2 runner runner     4096 Oct 26 15:58 .
+drwxr-xr-x 16 runner runner     4096 Oct 26 15:55 ..
+-rw-r--r--  1 runner runner 24249612 Oct 26 15:58 apk-arm64.apk
+-rw-r--r--  1 runner runner 25609232 Oct 26 15:57 apk-x64.apk
+-rw-r--r--  1 runner runner        7 Oct 26 15:58 head
+-rw-r--r--  1 runner runner        3 Oct 26 15:58 secs-arm64
+-rw-r--r--  1 runner runner        3 Oct 26 15:57 secs-x64

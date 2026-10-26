@@ -1,0 +1,624 @@
+{
+ "summary": {
+  "tag": "compose-jvm-uncapped-canvas-s5000",
+  "stack": "compose-jvm-uncapped",
+  "scenario": "canvas",
+  "runs": 3,
+  "ok_runs": 3,
+  "oom_runs": 0,
+  "markers_ok": 3,
+  "agg": {
+   "fps_mean": {
+    "median": 3.260623364525664,
+    "p95": 3.693220001205004,
+    "min": 2.927724479704086,
+    "max": 3.693220001205004,
+    "n": 3
+   },
+   "frame_p50": {
+    "median": 291.675,
+    "p95": 324.11,
+    "min": 264.427,
+    "max": 324.11,
+    "n": 3
+   },
+   "frame_p95": {
+    "median": 423.107,
+    "p95": 454.008,
+    "min": 319.687,
+    "max": 454.008,
+    "n": 3
+   },
+   "frame_p99": {
+    "median": 486.791,
+    "p95": 506.305,
+    "min": 336.05,
+    "max": 506.305,
+    "n": 3
+   },
+   "frame_max": {
+    "median": 486.791,
+    "p95": 506.305,
+    "min": 336.05,
+    "max": 506.305,
+    "n": 3
+   },
+   "dropped_gt16_7": {
+    "median": 45,
+    "p95": 51,
+    "min": 41,
+    "max": 51,
+    "n": 3
+   },
+   "dropped_gt8_3": {
+    "median": 45,
+    "p95": 51,
+    "min": 41,
+    "max": 51,
+    "n": 3
+   },
+   "dropped_gt25": {
+    "median": 45,
+    "p95": 51,
+    "min": 41,
+    "max": 51,
+    "n": 3
+   },
+   "rss_kb_median": {
+    "median": 230184,
+    "p95": 237436.0,
+    "min": 227832,
+    "max": 237436.0,
+    "n": 3
+   },
+   "rss_kb_peak": {
+    "median": 237612,
+    "p95": 239824,
+    "min": 232948,
+    "max": 239824,
+    "n": 3
+   },
+   "pss_kb_median": {
+    "median": 225855,
+    "p95": 233153.0,
+    "min": 223480,
+    "max": 233153.0,
+    "n": 3
+   },
+   "pss_kb_peak": {
+    "median": 233283,
+    "p95": 235541,
+    "min": 228596,
+    "max": 235541,
+    "n": 3
+   },
+   "cpu_pct_core_mean": {
+    "median": 102.59172552061311,
+    "p95": 102.91654502125712,
+    "min": 102.51257387076107,
+    "max": 102.91654502125712,
+    "n": 3
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 121.30400325104894,
+    "p95": 123.89836058605995,
+    "min": 112.85198042553618,
+    "max": 123.89836058605995,
+    "n": 3
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 3.561133314000017,
+    "p95": 3.5645754790002684,
+    "min": 3.459757322999849,
+    "max": 3.5645754790002684,
+    "n": 3
+   },
+   "wall_s": {
+    "median": 17.843398725000043,
+    "p95": 18.201338373999988,
+    "min": 17.66095983599962,
+    "max": 18.201338373999988,
+    "n": 3
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 17.843398725000043,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 3.561133314000017,
+   "frames": 51,
+   "ops": {
+    "pacing": "uncapped",
+    "jvm_start_to_main_ms": 113,
+    "render_api": "SOFTWARE_FAST",
+    "vsync_enabled": "false",
+    "startup_to_first_frame_ms": 1409,
+    "gc": {
+     "collections": 7,
+     "pause_ms_total": 52,
+     "pause_ms_max": 17,
+     "per_collector": {
+      "G1 Young Generation": {
+       "collections": 5,
+       "time_ms": 48
+      },
+      "G1 Concurrent GC": {
+       "collections": 2,
+       "time_ms": 4
+      },
+      "G1 Old Generation": {
+       "collections": 0,
+       "time_ms": 0
+      }
+     },
+     "source": "GarbageCollectorMXBean count/time deltas between markers; max = max GcInfo.duration from GC notifications (ms resolution)"
+    },
+    "shapes": 5000,
+    "not_rendered": []
+   },
+   "checksum": "c6816c33",
+   "unsupported": null,
+   "version": "Compose Multiplatform 1.12.2 (Jetpack Compose 1.12.1 base); Kotlin 2.4.21; Skiko 0.150.2; kotlinx-coroutines 1.11.0; JVM OpenJDK 64-Bit Server VM 25.0.4.1+1-1-24.04.4-Ubuntu; GC G1 Young Generation+G1 Concurrent GC+G1 Old Generation",
+   "fps_mean": 3.693220001205004,
+   "frame_p50": 264.427,
+   "frame_p95": 319.687,
+   "frame_p99": 336.05,
+   "frame_max": 336.05,
+   "dropped_gt16_7": 51,
+   "dropped_gt8_3": 51,
+   "dropped_gt25": 51,
+   "dropped_ms_gt16_7": 12957.388,
+   "window": "markers",
+   "rss_kb_median": 237436.0,
+   "rss_kb_peak": 239824,
+   "pss_kb_median": 233153.0,
+   "pss_kb_peak": 235541,
+   "pss_kb_first_quarter": 206885.0,
+   "pss_kb_last_quarter": 234629.0,
+   "cpu_pct_core_mean": 102.91654502125712,
+   "cpu_pct_core_peak_1s": 123.89836058605995,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2824,
+     682
+    ],
+    [
+     1.0,
+     1.6,
+     119756,
+     115529
+    ],
+    [
+     2.1,
+     3.0,
+     155152,
+     150869
+    ],
+    [
+     3.1,
+     4.11,
+     168252,
+     163969
+    ],
+    [
+     4.2,
+     5.26,
+     187480,
+     183197
+    ],
+    [
+     5.2,
+     6.53,
+     210676,
+     206393
+    ],
+    [
+     6.3,
+     7.59,
+     224440,
+     220157
+    ],
+    [
+     7.3,
+     8.67,
+     229608,
+     225325
+    ],
+    [
+     8.4,
+     9.74,
+     229656,
+     225373
+    ],
+    [
+     9.4,
+     10.8,
+     229880,
+     225597
+    ],
+    [
+     10.5,
+     11.89,
+     237396,
+     233113
+    ],
+    [
+     11.6,
+     12.94,
+     237524,
+     233241
+    ],
+    [
+     12.6,
+     13.97,
+     237576,
+     233293
+    ],
+    [
+     13.6,
+     15.1,
+     238756,
+     234473
+    ],
+    [
+     14.7,
+     16.14,
+     238760,
+     234477
+    ],
+    [
+     15.7,
+     17.17,
+     238760,
+     234477
+    ],
+    [
+     16.8,
+     18.24,
+     238912,
+     234629
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 17.66095983599962,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 3.459757322999849,
+   "frames": 45,
+   "ops": {
+    "pacing": "uncapped",
+    "jvm_start_to_main_ms": 108,
+    "render_api": "SOFTWARE_FAST",
+    "vsync_enabled": "false",
+    "startup_to_first_frame_ms": 1435,
+    "gc": {
+     "collections": 6,
+     "pause_ms_total": 47,
+     "pause_ms_max": 17,
+     "per_collector": {
+      "G1 Young Generation": {
+       "collections": 4,
+       "time_ms": 43
+      },
+      "G1 Concurrent GC": {
+       "collections": 2,
+       "time_ms": 4
+      },
+      "G1 Old Generation": {
+       "collections": 0,
+       "time_ms": 0
+      }
+     },
+     "source": "GarbageCollectorMXBean count/time deltas between markers; max = max GcInfo.duration from GC notifications (ms resolution)"
+    },
+    "shapes": 5000,
+    "not_rendered": []
+   },
+   "checksum": "c6816c33",
+   "unsupported": null,
+   "version": "Compose Multiplatform 1.12.2 (Jetpack Compose 1.12.1 base); Kotlin 2.4.21; Skiko 0.150.2; kotlinx-coroutines 1.11.0; JVM OpenJDK 64-Bit Server VM 25.0.4.1+1-1-24.04.4-Ubuntu; GC G1 Young Generation+G1 Concurrent GC+G1 Old Generation",
+   "fps_mean": 3.260623364525664,
+   "frame_p50": 291.675,
+   "frame_p95": 423.107,
+   "frame_p99": 486.791,
+   "frame_max": 486.791,
+   "dropped_gt16_7": 45,
+   "dropped_gt8_3": 45,
+   "dropped_gt25": 45,
+   "dropped_ms_gt16_7": 13049.542000000001,
+   "window": "markers",
+   "rss_kb_median": 230184,
+   "rss_kb_peak": 237612,
+   "pss_kb_median": 225855,
+   "pss_kb_peak": 233283,
+   "pss_kb_first_quarter": 203139,
+   "pss_kb_last_quarter": 232219,
+   "cpu_pct_core_mean": 102.51257387076107,
+   "cpu_pct_core_peak_1s": 112.85198042553618,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3524,
+     749
+    ],
+    [
+     1.0,
+     1.63,
+     124068,
+     119795
+    ],
+    [
+     2.1,
+     3.03,
+     154756,
+     150427
+    ],
+    [
+     3.1,
+     4.18,
+     172112,
+     167783
+    ],
+    [
+     4.2,
+     5.33,
+     186728,
+     182399
+    ],
+    [
+     5.2,
+     6.5,
+     211468,
+     207139
+    ],
+    [
+     6.3,
+     7.57,
+     225504,
+     221175
+    ],
+    [
+     7.3,
+     8.68,
+     226836,
+     222507
+    ],
+    [
+     8.4,
+     9.73,
+     226860,
+     222531
+    ],
+    [
+     9.5,
+     10.78,
+     226904,
+     222575
+    ],
+    [
+     10.5,
+     11.83,
+     230184,
+     225855
+    ],
+    [
+     11.6,
+     12.93,
+     235324,
+     230995
+    ],
+    [
+     12.6,
+     13.97,
+     235768,
+     231439
+    ],
+    [
+     13.7,
+     15.12,
+     236544,
+     232215
+    ],
+    [
+     14.7,
+     16.17,
+     236544,
+     232215
+    ],
+    [
+     15.8,
+     17.17,
+     236544,
+     232215
+    ],
+    [
+     16.8,
+     18.22,
+     236844,
+     232515
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 18.201338373999988,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 3.5645754790002684,
+   "frames": 41,
+   "ops": {
+    "pacing": "uncapped",
+    "jvm_start_to_main_ms": 169,
+    "render_api": "SOFTWARE_FAST",
+    "vsync_enabled": "false",
+    "startup_to_first_frame_ms": 1491,
+    "gc": {
+     "collections": 5,
+     "pause_ms_total": 41,
+     "pause_ms_max": 17,
+     "per_collector": {
+      "G1 Young Generation": {
+       "collections": 3,
+       "time_ms": 38
+      },
+      "G1 Concurrent GC": {
+       "collections": 2,
+       "time_ms": 3
+      },
+      "G1 Old Generation": {
+       "collections": 0,
+       "time_ms": 0
+      }
+     },
+     "source": "GarbageCollectorMXBean count/time deltas between markers; max = max GcInfo.duration from GC notifications (ms resolution)"
+    },
+    "shapes": 5000,
+    "not_rendered": []
+   },
+   "checksum": "c6816c33",
+   "unsupported": null,
+   "version": "Compose Multiplatform 1.12.2 (Jetpack Compose 1.12.1 base); Kotlin 2.4.21; Skiko 0.150.2; kotlinx-coroutines 1.11.0; JVM OpenJDK 64-Bit Server VM 25.0.4.1+1-1-24.04.4-Ubuntu; GC G1 Young Generation+G1 Concurrent GC+G1 Old Generation",
+   "fps_mean": 2.927724479704086,
+   "frame_p50": 324.11,
+   "frame_p95": 454.008,
+   "frame_p99": 506.305,
+   "frame_max": 506.305,
+   "dropped_gt16_7": 41,
+   "dropped_gt8_3": 41,
+   "dropped_gt25": 41,
+   "dropped_ms_gt16_7": 13319.35,
+   "window": "markers",
+   "rss_kb_median": 227832,
+   "rss_kb_peak": 232948,
+   "pss_kb_median": 223480,
+   "pss_kb_peak": 228596,
+   "pss_kb_first_quarter": 208288,
+   "pss_kb_last_quarter": 228428,
+   "cpu_pct_core_mean": 102.59172552061311,
+   "cpu_pct_core_peak_1s": 121.30400325104894,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3276,
+     820
+    ],
+    [
+     1.0,
+     1.53,
+     108988,
+     104692
+    ],
+    [
+     2.1,
+     3.04,
+     154872,
+     150520
+    ],
+    [
+     3.1,
+     4.21,
+     172260,
+     167908
+    ],
+    [
+     4.2,
+     5.38,
+     190012,
+     185660
+    ],
+    [
+     5.3,
+     6.65,
+     212640,
+     208288
+    ],
+    [
+     6.3,
+     7.68,
+     223056,
+     218704
+    ],
+    [
+     7.4,
+     8.8,
+     227692,
+     223340
+    ],
+    [
+     8.4,
+     9.86,
+     227752,
+     223400
+    ],
+    [
+     9.5,
+     10.93,
+     227768,
+     223416
+    ],
+    [
+     10.6,
+     12.0,
+     227832,
+     223480
+    ],
+    [
+     11.6,
+     13.12,
+     231636,
+     227284
+    ],
+    [
+     12.7,
+     14.18,
+     231976,
+     227624
+    ],
+    [
+     13.7,
+     15.24,
+     232136,
+     227784
+    ],
+    [
+     14.8,
+     16.31,
+     232248,
+     227896
+    ],
+    [
+     15.9,
+     17.43,
+     232780,
+     228428
+    ],
+    [
+     16.9,
+     18.48,
+     232780,
+     228428
+    ],
+    [
+     18.0,
+     19.34,
+     233440,
+     229088
+    ]
+   ]
+  }
+ ]
+}

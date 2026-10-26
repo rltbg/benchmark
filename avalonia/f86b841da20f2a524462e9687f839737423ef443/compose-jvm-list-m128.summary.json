@@ -1,0 +1,237 @@
+{
+ "summary": {
+  "tag": "compose-jvm-list-m128",
+  "stack": "compose-jvm",
+  "scenario": "list",
+  "runs": 3,
+  "ok_runs": 0,
+  "oom_runs": 3,
+  "markers_ok": 0,
+  "agg": {
+   "fps_mean": null,
+   "frame_p50": null,
+   "frame_p95": null,
+   "frame_p99": null,
+   "frame_max": null,
+   "dropped_gt16_7": null,
+   "dropped_gt8_3": null,
+   "dropped_gt25": null,
+   "rss_kb_median": null,
+   "rss_kb_peak": null,
+   "pss_kb_median": null,
+   "pss_kb_peak": null,
+   "cpu_pct_core_mean": null,
+   "cpu_pct_core_peak_1s": null,
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": null,
+   "wall_s": null
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": -9,
+   "wall_s": 7.814866814002016,
+   "markers": false,
+   "mem_failcnt": 695,
+   "mem_charged_peak_kb": 131072,
+   "oom_kills": 1,
+   "oom": true,
+   "startup_to_measure_s": 3.820527633000893,
+   "window": "whole_run",
+   "rss_kb_median": 152366.0,
+   "rss_kb_peak": 170384,
+   "pss_kb_median": 148143.0,
+   "pss_kb_peak": 166161,
+   "pss_kb_first_quarter": 71650.0,
+   "pss_kb_last_quarter": 156307.0,
+   "cpu_pct_core_mean": 101.50707722620474,
+   "cpu_pct_core_peak_1s": 183.6419186098557,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3456,
+     752
+    ],
+    [
+     1.1,
+     1.53,
+     84048,
+     79834
+    ],
+    [
+     2.1,
+     3.48,
+     139208,
+     134985
+    ],
+    [
+     3.2,
+     4.72,
+     149048,
+     144825
+    ],
+    [
+     4.2,
+     5.51,
+     154124,
+     149901
+    ],
+    [
+     5.3,
+     6.21,
+     152964,
+     148741
+    ],
+    [
+     6.3,
+     7.05,
+     160080,
+     155857
+    ],
+    [
+     7.4,
+     7.6,
+     162376,
+     158153
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": -9,
+   "wall_s": 6.629648726000596,
+   "markers": false,
+   "mem_failcnt": 2349,
+   "mem_charged_peak_kb": 131072,
+   "oom_kills": 1,
+   "oom": true,
+   "startup_to_measure_s": 3.3676570120005636,
+   "window": "whole_run",
+   "rss_kb_median": 152704,
+   "rss_kb_peak": 170520,
+   "pss_kb_median": 148491,
+   "pss_kb_peak": 166307,
+   "pss_kb_first_quarter": 76905,
+   "pss_kb_last_quarter": 155635,
+   "cpu_pct_core_mean": 98.22210493522266,
+   "cpu_pct_core_peak_1s": 178.2353382571934,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3388,
+     727
+    ],
+    [
+     1.1,
+     1.54,
+     100368,
+     69677
+    ],
+    [
+     2.1,
+     3.17,
+     145120,
+     140907
+    ],
+    [
+     3.2,
+     4.09,
+     152396,
+     148183
+    ],
+    [
+     4.2,
+     4.82,
+     157476,
+     153263
+    ],
+    [
+     5.3,
+     5.45,
+     158348,
+     154135
+    ],
+    [
+     6.3,
+     6.23,
+     162524,
+     158311
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": -9,
+   "wall_s": 7.677703510998981,
+   "markers": false,
+   "mem_failcnt": 794,
+   "mem_charged_peak_kb": 131072,
+   "oom_kills": 1,
+   "oom": true,
+   "startup_to_measure_s": 3.25896487999853,
+   "window": "whole_run",
+   "rss_kb_median": 147004,
+   "rss_kb_peak": 170272,
+   "pss_kb_median": 142803,
+   "pss_kb_peak": 166071,
+   "pss_kb_first_quarter": 87575.0,
+   "pss_kb_last_quarter": 162827.0,
+   "cpu_pct_core_mean": 92.67349918068757,
+   "cpu_pct_core_peak_1s": 173.2560871963573,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3416,
+     662
+    ],
+    [
+     1.1,
+     1.56,
+     99528,
+     95357
+    ],
+    [
+     2.1,
+     3.03,
+     134852,
+     130651
+    ],
+    [
+     3.2,
+     3.94,
+     144148,
+     139947
+    ],
+    [
+     4.2,
+     4.71,
+     148976,
+     144775
+    ],
+    [
+     5.3,
+     5.43,
+     151060,
+     146859
+    ],
+    [
+     6.3,
+     6.37,
+     165396,
+     161195
+    ],
+    [
+     7.4,
+     6.98,
+     170132,
+     165931
+    ]
+   ]
+  }
+ ]
+}

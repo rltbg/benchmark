@@ -1,0 +1,418 @@
+{
+ "summary": {
+  "tag": "egui-glow-stream-r1000",
+  "stack": "egui-glow",
+  "scenario": "stream",
+  "runs": 3,
+  "ok_runs": 3,
+  "agg": {
+   "fps_mean": {
+    "median": 206.46512214186674,
+    "p95": 212.24790383770204,
+    "min": 199.81148593260724,
+    "max": 212.24790383770204
+   },
+   "frame_p95": {
+    "median": 6.266,
+    "p95": 6.437,
+    "min": 5.997,
+    "max": 6.437
+   },
+   "frame_p99": {
+    "median": 8.118,
+    "p95": 8.179,
+    "min": 7.823,
+    "max": 8.179
+   },
+   "frame_max": {
+    "median": 12.688,
+    "p95": 16.773,
+    "min": 12.029,
+    "max": 16.773
+   },
+   "dropped_gt16_7": {
+    "median": 0,
+    "p95": 1,
+    "min": 0,
+    "max": 1
+   },
+   "dropped_gt8_3": {
+    "median": 25,
+    "p95": 25,
+    "min": 19,
+    "max": 25
+   },
+   "rss_kb_median": {
+    "median": 118056.0,
+    "p95": 118132.0,
+    "min": 117872,
+    "max": 118132.0
+   },
+   "rss_kb_peak": {
+    "median": 118056,
+    "p95": 118132,
+    "min": 117872,
+    "max": 118132
+   },
+   "rss_kb_last_quarter": {
+    "median": 118056,
+    "p95": 118132,
+    "min": 117872,
+    "max": 118132
+   },
+   "cpu_pct_core_mean": {
+    "median": 253.4035364889413,
+    "p95": 254.36585520109318,
+    "min": 250.9586419054219,
+    "max": 254.36585520109318
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 282.99999999999983,
+    "p95": 283.00000000000017,
+    "min": 282.0,
+    "max": 283.00000000000017
+   },
+   "wall_s": {
+    "median": 16.169852213999548,
+    "p95": 16.17370478399971,
+    "min": 16.12125445499987,
+    "max": 16.17370478399971
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 16.12125445499987,
+   "frames": 2798,
+   "ops": {
+    "sum_heights": 8799584,
+    "final_offset": 20642.394,
+    "rows_drawn": 23877,
+    "updates_generated": 14002,
+    "updates_applied": 13996,
+    "updates_dropped": 0,
+    "updates_pending_at_end": 6,
+    "unchanged_frames_excluded": 2,
+    "ui_end_interval_p50_ms": 4.837,
+    "ui_end_interval_p95_ms": 6.441,
+    "frame_cpu_usage_ms_mean": 1.027
+   },
+   "checksum": "dfed5248",
+   "fps_mean": 199.81148593260724,
+   "frame_p50": 4.837,
+   "frame_p95": 6.437,
+   "frame_p99": 8.179,
+   "frame_max": 12.688,
+   "dropped_gt16_7": 0,
+   "dropped_gt8_3": 25,
+   "dropped_ms_gt16_7": 0,
+   "rss_kb_median": 117872,
+   "rss_kb_peak": 117872,
+   "rss_kb_first_quarter": 116296,
+   "rss_kb_last_quarter": 117872,
+   "cpu_pct_core_mean": 250.9586419054219,
+   "cpu_pct_core_peak_1s": 282.0,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     6548
+    ],
+    [
+     1.1,
+     2.31,
+     116296
+    ],
+    [
+     2.2,
+     4.97,
+     117872
+    ],
+    [
+     3.3,
+     7.74,
+     117872
+    ],
+    [
+     4.3,
+     10.49,
+     117872
+    ],
+    [
+     5.4,
+     13.25,
+     117872
+    ],
+    [
+     6.5,
+     15.98,
+     117872
+    ],
+    [
+     7.6,
+     18.76,
+     117872
+    ],
+    [
+     8.7,
+     21.47,
+     117872
+    ],
+    [
+     9.8,
+     24.23,
+     117872
+    ],
+    [
+     10.8,
+     27.03,
+     117872
+    ],
+    [
+     11.9,
+     29.78,
+     117872
+    ],
+    [
+     13.0,
+     32.55,
+     117872
+    ],
+    [
+     14.1,
+     35.24,
+     117872
+    ],
+    [
+     15.2,
+     38.04,
+     117872
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 16.169852213999548,
+   "frames": 2972,
+   "ops": {
+    "sum_heights": 8799584,
+    "final_offset": 20638.154,
+    "rows_drawn": 25365,
+    "updates_generated": 14001,
+    "updates_applied": 13995,
+    "updates_dropped": 0,
+    "updates_pending_at_end": 6,
+    "unchanged_frames_excluded": 2,
+    "ui_end_interval_p50_ms": 4.537,
+    "ui_end_interval_p95_ms": 5.986,
+    "frame_cpu_usage_ms_mean": 0.961
+   },
+   "checksum": "dfed5248",
+   "fps_mean": 212.24790383770204,
+   "frame_p50": 4.535,
+   "frame_p95": 5.997,
+   "frame_p99": 7.823,
+   "frame_max": 16.773,
+   "dropped_gt16_7": 1,
+   "dropped_gt8_3": 19,
+   "dropped_ms_gt16_7": 0.0730000000000004,
+   "rss_kb_median": 118056.0,
+   "rss_kb_peak": 118056,
+   "rss_kb_first_quarter": 116484,
+   "rss_kb_last_quarter": 118056,
+   "cpu_pct_core_mean": 254.36585520109318,
+   "cpu_pct_core_peak_1s": 282.99999999999983,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     6736
+    ],
+    [
+     1.1,
+     2.51,
+     116484
+    ],
+    [
+     2.2,
+     5.29,
+     118056
+    ],
+    [
+     3.2,
+     7.97,
+     118056
+    ],
+    [
+     4.3,
+     10.7,
+     118056
+    ],
+    [
+     5.4,
+     13.48,
+     118056
+    ],
+    [
+     6.5,
+     16.27,
+     118056
+    ],
+    [
+     7.6,
+     19.04,
+     118056
+    ],
+    [
+     8.6,
+     21.82,
+     118056
+    ],
+    [
+     9.7,
+     24.57,
+     118056
+    ],
+    [
+     10.8,
+     27.38,
+     118056
+    ],
+    [
+     11.9,
+     30.15,
+     118056
+    ],
+    [
+     12.9,
+     32.9,
+     118056
+    ],
+    [
+     14.0,
+     35.62,
+     118056
+    ],
+    [
+     15.1,
+     38.39,
+     118056
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 16.17370478399971,
+   "frames": 2891,
+   "ops": {
+    "sum_heights": 8799584,
+    "final_offset": 20640.921,
+    "rows_drawn": 24705,
+    "updates_generated": 14000,
+    "updates_applied": 13996,
+    "updates_dropped": 0,
+    "updates_pending_at_end": 4,
+    "unchanged_frames_excluded": 2,
+    "ui_end_interval_p50_ms": 4.691,
+    "ui_end_interval_p95_ms": 6.27,
+    "frame_cpu_usage_ms_mean": 0.992
+   },
+   "checksum": "dfed5248",
+   "fps_mean": 206.46512214186674,
+   "frame_p50": 4.693,
+   "frame_p95": 6.266,
+   "frame_p99": 8.118,
+   "frame_max": 12.029,
+   "dropped_gt16_7": 0,
+   "dropped_gt8_3": 25,
+   "dropped_ms_gt16_7": 0,
+   "rss_kb_median": 118132.0,
+   "rss_kb_peak": 118132,
+   "rss_kb_first_quarter": 116524,
+   "rss_kb_last_quarter": 118132,
+   "cpu_pct_core_mean": 253.4035364889413,
+   "cpu_pct_core_peak_1s": 283.00000000000017,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     6608
+    ],
+    [
+     1.1,
+     2.57,
+     116524
+    ],
+    [
+     2.2,
+     5.29,
+     118096
+    ],
+    [
+     3.3,
+     8.07,
+     118096
+    ],
+    [
+     4.4,
+     10.82,
+     118096
+    ],
+    [
+     5.4,
+     13.6,
+     118096
+    ],
+    [
+     6.5,
+     16.3,
+     118132
+    ],
+    [
+     7.6,
+     19.02,
+     118132
+    ],
+    [
+     8.7,
+     21.84,
+     118132
+    ],
+    [
+     9.7,
+     24.65,
+     118132
+    ],
+    [
+     10.8,
+     27.4,
+     118132
+    ],
+    [
+     11.9,
+     30.1,
+     118132
+    ],
+    [
+     13.0,
+     32.78,
+     118132
+    ],
+    [
+     14.0,
+     35.53,
+     118132
+    ],
+    [
+     15.1,
+     38.29,
+     118132
+    ]
+   ]
+  }
+ ]
+}

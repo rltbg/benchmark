@@ -1,0 +1,35 @@
+{
+ "stack": "avalonia",
+ "platform": "macos",
+ "status": "ok",
+ "build_seconds": 36.0,
+ "artifacts": [
+  {
+   "path": "/Users/runner/work/benchmark/benchmark/work/aot/avalonia-spike",
+   "bytes": 16969808,
+   "gzip": 7128953,
+   "brotli": 5072656
+  },
+  {
+   "path": "/Users/runner/work/benchmark/benchmark/work/aot",
+   "bytes": 72257687,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "/Users/runner/work/benchmark/benchmark/work/sctrim",
+   "bytes": 47883088,
+   "gzip": null,
+   "brotli": null
+  }
+ ],
+ "notes": [
+  "NativeAOT OK en 36s ;        1 lignes warning/error uniques",
+  "variante self-contained+trim (IL, JIT) : 10s",
+  "execute : aot ; exit_code=0 wall_s=13 max_rss_kb=158784",
+  "SPIKE:ready platform=macos stack=avalonia core=fstar-extrait(F*>F#) SPIKE:startup_ms=746 "
+ ],
+ "runner": "macOS/ARM64",
+ "sha": "f86b841da20f2a524462e9687f839737423ef443",
+ "date": "2026-10-26T15:57:27Z"
+}

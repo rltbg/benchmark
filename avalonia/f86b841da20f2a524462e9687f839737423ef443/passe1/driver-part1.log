@@ -1,0 +1,68 @@
+=== 19:42:16 slint idle d=20 runs=10 
+SUMMARY {"tag": "slint-idle", "stack": "slint", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 23506.0, "p95": 23720, "min": 23032, "max": 237
+=== 19:46:03 slint list d=14 runs=10 
+SUMMARY {"tag": "slint-list", "stack": "slint", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 528.1966612015931, "p95": 541.2764977538437, "min": 480.95652142594145, "max": 541.2764977538437}, "frame_p95": {"median": 2.479642, "p95": 2.861354, "min": 2.373621, "max": 
+=== 19:48:51 slint stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "slint-stream-r10000", "stack": "slint", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 495.08019502544477, "p95": 549.6681362233941, "min": 464.750912759165, "max": 549.6681362233941}, "frame_p95": {"median": 2.6134139999999997, "p95": 3.041210999999
+=== 19:51:38 slint canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "slint-canvas-s5000", "stack": "slint", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 18.36618809368214, "p95": 19.782425382655006, "min": 17.392908781476685, "max": 19.782425382655006}, "frame_p95": {"median": 72.7580805, "p95": 79.451835, "min": 61
+=== 19:54:26 slint core d=14 runs=10 
+SUMMARY {"tag": "slint-core", "stack": "slint", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 200.61151700511348, "p95": 212.41541166665687, "min": 190.5746437834688, "max": 212.41541166665687}, "frame_p95": {"median": 6.7807175, "p95": 6.956517, "min": 6.680969, "max
+=== 19:57:13 avalonia-aot idle d=20 runs=10 
+SUMMARY {"tag": "avalonia-aot-idle", "stack": "avalonia-aot", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 41390.0, "p95": 46216, "min": 407
+=== 20:01:00 avalonia-aot list d=14 runs=10 
+SUMMARY {"tag": "avalonia-aot-list", "stack": "avalonia-aot", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 202.01858359753408, "p95": 203.80932045587875, "min": 191.7527602042106, "max": 203.80932045587875}, "frame_p95": {"median": 6.8149999999999995, "p95": 7.4, "mi
+=== 20:03:47 avalonia-aot stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "avalonia-aot-stream-r10000", "stack": "avalonia-aot", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 189.75255160274827, "p95": 197.9726967593733, "min": 163.27609265882546, "max": 197.9726967593733}, "frame_p95": {"median": 7.4425, "p95": 8.82, "min
+=== 20:06:34 avalonia-aot canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "avalonia-aot-canvas-s5000", "stack": "avalonia-aot", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 8.467216104609374, "p95": 8.708238464689021, "min": 8.121540419695563, "max": 8.708238464689021}, "frame_p95": {"median": 146.915, "p95": 158.204, "mi
+=== 20:09:24 avalonia-aot core d=14 runs=10 
+SUMMARY {"tag": "avalonia-aot-core", "stack": "avalonia-aot", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 38.73952705818549, "p95": 41.33022507198526, "min": 35.372864220690154, "max": 41.33022507198526}, "frame_p95": {"median": 32.646, "p95": 35.974, "min": 30.881,
+=== 20:12:12 avalonia-jit idle d=20 runs=10 
+SUMMARY {"tag": "avalonia-jit-idle", "stack": "avalonia-jit", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 81398.0, "p95": 81608, "min": 806
+=== 20:16:06 avalonia-jit list d=14 runs=10 
+SUMMARY {"tag": "avalonia-jit-list", "stack": "avalonia-jit", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 178.4514544588884, "p95": 190.15311074208697, "min": 175.08722942882147, "max": 190.15311074208697}, "frame_p95": {"median": 7.6895, "p95": 8.184, "min": 7.239,
+=== 20:19:01 avalonia-jit stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "avalonia-jit-stream-r10000", "stack": "avalonia-jit", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 171.5981022203324, "p95": 183.2634085108498, "min": 161.269575808878, "max": 183.2634085108498}, "frame_p95": {"median": 8.025, "p95": 8.335, "min": 
+=== 20:21:55 avalonia-jit canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "avalonia-jit-canvas-s5000", "stack": "avalonia-jit", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 8.0103194086942, "p95": 8.309792472521222, "min": 7.760012017339711, "max": 8.309792472521222}, "frame_p95": {"median": 152.6435, "p95": 168.903, "min
+=== 20:24:51 avalonia-jit core d=14 runs=10 
+SUMMARY {"tag": "avalonia-jit-core", "stack": "avalonia-jit", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 35.29299484799509, "p95": 37.692453706635206, "min": 33.6037927338041, "max": 37.692453706635206}, "frame_p95": {"median": 34.736000000000004, "p95": 36.934, "m
+=== 20:27:46 compose-jvm idle d=20 runs=10 
+SUMMARY {"tag": "compose-jvm-idle", "stack": "compose-jvm", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 126372.0, "p95": 129648.0, "min": 1
+=== 20:31:37 compose-jvm list d=14 runs=10 
+SUMMARY {"tag": "compose-jvm-list", "stack": "compose-jvm", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 143.50187871318118, "p95": 154.7237695194174, "min": 135.6310959892478, "max": 154.7237695194174}, "frame_p95": {"median": 9.8725, "p95": 10.528, "min": 9.208, "m
+=== 20:34:37 compose-jvm stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "compose-jvm-stream-r10000", "stack": "compose-jvm", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 144.79294046311577, "p95": 150.60786233027426, "min": 137.73652267047484, "max": 150.60786233027426}, "frame_p95": {"median": 9.7655, "p95": 10.319, "m
+=== 20:37:36 compose-jvm canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "compose-jvm-canvas-s5000", "stack": "compose-jvm", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 1.9048323019531064, "p95": 1.9210419048254652, "min": 1.7864429728582285, "max": 1.9210419048254652}, "frame_p95": {"median": 617.1975, "p95": 658.188, 
+=== 20:40:51 compose-jvm core d=14 runs=10 
+SUMMARY {"tag": "compose-jvm-core", "stack": "compose-jvm", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 12.095204953083197, "p95": 12.572906877380062, "min": 11.702376039014009, "max": 12.572906877380062}, "frame_p95": {"median": 100.3075, "p95": 103.002, "min": 96.
+=== 20:43:51 qt-software idle d=20 runs=10 
+SUMMARY {"tag": "qt-software-idle", "stack": "qt-software", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 53614.0, "p95": 53748.0, "min": 534
+=== 20:47:41 qt-software list d=14 runs=10 
+SUMMARY {"tag": "qt-software-list", "stack": "qt-software", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 797.8631548754802, "p95": 813.8261226537387, "min": 717.6858017388168, "max": 813.8261226537387}, "frame_p95": {"median": 2.0021259999999996, "p95": 2.240578, "mi
+=== 20:50:29 qt-software stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "qt-software-stream-r10000", "stack": "qt-software", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 737.6996591792488, "p95": 788.4558846542516, "min": 605.0208800276494, "max": 788.4558846542516}, "frame_p95": {"median": 2.14715, "p95": 2.857286, "mi
+=== 20:53:16 qt-software canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "qt-software-canvas-s5000", "stack": "qt-software", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 13.585952824889748, "p95": 14.022287779407113, "min": 12.09136411429378, "max": 14.022287779407113}, "frame_p95": {"median": 101.139243, "p95": 123.4490
+=== 20:56:04 qt-software core d=14 runs=10 
+SUMMARY {"tag": "qt-software-core", "stack": "qt-software", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 67.18990425270628, "p95": 70.44126372961446, "min": 64.11923807955935, "max": 70.44126372961446}, "frame_p95": {"median": 20.9305695, "p95": 21.7885, "min": 19.82
+=== 20:58:52 flutter idle d=20 runs=10 
+SUMMARY {"tag": "flutter-idle", "stack": "flutter", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 248628.0, "p95": 248952.0, "min": 248344.0,
+=== 21:02:50 flutter list d=14 runs=10 
+SUMMARY {"tag": "flutter-list", "stack": "flutter", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 49.596451222405776, "p95": 53.456559755929355, "min": 46.27803370571534, "max": 53.456559755929355}, "frame_p95": {"median": 26.107, "p95": 31.086, "min": 24.96, "max": 3
+=== 21:05:47 flutter stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "flutter-stream-r10000", "stack": "flutter", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 53.926207172912896, "p95": 57.43804845110398, "min": 50.55583530896766, "max": 57.43804845110398}, "frame_p95": {"median": 25.813000000000002, "p95": 32.108, "
+=== 21:08:49 flutter canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "flutter-canvas-s5000", "stack": "flutter", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 0.3121467963287972, "p95": 0.325071214976421, "min": 0.29622572874491526, "max": 0.325071214976421}, "frame_p95": {"median": 3317.438, "p95": 3567.449, "min": 3
+=== 21:11:47 flutter core d=14 runs=10 
+SUMMARY {"tag": "flutter-core", "stack": "flutter", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 1.6210740057561135, "p95": 1.7020899963064646, "min": 1.561677069388045, "max": 1.7020899963064646}, "frame_p95": {"median": 686.9770000000001, "p95": 725.39, "min": 645.
+=== 21:14:45 egui-glow idle d=20 runs=10 
+SUMMARY {"tag": "egui-glow-idle", "stack": "egui-glow", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 116448.0, "p95": 116612.0, "min": 11636
+=== 21:18:31 egui-glow list d=14 runs=10 
+SUMMARY {"tag": "egui-glow-list", "stack": "egui-glow", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 196.7172174320557, "p95": 205.5292803882861, "min": 185.17754119932488, "max": 205.5292803882861}, "frame_p95": {"median": 6.5855, "p95": 7.138, "min": 6.245, "max": 
+=== 21:21:19 egui-glow stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "egui-glow-stream-r10000", "stack": "egui-glow", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 216.3934510018571, "p95": 220.33913800186613, "min": 193.88964115847884, "max": 220.33913800186613}, "frame_p95": {"median": 6.0009999999999994, "p95": 6.9
+=== 21:24:06 egui-glow canvas d=14 runs=10 --shapes 5000
+=== 21:24:27 egui-glow core d=14 runs=10 

@@ -1,0 +1,8 @@
+  Determining projects to restore...
+  Restored /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Desktop/Spike.Desktop.fsproj (in 186 ms).
+  Restored /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj (in 183 ms).
+/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Ui.fs(462,21): warning FS0044: This construct is deprecated. Use the overload accepting BitmapEncoderOptions instead. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj]
+  Spike.Ui -> /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+  Spike.Desktop -> /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Desktop/bin/Release/net10.0/osx-arm64/avalonia-spike.dll
+  Optimizing assemblies for size. This process might take a while.
+  Spike.Desktop -> /Users/runner/work/benchmark/benchmark/work/sctrim/

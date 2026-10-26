@@ -1,0 +1,75 @@
+=== 21:32:24 egui-glow canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "egui-glow-canvas-s5000", "stack": "egui-glow", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 11.445686068568573, "p95": 12.182699455369214, "min": 11.064811813963821, "max": 12.182699455369214}, "frame_p95": {"median": 103.4135, "p95": 109.24, "min"
+=== 21:35:12 egui-glow core d=14 runs=10 
+SUMMARY {"tag": "egui-glow-core", "stack": "egui-glow", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 62.669198425936166, "p95": 64.96372240130476, "min": 57.2667548993601, "max": 64.96372240130476}, "frame_p95": {"median": 20.6715, "p95": 22.061, "min": 19.695, "max"
+=== 21:38:00 nsh-gtk idle d=20 runs=10 
+SUMMARY {"tag": "nsh-gtk-idle", "stack": "nsh-gtk", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 118906.0, "p95": 119144.0, "min": 118252, "
+=== 21:41:48 nsh-gtk list d=14 runs=10 
+SUMMARY {"tag": "nsh-gtk-list", "stack": "nsh-gtk", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 59.973064740456856, "p95": 59.98395374758381, "min": 59.54948555869626, "max": 59.98395374758381}, "frame_p95": {"median": 17.941144, "p95": 18.200792, "min": 17.849646, 
+=== 21:44:36 nsh-gtk stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "nsh-gtk-stream-r10000", "stack": "nsh-gtk", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 59.97837126211, "p95": 59.98283658120404, "min": 59.83662954733499, "max": 59.98283658120404}, "frame_p95": {"median": 17.9442135, "p95": 18.211079, "min": 17.
+=== 21:47:24 nsh-gtk canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "nsh-gtk-canvas-s5000", "stack": "nsh-gtk", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 4.040570627714317, "p95": 4.191439465635094, "min": 3.731901095680478, "max": 4.191439465635094}, "frame_p95": {"median": 309.3531205, "p95": 366.34938, "min": 
+=== 21:50:14 nsh-gtk core d=14 runs=10 
+SUMMARY {"tag": "nsh-gtk-core", "stack": "nsh-gtk", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 55.29247396652392, "p95": 57.30693031009301, "min": 53.141401008063454, "max": 57.30693031009301}, "frame_p95": {"median": 22.9995135, "p95": 24.238824, "min": 22.082489,
+=== 21:53:02 iced-natural idle d=20 runs=10 
+SUMMARY {"tag": "iced-natural-idle", "stack": "iced-natural", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 16800.0, "p95": 16904.0, "min": 1
+=== 21:56:49 iced-natural list d=14 runs=10 
+SUMMARY {"tag": "iced-natural-list", "stack": "iced-natural", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 26.102986373933607, "p95": 26.680675685971586, "min": 24.546690767140458, "max": 26.680675685971586}, "frame_p95": {"median": 55.317, "p95": 59.002, "min": 50.8
+=== 21:59:36 iced-natural stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "iced-natural-stream-r10000", "stack": "iced-natural", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 26.068237995860308, "p95": 26.92406164824535, "min": 25.064705859249894, "max": 26.92406164824535}, "frame_p95": {"median": 53.5695, "p95": 58.186, "
+=== 22:02:24 iced-natural canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "iced-natural-canvas-s5000", "stack": "iced-natural", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 0.25067692064780916, "p95": 0.3485010030904372, "min": 0.20844421407498712, "max": 0.3485010030904372}, "frame_p95": {"median": 7773.6224999999995, "p
+=== 22:07:01 iced-natural core d=14 runs=10 
+SUMMARY {"tag": "iced-natural-core", "stack": "iced-natural", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 16.77791239807363, "p95": 20.415616261795016, "min": 11.910322262653132, "max": 20.415616261795016}, "frame_p95": {"median": 55.7945, "p95": 60.515, "min": 42.2
+=== 22:09:49 iced-fulldamage idle d=20 runs=10 
+SUMMARY {"tag": "iced-fulldamage-idle", "stack": "iced-fulldamage", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 16826.0, "p95": 16928, "min
+=== 22:13:36 iced-fulldamage list d=14 runs=10 
+SUMMARY {"tag": "iced-fulldamage-list", "stack": "iced-fulldamage", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 237.52766288256805, "p95": 246.5978530346783, "min": 217.129286562447, "max": 246.5978530346783}, "frame_p95": {"median": 5.829, "p95": 6.324, "min": 5.60
+=== 22:16:23 iced-fulldamage stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "iced-fulldamage-stream-r10000", "stack": "iced-fulldamage", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 231.12364142493573, "p95": 243.84714512419276, "min": 218.3438228333374, "max": 243.84714512419276}, "frame_p95": {"median": 6.0489999999999995
+=== 22:19:10 iced-fulldamage canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "iced-fulldamage-canvas-s5000", "stack": "iced-fulldamage", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 4.434678729489862, "p95": 4.512572379193149, "min": 3.8979447200566972, "max": 4.512572379193149}, "frame_p95": {"median": 274.4595, "p95": 364.
+=== 22:22:02 iced-fulldamage core d=14 runs=10 
+SUMMARY {"tag": "iced-fulldamage-core", "stack": "iced-fulldamage", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 31.33916331645605, "p95": 33.04026216413289, "min": 28.749237663670016, "max": 33.04026216413289}, "frame_p95": {"median": 45.777, "p95": 52.571, "min": 3
+=== 22:24:50 compose-jvm idle d=20 runs=10 
+SUMMARY {"tag": "compose-jvm-idle", "stack": "compose-jvm", "scenario": "idle", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 171730.0, "p95": 177084.0, "min": 1
+=== 22:28:42 compose-jvm list d=14 runs=10 
+SUMMARY {"tag": "compose-jvm-list", "stack": "compose-jvm", "scenario": "list", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 225.18004328264584, "p95": 232.81018171763066, "min": 217.19974884538084, "max": 232.81018171763066}, "frame_p95": {"median": 6.701499999999999, "p95": 7.043, "mi
+=== 22:31:42 compose-jvm stream d=14 runs=10 --rate 10000
+SUMMARY {"tag": "compose-jvm-stream-r10000", "stack": "compose-jvm", "scenario": "stream", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 216.14101290939965, "p95": 223.48888940949792, "min": 208.03482930110223, "max": 223.48888940949792}, "frame_p95": {"median": 6.976, "p95": 7.701, "min
+=== 22:34:42 compose-jvm canvas d=14 runs=10 --shapes 5000
+SUMMARY {"tag": "compose-jvm-canvas-s5000", "stack": "compose-jvm", "scenario": "canvas", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 4.696312477791005, "p95": 4.949924092914036, "min": 4.477870364657861, "max": 4.949924092914036}, "frame_p95": {"median": 248.349, "p95": 284.993, "min"
+=== 22:37:46 compose-jvm core d=14 runs=10 
+SUMMARY {"tag": "compose-jvm-core", "stack": "compose-jvm", "scenario": "core", "runs": 10, "ok_runs": 10, "agg": {"fps_mean": {"median": 30.483728641398123, "p95": 31.595060586559804, "min": 28.820368067488744, "max": 31.595060586559804}, "frame_p95": {"median": 47.1495, "p95": 51.933, "min": 42.15
+=== 22:40:47 slint-femtovg idle d=20 runs=3 
+SUMMARY {"tag": "slint-femtovg-idle", "stack": "slint-femtovg", "scenario": "idle", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 138344, "p95": 138344, "min": 138
+=== 22:41:56 slint-femtovg list d=14 runs=3 
+SUMMARY {"tag": "slint-femtovg-list", "stack": "slint-femtovg", "scenario": "list", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 173.2260396754058, "p95": 174.45390373358873, "min": 168.25405654593519, "max": 174.45390373358873}, "frame_p95": {"median": 7.552055, "p95": 7.55672, "min": 7.
+=== 22:42:46 slint-femtovg stream d=14 runs=3 --rate 10000
+SUMMARY {"tag": "slint-femtovg-stream-r10000", "stack": "slint-femtovg", "scenario": "stream", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 162.45690667432146, "p95": 163.7190212484442, "min": 154.00116101389494, "max": 163.7190212484442}, "frame_p95": {"median": 8.392429, "p95": 9.011264
+=== 22:43:36 slint-femtovg canvas d=14 runs=3 --shapes 5000
+SUMMARY {"tag": "slint-femtovg-canvas-s5000", "stack": "slint-femtovg", "scenario": "canvas", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 1.4432664195309763, "p95": 1.477336245269047, "min": 1.3552962814270006, "max": 1.477336245269047}, "frame_p95": {"median": 739.947378, "p95": 795.612
+=== 22:44:28 slint-femtovg core d=14 runs=3 
+SUMMARY {"tag": "slint-femtovg-core", "stack": "slint-femtovg", "scenario": "core", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 7.564475586127284, "p95": 7.8498486227089685, "min": 7.423394581724638, "max": 7.8498486227089685}, "frame_p95": {"median": 149.38632199999998, "p95": 154.16847
+=== 22:45:18 qt-opengl idle d=20 runs=3 
+SUMMARY {"tag": "qt-opengl-idle", "stack": "qt-opengl", "scenario": "idle", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 160216.0, "p95": 160288.0, "min": 160120,
+=== 22:46:27 qt-opengl list d=14 runs=3 
+SUMMARY {"tag": "qt-opengl-list", "stack": "qt-opengl", "scenario": "list", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 250.42673297437418, "p95": 251.77213707758042, "min": 241.5232477887936, "max": 251.77213707758042}, "frame_p95": {"median": 5.100463, "p95": 5.378349, "min": 5.055614,
+=== 22:47:18 qt-opengl stream d=14 runs=3 --rate 10000
+SUMMARY {"tag": "qt-opengl-stream-r10000", "stack": "qt-opengl", "scenario": "stream", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 240.1473509869495, "p95": 250.519980392501, "min": 222.1872988608366, "max": 250.519980392501}, "frame_p95": {"median": 5.367381, "p95": 6.297769, "min": 5.2
+=== 22:48:08 qt-opengl canvas d=14 runs=3 --shapes 5000
+SUMMARY {"tag": "qt-opengl-canvas-s5000", "stack": "qt-opengl", "scenario": "canvas", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 13.826393359277233, "p95": 13.881078449962775, "min": 12.880975059079816, "max": 13.881078449962775}, "frame_p95": {"median": 91.326419, "p95": 94.532484, "mi
+=== 22:48:59 qt-opengl core d=14 runs=3 
+SUMMARY {"tag": "qt-opengl-core", "stack": "qt-opengl", "scenario": "core", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 47.93034266866702, "p95": 50.1221768365189, "min": 47.872233069730555, "max": 50.1221768365189}, "frame_p95": {"median": 26.20054, "p95": 26.47101, "min": 24.77162, "ma
+=== 22:49:49 egui-wgpu idle d=20 runs=3 
+SUMMARY {"tag": "egui-wgpu-idle", "stack": "egui-wgpu", "scenario": "idle", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "rss_kb_median": {"median": 148312.0, "p95": 148408, "min": 148120, "
+=== 22:50:58 egui-wgpu list d=14 runs=3 
+SUMMARY {"tag": "egui-wgpu-list", "stack": "egui-wgpu", "scenario": "list", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 135.85506621541643, "p95": 140.55445160159582, "min": 135.6812279522468, "max": 140.55445160159582}, "frame_p95": {"median": 9.306, "p95": 9.493, "min": 8.908, "max": 9
+=== 22:51:48 egui-wgpu stream d=14 runs=3 --rate 10000
+SUMMARY {"tag": "egui-wgpu-stream-r10000", "stack": "egui-wgpu", "scenario": "stream", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 133.39125998756347, "p95": 136.0217417723269, "min": 125.65383724329759, "max": 136.0217417723269}, "frame_p95": {"median": 9.515, "p95": 10.688, "min": 9.21
+=== 22:52:38 egui-wgpu canvas d=14 runs=3 --shapes 5000
+SUMMARY {"tag": "egui-wgpu-canvas-s5000", "stack": "egui-wgpu", "scenario": "canvas", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 11.364730864705436, "p95": 11.621813359381406, "min": 10.994064127453973, "max": 11.621813359381406}, "frame_p95": {"median": 103.553, "p95": 111.997, "min": 
+=== 22:53:29 egui-wgpu core d=14 runs=3 
+SUMMARY {"tag": "egui-wgpu-core", "stack": "egui-wgpu", "scenario": "core", "runs": 3, "ok_runs": 3, "agg": {"fps_mean": {"median": 50.60019756201254, "p95": 52.67099767862213, "min": 50.12483010574412, "max": 52.67099767862213}, "frame_p95": {"median": 25.412, "p95": 26.151, "min": 24.809, "max": 2
+=== 22:54:19 slint stream d=14 runs=5 --rate 1000

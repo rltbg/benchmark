@@ -1,0 +1,5 @@
+
+(dev.bench.benchapp:16962): Atk-CRITICAL **: 20:59:41.036: atk_socket_embed: assertion 'plug_id != NULL' failed
+[IMPORTANT:flutter/shell/platform/embedder/embedder_surface_gl_impeller.cc(126)] Using the Impeller rendering backend (OpenGLESSDF).
+
+** (dev.bench.benchapp:16962): CRITICAL **: 20:59:41.179: void fl_gnome_settings_set_interface_settings(FlGnomeSettings *, GSettings *): assertion 'G_IS_SETTINGS(settings)' failed

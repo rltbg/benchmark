@@ -1,0 +1,13 @@
+  Determining projects to restore...
+  Restored /Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj (in 285 ms).
+  1 of 2 projects are up-to-date for restore.
+  Spike.Ui -> /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_27.1/27.1.10018/targets/Xamarin.Shared.Sdk.targets(2998,3): error : This version of .NET for iOS (27.1.10018) requires Xcode 27.1. The current version of Xcode is 26.6. Either install Xcode 27.1, or use a different version of .NET for iOS. See https://aka.ms/xcode-requirement for more information. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+
+Build FAILED.
+
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_27.1/27.1.10018/targets/Xamarin.Shared.Sdk.targets(2998,3): error : This version of .NET for iOS (27.1.10018) requires Xcode 27.1. The current version of Xcode is 26.6. Either install Xcode 27.1, or use a different version of .NET for iOS. See https://aka.ms/xcode-requirement for more information. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:01.58

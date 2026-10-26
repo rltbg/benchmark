@@ -1,0 +1,558 @@
+{
+ "summary": {
+  "tag": "qt-opengl-stream-r10000",
+  "stack": "qt-opengl",
+  "scenario": "stream",
+  "runs": 3,
+  "ok_runs": 3,
+  "oom_runs": 0,
+  "markers_ok": 3,
+  "agg": {
+   "fps_mean": {
+    "median": 59.987394759365856,
+    "p95": 60.05786868867665,
+    "min": 59.98086852788043,
+    "max": 60.05786868867665,
+    "n": 3
+   },
+   "frame_p50": {
+    "median": 16.593907,
+    "p95": 16.625887,
+    "min": 16.578147,
+    "max": 16.625887,
+    "n": 3
+   },
+   "frame_p95": {
+    "median": 19.422963,
+    "p95": 19.537436,
+    "min": 19.205126,
+    "max": 19.537436,
+    "n": 3
+   },
+   "frame_p99": {
+    "median": 20.969093,
+    "p95": 21.991714,
+    "min": 20.679679,
+    "max": 21.991714,
+    "n": 3
+   },
+   "frame_max": {
+    "median": 33.070139,
+    "p95": 35.82963,
+    "min": 24.261567,
+    "max": 35.82963,
+    "n": 3
+   },
+   "dropped_gt16_7": {
+    "median": 393,
+    "p95": 401,
+    "min": 384,
+    "max": 401,
+    "n": 3
+   },
+   "dropped_gt8_3": {
+    "median": 839,
+    "p95": 840,
+    "min": 835,
+    "max": 840,
+    "n": 3
+   },
+   "dropped_gt25": {
+    "median": 1,
+    "p95": 2,
+    "min": 0,
+    "max": 2,
+    "n": 3
+   },
+   "rss_kb_median": {
+    "median": 164104.0,
+    "p95": 164356.0,
+    "min": 163888.0,
+    "max": 164356.0,
+    "n": 3
+   },
+   "rss_kb_peak": {
+    "median": 165036,
+    "p95": 165076,
+    "min": 164960,
+    "max": 165076,
+    "n": 3
+   },
+   "pss_kb_median": {
+    "median": 138778.0,
+    "p95": 139033.0,
+    "min": 138496.0,
+    "max": 139033.0,
+    "n": 3
+   },
+   "pss_kb_peak": {
+    "median": 139621,
+    "p95": 139649,
+    "min": 139568,
+    "max": 139649,
+    "n": 3
+   },
+   "cpu_pct_core_mean": {
+    "median": 86.2477583695478,
+    "p95": 88.57762730670709,
+    "min": 83.5581949729946,
+    "max": 88.57762730670709,
+    "n": 3
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 94.22817927738656,
+    "p95": 106.16736302402967,
+    "min": 89.28616363102165,
+    "max": 106.16736302402967,
+    "n": 3
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.197329614999944,
+    "p95": 2.2011453029999757,
+    "min": 2.1015305999999327,
+    "max": 2.2011453029999757,
+    "n": 3
+   },
+   "wall_s": {
+    "median": 16.193047479000143,
+    "p95": 16.239750719999847,
+    "min": 16.189115372999822,
+    "max": 16.239750719999847,
+    "n": 3
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 16.193047479000143,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1015305999999327,
+   "frames": 841,
+   "ops": {
+    "final_offset": 20645.66419276254,
+    "graphics_api": "opengl(rhi)",
+    "list_realigns": 352,
+    "listview_contentHeight_estimate": 8800000,
+    "pacing": "60",
+    "rows_drawn": 924,
+    "sum_heights": 8799584,
+    "top_index_expected": 234,
+    "top_index_listview": 234,
+    "top_row_y_error_px": 0,
+    "updates_applied": 140158,
+    "updates_dropped": 0,
+    "updates_generated": 140154
+   },
+   "checksum": "52391ad0",
+   "unsupported": null,
+   "version": "Qt 6.12.0 (runtime 6.12.0, aqtinstall linux_gcc_64 from download.qt.io), g++ 13.3.0, CMake 4.4.4, Ninja 1.13.2",
+   "fps_mean": 60.05786868867665,
+   "frame_p50": 16.593907,
+   "frame_p95": 19.422963,
+   "frame_p99": 20.969093,
+   "frame_max": 24.261567,
+   "dropped_gt16_7": 393,
+   "dropped_gt8_3": 840,
+   "dropped_gt25": 0,
+   "dropped_ms_gt16_7": 463.74973500000027,
+   "window": "markers",
+   "rss_kb_median": 164356.0,
+   "rss_kb_peak": 165036,
+   "pss_kb_median": 139033.0,
+   "pss_kb_peak": 139649,
+   "pss_kb_first_quarter": 138376,
+   "pss_kb_last_quarter": 139137,
+   "cpu_pct_core_mean": 88.57762730670709,
+   "cpu_pct_core_peak_1s": 106.16736302402967,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3560,
+     2965
+    ],
+    [
+     1.1,
+     0.88,
+     163408,
+     138156
+    ],
+    [
+     2.1,
+     1.74,
+     163552,
+     138300
+    ],
+    [
+     3.2,
+     2.53,
+     163584,
+     138332
+    ],
+    [
+     4.2,
+     3.38,
+     163828,
+     138576
+    ],
+    [
+     5.2,
+     4.23,
+     163712,
+     138460
+    ],
+    [
+     6.3,
+     5.17,
+     164560,
+     139173
+    ],
+    [
+     7.4,
+     6.05,
+     164084,
+     138697
+    ],
+    [
+     8.4,
+     6.96,
+     164164,
+     138777
+    ],
+    [
+     9.5,
+     7.87,
+     164036,
+     138649
+    ],
+    [
+     10.5,
+     8.75,
+     164724,
+     139337
+    ],
+    [
+     11.6,
+     9.83,
+     164472,
+     139085
+    ],
+    [
+     12.6,
+     10.94,
+     164452,
+     139065
+    ],
+    [
+     13.7,
+     11.94,
+     164524,
+     139137
+    ],
+    [
+     14.7,
+     12.98,
+     164564,
+     139177
+    ],
+    [
+     15.8,
+     13.86,
+     164408,
+     139021
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 16.189115372999822,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.2011453029999757,
+   "frames": 840,
+   "ops": {
+    "final_offset": 20646.17028660464,
+    "graphics_api": "opengl(rhi)",
+    "list_realigns": 352,
+    "listview_contentHeight_estimate": 8800000,
+    "pacing": "60",
+    "rows_drawn": 927,
+    "sum_heights": 8799584,
+    "top_index_expected": 234,
+    "top_index_listview": 234,
+    "top_row_y_error_px": 0,
+    "updates_applied": 140167,
+    "updates_dropped": 0,
+    "updates_generated": 140168
+   },
+   "checksum": "f28dc923",
+   "unsupported": null,
+   "version": "Qt 6.12.0 (runtime 6.12.0, aqtinstall linux_gcc_64 from download.qt.io), g++ 13.3.0, CMake 4.4.4, Ninja 1.13.2",
+   "fps_mean": 59.98086852788043,
+   "frame_p50": 16.625887,
+   "frame_p95": 19.205126,
+   "frame_p99": 20.679679,
+   "frame_max": 35.82963,
+   "dropped_gt16_7": 401,
+   "dropped_gt8_3": 839,
+   "dropped_gt25": 1,
+   "dropped_ms_gt16_7": 407.2828750000003,
+   "window": "markers",
+   "rss_kb_median": 163888.0,
+   "rss_kb_peak": 164960,
+   "pss_kb_median": 138496.0,
+   "pss_kb_peak": 139568,
+   "pss_kb_first_quarter": 138076,
+   "pss_kb_last_quarter": 139312,
+   "cpu_pct_core_mean": 83.5581949729946,
+   "cpu_pct_core_peak_1s": 89.28616363102165,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2456,
+     2015
+    ],
+    [
+     1.0,
+     0.91,
+     163036,
+     137772
+    ],
+    [
+     2.1,
+     1.78,
+     163164,
+     137900
+    ],
+    [
+     3.1,
+     2.6,
+     163332,
+     138068
+    ],
+    [
+     4.2,
+     3.47,
+     163452,
+     138188
+    ],
+    [
+     5.2,
+     4.34,
+     163380,
+     138116
+    ],
+    [
+     6.3,
+     5.22,
+     164180,
+     138788
+    ],
+    [
+     7.3,
+     6.05,
+     163816,
+     138424
+    ],
+    [
+     8.4,
+     6.92,
+     163852,
+     138460
+    ],
+    [
+     9.4,
+     7.81,
+     163828,
+     138436
+    ],
+    [
+     10.4,
+     8.69,
+     163892,
+     138500
+    ],
+    [
+     11.5,
+     9.56,
+     164208,
+     138816
+    ],
+    [
+     12.5,
+     10.43,
+     163832,
+     138440
+    ],
+    [
+     13.6,
+     11.32,
+     164192,
+     138800
+    ],
+    [
+     14.6,
+     12.24,
+     164704,
+     139312
+    ],
+    [
+     15.7,
+     13.1,
+     164956,
+     139564
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 16.239750719999847,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.197329614999944,
+   "frames": 839,
+   "ops": {
+    "final_offset": 20599.501852473713,
+    "graphics_api": "opengl(rhi)",
+    "list_realigns": 354,
+    "listview_contentHeight_estimate": 8699990,
+    "pacing": "60",
+    "rows_drawn": 923,
+    "sum_heights": 8799584,
+    "top_index_expected": 234,
+    "top_index_listview": 234,
+    "top_row_y_error_px": 0,
+    "updates_applied": 140021,
+    "updates_dropped": 0,
+    "updates_generated": 140001
+   },
+   "checksum": "238ee4e2",
+   "unsupported": null,
+   "version": "Qt 6.12.0 (runtime 6.12.0, aqtinstall linux_gcc_64 from download.qt.io), g++ 13.3.0, CMake 4.4.4, Ninja 1.13.2",
+   "fps_mean": 59.987394759365856,
+   "frame_p50": 16.578147,
+   "frame_p95": 19.537436,
+   "frame_p99": 21.991714,
+   "frame_max": 33.070139,
+   "dropped_gt16_7": 384,
+   "dropped_gt8_3": 835,
+   "dropped_gt25": 2,
+   "dropped_ms_gt16_7": 467.41229000000027,
+   "window": "markers",
+   "rss_kb_median": 164104.0,
+   "rss_kb_peak": 165076,
+   "pss_kb_median": 138778.0,
+   "pss_kb_peak": 139621,
+   "pss_kb_first_quarter": 138794,
+   "pss_kb_last_quarter": 139581,
+   "cpu_pct_core_mean": 86.2477583695478,
+   "cpu_pct_core_peak_1s": 94.22817927738656,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2340,
+     1931
+    ],
+    [
+     1.0,
+     0.97,
+     163156,
+     137830
+    ],
+    [
+     2.1,
+     1.81,
+     162928,
+     137602
+    ],
+    [
+     3.1,
+     2.59,
+     164020,
+     138694
+    ],
+    [
+     4.2,
+     3.48,
+     164228,
+     138902
+    ],
+    [
+     5.2,
+     4.36,
+     164236,
+     138910
+    ],
+    [
+     6.3,
+     5.3,
+     163536,
+     138081
+    ],
+    [
+     7.3,
+     6.2,
+     164636,
+     139181
+    ],
+    [
+     8.4,
+     7.08,
+     164720,
+     139265
+    ],
+    [
+     9.4,
+     7.98,
+     163740,
+     138285
+    ],
+    [
+     10.5,
+     8.9,
+     164784,
+     139329
+    ],
+    [
+     11.5,
+     9.81,
+     164032,
+     138577
+    ],
+    [
+     12.6,
+     10.74,
+     165032,
+     139577
+    ],
+    [
+     13.6,
+     11.72,
+     165036,
+     139581
+    ],
+    [
+     14.7,
+     12.65,
+     164028,
+     138573
+    ],
+    [
+     15.7,
+     13.55,
+     165072,
+     139617
+    ]
+   ]
+  }
+ ]
+}

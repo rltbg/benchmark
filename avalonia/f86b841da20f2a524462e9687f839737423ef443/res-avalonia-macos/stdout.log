@@ -1,0 +1,13 @@
+SPIKE:ready platform=macos stack=avalonia core=fstar-extrait(F*>F#)
+SPIKE:selftest ok
+SPIKE:startup_ms=746
+SPIKE:mem workingset_mb=108.9 gc_heap_mb=15.6
+SPIKE:shot tab1-liste
+SPIKE:fps tab=canvas value=50
+SPIKE:fps tab=canvas value=61
+SPIKE:fps tab=canvas value=57
+SPIKE:shot tab2-canvas
+SPIKE:heavy ms=100 iters=693345 max_frame_gap_ms=21
+SPIKE:shot tab3-coeur
+SPIKE:mem workingset_mb=155.4 gc_heap_mb=23.8 updates=4461 canvas_frames=205
+SPIKE:done

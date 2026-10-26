@@ -1,0 +1,15 @@
+  Determining projects to restore...
+  Restored /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj (in 2.59 sec).
+  Restored /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.iOS/Spike.iOS.fsproj (in 5.07 sec).
+/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Ui.fs(462,21): warning FS0044: This construct is deprecated. Use the overload accepting BitmapEncoderOptions instead. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj]
+  Spike.Ui -> /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_27.1/27.1.10018/targets/Xamarin.Shared.Sdk.targets(2998,3): error : This version of .NET for iOS (27.1.10018) requires Xcode 27.1. The current version of Xcode is 26.6. Either install Xcode 27.1, or use a different version of .NET for iOS. See https://aka.ms/xcode-requirement for more information. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.iOS/Spike.iOS.fsproj]
+
+Build FAILED.
+
+/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Ui.fs(462,21): warning FS0044: This construct is deprecated. Use the overload accepting BitmapEncoderOptions instead. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj]
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_27.1/27.1.10018/targets/Xamarin.Shared.Sdk.targets(2998,3): error : This version of .NET for iOS (27.1.10018) requires Xcode 27.1. The current version of Xcode is 26.6. Either install Xcode 27.1, or use a different version of .NET for iOS. See https://aka.ms/xcode-requirement for more information. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.iOS/Spike.iOS.fsproj]
+    1 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:11.19

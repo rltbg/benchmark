@@ -1,0 +1,1 @@
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_27.1/27.1.10018/targets/Xamarin.Shared.Sdk.targets(2998,3): error : This version of .NET for iOS (27.1.10018) requires Xcode 27.1. The current version of Xcode is 26.6. Either install Xcode 27.1, or use a different version of .NET for iOS. See https://aka.ms/xcode-requirement for more information.

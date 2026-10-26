@@ -1,0 +1,17 @@
+{
+ "stack": "avalonia",
+ "platform": "ios-sim",
+ "status": "fail",
+ "build_seconds": 2.0,
+ "artifacts": [],
+ "notes": [
+  "tete de plateforme : csharp-fallback",
+  "builds : fsharp tentative=1 rc=1 11s;csharp tentative=1 rc=1 2s;",
+  "fsharp-head-errors.txt : /Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_27.1/27.1.10018/targets/Xamarin.Shared.Sdk.targets(2998,3): error : This version of .NET for iOS (27.1.10018) requires Xcode 27.1. The current version of Xcode is 26.6. Either install Xcode 27.1, or use a different version of .NET for iOS. See https://aka.ms/xcode-requirement for more information.|",
+  "aucune execution (pas de run.log)",
+  "emulateur/simulateur/rendu logiciel : pas des chiffres d'appareil"
+ ],
+ "runner": "macOS/ARM64",
+ "sha": "f86b841da20f2a524462e9687f839737423ef443",
+ "date": "2026-10-26T15:56:38Z"
+}

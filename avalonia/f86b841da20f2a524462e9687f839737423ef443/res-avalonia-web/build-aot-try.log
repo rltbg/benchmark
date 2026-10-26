@@ -1,0 +1,100 @@
+  Determining projects to restore...
+  Restored /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Browser/Spike.Browser.fsproj (in 256 ms).
+  1 of 2 projects are up-to-date for restore.
+  Spike.Ui -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+  Spike.Browser -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Browser/bin/Release/net10.0-browser/Spike.Browser.dll
+  Optimizing assemblies for size. This process might take a while.
+  Spike.Ui -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+  AOT'ing 38 assemblies
+  [1/38] Avalonia.Dialogs.dll -> Avalonia.Dialogs.dll.bc
+  [2/38] Avalonia.Markup.dll -> Avalonia.Markup.dll.bc
+  [3/38] Avalonia.Metal.dll -> Avalonia.Metal.dll.bc
+  [4/38] Avalonia.Markup.Xaml.dll -> Avalonia.Markup.Xaml.dll.bc
+  [5/38] Avalonia.OpenGL.dll -> Avalonia.OpenGL.dll.bc
+  [6/38] Avalonia.Vulkan.dll -> Avalonia.Vulkan.dll.bc
+  [7/38] Avalonia.Fonts.Inter.dll -> Avalonia.Fonts.Inter.dll.bc
+  [8/38] Avalonia.HarfBuzz.dll -> Avalonia.HarfBuzz.dll.bc
+  [9/38] Avalonia.Skia.dll -> Avalonia.Skia.dll.bc
+  [10/38] Avalonia.Browser.dll -> Avalonia.Browser.dll.bc
+  [11/38] FSharp.Core.dll -> FSharp.Core.dll.bc
+  [12/38] HarfBuzzSharp.dll -> HarfBuzzSharp.dll.bc
+  [13/38] SkiaSharp.dll -> SkiaSharp.dll.bc
+  [14/38] Spike.Ui.dll -> Spike.Ui.dll.bc
+  [15/38] Spike.Browser.dll -> Spike.Browser.dll.bc
+  [16/38] System.Collections.Concurrent.dll -> System.Collections.Concurrent.dll.bc
+  [17/38] System.Collections.NonGeneric.dll -> System.Collections.NonGeneric.dll.bc
+  [18/38] System.Collections.Specialized.dll -> System.Collections.Specialized.dll.bc
+  [19/38] System.Collections.dll -> System.Collections.dll.bc
+  [20/38] System.ComponentModel.Primitives.dll -> System.ComponentModel.Primitives.dll.bc
+  [21/38] System.ComponentModel.TypeConverter.dll -> System.ComponentModel.TypeConverter.dll.bc
+  [22/38] System.ComponentModel.dll -> System.ComponentModel.dll.bc
+  [23/38] System.Console.dll -> System.Console.dll.bc
+  [24/38] System.Diagnostics.DiagnosticSource.dll -> System.Diagnostics.DiagnosticSource.dll.bc
+  [25/38] System.Diagnostics.Process.dll -> System.Diagnostics.Process.dll.bc
+  [26/38] Avalonia.Controls.dll -> Avalonia.Controls.dll.bc
+  [27/38] System.IO.Compression.dll -> System.IO.Compression.dll.bc
+  [28/38] System.Linq.Expressions.dll -> System.Linq.Expressions.dll.bc
+  [29/38] System.ObjectModel.dll -> System.ObjectModel.dll.bc
+  [30/38] System.Private.Uri.dll -> System.Private.Uri.dll.bc
+  [31/38] System.Linq.dll -> System.Linq.dll.bc
+  [32/38] System.Runtime.InteropServices.JavaScript.dll -> System.Runtime.InteropServices.JavaScript.dll.bc
+  [33/38] System.dll -> System.dll.bc
+  [34/38] System.Runtime.Numerics.dll -> System.Runtime.Numerics.dll.bc
+  [35/38] Avalonia.Themes.Fluent.dll -> Avalonia.Themes.Fluent.dll.bc
+  [36/38] Avalonia.Base.dll -> Avalonia.Base.dll.bc
+  [37/38] System.Private.CoreLib.dll -> System.Private.CoreLib.dll.bc
+  [38/38] aot-instances.dll -> aot-instances.dll.bc
+  IL stripping assemblies
+  Compiling assembly bitcode files with -O2 ...
+  [1/38] Avalonia.Dialogs.dll.bc -> Avalonia.Dialogs.dll.o [took 0.19s]
+  [2/38] Avalonia.Markup.dll.bc -> Avalonia.Markup.dll.o [took 0.23s]
+  [3/38] Avalonia.Metal.dll.bc -> Avalonia.Metal.dll.o [took 0.18s]
+  [4/38] Avalonia.Markup.Xaml.dll.bc -> Avalonia.Markup.Xaml.dll.o [took 0.75s]
+  [5/38] Avalonia.OpenGL.dll.bc -> Avalonia.OpenGL.dll.o [took 0.31s]
+  [6/38] Avalonia.Vulkan.dll.bc -> Avalonia.Vulkan.dll.o [took 0.22s]
+  [7/38] Avalonia.Fonts.Inter.dll.bc -> Avalonia.Fonts.Inter.dll.o [took 0.15s]
+  [8/38] Avalonia.HarfBuzz.dll.bc -> Avalonia.HarfBuzz.dll.o [took 0.24s]
+  [9/38] Avalonia.Skia.dll.bc -> Avalonia.Skia.dll.o [took 2.01s]
+  [10/38] Avalonia.Browser.dll.bc -> Avalonia.Browser.dll.o [took 2.77s]
+  [11/38] FSharp.Core.dll.bc -> FSharp.Core.dll.o [took 1.19s]
+  [12/38] HarfBuzzSharp.dll.bc -> HarfBuzzSharp.dll.o [took 0.98s]
+  [13/38] SkiaSharp.dll.bc -> SkiaSharp.dll.o [took 2.99s]
+  [14/38] Spike.Ui.dll.bc -> Spike.Ui.dll.o [took 1.18s]
+  [15/38] Spike.Browser.dll.bc -> Spike.Browser.dll.o [took 0.14s]
+  [16/38] System.Collections.Concurrent.dll.bc -> System.Collections.Concurrent.dll.o [took 1.52s]
+  [17/38] System.Collections.NonGeneric.dll.bc -> System.Collections.NonGeneric.dll.o [took 0.35s]
+  [18/38] System.Collections.Specialized.dll.bc -> System.Collections.Specialized.dll.o [took 0.60s]
+  [19/38] System.Collections.dll.bc -> System.Collections.dll.o [took 0.96s]
+  [20/38] System.ComponentModel.Primitives.dll.bc -> System.ComponentModel.Primitives.dll.o [took 0.18s]
+  [21/38] System.ComponentModel.TypeConverter.dll.bc -> System.ComponentModel.TypeConverter.dll.o [took 1.65s]
+  [22/38] System.ComponentModel.dll.bc -> System.ComponentModel.dll.o [took 0.15s]
+  [23/38] System.Console.dll.bc -> System.Console.dll.o [took 0.27s]
+  [24/38] System.Diagnostics.DiagnosticSource.dll.bc -> System.Diagnostics.DiagnosticSource.dll.o [took 1.20s]
+  [25/38] System.Diagnostics.Process.dll.bc -> System.Diagnostics.Process.dll.o [took 0.15s]
+  [26/38] System.IO.Compression.dll.bc -> System.IO.Compression.dll.o [took 0.16s]
+  [27/38] System.Linq.Expressions.dll.bc -> System.Linq.Expressions.dll.o [took 0.28s]
+  [28/38] Avalonia.Controls.dll.bc -> Avalonia.Controls.dll.o [took 19.70s]
+  [29/38] System.ObjectModel.dll.bc -> System.ObjectModel.dll.o [took 0.40s]
+  [30/38] System.Linq.dll.bc -> System.Linq.dll.o [took 2.46s]
+  [31/38] System.Runtime.InteropServices.JavaScript.dll.bc -> System.Runtime.InteropServices.JavaScript.dll.o [took 1.38s]
+  [32/38] System.Private.Uri.dll.bc -> System.Private.Uri.dll.o [took 1.75s]
+  [33/38] System.dll.bc -> System.dll.o [took 0.15s]
+  [34/38] System.Runtime.Numerics.dll.bc -> System.Runtime.Numerics.dll.o [took 2.08s]
+  [35/38] Avalonia.Base.dll.bc -> Avalonia.Base.dll.o [took 36.67s]
+  [36/38] Avalonia.Themes.Fluent.dll.bc -> Avalonia.Themes.Fluent.dll.o [took 34.15s]
+  [37/38] System.Private.CoreLib.dll.bc -> System.Private.CoreLib.dll.o [took 27.81s]
+  [38/38] aot-instances.dll.bc -> aot-instances.dll.o [took 47.27s]
+  Compiling native assets with /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.14/Sdk/../tools/emscripten/emcc with -Oz. This may take a while ...
+  [1/4] corebindings.c -> corebindings.o [took 0.15s]
+  [2/4] driver.c -> driver.o [took 0.18s]
+  [3/4] runtime.c -> runtime.o [took 0.18s]
+  [4/4] pinvoke.c -> pinvoke.o [took 0.21s]
+  Linking for initial memory $(WasmInitialHeapSize)=33554432 bytes. Set this msbuild property to change the value.
+  Linking with emcc with -O2. This may take a while ...
+   /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.14/tools/bin/clang --version
+   /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Node.linux-x64/10.0.14/tools/bin/node /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.14/tools/emscripten/src/compiler.mjs /tmp/tmp4b7k4kyz.json --symbols-only
+   /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.14/tools/bin/wasm-ld @/tmp/emscripten_crwalxzl.rsp.utf-8
+   /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.14/tools/bin/llvm-objcopy /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Browser/obj/Release/net10.0-browser/wasm/for-publish/dotnet.native.wasm /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Browser/obj/Release/net10.0-browser/wasm/for-publish/dotnet.native.wasm --remove-section=producers
+   /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Node.linux-x64/10.0.14/tools/bin/node /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.14/tools/emscripten/src/compiler.mjs /tmp/tmpwix5fi1h.json
+   /usr/share/dotnet/packs/Microsoft.NET.Runtime.Emscripten.3.1.56.Sdk.linux-x64/10.0.14/tools/bin/wasm-opt --strip-target-features --post-emscripten -O2 --low-memory-unused --zero-filled-memory --pass-arg=directize-initial-contents-immutable /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Browser/obj/Release/net10.0-browser/wasm/for-publish/dotnet.native.wasm -o /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Browser/obj/Release/net10.0-browser/wasm/for-publish/dotnet.native.wasm -g --mvp-features --enable-bulk-memory --enable-exception-handling --enable-multivalue --enable-mutable-globals --enable-reference-types --enable-sign-ext --enable-simd
+  Spike.Browser -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Browser/bin/Release/net10.0-browser/publish/

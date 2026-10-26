@@ -1,0 +1,45 @@
+{
+ "stack": "avalonia",
+ "platform": "web",
+ "status": "fail",
+ "build_seconds": 63.0,
+ "artifacts": [
+  {
+   "path": "work/web-jit/_framework/dotnet.native.8lliqvnjrx.wasm",
+   "bytes": 7472271,
+   "gzip": 2679689,
+   "brotli": null
+  },
+  {
+   "path": "work/web-jit",
+   "bytes": 26980586,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "work/web-aot/_framework/dotnet.native.exv57xb7q3.wasm",
+   "bytes": 26867367,
+   "gzip": 8152954,
+   "brotli": null
+  },
+  {
+   "path": "work/web-aot",
+   "bytes": 54771201,
+   "gzip": null,
+   "brotli": null
+  }
+ ],
+ "notes": [
+  "tete de plateforme : fsharp",
+  "builds : fsharp-jit rc=0 63s;aot-try rc=0 221s;",
+  "marqueurs : 0 lignes ; ",
+  "fps canvas : ",
+  "mem : ",
+  "variante run-aot :   {\"ready_ms_from_navigation\":null,\"done\":false,\"wall_ms\":170360,\"js_heap\":{\"used\":744739,\"total\":1310735},\"cdp\":{\"Timestamp\":711.685392,\"AudioHandlers\":0,\"AudioWorkletProcessors\":0,\"Documents\":1,\"Frames\":1,\"JSEventListeners\":0,\"LayoutObjects\":5,\"MediaKeySessions\":0,\"MediaKeys\":0,\"Nodes\":7,\"Resources\":0,\"ContextLifecycleStateObservers\":3,\"V8PerContextDatas\":2,\"WorkerGlobalScopes\":0,\"UACSSResources\":0,\"RTCPeerConnections\":0,\"ResourceFetchers\":1,\"AdSubframes\":0,\"DetachedScriptStates\":0,\"ArrayBufferC",
+  "web metrics : {\"ready_ms_from_navigation\":null,\"done\":false,\"wall_ms\":170547,\"js_heap\":{\"used\":744739,\"total\":1310735},\"cdp\":{\"Timestamp\":540.460167,\"AudioHandlers\":0,\"AudioWorkletProcessors\":0,\"Documents\":1,\"Frames\":1,\"JSEventListeners\":0,\"LayoutObjects\":5,\"MediaKeySessions\":0,\"MediaKeys\":0,\"Nodes\":7,\"Resources\":0,\"ContextLifecycleStateObservers\":3,\"V8PerContextDatas\":2,\"WorkerGlobalScopes\":0,\"UACSSResources\":0,\"RTCPeerConnections\":0,\"ResourceFetchers\":1,\"AdSubframes\":0,\"DetachedScriptStates\":0,\"ArrayBufferContents\":0,\"LayoutCount\":0,\"RecalcStyleCount\":0,\"LayoutDuration\":0,\"RecalcStyleDuration\":0,\"DevToolsCommandDuration\":0.000009,\"ScriptDuration\":0,\"V8CompileDuration\":0,\"TaskDuration\":0.000012,\"TaskOtherDuration\":0.000003,\"ThreadTime\":0.000055,\"ProcessTime\":0.08,\"JSHeapUsedSize\":763856,\"JSHeapTotalSize\":1310720,\"FirstMeaningfulPaint\":370.32331,\"DomContentLoaded\":370.182737,\"NavigationStart\":369.9870",
+  "emulateur/simulateur/rendu logiciel : pas des chiffres d'appareil"
+ ],
+ "runner": "Linux/X64",
+ "sha": "f86b841da20f2a524462e9687f839737423ef443",
+ "date": "2026-10-26T16:06:43Z"
+}

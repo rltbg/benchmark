@@ -1,0 +1,23 @@
+SPIKE:ready platform=android stack=avalonia core=fstar-extrait(F*>F#)
+SPIKE:selftest ok
+SPIKE:startup_ms=2645
+SPIKE:mem workingset_mb=209.1 gc_heap_mb=13.2
+SPIKE:ready platform=android stack=avalonia core=fstar-extrait(F*>F#)
+SPIKE:selftest ok
+SPIKE:startup_ms=3757
+SPIKE:mem workingset_mb=224.3 gc_heap_mb=23.3
+SPIKE:shot tab1-liste
+SPIKE:shot tab1-liste
+SPIKE:fps tab=canvas value=2
+SPIKE:fps tab=canvas value=5
+SPIKE:shot tab2-canvas
+SPIKE:shot tab2-canvas
+SPIKE:fps tab=canvas value=4
+SPIKE:heavy ms=103 iters=96859 max_frame_gap_ms=0
+SPIKE:heavy ms=101 iters=70053 max_frame_gap_ms=104
+SPIKE:shot tab3-coeur
+SPIKE:shot tab3-coeur
+SPIKE:mem workingset_mb=248.3 gc_heap_mb=33.4 updates=1044 canvas_frames=0
+SPIKE:done
+SPIKE:mem workingset_mb=248.3 gc_heap_mb=33.5 updates=4194 canvas_frames=15
+SPIKE:done
