@@ -1,0 +1,57 @@
+// Structures et état partagé entre Rust et l'UI (global `Bench`).
+export struct RowData { y: length, h: length, title: string, sub: string, price: string, color: color, hue: float, prog: float, on: bool }
+export struct ShapeData { x0: length, y0: length, vx: length, vy: length, x: length, y: length, w: length, r: length, c1: color, c2: color }
+export struct PathData { x0: length, y0: length, vx: length, vy: length, cmd: string, c: color }
+export struct ImgItem { img: image, x0: length, y0: length, vx: length, vy: length, sc: float, rot: angle, rotv: angle, op: float }
+export struct MoverData { xa: length, xb: length, ya: length, yb: length, dur: duration, c: color, oa: float }
+export struct GroupData { x0: length, y0: length, vx: length, vy: length, c1: color, c2: color, c3: color }
+
+export global Bench {
+    // ---- commun
+    in property <string> scn;
+    in property <string> variant;
+    in property <bool> chrome: true;
+    in property <string> status: "ready";
+    in property <float> t;               // temps de scénario (s), poussé une fois par frame
+    in property <bool> square: true;     // carré de latence (tous les scénarios sauf idle)
+    in-out property <bool> sq-white: false;
+    callback space-pressed();
+    callback edited-text();
+    callback wheel(length);
+
+    // ---- listes
+    in property <[RowData]> rows;        // variante `pool` : anneau de lignes (y relatif à l'origine)
+    in property <length> scroll-y;       // décalage local (px) dans l'anneau
+    in property <int> puces;             // L2 : (K-6)/2
+    in property <bool> dense;
+    in property <[RowData]> lv-rows;     // variante `native` : ListView sur modèle paresseux
+    in-out property <length> lv-y;       // content-y du ListView
+
+    // ---- texte
+    in property <string> big-text;
+    in property <[string]> labels;
+    in property <int> nlabels;
+    in property <int> tick;
+    in property <string> edit-text;
+    in property <string> rich-md;
+
+    // ---- graphisme
+    in property <[ShapeData]> shapes;
+    in property <bool> shape-bind: true;  // true : x,y calculés par liaison depuis `t` ; false : poussés par Rust
+    in property <string> shape-mode: "solid";
+    in property <[PathData]> paths;
+    in property <[ImgItem]> imgs;
+    in property <[GroupData]> groups;
+    in property <image> chart;
+    in property <string> chart-path;
+    in property <image> big-image;
+    in property <length> big-x;
+    in property <length> big-y;
+    in property <float> big-zoom: 1;
+    in property <angle> big-rot;
+
+    // ---- arbre, animations
+    in property <int> tree-n;
+    in property <[MoverData]> movers;
+    in property <bool> go;
+}

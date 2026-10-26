@@ -1,0 +1,178 @@
+import { TextEdit } from "std-widgets.slint";
+import { Bench } from "bench.slint";
+import { PoolList, PoolListDense, NativeList, ShapesView, PathsView, ImagesView, BigImageView, LayersView, ChartView, LabelsView,
+         BindModelView, BindDerivedView, TreeView, MoversView } from "scenes.slint";
+export { Bench, RowData, ShapeData, PathData, ImgItem, MoverData, GroupData } from "bench.slint";
+
+export component MainWindow inherits Window {
+    title: "slintapp";
+    width: 1280px;
+    height: 720px;
+    background: #f4f4f4;
+
+    // texte lecture seule (T1) / éditeur (T3)
+    in-out property <length> text-y <=> te.content-y;
+    out property <length> text-content-h <=> te.content-height;
+    out property <length> text-visible-h <=> te.visible-height;
+    public function select-all() {
+        te.select-all();
+    }
+    public function edit-focus(pos: int) {
+        ed.focus();
+        ed.set-selection-offsets(pos, pos);
+    }
+    public function focus-keys() {
+        keys.focus();
+    }
+
+    if Bench.chrome: Rectangle {
+        x: 0;
+        y: 0;
+        width: parent.width;
+        height: 36px;
+        background: #2b3a55;
+        Text {
+            x: 12px;
+            text: "slintapp - benchmark";
+            color: white;
+            font-size: 16px;
+            vertical-alignment: center;
+        }
+    }
+    if Bench.chrome: Rectangle {
+        x: 0;
+        y: parent.height - 24px;
+        width: parent.width;
+        height: 24px;
+        background: #dde2ea;
+        Text {
+            x: 12px;
+            text: Bench.status;
+            font-size: 12px;
+            vertical-alignment: center;
+        }
+    }
+
+    // ---- listes
+    if Bench.scn == "pool-list": PoolList {
+        y: Bench.chrome ? 36px : 0px;
+        width: root.width;
+        height: Bench.chrome ? root.height - 60px : root.height;
+    }
+    if Bench.scn == "pool-dense": PoolListDense {
+        y: Bench.chrome ? 36px : 0px;
+        width: root.width;
+        height: Bench.chrome ? root.height - 60px : root.height;
+    }
+    if Bench.scn == "native-list": NativeList {
+        y: Bench.chrome ? 36px : 0px;
+        width: root.width;
+        height: Bench.chrome ? root.height - 60px : root.height;
+    }
+    // ---- graphisme
+    if Bench.scn == "shapes": ShapesView {
+        x: 10px;
+        y: 5px;
+        width: 1000px;
+        height: 600px;
+    }
+    if Bench.scn == "paths": PathsView {
+        x: 10px;
+        y: 5px;
+        width: 1000px;
+        height: 600px;
+    }
+    if Bench.scn == "images": ImagesView {
+        x: 10px;
+        y: 5px;
+        width: 1000px;
+        height: 600px;
+    }
+    if Bench.scn == "bigimage": BigImageView {
+        x: 10px;
+        y: 5px;
+        width: 1000px;
+        height: 600px;
+    }
+    if Bench.scn == "layers": LayersView {
+        x: 10px;
+        y: 5px;
+        width: 1000px;
+        height: 600px;
+    }
+    if Bench.scn == "chart": ChartView {
+        x: 10px;
+        y: 5px;
+        width: 1000px;
+        height: 300px;
+    }
+    // ---- shapes + liste (F1 : 1000 formes `solid` pendant les appels FFI) partage ShapesView
+    // ---- texte
+    if Bench.scn == "labels": LabelsView {
+        width: root.width;
+        height: root.height;
+    }
+    te := TextEdit {
+        visible: Bench.scn == "text-big";
+        y: 36px;
+        width: root.width;
+        height: root.height - 60px;
+        read-only: true;
+        text: Bench.big-text;
+        wrap: word-wrap;
+        font-size: 14px;
+    }
+    ed := TextEdit {
+        visible: Bench.scn == "text-edit";
+        y: 36px;
+        width: root.width;
+        height: root.height - 60px;
+        text: Bench.edit-text;
+        wrap: word-wrap;
+        font-size: 14px;
+        edited(s) => {
+            Bench.sq-white = !Bench.sq-white;
+            Bench.edited-text();
+        }
+    }
+    // ---- liaisons, arbre, animations
+    if Bench.scn == "bind-model": BindModelView {
+        width: root.width;
+        height: root.height;
+    }
+    if Bench.scn == "bind-derived": BindDerivedView {
+        width: root.width;
+        height: root.height;
+    }
+    if Bench.scn == "tree": TreeView {
+        width: root.width;
+        height: root.height;
+    }
+    if Bench.scn == "movers": MoversView {
+        width: root.width;
+        height: root.height;
+    }
+
+    // ---- carré de latence : toujours au-dessus (sauf idle), alterne noir/blanc à chaque Espace
+    if Bench.square: Rectangle {
+        x: 100px;
+        y: 100px;
+        width: 200px;
+        height: 200px;
+        background: Bench.sq-white ? #ffffff : #000000;
+    }
+    keys := FocusScope {
+        x: 0;
+        y: 0;
+        width: 0;
+        height: 0;
+        key-pressed(e) => {
+            if (Bench.square && Bench.scn != "text-edit" && e.text == " ") {
+                Bench.sq-white = !Bench.sq-white;
+                Bench.space-pressed();
+                return accept;
+            }
+            reject
+        }
+    }
+}

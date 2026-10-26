@@ -1,0 +1,320 @@
+import { Bench, ShapeData, PathData, ImgItem, MoverData, GroupData, RowData } from "bench.slint";
+import { PoolRow, PoolDense, RowBody } from "rows.slint";
+import { ListView } from "std-widgets.slint";
+
+// ---------------------------------------------------------------- listes
+// Variante `pool` : anneau de lignes instanciées une fois, repositionnées par Rust (virtualisation maison,
+// positions exactes, origine locale pour rester dans la précision de f32).
+export component PoolList inherits Rectangle {
+    clip: true;
+    background: #f4f4f4;
+    Rectangle {
+        y: -Bench.scroll-y;
+        width: parent.width;
+        for r in Bench.rows: PoolRow {
+            d: r;
+            width: root.width;
+        }
+    }
+    TouchArea {
+        scroll-event(e) => {
+            Bench.wheel(e.delta-y);
+            accept
+        }
+    }
+}
+export component PoolListDense inherits Rectangle {
+    clip: true;
+    background: #f4f4f4;
+    Rectangle {
+        y: -Bench.scroll-y;
+        width: parent.width;
+        for r in Bench.rows: PoolDense {
+            d: r;
+            width: root.width;
+        }
+    }
+    TouchArea {
+        scroll-event(e) => {
+            Bench.wheel(e.delta-y);
+            accept
+        }
+    }
+}
+// Variante `native` : le ListView officiel (virtualisation du dépôt slint : i-slint-core/model/repeater.rs).
+export component NativeList inherits Rectangle {
+    clip: true;
+    ListView {
+        content-y <=> Bench.lv-y;
+        for r in Bench.lv-rows: RowBody {
+            d: r;
+            width: root.width - 14px;
+        }
+    }
+}
+
+// ---------------------------------------------------------------- graphisme
+component ShapeBase inherits Rectangle {
+    in property <ShapeData> s;
+    property <length> lim-x: 1000px - s.w;
+    property <length> lim-y: 600px - s.w;
+    width: s.w;
+    height: s.w;
+    border-radius: s.r;
+    x: Bench.shape-bind ? lim-x - abs(lim-x - mod(s.x0 + s.vx * Bench.t, 2 * lim-x)) : s.x;
+    y: Bench.shape-bind ? lim-y - abs(lim-y - mod(s.y0 + s.vy * Bench.t, 2 * lim-y)) : s.y;
+}
+component ShapeSolid inherits ShapeBase {
+    background: s.c1;
+}
+component ShapeGrad inherits ShapeBase {
+    background: @linear-gradient(90deg, s.c1, s.c2);
+}
+component ShapeShadow inherits ShapeBase {
+    background: s.c1;
+    drop-shadow-blur: 8px;
+    drop-shadow-offset-x: 2px;
+    drop-shadow-offset-y: 2px;
+    drop-shadow-color: #00000090;
+}
+component ShapeAll inherits ShapeBase {
+    background: @linear-gradient(90deg, s.c1, s.c2);
+    drop-shadow-blur: 8px;
+    drop-shadow-offset-x: 2px;
+    drop-shadow-offset-y: 2px;
+    drop-shadow-color: #00000090;
+}
+export component ShapesView inherits Rectangle {
+    background: #1e2630;
+    clip: Bench.shape-mode == "clip" || Bench.shape-mode == "all";
+    border-radius: (Bench.shape-mode == "clip" || Bench.shape-mode == "all") ? 24px : 0px;
+    if Bench.shape-mode == "solid" || Bench.shape-mode == "clip": Rectangle {
+        for s in Bench.shapes: ShapeSolid {
+            s: s;
+        }
+    }
+    if Bench.shape-mode == "gradient": Rectangle {
+        for s in Bench.shapes: ShapeGrad {
+            s: s;
+        }
+    }
+    if Bench.shape-mode == "shadow": Rectangle {
+        for s in Bench.shapes: ShapeShadow {
+            s: s;
+        }
+    }
+    if Bench.shape-mode == "all": Rectangle {
+        for s in Bench.shapes: ShapeAll {
+            s: s;
+        }
+    }
+}
+
+export component PathsView inherits Rectangle {
+    background: #101418;
+    clip: true;
+    for p in Bench.paths: Path {
+        property <length> lim-x: 1000px - 120px;
+        property <length> lim-y: 600px - 120px;
+        x: lim-x - abs(lim-x - mod(p.x0 + p.vx * Bench.t, 2 * lim-x));
+        y: lim-y - abs(lim-y - mod(p.y0 + p.vy * Bench.t, 2 * lim-y));
+        width: 120px;
+        height: 120px;
+        viewbox-width: 120;
+        viewbox-height: 120;
+        commands: p.cmd;
+        stroke: p.c;
+        stroke-width: 2px;
+    }
+}
+
+export component ImagesView inherits Rectangle {
+    background: #202020;
+    clip: true;
+    for im in Bench.imgs: Image {
+        property <length> sz: 256px * im.sc;
+        property <length> lim-x: 1000px - sz;
+        property <length> lim-y: 600px - sz;
+        source: im.img;
+        width: sz;
+        height: sz;
+        x: lim-x - abs(lim-x - mod(im.x0 + im.vx * Bench.t, 2 * lim-x));
+        y: lim-y - abs(lim-y - mod(im.y0 + im.vy * Bench.t, 2 * lim-y));
+        opacity: im.op;
+        transform-rotation: im.rot + im.rotv * Bench.t;
+    }
+}
+export component BigImageView inherits Rectangle {
+    background: #202020;
+    clip: true;
+    Image {
+        source: Bench.big-image;
+        x: Bench.big-x;
+        y: Bench.big-y;
+        width: self.source.width * 1px * Bench.big-zoom;
+        height: self.source.height * 1px * Bench.big-zoom;
+        transform-rotation: Bench.big-rot;
+    }
+}
+
+export component LayersView inherits Rectangle {
+    background: #202428;
+    clip: true;
+    for g in Bench.groups: Rectangle {
+        property <length> lim-x: 1000px - 160px;
+        property <length> lim-y: 600px - 120px;
+        x: lim-x - abs(lim-x - mod(g.x0 + g.vx * Bench.t, 2 * lim-x));
+        y: lim-y - abs(lim-y - mod(g.y0 + g.vy * Bench.t, 2 * lim-y));
+        width: 160px;
+        height: 120px;
+        opacity: 0.5;
+        Rectangle {
+            width: 100px;
+            height: 80px;
+            background: g.c1;
+        }
+        Rectangle {
+            x: 30px;
+            y: 20px;
+            width: 100px;
+            height: 80px;
+            border-radius: 12px;
+            background: g.c2;
+        }
+        Rectangle {
+            x: 60px;
+            y: 40px;
+            width: 100px;
+            height: 80px;
+            border-radius: 40px;
+            background: g.c3;
+        }
+    }
+}
+
+export component ChartView inherits Rectangle {
+    background: #101418;
+    clip: true;
+    if Bench.variant != "path": Image {
+        source: Bench.chart;
+        width: parent.width;
+        height: parent.height;
+        image-fit: fill;
+    }
+    if Bench.variant == "path": Path {
+        width: parent.width;
+        height: parent.height;
+        viewbox-width: 1000;
+        viewbox-height: 300;
+        commands: Bench.chart-path;
+        stroke: #40e080;
+        stroke-width: 1px;
+    }
+}
+
+// ---------------------------------------------------------------- texte
+export component LabelsView inherits Rectangle {
+    background: #ffffff;
+    clip: true;
+    for s[i] in Bench.labels: Text {
+        x: mod(i, 26) * 48px;
+        y: floor(i / 26) * 14px;
+        width: 48px;
+        text: s;
+        font-size: 11px;
+        color: #202020;
+    }
+}
+
+// ---------------------------------------------------------------- liaisons, arbre, animations
+export component BindModelView inherits Rectangle {
+    background: #ffffff;
+    clip: true;
+    for s[i] in Bench.labels: Text {
+        x: mod(i, 26) * 48px;
+        y: floor(i / 26) * 14px;
+        width: 48px;
+        text: s;
+        font-size: 11px;
+        color: #202020;
+    }
+}
+export component BindDerivedView inherits Rectangle {
+    background: #ffffff;
+    clip: true;
+    for i in Bench.nlabels: Text {
+        x: mod(i, 26) * 48px;
+        y: floor(i / 26) * 14px;
+        width: 48px;
+        text: Bench.tick + i;
+        font-size: 11px;
+        color: #202020;
+    }
+}
+
+component TreeLeaf inherits Rectangle {
+    in property <int> id;
+    background: Colors.hsv(mod(id * 37, 360), 0.35, 0.95, 1.0);
+    Text {
+        text: id;
+        font-size: 9px;
+        color: #202020;
+    }
+}
+component TreeRow inherits HorizontalLayout {
+    in property <int> id;
+    min-height: 22px;
+    max-height: 22px;
+    spacing: 1px;
+    for k in 10: TreeLeaf {
+        id: root.id * 10 + k;
+    }
+}
+export component TreeView inherits Rectangle {
+    background: #ffffff;
+    clip: true;
+    Flickable {
+        VerticalLayout {
+            spacing: 1px;
+            for c in Bench.tree-n: TreeRow {
+                id: c;
+            }
+        }
+    }
+}
+
+component Mover inherits Rectangle {
+    in property <MoverData> m;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    background: m.c;
+    x: Bench.go ? m.xb : m.xa;
+    y: Bench.go ? m.yb : m.ya;
+    opacity: Bench.go ? 1.0 : m.oa;
+    animate x {
+        duration: m.dur;
+        iteration-count: -1;
+        direction: alternate;
+        easing: ease-in-out;
+    }
+    animate y {
+        duration: m.dur * 1.3;
+        iteration-count: -1;
+        direction: alternate;
+        easing: ease-in-out;
+    }
+    animate opacity {
+        duration: m.dur * 0.7;
+        iteration-count: -1;
+        direction: alternate;
+        easing: linear;
+    }
+}
+export component MoversView inherits Rectangle {
+    background: #1e2630;
+    clip: true;
+    for m in Bench.movers: Mover {
+        m: m;
+    }
+}

@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Banc v3 : Avalonia 12.1.4 + F# + .NET 10, NativeAOT uniquement (pas de variante JIT livree : `dev.sh` = build JIT local de mise au point).
+       Coeur = core/ (Rust, C-ABI v2) via P/Invoke ; aucun F*, aucun coeur F#. -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+    <AssemblyName>avalonia-bench</AssemblyName>
+    <Nullable>disable</Nullable>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <!-- FSharp.Core epingle explicitement (meme version que celle livree avec le SDK 10.0.403) -->
+    <DisableImplicitFSharpCoreReference>true</DisableImplicitFSharpCoreReference>
+    <ServerGarbageCollector>false</ServerGarbageCollector>
+    <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
+    <BenchRoot Condition="'$(BENCH_ROOT)' != ''">$(BENCH_ROOT)</BenchRoot>
+    <BenchRoot Condition="'$(BENCH_ROOT)' == ''">$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', '..'))</BenchRoot>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(PublishAot)' == 'true'">
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <IsAotCompatible>true</IsAotCompatible>
+    <StripSymbols>true</StripSymbols>
+    <DefineConstants>$(DefineConstants);CORE_STATIC</DefineConstants>
+  </PropertyGroup>
+  <!-- NativeAOT : liaison statique de libbenchcore.a (DirectPInvoke + NativeLibrary) :
+       https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/interop -->
+  <ItemGroup Condition="'$(PublishAot)' == 'true'">
+    <DirectPInvoke Include="benchcore" />
+    <NativeLibrary Include="$([MSBuild]::NormalizePath('$(BenchRoot)', 'core', 'target', 'release', 'libbenchcore.a'))" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Util.fs" />
+    <Compile Include="Native.fs" />
+    <Compile Include="Harness.fs" />
+    <Compile Include="ListsCore.fs" />
+    <Compile Include="ListScenarios.fs" />
+    <Compile Include="TextStyles.fs" />
+    <Compile Include="Program.fs" />
+    <!-- TextStyles.axaml : inclus implicitement comme AvaloniaXaml par Avalonia.Build -->
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FSharp.Core" Version="10.1.403" />
+    <PackageReference Include="Avalonia" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Skia" Version="12.1.4" />
+    <PackageReference Include="Avalonia.HarfBuzz" Version="12.1.4" />
+    <PackageReference Include="Avalonia.X11" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="12.1.4" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="12.0.0" />
+  </ItemGroup>
+</Project>
