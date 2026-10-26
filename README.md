@@ -1,10 +1,10 @@
 # Banc comparatif de stacks UI natives multiplateformes (rendu logiciel, Linux)
 
-Comparaison mesurée de Slint, Qt/QML, Avalonia (F#, NativeAOT et JIT), Compose Multiplatform (JVM), Flutter, egui et NSH (Rust, GTK 4) sur une app de référence identique, plus deux « portes » de vérification formelle : F\* → F# → NativeAOT et F\* (Low\*) → C via KaRaMeL.
+Comparaison mesurée de Slint, Qt/QML, Avalonia (F#, NativeAOT et JIT), Compose Multiplatform (JVM), Flutter, egui et NSH (Rust, GTK 4) sur une app de référence identique, plus deux « portes » de vérification formelle : F\* → F# → NativeAOT et F\* (Pulse) → C via KaRaMeL.
 
 **Lire d'abord : [`docs/RAPPORT-FINAL.md`](docs/RAPPORT-FINAL.md)** (résultats, limites, audit des versions, verdict, plan de migration depuis KMP).
 
-> Toutes les mesures sont en **rendu logiciel sur une VM de 4 vCPU sans GPU**. Elles ne valent ni pour un GPU, ni pour iOS/Android, ni pour wasm. Un audit des versions a montré que plusieurs outils n'étaient pas à jour : voir §0 du rapport (remesure en cours).
+> Toutes les mesures sont en **rendu logiciel sur une VM de 4 vCPU sans GPU**, à 60 Hz pour toutes les stacks. Elles ne valent ni pour un GPU, ni pour iOS/Android, ni pour wasm. Passe 2 (2026-10-26) : versions à jour, code relu contre la documentation officielle, harnais v2 ; les résultats de la passe 1 sont archivés dans `results/passe1/`.
 
 ## Arborescence
 | Chemin | Contenu |
@@ -18,16 +18,17 @@ Comparaison mesurée de Slint, Qt/QML, Avalonia (F#, NativeAOT et JIT), Compose 
 | `stacks/<stack>/` | code de l'app de référence par stack (+ `STACK-NOTES.md` et `logs/`) |
 | `fstar/` | spec F\* (`Core.fst`), F# extrait, projets .NET, journaux |
 | `stacks/karamel/` | module Low\* (`Core_Low.fst`), C généré, tests, scripts de build |
-| `results/` | JSON bruts de chaque exécution, résumés, `SYNTHESE.md`, `TABLES.md`, démarrage, calibration, preuves GUI (`verification/`) |
+| `results/` | JSON bruts de chaque exécution, résumés, `SYNTHESE.md` (générée par `harness/synthese.py`), démarrage, calibration, preuves GUI (`verification/`) ; `results/passe1/` : premier passage archivé |
 | `logs/`, `toolchains-logs/` | journaux réseau et d'installation des outils |
 
 ## Reproduire
 1. Générer les assets (non versionnés, 111 Mo) : `python3 -I harness/gen_assets.py assets`
 2. Construire le cœur : `cd core && cargo build --release`
 3. Construire une stack : `stacks/<stack>/build.sh` (dépendances système : Xvfb, Mesa llvmpipe, GTK 3/4, Qt 6, polices Noto, voir `stacks/*/STACK-NOTES.md`)
-4. Mesurer : `python3 -I harness/run_bench.py --stack NAME --cmd "<binaire>" --scenario list --duration 14 --runs 10`
+4. Mesurer : `harness/run_plan.sh "A B D cold cal verify C" "<stacks>" "<variantes>"` (commandes dans `harness/stacks.tsv`), ou une seule mesure : `python3 -I harness/run_bench.py --stack NAME --cmd "<commande>" --scenario list --duration 14 --runs 10`
+5. Synthèse : `python3 -I harness/synthese.py`
 
 ## Hors périmètre / exclu
 - Aucune version web/TypeScript : les variantes NSH TSX/QuickJS et GPUI ont été retirées du dépôt.
-- iced : écarté (mobile hors scope pour ses auteurs) ; ses résultats bruts restent dans `results/iced-*`.
+- iced : écarté (mobile hors scope pour ses auteurs) ; ses résultats de la passe 1 restent dans `results/passe1/`.
 - Les binaires, caches de build, dépôts tiers (NSH, KaRaMeL, Flutter SDK) et assets générés ne sont pas versionnés.

@@ -97,7 +97,12 @@ for s in MAIN:
     cells = []
     for tag in (f"{s}-list-cpu0", f"{s}-stream-r10000-cpu0", f"{s}-canvas-s5000-cpu0", f"{s}-list-q0.5", f"{s}-canvas-s5000-q0.5"):
         rs = runs(tag)
-        cells.append(f"{f(med(rs,'fps_mean'),0 if (med(rs,'fps_mean') or 0) >= 20 else 1)} / {f(med(rs,None,miss25),0,' %')}" if rs else "–")
+        if not rs:
+            cells.append("–")
+        elif med(rs, 'fps_mean') is None:
+            cells.append("**0 frame**")
+        else:
+            cells.append(f"{f(med(rs,'fps_mean'),0 if med(rs,'fps_mean') >= 20 else 1)} / {f(med(rs,None,miss25),0,' %')}")
     w(f"| {s} | " + " | ".join(cells) + " |")
 w("\nPression mémoire (cgroup v1, 3 exécutions ; « pic facturé » = memory.max_usage_in_bytes ; OOM = processus tué) :\n")
 head(["Stack", "list 128 Mo : FPS / pic facturé / OOM", "stream 128 Mo", "list 96 Mo", "stream 96 Mo"])
