@@ -312,6 +312,10 @@ class _TextState extends State<TextScenario> with SingleTickerProviderStateMixin
       ops['final_offset'] = ctrl.hasClients ? ctrl.offset : 0.0;
       ops['lines'] = lines.length;
       ops['select_all_done'] = selected;
+      // checked on the verify_gui capture: CJK, Hangul, Hebrew/Arabic (RTL) and accents render;
+      // emoji come out as monochrome DejaVu Sans glyphs (fontconfig fallback order) and the
+      // ZWJ family sequence is not composed into one glyph.
+      ops['not_rendered'] = ['colour emoji (monochrome glyphs)', 'emoji ZWJ sequence composition'];
       ops['checksum'] = hexOf(fnv(lines.length ^ (ctrl.hasClients ? ctrl.offset.round() : 0)));
     });
     b.finishExtra = (inW) {

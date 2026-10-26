@@ -1,0 +1,1 @@
+{"stack": "flutter", "scenario": "idle", "toplevels_before": 0, "big_window_during": [{"w": 1280, "h": 720, "name": "\"benchapp\": (\"dev.bench.benchapp\" \"Dev.b"}], "toplevels_after": 0, "distinct_colors": 602, "nonbackground_pct": 12.6, "pixels_changed_between_captures_pct": 0.0, "png": "/home/user/benchmark/results/verification/flutter-idle.png"}

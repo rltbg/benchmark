@@ -1,0 +1,1 @@
+Mon Oct 26 02:18:35 UTC 2026 débit NON mesuré : machine chargée par d'autres agents de 01:46 à 02:18 (loadavg 1 min entre 3,4 et 7,8 ; actuel : 6.29 6.89 6.03 9/198 10252) ; attente de loadavg<1,0 abandonnée sur demande du coordinateur. Binaires prêts : BENCH=1 ./build.sh

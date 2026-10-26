@@ -146,6 +146,7 @@ struct App {
     gpu_info: String,
     square_white: bool,
     key_events: u64,
+    emoji_font: String,
 }
 
 fn rss_kb() -> u64 {
@@ -165,8 +166,12 @@ impl App {
             gpu_info = unsafe { format!("GL_RENDERER={} GL_VERSION={}", gl.get_parameter_string(eframe::glow::RENDERER), gl.get_parameter_string(eframe::glow::VERSION)) };
         }
         let (mut text, mut images, mut canvas, mut nav) = (None, None, None, None);
+        let mut emoji_font = String::new();
         match a.scenario.as_str() {
-            "text" => text = Some(scen::TextView::load(&format!("{}/text1mb.txt", a.assets))),
+            "text" => {
+                if std::env::var("EGUI_BENCH_NO_COLOR_EMOJI").is_err() { emoji_font = scen::add_color_emoji(&cc.egui_ctx); }
+                text = Some(scen::TextView::load(&format!("{}/text1mb.txt", a.assets)));
+            }
             "images" => images = Some(scen::Images::new(&a.assets)),
             "canvas" => canvas = Some(Canvas::new(a.shapes, Vec2::new(1000.0, 600.0), true, Some(Vec2::new(1000.0, 100.0)))),
             "core" => canvas = Some(Canvas::new(1000, Vec2::new(1000.0, 600.0), false, None)),
@@ -177,7 +182,7 @@ impl App {
         App {
             a, rend, pacing60, m0: None, hook_no: 0, last_counted: None, changed: false, frame_ms: Vec::new(),
             cpu_usage_sum: 0.0, cpu_usage_n: 0, unchanged: 0, t: 0.0, ttfd_ms: None, model: ListModel::new(), stream: None, canvas, text, images, nav, core: None, burner: None,
-            last_off: -1.0, final_off: 0.0, samples: Vec::new(), next_sample: 10.0, base_applied: 0, shown_imgs: 0, gpu_info, square_white: false, key_events: 0,
+            last_off: -1.0, final_off: 0.0, samples: Vec::new(), next_sample: 10.0, base_applied: 0, shown_imgs: 0, gpu_info, square_white: false, key_events: 0, emoji_font,
         }
     }
 
@@ -237,7 +242,7 @@ impl App {
         }
         if let Some(t) = &self.text {
             ops.push(format!("\"time_to_first_display_ms\":{:.1},\"layout_ms\":{:.3},\"file_read_ms\":{:.3},\"galley_rows\":{},\"select_all\":{},\"selected_chars\":{}", self.ttfd_ms.unwrap_or(0.0), t.layout_ms.unwrap_or(0.0), t.load_ms, t.galley_rows, t.select_all_done, t.selected_chars));
-            extra.push_str(" text: TextEdit::multiline(&mut &str) (lecture seule, sélectionnable) dans ScrollArea ; layout_ms = durée du premier TextEdit::show (mise en page complète du Mo en un Galley, retour à la ligne à la largeur) ; time_to_first_display_ms = début de main -> retour de la présentation de la 1re frame de texte ; select-all à t=5 s = request_focus + TextEditState::cursor.set_char_range(CCursorRange::select_all) ; polices de repli système via feature eframe `system_fonts` (egui_system_font_provider/fontique : Noto Sans CJK, Noto Color Emoji, DejaVu…).");
+            extra.push_str(&format!(" text: TextEdit::multiline(&mut &str) (lecture seule, sélectionnable) dans ScrollArea ; layout_ms = durée du premier TextEdit::show (mise en page complète du Mo en un Galley, retour à la ligne à la largeur) ; time_to_first_display_ms = début de main -> retour de la présentation de la 1re frame de texte ; select-all à t=5 s = request_focus + TextEditState::cursor.set_char_range(CCursorRange::select_all) ; polices de repli système via feature eframe `system_fonts` (egui_system_font_provider/fontique : Noto Sans CJK, DejaVu…) + Noto Color Emoji ajoutée explicitement : {}.", self.emoji_font));
             checksum = format!("{:08x}", data::fnv(t.text.len() as u32));
         }
         if let Some(im) = &self.images {

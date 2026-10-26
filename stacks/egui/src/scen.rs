@@ -97,6 +97,23 @@ impl TextView {
     }
 }
 
+/// Police emoji couleur : le repli système d'eframe 0.37 (`system_fonts`, fontique) choisit DejaVu Sans
+/// (glyphes monochromes) pour les emoji ; on ajoute donc explicitement « Noto Color Emoji » localisée par
+/// fontconfig (`fc-match`, pas de chemin codé en dur) en fin de famille Proportional/Monospace.
+pub fn add_color_emoji(ctx: &egui::Context) -> String {
+    let out = std::process::Command::new("fc-match").args(["-f", "%{file}", "Noto Color Emoji"]).output();
+    let Ok(out) = out else { return "fc-match indisponible".into() };
+    let path = String::from_utf8_lossy(&out.stdout).to_string();
+    let Ok(bytes) = std::fs::read(&path) else { return format!("lecture impossible: {path}") };
+    let mut fonts = egui::FontDefinitions::default();
+    fonts.font_data.insert("color-emoji".into(), Arc::new(egui::FontData::from_owned(bytes)));
+    for fam in [egui::FontFamily::Proportional, egui::FontFamily::Monospace] {
+        fonts.families.get_mut(&fam).unwrap().push("color-emoji".into());
+    }
+    ctx.set_fonts(fonts);
+    path
+}
+
 /// aller-retour 0..max
 pub fn ping(x: f64, max: f64) -> f64 {
     if max <= 0.0 { return 0.0; }

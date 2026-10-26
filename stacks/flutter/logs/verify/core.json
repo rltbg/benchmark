@@ -1,0 +1,1 @@
+{"stack": "flutter", "scenario": "core", "toplevels_before": 0, "big_window_during": [{"w": 1280, "h": 720, "name": "\"benchapp\": (\"dev.bench.benchapp\" \"Dev.b"}], "toplevels_after": 0, "distinct_colors": 47379, "nonbackground_pct": 65.1, "pixels_changed_between_captures_pct": 60.3, "png": "/home/user/benchmark/results/verification/flutter-core.png"}
