@@ -37,7 +37,7 @@ Reproduction : `stacks/karamel/build.sh` (sorties dans `$BUILD=/opt/krml/p2/buil
 | 7c | Idem sur la sortie `--codegen C` (C direct de Custard, sans krml ni krmllib) | **OK : 2634 / 0 / 0** (normal et ASan/UBSan) | `55` |
 | 8 | Mutations F* : borne 64→65, constante FNV fausse, copie décalée 3→2, `out_len := cap` | **4/4 rejetées** (`Error 19`) | `60` |
 | 8b | Mutation C : `n <= 64U` → `65U` | **détectée** : 2 échecs + 9614 divergences (identique à la passe 1) | `61` |
-| 9 | Débit (100 M triplets) | voir « Mesures » | `70` |
+| 9 | Débit (100 M triplets) | **non mesuré** (machine chargée, voir « Mesures ») | `70` |
 
 ## Diff du C passe 1 → passe 2 (`logs/v2/45-diff-C-passe1-vs-passe2.diff`)
 - Signatures : `uint32_t len/cap/*out_len` → **`size_t`** (`SZ.t` en Pulse). Adaptateur `kr_shim_pulse.c` réduit aux tests de `NULL` (19 lignes) : plus de refus `n > UINT32_MAX`, plus de clamp `cap > 64`.
@@ -68,7 +68,7 @@ Reproduction : `stacks/karamel/build.sh` (sorties dans `$BUILD=/opt/krml/p2/buil
 | Hors dépôt | opam root 642 Mo, karamel 221 Mo |
 
 ## Mesures (gcc -O2, boucle de `core/callbench.c`, 100 M triplets validate+hash+parse, trame de 8 o, `taskset -c 2`)
-MESURES_A_REMPLIR
+**Débit non mesuré.** La machine est restée chargée par d'autres agents de 01:46 à 02:18 UTC (loadavg sur 1 min entre 3,4 et 7,8 sur 4 vCPU ; je n'ai lancé le banc qu'à condition d'avoir loadavg < 1,0 trois relevés de suite, ce qui n'est jamais arrivé). Aucun chiffre de débit n'est donc donné, et je ne donne aucun ratio vs Rust (`logs/v2/70-bench.log`). Les binaires `cb_rust`, `cb_kr_shim` et `cb_kr_direct` sont construits ; `BENCH=1 ./build.sh` lance 5 passes entrelacées sous `taskset -c 2`. Seul indice statique : même `.o` de 357 o de text pour les deux backends, sans appel externe (`logs/v2/48`), mais avec une copie octet par octet là où la passe 1 utilisait `memcpy`.
 
 ## Fichiers
 `Core_Pulse.fst`, `build.sh`, `tests/{test_core_pulse.c,kr_shim_pulse.c,callbench_direct_pulse.c}`, `gen/` (C via krml), `gen-direct/` (C direct), `logs/v2/`, `passe1/` (Low\*, scripts et C de la passe 1, non reconstructibles avec F* 2026).
