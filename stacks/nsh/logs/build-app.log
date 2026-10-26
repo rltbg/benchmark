@@ -242,3 +242,6 @@
    Compiling gtk4 v0.11.5
    Compiling pangocairo v0.22.9
    Compiling nsh-engine v0.2.0
+   Compiling nshbench v0.2.0 (/home/user/benchmark/stacks/nsh/app)
+   Compiling benchcore v0.1.0 (/home/user/benchmark/core)
+   Compiling nsh-platform-linux v0.2.0
