@@ -273,7 +273,7 @@ pub fn build_static(args: &Args, app: &MainWindow, renderer: &str) -> Result<Box
             s
         });
     }
-    let imp = if args.pick("impl", &["pool", "native"], "pool") == "native" { Impl::Native } else { Impl::Pool };
+    let imp = if args.pick("impl", &["pool", "native"], "native") == "native" { Impl::Native } else { Impl::Pool };
     let (n, dense, script, k) = match sc {
         "list-scale" => (args.n_or(100_000) as usize, false, Some(Script::l1()), 6u64),
         "list-rich" => (100_000usize, true, Some(Script::constant(20000.0)), args.n_or(6)),

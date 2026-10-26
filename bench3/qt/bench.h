@@ -11,6 +11,7 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMutex>
+#include <QQmlComponent>
 #include <QQuickTextDocument>
 #include <QQuickView>
 #include <QQuickWindow>
@@ -154,6 +155,7 @@ class Bench : public QObject {
     Q_PROPERTY(int richK READ richK CONSTANT)
     Q_PROPERTY(bool layerBlur READ layerBlur CONSTANT)
     Q_PROPERTY(int leafStart READ leafStart CONSTANT)
+    Q_PROPERTY(QQmlComponent *nodeComp READ nodeComp WRITE setNodeComp)
 public:
     enum Profile { Fling, Rich20k, Slow3k };
     enum Sc { Idle, ListScale, ListRich, ListMutate, ListReset, TextBig, TextLabels, TextEdit, TextRich, GfxShapes, GfxPaths, GfxChart, GfxImages, GfxLayers,
@@ -170,6 +172,8 @@ public:
     bool interactive() const { return sc == LatWheel; }
     int richK() const { return sc == ListRich ? N : 0; }
     bool layerBlur() const { return a.v("effect") == "blur"; }
+    QQmlComponent *nodeComp() const { return m_nodeComp; }
+    void setNodeComp(QQmlComponent *c) { m_nodeComp = c; }
     int leafStart() const { return N < 2 ? 0 : (N - 2) / 10 + 1; }
     void setView(QQuickView *v) { view = v; }
     QQuickView *view = nullptr;
@@ -360,6 +364,7 @@ public:
         return QString("Qt %1 (runtime %2, aqtinstall linux_gcc_64 from download.qt.io), g++ %3, CMake 4.4.4, Ninja 1.13.2")
             .arg(QT_VERSION_STR, qVersion(), __VERSION__);
     }
+    QQmlComponent *m_nodeComp = nullptr;
     Args a; Sc sc = Unknown; int N = 0; QString paneName;
     RowModel model, model2; LabelModel labelModel; CellModel cellModel; HeightIndex hindex;
     ListCtl listCtl[2]; QHash<QString, QObject *> items; std::vector<GfxBase *> gfx; QObject *te = nullptr;

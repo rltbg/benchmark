@@ -258,6 +258,7 @@ pub struct CallsSc {
     handles: Vec<std::thread::JoinHandle<()>>,
     started: Arc<AtomicBool>,
     last_phase: u64,
+    slice: f64,
 }
 const FN_NAMES: [&str; 4] = ["core_noop", "core_add", "core_hash", "core_fill"];
 
@@ -329,7 +330,7 @@ pub fn build_calls(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, S
             std::hint::black_box(acc);
         }));
     }
-    Ok(Box::new(CallsSc { shapes, stop, stats, phase, threads, size, handles, started, last_phase: 0 }))
+    Ok(Box::new(CallsSc { shapes, stop, stats, phase, threads, size, handles, started, last_phase: 0, slice: (args.duration / 4.0).max(0.25) }))
 }
 
 impl Scenario for CallsSc {
@@ -340,7 +341,7 @@ impl Scenario for CallsSc {
         self.shapes.step(t, app);
         if measuring {
             // 4 fonctions en tranches de durée égale sur la fenêtre de mesure (12 s -> 3 s chacune)
-            let ph = ((t / 3.0) as u64).min(3);
+            let ph = ((t / (self.slice)) as u64).min(3);
             self.phase.store(ph, Ordering::Relaxed);
             self.last_phase = ph;
         }
