@@ -2,12 +2,12 @@
 // Sert le dossier (MIME application/wasm), ouvre Chrome headless sur /?autorun=1, journalise la console, capture a chaque SPIKE:shot.
 import { chromium } from 'playwright-core';
 import http from 'node:http'; import fs from 'node:fs'; import path from 'node:path';
-const [dir, out] = process.argv.slice(2); fs.mkdirSync(out, { recursive: true });
+const [dirArg, out] = process.argv.slice(2); const dir = path.resolve(dirArg); fs.mkdirSync(out, { recursive: true });
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.mjs': 'text/javascript', '.json': 'application/json', '.wasm': 'application/wasm', '.css': 'text/css', '.dat': 'application/octet-stream', '.png': 'image/png', '.ico': 'image/x-icon' };
 const server = http.createServer((req, res) => {
   let p = decodeURIComponent(req.url.split('?')[0]); if (p.endsWith('/')) p += 'index.html';
   const f = path.join(dir, p);
-  if (!f.startsWith(path.resolve(dir)) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { res.writeHead(404); res.end('404'); return; }
+  if (!f.startsWith(dir) || !fs.existsSync(f) || fs.statSync(f).isDirectory()) { console.log('404 ' + p); res.writeHead(404); res.end('404'); return; }
   res.writeHead(200, { 'Content-Type': mime[path.extname(f)] || 'application/octet-stream' }); fs.createReadStream(f).pipe(res);
 });
 await new Promise(r => server.listen(0, '127.0.0.1', r)); const port = server.address().port;

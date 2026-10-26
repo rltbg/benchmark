@@ -3,7 +3,7 @@
 set -u
 source "$(dirname "$0")/common.sh"
 root="$(pwd)"; res="$root/res"; work="$root/work"; mkdir -p "$res" "$work"; sa="$root/spikes/avalonia"
-{ echo "== dotnet workload install ios"; dotnet workload install ios; echo "rc=$?"; } > "$res/workload-install.log" 2>&1
+{ echo "== dotnet workload install ios (jeu de workloads 10.0.401 : iOS 26.5.x ; le jeu 10.0.403 donne iOS 27.1 qui exige Xcode 27.1, absent du runner)"; dotnet workload install ios --version 10.0.401; echo "rc=$?"; } > "$res/workload-install.log" 2>&1
 { dotnet --info; dotnet workload list; xcode-select -p; xcodebuild -version; ls -d /Applications/Xcode*; xcrun simctl list runtimes; } > "$res/versions.txt" 2>&1
 : > "$res/builds.txt"
 build_ios() { # <nom> <projet> <extra args...>
