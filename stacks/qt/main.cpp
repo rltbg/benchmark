@@ -26,6 +26,8 @@ int main(int argc, char **argv) {
         else if (k == "--canvas-impl") a.canvasImpl = nx(); else if (k == "--backend") a.backend = nx();
         else if (k == "--shot") a.shot = nx(); else if (k == "--paced") a.paced = true;
     }
+    // Cadence (spec v2.1): BENCH_PACING=60 (default) or uncapped.
+    { const QByteArray pc = qgetenv("BENCH_PACING"); a.pace60 = !(pc == "uncapped"); }
     // QWindow::requestUpdate() docs: update requests are delivered after up to 5 ms unless overridden by the documented
     // QT_QPA_UPDATE_IDLE_TIME environment variable (the Scene Graph docs recommend 0 for benchmarking). --paced keeps Qt's default.
     if (!a.paced && !qEnvironmentVariableIsSet("QT_QPA_UPDATE_IDLE_TIME")) qputenv("QT_QPA_UPDATE_IDLE_TIME", "0");

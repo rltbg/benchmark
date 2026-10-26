@@ -1,138 +1,22 @@
-== 2026-10-26T01:52:42+00:00 build with /opt/Qt/6.12.0/gcc_64 / cmake version 4.4.4 / ninja 1.13.2.git.kitware.jobserver-pipe-1 / g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
--- The CXX compiler identification is GNU 13.3.0
--- Detecting CXX compiler ABI info
--- Detecting CXX compiler ABI info - done
--- Check for working CXX compiler: /usr/bin/c++ - skipped
--- Detecting CXX compile features
--- Detecting CXX compile features - done
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD
--- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
--- Found Threads: TRUE
--- Performing Test HAVE_STDATOMIC
--- Performing Test HAVE_STDATOMIC - Success
--- Found WrapAtomic: TRUE
--- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so
--- Found WrapOpenGL: TRUE
--- Found WrapVulkanHeaders: /usr/include
+== 2026-10-26T02:09:27+00:00 build with /opt/Qt/6.12.0/gcc_64 / cmake version 4.4.4 / ninja 1.13.2.git.kitware.jobserver-pipe-1 / g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
 Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
 Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
 If this causes problems, reconfigure your locale. See the locale(1) manual
 for more information.
--- Configuring done (0.9s)
--- Generating done (0.0s)
+-- Configuring done (0.6s)
+-- Generating done (0.1s)
 -- Build files have been written to: /home/user/benchmark/stacks/qt/build
-[1/40] Copying qtbench qml sources into build dir
-[2/40] Copying qtbench qml resources into build dir
-[3/40] Populating .qmlls.build.ini file at /home/user/benchmark/stacks/qt/build/.qt/.qmlls.build.ini
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[4/40] Running qmlimportscanner for qtbench
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[5/40] Generating qt.conf part for qtbench
-[6/40] Generating qt.conf file
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[7/40] Automatic MOC and UIC for target qtbench
-[8/40] Running rcc for resource qmake_Bench
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[9/40] Running AUTOMOC file extraction for target qtbench
-[10/40] Generating .rcc/qmlcache/qtbench_qmlcache_loader.cpp
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[11/40] Running moc --collect-json for target qtbench
-[12/40] Running rcc for resource qtbench_raw_qml_0
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[13/40] Running rcc for resource qtbench_raw_qml_0_extra_qmldirs
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[14/40] Automatic QML type registration for target qtbench
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[15/40] Generating .rcc/qmlcache/qtbench_qml_Main_qml.cpp, .rcc/qmlcache/qtbench_qml_Main_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[16/40] Generating .rcc/qmlcache/qtbench_qml_Shell_qml.cpp, .rcc/qmlcache/qtbench_qml_Shell_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[17/40] Generating .rcc/qmlcache/qtbench_qml_TextPane_qml.cpp, .rcc/qmlcache/qtbench_qml_TextPane_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[18/40] Generating .rcc/qmlcache/qtbench_qml_ListPane_qml.cpp, .rcc/qmlcache/qtbench_qml_ListPane_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[19/40] Generating .rcc/qmlcache/qtbench_qml_ImagesPane_qml.cpp, .rcc/qmlcache/qtbench_qml_ImagesPane_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[20/40] Generating .rcc/qmlcache/qtbench_qml_CanvasPane_qml.cpp, .rcc/qmlcache/qtbench_qml_CanvasPane_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[21/40] Generating .rcc/qmlcache/qtbench_qml_NavPane_qml.cpp, .rcc/qmlcache/qtbench_qml_NavPane_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[22/40] Generating .rcc/qmlcache/qtbench_qml_CanvasJs_qml.cpp, .rcc/qmlcache/qtbench_qml_CanvasJs_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[23/40] Generating .rcc/qmlcache/qtbench_qml_NavScreen_qml.cpp, .rcc/qmlcache/qtbench_qml_NavScreen_qml.cpp.aotstats
-Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
-Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
-If this causes problems, reconfigure your locale. See the locale(1) manual
-for more information.
-[24/40] Building CXX object CMakeFiles/qtbench.dir/main.cpp.o
-[25/40] Building CXX object CMakeFiles/qtbench.dir/qtbench_autogen/mocs_compilation.cpp.o
-[26/40] Building CXX object CMakeFiles/qtbench.dir/build/.qt/rcc/qrc_qmake_Bench.cpp.o
-[27/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qmlcache_loader.cpp.o
-[28/40] Building CXX object CMakeFiles/qtbench.dir/qtbench_qmltyperegistrations.cpp.o
-[29/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_Main_qml.cpp.o
-[30/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_Shell_qml.cpp.o
-[31/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_ListPane_qml.cpp.o
-[32/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_TextPane_qml.cpp.o
-[33/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_ImagesPane_qml.cpp.o
-[34/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_CanvasPane_qml.cpp.o
-[35/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_CanvasJs_qml.cpp.o
-[36/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_NavPane_qml.cpp.o
-[37/40] Building CXX object CMakeFiles/qtbench.dir/build/.qt/rcc/qrc_qtbench_raw_qml_0.cpp.o
-[38/40] Building CXX object CMakeFiles/qtbench.dir/build/.qt/rcc/qrc_qtbench_raw_qml_0_extra_qmldirs.cpp.o
-[39/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_NavScreen_qml.cpp.o
-[40/40] Linking CXX executable qtbench
+[1/26] Automatic MOC and UIC for target qtbench
+[2/26] Running AUTOMOC file extraction for target qtbench
+[3/26] Running moc --collect-json for target qtbench
+[4/7] Building CXX object CMakeFiles/qtbench.dir/qtbench_autogen/mocs_compilation.cpp.o
+[5/7] Building CXX object CMakeFiles/qtbench.dir/main.cpp.o
+[6/7] Building CXX object CMakeFiles/qtbench.dir/qtbench_qmltyperegistrations.cpp.o
+[7/7] Linking CXX executable qtbench
 
-real	0m29.787s
-user	0m43.950s
-sys	0m3.690s
+real	0m24.819s
+user	0m14.405s
+sys	0m1.868s
 -- Install configuration: "Release"
 -- Installing: /home/user/benchmark/stacks/qt/deploy/bin/qtbench
 -- Set non-toolchain portion of runtime path of "/home/user/benchmark/stacks/qt/deploy/bin/qtbench" to "$ORIGIN:$ORIGIN/../lib"
@@ -258,6 +142,6 @@ sys	0m3.690s
 -- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libxcb-cursor.so.0
 -- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libxcb-cursor.so.0.0.0
 
-real	0m0.644s
-user	0m0.290s
-sys	0m0.243s
+real	0m1.287s
+user	0m0.379s
+sys	0m0.213s

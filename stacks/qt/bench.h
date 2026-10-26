@@ -34,7 +34,7 @@ static const double WARMUP = 2.0;
 
 struct Args {
     QString scenario = "idle", out = "out.json", assets, canvasImpl = "painted", backend, shot;
-    bool paced = false; double duration = 10; int rate = 1000; int shapes = 5000;
+    bool paced = false; bool pace60 = true; double duration = 10; int rate = 1000; int shapes = 5000;
 };
 
 // ---- images: QQuickAsyncImageProvider + QThreadPool (the idiom the QQuickImageProvider docs recommend instead of the
@@ -142,7 +142,19 @@ private:
             }
             lastFrameNs = now;
         }
-        if (continuous() && !tickPending.exchange(true)) QMetaObject::invokeMethod(this, &Bench::tick, Qt::QueuedConnection);
+        if (continuous() && !tickPending.exchange(true)) QMetaObject::invokeMethod(this, &Bench::scheduleTick, Qt::QueuedConnection);
+    }
+    // BENCH_PACING=uncapped: tick right away. BENCH_PACING=60 (default): tick at the next point of a fixed 16.667 ms grid
+    // with QTimer::singleShot(std::chrono::nanoseconds, Qt::PreciseTimer, ...) (public QTimer API); the update request it
+    // issues is delivered without extra delay (QT_QPA_UPDATE_IDLE_TIME=0). A frame finishing after its slot moves to the
+    // next free slot (missed frame, visible as frame_ms > 16.7 in the harness).
+    void scheduleTick() {
+        if (!a.pace60) { tick(); return; }
+        const qint64 now = clock.nsecsElapsed();
+        if (nextSlotNs == 0) nextSlotNs = now;
+        nextSlotNs += PERIOD_NS;
+        if (nextSlotNs <= now) nextSlotNs += ((now - nextSlotNs) / PERIOD_NS + 1) * PERIOD_NS;
+        QTimer::singleShot(std::chrono::nanoseconds(nextSlotNs - now), Qt::PreciseTimer, this, [this] { tick(); });
     }
     void tick() {
         tickPending = false;
@@ -324,6 +336,7 @@ private:
         if (s == "nav") { ops["transitions_done"] = qint64(transitions); ops["modals_done"] = qint64(modals); }
         if (s == "idle") ops["rows_drawn"] = qint64(model.titleCalls);
         ops["graphics_api"] = graphicsApiName();
+        ops["pacing"] = s == "nav" && !a.pace60 ? "60-only" : (a.pace60 ? "60" : "uncapped");
         if (!a.shot.isEmpty()) view->grabWindow().save(a.shot);
         QJsonArray fa; { QMutexLocker l(&fm); for (double f : frames) fa.push_back(f); }
         QJsonObject root{{"stack", "qt"}, {"version", version()}, {"scenario", s}, {"duration_s", dur}, {"frames", fa.size()}, {"frame_ms", fa},
@@ -352,8 +365,10 @@ private:
         QString n = QString("Qt %1; scene graph backend=%2; platform=%3. frame_ms = interval between consecutive QQuickWindow::frameSwapped "
                             "(software: emitted by the software render loop right after QBackingStore::flush of the dirty region to the X window (xcb, MIT-SHM); "
                             "RHI OpenGL: after the GL swapBuffers of the basic render loop (Mesa llvmpipe)). QT_QPA_UPDATE_IDLE_TIME=%4 (documented in QWindow::requestUpdate "
-                            "and recommended for benchmarking in the Qt Quick Scene Graph docs; removes the default 5 ms update pacing unless --paced). ")
-                        .arg(qVersion(), graphicsApiName(), QGuiApplication::platformName(), QString::fromLatin1(qgetenv("QT_QPA_UPDATE_IDLE_TIME")));
+                            "and recommended for benchmarking in the Qt Quick Scene Graph docs; removes the default 5 ms update pacing unless --paced). Pacing %5. ")
+                        .arg(qVersion(), graphicsApiName(), QGuiApplication::platformName(), QString::fromLatin1(qgetenv("QT_QPA_UPDATE_IDLE_TIME")),
+                             a.pace60 ? QStringLiteral("BENCH_PACING=60: each tick is scheduled on a fixed 16.667 ms grid by QTimer::singleShot(nanoseconds, Qt::PreciseTimer) (public API, ms accuracy on Linux per Qt::TimerType docs)")
+                                      : QStringLiteral("BENCH_PACING=uncapped: next tick queued immediately after each frameSwapped"));
         n += continuous() ? "Continuous redraw: each frameSwapped queues a tick that advances the script and calls QQuickWindow::update(); only frames following a tick are counted. "
                           : "No redraw requested by the app: frames are rendered by Qt only when the scene changes. ";
         n += "First 2 s warm-up discarded (scripts restart at t=0). ";
@@ -376,6 +391,7 @@ private:
     QElapsedTimer clock; qint64 startNs = 0; QMutex fm; std::vector<double> frames; qint64 lastNs = -1, lastFrameNs = 0, t0Ns = 0, lastTickNs = 0;
     bool measuring = false, finished = false, textSelected = false, ttfdDone = false;
     std::atomic<bool> ticked{false}, tickPending{false}, stopAll{false};
+    static constexpr qint64 PERIOD_NS = 16666667; qint64 nextSlotNs = 0;
     double listPos = 0, shownPos = 0, prevD = 0, layoutMs = 0, ttfdMs = 0; qint64 textStartNs = 0, textDoneNs = 0;
     uint64_t titleCalls0 = 0, gen0 = 0, drop0 = 0, app0 = 0, calls0 = 0, heavy0 = 0, dec0 = 0, decNs0 = 0;
     std::atomic<uint64_t> calls{0}, heavy{0}, coreAcc{0}, busyAcc{0};

@@ -41,6 +41,22 @@ Installation : `python3 -m aqt install-qt linux desktop 6.12.0 linux_gcc_64 -O /
 16. Spec v2 : marqueurs `BENCH:measure_start/end` (fflush), scénario `input` (Rectangle 200×200 en (100,100), `Keys.onPressed` Key_Space sans auto-repeat, fenêtre en (0,0), `requestActivate`), `version`, `unsupported: null`, `ops.not_rendered`, `ops.key_events` ; pas de `ops.gc` (C++ natif).
 17. Dépendance découverte : le plugin xcb exige `libxcb-cursor.so.0` depuis Qt 6.5 (`qt.qpa.plugin: From 6.5.0, xcb-cursor0 or libxcb-cursor0 is needed…`, rc 134) ; absente, pas d'apt → embarquée dans `deploy/lib` (build.sh la récupère et vérifie le sha256).
 
+## Cadence `BENCH_PACING` (spec v2.1)
+- `BENCH_PACING=60` (**défaut**, mesure principale) : chaque tick (script + `QQuickWindow::update()`) est planifié sur une grille fixe de 16,667 ms par `QTimer::singleShot(std::chrono::nanoseconds, Qt::PreciseTimer, …)` (API publique ; résolution ns acceptée depuis 6.8, précision ms garantie sous Unix : https://doc.qt.io/qt-6/qt.html#TimerType-enum, https://doc.qt.io/qt-6/qchronotimer.html#accuracy-and-timer-resolution). La requête de mise à jour est ensuite livrée sans délai (`QT_QPA_UPDATE_IDLE_TIME=0`, documenté). Une frame en retard passe au créneau suivant (frame manquée). `QT_QPA_UPDATE_IDLE_TIME=16` aurait donné « rendu + 16 ms » et non une grille 60 Hz, d'où le timer. Pas de vsync utilisable (Xvfb, software).
+- `BENCH_PACING=uncapped` : tick re-posté immédiatement après chaque `frameSwapped` (comportement précédent).
+- `ops.pacing` : `"60"` ou `"uncapped"` ; nav : `"60"` / `"60-only"` (animations sur le timer Qt de 16 ms dans les deux modes, cf. revue §1).
+- Hors cadence : un événement clavier (input) qui change la scène déclenche un rendu immédiat par Qt (non compté comme frame), d'où une latence d'entrée plus basse en mode 60 qu'en uncapped.
+- Fumée harnais (`logs/harness-smoke-pacing.txt`) :
+  | mode | scénario | fps | p50 / p95 ms | >16,7 / >25 ms | CPU % cœur | RSS Mo | latence p50/p95 |
+  |---|---|---|---|---|---|---|---|
+  | 60 | list (8 s) | 58,5 | 16,66 / 23,6 | 220 / 16 | **9,0** | 59 | – |
+  | 60 | input (15 s) | 60,1 | 16,71 / 17,8 | 457 / 2 | **10,1** | 60 | 0,77 / 2,6 ms, 40/40 |
+  | uncapped | list | 753,6 | 0,85 / 4,9 | 1 / 1 | 57,8 | 60 | – |
+  | uncapped | input | 684,1 | 0,90 / 5,1 | 0 / 0 | 58,4 | 62 | 3,2 / 9,9 ms, 40/40 |
+  | 60 (OpenGL) | list | 55,8 | 16,68 / 24,9 | 219 / 22 | 57,0 | 166 | – |
+  Le compteur « >16,7 ms » inclut les intervalles à 16,70–16,8 ms (gigue du timer autour de 16,667) ; « >25 ms » donne les vraies frames manquées.
+- Commandes harnais : `--stack qt-software --cmd '${ROOT}/stacks/qt/deploy/bin/qtbench'` (60 Hz) ; variante `--env BENCH_PACING=uncapped` ; OpenGL : `--cmd '${ROOT}/stacks/qt/deploy/bin/qtbench --backend opengl'` (± `--env BENCH_PACING=uncapped`).
+
 ## Définition de frame
 `frame_ms` = intervalle entre deux `QQuickWindow::frameSwapped` (software : émis juste après `QBackingStore::flush` de la région sale vers X/xcb-SHM ; OpenGL : après `swapBuffers` de la boucle basic). Scénarios continus : chaque `frameSwapped` poste un tick (script + `update()`), seules les frames suivant un tick comptent. idle : aucun redessin (0 frame). nav : uniquement les frames rendues par Qt (animations, plafond ~60 Hz, cf. 1).
 
@@ -51,7 +67,7 @@ Installation : `python3 -m aqt install-qt linux desktop 6.12.0 linux_gcc_64 -O /
 - Machine partagée très chargée (load 6–8) : chiffres bruités. Deux runs harnais perdus par collision de display `:90` avec un autre agent (`could not connect to display :90`, `X11 connection broke`), relancés OK.
 - Compilateur non mis à jour (pas d'apt).
 
-## Fumée harnais (`run_bench.py --duration 8|10|15 --runs 1`, non officiel) — `logs/harness-smoke.txt`
+## Fumée harnais v2 (mode uncapped, avant v2.1) (`run_bench.py --duration 8|10|15 --runs 1`, non officiel) — `logs/harness-smoke.txt`
 software : idle 0 frame, RSS 57 Mo, CPU 0 % ; list 674 fps (p95 5,6 ms), RSS 61 Mo ; stream 1k 1047 fps / 10k 851 fps, 0 drop ; canvas 5k 14,2 fps, 20k 3,9 fps ; text 33 fps (RSS 83 Mo) ; images 267 fps (1686 décodages, 4990 ms) ; nav 61 fps, 24 transitions/10 s ; core 51 fps, 90,8 M calls/s, heavy 9, stall max 194 ms ; stress(10 s) 13,2 fps ; **input 1108 fps, latence p50 2,2 ms, 40/40 événements, 0 perdu**. Tous : `markers: True`, `sum_heights` 8 799 584.
 OpenGL/llvmpipe : list 210 fps (RSS 166 Mo) ; canvas 5k 8,5 ; nav 41 ; text 59 ; input 211 fps, latence p50 13,7 ms, 0 perdu.
 Fumées directes (`smoke.sh`, `logs/smoke/`) : canvas `render` (QSGRenderNode) 13,9 fps vs `painted` 11–14 ; Canvas QML 1000 formes 2,9 fps ; `--paced` list 149 fps.
