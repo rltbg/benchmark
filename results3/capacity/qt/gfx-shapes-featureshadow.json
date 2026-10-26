@@ -1,0 +1,328 @@
+{
+ "stack": "qt",
+ "scenario": "gfx-shapes",
+ "variant": [
+  "feature=shadow"
+ ],
+ "cpu_quota": null,
+ "cmd": "${ROOT}/bench3/qt/run.sh",
+ "n_max": 1375,
+ "bounded_above": true,
+ "first_fail": 1437,
+ "probes": [
+  {
+   "n": 250,
+   "ok": true,
+   "reasons": [],
+   "rc": 0,
+   "fps_mean": 59.885417352804254,
+   "frame_p95": 17.779132,
+   "frame_p99": 18.75576,
+   "frame_max": 40.469089,
+   "frames": 479,
+   "cpu_pct_core_mean": 18.932686862955975,
+   "pss_kb_peak": 46087,
+   "rss_kb_peak": 51744,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 0.20876826722338204,
+   "setup_ms": 37.069055,
+   "ui_stall_ms_max": 28.657235,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 500,
+   "ok": true,
+   "reasons": [],
+   "rc": 0,
+   "fps_mean": 59.99338895147749,
+   "frame_p95": 18.088089,
+   "frame_p99": 19.464659,
+   "frame_max": 24.926331,
+   "frames": 479,
+   "cpu_pct_core_mean": 27.784949199463167,
+   "pss_kb_peak": 46105,
+   "rss_kb_peak": 51816,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 0.0,
+   "setup_ms": 32.354304,
+   "ui_stall_ms_max": 15.806495,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 1000,
+   "ok": true,
+   "reasons": [],
+   "rc": 0,
+   "fps_mean": 59.77108962825709,
+   "frame_p95": 19.421203,
+   "frame_p99": 22.277191,
+   "frame_max": 29.467562,
+   "frames": 477,
+   "cpu_pct_core_mean": 45.98911917876778,
+   "pss_kb_peak": 46150,
+   "rss_kb_peak": 51860,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 0.6289308176100629,
+   "setup_ms": 34.412116,
+   "ui_stall_ms_max": 19.057328,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 2000,
+   "ok": false,
+   "reasons": [
+    "fps 56.6 < 58.5",
+    "manqu\u00e9es 6.0 % > 1.0"
+   ],
+   "rc": 0,
+   "fps_mean": 56.621315198049544,
+   "frame_p95": 27.261314,
+   "frame_p99": 32.773448,
+   "frame_max": 35.039836,
+   "frames": 453,
+   "cpu_pct_core_mean": 74.70862913150592,
+   "pss_kb_peak": 46172,
+   "rss_kb_peak": 51848,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 5.960264900662252,
+   "setup_ms": 43.038516,
+   "ui_stall_ms_max": 27.265132,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 1500,
+   "ok": false,
+   "reasons": [
+    "manqu\u00e9es 1.5 % > 1.0"
+   ],
+   "rc": 0,
+   "fps_mean": 59.08197919098318,
+   "frame_p95": 20.289663,
+   "frame_p99": 27.253344,
+   "frame_max": 33.141973,
+   "frames": 473,
+   "cpu_pct_core_mean": 61.22811018183434,
+   "pss_kb_peak": 46200,
+   "rss_kb_peak": 51888,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 1.4799154334038056,
+   "setup_ms": 37.203563,
+   "ui_stall_ms_max": 20.195536,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 1250,
+   "ok": true,
+   "reasons": [],
+   "rc": 0,
+   "fps_mean": 60.00949693045691,
+   "frame_p95": 19.164616,
+   "frame_p99": 21.202931,
+   "frame_max": 22.46767,
+   "frames": 480,
+   "cpu_pct_core_mean": 53.34758643976394,
+   "pss_kb_peak": 46125,
+   "rss_kb_peak": 51824,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 0.0,
+   "setup_ms": 43.037534,
+   "ui_stall_ms_max": 16.858167,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 1375,
+   "ok": true,
+   "reasons": [],
+   "rc": 0,
+   "fps_mean": 59.37447773907185,
+   "frame_p95": 19.457533,
+   "frame_p99": 24.004411,
+   "frame_max": 58.192093,
+   "frames": 474,
+   "cpu_pct_core_mean": 58.764657041673786,
+   "pss_kb_peak": 46221,
+   "rss_kb_peak": 51900,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 0.8438818565400844,
+   "setup_ms": 36.566742,
+   "ui_stall_ms_max": 54.043197,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 1437,
+   "ok": false,
+   "reasons": [
+    "manqu\u00e9es 1.3 % > 1.0"
+   ],
+   "rc": 0,
+   "fps_mean": 59.25750764474543,
+   "frame_p95": 19.880927,
+   "frame_p99": 28.217967,
+   "frame_max": 32.366805,
+   "frames": 474,
+   "cpu_pct_core_mean": 62.82935398899255,
+   "pss_kb_peak": 46120,
+   "rss_kb_peak": 51796,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 1.2658227848101267,
+   "setup_ms": 40.64612,
+   "ui_stall_ms_max": 20.415095,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 1375,
+   "ok": true,
+   "reasons": [],
+   "rc": 0,
+   "fps_mean": 59.635178360791485,
+   "frame_p95": 19.053498,
+   "frame_p99": 23.628555,
+   "frame_max": 31.751283,
+   "frames": 477,
+   "cpu_pct_core_mean": 58.31456791349663,
+   "pss_kb_peak": 46189,
+   "rss_kb_peak": 51848,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 0.6289308176100629,
+   "setup_ms": 35.381372,
+   "ui_stall_ms_max": 23.376346,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 1375,
+   "ok": true,
+   "reasons": [],
+   "rc": 0,
+   "fps_mean": 59.86859966600406,
+   "frame_p95": 18.947139,
+   "frame_p99": 21.736897,
+   "frame_max": 27.924961,
+   "frames": 478,
+   "cpu_pct_core_mean": 59.05319599756049,
+   "pss_kb_peak": 46139,
+   "rss_kb_peak": 51812,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 0.41841004184100417,
+   "setup_ms": 37.078903,
+   "ui_stall_ms_max": 20.945938,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  },
+  {
+   "n": 2750,
+   "ok": false,
+   "reasons": [
+    "fps 28.8 < 58.5",
+    "manqu\u00e9es 94.3 % > 1.0",
+    "p99 63.9 ms > 33.0"
+   ],
+   "rc": 0,
+   "fps_mean": 28.76532845472358,
+   "frame_p95": 43.387674,
+   "frame_p99": 63.865993,
+   "frame_max": 206.797504,
+   "frames": 229,
+   "cpu_pct_core_mean": 56.01603799391211,
+   "pss_kb_peak": 46261,
+   "rss_kb_peak": 51916,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 94.32314410480349,
+   "setup_ms": 50.463082,
+   "ui_stall_ms_max": 155.85878,
+   "pacing": "60",
+   "not_rendered": [
+    "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+   ]
+  }
+ ],
+ "at_nmax": {
+  "n": 1375,
+  "ok": true,
+  "reasons": [],
+  "rc": 0,
+  "fps_mean": 59.86859966600406,
+  "frame_p95": 18.947139,
+  "frame_p99": 21.736897,
+  "frame_max": 27.924961,
+  "frames": 478,
+  "cpu_pct_core_mean": 59.05319599756049,
+  "pss_kb_peak": 46139,
+  "rss_kb_peak": 51812,
+  "markers": true,
+  "oom": false,
+  "missed_gt25_pct": 0.41841004184100417,
+  "setup_ms": 37.078903,
+  "ui_stall_ms_max": 20.945938,
+  "pacing": "60",
+  "not_rendered": [
+   "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+  ]
+ },
+ "at_2x": {
+  "n": 2750,
+  "ok": false,
+  "reasons": [
+   "fps 28.8 < 58.5",
+   "manqu\u00e9es 94.3 % > 1.0",
+   "p99 63.9 ms > 33.0"
+  ],
+  "rc": 0,
+  "fps_mean": 28.76532845472358,
+  "frame_p95": 43.387674,
+  "frame_p99": 63.865993,
+  "frame_max": 206.797504,
+  "frames": 229,
+  "cpu_pct_core_mean": 56.01603799391211,
+  "pss_kb_peak": 46261,
+  "rss_kb_peak": 51916,
+  "markers": true,
+  "oom": false,
+  "missed_gt25_pct": 94.32314410480349,
+  "setup_ms": 50.463082,
+  "ui_stall_ms_max": 155.85878,
+  "pacing": "60",
+  "not_rendered": [
+   "drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated"
+  ]
+ }
+}

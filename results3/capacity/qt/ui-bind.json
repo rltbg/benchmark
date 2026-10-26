@@ -1,0 +1,39 @@
+{
+ "stack": "qt",
+ "scenario": "ui-bind",
+ "variant": [],
+ "cpu_quota": null,
+ "cmd": "${ROOT}/bench3/qt/run.sh",
+ "n_max": null,
+ "bounded_above": true,
+ "first_fail": 1000,
+ "probes": [
+  {
+   "n": 1000,
+   "ok": false,
+   "reasons": [
+    "fps 28.5 < 58.5",
+    "manqu\u00e9es 92.9 % > 1.0",
+    "p99 52.2 ms > 33.0"
+   ],
+   "rc": 0,
+   "fps_mean": 28.46445276333806,
+   "frame_p95": 48.177794,
+   "frame_p99": 52.175208,
+   "frame_max": 59.904216,
+   "frames": 226,
+   "cpu_pct_core_mean": 65.08283006077271,
+   "pss_kb_peak": 55222,
+   "rss_kb_peak": 60960,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 92.92035398230088,
+   "setup_ms": 65.661468,
+   "ui_stall_ms_max": 49.016437,
+   "pacing": "60",
+   "not_rendered": []
+  }
+ ],
+ "at_nmax": null,
+ "at_2x": null
+}

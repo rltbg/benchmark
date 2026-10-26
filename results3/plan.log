@@ -12,3 +12,192 @@ SUMMARY {"tag": "slint-latency-load-n100000-loadheavy", "stack": "slint", "scena
 SUMMARY {"tag": "slint-latency-wheel-n100000-loadheavy", "stack": "slint", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.90578627728278, "p95": 51.019894573087456, "min": 50.717783223797106, "max": 51.019894573087456, "n": 3},
 === 20:47:05 slint latency-load lat-key-mutate --n 100000 --variant load=mutate --latency key --cpuhog 0
 === 21:14:41 slint latency-load lat-key-mutate --n 100000 --variant load=mutate --latency key --cpuhog 0
+SUMMARY {"tag": "slint-latency-load-n100000-loadmutate", "stack": "slint", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.18985672284136, "p95": 62.2575633390319, "min": 62.08107254620747, "max": 62.2575633390319, "n": 3}, "fram
+=== 21:15:31 slint latency-wheel lat-wheel-mutate --n 100000 --variant load=mutate --latency wheel --cpuhog 0
+SUMMARY {"tag": "slint-latency-wheel-n100000-loadmutate", "stack": "slint", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.014219838461024, "p95": 62.19420681237425, "min": 61.87643383135, "max": 62.19420681237425, "n": 3}, "fr
+=== 21:16:22 slint latency-load lat-key-cpuhog --n 100000 --variant load=cpuhog --latency key --cpuhog 3
+SUMMARY {"tag": "slint-latency-load-n100000-loadcpuhog", "stack": "slint", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 8.20731616810571, "p95": 8.218385912158968, "min": 8.206594606012379, "max": 8.218385912158968, "n": 3}, "fra
+=== 21:17:13 slint latency-wheel lat-wheel-cpuhog --n 100000 --variant load=cpuhog --latency wheel --cpuhog 3
+SUMMARY {"tag": "slint-latency-wheel-n100000-loadcpuhog", "stack": "slint", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.404720882872326, "p95": 51.10975932648384, "min": 50.36175089925426, "max": 51.10975932648384, "n": 3}, 
+=== 21:18:04 qt latency-load lat-key-idle --n 100000 --variant load=idle --latency key --cpuhog 0
+SUMMARY {"tag": "qt-latency-load-n100000-loadidle", "stack": "qt", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 4.339004882773981, "p95": 4.341154824780977, "min": 4.336222664009114, "max": 4.341154824780977, "n": 3}, "frame_p50"
+=== 21:18:56 qt latency-wheel lat-wheel-idle --n 100000 --variant load=idle --latency wheel --cpuhog 0
+SUMMARY {"tag": "qt-latency-wheel-n100000-loadidle", "stack": "qt", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 11.967238605953249, "p95": 12.480829659397635, "min": 11.236025022185315, "max": 12.480829659397635, "n": 3}, "fram
+=== 21:19:47 qt latency-load lat-key-fling --n 100000 --variant load=fling --latency key --cpuhog 0
+SUMMARY {"tag": "qt-latency-load-n100000-loadfling", "stack": "qt", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.9930065423787, "p95": 59.998839361023244, "min": 59.653324247483845, "max": 59.998839361023244, "n": 3}, "frame_p
+=== 21:20:38 qt latency-wheel lat-wheel-fling --n 100000 --variant load=fling --latency wheel --cpuhog 0
+SUMMARY {"tag": "qt-latency-wheel-n100000-loadfling", "stack": "qt", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.99708872269436, "p95": 60.00360849700779, "min": 59.92798589523825, "max": 60.00360849700779, "n": 3}, "frame_p
+=== 21:21:29 qt latency-load lat-key-heavy --n 100000 --variant load=heavy --latency key --cpuhog 0
+SUMMARY {"tag": "qt-latency-load-n100000-loadheavy", "stack": "qt", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 4.338651122081272, "p95": 4.342508125152545, "min": 4.328510403638296, "max": 4.342508125152545, "n": 3}, "frame_p50
+=== 21:22:20 qt latency-wheel lat-wheel-heavy --n 100000 --variant load=heavy --latency wheel --cpuhog 0
+SUMMARY {"tag": "qt-latency-wheel-n100000-loadheavy", "stack": "qt", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 11.78745226959955, "p95": 11.986715633843874, "min": 11.702848477468608, "max": 11.986715633843874, "n": 3}, "fram
+=== 21:23:10 qt latency-load lat-key-mutate --n 100000 --variant load=mutate --latency key --cpuhog 0
+SUMMARY {"tag": "qt-latency-load-n100000-loadmutate", "stack": "qt", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.00610823177829, "p95": 60.00702647091111, "min": 59.721268559624974, "max": 60.00702647091111, "n": 3}, "frame_p
+=== 21:24:01 qt latency-wheel lat-wheel-mutate --n 100000 --variant load=mutate --latency wheel --cpuhog 0
+SUMMARY {"tag": "qt-latency-wheel-n100000-loadmutate", "stack": "qt", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.00695378460955, "p95": 60.01559889107969, "min": 59.57895218474334, "max": 60.01559889107969, "n": 3}, "frame_
+=== 21:24:52 qt latency-load lat-key-cpuhog --n 100000 --variant load=cpuhog --latency key --cpuhog 3
+SUMMARY {"tag": "qt-latency-load-n100000-loadcpuhog", "stack": "qt", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 4.348542047983814, "p95": 4.349588419928097, "min": 4.337183970560348, "max": 4.349588419928097, "n": 3}, "frame_p5
+=== 21:25:43 qt latency-wheel lat-wheel-cpuhog --n 100000 --variant load=cpuhog --latency wheel --cpuhog 3
+SUMMARY {"tag": "qt-latency-wheel-n100000-loadcpuhog", "stack": "qt", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 12.366251012156289, "p95": 12.476514185392519, "min": 12.043518523650732, "max": 12.476514185392519, "n": 3}, "fr
+=== 21:26:34 avalonia-aot latency-load lat-key-idle --n 100000 --variant load=idle --latency key --cpuhog 0
+SUMMARY {"tag": "avalonia-aot-latency-load-n100000-loadidle", "stack": "avalonia-aot", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 52.965330218971914, "p95": 53.4592834050356, "min": 51.56931883375986, "max": 53.4592834050356, "
+=== 21:27:25 avalonia-aot latency-wheel lat-wheel-idle --n 100000 --variant load=idle --latency wheel --cpuhog 0
+SUMMARY {"tag": "avalonia-aot-latency-wheel-n100000-loadidle", "stack": "avalonia-aot", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 49.40284313362234, "p95": 50.042849189618615, "min": 49.20321543012836, "max": 50.0428491896186
+=== 21:28:16 avalonia-aot latency-load lat-key-fling --n 100000 --variant load=fling --latency key --cpuhog 0
+SUMMARY {"tag": "avalonia-aot-latency-load-n100000-loadfling", "stack": "avalonia-aot", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.29210455777354, "p95": 61.310513655205924, "min": 61.05219898823098, "max": 61.31051365520592
+=== 21:29:07 avalonia-aot latency-wheel lat-wheel-fling --n 100000 --variant load=fling --latency wheel --cpuhog 0
+SUMMARY {"tag": "avalonia-aot-latency-wheel-n100000-loadfling", "stack": "avalonia-aot", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 49.726349681906754, "p95": 49.72944076135774, "min": 48.81010125045378, "max": 49.729440761357
+=== 21:29:58 avalonia-aot latency-load lat-key-heavy --n 100000 --variant load=heavy --latency key --cpuhog 0
+SUMMARY {"tag": "avalonia-aot-latency-load-n100000-loadheavy", "stack": "avalonia-aot", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 53.51392499220703, "p95": 53.642313056539, "min": 53.44049934802591, "max": 53.642313056539, "n"
+=== 21:30:49 avalonia-aot latency-wheel lat-wheel-heavy --n 100000 --variant load=heavy --latency wheel --cpuhog 0
+SUMMARY {"tag": "avalonia-aot-latency-wheel-n100000-loadheavy", "stack": "avalonia-aot", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 49.14412435920669, "p95": 49.54864283170493, "min": 49.09692346403343, "max": 49.5486428317049
+=== 21:31:40 avalonia-aot latency-load lat-key-mutate --n 100000 --variant load=mutate --latency key --cpuhog 0
+SUMMARY {"tag": "avalonia-aot-latency-load-n100000-loadmutate", "stack": "avalonia-aot", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.5577319760639, "p95": 61.65770156073911, "min": 61.31171963171285, "max": 61.65770156073911,
+=== 21:32:31 avalonia-aot latency-wheel lat-wheel-mutate --n 100000 --variant load=mutate --latency wheel --cpuhog 0
+SUMMARY {"tag": "avalonia-aot-latency-wheel-n100000-loadmutate", "stack": "avalonia-aot", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 49.61948060808673, "p95": 50.07432908223144, "min": 48.50792649836437, "max": 50.074329082231
+=== 21:33:22 avalonia-aot latency-load lat-key-cpuhog --n 100000 --variant load=cpuhog --latency key --cpuhog 3
+SUMMARY {"tag": "avalonia-aot-latency-load-n100000-loadcpuhog", "stack": "avalonia-aot", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.87673330670784, "p95": 51.76539405759159, "min": 49.81065723916961, "max": 51.76539405759159
+=== 21:34:13 avalonia-aot latency-wheel lat-wheel-cpuhog --n 100000 --variant load=cpuhog --latency wheel --cpuhog 3
+SUMMARY {"tag": "avalonia-aot-latency-wheel-n100000-loadcpuhog", "stack": "avalonia-aot", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 46.222602274729816, "p95": 47.36025763980156, "min": 45.78191213878787, "max": 47.36025763980
+=== 21:35:04 slint-direct latency-load lat-key-idle --n 100000 --variant load=idle --latency key --cpuhog 0
+SUMMARY {"tag": "slint-direct-latency-load-n100000-loadidle", "stack": "slint-direct", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 8.776852983208672, "p95": 8.779489708034927, "min": 8.775389645189822, "max": 8.779489708034927, 
+=== 21:35:55 slint-direct latency-wheel lat-wheel-idle --n 100000 --variant load=idle --latency wheel --cpuhog 0
+SUMMARY {"tag": "slint-direct-latency-wheel-n100000-loadidle", "stack": "slint-direct", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.51544189879346, "p95": 50.66575541319654, "min": 50.33643674805109, "max": 50.66575541319654
+=== 21:36:45 slint-direct latency-load lat-key-fling --n 100000 --variant load=fling --latency key --cpuhog 0
+SUMMARY {"tag": "slint-direct-latency-load-n100000-loadfling", "stack": "slint-direct", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 64.98476636007541, "p95": 65.06472193309307, "min": 64.61699754349468, "max": 65.06472193309307,
+=== 21:37:36 slint-direct latency-wheel lat-wheel-fling --n 100000 --variant load=fling --latency wheel --cpuhog 0
+SUMMARY {"tag": "slint-direct-latency-wheel-n100000-loadfling", "stack": "slint-direct", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.5491032694842, "p95": 50.90345714647473, "min": 49.59365632486945, "max": 50.90345714647473
+=== 21:38:27 slint-direct latency-load lat-key-heavy --n 100000 --variant load=heavy --latency key --cpuhog 0
+SUMMARY {"tag": "slint-direct-latency-load-n100000-loadheavy", "stack": "slint-direct", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 8.782548495202244, "p95": 8.782719458805039, "min": 8.779268522935304, "max": 8.782719458805039,
+=== 21:39:18 slint-direct latency-wheel lat-wheel-heavy --n 100000 --variant load=heavy --latency wheel --cpuhog 0
+SUMMARY {"tag": "slint-direct-latency-wheel-n100000-loadheavy", "stack": "slint-direct", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.74878091993709, "p95": 50.948359433579235, "min": 50.5426509356368, "max": 50.9483594335792
+=== 21:40:09 slint-direct latency-load lat-key-mutate --n 100000 --variant load=mutate --latency key --cpuhog 0
+SUMMARY {"tag": "slint-direct-latency-load-n100000-loadmutate", "stack": "slint-direct", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 64.9562168362145, "p95": 65.0761817296329, "min": 64.80973820035578, "max": 65.0761817296329, "
+=== 21:40:59 slint-direct latency-wheel lat-wheel-mutate --n 100000 --variant load=mutate --latency wheel --cpuhog 0
+SUMMARY {"tag": "slint-direct-latency-wheel-n100000-loadmutate", "stack": "slint-direct", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.14924415288978, "p95": 62.25256185757525, "min": 61.902209549290546, "max": 62.25256185757
+=== 21:41:51 slint-direct latency-load lat-key-cpuhog --n 100000 --variant load=cpuhog --latency key --cpuhog 3
+SUMMARY {"tag": "slint-direct-latency-load-n100000-loadcpuhog", "stack": "slint-direct", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 8.781281931745776, "p95": 8.796127296834515, "min": 8.779743400387636, "max": 8.796127296834515
+=== 21:42:42 slint-direct latency-wheel lat-wheel-cpuhog --n 100000 --variant load=cpuhog --latency wheel --cpuhog 3
+SUMMARY {"tag": "slint-direct-latency-wheel-n100000-loadcpuhog", "stack": "slint-direct", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.47189641220643, "p95": 50.79322966059972, "min": 50.26648989649954, "max": 50.793229660599
+=== 21:43:32 slint list-scale q1-list --n 1000000 --cpu-quota 1
+SUMMARY {"tag": "slint-list-scale-n1000000-q1.0", "stack": "slint", "scenario": "list-scale", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.20635221518455, "p95": 62.234065287202654, "min": 62.20059257146008, "max": 62.234065287202654, "n": 3}, "frame_p50
+=== 21:44:23 slint gfx-shapes q1-shapes --n 1000 --cpu-quota 1
+SUMMARY {"tag": "slint-gfx-shapes-n1000-q1.0", "stack": "slint", "scenario": "gfx-shapes", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.229518828656296, "p95": 62.23564180291326, "min": 61.99760486867311, "max": 62.23564180291326, "n": 3}, "frame_p50": {
+=== 21:45:14 slint text-labels q1-labels --n 2000 --cpu-quota 1
+SUMMARY {"tag": "slint-text-labels-n2000-q1.0", "stack": "slint", "scenario": "text-labels", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.60075962931872, "p95": 60.47955902752735, "min": 57.372095266865465, "max": 60.47955902752735, "n": 3}, "frame_p50":
+=== 21:46:05 slint list-scale q0.5-list --n 1000000 --cpu-quota 0.5
+SUMMARY {"tag": "slint-list-scale-n1000000-q0.5", "stack": "slint", "scenario": "list-scale", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.22579544632613, "p95": 62.249147393314296, "min": 62.201415176784316, "max": 62.249147393314296, "n": 3}, "frame_p5
+=== 21:46:55 slint gfx-shapes q0.5-shapes --n 1000 --cpu-quota 0.5
+SUMMARY {"tag": "slint-gfx-shapes-n1000-q0.5", "stack": "slint", "scenario": "gfx-shapes", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.071360044401324, "p95": 61.3003293613684, "min": 60.438826846842886, "max": 61.3003293613684, "n": 3}, "frame_p50": {"
+=== 21:47:46 slint text-labels q0.5-labels --n 2000 --cpu-quota 0.5
+SUMMARY {"tag": "slint-text-labels-n2000-q0.5", "stack": "slint", "scenario": "text-labels", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 30.784296809574418, "p95": 31.87215743438481, "min": 30.410550224317934, "max": 31.87215743438481, "n": 3}, "frame_p50"
+=== 21:48:37 qt list-scale q1-list --n 1000000 --cpu-quota 1
+SUMMARY {"tag": "qt-list-scale-n1000000-q1.0", "stack": "qt", "scenario": "list-scale", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.99798114731194, "p95": 60.00414821534645, "min": 59.997266301434706, "max": 60.00414821534645, "n": 3}, "frame_p50": {"me
+=== 21:49:28 qt gfx-shapes q1-shapes --n 1000 --cpu-quota 1
+SUMMARY {"tag": "qt-gfx-shapes-n1000-q1.0", "stack": "qt", "scenario": "gfx-shapes", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.79141182643049, "p95": 60.006709602672295, "min": 59.64227104751545, "max": 60.006709602672295, "n": 3}, "frame_p50": {"medi
+=== 21:50:19 qt text-labels q1-labels --n 2000 --cpu-quota 1
+SUMMARY {"tag": "qt-text-labels-n2000-q1.0", "stack": "qt", "scenario": "text-labels", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 12.159582021755847, "p95": 12.250181789348655, "min": 12.102333109138472, "max": 12.250181789348655, "n": 3}, "frame_p50": {"
+=== 21:51:10 qt list-scale q0.5-list --n 1000000 --cpu-quota 0.5
+SUMMARY {"tag": "qt-list-scale-n1000000-q0.5", "stack": "qt", "scenario": "list-scale", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.997691258805766, "p95": 60.00886348487696, "min": 59.92671388450163, "max": 60.00886348487696, "n": 3}, "frame_p50": {"me
+=== 21:52:01 qt gfx-shapes q0.5-shapes --n 1000 --cpu-quota 0.5
+SUMMARY {"tag": "qt-gfx-shapes-n1000-q0.5", "stack": "qt", "scenario": "gfx-shapes", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 57.9872430370508, "p95": 58.42461302749684, "min": 56.561036345575914, "max": 58.42461302749684, "n": 3}, "frame_p50": {"median
+=== 21:52:52 qt text-labels q0.5-labels --n 2000 --cpu-quota 0.5
+SUMMARY {"tag": "qt-text-labels-n2000-q0.5", "stack": "qt", "scenario": "text-labels", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 5.718394844579984, "p95": 5.817943405730273, "min": 5.617400688121113, "max": 5.817943405730273, "n": 3}, "frame_p50": {"medi
+=== 21:53:44 avalonia-aot list-scale q1-list --n 1000000 --cpu-quota 1
+SUMMARY {"tag": "avalonia-aot-list-scale-n1000000-q1.0", "stack": "avalonia-aot", "scenario": "list-scale", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.49103782390779, "p95": 61.51356003349246, "min": 61.280078780927354, "max": 61.51356003349246, "n": 3
+=== 21:54:35 avalonia-aot gfx-shapes q1-shapes --n 1000 --cpu-quota 1
+SUMMARY {"tag": "avalonia-aot-gfx-shapes-n1000-q1.0", "stack": "avalonia-aot", "scenario": "gfx-shapes", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.30865170583481, "p95": 61.31594280106627, "min": 61.26961920610693, "max": 61.31594280106627, "n": 3}, "
+=== 21:55:26 avalonia-aot text-labels q1-labels --n 2000 --cpu-quota 1
+SUMMARY {"tag": "avalonia-aot-text-labels-n2000-q1.0", "stack": "avalonia-aot", "scenario": "text-labels", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 17.860797357228186, "p95": 18.342389710516567, "min": 17.586597617080102, "max": 18.342389710516567, "n":
+=== 21:56:17 avalonia-aot list-scale q0.5-list --n 1000000 --cpu-quota 0.5
+SUMMARY {"tag": "avalonia-aot-list-scale-n1000000-q0.5", "stack": "avalonia-aot", "scenario": "list-scale", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.31395375116986, "p95": 61.384776390088916, "min": 61.170399344321766, "max": 61.384776390088916, "n":
+=== 21:57:08 avalonia-aot gfx-shapes q0.5-shapes --n 1000 --cpu-quota 0.5
+SUMMARY {"tag": "avalonia-aot-gfx-shapes-n1000-q0.5", "stack": "avalonia-aot", "scenario": "gfx-shapes", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.761053590964, "p95": 61.102224235038655, "min": 60.461048290481685, "max": 61.102224235038655, "n": 3}, 
+=== 21:57:59 avalonia-aot text-labels q0.5-labels --n 2000 --cpu-quota 0.5
+SUMMARY {"tag": "avalonia-aot-text-labels-n2000-q0.5", "stack": "avalonia-aot", "scenario": "text-labels", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 8.72825555594269, "p95": 8.92161279818101, "min": 8.562876209258578, "max": 8.92161279818101, "n": 3}, "f
+=== 21:58:51 slint-direct list-scale q1-list --n 1000000 --cpu-quota 1
+SUMMARY {"tag": "slint-direct-list-scale-n1000000-q1.0", "stack": "slint-direct", "scenario": "list-scale", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.093578419747494, "p95": 62.2464090807887, "min": 62.018640404536185, "max": 62.2464090807887, "n": 3}
+=== 21:59:42 slint-direct gfx-shapes q1-shapes --n 1000 --cpu-quota 1
+SUMMARY {"tag": "slint-direct-gfx-shapes-n1000-q1.0", "stack": "slint-direct", "scenario": "gfx-shapes", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.20518841674759, "p95": 62.26870156757013, "min": 61.77153121010603, "max": 62.26870156757013, "n": 3}, "
+=== 22:00:33 slint-direct text-labels q1-labels --n 2000 --cpu-quota 1
+SUMMARY {"tag": "slint-direct-text-labels-n2000-q1.0", "stack": "slint-direct", "scenario": "text-labels", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 57.19540683007085, "p95": 59.54611432709139, "min": 56.49025109201973, "max": 59.54611432709139, "n": 3},
+=== 22:01:23 slint-direct list-scale q0.5-list --n 1000000 --cpu-quota 0.5
+SUMMARY {"tag": "slint-direct-list-scale-n1000000-q0.5", "stack": "slint-direct", "scenario": "list-scale", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.17805845223986, "p95": 62.21810232478974, "min": 62.04723421934406, "max": 62.21810232478974, "n": 3}
+=== 22:02:14 slint-direct gfx-shapes q0.5-shapes --n 1000 --cpu-quota 0.5
+SUMMARY {"tag": "slint-direct-gfx-shapes-n1000-q0.5", "stack": "slint-direct", "scenario": "gfx-shapes", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.45531803585139, "p95": 60.51681869619358, "min": 59.865817713458625, "max": 60.51681869619358, "n": 3}, 
+=== 22:03:05 slint-direct text-labels q0.5-labels --n 2000 --cpu-quota 0.5
+SUMMARY {"tag": "slint-direct-text-labels-n2000-q0.5", "stack": "slint-direct", "scenario": "text-labels", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 30.356592515972153, "p95": 31.462034725121516, "min": 30.210671100278482, "max": 31.462034725121516, "n":
+=== 22:03:56 slint ffi-calls ffi-calls --n 1000000
+SUMMARY {"tag": "slint-ffi-calls-n1000000", "stack": "slint", "scenario": "ffi-calls", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.26950568478411, "p95": 62.29859760144783, "min": 62.13523279652209, "max": 62.29859760144783, "n": 3}, "frame_p50": {"medi
+=== 22:04:47 slint ffi-block ffi-block-bg --n 1000 --variant where=bg
+SUMMARY {"tag": "slint-ffi-block-n1000-wherebg", "stack": "slint", "scenario": "ffi-block", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.17217281002835, "p95": 62.281146322118445, "min": 61.761477116331605, "max": 62.281146322118445, "n": 3}, "frame_p50"
+=== 22:05:38 slint ffi-block ffi-block-ui --n 1000 --variant where=ui
+SUMMARY {"tag": "slint-ffi-block-n1000-whereui", "stack": "slint", "scenario": "ffi-block", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 0.9953790609923651, "p95": 0.9955248062346029, "min": 0.9950950735051716, "max": 0.9955248062346029, "n": 3}, "frame_p50
+=== 22:06:29 qt ffi-calls ffi-calls --n 1000000
+SUMMARY {"tag": "qt-ffi-calls-n1000000", "stack": "qt", "scenario": "ffi-calls", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 52.5198724355694, "p95": 53.890562442754984, "min": 51.253984352408914, "max": 53.890562442754984, "n": 3}, "frame_p50": {"median":
+=== 22:07:19 qt ffi-block ffi-block-bg --n 1000 --variant where=bg
+SUMMARY {"tag": "qt-ffi-block-n1000-wherebg", "stack": "qt", "scenario": "ffi-block", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.937423813600425, "p95": 60.00949951234559, "min": 59.93488834746902, "max": 60.00949951234559, "n": 3}, "frame_p50": {"medi
+=== 22:08:10 qt ffi-block ffi-block-ui --n 1000 --variant where=ui
+SUMMARY {"tag": "qt-ffi-block-n1000-whereui", "stack": "qt", "scenario": "ffi-block", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 9.413842058326713, "p95": 9.414508959696596, "min": 9.413492379759091, "max": 9.414508959696596, "n": 3}, "frame_p50": {"media
+=== 22:09:02 avalonia-aot ffi-calls ffi-calls --n 1000000
+SUMMARY {"tag": "avalonia-aot-ffi-calls-n1000000", "stack": "avalonia-aot", "scenario": "ffi-calls", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.228226825561634, "p95": 61.2859546345686, "min": 61.06917718058877, "max": 61.2859546345686, "n": 3}, "frame
+=== 22:09:53 avalonia-aot ffi-block ffi-block-bg --n 1000 --variant where=bg
+SUMMARY {"tag": "avalonia-aot-ffi-block-n1000-wherebg", "stack": "avalonia-aot", "scenario": "ffi-block", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.43481509546058, "p95": 61.487901649031336, "min": 61.396235975755545, "max": 61.487901649031336, "n": 3
+=== 22:10:44 avalonia-aot ffi-block ffi-block-ui --n 1000 --variant where=ui
+SUMMARY {"tag": "avalonia-aot-ffi-block-n1000-whereui", "stack": "avalonia-aot", "scenario": "ffi-block", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 56.90344298631551, "p95": 56.96721518941314, "min": 56.87095979223143, "max": 56.96721518941314, "n": 3}, 
+=== 22:11:35 slint-direct ffi-calls ffi-calls --n 1000000
+SUMMARY {"tag": "slint-direct-ffi-calls-n1000000", "stack": "slint-direct", "scenario": "ffi-calls", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.20483792339754, "p95": 62.24008117331355, "min": 62.17377572186621, "max": 62.24008117331355, "n": 3}, "fram
+=== 22:12:26 slint-direct ffi-block ffi-block-bg --n 1000 --variant where=bg
+SUMMARY {"tag": "slint-direct-ffi-block-n1000-wherebg", "stack": "slint-direct", "scenario": "ffi-block", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 62.102337901450284, "p95": 62.249937284939186, "min": 62.09081543256513, "max": 62.249937284939186, "n": 3
+=== 22:13:17 slint-direct ffi-block ffi-block-ui --n 1000 --variant where=ui
+SUMMARY {"tag": "slint-direct-ffi-block-n1000-whereui", "stack": "slint-direct", "scenario": "ffi-block", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 0.9956949595055539, "p95": 0.995700155291921, "min": 0.9955215397614696, "max": 0.995700155291921, "n": 3}
+=== 22:14:08 slint text-edit text-edit-1mb --n 1 --latency key
+SUMMARY {"tag": "slint-text-edit-n1", "stack": "slint", "scenario": "text-edit", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 2.5992165320436205, "p95": 2.879303692602942, "min": 2.583503946553562, "max": 2.879303692602942, "n": 3}, "frame_p50": {"median": 
+=== 22:15:07 qt text-edit text-edit-1mb --n 1 --latency key
+SUMMARY {"tag": "qt-text-edit-n1", "stack": "qt", "scenario": "text-edit", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 4.962685973402405, "p95": 4.963361552514081, "min": 4.949923227307638, "max": 4.963361552514081, "n": 3}, "frame_p50": {"median": 190.726
+=== 22:15:58 avalonia-aot text-edit text-edit-1mb --n 1 --latency key
+SUMMARY {"tag": "avalonia-aot-text-edit-n1", "stack": "avalonia-aot", "scenario": "text-edit", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 46.182070503857936, "p95": 46.41625868709291, "min": 45.72667110977488, "max": 46.41625868709291, "n": 3}, "frame_p50
+=== 22:16:49 slint-direct text-edit text-edit-1mb --n 1 --latency key
+SUMMARY {"tag": "slint-direct-text-edit-n1", "stack": "slint-direct", "scenario": "text-edit", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 2.617532608796982, "p95": 2.8473252540098146, "min": 2.569306625498872, "max": 2.8473252540098146, "n": 3}, "frame_p5
+RÉSULTAT slint list-mutate: N_max=None premier échec=10000
+RÉSULTAT slint list-reset: N_max=1000000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT slint text-big: N_max=1 premier échec=10
+RÉSULTAT slint text-labels: N_max=1000 premier échec=6250
+RÉSULTAT slint text-rich: N_max=64000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT slint gfx-shapes: N_max=2000 premier échec=2625
+RÉSULTAT slint gfx-paths: N_max=None premier échec=100
+RÉSULTAT slint gfx-chart: N_max=100000 premier échec=1000000
+RÉSULTAT slint gfx-images: N_max=17 premier échec=19
+RÉSULTAT slint gfx-layers: N_max=27 premier échec=28
+RÉSULTAT slint ui-tree: N_max=10000 premier échec=100000
+RÉSULTAT slint ui-bind: N_max=1000 premier échec=1093
+RÉSULTAT slint ui-anim: N_max=2600 premier échec=2700
+RÉSULTAT slint ffi-callbacks: N_max=155000 premier échec=160000
+RÉSULTAT slint gfx-shapes-featuregradient: N_max=1000 premier échec=1312
+RÉSULTAT slint gfx-shapes-featureshadow: N_max=375 premier échec=406
+RÉSULTAT qt list-scale: N_max=6400000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT qt list-rich: N_max=None premier échec=6
+RÉSULTAT qt list-mutate: N_max=800000 premier échec=840000
+RÉSULTAT qt list-reset: N_max=1000000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT qt text-big: N_max=None premier échec=1
+RÉSULTAT qt text-labels: N_max=None premier échec=500
+RÉSULTAT qt text-rich: N_max=None premier échec=1000
+RÉSULTAT qt gfx-shapes: N_max=1500 premier échec=1562
+RÉSULTAT qt gfx-paths: N_max=None premier échec=100
+RÉSULTAT qt gfx-chart: N_max=10000 premier échec=100000
+RÉSULTAT qt gfx-images: N_max=80 premier échec=145
+RÉSULTAT qt gfx-layers: N_max=160 premier échec=168
+RÉSULTAT qt ui-tree: N_max=1000 premier échec=10000
+RÉSULTAT qt ui-bind: N_max=None premier échec=1000
+RÉSULTAT qt ui-anim: N_max=225 premier échec=231
+RÉSULTAT qt ffi-callbacks: N_max=10240000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT qt gfx-shapes-featuregradient: N_max=718 premier échec=750
+RÉSULTAT qt gfx-shapes-featureshadow: N_max=1375 premier échec=1437
+RÉSULTAT avalonia-aot list-scale: N_max=6400000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT avalonia-aot list-rich: N_max=24 premier échec=48
+RÉSULTAT avalonia-aot list-mutate: N_max=77500 premier échec=80000
+RÉSULTAT avalonia-aot list-reset: N_max=1000000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT avalonia-aot text-big: N_max=None premier échec=1
+RÉSULTAT avalonia-aot text-labels: N_max=None premier échec=500
+RÉSULTAT avalonia-aot text-rich: N_max=None premier échec=1000
+--- reprise 23:14:56

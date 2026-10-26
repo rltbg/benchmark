@@ -1,0 +1,39 @@
+{
+ "stack": "slint",
+ "scenario": "gfx-paths",
+ "variant": [],
+ "cpu_quota": null,
+ "cmd": "${ROOT}/bench3/slint/run.sh",
+ "n_max": null,
+ "bounded_above": true,
+ "first_fail": 100,
+ "probes": [
+  {
+   "n": 100,
+   "ok": false,
+   "reasons": [
+    "fps 46.3 < 58.5",
+    "manqu\u00e9es 6.2 % > 1.0",
+    "p99 33.5 ms > 33.0"
+   ],
+   "rc": 0,
+   "fps_mean": 46.27962176941945,
+   "frame_p95": 26.437254,
+   "frame_p99": 33.481415,
+   "frame_max": 34.438869,
+   "frames": 370,
+   "cpu_pct_core_mean": 97.20344375929028,
+   "pss_kb_peak": 18757,
+   "rss_kb_peak": 23632,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 6.216216216216216,
+   "setup_ms": 77.90588,
+   "ui_stall_ms_max": 34.451567000000004,
+   "pacing": "60",
+   "not_rendered": []
+  }
+ ],
+ "at_nmax": null,
+ "at_2x": null
+}

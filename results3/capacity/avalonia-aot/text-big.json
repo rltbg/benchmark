@@ -1,0 +1,39 @@
+{
+ "stack": "avalonia-aot",
+ "scenario": "text-big",
+ "variant": [],
+ "cpu_quota": null,
+ "cmd": "${ROOT}/bench3/avalonia/run.sh",
+ "n_max": null,
+ "bounded_above": true,
+ "first_fail": 1,
+ "probes": [
+  {
+   "n": 1,
+   "ok": false,
+   "reasons": [
+    "fps 20.7 < 58.5",
+    "manqu\u00e9es 98.8 % > 1.0",
+    "p99 176.0 ms > 33.0"
+   ],
+   "rc": 0,
+   "fps_mean": 20.714094706088833,
+   "frame_p95": 64.369,
+   "frame_p99": 175.976,
+   "frame_max": 190.26,
+   "frames": 166,
+   "cpu_pct_core_mean": 89.32839955456323,
+   "pss_kb_peak": 256072,
+   "rss_kb_peak": 259060,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 98.79518072289157,
+   "setup_ms": 161.005,
+   "ui_stall_ms_max": 168.435,
+   "time_to_first_display_ms": 128.101,
+   "pacing": "60-only"
+  }
+ ],
+ "at_nmax": null,
+ "at_2x": null
+}

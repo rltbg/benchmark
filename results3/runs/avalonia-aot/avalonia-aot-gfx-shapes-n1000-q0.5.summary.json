@@ -1,0 +1,639 @@
+{
+ "summary": {
+  "tag": "avalonia-aot-gfx-shapes-n1000-q0.5",
+  "stack": "avalonia-aot",
+  "scenario": "gfx-shapes",
+  "runs": 3,
+  "ok_runs": 3,
+  "oom_runs": 0,
+  "markers_ok": 3,
+  "agg": {
+   "fps_mean": {
+    "median": 60.761053590964,
+    "p95": 61.102224235038655,
+    "min": 60.461048290481685,
+    "max": 61.102224235038655,
+    "n": 3
+   },
+   "frame_p50": {
+    "median": 16.334,
+    "p95": 16.346,
+    "min": 16.262,
+    "max": 16.346,
+    "n": 3
+   },
+   "frame_p95": {
+    "median": 19.191,
+    "p95": 19.681,
+    "min": 18.87,
+    "max": 19.681,
+    "n": 3
+   },
+   "frame_p99": {
+    "median": 26.193,
+    "p95": 30.236,
+    "min": 23.263,
+    "max": 30.236,
+    "n": 3
+   },
+   "frame_max": {
+    "median": 57.215,
+    "p95": 84.2,
+    "min": 39.01,
+    "max": 84.2,
+    "n": 3
+   },
+   "dropped_gt16_7": {
+    "median": 284,
+    "p95": 291,
+    "min": 271,
+    "max": 291,
+    "n": 3
+   },
+   "dropped_gt8_3": {
+    "median": 845,
+    "p95": 856,
+    "min": 842,
+    "max": 856,
+    "n": 3
+   },
+   "dropped_gt25": {
+    "median": 9,
+    "p95": 15,
+    "min": 5,
+    "max": 15,
+    "n": 3
+   },
+   "rss_kb_median": {
+    "median": 44598.0,
+    "p95": 44608.0,
+    "min": 44500.0,
+    "max": 44608.0,
+    "n": 3
+   },
+   "rss_kb_peak": {
+    "median": 47076,
+    "p95": 47524,
+    "min": 46984,
+    "max": 47524,
+    "n": 3
+   },
+   "pss_kb_median": {
+    "median": 41685.0,
+    "p95": 41685.0,
+    "min": 41597.0,
+    "max": 41685.0,
+    "n": 3
+   },
+   "pss_kb_peak": {
+    "median": 44153,
+    "p95": 44611,
+    "min": 44081,
+    "max": 44611,
+    "n": 3
+   },
+   "cpu_pct_core_mean": {
+    "median": 42.746411298064544,
+    "p95": 44.16417906281736,
+    "min": 42.42391439643611,
+    "max": 44.16417906281736,
+    "n": 3
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 46.71405279841921,
+    "p95": 51.462838116086395,
+    "min": 46.640638171865575,
+    "max": 51.462838116086395,
+    "n": 3
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.171496351999849,
+    "p95": 2.188038002000212,
+    "min": 2.168285024999932,
+    "max": 2.188038002000212,
+    "n": 3
+   },
+   "wall_s": {
+    "median": 16.1865465220003,
+    "p95": 16.204910887000096,
+    "min": 16.173463638999692,
+    "max": 16.204910887000096,
+    "n": 3
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 16.173463638999692,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.168285024999932,
+   "frames": 848,
+   "ops": {
+    "n": 1000,
+    "variant": "",
+    "pacing": "60-only",
+    "impl": "skia",
+    "shapes": 1000,
+    "feature": "solid",
+    "not_rendered": [],
+    "checksum_data": "0355f5b5",
+    "key_events": 0,
+    "max_frame_stall_ms": 57.215,
+    "ui_stall_ms_max": 18.906,
+    "ui_stall_ticks": 2791,
+    "ui_stall_gt50ms": 0,
+    "ui_stall_hist_lt8_16_33_50_100_250_1000_ge1000": [
+     2780,
+     7,
+     4,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "setup_ms": 85.889,
+    "gc": {
+     "collections": 0,
+     "gen0": 0,
+     "gen1": 0,
+     "gen2": 0,
+     "gen0_only": 0,
+     "gen1_only": 0,
+     "pause_ms_total": 0.0,
+     "pause_ms_max": 0.0,
+     "alloc_bytes": 7180584,
+     "heap_bytes": 9244768,
+     "server_gc": false,
+     "latency_mode": "Interactive"
+    },
+    "render_ops": 848,
+    "render_op_ms_mean": 5.691
+   },
+   "checksum": "0355f5b5",
+   "unsupported": null,
+   "version": "Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simple 12.1.4), Avalonia.AvaloniaEdit 12.0.0, SkiaSharp 3.119.4, HarfBuzzSharp 8.3.1.3, FSharp.Core 10.1.403, .NET SDK 10.0.403, core rust (core/ libbenchcore C-ABI v2), runtime .NET 10.0.14, NativeAOT, Avalonia assembly 12.1.4",
+   "fps_mean": 60.461048290481685,
+   "frame_p50": 16.334,
+   "frame_p95": 19.681,
+   "frame_p99": 30.236,
+   "frame_max": 57.215,
+   "dropped_gt16_7": 291,
+   "dropped_gt8_3": 842,
+   "dropped_gt25": 15,
+   "dropped_ms_gt16_7": 594.2370000000002,
+   "window": "markers",
+   "rss_kb_median": 44608.0,
+   "rss_kb_peak": 47076,
+   "pss_kb_median": 41685.0,
+   "pss_kb_peak": 44153,
+   "pss_kb_first_quarter": 39845.0,
+   "pss_kb_last_quarter": 43559.0,
+   "cpu_pct_core_mean": 44.16417906281736,
+   "cpu_pct_core_peak_1s": 51.462838116086395,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3448,
+     743
+    ],
+    [
+     1.0,
+     0.42,
+     41736,
+     38813
+    ],
+    [
+     2.1,
+     0.87,
+     42052,
+     39129
+    ],
+    [
+     3.1,
+     1.29,
+     42496,
+     39573
+    ],
+    [
+     4.1,
+     1.74,
+     42860,
+     39937
+    ],
+    [
+     5.2,
+     2.14,
+     43236,
+     40313
+    ],
+    [
+     6.2,
+     2.61,
+     43596,
+     40673
+    ],
+    [
+     7.2,
+     3.11,
+     43960,
+     41037
+    ],
+    [
+     8.2,
+     3.57,
+     44324,
+     41401
+    ],
+    [
+     9.3,
+     4.02,
+     44656,
+     41733
+    ],
+    [
+     10.3,
+     4.52,
+     45024,
+     42101
+    ],
+    [
+     11.3,
+     4.96,
+     45396,
+     42473
+    ],
+    [
+     12.4,
+     5.39,
+     45764,
+     42841
+    ],
+    [
+     13.4,
+     5.85,
+     46136,
+     43213
+    ],
+    [
+     14.4,
+     6.3,
+     46500,
+     43577
+    ],
+    [
+     15.5,
+     6.76,
+     46868,
+     43945
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 16.204910887000096,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.171496351999849,
+   "frames": 852,
+   "ops": {
+    "n": 1000,
+    "variant": "",
+    "pacing": "60-only",
+    "impl": "skia",
+    "shapes": 1000,
+    "feature": "solid",
+    "not_rendered": [],
+    "checksum_data": "0355f5b5",
+    "key_events": 0,
+    "max_frame_stall_ms": 84.2,
+    "ui_stall_ms_max": 61.314,
+    "ui_stall_ticks": 2793,
+    "ui_stall_gt50ms": 1,
+    "ui_stall_hist_lt8_16_33_50_100_250_1000_ge1000": [
+     2786,
+     5,
+     1,
+     0,
+     1,
+     0,
+     0,
+     0
+    ],
+    "setup_ms": 56.771,
+    "gc": {
+     "collections": 0,
+     "gen0": 0,
+     "gen1": 0,
+     "gen2": 0,
+     "gen0_only": 0,
+     "gen1_only": 0,
+     "pause_ms_total": 0.0,
+     "pause_ms_max": 0.0,
+     "alloc_bytes": 7206232,
+     "heap_bytes": 9270728,
+     "server_gc": false,
+     "latency_mode": "Interactive"
+    },
+    "render_ops": 852,
+    "render_op_ms_mean": 5.295
+   },
+   "checksum": "0355f5b5",
+   "unsupported": null,
+   "version": "Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simple 12.1.4), Avalonia.AvaloniaEdit 12.0.0, SkiaSharp 3.119.4, HarfBuzzSharp 8.3.1.3, FSharp.Core 10.1.403, .NET SDK 10.0.403, core rust (core/ libbenchcore C-ABI v2), runtime .NET 10.0.14, NativeAOT, Avalonia assembly 12.1.4",
+   "fps_mean": 60.761053590964,
+   "frame_p50": 16.262,
+   "frame_p95": 19.191,
+   "frame_p99": 26.193,
+   "frame_max": 84.2,
+   "dropped_gt16_7": 271,
+   "dropped_gt8_3": 845,
+   "dropped_gt25": 9,
+   "dropped_ms_gt16_7": 492.41000000000014,
+   "window": "markers",
+   "rss_kb_median": 44598.0,
+   "rss_kb_peak": 47524,
+   "pss_kb_median": 41685.0,
+   "pss_kb_peak": 44611,
+   "pss_kb_first_quarter": 39831.0,
+   "pss_kb_last_quarter": 43561.0,
+   "cpu_pct_core_mean": 42.42391439643611,
+   "cpu_pct_core_peak_1s": 46.640638171865575,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3416,
+     687
+    ],
+    [
+     1.0,
+     0.44,
+     41716,
+     38803
+    ],
+    [
+     2.1,
+     0.91,
+     42012,
+     39099
+    ],
+    [
+     3.1,
+     1.34,
+     42468,
+     39555
+    ],
+    [
+     4.1,
+     1.77,
+     42832,
+     39919
+    ],
+    [
+     5.2,
+     2.23,
+     43200,
+     40287
+    ],
+    [
+     6.2,
+     2.65,
+     43552,
+     40639
+    ],
+    [
+     7.2,
+     3.06,
+     43932,
+     41019
+    ],
+    [
+     8.2,
+     3.48,
+     44300,
+     41387
+    ],
+    [
+     9.3,
+     3.89,
+     44652,
+     41739
+    ],
+    [
+     10.3,
+     4.35,
+     45028,
+     42115
+    ],
+    [
+     11.4,
+     4.8,
+     45400,
+     42487
+    ],
+    [
+     12.4,
+     5.23,
+     45752,
+     42839
+    ],
+    [
+     13.4,
+     5.66,
+     46136,
+     43223
+    ],
+    [
+     14.4,
+     6.12,
+     46492,
+     43579
+    ],
+    [
+     15.5,
+     6.58,
+     46864,
+     43951
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 16.1865465220003,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.188038002000212,
+   "frames": 857,
+   "ops": {
+    "n": 1000,
+    "variant": "",
+    "pacing": "60-only",
+    "impl": "skia",
+    "shapes": 1000,
+    "feature": "solid",
+    "not_rendered": [],
+    "checksum_data": "0355f5b5",
+    "key_events": 0,
+    "max_frame_stall_ms": 39.01,
+    "ui_stall_ms_max": 17.417,
+    "ui_stall_ticks": 2810,
+    "ui_stall_gt50ms": 0,
+    "ui_stall_hist_lt8_16_33_50_100_250_1000_ge1000": [
+     2806,
+     3,
+     1,
+     0,
+     0,
+     0,
+     0,
+     0
+    ],
+    "setup_ms": 67.9,
+    "gc": {
+     "collections": 0,
+     "gen0": 0,
+     "gen1": 0,
+     "gen2": 0,
+     "gen0_only": 0,
+     "gen1_only": 0,
+     "pause_ms_total": 0.0,
+     "pause_ms_max": 0.0,
+     "alloc_bytes": 7230712,
+     "heap_bytes": 9294968,
+     "server_gc": false,
+     "latency_mode": "Interactive"
+    },
+    "render_ops": 857,
+    "render_op_ms_mean": 5.288
+   },
+   "checksum": "0355f5b5",
+   "unsupported": null,
+   "version": "Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simple 12.1.4), Avalonia.AvaloniaEdit 12.0.0, SkiaSharp 3.119.4, HarfBuzzSharp 8.3.1.3, FSharp.Core 10.1.403, .NET SDK 10.0.403, core rust (core/ libbenchcore C-ABI v2), runtime .NET 10.0.14, NativeAOT, Avalonia assembly 12.1.4",
+   "fps_mean": 61.102224235038655,
+   "frame_p50": 16.346,
+   "frame_p95": 18.87,
+   "frame_p99": 23.263,
+   "frame_max": 39.01,
+   "dropped_gt16_7": 284,
+   "dropped_gt8_3": 856,
+   "dropped_gt25": 5,
+   "dropped_ms_gt16_7": 359.2430000000002,
+   "window": "markers",
+   "rss_kb_median": 44500.0,
+   "rss_kb_peak": 46984,
+   "pss_kb_median": 41597.0,
+   "pss_kb_peak": 44081,
+   "pss_kb_first_quarter": 39725.0,
+   "pss_kb_last_quarter": 43485.0,
+   "cpu_pct_core_mean": 42.746411298064544,
+   "cpu_pct_core_peak_1s": 46.71405279841921,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     1404,
+     624
+    ],
+    [
+     1.1,
+     0.42,
+     41620,
+     38717
+    ],
+    [
+     2.1,
+     0.83,
+     41936,
+     39033
+    ],
+    [
+     3.1,
+     1.29,
+     42348,
+     39445
+    ],
+    [
+     4.1,
+     1.73,
+     42720,
+     39817
+    ],
+    [
+     5.2,
+     2.16,
+     43088,
+     40185
+    ],
+    [
+     6.2,
+     2.6,
+     43452,
+     40549
+    ],
+    [
+     7.2,
+     3.06,
+     43828,
+     40925
+    ],
+    [
+     8.3,
+     3.47,
+     44188,
+     41285
+    ],
+    [
+     9.3,
+     3.94,
+     44548,
+     41645
+    ],
+    [
+     10.3,
+     4.38,
+     44932,
+     42029
+    ],
+    [
+     11.3,
+     4.79,
+     45296,
+     42393
+    ],
+    [
+     12.4,
+     5.21,
+     45660,
+     42757
+    ],
+    [
+     13.4,
+     5.67,
+     46040,
+     43137
+    ],
+    [
+     14.4,
+     6.11,
+     46408,
+     43505
+    ],
+    [
+     15.5,
+     6.57,
+     46756,
+     43853
+    ]
+   ]
+  }
+ ]
+}

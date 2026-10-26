@@ -124,6 +124,12 @@ def main():
             else: hi = n; break
             if n > spec["max"]:
                 bounded = False; break
+        if lo is None:  # échec dès le départ : recherche vers le bas (÷2) jusqu'à un point qui tient, au plus 6 fois
+            m = hi // 2
+            for _ in range(6):
+                if m < 1: break
+                if probe(m): lo = m; break
+                hi = m; m //= 2
         if lo is not None and hi is not None:
             while hi - lo > max(1, int(lo * 0.05)):
                 mid = (lo + hi) // 2

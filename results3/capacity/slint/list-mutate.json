@@ -1,0 +1,40 @@
+{
+ "stack": "slint",
+ "scenario": "list-mutate",
+ "variant": [],
+ "cpu_quota": null,
+ "cmd": "${ROOT}/bench3/slint/run.sh",
+ "n_max": null,
+ "bounded_above": true,
+ "first_fail": 10000,
+ "probes": [
+  {
+   "n": 10000,
+   "ok": false,
+   "reasons": [
+    "appliqu\u00e9es 80674/80817 < 99,9 %"
+   ],
+   "rc": 0,
+   "fps_mean": 61.45955359251857,
+   "frame_p95": 17.24973,
+   "frame_p99": 19.503560999999998,
+   "frame_max": 110.499311,
+   "frames": 490,
+   "cpu_pct_core_mean": 16.12215081987105,
+   "pss_kb_peak": 48402,
+   "rss_kb_peak": 53276,
+   "markers": true,
+   "oom": false,
+   "missed_gt25_pct": 0.40816326530612246,
+   "updates_generated": 80817,
+   "updates_applied": 80674,
+   "updates_dropped": 0,
+   "setup_ms": 61.578778,
+   "ui_stall_ms_max": 50.418017,
+   "pacing": "60",
+   "not_rendered": []
+  }
+ ],
+ "at_nmax": null,
+ "at_2x": null
+}
