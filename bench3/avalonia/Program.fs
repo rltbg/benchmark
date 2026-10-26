@@ -39,7 +39,7 @@ let makeScenario (a: Args) : Scenario =
     | "ui-bind" -> Ui.BindScn(a) :> Scenario
     | "ui-anim" -> Ui.AnimScn(a) :> Scenario
     | "ffi-calls" -> Ffi.FfiCallsScn(a) :> Scenario
-    | _ -> null
+    | _ -> failwith ("scenario inconnu: " + a.Scenario)
 
 let writeUnsupported (a: Args) (reason: string) =
     let sb = Text.StringBuilder()

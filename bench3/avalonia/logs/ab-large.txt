@@ -1,0 +1,18 @@
+LARGE L1 N=10M                                 rc=0 n=  492 fps= 61.3 p50=  16.2 p99=  20.7 max=  53.5 gt25=   2 gc=0/0/0 pause=0.0 alloc=50MB setup_ms=90.8 ui_stall_ms_max=9.5
+LARGE L2 K=96                                  rc=0 n=  390 fps= 48.6 p50=  16.7 p99=  62.9 max=  78.5 gt25=  80 gc=10/7/1 pause=343.383 alloc=1268MB setup_ms=146.3 ui_stall_ms_max=67.8
+LARGE L3 N=10M/s                               rc=0 n=   83 fps= 10.3 p50=  97.2 p99= 147.8 max= 147.8 gt25=  81 gc=0/0/0 pause=0.0 alloc=10MB setup_ms=60.6 ui_stall_ms_max=136.5 updates_generated=81081211 updates_applied=46064128
+LARGE L4 N=1M                                  rc=0 n=  492 fps= 61.3 p50=  16.2 p99=  19.2 max=  21.7 gt25=   0 gc=0/0/0 pause=0.0 alloc=11MB setup_ms=60.3 ui_stall_ms_max=8.1 rebuild_ms=3.3
+LARGE T1 100MB                                 rc=0 n=  148 fps= 18.4 p50=  49.1 p99= 260.6 max= 271.0 gt25= 146 gc=2/2/0 pause=422.924 alloc=283MB setup_ms=1563.2 ui_stall_ms_max=267.8 time_to_first_display_ms=1541.9 layout_ms=175.1
+LARGE T2 N=20000                               rc=0 n=   15 fps=  1.6 p50= 644.5 p99= 830.0 max= 830.0 gt25=  15 gc=11/11/0 pause=2543.634 alloc=1415MB setup_ms=1299.2 ui_stall_ms_max=836.4
+LARGE T2 N=20000 canvas                        rc=0 n=  126 fps= 15.5 p50=  62.8 p99=  99.3 max= 128.7 gt25= 126 gc=4/4/1 pause=160.612 alloc=627MB setup_ms=124.7 ui_stall_ms_max=76.2
+LARGE T4 N=100000                              rc=0 n=   10 fps=  1.0 p50= 919.0 p99=1758.5 max=1758.5 gt25=  10 gc=4/4/0 pause=1378.518 alloc=927MB setup_ms=99374.2 ui_stall_ms_max=1309.8
+LARGE G1 solid N=50000                         rc=0 n=   31 fps=  3.7 p50= 260.9 p99= 338.0 max= 338.0 gt25=  31 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=256.5 ui_stall_ms_max=11.2
+LARGE G1 all N=20000                           rc=0 n=    9 fps=  0.9 p50=1056.1 p99=1250.9 max=1250.9 gt25=   9 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=1107.6 ui_stall_ms_max=8.7
+LARGE G2 N=10000                               rc=0 n=    5 fps=  0.5 p50=2076.7 p99=2272.3 max=2272.3 gt25=   5 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=2127.2 ui_stall_ms_max=24.3
+LARGE G3 N=1M                                  rc=0 n=   15 fps=  1.7 p50= 596.1 p99= 706.3 max= 706.3 gt25=  15 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=676.4 ui_stall_ms_max=10.0
+LARGE G4 N=5000                                rc=0 n=    6 fps=  0.5 p50=1845.8 p99=3780.9 max=3780.9 gt25=   6 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=2824.2 ui_stall_ms_max=84.2
+LARGE G5 N=100 blur                            rc=0 n=   10 fps=  1.1 p50= 965.7 p99=1102.6 max=1102.6 gt25=  10 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=1037.3 ui_stall_ms_max=19.0
+LARGE U2 N=100000                              rc=0 n=    2 fps=  0.2 p50=5757.5 p99=5757.5 max=5757.5 gt25=   2 gc=9/9/2 pause=4442.652 alloc=1000MB setup_ms=10130.4 ui_stall_ms_max=5649.4
+LARGE U3 N=100000                              rc=0 n=    9 fps=  0.9 p50= 945.7 p99=1982.7 max=1982.7 gt25=   9 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=5607.0 ui_stall_ms_max=189.6
+LARGE F1 hash 1MB 4T                           rc=0 n=  415 fps= 51.7 p50=  18.6 p99=  32.1 max=  34.8 gt25=  50 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=42.4 ui_stall_ms_max=19.5 calls_per_s=1681.7 mb_per_s=1681.7
+LARGE F2 N=20M                                 rc=0 n=  492 fps= 61.3 p50=  16.3 p99=  20.2 max=  24.8 gt25=   0 gc=1/1/1 pause=0.576 alloc=26MB setup_ms=57.5 ui_stall_ms_max=14.1 updates_generated=160256305 updates_applied=160256305

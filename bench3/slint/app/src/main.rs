@@ -117,6 +117,17 @@ fn parse_args() -> Args {
         }
         i += 2;
     }
+    // SLINTAPP_VARIANT="k=v,k2=v2" : variantes supplémentaires posées par l'environnement (lignes de stacks3.tsv) ;
+    // SLINTAPP_DIRECT=1 est un raccourci pour `direct`
+    if let Ok(e) = std::env::var("SLINTAPP_VARIANT") {
+        for kv in e.split(',').filter(|x| !x.is_empty()) {
+            let (k, v) = kv.split_once('=').map(|(k, v)| (k.to_string(), v.to_string())).unwrap_or((kv.to_string(), "1".into()));
+            a.variant.entry(k).or_insert(v);
+        }
+    }
+    if std::env::var("SLINTAPP_DIRECT").as_deref() == Ok("1") {
+        a.variant.entry("direct".into()).or_insert("1".into());
+    }
     if a.assets.is_empty() {
         a.assets = bench_root().join("assets").to_string_lossy().into_owned();
     }

@@ -119,7 +119,15 @@ pub struct EditSc {
     len: usize,
 }
 pub fn build_edit(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, String> {
-    let t = read_text(args, 1)?;
+    let mut t = read_text(args, 1)?;
+    if let Some(kb) = args.var("docsize").and_then(|v| v.parse::<usize>().ok()) {
+        // variante d'exploration (pas de la spec) : document réduit à `kb` Ko pour mesurer la dépendance à la taille
+        let mut end = (kb * 1024).min(t.len());
+        while !t.is_char_boundary(end) {
+            end += 1;
+        }
+        t.truncate(end);
+    }
     let mut mid = t.len() / 2;
     while !t.is_char_boundary(mid) {
         mid += 1;

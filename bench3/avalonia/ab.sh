@@ -6,7 +6,7 @@ D=${AB_DURATION:-8}
 while IFS='|' read -r label sc args; do
   [ -z "$label" ] && continue
   OUT=/tmp/ab-$$.json; rm -f $OUT
-  timeout 120 $HERE/out/avalonia-bench --scenario $sc --duration $D --out $OUT --assets $BENCH_ROOT/assets $args > /tmp/ab-$$.log 2>&1
+  timeout ${AB_TIMEOUT:-120} $HERE/out/avalonia-bench --scenario $sc --duration $D --out $OUT --assets $BENCH_ROOT/assets $args > /tmp/ab-$$.log 2>&1
   rc=$?
   python3 -I - "$OUT" "$label" "$rc" <<'PY'
 import json,sys

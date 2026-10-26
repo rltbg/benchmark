@@ -1,5 +1,5 @@
   Determining projects to restore...
-  Restored /home/user/benchmark/bench3/avalonia/AvaloniaBench.fsproj (in 1.34 sec).
+  Restored /home/user/benchmark/bench3/avalonia/AvaloniaBench.fsproj (in 391 ms).
   AvaloniaBench -> /home/user/benchmark/bench3/avalonia/artifacts/aot/bin/AvaloniaBench/release_linux-x64/avalonia-bench.dll
   Generating native code
 /root/.nuget/packages/fsharp.core/10.1.403/lib/netstandard2.1/FSharp.Core.dll : warning IL3053: Assembly 'FSharp.Core' produced AOT analysis warnings. [/home/user/benchmark/bench3/avalonia/AvaloniaBench.fsproj]
@@ -9,6 +9,6 @@ ILC : AOT analysis warning IL3050: Ui.BindScn.BindScn(Util.Args): Using member '
 ILC : AOT analysis warning IL3050: Native.CallbackSink.Start(Int32,UInt64,UInt32): Using member 'System.Runtime.InteropServices.Marshal.GetFunctionPointerForDelegate(Delegate)' which has 'RequiresDynamicCodeAttribute' can break functionality when AOT compiling. Marshalling code for the delegate might not be available. Use the GetFunctionPointerForDelegate<TDelegate> overload instead. [/home/user/benchmark/bench3/avalonia/AvaloniaBench.fsproj]
   AvaloniaBench -> /home/user/benchmark/bench3/avalonia/out/
 
-real	1m15.481s
-user	1m50.444s
-sys	0m6.242s
+real	1m6.361s
+user	1m45.448s
+sys	0m3.996s

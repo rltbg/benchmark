@@ -273,7 +273,8 @@ pub fn build_static(args: &Args, app: &MainWindow, renderer: &str) -> Result<Box
             s
         });
     }
-    let imp = if args.pick("impl", &["pool", "native"], "native") == "native" { Impl::Native } else { Impl::Pool };
+    let dflt = if sc == "list-rich" { "pool" } else { "native" };
+    let imp = if args.pick("impl", &["pool", "native"], dflt) == "native" { Impl::Native } else { Impl::Pool };
     let (n, dense, script, k) = match sc {
         "list-scale" => (args.n_or(100_000) as usize, false, Some(Script::l1()), 6u64),
         "list-rich" => (100_000usize, true, Some(Script::constant(20000.0)), args.n_or(6)),
@@ -302,6 +303,7 @@ pub fn build_static(args: &Args, app: &MainWindow, renderer: &str) -> Result<Box
             let w = app.as_weak();
             let inn = inner.clone();
             let we = wheel_events.clone();
+            let direct = args.has("direct");
             b.on_wheel(move |dy| {
                 we.set(we.get() + 1);
                 if let Some(app) = w.upgrade() {
@@ -309,6 +311,10 @@ pub fn build_static(args: &Args, app: &MainWindow, renderer: &str) -> Result<Box
                     let off = i.final_offset - dy as f64;
                     let local = i.set_offset(off);
                     app.global::<Bench>().set_scroll_y(local);
+                    if direct {
+                        use slint::winit_030::{winit, WinitWindowAccessor};
+                        app.window().with_winit_window(|w: &winit::window::Window| w.request_redraw());
+                    }
                 }
             });
             (inner, 0.0)

@@ -1,0 +1,9 @@
+L2 panel K=24 (sync-before-layout, puce cache) rc=0 n=  480 fps= 59.8 p50=  16.3 p99=  27.3 max=  93.0 gt25=   6 gc=4/3/1 pause=187.625 alloc=356MB setup_ms=65.3 ui_stall_ms_max=82.7
+L2 panel K=48                                  rc=0 n=  479 fps= 59.7 p50=  16.4 p99=  47.5 max=  97.9 gt25=   6 gc=6/4/1 pause=216.016 alloc=664MB setup_ms=85.7 ui_stall_ms_max=91.6
+L2 panel K=96                                  rc=0 n=  417 fps= 51.9 p50=  16.7 p99=  57.6 max=  77.6 gt25=  53 gc=10/6/1 pause=353.123 alloc=1264MB setup_ms=140.8 ui_stall_ms_max=69.3
+L2 panel K=96 (2)                              rc=0 n=  430 fps= 53.5 p50=  16.5 p99=  60.7 max=  76.4 gt25=  45 gc=10/7/1 pause=361.308 alloc=1264MB setup_ms=106.6 ui_stall_ms_max=72.1
+L1 panel n=1M                                  rc=0 n=  492 fps= 61.3 p50=  16.3 p99=  19.6 max=  21.8 gt25=   0 gc=0/0/0 pause=0.0 alloc=51MB setup_ms=58.4 ui_stall_ms_max=10.2
+L3 panel 1M/s                                  rc=0 n=  493 fps= 61.4 p50=  16.3 p99=  18.2 max=  23.1 gt25=   0 gc=0/0/0 pause=0.0 alloc=13MB setup_ms=62.6 ui_stall_ms_max=12.4 updates_generated=8108694 updates_applied=8108694
+G4 n=100 filter=low (default)                  rc=0 n=  221 fps= 27.5 p50=  35.3 p99=  48.8 max=  52.5 gt25= 221 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=948.1 ui_stall_ms_max=8.2
+G4 n=1000 filter=low                           rc=0 n=   25 fps=  2.9 p50= 343.9 p99= 398.7 max= 398.7 gt25=  25 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=1316.3 ui_stall_ms_max=7.4
+G4 n=100 filter=high                           rc=0 n=   52 fps=  6.3 p50= 155.6 p99= 189.4 max= 189.4 gt25=  52 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=1023.7 ui_stall_ms_max=8.3

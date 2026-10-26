@@ -471,7 +471,7 @@ type ImagesScn(args: Args) =
         else null
     let decodeMs = ticksToMs (Stopwatch.GetTimestamp() - t0)
     // echantillonnage : high = bilineaire + mipmaps (reduction nette), low = bilineaire seul (equivalent BitmapInterpolationMode.LowQuality)
-    let filter = args.Variant("filter", "high")
+    let filter = args.Variant("filter", "low")
     let sampling = if filter = "low" then SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.None) else SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear)
     let view = ImagesView(n, imgs, big, sampling)
     let mutable sq : Square = null
