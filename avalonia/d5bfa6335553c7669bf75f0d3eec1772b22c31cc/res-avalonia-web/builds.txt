@@ -1,0 +1,10 @@
+fsharp-jit rc=0 63s
+aot-try rc=0 255s
+total 28
+drwxr-xr-x  4 runner runner 4096 Oct 26 16:14 .
+drwxr-xr-x 16 runner runner 4096 Oct 26 16:09 ..
+-rw-r--r--  1 runner runner    7 Oct 26 16:10 head
+-rw-r--r--  1 runner runner    4 Oct 26 16:14 secs-aot
+-rw-r--r--  1 runner runner    3 Oct 26 16:10 secs-jit
+drwxr-xr-x  3 runner runner 4096 Oct 26 16:14 web-aot
+drwxr-xr-x  3 runner runner 4096 Oct 26 16:10 web-jit

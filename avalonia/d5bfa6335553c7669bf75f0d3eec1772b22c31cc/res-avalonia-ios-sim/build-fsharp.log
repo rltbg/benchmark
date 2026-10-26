@@ -1,0 +1,23 @@
+  Determining projects to restore...
+  Restored /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj (in 1.84 sec).
+  Restored /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.iOS/Spike.iOS.fsproj (in 3.68 sec).
+/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Ui.fs(462,21): warning FS0044: This construct is deprecated. Use the overload accepting BitmapEncoderOptions instead. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj]
+  Spike.Ui -> /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+  Detected signing identity:
+    Code Signing Key: "" (-)
+    Provisioning Profile: "" () - no entitlements
+    Bundle Id: net.rltbg.spike.avalonia
+    App Id: net.rltbg.spike.avalonia
+  Spike.iOS -> /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.iOS/bin/Release/net10.0-ios/iossimulator-arm64/Spike.iOS.dll
+  Optimizing assemblies for size. This process might take a while.
+  IL stripping assemblies
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_26.5/26.5.10318/targets/Xamarin.Shared.Sdk.targets(1095,3): error : ILStrip failed for obj/Release/net10.0-ios/iossimulator-arm64/linked/FSharp.Core.dll: Object reference not set to an instance of an object. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.iOS/Spike.iOS.fsproj]
+
+Build FAILED.
+
+/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Ui.fs(462,21): warning FS0044: This construct is deprecated. Use the overload accepting BitmapEncoderOptions instead. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj]
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_26.5/26.5.10318/targets/Xamarin.Shared.Sdk.targets(1095,3): error : ILStrip failed for obj/Release/net10.0-ios/iossimulator-arm64/linked/FSharp.Core.dll: Object reference not set to an instance of an object. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.iOS/Spike.iOS.fsproj]
+    1 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:48.40

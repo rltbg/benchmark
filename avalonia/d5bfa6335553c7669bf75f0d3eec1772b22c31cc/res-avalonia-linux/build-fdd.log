@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  Restored /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Desktop/Spike.Desktop.fsproj (in 302 ms).
+  1 of 2 projects are up-to-date for restore.
+  Spike.Ui -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+  Spike.Desktop -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Desktop/bin/Release/net10.0/linux-x64/avalonia-spike.dll
+  Spike.Desktop -> /home/runner/work/benchmark/benchmark/work/fdd/

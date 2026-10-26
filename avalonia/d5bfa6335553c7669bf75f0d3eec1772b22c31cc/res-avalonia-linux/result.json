@@ -1,0 +1,49 @@
+{
+ "stack": "avalonia",
+ "platform": "linux",
+ "status": "ok",
+ "build_seconds": 46.0,
+ "artifacts": [
+  {
+   "path": "/home/runner/work/benchmark/benchmark/work/aot/avalonia-spike",
+   "bytes": 21364080,
+   "gzip": 9278094,
+   "brotli": 6765689
+  },
+  {
+   "path": "/home/runner/work/benchmark/benchmark/work/aot",
+   "bytes": 35342416,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "/home/runner/work/benchmark/benchmark/work/sctrim",
+   "bytes": 46109503,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "/home/runner/work/benchmark/benchmark/work/fdd",
+   "bytes": 27613715,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "/home/runner/work/benchmark/benchmark/work/sc",
+   "bytes": 110186506,
+   "gzip": null,
+   "brotli": null
+  }
+ ],
+ "notes": [
+  "NativeAOT OK en 46s ; 1 lignes warning/error uniques",
+  "variante self-contained+trim (IL, JIT) : 18s",
+  "variante framework-dependent : 3s",
+  "variante self-contained non trimee : 2s",
+  "execute : aot ; exit_code=0 wall_s=13 max_rss_kb=149436",
+  "SPIKE:ready platform=linux stack=avalonia core=fstar-extrait(F*>F#) SPIKE:startup_ms=2120 "
+ ],
+ "runner": "Linux/X64",
+ "sha": "d5bfa6335553c7669bf75f0d3eec1772b22c31cc",
+ "date": "2026-10-26T16:21:46Z"
+}

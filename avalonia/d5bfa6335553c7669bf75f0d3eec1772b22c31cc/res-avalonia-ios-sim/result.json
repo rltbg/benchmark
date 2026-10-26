@@ -1,0 +1,31 @@
+{
+ "stack": "avalonia",
+ "platform": "ios-sim",
+ "status": "fail",
+ "build_seconds": 34.0,
+ "artifacts": [
+  {
+   "path": "work/Spike.app.zip",
+   "bytes": 1196,
+   "gzip": 988,
+   "brotli": null
+  },
+  {
+   "path": "work/Spike.app",
+   "bytes": 1089,
+   "gzip": null,
+   "brotli": null
+  }
+ ],
+ "notes": [
+  "tete de plateforme : csharp-fallback",
+  "builds : fsharp tentative=1 rc=1 49s;csharp tentative=1 rc=1 34s;nativeaot tentative=1 rc=1 38s;",
+  "fsharp-head-errors.txt : /Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_26.5/26.5.10318/targets/Xamarin.Shared.Sdk.targets(1095,3): error : ILStrip failed for obj/Release/net10.0-ios/iossimulator-arm64/linked/FSharp.Core.dll: Object reference not set to an instance of an object.|",
+  "nativeaot-errors.txt : /Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_26.5/26.5.10318/targets/Xamarin.Shared.Sdk.targets(1095,3): error : ILStrip failed for obj/Release/net10.0-ios/iossimulator-arm64/linked/FSharp.Core.dll: Object reference not set to an instance of an object.|",
+  "aucune execution (pas de run.log)",
+  "emulateur/simulateur/rendu logiciel : pas des chiffres d'appareil"
+ ],
+ "runner": "macOS/ARM64",
+ "sha": "d5bfa6335553c7669bf75f0d3eec1772b22c31cc",
+ "date": "2026-10-26T16:14:38Z"
+}

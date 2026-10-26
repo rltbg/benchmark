@@ -1,0 +1,15 @@
+[335] error: Failed to load resource: the server responded with a status of 404 (Not Found)
+[1399] warning: WebGL: INVALID_ENUM: getParameter: invalid parameter name, WEBGL_debug_renderer_info not enabled
+[1399] warning: WebGL: INVALID_ENUM: getParameter: invalid parameter name, WEBGL_debug_renderer_info not enabled
+[1481] log: SPIKE:ready platform=web stack=avalonia core=fstar-extrait(F*>F#)
+[1481] log: SPIKE:selftest ok
+[1485] log: SPIKE:mem gc_heap_mb=9.8
+[5006] log: SPIKE:shot tab1-liste
+[6740] log: SPIKE:fps tab=canvas value=11
+[7810] log: SPIKE:fps tab=canvas value=14
+[8741] log: SPIKE:shot tab2-canvas
+[8818] log: SPIKE:fps tab=canvas value=13
+[10463] log: SPIKE:heavy ms=100 iters=163846 max_frame_gap_ms=106
+[11474] log: SPIKE:shot tab3-coeur
+[12182] log: SPIKE:mem gc_heap_mb=19.7 updates=4258 canvas_frames=46
+[12183] log: SPIKE:done

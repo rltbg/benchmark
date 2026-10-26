@@ -1,0 +1,81 @@
+  Determining projects to restore...
+  Restored /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Android/Spike.Android.fsproj (in 7.75 sec).
+  Restored /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj (in 11.04 sec).
+/home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Ui.fs(462,21): warning FS0044: This construct is deprecated. Use the overload accepting BitmapEncoderOptions instead. [/home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Spike.Ui.fsproj]
+  Spike.Ui -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+  Spike.Android -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Android/bin/Release/net10.0-android/android-x64/Spike.Android.dll
+  Spike.Ui -> /home/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+  Optimizing assemblies for size may change the behavior of the app. Be sure to test after publishing. See: https://aka.ms/dotnet-illink
+  Optimizing assemblies for size. This process might take a while.
+  [1/72] Avalonia.Dialogs.dll -> Avalonia.Dialogs.dll.so
+  [2/72] Avalonia.DesignerSupport.dll -> Avalonia.DesignerSupport.dll.so
+  [3/72] Avalonia.Markup.Xaml.dll -> Avalonia.Markup.Xaml.dll.so
+  [4/72] Avalonia.Markup.dll -> Avalonia.Markup.dll.so
+  [5/72] Avalonia.Metal.dll -> Avalonia.Metal.dll.so
+  [6/72] Avalonia.OpenGL.dll -> Avalonia.OpenGL.dll.so
+  [7/72] Avalonia.Vulkan.dll -> Avalonia.Vulkan.dll.so
+  [8/72] Avalonia.dll -> Avalonia.dll.so
+  [9/72] Avalonia.Fonts.Inter.dll -> Avalonia.Fonts.Inter.dll.so
+  [10/72] Avalonia.HarfBuzz.dll -> Avalonia.HarfBuzz.dll.so
+  [11/72] Avalonia.Android.dll -> Avalonia.Android.dll.so
+  [12/72] Avalonia.Remote.Protocol.dll -> Avalonia.Remote.Protocol.dll.so
+  [13/72] Avalonia.Skia.dll -> Avalonia.Skia.dll.so
+  [14/72] Avalonia.Controls.dll -> Avalonia.Controls.dll.so
+  [15/72] HarfBuzzSharp.dll -> HarfBuzzSharp.dll.so
+  [16/72] SkiaSharp.dll -> SkiaSharp.dll.so
+  [17/72] Xamarin.AndroidX.Activity.dll -> Xamarin.AndroidX.Activity.dll.so
+  [18/72] Avalonia.Themes.Fluent.dll -> Avalonia.Themes.Fluent.dll.so
+  [19/72] Xamarin.AndroidX.AppCompat.dll -> Xamarin.AndroidX.AppCompat.dll.so
+  [20/72] Xamarin.AndroidX.CustomView.dll -> Xamarin.AndroidX.CustomView.dll.so
+  [21/72] Xamarin.AndroidX.Core.dll -> Xamarin.AndroidX.Core.dll.so
+  [22/72] Avalonia.Base.dll -> Avalonia.Base.dll.so
+  [23/72] Xamarin.AndroidX.DrawerLayout.dll -> Xamarin.AndroidX.DrawerLayout.dll.so
+  [24/72] Xamarin.AndroidX.Lifecycle.Common.Jvm.dll -> Xamarin.AndroidX.Lifecycle.Common.Jvm.dll.so
+  [25/72] Xamarin.AndroidX.Lifecycle.LiveData.Core.dll -> Xamarin.AndroidX.Lifecycle.LiveData.Core.dll.so
+  [26/72] Xamarin.AndroidX.Lifecycle.ViewModel.Android.dll -> Xamarin.AndroidX.Lifecycle.ViewModel.Android.dll.so
+  [27/72] Xamarin.AndroidX.Loader.dll -> Xamarin.AndroidX.Loader.dll.so
+  [28/72] Xamarin.AndroidX.Fragment.dll -> Xamarin.AndroidX.Fragment.dll.so
+  [29/72] Xamarin.AndroidX.NavigationEvent.Android.dll -> Xamarin.AndroidX.NavigationEvent.Android.dll.so
+  [30/72] Xamarin.AndroidX.SavedState.SavedState.Android.dll -> Xamarin.AndroidX.SavedState.SavedState.Android.dll.so
+  [31/72] Xamarin.AndroidX.Window.dll -> Xamarin.AndroidX.Window.dll.so
+  [32/72] Xamarin.KotlinX.Coroutines.Core.Jvm.dll -> Xamarin.KotlinX.Coroutines.Core.Jvm.dll.so
+  [33/72] System.Collections.Concurrent.dll -> System.Collections.Concurrent.dll.so
+  [34/72] System.Collections.NonGeneric.dll -> System.Collections.NonGeneric.dll.so
+  [35/72] Xamarin.Kotlin.StdLib.dll -> Xamarin.Kotlin.StdLib.dll.so
+  [36/72] System.Collections.Specialized.dll -> System.Collections.Specialized.dll.so
+  [37/72] System.ComponentModel.EventBasedAsync.dll -> System.ComponentModel.EventBasedAsync.dll.so
+  [38/72] System.Collections.dll -> System.Collections.dll.so
+  [39/72] System.ComponentModel.Primitives.dll -> System.ComponentModel.Primitives.dll.so
+  [40/72] System.ComponentModel.dll -> System.ComponentModel.dll.so
+  [41/72] System.Console.dll -> System.Console.dll.so
+  [42/72] System.ComponentModel.TypeConverter.dll -> System.ComponentModel.TypeConverter.dll.so
+  [43/72] System.Diagnostics.DiagnosticSource.dll -> System.Diagnostics.DiagnosticSource.dll.so
+  [44/72] System.Diagnostics.Process.dll -> System.Diagnostics.Process.dll.so
+  [45/72] System.IO.Compression.dll -> System.IO.Compression.dll.so
+  [46/72] System.Linq.Queryable.dll -> System.Linq.Queryable.dll.so
+  [47/72] System.Net.NameResolution.dll -> System.Net.NameResolution.dll.so
+  [48/72] System.Net.Primitives.dll -> System.Net.Primitives.dll.so
+  [49/72] System.Net.Requests.dll -> System.Net.Requests.dll.so
+  [50/72] System.Linq.dll -> System.Linq.dll.so
+  [51/72] System.Net.WebClient.dll -> System.Net.WebClient.dll.so
+  [52/72] FSharp.Core.dll -> FSharp.Core.dll.so
+  [53/72] System.ObjectModel.dll -> System.ObjectModel.dll.so
+  [54/72] System.Net.Sockets.dll -> System.Net.Sockets.dll.so
+  [55/72] System.Private.Xml.dll -> System.Private.Xml.dll.so
+  [56/72] System.Runtime.InteropServices.dll -> System.Runtime.InteropServices.dll.so
+  [57/72] System.Runtime.dll -> System.Runtime.dll.so
+  [58/72] System.Private.Uri.dll -> System.Private.Uri.dll.so
+  [59/72] System.Security.Cryptography.dll -> System.Security.Cryptography.dll.so
+  [60/72] System.Runtime.Numerics.dll -> System.Runtime.Numerics.dll.so
+  [61/72] System.Threading.Tasks.Parallel.dll -> System.Threading.Tasks.Parallel.dll.so
+  [62/72] System.Linq.Expressions.dll -> System.Linq.Expressions.dll.so
+  [63/72] System.dll -> System.dll.so
+  [64/72] System.Threading.dll -> System.Threading.dll.so
+  [65/72] netstandard.dll -> netstandard.dll.so
+  [66/72] Mono.Android.Runtime.dll -> Mono.Android.Runtime.dll.so
+  [67/72] Spike.Ui.dll -> Spike.Ui.dll.so
+  [68/72] Spike.Android.dll -> Spike.Android.dll.so
+  [69/72] Java.Interop.dll -> Java.Interop.dll.so
+  [70/72] System.Text.RegularExpressions.dll -> System.Text.RegularExpressions.dll.so
+  [71/72] Mono.Android.dll -> Mono.Android.dll.so
+  [72/72] System.Private.CoreLib.dll -> System.Private.CoreLib.dll.so

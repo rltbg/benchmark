@@ -1,0 +1,8 @@
+activite=net.rltbg.spike.avalonia/crc64fa894578a91bd3b7.MainActivity
+Starting: Intent { cmp=net.rltbg.spike.avalonia/crc64fa894578a91bd3b7.MainActivity (has extras) }
+Status: ok
+LaunchState: COLD
+Activity: net.rltbg.spike.avalonia/crc64fa894578a91bd3b7.MainActivity
+TotalTime: 2834
+WaitTime: 2860
+Complete

@@ -1,0 +1,33 @@
+  Determining projects to restore...
+  Restored /Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj (in 432 ms).
+  1 of 2 projects are up-to-date for restore.
+  Spike.Ui -> /Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/bin/Release/net10.0/Spike.Ui.dll
+  Detected signing identity:
+    Code Signing Key: "" (-)
+    Provisioning Profile: "" () - no entitlements
+    Bundle Id: net.rltbg.spike.avalonia
+    App Id: net.rltbg.spike.avalonia
+  Spike.iOS.Cs -> /Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/bin/Release/net10.0-ios/iossimulator-arm64/Spike.iOS.Cs.dll
+  Optimizing assemblies for size. This process might take a while.
+resource ILLink.Substitutions.xml in FSharp.Core, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(6,6): warning IL2040: FSharp.Core: Could not find embedded resource 'FSharpSignatureInfo.FSharp.Core' to remove in assembly 'FSharp.Core'. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+resource ILLink.Substitutions.xml in FSharp.Core, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(9,6): warning IL2040: FSharp.Core: Could not find embedded resource 'FSharpOptimizationDataB.FSharp.Core' to remove in assembly 'FSharp.Core'. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+resource ILLink.Substitutions.xml in FSharp.Core, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(11,6): warning IL2040: FSharp.Core: Could not find embedded resource 'FSharpSignatureDataB.FSharp.Core' to remove in assembly 'FSharp.Core'. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+resource ILLink.Substitutions.xml in FSharp.Core, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(4,6): warning IL2040: FSharp.Core: Could not find embedded resource 'FSharpOptimizationInfo.FSharp.Core' to remove in assembly 'FSharp.Core'. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+/Users/runner/.nuget/packages/avalonia/12.1.4/lib/net10.0/Avalonia.DesignerSupport.dll : warning IL2104: Assembly 'Avalonia.DesignerSupport' produced trim warnings. For more information see https://aka.ms/il2104 [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+/Users/runner/.nuget/packages/fsharp.core/10.1.403/lib/netstandard2.1/FSharp.Core.dll : warning IL2104: Assembly 'FSharp.Core' produced trim warnings. For more information see https://aka.ms/il2104 [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+  IL stripping assemblies
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_26.5/26.5.10318/targets/Xamarin.Shared.Sdk.targets(1095,3): error : ILStrip failed for obj/Release/net10.0-ios/iossimulator-arm64/linked/FSharp.Core.dll: Object reference not set to an instance of an object. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+
+Build FAILED.
+
+resource ILLink.Substitutions.xml in FSharp.Core, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(6,6): warning IL2040: FSharp.Core: Could not find embedded resource 'FSharpSignatureInfo.FSharp.Core' to remove in assembly 'FSharp.Core'. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+resource ILLink.Substitutions.xml in FSharp.Core, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(9,6): warning IL2040: FSharp.Core: Could not find embedded resource 'FSharpOptimizationDataB.FSharp.Core' to remove in assembly 'FSharp.Core'. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+resource ILLink.Substitutions.xml in FSharp.Core, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(11,6): warning IL2040: FSharp.Core: Could not find embedded resource 'FSharpSignatureDataB.FSharp.Core' to remove in assembly 'FSharp.Core'. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+resource ILLink.Substitutions.xml in FSharp.Core, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a(4,6): warning IL2040: FSharp.Core: Could not find embedded resource 'FSharpOptimizationInfo.FSharp.Core' to remove in assembly 'FSharp.Core'. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+/Users/runner/.nuget/packages/avalonia/12.1.4/lib/net10.0/Avalonia.DesignerSupport.dll : warning IL2104: Assembly 'Avalonia.DesignerSupport' produced trim warnings. For more information see https://aka.ms/il2104 [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+/Users/runner/.nuget/packages/fsharp.core/10.1.403/lib/netstandard2.1/FSharp.Core.dll : warning IL2104: Assembly 'FSharp.Core' produced trim warnings. For more information see https://aka.ms/il2104 [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_26.5/26.5.10318/targets/Xamarin.Shared.Sdk.targets(1095,3): error : ILStrip failed for obj/Release/net10.0-ios/iossimulator-arm64/linked/FSharp.Core.dll: Object reference not set to an instance of an object. [/Users/runner/work/benchmark/benchmark/spikes/avalonia/heads-cs/Spike.iOS.Cs/Spike.iOS.Cs.csproj]
+    6 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:33.54

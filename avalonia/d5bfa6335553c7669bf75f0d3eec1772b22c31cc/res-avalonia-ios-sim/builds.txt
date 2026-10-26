@@ -1,0 +1,3 @@
+fsharp tentative=1 rc=1 49s
+csharp tentative=1 rc=1 34s
+nativeaot tentative=1 rc=1 38s

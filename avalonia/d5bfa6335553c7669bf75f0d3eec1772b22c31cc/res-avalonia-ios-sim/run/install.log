@@ -1,0 +1,8 @@
+An error was encountered processing the command (domain=IXUserPresentableErrorDomain, code=1):
+App installation failed: Unable to Install “AvaloniaSpike”
+Please try again later.
+Spike.app is missing its bundle executable. Please check your build settings to make sure that a bundle executable is produced at the path "Spike.app/Spike.iOS.Cs".
+Underlying error (domain=IXUserPresentableErrorDomain, code=1):
+	Unable to Install “AvaloniaSpike”
+	Please try again later.
+INSTALL FAILED

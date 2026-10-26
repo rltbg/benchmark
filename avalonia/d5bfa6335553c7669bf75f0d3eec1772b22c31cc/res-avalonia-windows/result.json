@@ -1,0 +1,35 @@
+{
+ "stack": "avalonia",
+ "platform": "windows",
+ "status": "ok",
+ "build_seconds": 59.0,
+ "artifacts": [
+  {
+   "path": "D:/a/benchmark/benchmark/work/aot/avalonia-spike.exe",
+   "bytes": 19793920,
+   "gzip": 7730000,
+   "brotli": 5628777
+  },
+  {
+   "path": "D:/a/benchmark/benchmark/work/aot",
+   "bytes": 143584808,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "D:/a/benchmark/benchmark/work/sctrim",
+   "bytes": 151877702,
+   "gzip": null,
+   "brotli": null
+  }
+ ],
+ "notes": [
+  "NativeAOT OK en 59s ; 1 lignes warning/error uniques",
+  "variante self-contained+trim (IL, JIT) : 11s",
+  "execute : aot ; exit_code=0 wall_s=13 max_rss_kb=0",
+  "SPIKE:ready platform=windows stack=avalonia core=fstar-extrait(F*>F#) SPIKE:startup_ms=499 "
+ ],
+ "runner": "Windows/X64",
+ "sha": "d5bfa6335553c7669bf75f0d3eec1772b22c31cc",
+ "date": "2026-10-26T16:11:30Z"
+}

@@ -1,0 +1,13 @@
+SPIKE:ready platform=windows stack=avalonia core=fstar-extrait(F*>F#)
+SPIKE:selftest ok
+SPIKE:startup_ms=499
+SPIKE:mem workingset_mb=50.1 gc_heap_mb=11.1
+SPIKE:shot tab1-liste
+SPIKE:fps tab=canvas value=11
+SPIKE:fps tab=canvas value=19
+SPIKE:shot tab2-canvas
+SPIKE:fps tab=canvas value=18
+SPIKE:heavy ms=100 iters=1142391 max_frame_gap_ms=36
+SPIKE:shot tab3-coeur
+SPIKE:mem workingset_mb=128.8 gc_heap_mb=19.4 updates=4258 canvas_frames=64
+SPIKE:done

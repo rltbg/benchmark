@@ -1,0 +1,8 @@
+  Determining projects to restore...
+  Restored D:\a\benchmark\benchmark\spikes\avalonia\Spike.Ui\Spike.Ui.fsproj (in 254 ms).
+  Restored D:\a\benchmark\benchmark\spikes\avalonia\Spike.Desktop\Spike.Desktop.fsproj (in 256 ms).
+D:\a\benchmark\benchmark\spikes\avalonia\Spike.Ui\Ui.fs(462,21): warning FS0044: This construct is deprecated. Use the overload accepting BitmapEncoderOptions instead. [D:\a\benchmark\benchmark\spikes\avalonia\Spike.Ui\Spike.Ui.fsproj]
+  Spike.Ui -> D:\a\benchmark\benchmark\spikes\avalonia\Spike.Ui\bin\Release\net10.0\Spike.Ui.dll
+  Spike.Desktop -> D:\a\benchmark\benchmark\spikes\avalonia\Spike.Desktop\bin\Release\net10.0\win-x64\avalonia-spike.dll
+  Optimizing assemblies for size. This process might take a while.
+  Spike.Desktop -> D:\a\benchmark\benchmark\work\sctrim\

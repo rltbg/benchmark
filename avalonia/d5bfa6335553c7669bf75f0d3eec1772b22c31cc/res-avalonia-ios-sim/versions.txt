@@ -1,0 +1,126 @@
+.NET SDK:
+ Version:           10.0.403
+ Commit:            5a2162bea6
+ Workload version:  10.0.401
+ MSBuild version:   18.9.15+5a2162bea
+
+Runtime Environment:
+ OS Name:     Mac OS X
+ OS Version:  26.6
+ OS Platform: Darwin
+ RID:         osx-arm64
+ Base Path:   /Users/runner/.dotnet/sdk/10.0.403/
+
+.NET workloads installed:
+ [ios]
+   Installation Source: SDK 10.0.400
+   Manifest Version:    26.5.10318/10.0.100
+   Manifest Path:       /Users/runner/.dotnet/sdk-manifests/10.0.100/microsoft.net.sdk.ios/26.5.10318/WorkloadManifest.json
+   Install Type:        FileBased
+
+Configured to use workload sets when installing new manifests.
+
+Host:
+  Version:      10.0.14
+  Architecture: arm64
+  Commit:       0427b9abbe
+
+.NET SDKs installed:
+  8.0.101 [/Users/runner/.dotnet/sdk]
+  8.0.204 [/Users/runner/.dotnet/sdk]
+  8.0.303 [/Users/runner/.dotnet/sdk]
+  8.0.425 [/Users/runner/.dotnet/sdk]
+  9.0.102 [/Users/runner/.dotnet/sdk]
+  9.0.203 [/Users/runner/.dotnet/sdk]
+  9.0.318 [/Users/runner/.dotnet/sdk]
+  10.0.103 [/Users/runner/.dotnet/sdk]
+  10.0.203 [/Users/runner/.dotnet/sdk]
+  10.0.302 [/Users/runner/.dotnet/sdk]
+  10.0.401 [/Users/runner/.dotnet/sdk]
+  10.0.403 [/Users/runner/.dotnet/sdk]
+
+.NET runtimes installed:
+  Microsoft.AspNetCore.App 8.0.1 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 8.0.4 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 8.0.7 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 8.0.31 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 9.0.1 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 9.0.4 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 9.0.20 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 10.0.3 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 10.0.7 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 10.0.10 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 10.0.12 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.AspNetCore.App 10.0.14 [/Users/runner/.dotnet/shared/Microsoft.AspNetCore.App]
+  Microsoft.NETCore.App 8.0.1 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 8.0.4 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 8.0.7 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 8.0.31 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 9.0.1 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 9.0.4 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 9.0.20 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 10.0.3 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 10.0.7 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 10.0.10 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 10.0.12 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+  Microsoft.NETCore.App 10.0.14 [/Users/runner/.dotnet/shared/Microsoft.NETCore.App]
+
+Other architectures found:
+  None
+
+Environment variables:
+  DOTNET_CLI_TELEMETRY_OPTOUT              [1]
+  DOTNET_MULTILEVEL_LOOKUP                 [0]
+  DOTNET_NOLOGO                            [1]
+  DOTNET_ROOT                              [/Users/runner/.dotnet]
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE        [1]
+  DOTNET_VERSION                           [10.0.403]
+
+global.json file:
+  Not found
+
+Learn more:
+  https://aka.ms/dotnet/info
+
+Download .NET:
+  https://aka.ms/dotnet/download
+
+Workload version: 10.0.401
+
+Installed Workload Id      Manifest Version         Installation Source
+-----------------------------------------------------------------------
+ios                        26.5.10318/10.0.100      SDK 10.0.400       
+
+Use `dotnet workload search` to find additional workloads to install.
+
+/Applications/Xcode_26.6.app/Contents/Developer
+Xcode 26.6
+Build version 17F113
+/Applications/Xcode_26.0.1.app
+/Applications/Xcode_26.0.app
+/Applications/Xcode_26.1.1.app
+/Applications/Xcode_26.1.app
+/Applications/Xcode_26.2.0.app
+/Applications/Xcode_26.2.app
+/Applications/Xcode_26.3.0.app
+/Applications/Xcode_26.3.app
+/Applications/Xcode_26.4.1.app
+/Applications/Xcode_26.4.app
+/Applications/Xcode_26.5.0.app
+/Applications/Xcode_26.5.app
+/Applications/Xcode_26.6.0.app
+/Applications/Xcode_26.6.app
+/Applications/Xcode.app
+== Runtimes ==
+iOS 26.2 (26.2 - 23C54) - com.apple.CoreSimulator.SimRuntime.iOS-26-2
+iOS 26.4 (26.4.1 - 23E254a) - com.apple.CoreSimulator.SimRuntime.iOS-26-4
+iOS 26.5 (26.5 - 23F77) - com.apple.CoreSimulator.SimRuntime.iOS-26-5
+tvOS 26.2 (26.2 - 23K51) - com.apple.CoreSimulator.SimRuntime.tvOS-26-2
+tvOS 26.4 (26.4 - 23L243a) - com.apple.CoreSimulator.SimRuntime.tvOS-26-4
+tvOS 26.5 (26.5 - 23L470) - com.apple.CoreSimulator.SimRuntime.tvOS-26-5
+watchOS 26.2 (26.2 - 23S303) - com.apple.CoreSimulator.SimRuntime.watchOS-26-2
+watchOS 26.4 (26.4 - 23T240b) - com.apple.CoreSimulator.SimRuntime.watchOS-26-4
+watchOS 26.5 (26.5 - 23T570) - com.apple.CoreSimulator.SimRuntime.watchOS-26-5
+visionOS 26.2 (26.2 - 23N301) - com.apple.CoreSimulator.SimRuntime.xrOS-26-2
+visionOS 26.4 (26.4.1 - 23O249a) - com.apple.CoreSimulator.SimRuntime.xrOS-26-4
+visionOS 26.5 (26.5 - 23O470) - com.apple.CoreSimulator.SimRuntime.xrOS-26-5

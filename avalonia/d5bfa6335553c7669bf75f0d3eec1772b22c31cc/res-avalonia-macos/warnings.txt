@@ -1,0 +1,1 @@
+/Users/runner/work/benchmark/benchmark/spikes/avalonia/Spike.Ui/Ui.fs(462,21): warning FS0044: This construct is deprecated. Use the overload accepting BitmapEncoderOptions instead.

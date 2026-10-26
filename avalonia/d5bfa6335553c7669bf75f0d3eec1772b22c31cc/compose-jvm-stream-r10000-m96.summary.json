@@ -1,0 +1,138 @@
+{
+ "summary": {
+  "tag": "compose-jvm-stream-r10000-m96",
+  "stack": "compose-jvm",
+  "scenario": "stream",
+  "runs": 3,
+  "ok_runs": 0,
+  "oom_runs": 3,
+  "markers_ok": 0,
+  "agg": {
+   "fps_mean": null,
+   "frame_p50": null,
+   "frame_p95": null,
+   "frame_p99": null,
+   "frame_max": null,
+   "dropped_gt16_7": null,
+   "dropped_gt8_3": null,
+   "dropped_gt25": null,
+   "rss_kb_median": null,
+   "rss_kb_peak": null,
+   "pss_kb_median": null,
+   "pss_kb_peak": null,
+   "cpu_pct_core_mean": null,
+   "cpu_pct_core_peak_1s": null,
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": null,
+   "wall_s": null
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": -9,
+   "wall_s": 1.8037479819977307,
+   "markers": false,
+   "mem_failcnt": 144,
+   "mem_charged_peak_kb": 98304,
+   "oom_kills": 1,
+   "oom": true,
+   "window": "whole_run",
+   "rss_kb_median": 87384,
+   "rss_kb_peak": 137564,
+   "pss_kb_median": 83225,
+   "pss_kb_peak": 133393,
+   "pss_kb_first_quarter": 24485.0,
+   "pss_kb_last_quarter": 117817.0,
+   "cpu_pct_core_mean": 167.89163469454544,
+   "cpu_pct_core_peak_1s": 176.75874927046132,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3416,
+     736
+    ],
+    [
+     1.1,
+     1.61,
+     97720,
+     93561
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": -9,
+   "wall_s": 2.2268530500005,
+   "markers": false,
+   "mem_failcnt": 667,
+   "mem_charged_peak_kb": 98304,
+   "oom_kills": 1,
+   "oom": true,
+   "window": "whole_run",
+   "rss_kb_median": 86816,
+   "rss_kb_peak": 137752,
+   "pss_kb_median": 82643,
+   "pss_kb_peak": 133549,
+   "pss_kb_first_quarter": 33696,
+   "pss_kb_last_quarter": 133033,
+   "cpu_pct_core_mean": 139.12077854964315,
+   "cpu_pct_core_peak_1s": 173.38894681776824,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3164,
+     861
+    ],
+    [
+     1.1,
+     1.54,
+     93556,
+     89383
+    ],
+    [
+     2.1,
+     2.93,
+     0,
+     0
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": -9,
+   "wall_s": 1.90084315799686,
+   "markers": false,
+   "mem_failcnt": 206,
+   "mem_charged_peak_kb": 98304,
+   "oom_kills": 1,
+   "oom": true,
+   "window": "whole_run",
+   "rss_kb_median": 90858.0,
+   "rss_kb_peak": 137668,
+   "pss_kb_median": 86746.0,
+   "pss_kb_peak": 133532,
+   "pss_kb_first_quarter": 23806.5,
+   "pss_kb_last_quarter": 132934.0,
+   "cpu_pct_core_mean": 157.68060036277592,
+   "cpu_pct_core_peak_1s": 189.99524037049522,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3416,
+     745
+    ],
+    [
+     1.1,
+     1.59,
+     97880,
+     93768
+    ]
+   ]
+  }
+ ]
+}

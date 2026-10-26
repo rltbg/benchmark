@@ -1,0 +1,45 @@
+{
+ "stack": "avalonia",
+ "platform": "web",
+ "status": "ok",
+ "build_seconds": 63.0,
+ "artifacts": [
+  {
+   "path": "work/web-jit/_framework/dotnet.native.8lliqvnjrx.wasm",
+   "bytes": 7472271,
+   "gzip": 2679689,
+   "brotli": null
+  },
+  {
+   "path": "work/web-jit",
+   "bytes": 26980722,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "work/web-aot/_framework/dotnet.native.lq789h6wp9.wasm",
+   "bytes": 26867367,
+   "gzip": 8152954,
+   "brotli": null
+  },
+  {
+   "path": "work/web-aot",
+   "bytes": 54774737,
+   "gzip": null,
+   "brotli": null
+  }
+ ],
+ "notes": [
+  "tete de plateforme : fsharp",
+  "builds : fsharp-jit rc=0 63s;aot-try rc=0 255s;",
+  "marqueurs : 12 lignes ; SPIKE:ready platform=web stack=avalonia core=fstar-extrait(F*>F#) SPIKE:selftest ok SPIKE:heavy ms=100 iters=66450 max_frame_gap_ms=119 ",
+  "fps canvas : 6,9,9,",
+  "mem : SPIKE:mem gc_heap_mb=9.6|SPIKE:mem gc_heap_mb=18.0 updates=988 canvas_frames=29|",
+  "variante run-aot : SPIKE:ready platform=web stack=avalonia core=fstar-extrait(F*>F#) SPIKE:selftest ok SPIKE:done   {\"ready_ms_from_navigation\":1481,\"done\":true,\"wall_ms\":12818,\"js_heap\":{\"used\":10738541,\"total\":13300825},\"cdp\":{\"Timestamp\":656.217809,\"AudioHandlers\":0,\"AudioWorkletProcessors\":0,\"Documents\":1,\"Frames\":1,\"JSEventListeners\":24,\"LayoutObjects\":6,\"MediaKeySessions\":0,\"MediaKeys\":0,\"Nodes\":29,\"Resources\":6,\"ContextLifecycleStateObservers\":5,\"V8PerContextDatas\":2,\"WorkerGlobalScopes\":0,\"UACSSResources\":0,\"RTCPeerConnections\":0,\"ResourceFetchers\":1,\"AdSubframes\":0,\"DetachedScriptStates\":0,\"ArrayBuff",
+  "web metrics : {\"ready_ms_from_navigation\":1693,\"done\":true,\"wall_ms\":12979,\"js_heap\":{\"used\":7672523,\"total\":13676895},\"cdp\":{\"Timestamp\":642.411927,\"AudioHandlers\":0,\"AudioWorkletProcessors\":0,\"Documents\":1,\"Frames\":1,\"JSEventListeners\":24,\"LayoutObjects\":6,\"MediaKeySessions\":0,\"MediaKeys\":0,\"Nodes\":29,\"Resources\":6,\"ContextLifecycleStateObservers\":5,\"V8PerContextDatas\":2,\"WorkerGlobalScopes\":0,\"UACSSResources\":0,\"RTCPeerConnections\":0,\"ResourceFetchers\":1,\"AdSubframes\":0,\"DetachedScriptStates\":0,\"ArrayBufferContents\":106,\"LayoutCount\":0,\"RecalcStyleCount\":0,\"LayoutDuration\":0,\"RecalcStyleDuration\":0,\"DevToolsCommandDuration\":0.000019,\"ScriptDuration\":0.003877,\"V8CompileDuration\":0,\"TaskDuration\":0.003945,\"TaskOtherDuration\":0.000049,\"ThreadTime\":0.003356,\"ProcessTime\":10.81,\"JSHeapUsedSize\":6931276,\"JSHeapTotalSize\":13078528,\"FirstMeaningfulPaint\":631.576081,\"DomContentLoaded\":629.850956,\"Navigation",
+  "emulateur/simulateur/rendu logiciel : pas des chiffres d'appareil"
+ ],
+ "runner": "Linux/X64",
+ "sha": "d5bfa6335553c7669bf75f0d3eec1772b22c31cc",
+ "date": "2026-10-26T16:15:17Z"
+}

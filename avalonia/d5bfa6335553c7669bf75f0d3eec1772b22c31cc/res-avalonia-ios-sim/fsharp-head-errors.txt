@@ -1,0 +1,1 @@
+/Users/runner/.dotnet/packs/Microsoft.iOS.Sdk.net10.0_26.5/26.5.10318/targets/Xamarin.Shared.Sdk.targets(1095,3): error : ILStrip failed for obj/Release/net10.0-ios/iossimulator-arm64/linked/FSharp.Core.dll: Object reference not set to an instance of an object.

@@ -1,0 +1,32 @@
+{
+ "stack": "avalonia",
+ "platform": "android",
+ "status": "ok",
+ "build_seconds": 61.0,
+ "artifacts": [
+  {
+   "path": "work/apk-x64.apk",
+   "bytes": 25609232,
+   "gzip": 25129195,
+   "brotli": null
+  },
+  {
+   "path": "work/apk-arm64.apk",
+   "bytes": 24249612,
+   "gzip": 23716384,
+   "brotli": null
+  }
+ ],
+ "notes": [
+  "tete de plateforme : fsharp",
+  "builds : fsharp-x64 rc=0 61s;fsharp-arm64 rc=0 49s;",
+  "marqueurs : 23 lignes ; SPIKE:ready platform=android stack=avalonia core=fstar-extrait(F*>F#) SPIKE:selftest ok SPIKE:startup_ms=2401 SPIKE:ready platform=android stack=avalonia core=fstar-extrait(F*>F#) SPIKE:selftest ok ",
+  "fps canvas : 5,5,7,",
+  "mem : SPIKE:mem workingset_mb=219.9 gc_heap_mb=23.3|SPIKE:mem workingset_mb=219.7 gc_heap_mb=23.3|SPIKE:mem workingset_mb=248.0 gc_heap_mb=34.6 updates=4517 canvas_frames=20|SPIKE:mem workingset_mb=248.0 gc_heap_mb=34.6 updates=0 canvas_frames=0|",
+  "exec : wall_s=20 ",
+  "emulateur/simulateur/rendu logiciel : pas des chiffres d'appareil"
+ ],
+ "runner": "Linux/X64",
+ "sha": "d5bfa6335553c7669bf75f0d3eec1772b22c31cc",
+ "date": "2026-10-26T16:13:17Z"
+}
