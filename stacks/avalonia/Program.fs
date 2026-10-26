@@ -284,7 +284,13 @@ type ShapesModel(cfg: ShapesCfg) =
     member val Sizes : float32[] = Array.init n (fun i -> 12.0f + float32 (fnv (i * 5 + 3) % 28u))
     member val Kinds : int[] = Array.init n (fun i -> i % 3)
     member _.Cfg = cfg
+    static member GraphValue(f: int) =
+        0.5f + 0.35f * float32 (Math.Sin(float f * 0.05)) + 0.1f * float32 (Math.Sin(float f * 0.31))
     member this.Reset() =
+        // historique de la polyligne pre-rempli (frames -10000..-1) : la courbe occupe toute la largeur des le debut
+        for k in 0 .. GRAPH_N - 1 do graph.[k] <- ShapesModel.GraphValue(k - GRAPH_N)
+        head <- 0
+        frame <- 0
         for i in 0 .. n - 1 do
             x.[i] <- float32 (fnv (i + 3) % uint32 cfg.AreaW)
             y.[i] <- float32 (fnv (i + 5) % uint32 cfg.AreaH)
@@ -304,8 +310,7 @@ type ShapesModel(cfg: ShapesCfg) =
             y.[i] <- ny
         if cfg.Graph then
             frame <- frame + 1
-            let v = 0.5f + 0.35f * float32 (Math.Sin(float frame * 0.05)) + 0.1f * float32 (Math.Sin(float frame * 0.31))
-            graph.[head] <- v
+            graph.[head] <- ShapesModel.GraphValue frame
             head <- (head + 1) % GRAPH_N
         cur <- (cur + 1) % 3
         let s = snaps.[cur]
@@ -878,6 +883,7 @@ type Driver(top: TopLevel, sc: Scenario, args: Args, notes: string, onFirstRende
     let gc = GcTracker()
     let mutable measuring = false
     let mutable finished = false
+    let mutable finishing = false
     let mutable startTs = 0L
     let mutable lastRaf = 0L
     let mutable lastRendered = 0L
@@ -963,7 +969,14 @@ type Driver(top: TopLevel, sc: Scenario, args: Args, notes: string, onFirstRende
                 let dt = float (now - lastRaf) / freq
                 lastRaf <- now
                 gc.Sample()
-                if t >= args.Duration then this.Finish()
+                if t >= args.Duration then
+                    // attendre la fin de rendu des batches deja commites (la derniere frame mesuree, p. ex. apres un long
+                    // blocage du thread UI) : commit vide (non compte) puis Finish a son Rendered
+                    if not finishing then
+                        finishing <- true
+                        let b = compositor.RequestCompositionBatchCommitAsync()
+                        b.Rendered.ContinueWith((fun (_: Task) -> Dispatcher.UIThread.Post(fun () -> this.Finish())), CancellationToken.None,
+                                                TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default) |> ignore
                 else
                     sc.Update(t, dt)
                     this.Track()
@@ -1086,7 +1099,7 @@ let buildWindow () : Window =
                 (tb :> Control), (fun () -> findScrollViewer tb), (fun () -> tb.Focus() |> ignore; tb.SelectAll()), "TextBox", tDoc
             else
                 let ed = AvaloniaEdit.TextEditor(IsReadOnly = true, WordWrap = true, FontSize = 14.0, ShowLineNumbers = false,
-                                                 FontFamily = FontFamily("Noto Sans"), Background = Brushes.White)
+                                                 FontFamily = FontFamily("Noto Sans, Noto Color Emoji"), Background = Brushes.White)
                 ed.Document <- AvaloniaEdit.Document.TextDocument(text)
                 let tDoc = Stopwatch.GetTimestamp()
                 // NB : TextEditor.ScrollToVerticalOffset est un no-op dans AvaloniaEdit 12.0.0 (corps commente) -> ScrollViewer du template

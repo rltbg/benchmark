@@ -3739,6 +3739,7 @@ dependencies = [
  "serde_json",
  "slint",
  "slint-build",
+ "x11rb",
 ]
 
 [[package]]

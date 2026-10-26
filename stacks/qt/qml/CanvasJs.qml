@@ -21,7 +21,7 @@ Canvas {
         for (var g = 0; g < 10000; g++) gr.push(50)
         App.registerItem("qmlcanvas", cv)
     }
-    Connections { target: bench; function onFrame() { cv.requestPaint() } }
+    Connections { target: App; function onFrame() { cv.requestPaint() } }
     onPaint: {
         var now = Date.now(), dt = Math.min(0.1, (now - last) / 1000); last = now
         var ctx = getContext("2d")

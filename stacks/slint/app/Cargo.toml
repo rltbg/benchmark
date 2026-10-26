@@ -14,6 +14,10 @@ slint = { version = "=1.18.1", default-features = false, features = [
 ] }
 image = { version = "=0.25.10", default-features = false, features = ["png"] }
 serde_json = "=1.0.154"
+# input : sans gestionnaire de fenêtres sous Xvfb, personne ne donne le focus clavier à la fenêtre
+# (winit ignore les touches tant qu'il n'a pas reçu FocusIn) -> SetInputFocus X11 explicite.
+# 0.13.2 = version déjà utilisée par winit 0.30.13 (0.14.0 existe ; évite deux copies)
+x11rb = "=0.13.2"
 # cœur C-ABI : crate rlib du dépôt (dépendance path relative, pas de staticlib -> une seule libstd)
 benchcore = { path = "../../../core" }
 

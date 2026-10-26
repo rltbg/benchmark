@@ -14,12 +14,9 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.text.BasicText
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.input.TextFieldState
-import androidx.compose.foundation.text.input.selectAll
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.ui.text.TextRange
+import androidx.compose.foundation.text.selection.SelectionContainer
+import androidx.compose.foundation.text.selection.SelectionState
+import androidx.compose.foundation.text.selection.rememberSelectionState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,34 +41,36 @@ import java.util.concurrent.atomic.AtomicInteger
 import java.util.concurrent.atomic.AtomicLong
 
 // ---------------- TEXT ----------------
-class TextSc(val scroll: ScrollState, val tf: TextFieldState, val lines: Int, val loadMs: Double) : Sc {
+class TextSc(val state: LazyListState, val sel: SelectionState, val lines: List<String>, val loadMs: Double) : Sc {
     var offset = 0.0
     var selected = false
     var selectAllMs = -1.0
-    override suspend fun reset() { scroll.scrollTo(0); offset = 0.0; selected = false; tf.edit { selection = TextRange.Zero } }
+    override suspend fun reset() { state.scrollToItem(0); offset = 0.0; selected = false; sel.clear() }
     override suspend fun step(t: Double, dt: Double) {
         // aller-retour 3000 px/s, demi-période 5 s
         val dir = if (((t / 5.0).toInt()) % 2 == 0) 1f else -1f
-        offset += scroll.scrollPx(dir * 3000f * dt.toFloat())
+        offset += state.scrollPx(dir * 3000f * dt.toFloat())
         if (!selected && t >= 5.0) {
             val s = System.nanoTime()
-            tf.edit { selectAll() }   // TextFieldBuffer.selectAll() : API publique
+            sel.selectAll()     // SelectionState.selectAll() : API publique (Compose 1.12)
             selectAllMs = (System.nanoTime() - s) / 1e6
             selected = true
         }
     }
     override fun finish(run: Run) {
-        run.ops["lines"] = lines
-        run.ops["chars"] = tf.text.length
+        run.ops["lines"] = lines.size
         run.ops["final_offset"] = Math.round(offset)
-        run.ops["scroll_max_px"] = scroll.maxValue
         run.ops["load_ms"] = loadMs
-        run.ops["select_all"] = if (selected) "done at t=5s via TextFieldState.edit { selectAll() }, selection=${tf.selection}" else "not reached (duration < 5 s)"
+        val selChars = sel.selectedTexts.sumOf { it.length }
+        run.ops["select_all"] = if (selected) "partial: SelectionState.selectAll() at t=5s selects only composed LazyColumn items (documented)" else "not reached (duration < 5 s)"
+        run.ops["select_all_selected_chars"] = selChars
         run.ops["select_all_call_ms"] = selectAllMs
-        run.notes = FRAME_NOTE + " text: the whole 1 MB file in ONE read-only BasicTextField(TextFieldState, readOnly=true) (selectable, " +
-            "multi-line, own ScrollState); scripted scroll via scrollState.scroll{scrollBy}; select-all at t=5 s with TextFieldState.edit{selectAll()}. " +
-            "time_to_first_display_ms = JVM start -> end of the first frame showing the text; layout_ms = composition start -> first onTextLayout result " +
-            "(full-text layout of 1 MB, single paragraph layout)."
+        run.notes = FRAME_NOTE + " text: 1 MB split into ${lines.size} lines (paragraphs) in a LazyColumn (key=index) inside " +
+            "SelectionContainer(rememberSelectionState()); scripted scroll via scroll{scrollBy}. Select-all at t=5 s via the public " +
+            "SelectionState.selectAll(): per the API doc, texts of non-composed lazy items are not included, so only the composed " +
+            "lines get selected (select_all_selected_chars). A single read-only BasicTextField holding the whole 1 MB was tried first: " +
+            "its layout (SkParagraph _nLayout on the UI thread) did not finish within 60 s (logs), so it is not usable here. " +
+            "time_to_first_display_ms = JVM start -> after the present of the first frame with text; layout_ms = composition start -> first frame."
     }
 }
 
@@ -80,39 +79,38 @@ fun TextScenario(run: Run) {
     val t0 = remember { System.nanoTime() }
     val loaded = remember {
         val s = System.nanoTime()
-        val txt = File(run.args.assets, "text1mb.txt").readText()
-        Triple(txt, txt.count { it == '\n' }, (System.nanoTime() - s) / 1e6)
+        val l = File(run.args.assets, "text1mb.txt").readText().split('\n')
+        l to (System.nanoTime() - s) / 1e6
     }
-    val tf = remember { TextFieldState(loaded.first) }
-    val scroll = rememberScrollState()
-    val sc = remember { TextSc(scroll, tf, loaded.second, loaded.third) }
-    var laidOut by remember { mutableStateOf(false) }
-    LaunchedEffect(laidOut) {
-        if (laidOut && !run.ops.containsKey("time_to_first_display_ms")) {
-            withFrameNanos { }
-            java.awt.EventQueue.invokeLater {
-                run.ops["time_to_first_display_ms"] = (System.currentTimeMillis() - java.lang.management.ManagementFactory.getRuntimeMXBean().startTime).toDouble()
-            }
+    val lines = loaded.first
+    val state = rememberLazyListState()
+    val sel = rememberSelectionState()
+    val sc = remember { TextSc(state, sel, lines, loaded.second) }
+    LaunchedEffect(Unit) {
+        withFrameNanos { }
+        run.ops["layout_ms"] = (System.nanoTime() - t0) / 1e6
+        java.awt.EventQueue.invokeLater {
+            run.ops["time_to_first_display_ms"] = (System.currentTimeMillis() - java.lang.management.ManagementFactory.getRuntimeMXBean().startTime).toDouble()
         }
     }
     FrameLoop(run, sc)
     Shell {
-        BasicTextField(
-            state = tf, readOnly = true, modifier = Modifier.fillMaxSize().padding(horizontal = 8.dp),
-            textStyle = TextStyle(color = Color(0xFFE0E0E0), fontSize = 14.sp),
-            scrollState = scroll,
-            onTextLayout = { get ->
-                if (!laidOut && get() != null) { run.ops["layout_ms"] = (System.nanoTime() - t0) / 1e6; laidOut = true }
+        SelectionContainer(sel) {
+            LazyColumn(Modifier.fillMaxSize(), state = state) {
+                items(lines.size, key = { it }, contentType = { 0 }) { i ->
+                    BasicText(lines[i], style = textStyle, modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp))
+                }
             }
-        )
+        }
     }
 }
+
+private val textStyle = TextStyle(color = Color(0xFFE0E0E0), fontSize = 14.sp)
 
 // ---------------- IMAGES ----------------
 class ImageCache(val dir: File) {
     val states = Array(600) { mutableStateOf<ImageBitmap?>(null) }
     val decoded = AtomicInteger(); val decodeNs = AtomicLong()
-    @Volatile var wallMs = -1.0
     fun decode(i: Int) {
         val t = System.nanoTime()
         val img = SkImage.makeFromEncoded(File(dir, "img%03d.png".format(i)).readBytes())
@@ -126,17 +124,17 @@ class ImageCache(val dir: File) {
         decodeNs.addAndGet(System.nanoTime() - t); decoded.incrementAndGet()
         states[i].value = bm   // écriture de snapshot state depuis un thread de fond (snapshot global, thread-safe)
     }
-    fun startAll(scope: CoroutineScope) {
-        val t0 = System.nanoTime()
-        val pool = Dispatchers.Default.limitedParallelism(2)
-        val jobs = (0 until 600).map { i -> scope.launch(pool) { decode(i) } }
-        scope.launch { jobs.joinAll(); wallMs = (System.nanoTime() - t0) / 1e6 }
+    private val requested = java.util.concurrent.atomic.AtomicIntegerArray(600)
+    private val pool = Dispatchers.Default.limitedParallelism(2)
+    /** Décodage à la demande (item composé), une seule fois par image, sur 2 threads de fond ; non annulé si l'item sort de l'écran. */
+    fun request(i: Int, scope: CoroutineScope) {
+        if (states[i].value == null && requested.compareAndSet(i, 0, 1)) scope.launch(pool) { decode(i) }
     }
 }
 
 class ImagesSc(val grid: LazyGridState, val cache: ImageCache, val zoom: MutableFloatState, val pan: MutableFloatState, val scope: CoroutineScope) : Sc {
     var offset = 0.0
-    override suspend fun reset() { grid.scrollToItem(0); offset = 0.0; cache.startAll(scope) }
+    override suspend fun reset() { grid.scrollToItem(0); offset = 0.0 }
     override suspend fun step(t: Double, dt: Double) {
         val dir = if (((t / 3.0).toInt()) % 2 == 0) 1f else -1f   // aller-retour sur la grille
         offset += grid.scrollPx(dir * 3000f * dt.toFloat())
@@ -147,13 +145,13 @@ class ImagesSc(val grid: LazyGridState, val cache: ImageCache, val zoom: Mutable
     override fun finish(run: Run) {
         run.ops["images_decoded"] = cache.decoded.get()
         run.ops["decode_total_ms"] = cache.decodeNs.get() / 1e6
-        run.ops["decode_wall_ms"] = cache.wallMs
         run.ops["final_offset"] = Math.round(offset)
-        run.notes = FRAME_NOTE + " images: LazyVerticalGrid 9 cols x 128dp (key=index, one contentType); all 600 PNGs decoded (Skia) and " +
-            "downscaled to 128x128 on 2 background threads (Dispatchers.Default.limitedParallelism(2)) starting at measure_start; bitmaps " +
+        run.notes = FRAME_NOTE + " images: LazyVerticalGrid 9 cols x 128dp (key=index, one contentType); each PNG decoded (Skia) and " +
+            "downscaled to 128x128 on demand when its item is first composed (warm-up included, same script), once, on 2 background threads " +
+            "(Dispatchers.Default.limitedParallelism(2)), placeholder until ready; bitmaps " +
             "set immutable (avoids a pixel copy per draw in SkiaBackedCanvas.drawImageRect -> Image.makeFromBitmap); Image() default " +
             "FilterQuality.Low (bilinear, no mipmaps); zoom 1->3->1 / 6 s + pan via one graphicsLayer (state read in the layer block: " +
-            "no recomposition). decode_total_ms = sum of per-image decode times; decode_wall_ms = wall time for all 600."
+            "no recomposition). images_decoded / decode_total_ms (sum of per-image decode times) cover the whole run incl. warm-up."
     }
 }
 
@@ -170,7 +168,10 @@ fun ImagesScenario(run: Run) {
         Box(Modifier.fillMaxSize().graphicsLayer { scaleX = zoom.floatValue; scaleY = zoom.floatValue; translationX = pan.floatValue; transformOrigin = TransformOrigin.Center }) {
             LazyVerticalGrid(GridCells.Fixed(9), Modifier.fillMaxSize().padding(horizontal = 40.dp), state = grid,
                 horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                items(600, key = { it }, contentType = { 0 }) { i -> Thumb(cache.states[i]) }
+                items(600, key = { it }, contentType = { 0 }) { i ->
+                    LaunchedEffect(i) { cache.request(i, scope) }
+                    Thumb(cache.states[i])
+                }
             }
         }
     }

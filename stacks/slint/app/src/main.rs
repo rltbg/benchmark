@@ -126,13 +126,43 @@ pub struct Driver {
     sc: Scenario,
     unthrottled: bool,
     renderer: String,
+    focus_done: bool,
 }
 
 const WARMUP: f64 = 2.0;
 
 impl Driver {
+    /// Donne le focus clavier X11 à notre fenêtre (pas de WM sous Xvfb) : X envoie alors FocusIn,
+    /// winit marque la fenêtre active et transmet les KeyPress à Slint (chemin d'événements normal).
+    fn take_x11_focus(&mut self) {
+        use winit::raw_window_handle::{HasWindowHandle, RawWindowHandle};
+        let mut id: Option<u32> = None;
+        self.app.window().with_winit_window(|w: &winit::window::Window| {
+            if let Ok(h) = w.window_handle() {
+                id = match h.as_raw() {
+                    RawWindowHandle::Xlib(x) => Some(x.window as u32),
+                    RawWindowHandle::Xcb(x) => Some(x.window.get()),
+                    _ => None,
+                };
+            }
+        });
+        if let Some(win) = id {
+            use x11rb::connection::Connection;
+            use x11rb::protocol::xproto::{ConnectionExt, InputFocus};
+            if let Ok((conn, _)) = x11rb::connect(None) {
+                let _ = conn.set_input_focus(InputFocus::PARENT, win, x11rb::CURRENT_TIME);
+                let _ = conn.flush();
+                let _ = conn.get_input_focus().map(|c| c.reply()); // aller-retour : requête traitée
+            }
+        }
+        self.focus_done = true;
+    }
+
     fn tick(&mut self) {
         let now = Instant::now();
+        if self.drew && !self.focus_done && self.args.scenario == "input" {
+            self.take_x11_focus();
+        }
         if self.drew {
             self.drew = false;
             self.sc.on_frame_end(now, now.duration_since(self.draw_start));
@@ -224,7 +254,7 @@ fn main() {
     let rname = renderer.clone();
     let scen_is_nav = scen == "nav";
     DRIVER.with(|d| {
-        *d.borrow_mut() = Some(Driver { app, args, drew: false, draw_start: Instant::now(), start, t0: None, last_end: None, frame_ms: vec![], sc, unthrottled, renderer });
+        *d.borrow_mut() = Some(Driver { app, args, drew: false, draw_start: Instant::now(), start, t0: None, last_end: None, frame_ms: vec![], sc, unthrottled, renderer, focus_done: false });
     });
     if !animated {
         // idle : aucune animation ni redessin continu ; deux Timers mono-coup (début / fin de mesure)
