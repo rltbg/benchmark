@@ -1,1 +1,11 @@
 === 12:46:04 core impl=rust
+SUMMARY {"tag": "avalonia-aot-core-rust-core", "stack": "avalonia-aot-core-rust", "scenario": "core", "runs": 10, "ok_runs": 10, "oom_runs": 0, "markers_ok": 10, "agg": {"fps_mean": {"median": 48.986132178074826, "p95": 50.04808751428545, "min": 47.55091066410087, "max": 50.04808751428545, "n": 10},
+=== 12:48:54 core impl=fstar
+SUMMARY {"tag": "avalonia-aot-core-fstar-core", "stack": "avalonia-aot-core-fstar", "scenario": "core", "runs": 10, "ok_runs": 10, "oom_runs": 0, "markers_ok": 10, "agg": {"fps_mean": {"median": 49.53214474820164, "p95": 51.448067131034165, "min": 44.92234530865609, "max": 51.448067131034165, "n": 1
+=== 12:51:43 core impl=fsharp
+SUMMARY {"tag": "avalonia-aot-core-fsharp-core", "stack": "avalonia-aot-core-fsharp", "scenario": "core", "runs": 10, "ok_runs": 10, "oom_runs": 0, "markers_ok": 10, "agg": {"fps_mean": {"median": 49.646219683564624, "p95": 51.217793873668, "min": 48.668874224094864, "max": 51.217793873668, "n": 10}
+=== 12:54:33 stress impl=fstar
+SUMMARY {"tag": "avalonia-aot-fstar-stress", "stack": "avalonia-aot-fstar", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 7.240212331204783, "p95": 7.240212331204783, "min": 7.240212331204783, "max": 7.240212331204783, "n": 1}, "frame_p
+=== 13:04:37 stress impl=fsharp
+SUMMARY {"tag": "avalonia-aot-fsharp-stress", "stack": "avalonia-aot-fsharp", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 7.623311906516941, "p95": 7.623311906516941, "min": 7.623311906516941, "max": 7.623311906516941, "n": 1}, "frame
+=== CORE DONE 13:14:40
