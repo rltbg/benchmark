@@ -284,7 +284,7 @@ pub fn load_png(path: &std::path::Path) -> Option<SharedPixelBuffer<Rgba8Pixel>>
     let (w, h) = im.dimensions();
     Some(SharedPixelBuffer::<Rgba8Pixel>::clone_from_slice(im.as_raw(), w, h))
 }
-pub fn build_images(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, String> {
+pub fn build_images(args: &Args, app: &MainWindow, renderer: &str) -> Result<Box<dyn Scenario>, String> {
     let b = app.global::<Bench>();
     b.set_chrome(false);
     if args.has("big") {
@@ -302,7 +302,7 @@ pub fn build_images(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, 
         b.set_big_image(imgs[0].clone());
         b.set_scn("bigimage".into());
         let _ = t0;
-        return Ok(Box::new(ImagesSc { n: 1, big: Some(BigState { imgs, switch_at: args.duration / 2.0, cur: 0, load_ms }), decode_ms: 0.0, decoded: 2, renderer: String::new() }));
+        return Ok(Box::new(ImagesSc { n: 1, big: Some(BigState { imgs, switch_at: args.duration / 2.0, cur: 0, load_ms }), decode_ms: 0.0, decoded: 2, renderer: renderer.to_string() }));
     }
     let n = args.n_or(100) as usize;
     let nd = n.min(600);
@@ -370,7 +370,7 @@ pub fn build_images(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, 
     }
     b.set_imgs(ModelRc::from(Rc::new(VecModel::from(v))));
     b.set_scn("images".into());
-    Ok(Box::new(ImagesSc { n, big: None, decode_ms, decoded: ndec, renderer: String::new() }))
+    Ok(Box::new(ImagesSc { n, big: None, decode_ms, decoded: ndec, renderer: renderer.to_string() }))
 }
 impl Scenario for ImagesSc {
     fn step(&mut self, t: f64, app: &MainWindow, measuring: bool) {

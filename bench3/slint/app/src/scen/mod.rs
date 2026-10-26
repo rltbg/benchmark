@@ -58,7 +58,7 @@ pub fn build(args: &Args, app: &MainWindow, renderer: &str) -> Result<Box<dyn Sc
         "gfx-shapes" => gfx::build_shapes(args, app, renderer),
         "gfx-paths" => gfx::build_paths(args, app),
         "gfx-chart" => gfx::build_chart(args, app),
-        "gfx-images" => gfx::build_images(args, app),
+        "gfx-images" => gfx::build_images(args, app, renderer),
         "gfx-layers" => gfx::build_layers(args, app),
         "ui-tree" => uis::build_tree(args, app),
         "ui-bind" => uis::build_bind(args, app),
