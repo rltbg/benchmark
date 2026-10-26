@@ -1,0 +1,1 @@
+{"stack": "flutter", "scenario": "images", "toplevels_before": 0, "big_window_during": [{"w": 1280, "h": 720, "name": "\"benchapp\": (\"dev.bench.benchapp\" \"Dev.b"}], "toplevels_after": 0, "distinct_colors": 129406, "nonbackground_pct": 100.0, "pixels_changed_between_captures_pct": 100.0, "png": "/home/user/benchmark/results/verification/flutter-images.png"}

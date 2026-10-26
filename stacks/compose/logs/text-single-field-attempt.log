@@ -1,0 +1,12 @@
+# Tentative (abandonnée) : texte 1 Mo entier dans UN BasicTextField(TextFieldState, readOnly=true) — CMP 1.12.2, 2026-10-26
+# 1) xrun 8 s : timeout 68 s atteint, aucun marqueur BENCH:measure_start, pas de JSON.
+# 2) relance (timeout 400 s) : après >2 min, jstack du thread AWT-EventQueue-0 (extrait transcrit) :
+"AWT-EventQueue-0" ... runnable
+	at org.jetbrains.skia.paragraph.ParagraphKt._nLayout(Native Method)
+	at org.jetbrains.skia.paragraph.Paragraph.layout(Paragraph.kt:84)
+	at androidx.compose.ui.text.platform.ParagraphLayouter.layoutParagraph(ParagraphLayouter.skiko.kt:245)
+	at androidx.compose.ui.text.platform.SkiaParagraphIntrinsics.<init>(SkiaParagraphIntrinsics.skiko.kt:71)
+	at androidx.compose.ui.text.TextMeasurer.measure-xDpz5zY(TextMeasurer.kt:185)
+	at androidx.compose.foundation.text.input.internal.TextFieldLayoutStateCache.computeLayout(TextFieldLayoutStateCache.kt:309)
+	at androidx.compose.foundation.text.input.internal.TextFieldTextLayoutModifierNode.measure-3p2s80s(TextFieldTextLayoutModifier.kt:175)
+# Le processus a été tué manuellement (pas de résultat) ; implémentation retenue : LazyColumn + SelectionContainer(SelectionState).

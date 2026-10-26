@@ -100,6 +100,12 @@ class Scene extends ChangeNotifier {
       hasShadow[i] = (shadows && i % 10 == 0) ? 1 : 0;
       xforms[4 * i] = 1.0; // scos (scale 1, no rotation); ssin stays 0
     }
+    if (graph) {
+      // history pre-filled so that the polyline has its 10 000 real points from the first frame
+      for (var p = 0; p < graphPoints - 1; p++) {
+        _pushSample();
+      }
+    }
     if (!canvasDirect) _buildAtlas();
   }
 
@@ -168,6 +174,14 @@ class Scene extends ChangeNotifier {
     atlasBuildMs = sw0.elapsedMicroseconds / 1000.0;
   }
 
+  /// Appends the next sample (deterministic signal) to the 10 000-point ring.
+  void _pushSample() {
+    k++;
+    final v = 50.0 + 35.0 * m.sin(k * 0.031) + 10.0 * m.sin(k * 0.173) + (fnv(k) % 100) / 25.0;
+    ring[head] = v;
+    head = (head + 1) % graphPoints;
+  }
+
   void tick(double nowSec) {
     final dt = lastT == 0 ? 0.0 : (nowSec - lastT).clamp(0.0, 0.1);
     lastT = nowSec;
@@ -192,10 +206,7 @@ class Scene extends ChangeNotifier {
       y[i] = py;
     }
     if (graph) {
-      k++;
-      final v = 50.0 + 35.0 * m.sin(k * 0.031) + 10.0 * m.sin(k * 0.173) + (fnv(k) % 100) / 25.0;
-      ring[head] = v;
-      head = (head + 1) % graphPoints;
+      _pushSample();
       final step = gw / (graphPoints - 1);
       var j = 0;
       for (var p = 0; p < graphPoints; p++) {

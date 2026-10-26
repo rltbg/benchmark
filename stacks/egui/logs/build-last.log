@@ -328,3 +328,7 @@ warning: method `dir` is never used
 163 |     pub fn dir(&self) -> &str { &self.dir }
     |            ^^^
 
+warning: `egui_bench` (bin "egui_bench") generated 3 warnings
+    Finished `release` profile [optimized] target(s) in 8m 43s
+build_seconds=523
+-rwxr-xr-x 2 root root 20628776 Oct 26 02:13 target/release/egui_bench

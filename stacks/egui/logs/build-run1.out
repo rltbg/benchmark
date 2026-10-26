@@ -326,3 +326,30 @@ warning: method `dir` is never used
 163 |     pub fn dir(&self) -> &str { &self.dir }
     |            ^^^
 
+warning: `egui_bench` (bin "egui_bench") generated 3 warnings
+    Finished `release` profile [optimized] target(s) in 8m 43s
+build_seconds=523
+-rwxr-xr-x 2 root root 20628776 Oct 26 02:13 target/release/egui_bench
+	Command being timed: "./build.sh"
+	User time (seconds): 587.84
+	System time (seconds): 36.57
+	Percent of CPU this job got: 119%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 8:43.74
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 1010656
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 459
+	Minor (reclaiming a frame) page faults: 9483588
+	Voluntary context switches: 29830
+	Involuntary context switches: 251137
+	Swaps: 0
+	File system inputs: 89800
+	File system outputs: 3745496
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
