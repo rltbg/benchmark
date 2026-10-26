@@ -155,9 +155,12 @@ let titleOf (id: int) = "Item #" + id.ToString(inv)
 let quoteOf (id: int) = "Quote " + id.ToString(inv) + " — " + (float (fnv (id + 7) % 100000u) / 100.0).ToString("F2", inv)
 let subtitleStd (id: int) = let q = quoteOf id in q + "  " + q + "  " + q + "  " + q
 let priceOf (p: float) = p.ToString("F2", inv)
+/// 260 chaines pre-calculees (26 lettres x 10 chiffres) : aucun allocation par puce a chaque rebind
+let private puceTable : string[] =
+    Array.init 260 (fun v -> String([| char (int 'a' + v % 26); char (int '0' + v / 26) |]))
 let puceText (id: int) (k: int) =
     let h = fnv (id * 31 + k)
-    String([| char (int 'a' + int (h % 26u)); char (int '0' + int ((h >>> 8) % 10u)) |])
+    puceTable.[int (h % 26u) + 26 * int ((h >>> 8) % 10u)]
 
 // geometrie des cellules
 let STD_W_RESERVE = 110.0
@@ -489,6 +492,8 @@ type PanelListView(store0: RowStore, np: int) as this =
     let mutable offset = 0.0
     let mutable first = 0
     let mutable lastCount = 0
+    let mutable syncedW = -1.0
+    let mutable syncedH = -1.0
     do this.ClipToBounds <- true
     member _.Offset
         with get () = offset
@@ -498,9 +503,9 @@ type PanelListView(store0: RowStore, np: int) as this =
     member val RowsDrawn = 0L with get, set
     member val Rebinds = 0L with get, set
     member this.MaxOffset = max 0.0 (float store.Total - this.Bounds.Height)
-    override this.MeasureOverride(avail: Size) =
-        let h = if Double.IsInfinity avail.Height then 720.0 else avail.Height
-        let w = if Double.IsInfinity avail.Width then 1280.0 else avail.Width
+    /// Realise les lignes visibles (pool + rebind). Appele une fois par frame AVANT la passe de mise en page (le rebind invalide les
+    /// mesures des enfants : le faire dans MeasureOverride declenchait une 2e passe de mise en page par frame).
+    member this.Sync(w: float, h: float) =
         let need = int (Math.Ceiling(h / minH)) + 2
         if isNull pool then
             pool <- Array.init need (fun _ -> RowView(dense, np))
@@ -523,18 +528,28 @@ type PanelListView(store0: RowStore, np: int) as this =
             rv.Bind(id, pr, hh)
             slotPos.[slot] <- p
             rv.IsVisible <- true
-            rv.Measure(Size(w, hh))
             y <- y + hh
             p <- p + 1
             k <- k + 1
-        // lignes non utilisees : masquees
         for s in 0 .. pool.Length - 1 do
             let pp = slotPos.[s]
             if pp < first || pp >= p then
                 if pool.[s].IsVisible then pool.[s].IsVisible <- false
                 slotPos.[s] <- -1
         lastCount <- k
+        syncedW <- w
+        syncedH <- h
         this.RowsDrawn <- this.RowsDrawn + int64 k
+    member this.SyncNow() =
+        let b = this.Bounds
+        this.Sync((if b.Width > 0.0 then b.Width else 1280.0), (if b.Height > 0.0 then b.Height else 664.0))
+    override this.MeasureOverride(avail: Size) =
+        let h = if Double.IsInfinity avail.Height then 720.0 else avail.Height
+        let w = if Double.IsInfinity avail.Width then 1280.0 else avail.Width
+        if isNull pool || h <> syncedH || w <> syncedW then this.Sync(w, h)
+        for s in 0 .. pool.Length - 1 do
+            let pp = slotPos.[s]
+            if pp >= 0 then pool.[s].Measure(Size(w, float (store.Height pp)))
         Size(w, h)
     override this.ArrangeOverride(fin: Size) =
         if not (isNull pool) then

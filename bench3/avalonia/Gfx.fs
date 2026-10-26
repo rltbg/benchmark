@@ -388,7 +388,7 @@ type PathsScn(args: Args) =
     override _.Notes = "G2: N SKPath de 8 segments cubiques (largeur 2 px, AA), geometrie creee une fois, translation animee par chemin ; " + (if dashed then "SKPathEffect.CreateDash(8,4)." else "trait plein.")
 
 // ---------------------------------------------------------------- G4 : images
-type ImagesOp(bounds: Rect, imgs: SKImage[], n: int, t: float32, paint: SKPaint, bg: SKPaint) =
+type ImagesOp(bounds: Rect, imgs: SKImage[], n: int, t: float32, paint: SKPaint, bg: SKPaint, sampling: SKSamplingOptions) =
     interface ICustomDrawOperation with
         member _.Bounds = bounds
         member _.HitTest(_) = false
@@ -401,7 +401,6 @@ type ImagesOp(bounds: Rect, imgs: SKImage[], n: int, t: float32, paint: SKPaint,
                 use lease = f.Lease()
                 let c = lease.SkCanvas
                 c.DrawRect(0.0f, 0.0f, 1280.0f, 720.0f, bg)
-                let sampling = SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear)
                 for i in 0 .. n - 1 do
                     let img = imgs.[i % imgs.Length]
                     let fx = float32 (fnv (i * 7) % 1180u)
@@ -443,14 +442,14 @@ type ImagesBigOp(bounds: Rect, img: SKImage, t: float32, paint: SKPaint, bg: SKP
                 c.Restore()
             Stats.addRender (Stopwatch.GetTimestamp() - t0)
 
-type ImagesView(n: int, imgs: SKImage[], big: SKImage) as this =
+type ImagesView(n: int, imgs: SKImage[], big: SKImage, sampling: SKSamplingOptions) as this =
     inherit Control()
     let paint = new SKPaint(IsAntialias = true)
     let bg = new SKPaint(Color = SKColor(250uy, 250uy, 252uy))
     do this.ClipToBounds <- true
     member val T = 0.0f with get, set
     override this.Render(ctx: DrawingContext) =
-        if isNull big then ctx.Custom(new ImagesOp(Rect(0.0, 0.0, 1280.0, 720.0), imgs, n, this.T, paint, bg))
+        if isNull big then ctx.Custom(new ImagesOp(Rect(0.0, 0.0, 1280.0, 720.0), imgs, n, this.T, paint, bg, sampling))
         else ctx.Custom(new ImagesBigOp(Rect(0.0, 0.0, 1280.0, 720.0), big, this.T, paint, bg))
 
 type ImagesScn(args: Args) =
@@ -471,7 +470,10 @@ type ImagesScn(args: Args) =
             SKImage.FromBitmap bmp
         else null
     let decodeMs = ticksToMs (Stopwatch.GetTimestamp() - t0)
-    let view = ImagesView(n, imgs, big)
+    // echantillonnage : high = bilineaire + mipmaps (reduction nette), low = bilineaire seul (equivalent BitmapInterpolationMode.LowQuality)
+    let filter = args.Variant("filter", "high")
+    let sampling = if filter = "low" then SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.None) else SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear)
+    let view = ImagesView(n, imgs, big, sampling)
     let mutable sq : Square = null
     override _.Content = view :> Control
     override _.SetSquare(s) = sq <- s

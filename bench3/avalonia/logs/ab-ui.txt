@@ -29,3 +29,5 @@ G4 big 4096                                    rc=0 n=   55 fps=  6.8 p50= 158.8
 G4 big 8192                                    rc=0 n=   33 fps=  4.0 p50= 259.4 p99= 358.0 max= 358.0 gt25=  33 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=755.3 ui_stall_ms_max=16.0
 G5 n=4                                         rc=0 n=  491 fps= 61.2 p50=  16.3 p99=  22.3 max=  34.3 gt25=   3 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=46.5 ui_stall_ms_max=16.2
 G5 n=16                                        rc=0 n=  460 fps= 57.2 p50=  16.9 p99=  26.3 max=  37.3 gt25=   5 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=66.0 ui_stall_ms_max=12.2
+G5 blur n=4                                    rc=0 n=  213 fps= 26.4 p50=  35.5 p99=  53.7 max=  59.8 gt25= 213 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=88.7 ui_stall_ms_max=12.1
+G5 blur n=16                                   rc=0 n=   57 fps=  7.0 p50= 137.1 p99= 212.4 max= 212.4 gt25=  57 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=200.3 ui_stall_ms_max=9.9

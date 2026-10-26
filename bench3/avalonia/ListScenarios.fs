@@ -194,12 +194,15 @@ type ListScn(args: Args) =
         | "vsp" -> vspView.Scroll.Offset <- Vector(0.0, o)
         | _ ->
             panelView.Offset <- o
+            panelView.SyncNow()
             panelView.InvalidateMeasure()
     let refreshView () =
         match impl with
         | "canvas" -> canvasView.InvalidateVisual()
         | "vsp" -> if not (isNull vspList) then vspList.NotifyReset()
-        | _ -> panelView.InvalidateMeasure()
+        | _ ->
+            panelView.SyncNow()
+            panelView.InvalidateMeasure()
     let setStore (s: RowStore) =
         store <- s
         match impl with
