@@ -1,0 +1,14 @@
+    [INFO] please ensure to have GNU patch installed as `patch`. Otherwise update may fail silently (since it can't remove files).
+
+default (at https://opam.ocaml.org): 
+    [WARNING] opam >= 2.5.2 includes important security fixes; please consider upgrading (https://opam.ocaml.org/doc/Install.html)
+
+-> retrieved ocaml-config.2  (2 extra sources)
+-> installed ocaml-config.2
+-> installed ocaml.4.14.1
+Done.
+# Run eval $(opam env --switch=krml) to update the current shell environment
+
+real	0m27.125s
+user	0m15.567s
+sys	0m6.346s

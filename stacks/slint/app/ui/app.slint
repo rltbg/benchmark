@@ -1,0 +1,283 @@
+import { TextEdit } from "std-widgets.slint";
+
+export struct ImgData { img: image, loaded: bool }
+export struct RowData { y: length, h: length, title: string, sub: string, price: string, color: color }
+export struct ShapeData { x: length, y: length, w: length, r: length, c1: color, c2: color, shadow: bool }
+
+component Row inherits Rectangle {
+    in property <RowData> d;
+    y: d.y;
+    height: d.h;
+    background: d.h > 0px ? #ffffff : transparent;
+    Rectangle {
+        x: 12px;
+        y: (parent.height - 32px) / 2;
+        width: 32px;
+        height: 32px;
+        border-radius: 16px;
+        background: d.color;
+    }
+    Text {
+        x: 60px;
+        y: 6px;
+        width: parent.width - 60px - 130px;
+        text: d.title;
+        font-size: 16px;
+        font-weight: 700;
+        color: #202020;
+        overflow: elide;
+    }
+    Rectangle {
+        x: 60px;
+        y: 28px;
+        width: parent.width - 60px - 130px;
+        height: parent.height - 32px;
+        clip: true;
+        Text {
+            width: parent.width;
+            text: d.sub;
+            wrap: word-wrap;
+            vertical-alignment: top;
+            font-size: 12px;
+            color: #606060;
+        }
+    }
+    Text {
+        x: parent.width - 120px;
+        y: (parent.height - 20px) / 2;
+        width: 108px;
+        horizontal-alignment: right;
+        text: d.price;
+        font-size: 16px;
+        color: #107010;
+    }
+    Rectangle {
+        y: parent.height - 1px;
+        height: 1px;
+        background: #e0e0e0;
+    }
+}
+
+component RowList inherits Rectangle {
+    in property <[RowData]> rows;
+    in property <length> scroll-y;
+    clip: true;
+    background: #f4f4f4;
+    Rectangle {
+        y: -root.scroll-y;
+        width: parent.width;
+        for r in rows: Row {
+            d: r;
+            width: root.width;
+        }
+    }
+}
+
+component ShapeCanvas inherits Rectangle {
+    in property <[ShapeData]> shapes;
+    clip: true;
+    background: #1e2630;
+    border-radius: 12px;
+    for s in shapes: Rectangle {
+        x: s.x;
+        y: s.y;
+        width: s.w;
+        height: s.w;
+        border-radius: s.r;
+        background: @linear-gradient(90deg, s.c1, s.c2);
+        drop-shadow-blur: s.shadow ? 8px : 0px;
+        drop-shadow-offset-x: s.shadow ? 2px : 0px;
+        drop-shadow-offset-y: s.shadow ? 2px : 0px;
+        drop-shadow-color: #00000090;
+    }
+}
+
+component NavScreen inherits Rectangle {
+    in property <color> tint;
+    in property <string> label;
+    Text {
+        x: 20px;
+        y: 10px;
+        text: root.label;
+        font-size: 28px;
+        color: white;
+    }
+    for k in 12: Rectangle {
+        x: 20px;
+        y: 60px + k * 46px;
+        width: parent.width - 40px;
+        height: 40px;
+        border-radius: 6px;
+        background: #ffffff30;
+        Text {
+            x: 12px;
+            text: "Row " + k + " of " + root.label;
+            color: white;
+            font-size: 16px;
+        }
+    }
+    background: tint;
+}
+
+export component MainWindow inherits Window {
+    title: "slintapp";
+    width: 1280px;
+    height: 720px;
+    background: #f4f4f4;
+
+    in property <bool> chrome: true;
+    in property <bool> show-list: true;
+    in property <length> list-w: 1280px;
+    in property <bool> show-canvas: false;
+    in property <length> canvas-x: 10px;
+    in property <length> canvas-y: 5px;
+    in property <length> canvas-w: 1000px;
+    in property <length> canvas-h: 600px;
+    in property <bool> show-graph: false;
+    in property <string> graph;
+    in property <string> status: "ready";
+    in property <[RowData]> rows;
+    in property <length> scroll-y;
+    in property <[ShapeData]> shapes;
+
+    // text scenario
+    in property <bool> show-text: false;
+    in property <string> big-text;
+    in-out property <length> text-y <=> te.content-y;
+    out property <length> text-content-h <=> te.content-height;
+    out property <length> text-visible-h <=> te.visible-height;
+    public function select-all() {
+        te.select-all();
+    }
+    // images scenario
+    in property <bool> show-images: false;
+    in property <[ImgData]> images;
+    in property <float> zoom: 1;
+    in property <length> pan-x;
+    in property <length> pan-y;
+    // nav scenario
+    in property <bool> show-nav: false;
+    in property <int> screen: 0;
+    in property <bool> modal: false;
+
+    if root.chrome: Rectangle {
+        x: 0;
+        y: 0;
+        width: parent.width;
+        height: 36px;
+        background: #2b3a55;
+        Text {
+            x: 12px;
+            text: "slintapp - benchmark";
+            color: white;
+            font-size: 16px;
+            vertical-alignment: center;
+        }
+    }
+    if root.chrome: Rectangle {
+        x: 0;
+        y: parent.height - 24px;
+        width: parent.width;
+        height: 24px;
+        background: #dde2ea;
+        Text {
+            x: 12px;
+            text: root.status;
+            font-size: 12px;
+            vertical-alignment: center;
+        }
+    }
+    if root.show-list: RowList {
+        x: 0;
+        y: root.chrome ? 36px : 0px;
+        width: root.list-w;
+        height: root.chrome ? root.height - 60px : root.height;
+        rows: root.rows;
+        scroll-y: root.scroll-y;
+    }
+    if root.show-canvas: ShapeCanvas {
+        x: root.canvas-x;
+        y: root.canvas-y;
+        width: root.canvas-w;
+        height: root.canvas-h;
+        shapes: root.shapes;
+    }
+    if root.show-graph: Rectangle {
+        x: root.canvas-x;
+        y: root.canvas-y + root.canvas-h + 5px;
+        width: 1000px;
+        height: 100px;
+        background: #101418;
+        clip: true;
+        Path {
+            width: 1000px;
+            height: 100px;
+            viewbox-width: 1000;
+            viewbox-height: 100;
+            commands: root.graph;
+            stroke: #40e080;
+            stroke-width: 1px;
+        }
+    }
+
+    te := TextEdit {
+        visible: root.show-text;
+        y: 36px;
+        width: root.width;
+        height: root.height - 60px;
+        read-only: true;
+        text: root.big-text;
+        wrap: word-wrap;
+        font-size: 14px;
+    }
+    if root.show-images: Rectangle {
+        y: 36px;
+        height: root.height - 60px;
+        width: root.width;
+        clip: true;
+        background: #202020;
+        for d[i] in root.images: Rectangle {
+            x: mod(i, 9) * 136px * root.zoom + 4px * root.zoom - root.pan-x;
+            y: floor(i / 9) * 136px * root.zoom + 4px * root.zoom - root.pan-y;
+            width: 128px * root.zoom;
+            height: 128px * root.zoom;
+            background: #404040;
+            if d.loaded: Image {
+                source: d.img;
+                width: parent.width;
+                height: parent.height;
+                image-fit: fill;
+            }
+        }
+    }
+    if root.show-nav: Rectangle {
+        y: 36px;
+        height: root.height - 60px;
+        width: root.width;
+        clip: true;
+        for c[i] in 3: NavScreen {
+            x: (i - root.screen) * root.width;
+            width: root.width;
+            height: parent.height;
+            animate x { duration: 300ms; easing: ease-in-out; }
+            tint: i == 0 ? #3b5b92 : (i == 1 ? #7a3b92 : #3b926a);
+            label: "Screen " + i;
+        }
+        Rectangle {
+            opacity: root.modal ? 1.0 : 0.0;
+            animate opacity { duration: 200ms; }
+            background: #00000080;
+            Rectangle {
+                width: 500px;
+                height: 300px;
+                border-radius: 12px;
+                background: white;
+                Text {
+                    text: "Modal dialog";
+                    color: #202020;
+                    font-size: 24px;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,25 @@
+Sun Oct 25 17:32:42 UTC 2026
+zarith              (version: 1.13)
+zarith.top          (version: 1.13)
+---
+libbatteries-ocaml-dev - Batteries included: OCaml development platform - development files
+libbatteries-ocaml-doc - Batteries included - OCaml development platform - documentation
+libcamlimages-ocaml - OCaml image processing library (Runtime library)
+libcamlimages-ocaml-dev - OCaml image processing library (Development package)
+libcpu-ocaml - Pin current process to given core number (runtime)
+libcpu-ocaml-dev - Pin current process to given core number (development)
+libfileutils-ocaml-dev - File manipulation for OCaml
+libnproc-ocaml-dev - process pool implementation for OCaml
+libpprint-ocaml - Pretty printing toolbox for OCaml (runtime files)
+libpprint-ocaml-dev - Pretty printing toolbox for OCaml (dev files)
+libppx-derivers-ocaml-dev - interoperability of ppx-deriving and ppx-type-conv
+libppx-deriving-ocaml - type-driven code generation for OCaml (runtime files)
+libppx-deriving-ocaml-dev - type-driven code generation for OCaml (dev files)
+libppx-deriving-yojson-ocaml-dev - OCaml syntax extension for JSON serialization
+libppx-visitors-ocaml-dev - OCaml syntax extension for object-oriented visitors
+libppx-visitors-ocaml-doc - Documentation of the visitors syntax extension for OCaml
+libsedlex-ocaml - Unicode-friendly lexer generator for OCaml (Runtime library)
+libsedlex-ocaml-dev - Unicode-friendly lexer generator for OCaml (Development package)
+libyojson-ocaml - JSON library for OCaml - runtime package
+libyojson-ocaml-dev - JSON library for OCaml - development package
+ocaml-batteries-included - Batteries included: OCaml development platform - metapackage

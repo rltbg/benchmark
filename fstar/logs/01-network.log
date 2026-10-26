@@ -1,0 +1,12 @@
+https://github.com/FStarLang/FStar/releases -> 403
+https://api.github.com/repos/FStarLang/FStar/releases/latest -> 403
+https://objects.githubusercontent.com -> 404
+https://release-assets.githubusercontent.com -> 404
+https://dot.net/v1/dotnet-install.sh -> 000
+https://builds.dotnet.microsoft.com -> 000
+https://dotnetcli.azureedge.net -> 000
+https://api.nuget.org/v3/index.json -> 200
+https://opam.ocaml.org -> 000
+https://github.com/Z3Prover/z3/releases -> 403
+https://raw.githubusercontent.com/FStarLang/FStar/master/README.md -> 200
+https://ci.dot.net -> 000

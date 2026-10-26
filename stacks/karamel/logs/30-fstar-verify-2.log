@@ -1,0 +1,17 @@
+* Error 12 at Core_Low.fst(104,33-104,38):
+  - Expected type bytes but 102uy has type FStar.UInt8.t
+* Warning 241 at /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/krmllib/Spec.Loops.fst(0,0-0,0):
+  - Unable to load /home/user/eval/stacks/karamel/cache/Spec.Loops.fst.checked
+    since checked file
+    /home/user/eval/stacks/karamel/cache/Spec.Loops.fst.checked does not exist;
+    will recheck
+    /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/krmllib/Spec.Loops.fst
+    (suppressing this warning for further modules)
+* Warning 328 at /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/krmllib/Spec.Loops.fst(47,8-47,19):
+  - Global binding
+        'Spec.Loops.repeat_base'
+    is recursive but not used in its body
+1 error was reported (see above)
+real	0m2.690s
+user	0m2.242s
+sys	0m0.126s

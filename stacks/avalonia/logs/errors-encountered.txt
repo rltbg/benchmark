@@ -1,0 +1,27 @@
+Erreurs/ecarts exacts rencontres pendant la mise au point (Avalonia 12.1.4, F#, .NET SDK 10.0.113)
+
+1. warning NU1504 (restore) : Duplicate 'PackageReference' items found ... FSharp.Core 10.0.113, FSharp.Core 10.1.402
+   -> FSharp.Core est reference implicitement par le SDK F# (10.0.113) ; PackageReference explicite supprime.
+
+2. error FS0859: No abstract property was found that corresponds to this override   (implementation de IRenderTimer.Tick / RunsInBackground)
+   error FS0509: Method or object constructor 'DefaultRenderTimer' not found ; error FS0855: No abstract or interface member was found...
+   Cause : IRenderTimer / DefaultRenderTimer / SleepLoopRenderTimer sont [PrivateApi] en Avalonia 12 : retires des assemblies de reference (ref/).
+   -> <AvaloniaAccessUnstablePrivateApis>true</AvaloniaAccessUnstablePrivateApis> (compile contre lib/), emet
+      warning AVA3001: AvaloniaAccessUnstablePrivateApis is Enabled: ...
+
+3. error FS0039: The type 'AvaloniaLocator' does not define the field, constructor or member 'CurrentMutable'  (idem : API privee)
+   error FS0039: The value, namespace, type or module 'SystemDecorations' is not defined  -> remplace par WindowDecorations (warning FS0044 deprecated)
+
+4. Execution : System.InvalidOperationException: No text shaping system configured. Consider calling UseHarfBuzz().
+      at Avalonia.AppBuilder.Setup() ...
+   -> PackageReference Avalonia.HarfBuzz 12.1.4 + .UseHarfBuzz()
+
+5. Le timer de rendu X11 est SleepLoopRenderTimer(60) cree DANS AvaloniaX11Platform ctor, puis Compositor cree immediatement :
+   lier IRenderTimer/IRenderLoop via AppBuilder.With / AfterPlatformServicesSetup n'a AUCUN effet (StartCore jamais appele ; mesure 60 FPS).
+   -> reflexion sur DefaultRenderLoop.Timer (internal) pour fixer SleepLoopRenderTimer.DesiredFps = 100000 (voir uncapRenderTimer).
+   Trim warning AOT : ILC : Trim analysis warning IL2075: AvaloniaBench.uncapRenderTimer(): 'this' argument does not satisfy 'DynamicallyAccessedMemberTypes.PublicProperties',
+   'DynamicallyAccessedMemberTypes.NonPublicProperties' in call to 'System.Type.GetProperty(String,BindingFlags)'. ...
+   -> [DynamicDependency("Timer","Avalonia.Rendering.DefaultRenderLoop","Avalonia.Base")] + UnconditionalSuppressMessage IL2075 ; fonctionne en AOT (verifie).
+
+6. Build-time : av-build-tel-api-v1.avaloniaui.net:443 connect_rejected (telemetrie du package Avalonia.BuildServices 11.3.2, hote bloque).
+   Sans effet sur le build ; AVALONIA_TELEMETRY_OPTOUT=1 exporte dans build.sh.

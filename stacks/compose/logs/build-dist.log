@@ -1,0 +1,38 @@
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=44019 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes=
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :checkRuntime
+> Task :checkKotlinGradlePluginConfigurationErrors
+> Task :processResources NO-SOURCE
+> Task :createRuntimeImage
+> Task :prepareAppResources NO-SOURCE
+> Task :unpackDefaultComposeDesktopJvmApplicationResources
+
+> Task :compileKotlin
+w: file:///home/user/eval/stacks/compose/src/main/kotlin/bench/Main.kt:41:64 Variable 'measureStart' is assigned but never accessed
+w: file:///home/user/eval/stacks/compose/src/main/kotlin/bench/Main.kt:45:63 The value 'now' assigned to 'var measureStart: Long defined in bench.FrameLoop.`<anonymous>`' is never used
+w: file:///home/user/eval/stacks/compose/src/main/kotlin/bench/Main.kt:47:69 The value 'now' assigned to 'var measureStart: Long defined in bench.FrameLoop.`<anonymous>`' is never used
+w: file:///home/user/eval/stacks/compose/src/main/kotlin/bench/OtherScn.kt:189:73 'with(ExitTransition): ContentTransform' is deprecated. Infix fun EnterTransition.with(ExitTransition) has been renamed to togetherWith
+w: file:///home/user/eval/stacks/compose/src/main/kotlin/bench/OtherScn.kt:190:62 'with(ExitTransition): ContentTransform' is deprecated. Infix fun EnterTransition.with(ExitTransition) has been renamed to togetherWith
+
+> Task :compileJava NO-SOURCE
+> Task :classes UP-TO-DATE
+> Task :jar
+
+> Task :createDistributable
+The distribution is written to /home/user/eval/stacks/compose/build/compose/binaries/main/app
+
+[Incubating] Problems report is available at: file:///home/user/eval/stacks/compose/build/reports/problems/problems-report.html
+
+Deprecated Gradle features were used in this build, making it incompatible with Gradle 9.0.
+
+You can use '--warning-mode all' to show the individual deprecation warnings and determine if they come from your own scripts or plugins.
+
+For more on this, please refer to https://docs.gradle.org/8.14.3/userguide/command_line_interface.html#sec:command_line_warnings in the Gradle documentation.
+
+BUILD SUCCESSFUL in 41s
+7 actionable tasks: 7 executed
+
+real	0m41.656s
+user	1m19.954s
+sys	0m3.487s

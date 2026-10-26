@@ -1,0 +1,17 @@
+   Compiling smallvec v1.16.4
+   Compiling euclid v0.22.14
+   Compiling harfrust v0.3.2
+   Compiling lyon_geom v1.0.20
+   Compiling lyon_path v1.0.19
+   Compiling half v2.7.1
+   Compiling kurbo v0.10.4
+   Compiling cosmic-text v0.15.0
+   Compiling iced_graphics v0.14.0
+   Compiling iced_tiny_skia v0.14.1
+   Compiling iced_program v0.14.0
+   Compiling iced_renderer v0.14.0
+   Compiling iced_widget v0.14.2
+   Compiling iced_winit v0.14.1
+   Compiling iced v0.14.0
+   Compiling iced_bench v0.1.0 (/home/user/eval/stacks/iced)
+    Finished `release` profile [optimized] target(s) in 16.05s

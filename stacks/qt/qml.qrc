@@ -1,0 +1,4 @@
+<RCC><qresource prefix="/">
+<file>qml/main.qml</file><file>qml/Shell.qml</file><file>qml/ListPane.qml</file><file>qml/TextPane.qml</file><file>qml/ImagesPane.qml</file>
+<file>qml/CanvasPane.qml</file><file>qml/CanvasJs.qml</file><file>qml/NavPane.qml</file><file>qml/Page.qml</file>
+</qresource></RCC>

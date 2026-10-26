@@ -1,0 +1,32 @@
+== 1. F* verify+extract
+All verification conditions discharged successfully
+== 2. krml (F*->C)
+== 3. gcc -O2 -> .o/.a/.so
+== 4. tests
+2634 verifications, 0 echec(s), 0 divergence(s) vs Rust
+2634 verifications, 0 echec(s), 0 divergence(s) vs Rust
+== 5. bench binaries
+bin:
+total 15220
+drwxr-xr-x  2 root root    4096 Oct 25 17:43 .
+drwxr-xr-x 20 root root    4096 Oct 25 21:30 ..
+-rwxr-xr-x  1 root root   16272 Oct 25 17:43 cb_kr_direct
+-rwxr-xr-x  1 root root   16408 Oct 25 17:43 cb_kr_shim
+-rwxr-xr-x  1 root root   16376 Oct 25 17:43 cb_kr_tu
+-rwxr-xr-x  1 root root 5146656 Oct 25 17:43 cb_rust
+-rwxr-xr-x  1 root root 5155272 Oct 25 17:43 test_core
+-rwxr-xr-x  1 root root 5215536 Oct 25 17:43 test_core_asan
+
+lib:
+total 40
+drwxr-xr-x  2 root root  4096 Oct 25 17:43 .
+drwxr-xr-x 20 root root  4096 Oct 25 21:30 ..
+-rw-r--r--  1 root root  1840 Oct 25 17:43 Core_Low.o
+-rw-r--r--  1 root root  1936 Oct 25 17:43 kr_shim.o
+-rw-r--r--  1 root root  2054 Oct 25 17:43 libcorelow.a
+-rwxr-xr-x  1 root root 15616 Oct 25 17:43 libcorelow.so
+-rw-r--r--  1 root root  4090 Oct 25 17:43 libcorelow_shim.a
+
+real	0m3.315s
+user	0m2.639s
+sys	0m0.431s

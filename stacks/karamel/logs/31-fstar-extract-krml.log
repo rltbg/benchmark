@@ -1,0 +1,24 @@
+Extracted module Core_Low
+Attempting to translate module Core_Low
+* Warning 247 at Core_Low.fst(0,0-0,0):
+  - Checked file /home/user/eval/stacks/karamel/cache/Core_Low.fst.checked was
+    not written.
+  - Reason:
+      checked file /home/user/eval/stacks/karamel/cache/C.Loops.fst.checked does
+      not exist
+* Warning 241 at /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/krmllib/Spec.Loops.fst(0,0-0,0):
+  - Unable to load /home/user/eval/stacks/karamel/cache/Spec.Loops.fst.checked
+    since checked file
+    /home/user/eval/stacks/karamel/cache/Spec.Loops.fst.checked does not exist;
+    will recheck
+    /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/krmllib/Spec.Loops.fst
+    (suppressing this warning for further modules)
+* Warning 328 at /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/krmllib/Spec.Loops.fst(47,8-47,19):
+  - Global binding
+        'Spec.Loops.repeat_base'
+    is recursive but not used in its body
+Verified module: Core_Low
+All verification conditions discharged successfully
+real	0m5.587s
+user	0m4.737s
+sys	0m0.287s

@@ -1,0 +1,11 @@
+Verified module: Core
+All verification conditions discharged successfully
+
+real	0m1.982s
+user	0m1.332s
+sys	0m0.629s
+F* 2025.03.25
+
+Verified module: Core
+All verification conditions discharged successfully
+TOTAL TIME 1833 ms: /home/user/fstar-aot/.fstar-root/bin/fstar.exe --query_stats Core.fst

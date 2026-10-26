@@ -1,0 +1,6 @@
+  209 Core_Low.fst
+   57 gen/Core_Low.c
+   23 gen/Core_Low.h
+   24 tests/kr_shim.c
+   62 tests/test_core.c
+  375 total

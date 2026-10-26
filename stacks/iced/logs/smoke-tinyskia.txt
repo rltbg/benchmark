@@ -1,0 +1,64 @@
+### [] list 8
+rc=0
+list frames 206 fps 25.681494613119504 p95 54.114 max 59.955
+{'sum_heights': 8799584, 'final_offset': 20601.667, 'rows_drawn': 1765, 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 38.291, 'redraw_start_interval_p95_ms': 54.12, 'frame_events': 208, 'frames_without_custom_draw': 1, 'custom_draws': 207}
+### [] stream 8 --rate 10000
+rc=0
+stream frames 219 fps 27.3506784092246 p95 49.26 max 58.867
+{'sum_heights': 8799584, 'final_offset': 20583.609, 'rows_drawn': 1870, 'updates_generated': 80056, 'updates_applied': 79759, 'updates_dropped': 0, 'updates_pending_at_end': 297, 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 35.514, 'redraw_start_interval_p95_ms': 49.243, 'frame_events': 221, 'frames_without_custom_draw': 1, 'custom_draws': 220}
+### [] canvas 8 --shapes 5000
+rc=0
+canvas frames 3 fps 0.21161381776156596 p95 9029.403 max 9029.403
+{'shapes': 5000, 'shadows': 500, 'graph_points': 10000, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 5147.362, 'redraw_start_interval_p95_ms': 5147.362, 'frame_events': 3, 'frames_without_custom_draw': 1, 'custom_draws': 4}
+### [] core 8
+rc=0
+core frames 129 fps 16.115671040926184 p95 59.632 max 1868.749
+{'shapes': 1000, 'shadows': 0, 'graph_points': 0, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'calls_per_s': 149501956, 'core_calls_total': 1196707840, 'heavy_calls': 8, 'max_frame_stall_ms': 1868.749, 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 34.966, 'redraw_start_interval_p95_ms': 59.631, 'frame_events': 129, 'frames_without_custom_draw': 1, 'custom_draws': 128}
+### [] stress 14
+rc=0
+stress frames 19 fps 1.188000370906221 p95 2275.822 max 2275.822
+{'sum_heights': 8799584, 'final_offset': 19618.558, 'rows_drawn': 153, 'updates_generated': 79957, 'updates_applied': 68581, 'updates_dropped': 0, 'updates_pending_at_end': 11376, 'shapes': 5000, 'shadows': 500, 'graph_points': 10000, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'calls_per_s': 151201216, 'core_calls_total': 2418200576, 'heavy_calls': 15, 'max_frame_stall_ms': 2275.822, 'heap_samples': [{'t': 10.2, 'managed_heap_kb': 13751, 'rss_kb': 28932}], 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 706.902, 'redraw_start_interval_p95_ms': 1649.855, 'frame_events': 19, 'frames_without_custom_draw': 1, 'custom_draws': 54}
+### [] text 8
+rc=0
+text frames 1315 fps 164.4431205626931 p95 9.421 max 47.148
+{'time_to_first_display_ms': 1788.1, 'layout_ms': 1654.639, 'lines': 9599, 'select_all': 'Action::SelectAll performed (t=5s)', 'wrapping': 'none', 'unchanged_frames_excluded': 530, 'redraw_start_interval_p50_ms': 4.131, 'redraw_start_interval_p95_ms': 5.722, 'frame_events': 1845, 'frames_without_custom_draw': 1845, 'custom_draws': 0}
+### [] images 8
+rc=0
+images frames 66 fps 8.124306818139853 p95 213.315 max 234.746
+{'images_decoded': 600, 'decode_total_ms': 1067.0, 'cells_drawn_last_frame': 30, 'decode_threads': 2, 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 114.782, 'redraw_start_interval_p95_ms': 213.307, 'frame_events': 66, 'frames_without_custom_draw': 1, 'custom_draws': 65}
+### [] nav 8
+rc=0
+nav frames 414 fps 51.70911747899317 p95 100.12 max 212.876
+{'transitions_done': 20, 'modals_done': 9, 'background_load': '1 thread de calcul', 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 7.328, 'redraw_start_interval_p95_ms': 101.061, 'frame_events': 414, 'frames_without_custom_draw': 269, 'custom_draws': 290}
+### [--full-damage] list 8
+rc=0
+list frames 1817 fps 227.02862634811524 p95 6.105 max 20.564
+{'sum_heights': 8799584, 'final_offset': 20642.025, 'rows_drawn': 15534, 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 4.118, 'redraw_start_interval_p95_ms': 6.086, 'frame_events': 1819, 'frames_without_custom_draw': 1, 'custom_draws': 1818}
+### [--full-damage] stream 8 --rate 10000
+rc=0
+stream frames 1665 fps 208.09916969056215 p95 7.165 max 13.157
+{'sum_heights': 8799584, 'final_offset': 20638.885, 'rows_drawn': 14241, 'updates_generated': 79996, 'updates_applied': 79953, 'updates_dropped': 0, 'updates_pending_at_end': 43, 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 4.393, 'redraw_start_interval_p95_ms': 7.184, 'frame_events': 1667, 'frames_without_custom_draw': 1, 'custom_draws': 1666}
+### [--full-damage] canvas 8 --shapes 5000
+rc=0
+canvas frames 35 fps 4.271779392618877 p95 304.243 max 352.737
+{'shapes': 5000, 'shadows': 500, 'graph_points': 10000, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 225.279, 'redraw_start_interval_p95_ms': 304.247, 'frame_events': 35, 'frames_without_custom_draw': 1, 'custom_draws': 68}
+### [--full-damage] core 8
+rc=0
+core frames 220 fps 27.445017338389704 p95 53.01 max 56.43
+{'shapes': 1000, 'shadows': 0, 'graph_points': 0, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'calls_per_s': 144318956, 'core_calls_total': 1156866048, 'heavy_calls': 8, 'max_frame_stall_ms': 56.43, 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 33.68, 'redraw_start_interval_p95_ms': 53.015, 'frame_events': 220, 'frames_without_custom_draw': 1, 'custom_draws': 219}
+### [--full-damage] stress 14
+rc=0
+stress frames 55 fps 3.9101087330145767 p95 310.669 max 325.59
+{'sum_heights': 8799584, 'final_offset': 19953.656, 'rows_drawn': 464, 'updates_generated': 70321, 'updates_applied': 68961, 'updates_dropped': 0, 'updates_pending_at_end': 1360, 'shapes': 5000, 'shadows': 500, 'graph_points': 10000, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'calls_per_s': 142791663, 'core_calls_total': 2008522752, 'heavy_calls': 13, 'max_frame_stall_ms': 325.59, 'heap_samples': [{'t': 10.1, 'managed_heap_kb': 13746, 'rss_kb': 29016}], 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 254.196, 'redraw_start_interval_p95_ms': 310.768, 'frame_events': 55, 'frames_without_custom_draw': 1, 'custom_draws': 162}
+### [--full-damage] text 8
+rc=0
+text frames 1025 fps 128.0400134410785 p95 13.445 max 22.786
+{'time_to_first_display_ms': 1905.0, 'layout_ms': 1726.003, 'lines': 9599, 'select_all': 'Action::SelectAll performed (t=5s)', 'wrapping': 'none', 'unchanged_frames_excluded': 124, 'redraw_start_interval_p50_ms': 7.291, 'redraw_start_interval_p95_ms': 11.647, 'frame_events': 1149, 'frames_without_custom_draw': 1149, 'custom_draws': 0}
+### [--full-damage] images 8
+rc=0
+images frames 410 fps 51.19577087969568 p95 26.996 max 61.664
+{'images_decoded': 600, 'decode_total_ms': 632.3, 'cells_drawn_last_frame': 24, 'decode_threads': 2, 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 18.825, 'redraw_start_interval_p95_ms': 26.996, 'frame_events': 410, 'frames_without_custom_draw': 1, 'custom_draws': 409}
+### [--full-damage] nav 8
+rc=0
+nav frames 803 fps 100.34361753361635 p95 14.257 max 20.587
+{'transitions_done': 20, 'modals_done': 9, 'background_load': '1 thread de calcul', 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 9.736, 'redraw_start_interval_p95_ms': 14.254, 'frame_events': 803, 'frames_without_custom_draw': 228, 'custom_draws': 1150}

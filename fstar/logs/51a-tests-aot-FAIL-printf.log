@@ -1,0 +1,11 @@
+Unhandled exception. System.NotSupportedException: 'Microsoft.FSharp.Core.PrintfImpl+Specializations`3[Microsoft.FSharp.Core.Unit,System.String,System.String].CaptureFinal1[System.Int32](Microsoft.FSharp.Core.PrintfImpl+Step[])' is missing native code. MethodInfo.MakeGenericMethod() is not compatible with AOT compilation. Inspect and fix AOT related warnings that were generated when the app was published. For more information see https://aka.ms/nativeaot-compatibility
+   at System.Reflection.Runtime.MethodInfos.RuntimeNamedMethodInfo`1.GetUncachedMethodInvoker(RuntimeTypeInfo[], MemberInfo) + 0x2a
+   at System.Reflection.Runtime.MethodInfos.RuntimeMethodInfo.Invoke(Object, BindingFlags, Binder, Object[], CultureInfo) + 0x3f
+   at Microsoft.FSharp.Core.PrintfImpl.FormatParser`4.buildCaptureFunc[a](PrintfImpl.FormatSpecifier, a, Type[], Type, Tuple`5) + 0x39b
+   at Microsoft.FSharp.Core.PrintfImpl.FormatParser`4.parseAndCreateFuncFactoryAux(FSharpList`1, String, Type, Int32&) + 0x134
+   at Microsoft.FSharp.Core.PrintfImpl.FormatParser`4.parseAndCreateFunctionFactory() + 0x72
+   at Microsoft.FSharp.Core.PrintfImpl.FormatParser`4.GetCurriedPrinterFactory() + 0x2e
+   at Microsoft.FSharp.Core.PrintfImpl.FormatParser`4.GetCurriedStringPrinter() + 0x2f
+   at Program.runTests() + 0x33d
+   at Program.main(String[] argv) + 0x2a0
+exit=134

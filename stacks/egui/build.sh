@@ -1,0 +1,11 @@
+#!/bin/sh
+# Build release de l'app egui.  ./build.sh        -> variante principale glow : target/release/egui_bench
+#                               ./build.sh wgpu   -> variante secondaire wgpu : target-wgpu/release/egui_bench
+cd "$(dirname "$0")" || exit 1
+mkdir -p logs
+export CARGO_BUILD_JOBS=2
+if [ "$1" = "wgpu" ]; then
+  /usr/bin/time -v cargo build --release --no-default-features --features wgpu --target-dir target-wgpu 2>&1 | tee logs/build-wgpu.log
+else
+  /usr/bin/time -v cargo build --release 2>&1 | tee logs/build.log
+fi

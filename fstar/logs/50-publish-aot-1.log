@@ -1,0 +1,17 @@
+  Determining projects to restore...
+  Restored /home/user/fstar-aot/fsproj/core/core.fsproj (in 4.09 sec).
+  Restored /home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj (in 4.09 sec).
+  Restored /home/user/fstar-aot/fsproj/app/app.fsproj (in 4.09 sec).
+/home/user/fstar-aot/fsproj/ulibfs/FStar_List_Tot_Base.fs(10,39): warning FS0044: This construct is deprecated. please use List.item [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/FStar_List_Tot_Base.fs(11,31): warning FS0044: This construct is deprecated. please use List.item [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+  ulibfs -> /home/user/fstar-aot/fsproj/ulibfs/bin/Release/net10.0/ulibfs.dll
+  core -> /home/user/fstar-aot/fsproj/core/bin/Release/net10.0/core.dll
+  app -> /home/user/fstar-aot/fsproj/app/bin/Release/net10.0/linux-x64/coreapp.dll
+  Generating native code
+/root/.nuget/packages/fsharp.core/10.0.113/lib/netstandard2.1/FSharp.Core.dll : warning IL3053: Assembly 'FSharp.Core' produced AOT analysis warnings. [/home/user/fstar-aot/fsproj/app/app.fsproj]
+/root/.nuget/packages/fsharp.core/10.0.113/lib/netstandard2.1/FSharp.Core.dll : warning IL2104: Assembly 'FSharp.Core' produced trim warnings. For more information see https://aka.ms/il2104 [/home/user/fstar-aot/fsproj/app/app.fsproj]
+  app -> /home/user/fstar-aot/aot-out/
+
+real	0m25.469s
+user	0m25.378s
+sys	0m4.688s

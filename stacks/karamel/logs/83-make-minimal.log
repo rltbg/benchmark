@@ -1,0 +1,6 @@
+dune build
+ln -sf _build/default/src/Karamel.exe krml
+
+real	0m12.358s
+user	0m25.721s
+sys	0m4.836s

@@ -1,0 +1,37 @@
+== ppxlib
+libppxlib-ocaml-dev - meta-programming for OCaml
+== fix
+== process
+== wasm
+== stdint
+== ctypes
+libctypes-ocaml - library for binding to C libraries using pure OCaml (runtime)
+libctypes-ocaml-dev - library for binding to C libraries using pure OCaml (dev)
+== visitors
+== ppx-deriving
+libppx-deriving-ocaml - type-driven code generation for OCaml (runtime files)
+libppx-deriving-ocaml-dev - type-driven code generation for OCaml (dev files)
+libppx-deriving-yojson-ocaml-dev - OCaml syntax extension for JSON serialization
+== ocaml-ppx-deriving
+== sedlex
+libsedlex-ocaml - Unicode-friendly lexer generator for OCaml (Runtime library)
+libsedlex-ocaml-dev - Unicode-friendly lexer generator for OCaml (Development package)
+== uucp
+libuucp-ocaml - access properties of Unicode characters (runtime files)
+libuucp-ocaml-dev - access properties of Unicode characters (dev files)
+== batteries
+libbatteries-ocaml-dev - Batteries included: OCaml development platform - development files
+libbatteries-ocaml-doc - Batteries included - OCaml development platform - documentation
+== yojson
+libyojson-ocaml - JSON library for OCaml - runtime package
+libyojson-ocaml-dev - JSON library for OCaml - development package
+camlmix - preprocessor which converts text with embedded OCaml
+camlp4 - Pre Processor Pretty Printer for OCaml
+camlp5 - Pre Processor Pretty Printer for OCaml - classical version
+libcamlimages-ocaml - OCaml image processing library (Runtime library)
+libcamlimages-ocaml-dev - OCaml image processing library (Development package)
+libcamlp4-ocaml-dev - Pre Processor Pretty Printer for OCaml (libraries)
+libcpu-ocaml - Pin current process to given core number (runtime)
+libcpu-ocaml-dev - Pin current process to given core number (development)
+libnproc-ocaml-dev - process pool implementation for OCaml
+libppxlib-ocaml-dev - meta-programming for OCaml

@@ -1,0 +1,21 @@
+File "lib/CFlatToWasm.ml", line 23, characters 21-41:
+23 | let string_of_name = W.Ast.string_of_name
+                          ^^^^^^^^^^^^^^^^^^^^
+Error: Unbound value W.Ast.string_of_name
+File "lib/DataTypes.ml", line 91, characters 10-19:
+91 |     F.lfp equations (lid, n)
+               ^^^^^^^^^
+Error: This expression has type
+         lident * int -> (lident * int -> bool) -> bool
+       but an expression was expected of type
+         (F.variable -> bool) -> F.variable -> bool
+       Type lident * int is not compatible with type F.variable -> bool 
+File "lib/Inlining.ml", line 524, characters 33-36:
+524 |     if not (Hashtbl.mem info_map lid) then
+                                       ^^^
+Error: This expression has type lident -> visibility
+       but an expression was expected of type lident = string list * string
+
+real	0m12.998s
+user	0m19.746s
+sys	0m3.559s

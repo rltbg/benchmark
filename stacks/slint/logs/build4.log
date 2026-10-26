@@ -1,0 +1,20 @@
+   Compiling slintapp v0.1.0 (/home/user/eval/stacks/slint/app)
+warning: fields `pos` and `last_t` are never read
+   --> src/sim.rs:379:5
+    |
+374 | struct ImagesSim {
+    |        --------- fields in this struct
+...
+379 |     pos: f64,
+    |     ^^^
+380 |     last_t: f64,
+    |     ^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `slintapp` (bin "slintapp") generated 1 warning
+    Finished `release` profile [optimized] target(s) in 2m 15s
+
+real	2m15.599s
+user	2m6.497s
+sys	0m4.056s

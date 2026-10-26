@@ -1,0 +1,6 @@
+* Error 168 at Core_Low.fst(97,8-97,8):
+  - Syntax error
+1 error was reported (see above)
+real	0m0.061s
+user	0m0.019s
+sys	0m0.019s

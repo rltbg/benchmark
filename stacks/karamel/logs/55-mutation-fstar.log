@@ -1,0 +1,6 @@
+## mutation F* : borne 64uy -> 65uy
+* Error 19 at Core_Low.fst(139,2-147,5):
+## mutation F* : prime FNV 16777619 -> 16777618 (la spec utilise la même constante -> doit passer ; seule hash_nat/vecteurs échouent)
+* Error 19 at Core_Low.fst(93,70-93,72):
+  - Could not prove post-condition
+  - Try with --query_stats to get more details

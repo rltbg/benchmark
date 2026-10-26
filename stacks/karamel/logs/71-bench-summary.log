@@ -1,0 +1,7 @@
+min / mediane / max (M triplets/s), 5 passes entrelacees, charge machine 7 sur 4 coeurs
+Rust  : 77.9 / 93.6 / 105.4
+Low* shim .a : 52.7 / 54.4 / 57.9
+Low* shim+C meme TU : 57.8 / 68.3 / 73.5
+Low* direct (.a) : M / M / M
+serie 1 (sans taskset), direct = 3e champ:
+73.8 75.3 79.8 87.1 94.9 

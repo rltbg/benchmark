@@ -1,0 +1,48 @@
+== cairo images
+	User time (seconds): 4.10
+	System time (seconds): 0.35
+	Maximum resident set size (kbytes): 245008
+frames 359 mean 16.70 p50 16.63 p95 20.82 max 30.94
+paint_phase_ms': {'max': 20.850113, 'mean': 9.511101052777782, 'n': 360, 'p50': 8.898979, 'p95': 14.369243}}
+== cairo core
+	User time (seconds): 16.12
+	System time (seconds): 0.15
+	Maximum resident set size (kbytes): 127088
+frames 316 mean 18.94 p50 18.61 p95 22.98 max 29.35
+paint_phase_ms': {'max': 29.260004, 'mean': 18.161947892744482, 'n': 317, 'p50': 17.681792, 'p95': 22.627701}, 'shapes': 1000}
+== ngl images
+	User time (seconds): 7.26
+	System time (seconds): 0.46
+	Maximum resident set size (kbytes): 333888
+frames 54 mean 113.79 p50 21.12 p95 440.89 max 735.77
+paint_phase_ms': {'max': 735.726435, 'mean': 108.37796685454546, 'n': 55, 'p50': 19.896142, 'p95': 440.83132}}
+== ngl core
+	User time (seconds): 15.80
+	System time (seconds): 0.26
+	Maximum resident set size (kbytes): 169124
+frames 230 mean 26.02 p50 23.93 p95 36.03 max 118.84
+paint_phase_ms': {'max': 118.634037, 'mean': 25.88617830735932, 'n': 231, 'p50': 23.778541, 'p95': 35.821712}, 'shapes': 1000}
+== gl images
+	User time (seconds): 8.84
+	System time (seconds): 1.23
+	Maximum resident set size (kbytes): 478472
+frames 250 mean 24.00 p50 21.50 p95 41.39 max 161.58
+paint_phase_ms': {'max': 144.972175, 'mean': 22.35479902788846, 'n': 251, 'p50': 21.020923, 'p95': 35.179642}}
+== gl core
+	User time (seconds): 15.65
+	System time (seconds): 0.19
+	Maximum resident set size (kbytes): 204832
+frames 194 mean 30.82 p50 28.73 p95 47.69 max 71.39
+paint_phase_ms': {'max': 71.190762, 'mean': 30.623109364102554, 'n': 195, 'p50': 28.447518, 'p95': 47.483878}, 'shapes': 1000}
+== vulkan images
+	User time (seconds): 6.46
+	System time (seconds): 0.53
+	Maximum resident set size (kbytes): 281104
+frames 82 mean 73.73 p50 68.12 p95 102.34 max 250.64
+paint_phase_ms': {'max': 248.846758, 'mean': 72.2715503253012, 'n': 83, 'p50': 67.944686, 'p95': 99.99162}}
+== vulkan core
+	User time (seconds): 15.74
+	System time (seconds): 0.96
+	Maximum resident set size (kbytes): 190676
+frames 238 mean 25.13 p50 23.62 p95 33.84 max 48.06
+paint_phase_ms': {'max': 47.932255, 'mean': 24.914609058577415, 'n': 239, 'p50': 23.472695, 'p95': 33.51667}, 'shapes': 1000}

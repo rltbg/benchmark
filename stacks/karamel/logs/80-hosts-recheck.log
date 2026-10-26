@@ -1,0 +1,10 @@
+200 https://opam.ocaml.org/index.tar.gz
+404 https://opam.ocaml.org/cache/
+200 https://gitlab.inria.fr/fpottier/fix
+200 https://gitlab.inria.fr/fpottier/fix/-/archive/20250428/fix-20250428.tar.gz
+403 https://github.com/ocaml/opam-repository
+403 https://codeload.github.com/ocaml/opam-repository/tar.gz/master
+403 https://github.com/WebAssembly/spec/archive/opam-2.0.2.zip
+200 https://ocaml.org
+200 https://deb.debian.org/debian/
+403 https://crates.io

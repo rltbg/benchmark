@@ -1,0 +1,14 @@
+  Determining projects to restore...
+  Restored /home/user/eval/stacks/avalonia/AvaloniaBench.fsproj (in 411 ms).
+/root/.nuget/packages/avalonia/12.1.4/buildTransitive/AvaloniaPrivateApis.targets(24,5): warning AVA3001: AvaloniaAccessUnstablePrivateApis is Enabled: This means you are using unstable internal APIs, and your code may be depending on APIs which may change or be removed in future versions of Avalonia. Set AvaloniaAccessUnstablePrivateApis to 'False' to disable this warning. [/home/user/eval/stacks/avalonia/AvaloniaBench.fsproj]
+/home/user/eval/stacks/avalonia/Program.fs(206,20): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/home/user/eval/stacks/avalonia/AvaloniaBench.fsproj]
+/home/user/eval/stacks/avalonia/Program.fs(339,20): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/home/user/eval/stacks/avalonia/AvaloniaBench.fsproj]
+  AvaloniaBench -> /home/user/eval/stacks/avalonia/artifacts/aots/bin/AvaloniaBench/release_linux-x64/avalonia-bench.dll
+  Generating native code
+/root/.nuget/packages/fsharp.core/10.0.113/lib/netstandard2.1/FSharp.Core.dll : warning IL2104: Assembly 'FSharp.Core' produced trim warnings. For more information see https://aka.ms/il2104 [/home/user/eval/stacks/avalonia/AvaloniaBench.fsproj]
+/root/.nuget/packages/fsharp.core/10.0.113/lib/netstandard2.1/FSharp.Core.dll : warning IL3053: Assembly 'FSharp.Core' produced AOT analysis warnings. [/home/user/eval/stacks/avalonia/AvaloniaBench.fsproj]
+  AvaloniaBench -> /home/user/eval/stacks/avalonia/out/aot-static/
+
+real	1m5.235s
+user	1m19.778s
+sys	0m3.488s

@@ -1,0 +1,82 @@
+### [] list 8
+rc=0
+list frames 1067 fps 133.32886821159877 p95 11.084 max 50.835
+{'sum_heights': 8799584, 'final_offset': 20626.611, 'rows_drawn': 9114, 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 6.781, 'redraw_start_interval_p95_ms': 10.995, 'frame_events': 1069, 'frames_without_custom_draw': 1, 'custom_draws': 1068}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [] stream 8 --rate 10000
+rc=0
+stream frames 743 fps 92.85292421726734 p95 14.299 max 23.23
+{'sum_heights': 8799584, 'final_offset': 20626.385, 'rows_drawn': 6340, 'updates_generated': 80001, 'updates_applied': 79912, 'updates_dropped': 0, 'updates_pending_at_end': 89, 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 10.418, 'redraw_start_interval_p95_ms': 14.061, 'frame_events': 745, 'frames_without_custom_draw': 1, 'custom_draws': 744}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [] canvas 8 --shapes 5000
+rc=0
+canvas frames 24 fps 2.893863574348359 p95 412.157 max 445.553
+{'shapes': 5000, 'shadows': 500, 'graph_points': 10000, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 351.683, 'redraw_start_interval_p95_ms': 413.239, 'frame_events': 24, 'frames_without_custom_draw': 1, 'custom_draws': 46}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [] core 8
+rc=0
+core frames 70 fps 8.738538314683003 p95 145.378 max 177.395
+{'shapes': 1000, 'shadows': 0, 'graph_points': 0, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'calls_per_s': 124265808, 'core_calls_total': 995430400, 'heavy_calls': 8, 'max_frame_stall_ms': 177.395, 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 116.373, 'redraw_start_interval_p95_ms': 145.366, 'frame_events': 70, 'frames_without_custom_draw': 1, 'custom_draws': 69}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [] stress 14
+rc=0
+stress frames 31 fps 2.1534200652208417 p95 569.013 max 570.137
+{'sum_heights': 8799584, 'final_offset': 20452.384, 'rows_drawn': 252, 'updates_generated': 71969, 'updates_applied': 69656, 'updates_dropped': 0, 'updates_pending_at_end': 2313, 'shapes': 5000, 'shadows': 500, 'graph_points': 10000, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'calls_per_s': 95767158, 'core_calls_total': 1378635776, 'heavy_calls': 13, 'max_frame_stall_ms': 570.137, 'heap_samples': [{'t': 10.3, 'managed_heap_kb': 130520, 'rss_kb': 289128}], 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 471.321, 'redraw_start_interval_p95_ms': 569.036, 'frame_events': 31, 'frames_without_custom_draw': 1, 'custom_draws': 90}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [] text 8
+rc=0
+text frames 698 fps 87.19694066160741 p95 14.867 max 27.597
+{'time_to_first_display_ms': 1950.4, 'layout_ms': 1574.232, 'lines': 9599, 'select_all': 'Action::SelectAll performed (t=5s)', 'wrapping': 'none', 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 11.003, 'redraw_start_interval_p95_ms': 14.965, 'frame_events': 700, 'frames_without_custom_draw': 700, 'custom_draws': 0}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [] images 8
+rc=0
+images frames 544 fps 67.98074445413337 p95 20.087 max 24.397
+{'images_decoded': 600, 'decode_total_ms': 1168.5, 'cells_drawn_last_frame': 24, 'decode_threads': 2, 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 14.18, 'redraw_start_interval_p95_ms': 20.079, 'frame_events': 544, 'frames_without_custom_draw': 1, 'custom_draws': 543}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [] nav 8
+rc=0
+nav frames 435 fps 54.328576231610086 p95 25.868 max 37.252
+{'transitions_done': 20, 'modals_done': 9, 'background_load': '1 thread de calcul', 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 18.176, 'redraw_start_interval_p95_ms': 25.762, 'frame_events': 435, 'frames_without_custom_draw': 96, 'custom_draws': 678}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [--full-damage] list 8
+rc=0
+list frames 771 fps 96.29258558331388 p95 14.285 max 26.05
+{'sum_heights': 8799584, 'final_offset': 20645.241, 'rows_drawn': 6607, 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 9.926, 'redraw_start_interval_p95_ms': 14.248, 'frame_events': 773, 'frames_without_custom_draw': 1, 'custom_draws': 772}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [--full-damage] stream 8 --rate 10000
+rc=0
+stream frames 892 fps 111.37537095989587 p95 13.256 max 45.419
+{'sum_heights': 8799584, 'final_offset': 20645.017, 'rows_drawn': 7640, 'updates_generated': 80078, 'updates_applied': 79983, 'updates_dropped': 0, 'updates_pending_at_end': 95, 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 8.671, 'redraw_start_interval_p95_ms': 13.364, 'frame_events': 894, 'frames_without_custom_draw': 1, 'custom_draws': 893}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [--full-damage] canvas 8 --shapes 5000
+rc=0
+canvas frames 24 fps 2.974228311679299 p95 394.006 max 407.564
+{'shapes': 5000, 'shadows': 500, 'graph_points': 10000, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 347.279, 'redraw_start_interval_p95_ms': 381.106, 'frame_events': 24, 'frames_without_custom_draw': 1, 'custom_draws': 46}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [--full-damage] core 8
+rc=0
+core frames 70 fps 8.657013931237833 p95 143.937 max 147.636
+{'shapes': 1000, 'shadows': 0, 'graph_points': 0, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'calls_per_s': 119743999, 'core_calls_total': 968241152, 'heavy_calls': 8, 'max_frame_stall_ms': 147.636, 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 117.73, 'redraw_start_interval_p95_ms': 143.933, 'frame_events': 70, 'frames_without_custom_draw': 1, 'custom_draws': 69}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [--full-damage] stress 14
+rc=0
+stress frames 33 fps 2.325326740115987 p95 499.679 max 516.611
+{'sum_heights': 8799584, 'final_offset': 19776.565, 'rows_drawn': 270, 'updates_generated': 70947, 'updates_applied': 68748, 'updates_dropped': 0, 'updates_pending_at_end': 2199, 'shapes': 5000, 'shadows': 500, 'graph_points': 10000, 'clip': 'rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte', 'shadow_impl': 'Quad.shadow (fill_quad) hors canvas, sous les formes', 'calls_per_s': 105245851, 'core_calls_total': 1493602304, 'heavy_calls': 13, 'max_frame_stall_ms': 516.611, 'heap_samples': [{'t': 10.3, 'managed_heap_kb': 130518, 'rss_kb': 282192}], 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 436.365, 'redraw_start_interval_p95_ms': 499.695, 'frame_events': 33, 'frames_without_custom_draw': 1, 'custom_draws': 96}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [--full-damage] text 8
+rc=0
+text frames 708 fps 88.40926998667618 p95 14.183 max 31.215
+{'time_to_first_display_ms': 1785.7, 'layout_ms': 1515.968, 'lines': 9599, 'select_all': 'Action::SelectAll performed (t=5s)', 'wrapping': 'none', 'unchanged_frames_excluded': 2, 'redraw_start_interval_p50_ms': 10.889, 'redraw_start_interval_p95_ms': 13.934, 'frame_events': 710, 'frames_without_custom_draw': 710, 'custom_draws': 0}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [--full-damage] images 8
+rc=0
+images frames 572 fps 71.47878866946233 p95 19.037 max 26.635
+{'images_decoded': 600, 'decode_total_ms': 1091.1, 'cells_drawn_last_frame': 24, 'decode_threads': 2, 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 13.329, 'redraw_start_interval_p95_ms': 19.048, 'frame_events': 572, 'frames_without_custom_draw': 1, 'custom_draws': 571}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [--full-damage] nav 8
+rc=0
+nav frames 427 fps 53.3318012409948 p95 26.13 max 32.137
+{'transitions_done': 20, 'modals_done': 9, 'background_load': '1 thread de calcul', 'unchanged_frames_excluded': 0, 'redraw_start_interval_p50_ms': 18.572, 'redraw_start_interval_p95_ms': 26.176, 'frame_events': 427, 'frames_without_custom_draw': 94, 'custom_draws': 666}
+error: XDG_RUNTIME_DIR is invalid or not set in the environment.
+### [] text 12 (apres SelectAll+focus)
+text frames 1401 fps 116.7113588142859 p95 11.809 max 15.486

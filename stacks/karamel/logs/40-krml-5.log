@@ -1,0 +1,11 @@
+[38;5;119m✔[0m [Monomorphization] ⏱️ 5ms
+[38;5;119m✔[0m [Inlining] ⏱️ 7ms
+[38;5;119m✔[0m [Pattern matches compilation] ⏱️ 7ms
+[38;5;119m✔[0m [Structs + Simplify 2] ⏱️ 13ms
+[38;5;119m✔[0m [Drop] ⏱️ 1ms
+[38;5;119m✔[0m [AstToCStar] ⏱️ 4ms
+[38;5;119m✔[0m [CStarToC] ⏱️ <1ms
+[4mKaRaMeL executable is:[0m /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/_build/default/src/Karamel.exe
+[38;5;119m✔[0m [PrettyPrinting] ⏱️ <1ms
+KaRaMeL: wrote out .c files for Core_Low
+KaRaMeL: wrote out .h files for Core_Low

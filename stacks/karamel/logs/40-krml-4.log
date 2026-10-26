@@ -1,0 +1,13 @@
+[38;5;119m✔[0m [Monomorphization] ⏱️ 2ms
+[38;5;119m✔[0m [Inlining] ⏱️ 6ms
+[38;5;119m✔[0m [Pattern matches compilation] ⏱️ 5ms
+[38;5;119m✔[0m [Structs + Simplify 2] ⏱️ 7ms
+[38;5;119m✔[0m [Drop] ⏱️ <1ms
+Warning 15: Core_Low.header_len is not Low*; it uses mathematical integers and runtime checks may fail; rewrite your code to use machine integers, or if you must, use -add-include '"krml/internal/compat.h"'; if this declaration is for specification purposes only, consider marking it noextract or using -bundle <name-of-the-module> to only keep reachable definitions.
+Warning 15: Core_Low.max_payload is not Low*; it uses mathematical integers and runtime checks may fail; rewrite your code to use machine integers, or if you must, use -add-include '"krml/internal/compat.h"'; if this declaration is for specification purposes only, consider marking it noextract or using -bundle <name-of-the-module> to only keep reachable definitions.
+Warning 1: unknown: Not generating code for Core_Low/Core_Low_payload because of the error below:
+Warning 5: unknown: hit a type application of FStar.Seq.Base.seq, which is not defined; dropping
+[38;5;119m✔[0m [AstToCStar] ⏱️ 3ms
+[38;5;119m✔[0m [CStarToC] ⏱️ <1ms
+[4mKaRaMeL executable is:[0m /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/_build/default/src/Karamel.exe
+Fatal error: exception Sys_error("/tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/karamel/_build/default/share/krml/misc/Makefile.basic: No such file or directory")

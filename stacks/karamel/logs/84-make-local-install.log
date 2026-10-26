@@ -1,0 +1,29 @@
+cc -O3 -I. -I /home/user/eval/stacks/karamel/karamel-clean/include -I /home/user/eval/stacks/karamel/karamel-clean/krmllib/dist/minimal -Wall -Wextra -Werror -std=c11 -Wno-unknown-warning-option -Wno-infinite-recursion -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -fPIC    -c -o fstar_uint16.o fstar_uint16.c
+cc -O3 -I. -I /home/user/eval/stacks/karamel/karamel-clean/include -I /home/user/eval/stacks/karamel/karamel-clean/krmllib/dist/minimal -Wall -Wextra -Werror -std=c11 -Wno-unknown-warning-option -Wno-infinite-recursion -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -fPIC    -c -o fstar_uint32.o fstar_uint32.c
+cc -O3 -I. -I /home/user/eval/stacks/karamel/karamel-clean/include -I /home/user/eval/stacks/karamel/karamel-clean/krmllib/dist/minimal -Wall -Wextra -Werror -std=c11 -Wno-unknown-warning-option -Wno-infinite-recursion -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -fPIC    -c -o fstar_uint64.o fstar_uint64.c
+cc -O3 -I. -I /home/user/eval/stacks/karamel/karamel-clean/include -I /home/user/eval/stacks/karamel/karamel-clean/krmllib/dist/minimal -Wall -Wextra -Werror -std=c11 -Wno-unknown-warning-option -Wno-infinite-recursion -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -fPIC    -c -o fstar_uint8.o fstar_uint8.c
+cc -O3 -I. -I /home/user/eval/stacks/karamel/karamel-clean/include -I /home/user/eval/stacks/karamel/karamel-clean/krmllib/dist/minimal -Wall -Wextra -Werror -std=c11 -Wno-unknown-warning-option -Wno-infinite-recursion -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -fPIC    -c -o lowstar_printf.o lowstar_printf.c
+cc -O3 -I. -I /home/user/eval/stacks/karamel/karamel-clean/include -I /home/user/eval/stacks/karamel/karamel-clean/krmllib/dist/minimal -Wall -Wextra -Werror -std=c11 -Wno-unknown-warning-option -Wno-infinite-recursion -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -fPIC    -c -o prims.o prims.c
+cc -O3 -I. -I /home/user/eval/stacks/karamel/karamel-clean/include -I /home/user/eval/stacks/karamel/karamel-clean/krmllib/dist/minimal -Wall -Wextra -Werror -std=c11 -Wno-unknown-warning-option -Wno-infinite-recursion -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -fPIC    -c -o testlib.o testlib.c
+ar cr libkrmllib.a FStar_Attributes.o FStar_NormSteps.o FStar_Order.o WasmSupport.o c.o c_string.o fstar_bytes.o fstar_char.o fstar_date.o fstar_dyn.o fstar_hyperstack_io.o fstar_int16.o fstar_int32.o fstar_int64.o fstar_int8.o fstar_io.o fstar_string.o fstar_uint16.o fstar_uint32.o fstar_uint64.o fstar_uint8.o lowstar_printf.o prims.o testlib.o
+make[2]: Leaving directory '/home/user/eval/stacks/karamel/karamel-clean/krmllib/dist/generic'
+make[1]: Leaving directory '/home/user/eval/stacks/karamel/karamel-clean/krmllib'
+make PREFIX=/home/user/eval/stacks/karamel/karamel-clean/out _install
+make[1]: Entering directory '/home/user/eval/stacks/karamel/karamel-clean'
+mkdir -p /home/user/eval/stacks/karamel/karamel-clean/out/bin
+install _build/default/src/Karamel.exe /home/user/eval/stacks/karamel/karamel-clean/out/bin/krml
+mkdir -p /home/user/eval/stacks/karamel/karamel-clean/out/include/krml
+cp -r include/* /home/user/eval/stacks/karamel/karamel-clean/out/include/krml
+mkdir -p /home/user/eval/stacks/karamel/karamel-clean/out/lib/krml
+cp -r krmllib/* /home/user/eval/stacks/karamel/karamel-clean/out/lib/krml
+echo 'obj' >> /home/user/eval/stacks/karamel/karamel-clean/out/lib/krml/fstar.include
+mkdir -p /home/user/eval/stacks/karamel/karamel-clean/out/share/krml/examples
+cp -r test/*.fst /home/user/eval/stacks/karamel/karamel-clean/out/share/krml/examples
+mkdir -p /home/user/eval/stacks/karamel/karamel-clean/out/share/krml/misc
+cp -r misc/* /home/user/eval/stacks/karamel/karamel-clean/out/share/krml/misc
+make[1]: Leaving directory '/home/user/eval/stacks/karamel/karamel-clean'
+ln -sf out/bin/krml krml
+
+real	1m2.926s
+user	1m18.412s
+sys	0m11.956s

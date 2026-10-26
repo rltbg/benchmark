@@ -1,0 +1,58 @@
+== https://github.com/FStarLang/FStar/releases
+HTTP/1.1 200 Connection Established
+
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+Content-Length: 378
+Connection: close
+
+{"message":"GitHub access to this repository is not enabled for this session. Use add_repo to request access. If add_repo answers that read access is already available and you need GitHub API or write access, call add_repo again with access:\"push\" to attach the repository with credentials.","documentation_url":"https://docs.anthropic.com/en/docs/claude-code/github-actions"}== https://api.github.com/repos/FStarLang/FStar/releases/latest
+HTTP/1.1 200 Connection Established
+
+HTTP/1.1 403 Forbidden
+Content-Type: application/json; charset=utf-8
+Content-Length: 378
+Connection: close
+
+{"message":"GitHub access to this repository is not enabled for this session. Use add_repo to request access. If add_repo answers that read access is already available and you need GitHub API or write access, call add_repo again with access:\"push\" to attach the repository with credentials.","documentation_url":"https://docs.anthropic.com/en/docs/claude-code/github-actions"}== https://dot.net/v1/dotnet-install.sh
+curl: (56) CONNECT tunnel failed, response 403
+HTTP/1.1 200 Connection Established
+
+HTTP/2 301 
+date: Sun, 25 Oct 2026 16:47:24 GMT
+server: Kestrel
+location: https://builds.dotnet.microsoft.com/dotnet/scripts/v1/dotnet-install.sh
+content-length: 0
+strict-transport-security: max-age=31536000
+
+HTTP/1.1 403 Forbidden
+Content-Type: text/plain; charset=utf-8
+== https://builds.dotnet.microsoft.com/dotnet/Sdk/10.0.100/dotnet-sdk-10.0.100-linux-x64.tar.gz
+curl: (56) CONNECT tunnel failed, response 403
+HTTP/1.1 403 Forbidden
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 85
+Connection: close
+
+== https://opam.ocaml.org/index.tar.gz
+curl: (56) CONNECT tunnel failed, response 403
+HTTP/1.1 403 Forbidden
+Content-Type: text/plain; charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 72
+Connection: close
+
+== https://github.com/FStarLang/FStar/releases/download/v2025.03.25/fstar-v2025.03.25-Linux-x86_64.tar.gz
+HTTP/1.1 200 Connection Established
+
+HTTP/1.1 302 Found
+Connection: close
+Cache-Control: no-cache
+Content-Security-Policy: default-src 'none'; base-uri 'self'; child-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/; connect-src 'self' uploads.github.com www.githubstatus.com collector.github.com raw.githubusercontent.com api.github.com github-cloud.s3.amazonaws.com github-production-repository-file-5c1aeb.s3.amazonaws.com github-production-upload-manifest-file-7fdce7.s3.amazonaws.com github-production-user-asset-6210df.s3.amazonaws.com *.rel.tunnels.api.visualstudio.com wss://*.rel.tunnels.api.visualstudio.com github.githubassets.com objects-origin.githubusercontent.com copilot-proxy.githubusercontent.com proxy.individual.githubcopilot.com proxy.business.githubcopilot.com proxy.enterprise.githubcopilot.com *.actions.githubusercontent.com wss://*.actions.githubusercontent.com productionresultssa0.blob.core.windows.net productionresultssa1.blob.core.windows.net productionresultssa2.blob.core.windows.net productionresultssa3.blob.core.windows.net productionresultssa4.blob.core.windows.net productionresultssa5.blob.core.windows.net productionresultssa6.blob.core.windows.net productionresultssa7.blob.core.windows.net productionresultssa8.blob.core.windows.net productionresultssa9.blob.core.windows.net productionresultssa10.blob.core.windows.net productionresultssa11.blob.core.windows.net productionresultssa12.blob.core.windows.net productionresultssa13.blob.core.windows.net productionresultssa14.blob.core.windows.net productionresultssa15.blob.core.windows.net productionresultssa16.blob.core.windows.net productionresultssa17.blob.core.windows.net productionresultssa18.blob.core.windows.net productionresultssa19.blob.core.windows.net github-production-repository-image-32fea6.s3.amazonaws.com github-production-release-asset-2e65be.s3.amazonaws.com insights.github.com wss://alive.github.com wss://alive-staging.github.com api.githubcopilot.com api.individual.githubcopilot.com api.business.githubcopilot.com api.enterprise.githubcopilot.com wss://production-copilot-host.webpubsub.azure.com wss://production-copilot-host-centralus.webpubsub.azure.com wss://production-copilot-host-centralus-02.webpubsub.azure.com wss://production-copilot-host-westus.webpubsub.azure.com api.github.com/cmc_internal/api/; font-src github.githubassets.com; form-action 'self' github.com gist.github.com copilot-workspace.githubnext.com objects-origin.githubusercontent.com; frame-ancestors 'none'; frame-src viewscreen.githubusercontent.com notebooks.githubusercontent.com; img-src 'self' data: blob: github.githubassets.com media.githubusercontent.com camo.githubusercontent.com identicons.github.com avatars.githubusercontent.com private-avatars.githubusercontent.com github-cloud.s3.amazonaws.com objects.githubusercontent.com release-assets.githubusercontent.com secured-user-images.githubusercontent.com user-images.githubusercontent.com private-user-images.githubusercontent.com opengraph.githubassets.com repository-images.githubusercontent.com marketplace-screenshots.githubusercontent.com copilotprodattachments.blob.core.windows.net/github-production-copilot-attachments/ github-production-user-asset-6210df.s3.amazonaws.com customer-stories-feed.github.com spotlights-feed.github.com explore-feed.github.com *.googleusercontent.com objects-origin.githubusercontent.com *.githubusercontent.com; manifest-src 'self'; media-src github.com user-images.githubusercontent.com secured-user-images.githubusercontent.com private-user-images.githubusercontent.com github-production-user-asset-6210df.s3.amazonaws.com gist.github.com github.githubassets.com; script-src github.githubassets.com; style-src 'unsafe-inline' github.githubassets.com; upgrade-insecure-requests; worker-src github.githubassets.com github.com/assets-cdn/worker/ github.com/assets/ gist.github.com/assets-cdn/worker/
+Content-Type: text/html; charset=utf-8
+Date: Sun, 25 Oct 2026 16:47:26 GMT
+Location: https://release-assets.githubusercontent.com/github-production-release-asset/18411972/a9199373-ef0c-4a04-a823-6a96f25fdc34?sp=r&sv=2018-11-09&sr=b&spr=https&se=2026-10-25T17%3A40%3A34Z&rscd=attachment%3B+filename%3Dfstar-v2025.03.25-Linux-x86_64.tar.gz&rsct=application%2Foctet-stream&skoid=96c2d410-5711-43a1-aedd-ab1947aa7ab0&sktid=398a6654-997b-47e9-b12b-9515b896b4de&skt=2026-10-25T16%3A40%3A07Z&ske=2026-10-25T17%3A40%3A34Z&sks=b&skv=2018-11-09&sig=3cBasfE9wiuVK4%2BFKPYFVyKAuPD9JR%2FuSxXx%2FJt8Dfg%3D&jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmVsZWFzZS1hc3NldHMuZ2l0aHVidXNlcmNvbnRlbnQuY29tIiwia2V5Ijoia2V5MSIsImV4cCI6MTc5Mjk1MDQ0NiwibmJmIjoxNzkyOTQ2ODQ2LCJwYXRoIjoicmVsZWFzZWFzc2V0cHJvZHVjdGlvbi5ibG9iLmNvcmUud2luZG93cy5uZXQifQ.ObAnzqsQMlyD_aCg-LXy6qfLm5p2a09BQlVMADRjbbk&response-content-disposition=attachment%3B%20filename%3Dfstar-v2025.03.25-Linux-x86_64.tar.gz&response-content-type=application%2Foctet-stream
+Referrer-Policy: no-referrer-when-downgrade
+Server: github.com
+Strict-Transport-Security: max-age=31536000; includeSubdomains; preload

@@ -1,0 +1,113 @@
+{
+ "summary": {
+  "tag": "slint-idle",
+  "stack": "slint",
+  "scenario": "idle",
+  "runs": 1,
+  "ok_runs": 1,
+  "agg": {
+   "fps_mean": null,
+   "frame_p95": null,
+   "frame_p99": null,
+   "frame_max": null,
+   "dropped_gt16_7": null,
+   "dropped_gt8_3": null,
+   "rss_kb_median": {
+    "median": 22904.0,
+    "p95": 22904.0,
+    "min": 22904.0,
+    "max": 22904.0
+   },
+   "rss_kb_peak": {
+    "median": 22904,
+    "p95": 22904,
+    "min": 22904,
+    "max": 22904
+   },
+   "rss_kb_last_quarter": {
+    "median": 22904,
+    "p95": 22904,
+    "min": 22904,
+    "max": 22904
+   },
+   "cpu_pct_core_mean": {
+    "median": 0.49793026806815477,
+    "p95": 0.49793026806815477,
+    "min": 0.49793026806815477,
+    "max": 0.49793026806815477
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 4.0,
+    "p95": 4.0,
+    "min": 4.0,
+    "max": 4.0
+   },
+   "wall_s": {
+    "median": 8.139943677000247,
+    "p95": 8.139943677000247,
+    "min": 8.139943677000247,
+    "max": 8.139943677000247
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 8.139943677000247,
+   "frames": 0,
+   "ops": {
+    "sum_heights": 8799584
+   },
+   "checksum": "00000000",
+   "rss_kb_median": 22904.0,
+   "rss_kb_peak": 22904,
+   "rss_kb_first_quarter": 22904,
+   "rss_kb_last_quarter": 22904,
+   "cpu_pct_core_mean": 0.49793026806815477,
+   "cpu_pct_core_peak_1s": 4.0,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     7900
+    ],
+    [
+     1.1,
+     0.04,
+     22904
+    ],
+    [
+     2.1,
+     0.04,
+     22904
+    ],
+    [
+     3.2,
+     0.04,
+     22904
+    ],
+    [
+     4.3,
+     0.04,
+     22904
+    ],
+    [
+     5.3,
+     0.04,
+     22904
+    ],
+    [
+     6.4,
+     0.04,
+     22904
+    ],
+    [
+     7.5,
+     0.04,
+     22904
+    ]
+   ]
+  }
+ ]
+}

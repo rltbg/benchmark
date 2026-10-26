@@ -1,0 +1,42 @@
+
+Welcome to .NET 10.0!
+---------------------
+SDK Version: 10.0.113
+
+----------------
+Installed an ASP.NET Core HTTPS development certificate.
+To trust the certificate, run 'dotnet dev-certs https --trust'
+Learn about HTTPS: https://aka.ms/dotnet-https
+
+----------------
+Write your first app: https://aka.ms/dotnet-hello-world
+Find out what's new: https://aka.ms/dotnet-whats-new
+Explore documentation: https://aka.ms/dotnet-docs
+Report issues and find source on GitHub: https://github.com/dotnet/core
+Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli
+--------------------------------------------------------------------------------------
+  Determining projects to restore...
+  Restored /home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj (in 1.05 sec).
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(1,1): error FS0062: This construct is deprecated. The use of '#light "off"' or '#indent "off"' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(62,24): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(71,25): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(90,26): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(90,44): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(90,25): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(92,18): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/FStar_Pervasives_Native.fs(1,1): error FS0062: This construct is deprecated. The use of '#light "off"' or '#indent "off"' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+
+Build FAILED.
+
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(1,1): error FS0062: This construct is deprecated. The use of '#light "off"' or '#indent "off"' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(62,24): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(71,25): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(90,26): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(90,44): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(90,25): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/Prims.fs(92,18): error FS0062: This construct is deprecated. The use of multiple parenthesized type parameters before a generic type name such as '(int, int) Map' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/FStar_Pervasives_Native.fs(1,1): error FS0062: This construct is deprecated. The use of '#light "off"' or '#indent "off"' was deprecated in F# 2.0 and is no longer supported. You can enable this feature by using '--langversion:5.0' and '--mlcompatibility'. [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+    0 Warning(s)
+    8 Error(s)
+
+Time Elapsed 00:00:04.26

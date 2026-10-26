@@ -1,0 +1,13 @@
+403 https://github.com/dsheets/ocaml-process
+403 https://github.com/WebAssembly/spec
+403 https://github.com/andrenth/ocaml-stdint
+000 https://gitlab.inria.fr/fpottier/fix
+200 https://archive.ubuntu.com/ubuntu/dists/noble/Release
+403 https://github.com/ocaml/opam-repository
+000 https://opam.ocaml.org/index.tar.gz
+403 https://codeload.github.com/ocaml/opam-repository/tar.gz/master
+200 https://pypi.org
+200 https://registry.npmjs.org/
+403 https://crates.io
+000 https://deb.debian.org/debian/dists/stable/Release
+200 https://raw.githubusercontent.com/ocaml/opam-repository/master/README.md

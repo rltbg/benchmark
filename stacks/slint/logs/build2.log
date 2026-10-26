@@ -1,0 +1,30 @@
+   Compiling slintapp v0.1.0 (/home/user/eval/stacks/slint/app)
+error: linking with `cc` failed: exit status: 1
+  |
+  = note:  "cc" "-m64" "<1 object files omitted>" "-Wl,--as-needed" "-Wl,-Bstatic" "-lbenchcore" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib/libcompiler_builtins-*.rlib" "-Wl,-Bdynamic" "-ldl" "-lfontconfig" "-lfreetype" "-ldl" "-lgcc_s" "-lutil" "-lrt" "-lpthread" "-lm" "-ldl" "-lc" "-L" "/home/user/eval/stacks/slint/app/target/release/deps/rustcOyuz7b/raw-dylibs" "-B<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/bin/gcc-ld" "-fuse-ld=lld" "-Wl,--eh-frame-hdr" "-Wl,-z,noexecstack" "-L" "/home/user/eval/core/target/release" "-L" "/usr/lib/x86_64-linux-gnu" "-L" "<sysroot>/lib/rustlib/x86_64-unknown-linux-gnu/lib" "-o" "/home/user/eval/stacks/slint/app/target/release/deps/slintapp-99d413c6b4178d2b" "-Wl,--gc-sections" "-pie" "-Wl,-z,relro,-z,now" "-Wl,-O1" "-Wl,--strip-all" "-nodefaultlibs"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: rust-lld: error: duplicate symbol: rust_eh_personality
+          >>> defined at gcc.rs:299 (library/std/src/sys/personality/gcc.rs:299)
+          >>>            /home/user/eval/stacks/slint/app/target/release/deps/slintapp-99d413c6b4178d2b.slintapp.c815c17feec7dc1a-cgu.0.rcgu.o:(rust_eh_personality)
+          >>> defined at gcc.rs:299 (library/std/src/sys/personality/gcc.rs:299)
+          >>>            std-ca8536218e109c03.std.bcb96dfbba0ab899-cgu.0.rcgu.o:(.text.rust_eh_personality+0x0) in archive /home/user/eval/core/target/release/libbenchcore.a
+          
+          rust-lld: error: duplicate symbol: std::panicking::EMPTY_PANIC
+          >>> defined at slintapp.c815c17feec7dc1a-cgu.0
+          >>>            /home/user/eval/stacks/slint/app/target/release/deps/slintapp-99d413c6b4178d2b.slintapp.c815c17feec7dc1a-cgu.0.rcgu.o:(std::panicking::EMPTY_PANIC)
+          >>> defined at std.bcb96dfbba0ab899-cgu.0
+          >>>            std-ca8536218e109c03.std.bcb96dfbba0ab899-cgu.0.rcgu.o:(.data.rel.ro._RNvNtCsgczF5crJ4sT_3std9panicking11EMPTY_PANIC+0x0) in archive /home/user/eval/core/target/release/libbenchcore.a
+          
+          rust-lld: error: duplicate symbol: std::sys::args::unix::imp::ARGV_INIT_ARRAY
+          >>> defined at slintapp.c815c17feec7dc1a-cgu.0
+          >>>            /home/user/eval/stacks/slint/app/target/release/deps/slintapp-99d413c6b4178d2b.slintapp.c815c17feec7dc1a-cgu.0.rcgu.o:(std::sys::args::unix::imp::ARGV_INIT_ARRAY)
+          >>> defined at std.bcb96dfbba0ab899-cgu.0
+          >>>            std-ca8536218e109c03.std.bcb96dfbba0ab899-cgu.0.rcgu.o:(.init_array.00099+0x0) in archive /home/user/eval/core/target/release/libbenchcore.a
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `slintapp` (bin "slintapp") due to 1 previous error
+
+real	1m50.265s
+user	1m40.552s
+sys	0m3.721s

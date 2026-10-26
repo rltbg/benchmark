@@ -1,0 +1,11 @@
+[38;5;119m✔[0m [Monomorphization] ⏱️ 6ms
+[38;5;119m✔[0m [Inlining] ⏱️ 6ms
+[38;5;119m✔[0m [Pattern matches compilation] ⏱️ 6ms
+[38;5;119m✔[0m [Structs + Simplify 2] ⏱️ 10ms
+[38;5;119m✔[0m [Drop] ⏱️ <1ms
+[38;5;119m✔[0m [AstToCStar] ⏱️ 3ms
+[38;5;119m✔[0m [CStarToC] ⏱️ <1ms
+[4mKaRaMeL executable is:[0m /home/user/eval/stacks/karamel/krml-prefix/bin/krml
+[38;5;119m✔[0m [PrettyPrinting] ⏱️ <1ms
+KaRaMeL: wrote out .c files for Core_Low
+KaRaMeL: wrote out .h files for Core_Low

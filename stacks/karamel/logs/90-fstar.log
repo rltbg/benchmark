@@ -1,0 +1,6 @@
+Extracted module C.Loops
+Extracted module Core_Low
+Attempting to translate module C.Loops
+Attempting to translate module Core_Low
+Verified module: Core_Low
+All verification conditions discharged successfully

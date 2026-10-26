@@ -1,0 +1,14 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+/home/user/fstar-aot/fsproj/ulibfs/FStar_List_Tot_Base.fs(10,39): warning FS0044: This construct is deprecated. please use List.item [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/FStar_List_Tot_Base.fs(11,31): warning FS0044: This construct is deprecated. please use List.item [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+  ulibfs -> /home/user/fstar-aot/fsproj/ulibfs/bin/Release/net10.0/ulibfs.dll
+
+Build succeeded.
+
+/home/user/fstar-aot/fsproj/ulibfs/FStar_List_Tot_Base.fs(10,39): warning FS0044: This construct is deprecated. please use List.item [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+/home/user/fstar-aot/fsproj/ulibfs/FStar_List_Tot_Base.fs(11,31): warning FS0044: This construct is deprecated. please use List.item [/home/user/fstar-aot/fsproj/ulibfs/ulibfs.fsproj]
+    2 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:00:05.70

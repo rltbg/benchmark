@@ -1,0 +1,112 @@
+## flutter --version
+   Woah! You appear to be trying to run flutter as root.
+   We strongly recommend running the flutter tool without superuser privileges.
+  /
+📎
+Flutter 3.47.8 • channel stable • https://github.com/flutter/flutter
+Framework • revision 737ba8f885 (3 days ago) • 2026-10-22 21:37:31 -0700
+Engine • hash dfd2e6cb7d319db05e3bf1503f3e2ac60f6288a2 (revision cf636b1dfb) (2 days ago) • 2026-10-23 02:13:38.000Z
+Tools • Dart 3.13.7 • DevTools 2.60.0
+   Woah! You appear to be trying to run flutter as root.
+   We strongly recommend running the flutter tool without superuser privileges.
+  /
+📎
+Dart SDK version: 3.13.7 (stable) (Thu Oct 22 14:28:57 2026 -0700) on "linux_x64"
+
+## ldd
+  17256536 /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/lib/libflutter_linux_gtk.so
+   1302184 /lib/x86_64-linux-gnu/libX11.so.6
+     18696 /lib/x86_64-linux-gnu/libXau.so.6
+     14464 /lib/x86_64-linux-gnu/libXcomposite.so.1
+     43464 /lib/x86_64-linux-gnu/libXcursor.so.1
+     14488 /lib/x86_64-linux-gnu/libXdamage.so.1
+     26776 /lib/x86_64-linux-gnu/libXdmcp.so.6
+     77512 /lib/x86_64-linux-gnu/libXext.so.6
+     26800 /lib/x86_64-linux-gnu/libXfixes.so.3
+     76320 /lib/x86_64-linux-gnu/libXi.so.6
+     14616 /lib/x86_64-linux-gnu/libXinerama.so.1
+     47504 /lib/x86_64-linux-gnu/libXrandr.so.2
+     43600 /lib/x86_64-linux-gnu/libXrender.so.1
+    170064 /lib/x86_64-linux-gnu/libatk-1.0.so.0
+    243912 /lib/x86_64-linux-gnu/libatk-bridge-2.0.so.0
+    235904 /lib/x86_64-linux-gnu/libatspi.so.0
+    236592 /lib/x86_64-linux-gnu/libblkid.so.1
+    141640 /lib/x86_64-linux-gnu/libbrotlicommon.so.1
+     51512 /lib/x86_64-linux-gnu/libbrotlidec.so.1
+     80888 /lib/x86_64-linux-gnu/libbsd.so.0
+     78944 /lib/x86_64-linux-gnu/libbz2.so.1.0
+   2129424 /lib/x86_64-linux-gnu/libc.so.6
+     42920 /lib/x86_64-linux-gnu/libcairo-gobject.so.2
+   1321832 /lib/x86_64-linux-gnu/libcairo.so.2
+     51536 /lib/x86_64-linux-gnu/libcap.so.2
+     30792 /lib/x86_64-linux-gnu/libdatrie.so.1
+    317752 /lib/x86_64-linux-gnu/libdbus-1.so.3
+     14408 /lib/x86_64-linux-gnu/libdl.so.2
+   1189616 /lib/x86_64-linux-gnu/libepoxy.so.0
+    186624 /lib/x86_64-linux-gnu/libexpat.so.1
+     47672 /lib/x86_64-linux-gnu/libffi.so.8
+    325712 /lib/x86_64-linux-gnu/libfontconfig.so.1
+    833608 /lib/x86_64-linux-gnu/libfreetype.so.6
+    121144 /lib/x86_64-linux-gnu/libfribidi.so.0
+    183024 /lib/x86_64-linux-gnu/libgcc_s.so.1
+   1345072 /lib/x86_64-linux-gnu/libgcrypt.so.20
+   1022416 /lib/x86_64-linux-gnu/libgdk-3.so.0
+    186744 /lib/x86_64-linux-gnu/libgdk_pixbuf-2.0.so.0
+   1887632 /lib/x86_64-linux-gnu/libgio-2.0.so.0
+   1343056 /lib/x86_64-linux-gnu/libglib-2.0.so.0
+     22736 /lib/x86_64-linux-gnu/libgmodule-2.0.so.0
+    399752 /lib/x86_64-linux-gnu/libgobject-2.0.so.0
+    149760 /lib/x86_64-linux-gnu/libgpg-error.so.0
+    149776 /lib/x86_64-linux-gnu/libgraphite2.so.3
+   8156632 /lib/x86_64-linux-gnu/libgtk-3.so.0
+   1101752 /lib/x86_64-linux-gnu/libharfbuzz.so.0
+    534592 /lib/x86_64-linux-gnu/libjpeg.so.8
+    137440 /lib/x86_64-linux-gnu/liblz4.so.1
+    202904 /lib/x86_64-linux-gnu/liblzma.so.5
+    952616 /lib/x86_64-linux-gnu/libm.so.6
+     55536 /lib/x86_64-linux-gnu/libmd.so.0
+    309960 /lib/x86_64-linux-gnu/libmount.so.1
+    433912 /lib/x86_64-linux-gnu/libpango-1.0.so.0
+     67712 /lib/x86_64-linux-gnu/libpangocairo-1.0.so.0
+    108536 /lib/x86_64-linux-gnu/libpangoft2-1.0.so.0
+    625344 /lib/x86_64-linux-gnu/libpcre2-8.so.0
+    710832 /lib/x86_64-linux-gnu/libpixman-1.so.0
+    223304 /lib/x86_64-linux-gnu/libpng16.so.16
+     14408 /lib/x86_64-linux-gnu/libpthread.so.0
+    174472 /lib/x86_64-linux-gnu/libselinux.so.1
+   2592224 /lib/x86_64-linux-gnu/libstdc++.so.6
+    910592 /lib/x86_64-linux-gnu/libsystemd.so.0
+     41152 /lib/x86_64-linux-gnu/libthai.so.0
+     64776 /lib/x86_64-linux-gnu/libwayland-client.so.0
+     35352 /lib/x86_64-linux-gnu/libwayland-cursor.so.0
+     14344 /lib/x86_64-linux-gnu/libwayland-egl.so.1
+     55528 /lib/x86_64-linux-gnu/libxcb-render.so.0
+     14552 /lib/x86_64-linux-gnu/libxcb-shm.so.0
+    162392 /lib/x86_64-linux-gnu/libxcb.so.1
+    293432 /lib/x86_64-linux-gnu/libxkbcommon.so.0
+    113000 /lib/x86_64-linux-gnu/libz.so.1
+    755864 /lib/x86_64-linux-gnu/libzstd.so.1
+
+-rwxr-xr-x 1 root root 23840 Oct 25 18:25 /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/benchapp
+
+/home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data:
+total 852
+drwxr-xr-x 3 root root   4096 Oct 25 18:31 flutter_assets
+-rw-r--r-- 1 root root 864880 Oct 25 18:22 icudtl.dat
+
+/home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/lib:
+total 20156
+-rw-r--r-- 1 root root  3376008 Oct 25 18:31 libapp.so
+-rw-r--r-- 1 root root 17256536 Oct 25 18:22 libflutter_linux_gtk.so
+21659001	/home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle
+
+  characters:	    version: "1.4.1"
+  ffi:	    version: "2.2.0"
+  material_color_utilities:	    version: "0.13.0"
+  vector_math:	    version: "2.4.0"
+  150 app/lib/bench.dart
+   34 app/lib/main.dart
+  308 app/lib/model.dart
+  589 app/lib/scenarios.dart
+  175 app/lib/scene.dart
+ 1256 total

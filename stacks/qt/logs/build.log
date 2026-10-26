@@ -1,0 +1,70 @@
+-- Configuring done (0.2s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/user/eval/stacks/qt/build
+Change Dir: '/home/user/eval/stacks/qt/build'
+
+Run Build Command(s): /usr/bin/ninja -v -j 2
+[1/6] cd /home/user/eval/stacks/qt/build && /usr/bin/cmake -E cmake_autogen /home/user/eval/stacks/qt/build/CMakeFiles/qtbench_autogen.dir/AutogenInfo.json Release && /usr/bin/cmake -E touch /home/user/eval/stacks/qt/build/qtbench_autogen/timestamp && /usr/bin/cmake -E cmake_transform_depfile Ninja gccdepfile /home/user/eval/stacks/qt /home/user/eval/stacks/qt /home/user/eval/stacks/qt/build /home/user/eval/stacks/qt/build /home/user/eval/stacks/qt/build/qtbench_autogen/deps /home/user/eval/stacks/qt/build/CMakeFiles/d/a3d7a6d02aef492349a778b3c017295f517b26503f3dbb65cd8c6b0169ac8cb0.d
+[2/6] cd /home/user/eval/stacks/qt/build && /usr/bin/cmake -E cmake_autorcc /home/user/eval/stacks/qt/build/CMakeFiles/qtbench_autogen.dir/AutoRcc_qml_EWIEGA46WW_Info.json Release
+[3/6] /usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/user/eval/stacks/qt/build/qtbench_autogen/include -I/home/user/eval/core -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -O2 -DNDEBUG -std=gnu++17 -fPIC -MD -MT CMakeFiles/qtbench.dir/qtbench_autogen/mocs_compilation.cpp.o -MF CMakeFiles/qtbench.dir/qtbench_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/qtbench.dir/qtbench_autogen/mocs_compilation.cpp.o -c /home/user/eval/stacks/qt/build/qtbench_autogen/mocs_compilation.cpp
+[4/6] /usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/user/eval/stacks/qt/build/qtbench_autogen/include -I/home/user/eval/core -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -O2 -DNDEBUG -std=gnu++17 -fPIC -MD -MT CMakeFiles/qtbench.dir/qtbench_autogen/EWIEGA46WW/qrc_qml.cpp.o -MF CMakeFiles/qtbench.dir/qtbench_autogen/EWIEGA46WW/qrc_qml.cpp.o.d -o CMakeFiles/qtbench.dir/qtbench_autogen/EWIEGA46WW/qrc_qml.cpp.o -c /home/user/eval/stacks/qt/build/qtbench_autogen/EWIEGA46WW/qrc_qml.cpp
+[5/6] /usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NETWORK_LIB -DQT_NO_DEBUG -DQT_OPENGL_LIB -DQT_QMLINTEGRATION_LIB -DQT_QMLMODELS_LIB -DQT_QML_LIB -DQT_QUICK_LIB -I/home/user/eval/stacks/qt/build/qtbench_autogen/include -I/home/user/eval/core -isystem /usr/include/x86_64-linux-gnu/qt6/QtQuick -isystem /usr/include/x86_64-linux-gnu/qt6 -isystem /usr/include/x86_64-linux-gnu/qt6/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt6/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt6/QtGui -isystem /usr/include/x86_64-linux-gnu/qt6/QtQml -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlIntegration -isystem /usr/include/x86_64-linux-gnu/qt6/QtNetwork -isystem /usr/include/x86_64-linux-gnu/qt6/QtQmlModels -isystem /usr/include/x86_64-linux-gnu/qt6/QtOpenGL -O2 -DNDEBUG -std=gnu++17 -fPIC -MD -MT CMakeFiles/qtbench.dir/main.cpp.o -MF CMakeFiles/qtbench.dir/main.cpp.o.d -o CMakeFiles/qtbench.dir/main.cpp.o -c /home/user/eval/stacks/qt/main.cpp
+In file included from /usr/include/c++/13/bits/specfun.h:43,
+                 from /usr/include/c++/13/cmath:3699,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qnumeric.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qglobal.h:1405,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qtguiglobal.h:7,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qguiapplication.h:7,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/QGuiApplication:1,
+                 from /home/user/eval/stacks/qt/main.cpp:2:
+In static member function 'static _Up* std::__copy_move<_IsMove, true, std::random_access_iterator_tag>::__copy_m(_Tp*, _Tp*, _Up*) [with _Tp = Upd; _Up = Upd; bool _IsMove = false]',
+    inlined from '_OI std::__copy_move_a2(_II, _II, _OI) [with bool _IsMove = false; _II = Upd*; _OI = Upd*]' at /usr/include/c++/13/bits/stl_algobase.h:506:30,
+    inlined from '_OI std::__copy_move_a1(_II, _II, _OI) [with bool _IsMove = false; _II = Upd*; _OI = Upd*]' at /usr/include/c++/13/bits/stl_algobase.h:533:42,
+    inlined from '_OI std::__copy_move_a(_II, _II, _OI) [with bool _IsMove = false; _II = __gnu_cxx::__normal_iterator<Upd*, vector<Upd> >; _OI = Upd*]' at /usr/include/c++/13/bits/stl_algobase.h:540:31,
+    inlined from '_OI std::copy(_II, _II, _OI) [with _II = __gnu_cxx::__normal_iterator<Upd*, vector<Upd> >; _OI = Upd*]' at /usr/include/c++/13/bits/stl_algobase.h:633:7,
+    inlined from 'static _ForwardIterator std::__uninitialized_copy<true>::__uninit_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<Upd*, std::vector<Upd> >; _ForwardIterator = Upd*]' at /usr/include/c++/13/bits/stl_uninitialized.h:147:27,
+    inlined from '_ForwardIterator std::uninitialized_copy(_InputIterator, _InputIterator, _ForwardIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<Upd*, vector<Upd> >; _ForwardIterator = Upd*]' at /usr/include/c++/13/bits/stl_uninitialized.h:185:15,
+    inlined from '_ForwardIterator std::__uninitialized_copy_a(_InputIterator, _InputIterator, _ForwardIterator, allocator<_Tp>&) [with _InputIterator = __gnu_cxx::__normal_iterator<Upd*, vector<Upd> >; _ForwardIterator = Upd*; _Tp = Upd]' at /usr/include/c++/13/bits/stl_uninitialized.h:373:37,
+    inlined from 'void std::vector<_Tp, _Alloc>::_M_range_insert(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = __gnu_cxx::__normal_iterator<Upd*, std::vector<Upd> >; _Tp = Upd; _Alloc = std::allocator<Upd>]' at /usr/include/c++/13/bits/vector.tcc:814:38,
+    inlined from 'std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<Upd*, std::vector<Upd> >; <template-parameter-2-2> = void; _Tp = Upd; _Alloc = std::allocator<Upd>]' at /usr/include/c++/13/bits/stl_vector.h:1486:19,
+    inlined from 'void BenchModel::enqueue(std::vector<Upd>&&)' at /home/user/eval/stacks/qt/model.h:42:28,
+    inlined from 'Producer::run()::<lambda()> mutable' at /home/user/eval/stacks/qt/model.h:93:94,
+    inlined from 'static void QtPrivate::FunctorCall<QtPrivate::IndexesList<II ...>, QtPrivate::List<Tail ...>, R, Function>::call(Function&, void**) [with int ...II = {}; SignalArgs = {}; R = void; Function = Producer::run()::<lambda()>]' at /usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs_impl.h:127:14,
+    inlined from 'static void QtPrivate::Functor<Function, N>::call(Function&, void*, void**) [with SignalArgs = QtPrivate::List<>; R = void; Function = Producer::run()::<lambda()>; int N = 0]' at /usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs_impl.h:241:83,
+    inlined from 'static void QtPrivate::QFunctorSlotObject<Func, N, Args, R>::impl(int, QtPrivate::QSlotObjectBase*, QObject*, void**, bool*) [with Func = Producer::run()::<lambda()>; int N = 0; Args = QtPrivate::List<>; R = void]' at /usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs_impl.h:408:49:
+/usr/include/c++/13/bits/stl_algobase.h:437:30: warning: 'void* __builtin_memmove(void*, const void*, long unsigned int)' writing between 17 and 9223372036854775792 bytes into a region of size 0 overflows the destination [-Wstringop-overflow=]
+  437 |             __builtin_memmove(__result, __first, sizeof(_Tp) * _Num);
+      |             ~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+In file included from /usr/include/x86_64-linux-gnu/c++/13/bits/c++allocator.h:33,
+                 from /usr/include/c++/13/bits/allocator.h:46,
+                 from /usr/include/c++/13/bits/alloc_traits.h:39,
+                 from /usr/include/c++/13/ext/alloc_traits.h:34,
+                 from /usr/include/c++/13/bits/hashtable_policy.h:39,
+                 from /usr/include/c++/13/bits/hashtable.h:35,
+                 from /usr/include/c++/13/bits/unordered_map.h:33,
+                 from /usr/include/c++/13/unordered_map:41,
+                 from /usr/include/c++/13/functional:63,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qchar.h:9,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qstring.h:14,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtCore/qcoreapplication.h:8,
+                 from /usr/include/x86_64-linux-gnu/qt6/QtGui/qguiapplication.h:8:
+In member function '_Tp* std::__new_allocator<_Tp>::allocate(size_type, const void*) [with _Tp = Upd]',
+    inlined from 'static _Tp* std::allocator_traits<std::allocator<_Tp1> >::allocate(allocator_type&, size_type) [with _Tp = Upd]' at /usr/include/c++/13/bits/alloc_traits.h:482:28,
+    inlined from 'std::_Vector_base<_Tp, _Alloc>::pointer std::_Vector_base<_Tp, _Alloc>::_M_allocate(std::size_t) [with _Tp = Upd; _Alloc = std::allocator<Upd>]' at /usr/include/c++/13/bits/stl_vector.h:381:33,
+    inlined from 'std::_Vector_base<_Tp, _Alloc>::pointer std::_Vector_base<_Tp, _Alloc>::_M_allocate(std::size_t) [with _Tp = Upd; _Alloc = std::allocator<Upd>]' at /usr/include/c++/13/bits/stl_vector.h:378:7,
+    inlined from 'void std::vector<_Tp, _Alloc>::_M_range_insert(iterator, _ForwardIterator, _ForwardIterator, std::forward_iterator_tag) [with _ForwardIterator = __gnu_cxx::__normal_iterator<Upd*, std::vector<Upd> >; _Tp = Upd; _Alloc = std::allocator<Upd>]' at /usr/include/c++/13/bits/vector.tcc:805:40,
+    inlined from 'std::vector<_Tp, _Alloc>::iterator std::vector<_Tp, _Alloc>::insert(const_iterator, _InputIterator, _InputIterator) [with _InputIterator = __gnu_cxx::__normal_iterator<Upd*, std::vector<Upd> >; <template-parameter-2-2> = void; _Tp = Upd; _Alloc = std::allocator<Upd>]' at /usr/include/c++/13/bits/stl_vector.h:1486:19,
+    inlined from 'void BenchModel::enqueue(std::vector<Upd>&&)' at /home/user/eval/stacks/qt/model.h:42:28,
+    inlined from 'Producer::run()::<lambda()> mutable' at /home/user/eval/stacks/qt/model.h:93:94,
+    inlined from 'static void QtPrivate::FunctorCall<QtPrivate::IndexesList<II ...>, QtPrivate::List<Tail ...>, R, Function>::call(Function&, void**) [with int ...II = {}; SignalArgs = {}; R = void; Function = Producer::run()::<lambda()>]' at /usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs_impl.h:127:14,
+    inlined from 'static void QtPrivate::Functor<Function, N>::call(Function&, void*, void**) [with SignalArgs = QtPrivate::List<>; R = void; Function = Producer::run()::<lambda()>; int N = 0]' at /usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs_impl.h:241:83,
+    inlined from 'static void QtPrivate::QFunctorSlotObject<Func, N, Args, R>::impl(int, QtPrivate::QSlotObjectBase*, QObject*, void**, bool*) [with Func = Producer::run()::<lambda()>; int N = 0; Args = QtPrivate::List<>; R = void]' at /usr/include/x86_64-linux-gnu/qt6/QtCore/qobjectdefs_impl.h:408:49:
+/usr/include/c++/13/bits/new_allocator.h:151:55: note: at offset [-9223372036854775808, -1] into destination object of size [16, 9223372036854775792] allocated by 'operator new'
+  151 |         return static_cast<_Tp*>(_GLIBCXX_OPERATOR_NEW(__n * sizeof(_Tp)));
+      |                                                       ^
+[6/6] : && /usr/bin/c++ -O2 -DNDEBUG  CMakeFiles/qtbench.dir/qtbench_autogen/mocs_compilation.cpp.o CMakeFiles/qtbench.dir/main.cpp.o CMakeFiles/qtbench.dir/qtbench_autogen/EWIEGA46WW/qrc_qml.cpp.o -o qtbench  /usr/lib/x86_64-linux-gnu/libQt6Quick.so.6.4.2  /home/user/eval/core/target/release/libbenchcore.a  -lpthread  -ldl  -lm  /usr/lib/x86_64-linux-gnu/libQt6QmlModels.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6Qml.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6Network.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6OpenGL.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6Gui.so.6.4.2  /usr/lib/x86_64-linux-gnu/libQt6Core.so.6.4.2  /usr/lib/x86_64-linux-gnu/libGLX.so  /usr/lib/x86_64-linux-gnu/libOpenGL.so && :
+
+
+real	0m6.012s
+user	0m7.842s
+sys	0m0.870s

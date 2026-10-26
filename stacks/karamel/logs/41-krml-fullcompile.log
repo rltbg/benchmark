@@ -1,0 +1,30 @@
+[38;5;119m✔[0m [Monomorphization] ⏱️ 7ms
+[38;5;119m✔[0m [Inlining] ⏱️ 8ms
+[38;5;119m✔[0m [Pattern matches compilation] ⏱️ 8ms
+[38;5;119m✔[0m [Structs + Simplify 2] ⏱️ 14ms
+[38;5;119m✔[0m [Drop] ⏱️ 1ms
+[38;5;119m✔[0m [AstToCStar] ⏱️ 4ms
+[38;5;119m✔[0m [CStarToC] ⏱️ <1ms
+[4mKaRaMeL executable is:[0m /home/user/eval/stacks/karamel/krml-prefix/bin/krml
+[38;5;119m✔[0m [PrettyPrinting] ⏱️ <1ms
+KaRaMeL: wrote out .c files for Core_Low
+KaRaMeL: wrote out .h files for Core_Low
+[38;5;81m⚙ KaRaMeL auto-detecting tools.[0m Here's what we found:
+[4mreadlink is:[0m readlink
+[38;5;81m⚙ KaRaMeL will drive the C compiler.[0m Here's what we found:
+[4mcc is:[0m cc (= /usr/bin/x86_64-linux-gnu-gcc-13)
+[4mcc flavor is:[0m gcc
+[4mcc options are:[0m -I /home/user/eval/stacks/karamel/krml-prefix/lib/krml/dist/minimal -I /home/user/eval/stacks/karamel/krml-prefix/lib/krml -I /home/user/eval/stacks/karamel/krml-prefix/include/krml -I c5 -Wall -Werror -Wno-unknown-warning-option -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -Wno-parentheses -std=c11
+[38;5;81m⚡ Generating object files[0m
+[38;5;119m✔[0m [CC,c5/Core_Low.c] (use -verbose to see the output)
+[38;5;203m✘[0m [LD] (use -verbose to see the output)
+/usr/bin/ld: cannot find /home/user/eval/stacks/karamel/krml-prefix/lib/krml/dist/generic/libkrmllib.a: No such file or directory
+collect2: error: ld returned 1 exit status
+
+Warning 3: run_or_warn: the following command failed:
+cc -I /home/user/eval/stacks/karamel/krml-prefix/lib/krml/dist/minimal -I /home/user/eval/stacks/karamel/krml-prefix/lib/krml -I /home/user/eval/stacks/karamel/krml-prefix/include/krml -I c5 -Wall -Werror -Wno-unknown-warning-option -g -fwrapv -D_BSD_SOURCE -D_DEFAULT_SOURCE -Wno-parentheses -std=c11 c5/Core_Low.o /home/user/eval/stacks/karamel/krml-prefix/lib/krml/dist/generic/libkrmllib.a -o c5/core.a
+Warning 3 is fatal, exiting.
+
+real	0m0.294s
+user	0m0.189s
+sys	0m0.015s

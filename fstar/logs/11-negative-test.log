@@ -1,0 +1,14 @@
+* Error 19 at Core.fst(56,4-56,6):
+  - Could not prove post-condition
+  - The SMT solver could not prove the query. Use --query_stats for more
+    details.
+  - See also Core.fst(55,23-55,65)
+
+1 error was reported (see above)
+* Error 19 at Core.fst(167,54-167,101):
+  - Assertion failed
+  - The SMT solver could not prove the query. Use --query_stats for more
+    details.
+  - See also /tmp/claude-0/-home-user/950b1927-9cd8-5fd1-8b28-a00f39a279fc/scratchpad/dl/fstar/fstar/lib/fstar/ulib/Prims.fst(449,29-449,97)
+
+1 error was reported (see above)

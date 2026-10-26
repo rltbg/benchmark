@@ -1,0 +1,263 @@
+Resolving dependencies...
+Downloading packages...
+  material_color_utilities 0.13.0 (0.13.1 available)
+  meta 1.18.3 (1.19.0 available)
+  vector_math 2.4.0 (2.4.3 available)
+Got dependencies!
+3 packages have newer versions incompatible with dependency constraints.
+Try `flutter pub outdated` for more information.
+[  +58 ms] Unable to locate an Android SDK.
+[   +9 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[  +17 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[   +1 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[  +66 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
+[        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[        ] [1/1] Linux SDK
+[   +1 ms]   ├─ [1/3] linux-x64-debug/linux-x64-flutter-gtk
+[ +431 ms] Content https://storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-debug/linux-x64-flutter-gtk.zip md5 hash: dLh0wFXXlv+Vy3+JhIxWFQ==
+[ +770 ms]   ├─ [1/3] linux-x64-debug/linux-x64-flutter-gtk (completed in 1,201ms)
+[   +1 ms] executing: unzip -o -q /home/user/eval/stacks/flutter/sdk/bin/cache/downloads/storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-debug/linux-x64-flutter-gtk.zip -d /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64
+[ +462 ms] Exit code 0 from: unzip -o -q /home/user/eval/stacks/flutter/sdk/bin/cache/downloads/storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-debug/linux-x64-flutter-gtk.zip -d /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64
+[  +63 ms]   ├─ [2/3] linux-x64-profile/linux-x64-flutter-gtk
+[ +368 ms] Content https://storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-profile/linux-x64-flutter-gtk.zip md5 hash: BZwqnuqy5OV4AO3+DTMIeQ==
+[ +433 ms]   ├─ [2/3] linux-x64-profile/linux-x64-flutter-gtk (completed in 802ms)
+[   +1 ms] executing: unzip -o -q /home/user/eval/stacks/flutter/sdk/bin/cache/downloads/storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-profile/linux-x64-flutter-gtk.zip -d /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64-profile
+[ +224 ms] Exit code 0 from: unzip -o -q /home/user/eval/stacks/flutter/sdk/bin/cache/downloads/storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-profile/linux-x64-flutter-gtk.zip -d /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64-profile
+[  +41 ms]   └─ [3/3] linux-x64-release/linux-x64-flutter-gtk
+[ +389 ms] Content https://storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-release/linux-x64-flutter-gtk.zip md5 hash: AJHqIi5LA0bVQGNVQqvu/w==
+[ +406 ms]   └─ [3/3] linux-x64-release/linux-x64-flutter-gtk (completed in 795ms)
+[   +1 ms] executing: unzip -o -q /home/user/eval/stacks/flutter/sdk/bin/cache/downloads/storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-release/linux-x64-flutter-gtk.zip -d /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64-release
+[ +208 ms] Exit code 0 from: unzip -o -q /home/user/eval/stacks/flutter/sdk/bin/cache/downloads/storage.googleapis.com/flutter_infra_release/flutter/cf636b1dfb818dd6a3ff16e390e93b1a036969c8/linux-x64-release/linux-x64-flutter-gtk.zip -d /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64-release
+[  +33 ms] Skipping pub get: version match.
+[  +73 ms] Skipping generating generated_plugin_registrant.h because it is up-to-date.
+[   +3 ms] Skipping generating generated_plugin_registrant.cc because it is up-to-date.
+[   +1 ms] Skipping generating generated_plugins.cmake because it is up-to-date.
+[  +26 ms] Building Linux application...
+[   +4 ms] executing: [/home/user/eval/stacks/flutter/app/build/linux/x64/release/] cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DFLUTTER_TARGET_PLATFORM=linux-x64 /home/user/eval/stacks/flutter/app/linux
+[ +259 ms] -- The CXX compiler identification is Clang 18.1.3
+[ +317 ms] -- Detecting CXX compiler ABI info
+[ +213 ms] -- Detecting CXX compiler ABI info - done
+[   +6 ms] -- Check for working CXX compiler: /usr/bin/clang++ - skipped
+[   +4 ms] -- Detecting CXX compile features
+[        ] -- Detecting CXX compile features - done
+[  +12 ms] -- Found PkgConfig: /usr/bin/pkg-config (found version "1.8.1") 
+[        ] -- Checking for module 'gtk+-3.0'
+[  +42 ms] --   Found gtk+-3.0, version 3.24.41
+[ +354 ms] -- Checking for module 'glib-2.0'
+[  +24 ms] --   Found glib-2.0, version 2.80.0
+[  +68 ms] -- Checking for module 'gio-2.0'
+[  +23 ms] --   Found gio-2.0, version 2.80.0
+[  +82 ms] -- Configuring done (1.4s)
+[  +10 ms] -- Generating done (0.0s)
+[   +7 ms] -- Build files have been written to: /home/user/eval/stacks/flutter/app/build/linux/x64/release
+[   +9 ms] executing: ninja -C /home/user/eval/stacks/flutter/app/build/linux/x64/release install
+[  +11 ms] ninja: Entering directory `/home/user/eval/stacks/flutter/app/build/linux/x64/release'
+[+19836 ms] [1/6] Generating /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/libflutter_linux_gtk.so, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_engine.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_call.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_response.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_value.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_view.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/flutter_linux.h, _phony_
+[        ] [  +86 ms] Unable to locate an Android SDK.
+[        ] [  +38 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] [   +4 ms] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] [   +3 ms] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[   +1 ms] [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[   +2 ms] [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[        ] [  +13 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] [   +2 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[   +3 ms] [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[   +2 ms] [  +96 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
+[        ] [   +4 ms] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
+[   +7 ms] [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
+[        ] [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
+[        ] [  +13 ms] Initializing file store
+[        ] [  +39 ms] build_hooks: Starting due to {}
+[        ] [   +2 ms] Skipping target: gen_localizations
+[        ] [   +2 ms] gen_dart_plugin_registrant: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: /home/user/eval/stacks/flutter/app/.dart_tool/package_config.json}
+[        ] [   +2 ms] unpack_linux: Starting due to {}
+[        ] [  +55 ms] unpack_linux: Complete
+[        ] [ +350 ms] No packages with native assets. Skipping native assets compilation.
+[        ] [   +2 ms] build_hooks: Complete
+[        ] [  +18 ms] gen_dart_plugin_registrant: Complete
+[        ] [   +2 ms] kernel_snapshot_program: Starting due to {}
+[  +53 ms] [   +9 ms] /home/user/eval/stacks/flutter/sdk/bin/cache/dart-sdk/bin/dartaotruntime /home/user/eval/stacks/flutter/sdk/bin/cache/dart-sdk/bin/snapshots/frontend_server_aot.dart.snapshot --sdk-root /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/common/flutter_patched_sdk_product/ --target=flutter --no-print-incremental-dependencies -DFLUTTER_BUILD_NAME=1.0.0 -DFLUTTER_BUILD_NUMBER=1 -DFLUTTER_VERSION=3.47.8 -DFLUTTER_CHANNEL=stable -DFLUTTER_GIT_URL=https://github.com/flutter/flutter -DFLUTTER_FRAMEWORK_REVISION=737ba8f885 -DFLUTTER_ENGINE_REVISION=cf636b1dfb -DFLUTTER_DART_VERSION=3.13.7 -Ddart.vm.profile=false -Ddart.vm.product=true --delete-tostring-package-uri=dart:ui --delete-tostring-package-uri=package:flutter --aot --tfa --target-os linux --packages /home/user/eval/stacks/flutter/app/.dart_tool/package_config.json --output-dill /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.dill --depfile /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/kernel_snapshot_program.d --verbosity=error --recorded-uses=/home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/recorded_uses.json package:benchapp/main.dart
+[        ] [+10433 ms] kernel_snapshot_program: Complete
+[        ] [ +349 ms] link_hooks: Starting due to {}
+[  +12 ms] [   +1 ms] aot_elf_release: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: /home/user/eval/stacks/flutter/sdk/packages/flutter_tools/lib/src/build_system/targets/common.dart,/home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.dill,/home/user/eval/stacks/flutter/sdk/bin/cache/engine.stamp,/home/user/eval/stacks/flutter/sdk/bin/cache/engine.stamp,/home/user/eval/stacks/flutter/sdk/bin/cache/engine.stamp, InvalidatedReasonKind.outputSetAddition: The following outputs were added to the output set: /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.so}
+[        ] [   +2 ms] targetingApplePlatform = false
+[        ] [        ] extractAppleDebugSymbols = true
+[        ] [        ] targetingAndroidPlatform = false
+[        ] [        ] Will strip AOT snapshot during build.
+[   +1 ms] [   +1 ms] executing: /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64-release/gen_snapshot --deterministic --snapshot_kind=app-aot-elf --elf=/home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.so --strip /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.dill
+[        ] [   +6 ms] link_hooks: Complete
+[        ] [   +1 ms] install_code_assets: Starting due to {}
+[   +8 ms] [  +15 ms] Writing native assets json to file:///home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/native_assets.json.
+[        ] [   +9 ms] Writing /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/native_assets.json done.
+[        ] [        ] install_code_assets: Complete
+[        ] [+6151 ms] aot_elf_release: Complete
+[  +12 ms] [  +20 ms] linux_aot_bundle: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.so, InvalidatedReasonKind.outputSetAddition: The following outputs were added to the output set: /home/user/eval/stacks/flutter/app/build/lib/libapp.so}
+[        ] [   +2 ms] linux_aot_bundle: Complete
+[        ] [  +18 ms] release_bundle_linux-x64_assets: Starting due to {}
+[  +12 ms] [ +124 ms] impellerc command: [/home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64/impellerc, --sksl, --runtime-stage-gles, --runtime-stage-gles3, --runtime-stage-vulkan, --iplr, --sl=/home/user/eval/stacks/flutter/app/build/flutter_assets/shaders/ink_sparkle.frag, --spirv=/home/user/eval/stacks/flutter/app/build/flutter_assets/shaders/ink_sparkle.frag.spirv, --input=/home/user/eval/stacks/flutter/sdk/packages/flutter/lib/src/material/shaders/ink_sparkle.frag, --input-type=frag, --include=/home/user/eval/stacks/flutter/sdk/packages/flutter/lib/src/material/shaders, --include=/home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64/shader_lib]
+[   +8 ms] [   +9 ms] impellerc command: [/home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64/impellerc, --sksl, --runtime-stage-gles, --runtime-stage-gles3, --runtime-stage-vulkan, --iplr, --sl=/home/user/eval/stacks/flutter/app/build/flutter_assets/shaders/stretch_effect.frag, --spirv=/home/user/eval/stacks/flutter/app/build/flutter_assets/shaders/stretch_effect.frag.spirv, --input=/home/user/eval/stacks/flutter/sdk/packages/flutter/lib/src/widgets/shaders/stretch_effect.frag, --input-type=frag, --include=/home/user/eval/stacks/flutter/sdk/packages/flutter/lib/src/widgets/shaders, --include=/home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64/shader_lib]
+[        ] [+1125 ms] release_bundle_linux-x64_assets: Complete
+[        ] [  +17 ms] Persisting file store
+[        ] [   +4 ms] Done persisting file store
+[        ] [  +18 ms] build succeeded.
+[        ] [        ] "flutter assemble" took 18,933ms.
+[   +8 ms] [   +1 ms] Running 1 shutdown hook
+[        ] [        ] Shutdown hooks complete
+[        ] [        ] exiting with code 0
+[+1178 ms] [2/6] Building CXX object runner/CMakeFiles/benchapp.dir/main.cc.o
+[  +26 ms] [3/6] Building CXX object runner/CMakeFiles/benchapp.dir/__/flutter/generated_plugin_registrant.cc.o
+[ +203 ms] [4/6] Building CXX object runner/CMakeFiles/benchapp.dir/my_application.cc.o
+[ +122 ms] [5/6] Linking CXX executable intermediates_do_not_run/benchapp
+[        ] [5/6] Install the project...
+[   +9 ms] -- Install configuration: "Release"
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/benchapp
+[        ] -- Set non-toolchain portion of runtime path of "/home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/benchapp" to "$ORIGIN/lib"
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/icudtl.dat
+[   +1 ms] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/lib/libflutter_linux_gtk.so
+[  +15 ms] -- Up-to-date: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/lib
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/AssetManifest.bin
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/NOTICES.Z
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/FontManifest.json
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/NativeAssetsManifest.json
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/version.json
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/shaders
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/shaders/stretch_effect.frag
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/shaders/ink_sparkle.frag
+[        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/lib/libapp.so
+[  +15 ms] Building Linux application... (completed in 23.0s)
+[   +1 ms] ✓ Built build/linux/x64/release/bundle/benchapp
+[        ] "flutter linux" took 27,054ms.
+[   +1 ms] Running 1 shutdown hook
+[        ] Shutdown hooks complete
+[        ] exiting with code 0
+	Command being timed: "flutter build linux --release -v"
+	User time (seconds): 22.61
+	System time (seconds): 2.10
+	Percent of CPU this job got: 90%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:27.33
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 416264
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 715
+	Minor (reclaiming a frame) page faults: 610339
+	Voluntary context switches: 67378
+	Involuntary context switches: 56705
+	Swaps: 0
+	File system inputs: 90952
+	File system outputs: 393904
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
+total 40
+drwxr-xr-x 4 root root  4096 Oct 25 18:23 .
+drwxr-xr-x 7 root root  4096 Oct 25 18:23 ..
+-rwxr-xr-x 1 root root 23840 Oct 25 18:23 benchapp
+drwxr-xr-x 3 root root  4096 Oct 25 18:23 data
+drwxr-xr-x 2 root root  4096 Oct 25 18:23 lib

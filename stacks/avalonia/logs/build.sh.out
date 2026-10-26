@@ -1,0 +1,84 @@
+out/aot:
+total 33392
+drwxr-xr-x 2 root root     4096 Oct 25 18:02 .
+drwxr-xr-x 5 root root     4096 Oct 25 18:02 ..
+-rwxr-xr-x 1 root root 19783968 Oct 25 18:01 avalonia-bench
+-rwxr--r-- 1 root root  2808040 Feb  6  2026 libHarfBuzzSharp.so
+-rwxr--r-- 1 root root 11170296 May 23 00:33 libSkiaSharp.so
+-rwxr-xr-x 1 root root   411400 Oct 25 18:02 libbenchcore.so
+
+out/jit:
+total 104772
+drwxr-xr-x 2 root root    12288 Oct 25 18:02 .
+drwxr-xr-x 5 root root     4096 Oct 25 18:02 ..
+-rwxr--r-- 1 root root  2361344 Oct  9 11:34 Avalonia.Base.dll
+-rwxr--r-- 1 root root  1355264 Oct  9 11:34 Avalonia.Controls.dll
+-rwxr--r-- 1 root root   214528 Oct  9 11:34 Avalonia.DesignerSupport.dll
+-rwxr--r-- 1 root root   242688 Oct  9 11:34 Avalonia.Dialogs.dll
+-rwxr--r-- 1 root root   563712 Oct  9 11:34 Avalonia.FreeDesktop.AtSpi.dll
+-rwxr--r-- 1 root root   256512 Oct  9 11:34 Avalonia.FreeDesktop.dll
+-rwxr--r-- 1 root root    22016 Oct  9 11:34 Avalonia.HarfBuzz.dll
+-rwxr--r-- 1 root root    74752 Oct  9 11:34 Avalonia.Markup.Xaml.dll
+-rwxr--r-- 1 root root    45568 Oct  9 11:34 Avalonia.Markup.dll
+-rwxr--r-- 1 root root    15360 Oct  9 11:34 Avalonia.Metal.dll
+-rwxr--r-- 1 root root    15360 Oct  9 11:34 Avalonia.MicroCom.dll
+-rwxr--r-- 1 root root   128512 Oct  9 11:34 Avalonia.OpenGL.dll
+-rwxr--r-- 1 root root    75776 Oct  9 11:34 Avalonia.Remote.Protocol.dll
+-rwxr--r-- 1 root root   125952 Oct  9 11:34 Avalonia.Skia.dll
+-rwxr--r-- 1 root root   415232 Oct  9 11:34 Avalonia.Themes.Simple.dll
+-rwxr--r-- 1 root root   191488 Oct  9 11:34 Avalonia.Vulkan.dll
+-rwxr--r-- 1 root root   408576 Oct  9 11:34 Avalonia.X11.dll
+-rwxr--r-- 1 root root     4096 Oct  9 11:34 Avalonia.dll
+-rwxr--r-- 1 root root  2374144 Oct 15 09:02 FSharp.Core.dll
+-rwxr--r-- 1 root root   122400 Feb  6  2026 HarfBuzzSharp.dll
+-rwxr--r-- 1 root root    15360 Apr 20  2026 MicroCom.Runtime.dll
+-rwxr--r-- 1 root root   796496 Oct  4 21:49 Microsoft.CSharp.dll
+-rwxr--r-- 1 root root  1166160 Oct  4 21:49 Microsoft.VisualBasic.Core.dll
+-rwxr--r-- 1 root root    17192 Oct  4 21:36 Microsoft.VisualBasic.dll
+-rwxr--r-- 1 root root    15656 Oct  4 21:34 Microsoft.Win32.Primitives.dll
+-rwxr--r-- 1 root root    34640 Oct  4 21:49 Microsoft.Win32.Registry.dll
+-rwxr--r-- 1 root root   489824 May 23 02:08 SkiaSharp.dll
+-rwxr--r-- 1 root root    15144 Oct  4 21:36 System.AppContext.dll
+-rwxr--r-- 1 root root    15144 Oct  4 21:36 System.Buffers.dll
+-rwxr--r-- 1 root root   228136 Oct  4 21:49 System.Collections.Concurrent.dll
+-rwxr--r-- 1 root root   984360 Oct  4 21:49 System.Collections.Immutable.dll
+-rwxr--r-- 1 root root    93008 Oct  4 21:49 System.Collections.NonGeneric.dll
+-rwxr--r-- 1 root root    92968 Oct  4 21:49 System.Collections.Specialized.dll
+-rwxr--r-- 1 root root   289104 Oct  4 21:49 System.Collections.dll
+-rwxr--r-- 1 root root   191272 Oct  4 21:49 System.ComponentModel.Annotations.dll
+-rwxr--r-- 1 root root    16680 Oct  4 21:37 System.ComponentModel.DataAnnotations.dll
+-rwxr--r-- 1 root root    36136 Oct  4 21:49 System.ComponentModel.EventBasedAsync.dll
+-rwxr--r-- 1 root root    70952 Oct  4 21:49 System.ComponentModel.Primitives.dll
+-rwxr--r-- 1 root root   760144 Oct  4 21:49 System.ComponentModel.TypeConverter.dll
+-rwxr--r-- 1 root root    17192 Oct  4 21:49 System.ComponentModel.dll
+-rwxr--r-- 1 root root    19240 Oct  4 21:36 System.Configuration.dll
+-rwxr--r-- 1 root root   198952 Oct  4 21:49 System.Console.dll
+-rwxr--r-- 1 root root    23376 Oct  4 21:38 System.Core.dll
+-rwxr--r-- 1 root root  2803024 Oct  4 21:49 System.Data.Common.dll
+-rwxr--r-- 1 root root    15656 Oct  4 21:37 System.Data.DataSetExtensions.dll
+-rwxr--r-- 1 root root    25384 Oct  4 21:38 System.Data.dll
+-rwxr--r-- 1 root root    16168 Oct  4 21:37 System.Diagnostics.Contracts.dll
+-rwxr--r-- 1 root root    15656 Oct  4 21:36 System.Diagnostics.Debug.dll
+-rwxr--r-- 1 root root   497960 Oct  4 21:49 System.Diagnostics.DiagnosticSource.dll
+-rwxr--r-- 1 root root    43304 Oct  4 21:49 System.Diagnostics.FileVersionInfo.dll
+-rwxr--r-- 1 root root   275240 Oct  4 21:49 System.Diagnostics.Process.dll
+-rwxr--r-- 1 root root    35112 Oct  4 21:49 System.Diagnostics.StackTrace.dll
+-rwxr--r-- 1 root root    59176 Oct  4 21:49 System.Diagnostics.TextWriterTraceListener.dll
+-rwxr--r-- 1 root root    15144 Oct  4 21:36 System.Diagnostics.Tools.dll
+-rwxr--r-- 1 root root   131368 Oct  4 21:49 System.Diagnostics.TraceSource.dll
+-rwxr--r-- 1 root root    16168 Oct  4 21:34 System.Diagnostics.Tracing.dll
+-rwxr--r-- 1 root root   123688 Oct  4 21:49 System.Drawing.Primitives.dll
+-rwxr--r-- 1 root root    20264 Oct  4 21:37 System.Drawing.dll
+-rwxr--r-- 1 root root    16208 Oct  4 21:36 System.Dynamic.Runtime.dll
+-rwxr--r-- 1 root root   224592 Oct  4 21:49 System.Formats.Asn1.dll
+-rwxr--r-- 1 root root   292688 Oct  4 21:49 System.Formats.Tar.dll
+-rwxr--r-- 1 root root    15656 Oct  4 21:36 System.Globalization.Calendars.dll
+-rwxr--r-- 1 root root    15184 Oct  4 21:36 System.Globalization.Extensions.dll
+-rwxr--r-- 1 root root    15656 Oct  4 21:36 System.Globalization.dll
+-rwxr--r-- 1 root root    73552 Oct  4 21:49 System.IO.Compression.Brotli.dll
+-rwxr--r-- 1 root root    15144 Oct  4 21:36 System.IO.Compression.FileSystem.dll
+-rwxr--r-- 1 root root    98600 Oct  4 21:50 System.IO.Compression.ZipFile.dll
+
+real	2m21.000s
+user	2m41.001s
+sys	0m8.256s

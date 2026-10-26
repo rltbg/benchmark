@@ -1,0 +1,13 @@
+dotnet-sdk-10.0:
+  Installed: (none)
+  Candidate: 10.0.113-0ubuntu1~24.04.1
+  Version table:
+     10.0.113-0ubuntu1~24.04.1 500
+        500 http://archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages
+        500 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages
+z3:
+  Installed: (none)
+  Candidate: 4.8.12-3.1build1
+  Version table:
+     4.8.12-3.1build1 500
+        500 http://archive.ubuntu.com/ubuntu noble/universe amd64 Packages

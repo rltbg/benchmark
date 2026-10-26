@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <RuntimeIdentifier>linux-x64</RuntimeIdentifier>
+    <AssemblyName>avalonia-bench</AssemblyName>
+    <Nullable>disable</Nullable>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <AvaloniaAccessUnstablePrivateApis>true</AvaloniaAccessUnstablePrivateApis>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>3</WarningLevel>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <ServerGarbageCollector>false</ServerGarbageCollector>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+    <DebugType>none</DebugType>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(PublishAot)' == 'true'">
+    <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <StripSymbols>true</StripSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(PublishAot)' == 'true' and '$(LinkCoreStatic)' == 'true'">
+    <DefineConstants>$(DefineConstants);CORE_STATIC</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(PublishAot)' == 'true' and '$(LinkCoreStatic)' == 'true'">
+    <DirectPInvoke Include="benchcore" />
+    <NativeLibrary Include="/home/user/eval/core/target/release/libbenchcore.a" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Skia" Version="12.1.4" />
+    <PackageReference Include="Avalonia.HarfBuzz" Version="12.1.4" />
+    <PackageReference Include="Avalonia.X11" Version="12.1.4" />
+    <PackageReference Include="Avalonia.Themes.Simple" Version="12.1.4" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,24 @@
+[package]
+name = "nshbench"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+
+[features]
+default = []
+# TSX variant: links QuickJS (nsh-platform-linux `js`) and loads a compiled bundle.
+tsx = ["nsh-platform-linux/js"]
+
+[dependencies]
+nsh-core = { path = "../src/crates/nsh-core" }
+nsh-base = { path = "../src/crates/nsh-base", default-features = false }
+nsh-platform-linux = { path = "../src/crates/nsh-platform-linux", default-features = false }
+benchcore = { path = "/home/user/eval/core", default-features = false }
+serde_json = "1"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 4
+debug = false

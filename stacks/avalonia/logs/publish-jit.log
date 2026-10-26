@@ -1,0 +1,11 @@
+  Determining projects to restore...
+  Restored /home/user/eval/stacks/avalonia/AvaloniaBench.fsproj (in 432 ms).
+/root/.nuget/packages/avalonia/12.1.4/buildTransitive/AvaloniaPrivateApis.targets(24,5): warning AVA3001: AvaloniaAccessUnstablePrivateApis is Enabled: This means you are using unstable internal APIs, and your code may be depending on APIs which may change or be removed in future versions of Avalonia. Set AvaloniaAccessUnstablePrivateApis to 'False' to disable this warning. [/home/user/eval/stacks/avalonia/AvaloniaBench.fsproj]
+/home/user/eval/stacks/avalonia/Program.fs(206,20): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/home/user/eval/stacks/avalonia/AvaloniaBench.fsproj]
+/home/user/eval/stacks/avalonia/Program.fs(339,20): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/home/user/eval/stacks/avalonia/AvaloniaBench.fsproj]
+  AvaloniaBench -> /home/user/eval/stacks/avalonia/artifacts/jit/bin/AvaloniaBench/release_linux-x64/avalonia-bench.dll
+  AvaloniaBench -> /home/user/eval/stacks/avalonia/out/jit/
+
+real	0m7.245s
+user	0m6.984s
+sys	0m0.795s

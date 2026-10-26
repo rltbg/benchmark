@@ -1,0 +1,31 @@
+INFO    : aqtinstall(aqt) v3.3.0 on Python 3.13.17 [CPython GCC 13.3.0]
+INFO    : Found extension qtwebengine
+INFO    : Found extension qtpdf
+INFO    : Downloading qtsvg...
+INFO    : Downloading qtdeclarative...
+INFO    : Downloading qtdoc...
+INFO    : Downloading qtbase...
+INFO    : Redirected: qt.mirror.constant.com
+INFO    : Redirected: qt.mirror.constant.com
+INFO    : Redirected: qt.mirror.constant.com
+INFO    : Redirected: qt.mirror.constant.com
+INFO    : Finished installation of qtsvg-Linux-RHEL_9_6-GCC-Linux-RHEL_9_6-X86_64.7z in 1.90297905
+INFO    : Downloading qttools...
+INFO    : Finished installation of qtdoc-Linux-RHEL_9_6-GCC-Linux-RHEL_9_6-X86_64.7z in 2.97880063
+INFO    : Redirected: qt.mirror.constant.com
+INFO    : Downloading qttranslations...
+INFO    : Redirected: qt.mirror.constant.com
+INFO    : Finished installation of qttranslations-Linux-RHEL_9_6-GCC-Linux-RHEL_9_6-X86_64.7z in 2.66146328
+INFO    : Downloading qtwayland...
+INFO    : Redirected: qt.mirror.constant.com
+INFO    : Finished installation of qtwayland-Linux-RHEL_9_6-GCC-Linux-RHEL_9_6-X86_64.7z in 1.53472553
+INFO    : Finished installation of qttools-Linux-RHEL_9_6-GCC-Linux-RHEL_9_6-X86_64.7z in 5.70622425
+INFO    : Finished installation of qtbase-Linux-RHEL_9_6-GCC-Linux-RHEL_9_6-X86_64.7z in 7.87636812
+INFO    : Downloading icu...
+INFO    : Redirected: qt.mirror.constant.com
+INFO    : Finished installation of icu-linux-Rhel8.6-x86_64.7z in 2.70392369
+WARNING : Caught OSError, terminating installer workers
+ERROR   : Insufficient disk space to complete installation.
+==============================Suggested follow-up:==============================
+* Check available disk space.
+* Check size requirements for installation.

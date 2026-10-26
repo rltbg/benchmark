@@ -1,0 +1,1 @@
+bench: 200000 hash(64B) in 2539 ms (acc=00000000) => 12698 ns/hash

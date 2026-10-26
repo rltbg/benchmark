@@ -1,0 +1,6 @@
+   Compiling slintapp v0.1.0 (/home/user/eval/stacks/slint/app)
+    Finished `release` profile [optimized] target(s) in 1m 44s
+
+real	1m45.057s
+user	1m37.875s
+sys	0m3.452s

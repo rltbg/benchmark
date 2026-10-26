@@ -1,0 +1,7 @@
+drop_caches possible: True
+AOT startup ms (10 runs, caches dropped): min=7.8 median=11.2 p95=19.8 max=19.8
+  runs: [12.4, 19.8, 15.5, 12.2, 12.7, 9.4, 8.9, 10.3, 8.8, 7.8]
+  idle RSS kB: median=5568 min=5452 max=5660; peak(VmHWM) median=5568
+JIT (dotnet coreapp.dll) startup ms (10 runs, caches dropped): min=85.2 median=100.4 p95=115.5 max=115.5
+  runs: [104.2, 101.0, 115.5, 113.9, 104.8, 99.7, 85.2, 97.9, 90.9, 91.2]
+  idle RSS kB: median=30422 min=30296 max=30480; peak(VmHWM) median=30422

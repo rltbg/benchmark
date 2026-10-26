@@ -1,0 +1,20 @@
+[package]
+name = "iced_bench"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+iced = { version = "=0.14.0", default-features = false, features = ["tiny-skia", "canvas", "image-without-codecs", "advanced", "x11", "thread-pool", "crisp", "web-colors"] }
+image = { version = "0.25", default-features = false, features = ["png"] }
+benchcore = { path = "../../core" }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+debug = false
+
+[features]
+default = []
+wgpu = ["iced/wgpu"]

@@ -1,0 +1,44 @@
+-> installed ocamlfind.1.9.8
+-> installed base-bytes.base
+-> installed seq.base
+-> installed topkg.1.1.1
+-> installed process.0.2.1
+-> installed uucp.18.0.0
+-> installed zarith.1.14
+-> installed dune.3.24.2
+-> installed camlp-streams.5.0.1
+-> installed csexp.1.5.2
+-> installed cppo.1.8.0
+-> installed dune-configurator.3.24.2
+-> installed fileutils.0.6.6
+-> installed fix.20250919
+-> installed gen.1.1
+-> installed menhirCST.20260209
+-> installed menhirGLR.20260209
+-> installed menhirLib.20260209
+-> installed menhirSdk.20260209
+-> installed batteries.3.11.0
+-> installed ocaml-compiler-libs.v0.12.4
+-> installed pprint.20230830
+-> installed ppx_derivers.1.2.1
+-> installed result.1.5
+-> installed sexplib0.v0.17.0
+-> installed stdint.0.7.2
+-> installed menhir.20260209
+-> installed stdlib-shims.0.3.0
+-> installed wasm.2.0.2
+-> installed integers.0.8.0
+-> installed yojson.3.0.0
+-> installed ctypes.0.24.0
+-> installed ppxlib.0.39.0
+-> installed ctypes-foreign.0.24.0
+-> installed sedlex.3.8.1
+-> installed ppx_deriving.6.2.0
+-> installed visitors.20210608
+-> installed ppx_deriving_yojson.3.10.0
+Done.
+# Run eval $(opam env) to update the current shell environment
+
+real	2m6.961s
+user	3m31.180s
+sys	1m1.653s

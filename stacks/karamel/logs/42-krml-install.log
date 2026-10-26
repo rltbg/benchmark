@@ -1,0 +1,5 @@
+++ mkdir -p /home/user/eval/stacks/karamel/krml-prefix/bin /home/user/eval/stacks/karamel/krml-prefix/include/krml /home/user/eval/stacks/karamel/krml-prefix/lib/krml /home/user/eval/stacks/karamel/krml-prefix/share/krml/misc
+++ install _build/default/src/Karamel.exe /home/user/eval/stacks/karamel/krml-prefix/bin/krml
+++ cp -r include/krml include/krmllib.h /home/user/eval/stacks/karamel/krml-prefix/include/krml
+++ cp -r krmllib/C.Endianness.fst krmllib/C.Failure.fst krmllib/C.Loops.fst krmllib/C.String.fst krmllib/C.String.fsti krmllib/C.fst krmllib/FStar.Krml.Endianness.fst krmllib/LowStar.Lib.AssocList.fst krmllib/LowStar.Lib.AssocList.fsti krmllib/LowStar.Lib.LinkedList.fst krmllib/LowStar.Lib.LinkedList2.fst krmllib/Makefile krmllib/README.md krmllib/Spec.Loops.fst krmllib/TestLib.fsti krmllib/c krmllib/compat krmllib/copyright-header.txt krmllib/dist krmllib/js krmllib/runtime /home/user/eval/stacks/karamel/krml-prefix/lib/krml
+++ cp -r misc/Makefile.basic misc/cl-wrapper.bat /home/user/eval/stacks/karamel/krml-prefix/share/krml/misc

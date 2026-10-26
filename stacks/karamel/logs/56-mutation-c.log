@@ -1,0 +1,5 @@
+## mutation C : 64U->65U
+DIFF it=487 n=68
+DIFF it=655 n=68
+ECHEC ligne 57: diff == 0
+2634 verifications, 2 echec(s), 9614 divergence(s) vs Rust

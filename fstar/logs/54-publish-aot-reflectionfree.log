@@ -1,0 +1,6 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ulibfs -> /home/user/fstar-aot/fsproj/ulibfs/bin/Release/net10.0/ulibfs.dll
+  core -> /home/user/fstar-aot/fsproj/core/bin/Release/net10.0/core.dll
+  app -> /home/user/fstar-aot/fsproj/app/bin/Release/net10.0/linux-x64/coreapp.dll
+  app -> /home/user/fstar-aot/aot-out-noreflect/
