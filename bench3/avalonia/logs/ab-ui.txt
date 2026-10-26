@@ -5,3 +5,16 @@ U2 manual n=5000                               rc=0 n=   71 fps=  8.7 p50= 103.3
 U2 reflection n=1000                           rc=0 n=  361 fps= 44.9 p50=  17.2 p99=  59.2 max=  75.7 gt25= 117 gc=14/12/1 pause=330.993 alloc=1778MB setup_ms=74.5 ui_stall_ms_max=66.5
 U3 composition n=1000                          rc=0 n=  492 fps= 61.3 p50=  16.3 p99=  21.5 max=  25.1 gt25=   1 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=65.0 ui_stall_ms_max=7.7
 U3 composition n=10000                         rc=0 n=   87 fps= 10.7 p50=  89.3 p99= 125.8 max= 125.8 gt25=  87 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=408.8 ui_stall_ms_max=10.3
+U3 ui n=1000                                   rc=0 n=  476 fps= 59.3 p50=  16.3 p99=  32.5 max=  86.0 gt25=  10 gc=3/1/0 pause=81.115 alloc=485MB setup_ms=82.9 ui_stall_ms_max=80.1
+U3 ui n=3000                                   rc=0 n=  276 fps= 34.3 p50=  25.4 p99=  62.4 max= 141.7 gt25= 142 gc=7/3/1 pause=185.413 alloc=842MB setup_ms=191.1 ui_stall_ms_max=137.2
+T2 widgets n=500                               rc=0 n=  469 fps= 58.4 p50=  16.3 p99=  37.6 max=  98.3 gt25=  17 gc=8/5/1 pause=201.087 alloc=1146MB setup_ms=62.0 ui_stall_ms_max=85.2
+T2 widgets n=3000                              rc=0 n=  103 fps= 12.6 p50=  73.2 p99= 160.2 max= 163.6 gt25= 103 gc=13/8/1 pause=606.812 alloc=1534MB setup_ms=229.3 ui_stall_ms_max=139.6
+T2 canvas n=500                                rc=0 n=  494 fps= 61.5 p50=  16.2 p99=  21.1 max=  23.3 gt25=   0 gc=0/0/0 pause=0.0 alloc=71MB setup_ms=39.2 ui_stall_ms_max=12.8
+T2 canvas n=3000                               rc=0 n=  486 fps= 60.6 p50=  16.3 p99=  26.6 max=  44.8 gt25=   5 gc=3/1/0 pause=65.055 alloc=396MB setup_ms=52.4 ui_stall_ms_max=25.5
+T1 1MB                                         rc=0 n=  156 fps= 19.4 p50=  48.8 p99= 185.0 max= 211.0 gt25= 154 gc=2/2/1 pause=296.58 alloc=297MB setup_ms=156.8 ui_stall_ms_max=229.9 time_to_first_display_ms=138.1 layout_ms=52.5
+T1 10MB                                        rc=0 n=  153 fps= 19.1 p50=  48.9 p99= 209.2 max= 210.6 gt25= 152 gc=2/1/0 pause=326.795 alloc=293MB setup_ms=275.3 ui_stall_ms_max=204.1 time_to_first_display_ms=252.9 layout_ms=75.1
+T1 50MB                                        rc=0 n=  147 fps= 18.3 p50=  48.9 p99= 180.7 max= 421.4 gt25= 146 gc=3/3/1 pause=485.41 alloc=274MB setup_ms=676.7 ui_stall_ms_max=411.2 time_to_first_display_ms=659.2 layout_ms=87.1
+T4 textblock n=1000                            rc=0 n=  167 fps= 20.6 p50=  44.3 p99= 119.4 max= 136.2 gt25= 131 gc=6/6/5 pause=58.468 alloc=145MB setup_ms=392.1 ui_stall_ms_max=41.0
+T4 textblock n=10000                           rc=0 n=   62 fps=  7.5 p50= 122.5 p99= 335.0 max= 335.0 gt25=  62 gc=8/8/5 pause=479.852 alloc=644MB setup_ms=3183.3 ui_stall_ms_max=236.5
+G2 solid n=100                                 rc=0 n=  359 fps= 44.7 p50=  21.7 p99=  31.1 max=  71.0 gt25=  53 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=61.9 ui_stall_ms_max=67.4
+G2 solid n=1000                                rc=0 n=   45 fps=  5.4 p50= 180.6 p99= 211.5 max= 211.5 gt25=  45 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=230.1 ui_stall_ms_max=28.6
