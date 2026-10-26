@@ -3,6 +3,10 @@
 usage: coldstart.py <stack> "<cmd>" [runs=10] [--drop] [--env K=V]  -> JSON sur stdout"""
 import math, os, sys, os, time, mmap, subprocess, json, statistics as st, tempfile
 ROOT = os.environ.get("BENCH_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def free_display(n):
+    import os
+    while os.path.exists(f"/tmp/.X11-unix/X{n}") or os.path.exists(f"/tmp/.X{n}-lock"): n += 1
+    return f":{n}"
 stack, cmd = sys.argv[1], sys.argv[2].replace("${ROOT}", ROOT).split(); runs = int(sys.argv[3]) if len(sys.argv) > 3 else 10
 drop = "--drop" in sys.argv; envx = [a.split("=",1) for a in sys.argv if "=" in a and a.split("=")[0].isupper()]
 def dropc():
@@ -11,7 +15,7 @@ def dropc():
 def pct(v,p): s=sorted(v); return s[min(len(s)-1,max(0,math.ceil(p/100*len(s))-1))]
 res = []
 for i in range(runs):
-    d = tempfile.mkdtemp(prefix="cs"); disp = f":{300+i}"
+    d = tempfile.mkdtemp(prefix="cs"); disp = free_display(300+i)
     xv = subprocess.Popen(["Xvfb", disp, "-screen","0","1280x720x24","-fbdir",d,"-nolisten","tcp"], stderr=subprocess.DEVNULL); time.sleep(0.8)
     fb = os.path.join(d,"Xvfb_screen0"); f = open(fb,"rb"); m = mmap.mmap(f.fileno(),0,access=mmap.ACCESS_READ)
     W,H=1280,720; off=os.path.getsize(fb)-W*H*4; idx=[off+(y*W+x)*4 for y in range(0,H,23) for x in range(0,W,29)]

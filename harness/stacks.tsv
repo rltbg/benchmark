@@ -12,3 +12,6 @@ qt-opengl	${ROOT}/stacks/qt/deploy/bin/qtbench --backend opengl
 compose-jvm	${ROOT}/stacks/compose/run.sh	
 compose-jvm-uncapped	${ROOT}/stacks/compose/run.sh	--env BENCH_PACING=uncapped
 compose-jvm-aotcache	${ROOT}/stacks/compose/run.sh	--env BENCH_VARIANT=aot
+egui	${ROOT}/stacks/egui/target/release/egui_bench	
+egui-uncapped	${ROOT}/stacks/egui/target/release/egui_bench	--env BENCH_PACING=uncapped
+egui-glow	${ROOT}/stacks/egui/target/release/egui_bench	--env EGUI_BENCH_RENDERER=glow

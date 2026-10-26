@@ -7,9 +7,13 @@
 usage: verify_gui.py <stack> "<cmd>" <scenario> [extra args]"""
 import os, sys, os, time, subprocess, json, tempfile, zlib, struct, array, collections
 ROOT = os.environ.get("BENCH_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+def free_display(n):
+    import os
+    while os.path.exists(f"/tmp/.X11-unix/X{n}") or os.path.exists(f"/tmp/.X{n}-lock"): n += 1
+    return f":{n}"
 stack, cmd, sc = sys.argv[1], sys.argv[2].replace("${ROOT}", ROOT).split(), sys.argv[3]; extra = sys.argv[4:]
 OUT = os.path.join(ROOT,"results","verification"); os.makedirs(OUT, exist_ok=True)
-d = tempfile.mkdtemp(prefix="vg"); disp = ":390"
+d = tempfile.mkdtemp(prefix="vg"); disp = free_display(390)
 xv = subprocess.Popen(["Xvfb", disp, "-screen","0","1280x720x24","-fbdir",d,"-nolisten","tcp"], stderr=subprocess.DEVNULL); time.sleep(0.8)
 env = dict(os.environ, DISPLAY=disp, LIBGL_ALWAYS_SOFTWARE="1")
 def sh(*a): return subprocess.run(list(a),capture_output=True,text=True,env=env).stdout
