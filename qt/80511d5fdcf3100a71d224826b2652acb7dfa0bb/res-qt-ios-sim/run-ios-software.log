@@ -1,0 +1,11 @@
+SPIKE:selftest ok
+SPIKE:ready platform=ios stack=qt core=fstar-pulse-c
+qrc:/qt/qml/Spike/qml/Main.qml:25:5: QML ColumnLayout: Safe area binding loop detected
+qrc:/qt/qml/Spike/qml/Main.qml:25:5: QML ColumnLayout: Safe area binding loop detected
+SPIKE:autorun start
+SPIKE:fps tab=canvas value=7
+SPIKE:fps tab=canvas value=8
+SPIKE:heavy start
+SPIKE:heavy done iters=1479000 thread=worker max_frame_gap_ms=187
+SPIKE:done
+org.example.qtspike: 14147

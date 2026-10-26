@@ -1,0 +1,29 @@
+SPIKE:selftest ok
+qt.scenegraph.general: threaded render loop
+qt.scenegraph.general: Using sg animation driver
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: Animation Driver: using vsync: 16.67 ms
+qt.scenegraph.general: Creating QRhi with backend OpenGL for window 0x5592365069f0 (wflags 0x1)
+  Graphics API debug/validation layers: 0
+  Debug markers: 0
+  Timestamps: 0
+  Prefer software device: 0
+  Shader/pipeline cache collection: 1
+qt.rhi.general: Created OpenGL context QSurfaceFormat(version 4.5, options QFlags<QSurfaceFormat::FormatOption>(DeprecatedFunctions), depthBufferSize 24, redBufferSize 8, greenBufferSize 8, blueBufferSize 8, alphaBufferSize 0, stencilBufferSize 8, samples -1, swapBehavior QSurfaceFormat::DoubleBuffer, swapInterval 1, colorSpace QColorSpace(), profile  QSurfaceFormat::CompatibilityProfile)
+qt.rhi.general: OpenGL VENDOR: Mesa RENDERER: llvmpipe (LLVM 20.1.2, 256 bits) VERSION: 4.5 (Compatibility Profile) Mesa 25.2.8-0ubuntu0.24.04.4
+qt.scenegraph.general: Created QRhi 0x7fbf30001b70 for window 0x5592365069f0
+qt.scenegraph.general: MSAA sample count for the swapchain is 1. Alpha channel requested = no.
+qt.scenegraph.general: rhi texture atlas dimensions: 1024x1024
+SPIKE:ready platform=linux stack=qt core=fstar-pulse-c
+qt.scenegraph.general: Window 0x5592365069f0 is determined to have broken vsync throttling (5.047619 < 8.333333) switching to system timer to drive gui thread animations to remedy this (however, render thread animators will likely advance at an incorrect rate).
+SPIKE:autorun start
+SPIKE:shot tab1-list saved 960x640
+qt.scenegraph.general: animation driver switched to timer mode
+SPIKE:fps tab=canvas value=34
+SPIKE:fps tab=canvas value=18
+SPIKE:fps tab=canvas value=18
+SPIKE:shot tab2-canvas saved 960x640
+SPIKE:heavy start
+SPIKE:heavy done iters=1262000 thread=worker max_frame_gap_ms=199
+SPIKE:shot tab3-core saved 960x640
+SPIKE:done

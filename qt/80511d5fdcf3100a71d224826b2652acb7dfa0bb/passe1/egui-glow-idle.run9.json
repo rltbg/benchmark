@@ -1,0 +1,1 @@
+{"stack":"egui","scenario":"idle","duration_s":20.0,"frames":0,"frame_ms":[],"ops":{"sum_heights":8799584},"checksum":"dfed5248","notes":"egui glow ; aucune frame redemandee (pas de request_repaint) ; coquille = barre de titre + liste (1re page) + barre d'etat, dessinee une fois (quelques frames initiales d'eframe non comptees)."}

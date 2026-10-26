@@ -1,0 +1,1 @@
+{"checksum":"00000000","duration_s":20.0,"frame_ms":[],"frames":0,"notes":"renderer=femtovg; idle: no redraw loop, event loop sleeps (Timer wakes once at the end)","ops":{"sum_heights":8799584},"scenario":"idle","stack":"slint"}

@@ -1,0 +1,34 @@
+{
+ "stack": "qt",
+ "platform": "android",
+ "status": "ok",
+ "build_seconds": 140.0,
+ "artifacts": [
+  {
+   "path": "qtspike-arm64_v8a.apk",
+   "bytes": 49338274,
+   "gzip": 17003909,
+   "brotli": 11897246
+  },
+  {
+   "path": "qtspike-x86_64.apk",
+   "bytes": 50022009,
+   "gzip": 16936495,
+   "brotli": 12302160
+  },
+  {
+   "path": "qtspike-arm64_v8a.aab",
+   "bytes": 50384731,
+   "gzip": 17373306,
+   "brotli": 12194471
+  }
+ ],
+ "notes": [
+  "\u00e9mulateur: success",
+  "warnings build: 52",
+  "APK release sign\u00e9 avec une cl\u00e9 jetable (apksigner)"
+ ],
+ "runner": "Linux/X64",
+ "sha": "80511d5fdcf3100a71d224826b2652acb7dfa0bb",
+ "date": "2026-10-26T16:09:42Z"
+}

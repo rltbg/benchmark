@@ -1,0 +1,12 @@
+SPIKE:selftest ok
+SPIKE:ready platform=macos stack=qt core=fstar-pulse-c
+SPIKE:autorun start
+SPIKE:shot tab1-list saved 960x640
+SPIKE:fps tab=canvas value=23
+SPIKE:fps tab=canvas value=23
+SPIKE:fps tab=canvas value=26
+SPIKE:shot tab2-canvas saved 960x640
+SPIKE:heavy start
+SPIKE:heavy done iters=1353000 thread=worker max_frame_gap_ms=182
+SPIKE:shot tab3-core saved 960x640
+SPIKE:done

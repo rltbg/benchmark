@@ -1,0 +1,12 @@
+shared:INFO: (Emscripten: Running sanity checks)
+emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 5.0.5 (bc569045b14c3fa7b960734ed2c50da7b20adea4)
+cmake version 3.31.6
+QT_HOST_PATH=/home/runner/work/benchmark/Qt/6.12.0/gcc_64
+build mt: 99 s
+total 25776
+drwxr-xr-x  2 runner runner     4096 Oct 26 15:56 .
+drwxr-xr-x 19 runner runner     4096 Oct 26 15:54 ..
+-rw-r--r--  1 runner runner    13437 Oct 26 15:56 qtloader.js
+-rw-r--r--  1 runner runner     2993 Oct 26 15:56 qtspike.html
+-rw-r--r--  1 runner runner   269504 Oct 26 15:56 qtspike.js
+-rwxr-xr-x  1 runner runner 26093036 Oct 26 15:56 qtspike.wasm

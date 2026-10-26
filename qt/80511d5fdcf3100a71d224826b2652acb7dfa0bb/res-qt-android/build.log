@@ -1,0 +1,1166 @@
+-- Android toolchain file within NDK detected: /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:146 (include)
+  CMakeLists.txt:2 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:146 (include)
+  CMakeLists.txt:2 (project)
+
+
+-- Android toolchain file within NDK detected: /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt:2 (project)
+
+
+-- The C compiler identification is Clang 18.0.3
+-- The CXX compiler identification is Clang 18.0.3
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-C.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCInformation.cmake:48 (include)
+  CMakeLists.txt:2 (project)
+
+
+-- Detecting C compiler ABI info
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-dAdCi1/CMakeLists.txt:3 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-dAdCi1/CMakeLists.txt:3 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-C.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-dAdCi1/CMakeLists.txt:3 (project)
+
+
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-c4ZyvU/CMakeLists.txt:3 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-c4ZyvU/CMakeLists.txt:3 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-CXX.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCXXInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-c4ZyvU/CMakeLists.txt:3 (project)
+
+
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-aCre8W/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-aCre8W/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-C.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-aCre8W/CMakeLists.txt:4 (project)
+
+
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-RuXxrU/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-RuXxrU/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-C.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-RuXxrU/CMakeLists.txt:4 (project)
+
+
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE
+-- Performing Test HAVE_STDATOMIC
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-I0g3wu/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-I0g3wu/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-CXX.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCXXInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-I0g3wu/CMakeLists.txt:4 (project)
+
+
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Performing Test HAVE_EGL
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-TABDyZ/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-TABDyZ/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-CXX.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCXXInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-TABDyZ/CMakeLists.txt:4 (project)
+
+
+-- Performing Test HAVE_EGL - Success
+-- Found EGL: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include (found version "1.5")
+-- Performing Test HAVE_GLESv2
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-Gzyupu/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-Gzyupu/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-CXX.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCXXInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-arm64_v8a/CMakeFiles/CMakeScratch/TryCompile-Gzyupu/CMakeLists.txt:4 (project)
+
+
+-- Performing Test HAVE_GLESv2 - Success
+-- Found GLESv2: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+-- Found WrapVulkanHeaders: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+-- Could NOT find Qt6TaskTree (missing: Qt6TaskTree_DIR)
+CMake Warning at /usr/local/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package):
+  Found package configuration file:
+
+    /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6QmlAssetDownloaderPrivate/Qt6QmlAssetDownloaderPrivateConfig.cmake
+
+  but it set Qt6QmlAssetDownloaderPrivate_FOUND to FALSE so package
+  "Qt6QmlAssetDownloaderPrivate" is considered to be NOT FOUND.  Reason given
+  by package:
+
+  Qt6QmlAssetDownloaderPrivate could not be found because dependency
+  Qt6TaskTree could not be found.
+
+  Configuring with --debug-find-pkg=Qt6TaskTree might reveal details why the
+  package was not found.
+
+  Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+  of the path variables that find_package uses to try and find the package.
+
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlAssetDownloaderPrivatepluginDependencies.cmake:22 (_qt_internal_find_qt_dependencies)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlAssetDownloaderPrivatepluginConfig.cmake:40 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:638 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake:6 (__qt_internal_include_qml_plugin_packages)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake:199 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:40 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/lib/cmake/Qt6/Qt6Config.cmake:257 (find_package)
+  CMakeLists.txt:9 (find_package)
+
+
+-- Configuring 'qtspike' for the following Android ABIs: arm64-v8a (default)
+-- Found android platform plugin at: /home/runner/work/benchmark/Qt/6.12.0/android_arm64_v8a/plugins/platforms/libplugins_platforms_qtforandroid_arm64-v8a.so
+-- Configuring done (3.1s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/runner/work/benchmark/benchmark/build-arm64_v8a
+[1/34] Copying qtspike qml sources into build dir
+[2/34] Copying qtspike qml resources into build dir
+[3/34] Populating .qmlls.build.ini file at /home/runner/work/benchmark/benchmark/build-arm64_v8a/.qt/.qmlls.build.ini
+[4/34] Automatic MOC and UIC for target custard
+[5/34] Building CXX object CMakeFiles/custard.dir/custard_autogen/mocs_compilation.cpp.o
+[6/34] Building C object CMakeFiles/custard.dir/home/runner/work/benchmark/benchmark/stacks/karamel/gen/Custard.c.o
+[7/34] Linking CXX static library libcustard.a
+[8/34] Automatic MOC and UIC for target qtspike
+[9/34] Running rcc for resource qmake_Spike
+[10/34] Running AUTOMOC file extraction for target qtspike
+[11/34] Running rcc for resource qtspike_raw_qml_0_extra_qmldirs
+[12/34] Running rcc for resource qtspike_raw_qml_0
+[13/34] Generating .rcc/qmlcache/qtspike_qmlcache_loader.cpp
+[14/34] Running moc --collect-json for target qtspike
+[15/34] Automatic QML type registration for target qtspike
+[16/34] Generating .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.aotstats
+[17/34] Generating .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp, .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.aotstats
+[18/34] Generating .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.aotstats
+[19/34] Generating .rcc/qmlcache/qtspike_qml_Main_qml.cpp, .rcc/qmlcache/qtspike_qml_Main_qml.cpp.aotstats
+[20/34] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qmake_Spike.cpp.o
+[21/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qmlcache_loader.cpp.o
+[22/34] Building CXX object CMakeFiles/qtspike.dir/src/main.cpp.o
+[23/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_Main_qml.cpp.o
+[24/34] Building CXX object CMakeFiles/qtspike.dir/qtspike_qmltyperegistrations.cpp.o
+[25/34] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0.cpp.o
+[26/34] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp.o
+[27/34] Building CXX object CMakeFiles/qtspike.dir/src/spike.cpp.o
+[28/34] Building CXX object CMakeFiles/qtspike.dir/qtspike_autogen/mocs_compilation.cpp.o
+[29/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.o
+[30/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.o
+[31/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.o
+[32/34] Linking CXX shared module libqtspike_arm64-v8a.so
+[33/34] Copying qtspike binary to apk folder
+[34/34] Creating APK for qtspike
+Generating Android Package
+  Input file: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-qtspike-deployment-settings.json
+  Output directory: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-build/
+  Application binary: qtspike
+  Android build platform: android-36-ext19
+  Install to device: No
+Fetching distribution.
+Downloading https://services.gradle.org/distributions/gradle-9.5.1-bin.zip
+.............10%.............20%..............30%.............40%.............50%..............60%.............70%..............80%.............90%.............100%
+
+Welcome to Gradle 9.5.1!
+
+Here are the highlights of this release:
+ - Task provenance in reports and failure messages
+ - Type-safe accessors for precompiled Kotlin Settings plugins
+
+For more details see https://docs.gradle.org/9.5.1/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :preBuild UP-TO-DATE
+> Task :preReleaseBuild UP-TO-DATE
+> Task :mergeReleaseJniLibFolders
+> Task :mergeReleaseNativeLibs
+> Task :checkReleaseDuplicateClasses
+> Task :generateReleaseResources
+> Task :packageReleaseResources
+> Task :processReleaseNavigationResources
+> Task :stripReleaseDebugSymbols
+> Task :javaPreCompileRelease
+> Task :extractReleaseNativeSymbolTables
+> Task :checkReleaseAarMetadata
+> Task :parseReleaseLocalResources
+> Task :mapReleaseSourceSetPaths
+> Task :generateReleaseRFile
+> Task :mergeReleaseNativeDebugMetadata
+> Task :compileReleaseNavigationResources
+> Task :compileReleaseKotlin NO-SOURCE
+> Task :compileReleaseJavaWithJavac
+> Task :createReleaseCompatibleScreenManifests
+> Task :extractDeepLinksRelease
+
+> Task :processReleaseMainManifest
+package="org.example.qtspike" found in source AndroidManifest.xml: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-build/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="org.example.qtspike" from the source AndroidManifest.xml: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-build/AndroidManifest.xml.
+
+> Task :mergeReleaseResources
+> Task :processReleaseManifest
+> Task :processReleaseManifestForPackage
+> Task :mergeReleaseStartupProfile
+> Task :generateReleaseAssets UP-TO-DATE
+> Task :mergeReleaseArtProfile
+> Task :mergeReleaseAssets
+> Task :compressReleaseAssets
+> Task :extractReleaseVersionControlInfo
+> Task :extractProguardFiles
+> Task :processReleaseResources
+> Task :generateReleaseLintVitalReportModel
+> Task :dexBuilderRelease
+> Task :desugarReleaseFileDependencies
+> Task :lintVitalAnalyzeRelease
+> Task :mergeReleaseGlobalSynthetics
+> Task :processReleaseJavaRes NO-SOURCE
+> Task :lintVitalReportRelease
+> Task :lintVitalRelease
+> Task :collectReleaseDependencies
+> Task :sdkReleaseDependencyData
+> Task :writeReleaseAppMetadata
+> Task :writeReleaseSigningConfigVersions
+> Task :optimizeReleaseResources
+> Task :mergeReleaseJavaResource
+> Task :mergeExtDexRelease
+> Task :mergeDexRelease
+> Task :compileReleaseArtProfile
+> Task :packageRelease
+> Task :createReleaseApkListingFileRedirect
+> Task :assembleRelease
+
+BUILD SUCCESSFUL in 1m 22s
+47 actionable tasks: 47 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.1/userguide/configuration_cache_enabling.html
+Android package built successfully in 83.251 ms.
+  -- File: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-build//build/outputs/apk/release/android-build-release-unsigned.apk
+-- Android toolchain file within NDK detected: /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:146 (include)
+  CMakeLists.txt:2 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeDetermineSystem.cmake:146 (include)
+  CMakeLists.txt:2 (project)
+
+
+-- Android toolchain file within NDK detected: /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  CMakeLists.txt:2 (project)
+
+
+-- The C compiler identification is Clang 18.0.3
+-- The CXX compiler identification is Clang 18.0.3
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-C.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCInformation.cmake:48 (include)
+  CMakeLists.txt:2 (project)
+
+
+-- Detecting C compiler ABI info
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-u0Exz7/CMakeLists.txt:3 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-u0Exz7/CMakeLists.txt:3 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-C.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-u0Exz7/CMakeLists.txt:3 (project)
+
+
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-U6dQsv/CMakeLists.txt:3 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-U6dQsv/CMakeLists.txt:3 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-CXX.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCXXInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-U6dQsv/CMakeLists.txt:3 (project)
+
+
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-Bw4RLA/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-Bw4RLA/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-C.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-Bw4RLA/CMakeLists.txt:4 (project)
+
+
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Failed
+-- Check if compiler accepts -pthread
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-r6dV3J/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-r6dV3J/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-C.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-r6dV3J/CMakeLists.txt:4 (project)
+
+
+-- Check if compiler accepts -pthread - yes
+-- Found Threads: TRUE
+-- Performing Test HAVE_STDATOMIC
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-XRbbFH/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-XRbbFH/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-CXX.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCXXInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-XRbbFH/CMakeLists.txt:4 (project)
+
+
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Performing Test HAVE_EGL
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-mZJ2lL/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-mZJ2lL/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-CXX.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCXXInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-mZJ2lL/CMakeLists.txt:4 (project)
+
+
+-- Performing Test HAVE_EGL - Success
+-- Found EGL: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include (found version "1.5")
+-- Performing Test HAVE_GLESv2
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-nLpahl/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android-legacy.toolchain.cmake:35 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/android.toolchain.cmake:55 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/qt.toolchain.cmake:174 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/3.31.6/CMakeSystem.cmake:6 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-nLpahl/CMakeLists.txt:4 (project)
+
+
+CMake Deprecation Warning at /usr/local/lib/android/sdk/ndk/27.2.12479018/build/cmake/flags.cmake:18 (cmake_minimum_required):
+  Compatibility with CMake < 3.10 will be removed from a future version of
+  CMake.
+
+  Update the VERSION argument <min> value.  Or, use the <min>...<max> syntax
+  to tell CMake that the project requires at least <min> but has been updated
+  to work with policies introduced by <max> or earlier.
+Call Stack (most recent call first):
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang.cmake:23 (include)
+  /usr/local/share/cmake-3.31/Modules/Platform/Android-Clang-CXX.cmake:1 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeCXXInformation.cmake:48 (include)
+  /home/runner/work/benchmark/benchmark/build-x86_64/CMakeFiles/CMakeScratch/TryCompile-nLpahl/CMakeLists.txt:4 (project)
+
+
+-- Performing Test HAVE_GLESv2 - Success
+-- Found GLESv2: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+-- Found WrapVulkanHeaders: /usr/local/lib/android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/linux-x86_64/sysroot/usr/include
+-- Could NOT find Qt6TaskTree (missing: Qt6TaskTree_DIR)
+CMake Warning at /usr/local/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package):
+  Found package configuration file:
+
+    /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6QmlAssetDownloaderPrivate/Qt6QmlAssetDownloaderPrivateConfig.cmake
+
+  but it set Qt6QmlAssetDownloaderPrivate_FOUND to FALSE so package
+  "Qt6QmlAssetDownloaderPrivate" is considered to be NOT FOUND.  Reason given
+  by package:
+
+  Qt6QmlAssetDownloaderPrivate could not be found because dependency
+  Qt6TaskTree could not be found.
+
+  Configuring with --debug-find-pkg=Qt6TaskTree might reveal details why the
+  package was not found.
+
+  Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+  of the path variables that find_package uses to try and find the package.
+
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlAssetDownloaderPrivatepluginDependencies.cmake:22 (_qt_internal_find_qt_dependencies)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlAssetDownloaderPrivatepluginConfig.cmake:40 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:638 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake:6 (__qt_internal_include_qml_plugin_packages)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake:199 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:40 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/lib/cmake/Qt6/Qt6Config.cmake:257 (find_package)
+  CMakeLists.txt:9 (find_package)
+
+
+-- Configuring 'qtspike' for the following Android ABIs: x86_64 (default)
+-- Found android platform plugin at: /home/runner/work/benchmark/Qt/6.12.0/android_x86_64/plugins/platforms/libplugins_platforms_qtforandroid_x86_64.so
+-- Configuring done (1.2s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/runner/work/benchmark/benchmark/build-x86_64
+[1/34] Copying qtspike qml sources into build dir
+[2/34] Copying qtspike qml resources into build dir
+[3/34] Populating .qmlls.build.ini file at /home/runner/work/benchmark/benchmark/build-x86_64/.qt/.qmlls.build.ini
+[4/34] Automatic MOC and UIC for target custard
+[5/34] Building CXX object CMakeFiles/custard.dir/custard_autogen/mocs_compilation.cpp.o
+[6/34] Building C object CMakeFiles/custard.dir/home/runner/work/benchmark/benchmark/stacks/karamel/gen/Custard.c.o
+[7/34] Linking CXX static library libcustard.a
+[8/34] Automatic MOC and UIC for target qtspike
+[9/34] Running AUTOMOC file extraction for target qtspike
+[10/34] Running rcc for resource qmake_Spike
+[11/34] Running rcc for resource qtspike_raw_qml_0
+[12/34] Running rcc for resource qtspike_raw_qml_0_extra_qmldirs
+[13/34] Generating .rcc/qmlcache/qtspike_qmlcache_loader.cpp
+[14/34] Running moc --collect-json for target qtspike
+[15/34] Automatic QML type registration for target qtspike
+[16/34] Generating .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.aotstats
+[17/34] Generating .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp, .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.aotstats
+[18/34] Generating .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.aotstats
+[19/34] Generating .rcc/qmlcache/qtspike_qml_Main_qml.cpp, .rcc/qmlcache/qtspike_qml_Main_qml.cpp.aotstats
+[20/34] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qmake_Spike.cpp.o
+[21/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qmlcache_loader.cpp.o
+[22/34] Building CXX object CMakeFiles/qtspike.dir/src/main.cpp.o
+[23/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_Main_qml.cpp.o
+[24/34] Building CXX object CMakeFiles/qtspike.dir/src/spike.cpp.o
+[25/34] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0.cpp.o
+[26/34] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp.o
+[27/34] Building CXX object CMakeFiles/qtspike.dir/qtspike_autogen/mocs_compilation.cpp.o
+[28/34] Building CXX object CMakeFiles/qtspike.dir/qtspike_qmltyperegistrations.cpp.o
+[29/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.o
+[30/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.o
+[31/34] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.o
+[32/34] Linking CXX shared module libqtspike_x86_64.so
+[33/34] Copying qtspike binary to apk folder
+[34/34] Creating APK for qtspike
+Generating Android Package
+  Input file: /home/runner/work/benchmark/benchmark/build-x86_64/android-qtspike-deployment-settings.json
+  Output directory: /home/runner/work/benchmark/benchmark/build-x86_64/android-build/
+  Application binary: qtspike
+  Android build platform: android-36-ext19
+  Install to device: No
+> Task :preBuild UP-TO-DATE
+> Task :preReleaseBuild UP-TO-DATE
+> Task :mergeReleaseJniLibFolders
+> Task :checkReleaseDuplicateClasses
+> Task :generateReleaseResources
+> Task :packageReleaseResources
+> Task :processReleaseNavigationResources
+> Task :mergeReleaseNativeLibs
+> Task :parseReleaseLocalResources
+> Task :javaPreCompileRelease
+> Task :mapReleaseSourceSetPaths
+> Task :checkReleaseAarMetadata
+> Task :compileReleaseNavigationResources
+> Task :generateReleaseRFile
+> Task :stripReleaseDebugSymbols
+> Task :compileReleaseKotlin NO-SOURCE
+> Task :extractReleaseNativeSymbolTables
+> Task :mergeReleaseResources
+> Task :compileReleaseJavaWithJavac
+> Task :createReleaseCompatibleScreenManifests
+> Task :extractDeepLinksRelease
+
+> Task :processReleaseMainManifest
+package="org.example.qtspike" found in source AndroidManifest.xml: /home/runner/work/benchmark/benchmark/build-x86_64/android-build/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="org.example.qtspike" from the source AndroidManifest.xml: /home/runner/work/benchmark/benchmark/build-x86_64/android-build/AndroidManifest.xml.
+
+> Task :processReleaseManifest
+> Task :processReleaseManifestForPackage
+> Task :mergeReleaseNativeDebugMetadata
+> Task :mergeReleaseStartupProfile
+> Task :generateReleaseAssets UP-TO-DATE
+> Task :mergeReleaseArtProfile
+> Task :mergeReleaseAssets
+> Task :extractReleaseVersionControlInfo
+> Task :compressReleaseAssets
+> Task :extractProguardFiles
+> Task :processReleaseResources
+> Task :generateReleaseLintVitalReportModel
+> Task :dexBuilderRelease
+> Task :processReleaseJavaRes NO-SOURCE
+> Task :optimizeReleaseResources
+> Task :collectReleaseDependencies
+> Task :sdkReleaseDependencyData
+> Task :writeReleaseAppMetadata
+> Task :writeReleaseSigningConfigVersions
+> Task :mergeReleaseJavaResource
+> Task :desugarReleaseFileDependencies
+> Task :mergeReleaseGlobalSynthetics
+> Task :lintVitalAnalyzeRelease
+> Task :lintVitalReportRelease
+> Task :lintVitalRelease
+> Task :mergeExtDexRelease
+> Task :mergeDexRelease
+> Task :compileReleaseArtProfile
+> Task :packageRelease
+> Task :createReleaseApkListingFileRedirect
+> Task :assembleRelease
+
+BUILD SUCCESSFUL in 8s
+47 actionable tasks: 47 executed
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.1/userguide/configuration_cache_enabling.html
+Android package built successfully in 8.578 ms.
+  -- File: /home/runner/work/benchmark/benchmark/build-x86_64/android-build//build/outputs/apk/release/android-build-release-unsigned.apk
+[1/2] Copying qtspike binary to apk folder
+[2/2] Creating AAB for qtspike
+Generating Android Package
+  Input file: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-qtspike-deployment-settings.json
+  Output directory: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-build/
+  Application binary: qtspike
+  Android build platform: android-36-ext19
+  Install to device: No
+> Task :preBuild UP-TO-DATE
+> Task :preReleaseBuild UP-TO-DATE
+> Task :mergeReleaseJniLibFolders UP-TO-DATE
+> Task :mergeReleaseNativeLibs UP-TO-DATE
+> Task :stripReleaseDebugSymbols UP-TO-DATE
+> Task :extractReleaseNativeSymbolTables UP-TO-DATE
+> Task :mergeReleaseNativeDebugMetadata UP-TO-DATE
+> Task :checkReleaseDuplicateClasses UP-TO-DATE
+> Task :generateReleaseResources UP-TO-DATE
+> Task :packageReleaseResources UP-TO-DATE
+> Task :processReleaseNavigationResources UP-TO-DATE
+> Task :parseReleaseLocalResources UP-TO-DATE
+> Task :generateReleaseRFile UP-TO-DATE
+> Task :compileReleaseKotlin NO-SOURCE
+> Task :javaPreCompileRelease UP-TO-DATE
+> Task :compileReleaseJavaWithJavac UP-TO-DATE
+> Task :checkReleaseAarMetadata UP-TO-DATE
+> Task :mapReleaseSourceSetPaths UP-TO-DATE
+> Task :compileReleaseNavigationResources UP-TO-DATE
+> Task :mergeReleaseResources UP-TO-DATE
+> Task :createReleaseCompatibleScreenManifests UP-TO-DATE
+> Task :extractDeepLinksRelease UP-TO-DATE
+> Task :processReleaseMainManifest UP-TO-DATE
+> Task :processReleaseManifest UP-TO-DATE
+> Task :processReleaseManifestForPackage UP-TO-DATE
+> Task :processReleaseResources UP-TO-DATE
+> Task :dexBuilderRelease UP-TO-DATE
+> Task :desugarReleaseFileDependencies UP-TO-DATE
+> Task :mergeReleaseStartupProfile UP-TO-DATE
+> Task :mergeExtDexRelease UP-TO-DATE
+> Task :mergeDexRelease UP-TO-DATE
+> Task :mergeReleaseArtProfile UP-TO-DATE
+> Task :mergeReleaseGlobalSynthetics UP-TO-DATE
+> Task :compileReleaseArtProfile UP-TO-DATE
+> Task :generateReleaseAssets UP-TO-DATE
+> Task :mergeReleaseAssets
+> Task :extractReleaseVersionControlInfo UP-TO-DATE
+> Task :compressReleaseAssets
+> Task :extractProguardFiles UP-TO-DATE
+> Task :generateReleaseLintVitalReportModel
+> Task :processReleaseJavaRes NO-SOURCE
+> Task :mergeReleaseJavaResource UP-TO-DATE
+> Task :optimizeReleaseResources UP-TO-DATE
+> Task :collectReleaseDependencies UP-TO-DATE
+> Task :sdkReleaseDependencyData UP-TO-DATE
+> Task :writeReleaseAppMetadata UP-TO-DATE
+> Task :writeReleaseSigningConfigVersions UP-TO-DATE
+> Task :preDebugBuild UP-TO-DATE
+> Task :mapDebugSourceSetPaths
+> Task :processDebugNavigationResources
+> Task :compileDebugNavigationResources
+> Task :generateDebugResources
+> Task :createDebugCompatibleScreenManifests
+> Task :extractDeepLinksDebug
+
+> Task :processDebugMainManifest
+package="org.example.qtspike" found in source AndroidManifest.xml: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-build/AndroidManifest.xml.
+Setting the namespace via the package attribute in the source AndroidManifest.xml is no longer supported, and the value is ignored.
+Recommendation: remove package="org.example.qtspike" from the source AndroidManifest.xml: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-build/AndroidManifest.xml.
+
+> Task :processDebugManifest
+> Task :processApplicationManifestDebugForBundle
+> Task :checkDebugAarMetadata
+> Task :packageDebugResources
+> Task :processDebugManifestForPackage
+> Task :parseDebugLocalResources
+> Task :mergeDebugResources
+> Task :lintVitalAnalyzeRelease
+> Task :generateDebugGlobalSynthetics
+> Task :lintVitalReportRelease UP-TO-DATE
+> Task :lintVitalRelease
+> Task :generateDebugAssets UP-TO-DATE
+> Task :mergeDebugAssets
+> Task :generateDebugRFile
+> Task :checkDebugDuplicateClasses
+> Task :compileDebugKotlin NO-SOURCE
+> Task :packageRelease
+> Task :createReleaseApkListingFileRedirect UP-TO-DATE
+> Task :assembleRelease
+> Task :processDebugJavaRes NO-SOURCE
+> Task :processDebugResources
+> Task :mergeDebugJavaResource
+> Task :javaPreCompileDebug
+> Task :mergeLibDexDebug
+> Task :bundleDebugResources
+> Task :compileDebugJavaWithJavac
+> Task :dexBuilderDebug
+> Task :mergeProjectDexDebug
+> Task :mergeDebugJniLibFolders
+> Task :writeDebugAppMetadata
+> Task :parseDebugIntegrityConfig
+> Task :mergeDebugNativeLibs
+> Task :desugarDebugFileDependencies
+> Task :validateSigningDebug
+> Task :processApplicationManifestReleaseForBundle
+> Task :configureReleaseDependencies
+> Task :parseReleaseIntegrityConfig
+> Task :stripDebugDebugSymbols
+> Task :bundleReleaseResources
+> Task :buildReleasePreBundle
+> Task :packageReleaseBundle
+> Task :mergeExtDexDebug
+> Task :buildDebugPreBundle
+> Task :packageDebugBundle
+> Task :signDebugBundle
+> Task :produceDebugBundleIdeListingFile
+> Task :createDebugBundleListingFileRedirect
+> Task :bundleDebug
+> Task :signReleaseBundle
+> Task :produceReleaseBundleIdeListingFile
+> Task :createReleaseBundleListingFileRedirect
+> Task :bundleRelease
+> Task :bundle
+
+BUILD SUCCESSFUL in 18s
+95 actionable tasks: 54 executed, 41 up-to-date
+Consider enabling configuration cache to speed up this build: https://docs.gradle.org/9.5.1/userguide/configuration_cache_enabling.html
+Android package built successfully in 19.330 ms.
+  -- File: /home/runner/work/benchmark/benchmark/build-arm64_v8a/android-build//build/outputs/apk/release/android-build-release-unsigned.apk

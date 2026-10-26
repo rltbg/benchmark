@@ -1,0 +1,125 @@
+-- The C compiler identification is AppleClang 21.0.0.21000101
+-- The CXX compiler identification is AppleClang 21.0.0.21000101
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Found OpenGL: /Applications/Xcode_26.6.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks/OpenGL.framework
+-- Found WrapOpenGL: TRUE
+-- Could NOT find Qt6TaskTree (missing: Qt6TaskTree_DIR)
+CMake Warning at /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package):
+  Found package configuration file:
+
+    /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6QmlAssetDownloaderPrivate/Qt6QmlAssetDownloaderPrivateConfig.cmake
+
+  but it set Qt6QmlAssetDownloaderPrivate_FOUND to FALSE so package
+  "Qt6QmlAssetDownloaderPrivate" is considered to be NOT FOUND.  Reason given
+  by package:
+
+  Qt6QmlAssetDownloaderPrivate could not be found because dependency
+  Qt6TaskTree could not be found.
+
+  Configuring with --debug-find-pkg=Qt6TaskTree might reveal details why the
+  package was not found.
+
+  Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+  of the path variables that find_package uses to try and find the package.
+
+Call Stack (most recent call first):
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlAssetDownloaderPrivatepluginDependencies.cmake:22 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlAssetDownloaderPrivatepluginConfig.cmake:40 (include)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:638 (include)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake:6 (__qt_internal_include_qml_plugin_packages)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake:199 (include)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:40 (include)
+  /Users/runner/work/benchmark/Qt/6.12.0/macos/lib/cmake/Qt6/Qt6Config.cmake:257 (find_package)
+  CMakeLists.txt:9 (find_package)
+
+
+-- Configuring done (3.6s)
+-- Generating done (0.1s)
+-- Build files have been written to: /Users/runner/work/benchmark/benchmark/build
+[1/35] Copying qtspike qml sources into build dir
+[2/35] Copying qtspike qml resources into build dir
+[3/35] Running qmlimportscanner for qtspike
+[4/35] Generating qt.conf part for qtspike
+[5/35] Populating .qmlls.build.ini file at /Users/runner/work/benchmark/benchmark/build/.qt/.qmlls.build.ini
+[6/35] Automatic MOC and UIC for target custard
+[7/35] Generating qt.conf file
+[8/35] Building CXX object CMakeFiles/custard.dir/custard_autogen/mocs_compilation.cpp.o
+[9/35] Building C object CMakeFiles/custard.dir/Users/runner/work/benchmark/benchmark/stacks/karamel/gen/Custard.c.o
+[10/35] Linking CXX static library libcustard.a
+[11/35] Automatic MOC and UIC for target qtspike
+[12/35] Running AUTOMOC file extraction for target qtspike
+[13/35] Running rcc for resource qtspike_raw_qml_0_extra_qmldirs
+[14/35] Running rcc for resource qtspike_raw_qml_0
+[15/35] Generating .rcc/qmlcache/qtspike_qmlcache_loader.cpp
+[16/35] Running rcc for resource qmake_Spike
+[17/35] Running moc --collect-json for target qtspike
+[18/35] Automatic QML type registration for target qtspike
+[19/35] Generating .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp, .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.aotstats
+[20/35] Generating .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.aotstats
+[21/35] Generating .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.aotstats
+[22/35] Generating .rcc/qmlcache/qtspike_qml_Main_qml.cpp, .rcc/qmlcache/qtspike_qml_Main_qml.cpp.aotstats
+[23/35] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qmake_Spike.cpp.o
+[24/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qmlcache_loader.cpp.o
+[25/35] Building CXX object CMakeFiles/qtspike.dir/src/main.cpp.o
+[26/35] Building CXX object CMakeFiles/qtspike.dir/src/spike.cpp.o
+[27/35] Building CXX object CMakeFiles/qtspike.dir/qtspike_qmltyperegistrations.cpp.o
+[28/35] Building CXX object CMakeFiles/qtspike.dir/qtspike_autogen/mocs_compilation.cpp.o
+[29/35] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0.cpp.o
+[30/35] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp.o
+[31/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_Main_qml.cpp.o
+[32/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.o
+[33/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.o
+[34/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.o
+[35/35] Linking CXX executable qtspike.app/Contents/MacOS/qtspike
+-- Install configuration: "Release"
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/MacOS
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/MacOS/qtspike
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qt.conf
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Info.plist
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQuick/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libqtquick2plugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQml/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libqmlplugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQml/Models/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libmodelsplugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQml/WorkerScript/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libworkerscriptplugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQuick/Controls/Basic/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libqtquickcontrols2basicstyleplugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQuick/Layouts/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libqquicklayoutsplugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQuick/Templates/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libqtquicktemplates2plugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQuick/Controls/impl/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libqtquickcontrols2implplugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQuick/Controls/Basic/impl/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libqtquickcontrols2basicstyleimplplugin.dylib
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qml/QtQuick/Shapes/qmldir
+-- Installing: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/PlugIns/libqmlshapesplugin.dylib
+-- Removing generated build-tree qt.conf from installed bundle: /Users/runner/work/benchmark/benchmark/deploy/qtspike.app/Contents/Resources/qt.conf
+-- Running Qt deploy tool for qtspike.app in working directory '/Users/runner/work/benchmark/benchmark/deploy'
+'/Users/runner/work/benchmark/Qt/6.12.0/macos/bin/macdeployqt' 'qtspike.app' '-appstore-compliant' '-always-overwrite' '-executable=qtspike.app/Contents/PlugIns/libqtquick2plugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libqmlplugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libmodelsplugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libworkerscriptplugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libqtquickcontrols2basicstyleplugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libqquicklayoutsplugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libqtquicktemplates2plugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libqtquickcontrols2implplugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libqtquickcontrols2basicstyleimplplugin.dylib' '-executable=qtspike.app/Contents/PlugIns/libqmlshapesplugin.dylib'

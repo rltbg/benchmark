@@ -1,0 +1,849 @@
+{
+ "summary": {
+  "tag": "nsh-text",
+  "stack": "nsh",
+  "scenario": "text",
+  "runs": 5,
+  "ok_runs": 5,
+  "oom_runs": 0,
+  "markers_ok": 5,
+  "agg": {
+   "fps_mean": {
+    "median": 59.846083037345494,
+    "p95": 59.94022776547766,
+    "min": 59.55708072375719,
+    "max": 59.94022776547766,
+    "n": 5
+   },
+   "frame_p50": {
+    "median": 16.647168,
+    "p95": 16.691354,
+    "min": 16.617527,
+    "max": 16.691354,
+    "n": 5
+   },
+   "frame_p95": {
+    "median": 18.45247,
+    "p95": 18.746176,
+    "min": 18.18435,
+    "max": 18.746176,
+    "n": 5
+   },
+   "frame_p99": {
+    "median": 21.296687,
+    "p95": 22.391368,
+    "min": 19.998147,
+    "max": 22.391368,
+    "n": 5
+   },
+   "frame_max": {
+    "median": 45.734131,
+    "p95": 74.512825,
+    "min": 29.021928,
+    "max": 74.512825,
+    "n": 5
+   },
+   "dropped_gt16_7": {
+    "median": 395,
+    "p95": 413,
+    "min": 380,
+    "max": 413,
+    "n": 5
+   },
+   "dropped_gt8_3": {
+    "median": 835,
+    "p95": 836,
+    "min": 831,
+    "max": 836,
+    "n": 5
+   },
+   "dropped_gt25": {
+    "median": 3,
+    "p95": 4,
+    "min": 1,
+    "max": 4,
+    "n": 5
+   },
+   "rss_kb_median": {
+    "median": 129932.0,
+    "p95": 130120.0,
+    "min": 129820.0,
+    "max": 130120.0,
+    "n": 5
+   },
+   "rss_kb_peak": {
+    "median": 130072,
+    "p95": 130256,
+    "min": 129964,
+    "max": 130256,
+    "n": 5
+   },
+   "pss_kb_median": {
+    "median": 103489.0,
+    "p95": 103587.0,
+    "min": 103383.0,
+    "max": 103587.0,
+    "n": 5
+   },
+   "pss_kb_peak": {
+    "median": 103571,
+    "p95": 103665,
+    "min": 103469,
+    "max": 103665,
+    "n": 5
+   },
+   "cpu_pct_core_mean": {
+    "median": 33.8042739606365,
+    "p95": 35.31623175240771,
+    "min": 31.94974075970565,
+    "max": 35.31623175240771,
+    "n": 5
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 38.36203571414296,
+    "p95": 39.245911256860936,
+    "min": 35.4647400223667,
+    "max": 39.245911256860936,
+    "n": 5
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.1896087430004627,
+    "p95": 2.201511861000654,
+    "min": 2.1821842079998532,
+    "max": 2.201511861000654,
+    "n": 5
+   },
+   "wall_s": {
+    "median": 16.20466659900012,
+    "p95": 16.227442362000147,
+    "min": 16.182799922000413,
+    "max": 16.227442362000147,
+    "n": 5
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 16.209242949000327,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.201511861000654,
+   "frames": 836,
+   "ops": {
+    "layout_ms": 57.955778,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 15.655712,
+     "mean": 5.144263476702509,
+     "n": 837,
+     "p50": 4.868281,
+     "p95": 6.915729
+    },
+    "paints_without_change": 3,
+    "select_all": "not done: NSH 0.2.0 has no programmatic selection for text (set_selection is for inputs only); Ctrl+A selects all for the user",
+    "text_bytes": 1000111,
+    "text_content_height": 191951.0,
+    "time_to_first_display_ms": 160
+   },
+   "checksum": "0eab559a",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.846083037345494,
+   "frame_p50": 16.677569,
+   "frame_p95": 18.369706,
+   "frame_p99": 22.193189,
+   "frame_max": 29.021928,
+   "dropped_gt16_7": 408,
+   "dropped_gt8_3": 836,
+   "dropped_gt25": 3,
+   "dropped_ms_gt16_7": 364.2948170000003,
+   "window": "markers",
+   "rss_kb_median": 129932.0,
+   "rss_kb_peak": 130072,
+   "pss_kb_median": 103489.0,
+   "pss_kb_peak": 103571,
+   "pss_kb_first_quarter": 103413,
+   "pss_kb_last_quarter": 103501,
+   "cpu_pct_core_mean": 33.515015154681436,
+   "cpu_pct_core_peak_1s": 38.36203571414296,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3492,
+     718
+    ],
+    [
+     1.1,
+     0.21,
+     121904,
+     97131
+    ],
+    [
+     2.1,
+     0.22,
+     121904,
+     97131
+    ],
+    [
+     3.1,
+     0.58,
+     129776,
+     103333
+    ],
+    [
+     4.2,
+     0.95,
+     129864,
+     103421
+    ],
+    [
+     5.2,
+     1.3,
+     129916,
+     103473
+    ],
+    [
+     6.3,
+     1.69,
+     129916,
+     103473
+    ],
+    [
+     7.3,
+     2.02,
+     129928,
+     103485
+    ],
+    [
+     8.4,
+     2.38,
+     129928,
+     103485
+    ],
+    [
+     9.4,
+     2.72,
+     129932,
+     103489
+    ],
+    [
+     10.5,
+     3.08,
+     129936,
+     103493
+    ],
+    [
+     11.5,
+     3.42,
+     129944,
+     103501
+    ],
+    [
+     12.6,
+     3.81,
+     129944,
+     103501
+    ],
+    [
+     13.6,
+     4.12,
+     129944,
+     103501
+    ],
+    [
+     14.6,
+     4.47,
+     129944,
+     103501
+    ],
+    [
+     15.7,
+     4.8,
+     130068,
+     103567
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 16.182799922000413,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1821842079998532,
+   "frames": 836,
+   "ops": {
+    "layout_ms": 42.696779,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 22.359955,
+     "mean": 4.905972651135007,
+     "n": 837,
+     "p50": 4.700792,
+     "p95": 6.008784
+    },
+    "paints_without_change": 2,
+    "select_all": "not done: NSH 0.2.0 has no programmatic selection for text (set_selection is for inputs only); Ctrl+A selects all for the user",
+    "text_bytes": 1000111,
+    "text_content_height": 191951.0,
+    "time_to_first_display_ms": 153
+   },
+   "checksum": "0eab559a",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.94022776547766,
+   "frame_p50": 16.691354,
+   "frame_p95": 18.18435,
+   "frame_p99": 19.998147,
+   "frame_max": 34.016247,
+   "dropped_gt16_7": 413,
+   "dropped_gt8_3": 836,
+   "dropped_gt25": 1,
+   "dropped_ms_gt16_7": 306.3852180000003,
+   "window": "markers",
+   "rss_kb_median": 130120.0,
+   "rss_kb_peak": 130256,
+   "pss_kb_median": 103587.0,
+   "pss_kb_peak": 103665,
+   "pss_kb_first_quarter": 103511,
+   "pss_kb_last_quarter": 103599,
+   "cpu_pct_core_mean": 31.94974075970565,
+   "cpu_pct_core_peak_1s": 35.4647400223667,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3312,
+     817
+    ],
+    [
+     1.0,
+     0.2,
+     122160,
+     97288
+    ],
+    [
+     2.1,
+     0.21,
+     122160,
+     97288
+    ],
+    [
+     3.1,
+     0.54,
+     129972,
+     103439
+    ],
+    [
+     4.2,
+     0.87,
+     130056,
+     103523
+    ],
+    [
+     5.2,
+     1.2,
+     130096,
+     103563
+    ],
+    [
+     6.3,
+     1.53,
+     130096,
+     103563
+    ],
+    [
+     7.3,
+     1.87,
+     130120,
+     103587
+    ],
+    [
+     8.3,
+     2.22,
+     130120,
+     103587
+    ],
+    [
+     9.4,
+     2.56,
+     130120,
+     103587
+    ],
+    [
+     10.4,
+     2.9,
+     130120,
+     103587
+    ],
+    [
+     11.5,
+     3.26,
+     130128,
+     103595
+    ],
+    [
+     12.5,
+     3.58,
+     130132,
+     103599
+    ],
+    [
+     13.6,
+     3.9,
+     130132,
+     103599
+    ],
+    [
+     14.6,
+     4.23,
+     130132,
+     103599
+    ],
+    [
+     15.7,
+     4.54,
+     130252,
+     103661
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 16.227442362000147,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1896087430004627,
+   "frames": 832,
+   "ops": {
+    "layout_ms": 46.171023999999996,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 16.78144,
+     "mean": 5.377242139255699,
+     "n": 833,
+     "p50": 5.215151,
+     "p95": 6.883466
+    },
+    "paints_without_change": 3,
+    "select_all": "not done: NSH 0.2.0 has no programmatic selection for text (set_selection is for inputs only); Ctrl+A selects all for the user",
+    "text_bytes": 1000111,
+    "text_content_height": 191951.0,
+    "time_to_first_display_ms": 183
+   },
+   "checksum": "0eab559a",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.55708072375719,
+   "frame_p50": 16.617527,
+   "frame_p95": 18.746176,
+   "frame_p99": 22.391368,
+   "frame_max": 74.512825,
+   "dropped_gt16_7": 380,
+   "dropped_gt8_3": 831,
+   "dropped_gt25": 4,
+   "dropped_ms_gt16_7": 464.52337600000027,
+   "window": "markers",
+   "rss_kb_median": 129992.0,
+   "rss_kb_peak": 130136,
+   "pss_kb_median": 103533.0,
+   "pss_kb_peak": 103619,
+   "pss_kb_first_quarter": 103485,
+   "pss_kb_last_quarter": 103553,
+   "cpu_pct_core_mean": 34.089325606666996,
+   "cpu_pct_core_peak_1s": 39.245911256860936,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3464,
+     706
+    ],
+    [
+     1.0,
+     0.21,
+     121976,
+     97166
+    ],
+    [
+     2.1,
+     0.22,
+     121976,
+     97166
+    ],
+    [
+     3.1,
+     0.55,
+     129840,
+     103381
+    ],
+    [
+     4.2,
+     0.88,
+     129944,
+     103485
+    ],
+    [
+     5.3,
+     1.28,
+     129968,
+     103509
+    ],
+    [
+     6.3,
+     1.64,
+     129968,
+     103509
+    ],
+    [
+     7.4,
+     2.01,
+     129992,
+     103533
+    ],
+    [
+     8.4,
+     2.35,
+     129992,
+     103533
+    ],
+    [
+     9.4,
+     2.7,
+     129992,
+     103533
+    ],
+    [
+     10.5,
+     3.06,
+     129996,
+     103537
+    ],
+    [
+     11.5,
+     3.44,
+     130008,
+     103549
+    ],
+    [
+     12.6,
+     3.78,
+     130012,
+     103553
+    ],
+    [
+     13.6,
+     4.12,
+     130012,
+     103553
+    ],
+    [
+     14.7,
+     4.52,
+     130012,
+     103553
+    ],
+    [
+     15.7,
+     4.86,
+     130132,
+     103615
+    ]
+   ]
+  },
+  {
+   "run": 3,
+   "rc": 0,
+   "wall_s": 16.20466659900012,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.195770481999716,
+   "frames": 833,
+   "ops": {
+    "layout_ms": 54.753175,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 10.352814,
+     "mean": 5.284088089928053,
+     "n": 834,
+     "p50": 5.212828,
+     "p95": 6.475555
+    },
+    "paints_without_change": 1,
+    "select_all": "not done: NSH 0.2.0 has no programmatic selection for text (set_selection is for inputs only); Ctrl+A selects all for the user",
+    "text_bytes": 1000111,
+    "text_content_height": 191951.0,
+    "time_to_first_display_ms": 179
+   },
+   "checksum": "0eab559a",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.65514350397759,
+   "frame_p50": 16.647168,
+   "frame_p95": 18.45247,
+   "frame_p99": 20.750854,
+   "frame_max": 56.766545,
+   "dropped_gt16_7": 395,
+   "dropped_gt8_3": 833,
+   "dropped_gt25": 3,
+   "dropped_ms_gt16_7": 387.7069640000003,
+   "window": "markers",
+   "rss_kb_median": 129820.0,
+   "rss_kb_peak": 129964,
+   "pss_kb_median": 103383.0,
+   "pss_kb_peak": 103469,
+   "pss_kb_first_quarter": 103331,
+   "pss_kb_last_quarter": 103407,
+   "cpu_pct_core_mean": 33.8042739606365,
+   "cpu_pct_core_peak_1s": 37.260473019699425,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3216,
+     803
+    ],
+    [
+     1.0,
+     0.22,
+     121856,
+     97080
+    ],
+    [
+     2.1,
+     0.23,
+     121856,
+     97080
+    ],
+    [
+     3.1,
+     0.57,
+     129668,
+     103231
+    ],
+    [
+     4.2,
+     0.92,
+     129768,
+     103331
+    ],
+    [
+     5.2,
+     1.27,
+     129800,
+     103363
+    ],
+    [
+     6.3,
+     1.61,
+     129808,
+     103371
+    ],
+    [
+     7.3,
+     1.96,
+     129820,
+     103383
+    ],
+    [
+     8.4,
+     2.33,
+     129820,
+     103383
+    ],
+    [
+     9.4,
+     2.7,
+     129820,
+     103383
+    ],
+    [
+     10.5,
+     3.02,
+     129824,
+     103387
+    ],
+    [
+     11.5,
+     3.38,
+     129836,
+     103399
+    ],
+    [
+     12.5,
+     3.74,
+     129844,
+     103407
+    ],
+    [
+     13.6,
+     4.12,
+     129844,
+     103407
+    ],
+    [
+     14.6,
+     4.46,
+     129844,
+     103407
+    ],
+    [
+     15.7,
+     4.83,
+     129964,
+     103469
+    ]
+   ]
+  },
+  {
+   "run": 4,
+   "rc": 0,
+   "wall_s": 16.196064707000005,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.188602551999793,
+   "frames": 836,
+   "ops": {
+    "layout_ms": 43.174556,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 12.405493,
+     "mean": 5.615745506571084,
+     "n": 837,
+     "p50": 5.469405,
+     "p95": 7.094874
+    },
+    "paints_without_change": 1,
+    "select_all": "not done: NSH 0.2.0 has no programmatic selection for text (set_selection is for inputs only); Ctrl+A selects all for the user",
+    "text_bytes": 1000111,
+    "text_content_height": 191951.0,
+    "time_to_first_display_ms": 159
+   },
+   "checksum": "0eab559a",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.875276806081516,
+   "frame_p50": 16.645191,
+   "frame_p95": 18.606218,
+   "frame_p99": 21.296687,
+   "frame_max": 45.734131,
+   "dropped_gt16_7": 384,
+   "dropped_gt8_3": 835,
+   "dropped_gt25": 3,
+   "dropped_ms_gt16_7": 388.48563300000023,
+   "window": "markers",
+   "rss_kb_median": 129924.0,
+   "rss_kb_peak": 130060,
+   "pss_kb_median": 103420.0,
+   "pss_kb_peak": 103498,
+   "pss_kb_first_quarter": 103356,
+   "pss_kb_last_quarter": 103436,
+   "cpu_pct_core_mean": 35.31623175240771,
+   "cpu_pct_core_peak_1s": 39.16503795753685,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3496,
+     720
+    ],
+    [
+     1.0,
+     0.19,
+     121908,
+     97076
+    ],
+    [
+     2.1,
+     0.2,
+     121908,
+     97076
+    ],
+    [
+     3.1,
+     0.55,
+     129768,
+     103264
+    ],
+    [
+     4.2,
+     0.89,
+     129860,
+     103356
+    ],
+    [
+     5.2,
+     1.26,
+     129904,
+     103400
+    ],
+    [
+     6.3,
+     1.61,
+     129904,
+     103400
+    ],
+    [
+     7.3,
+     1.98,
+     129924,
+     103420
+    ],
+    [
+     8.3,
+     2.35,
+     129924,
+     103420
+    ],
+    [
+     9.4,
+     2.75,
+     129924,
+     103420
+    ],
+    [
+     10.4,
+     3.12,
+     129928,
+     103424
+    ],
+    [
+     11.5,
+     3.48,
+     129936,
+     103432
+    ],
+    [
+     12.5,
+     3.84,
+     129940,
+     103436
+    ],
+    [
+     13.6,
+     4.25,
+     129940,
+     103436
+    ],
+    [
+     14.6,
+     4.63,
+     129940,
+     103436
+    ],
+    [
+     15.7,
+     5.0,
+     130060,
+     103498
+    ]
+   ]
+  }
+ ]
+}

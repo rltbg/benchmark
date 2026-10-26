@@ -1,0 +1,28 @@
+{
+ "stack": "qt",
+ "platform": "linux",
+ "status": "ok",
+ "build_seconds": 16.0,
+ "artifacts": [
+  {
+   "path": "deploy",
+   "bytes": 186264860,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "qtspike-linux.tar",
+   "bytes": 96102400,
+   "gzip": 35836731,
+   "brotli": 25014409
+  }
+ ],
+ "notes": [
+  "ex\u00e9cution: success",
+  "warnings build: 1",
+  "rendu: software (QT_QUICK_BACKEND=software) et GL llvmpipe"
+ ],
+ "runner": "Linux/X64",
+ "sha": "80511d5fdcf3100a71d224826b2652acb7dfa0bb",
+ "date": "2026-10-26T15:58:07Z"
+}

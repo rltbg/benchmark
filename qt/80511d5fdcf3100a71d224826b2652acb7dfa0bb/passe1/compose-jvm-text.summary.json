@@ -1,0 +1,439 @@
+{
+ "summary": {
+  "tag": "compose-jvm-text",
+  "stack": "compose-jvm",
+  "scenario": "text",
+  "runs": 3,
+  "ok_runs": 3,
+  "agg": {
+   "fps_mean": {
+    "median": 118.48772805673697,
+    "p95": 121.1608105251261,
+    "min": 114.4988690024436,
+    "max": 121.1608105251261
+   },
+   "frame_p95": {
+    "median": 13.925,
+    "p95": 14.593,
+    "min": 13.647,
+    "max": 14.593
+   },
+   "frame_p99": {
+    "median": 19.53,
+    "p95": 19.665,
+    "min": 17.334,
+    "max": 19.665
+   },
+   "frame_max": {
+    "median": 101.028,
+    "p95": 111.216,
+    "min": 89.588,
+    "max": 111.216
+   },
+   "dropped_gt16_7": {
+    "median": 33,
+    "p95": 44,
+    "min": 23,
+    "max": 44
+   },
+   "dropped_gt8_3": {
+    "median": 573,
+    "p95": 719,
+    "min": 571,
+    "max": 719
+   },
+   "rss_kb_median": {
+    "median": 254948,
+    "p95": 260240.0,
+    "min": 253724.0,
+    "max": 260240.0
+   },
+   "rss_kb_peak": {
+    "median": 282556,
+    "p95": 287508,
+    "min": 280968,
+    "max": 287508
+   },
+   "rss_kb_last_quarter": {
+    "median": 275860,
+    "p95": 281424.0,
+    "min": 266106.0,
+    "max": 281424.0
+   },
+   "cpu_pct_core_mean": {
+    "median": 142.73342159000137,
+    "p95": 143.2156819952014,
+    "min": 139.87261028615399,
+    "max": 143.2156819952014
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 211.0,
+    "p95": 211.00000000000003,
+    "min": 204.99999999999997,
+    "max": 211.00000000000003
+   },
+   "wall_s": {
+    "median": 17.50864709600137,
+    "p95": 17.560453703001258,
+    "min": 17.421119939001073,
+    "max": 17.560453703001258
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 17.50864709600137,
+   "frames": 1604,
+   "ops": {
+    "jvm_start_to_main_ms": 70,
+    "startup_to_first_frame_ms": 1452,
+    "time_to_first_display_ms": 1545.0,
+    "layout_ms": 607.259263,
+    "lines": 9599,
+    "final_offset": 12005,
+    "load_split_ms": 30.953954,
+    "select_all": "unsupported: SelectionContainer over LazyColumn has no select-all API (non-composed items cannot be selected)"
+   },
+   "checksum": "1d283080",
+   "fps_mean": 114.4988690024436,
+   "frame_p50": 8.033,
+   "frame_p95": 13.925,
+   "frame_p99": 19.665,
+   "frame_max": 101.028,
+   "dropped_gt16_7": 33,
+   "dropped_gt8_3": 719,
+   "dropped_ms_gt16_7": 263.357,
+   "rss_kb_median": 254948,
+   "rss_kb_peak": 280968,
+   "rss_kb_first_quarter": 221734.0,
+   "rss_kb_last_quarter": 266106.0,
+   "cpu_pct_core_mean": 143.2156819952014,
+   "cpu_pct_core_peak_1s": 211.00000000000003,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     1408
+    ],
+    [
+     1.1,
+     1.59,
+     112152
+    ],
+    [
+     2.2,
+     3.66,
+     223564
+    ],
+    [
+     3.2,
+     5.68,
+     244852
+    ],
+    [
+     4.3,
+     7.53,
+     264612
+    ],
+    [
+     5.4,
+     9.44,
+     239708
+    ],
+    [
+     6.5,
+     10.93,
+     245744
+    ],
+    [
+     7.5,
+     12.41,
+     249892
+    ],
+    [
+     8.6,
+     13.85,
+     252464
+    ],
+    [
+     9.7,
+     15.34,
+     254684
+    ],
+    [
+     10.8,
+     16.68,
+     255188
+    ],
+    [
+     11.8,
+     18.1,
+     259608
+    ],
+    [
+     12.9,
+     19.41,
+     259468
+    ],
+    [
+     14.0,
+     20.93,
+     269384
+    ],
+    [
+     15.0,
+     22.22,
+     269664
+    ],
+    [
+     16.1,
+     23.35,
+     266028
+    ],
+    [
+     17.2,
+     24.61,
+     266196
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 17.421119939001073,
+   "frames": 1659,
+   "ops": {
+    "jvm_start_to_main_ms": 97,
+    "startup_to_first_frame_ms": 1378,
+    "time_to_first_display_ms": 1443.0,
+    "layout_ms": 590.554174,
+    "lines": 9599,
+    "final_offset": 12024,
+    "load_split_ms": 33.886902,
+    "select_all": "unsupported: SelectionContainer over LazyColumn has no select-all API (non-composed items cannot be selected)"
+   },
+   "checksum": "cd33908b",
+   "fps_mean": 118.48772805673697,
+   "frame_p50": 7.608,
+   "frame_p95": 14.593,
+   "frame_p99": 19.53,
+   "frame_max": 111.216,
+   "dropped_gt16_7": 44,
+   "dropped_gt8_3": 573,
+   "dropped_ms_gt16_7": 246.39300000000003,
+   "rss_kb_median": 260240.0,
+   "rss_kb_peak": 287508,
+   "rss_kb_first_quarter": 226284.0,
+   "rss_kb_last_quarter": 281424.0,
+   "cpu_pct_core_mean": 142.73342159000137,
+   "cpu_pct_core_peak_1s": 211.0,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     1408
+    ],
+    [
+     1.1,
+     1.63,
+     121096
+    ],
+    [
+     2.2,
+     3.66,
+     227312
+    ],
+    [
+     3.2,
+     5.64,
+     246008
+    ],
+    [
+     4.3,
+     7.52,
+     265584
+    ],
+    [
+     5.4,
+     9.46,
+     277608
+    ],
+    [
+     6.5,
+     11.03,
+     245520
+    ],
+    [
+     7.6,
+     12.38,
+     252920
+    ],
+    [
+     8.7,
+     13.79,
+     255248
+    ],
+    [
+     9.7,
+     15.27,
+     257216
+    ],
+    [
+     10.8,
+     16.7,
+     261020
+    ],
+    [
+     11.9,
+     18.48,
+     278636
+    ],
+    [
+     12.9,
+     19.77,
+     281052
+    ],
+    [
+     14.0,
+     20.86,
+     281204
+    ],
+    [
+     15.1,
+     22.24,
+     281420
+    ],
+    [
+     16.1,
+     23.47,
+     281568
+    ],
+    [
+     17.2,
+     24.57,
+     281656
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 17.560453703001258,
+   "frames": 1697,
+   "ops": {
+    "jvm_start_to_main_ms": 99,
+    "startup_to_first_frame_ms": 1474,
+    "time_to_first_display_ms": 1556.0,
+    "layout_ms": 623.373874,
+    "lines": 9599,
+    "final_offset": 11998,
+    "load_split_ms": 45.528932,
+    "select_all": "unsupported: SelectionContainer over LazyColumn has no select-all API (non-composed items cannot be selected)"
+   },
+   "checksum": "1eecc7ce",
+   "fps_mean": 121.1608105251261,
+   "frame_p50": 7.584,
+   "frame_p95": 13.647,
+   "frame_p99": 17.334,
+   "frame_max": 89.588,
+   "dropped_gt16_7": 23,
+   "dropped_gt8_3": 571,
+   "dropped_ms_gt16_7": 157.513,
+   "rss_kb_median": 253724.0,
+   "rss_kb_peak": 282556,
+   "rss_kb_first_quarter": 222284,
+   "rss_kb_last_quarter": 275860,
+   "cpu_pct_core_mean": 139.87261028615399,
+   "cpu_pct_core_peak_1s": 204.99999999999997,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     1408
+    ],
+    [
+     1.1,
+     1.52,
+     109196
+    ],
+    [
+     2.2,
+     3.5,
+     222284
+    ],
+    [
+     3.2,
+     5.37,
+     244836
+    ],
+    [
+     4.3,
+     7.26,
+     267576
+    ],
+    [
+     5.4,
+     9.21,
+     236040
+    ],
+    [
+     6.5,
+     10.65,
+     242216
+    ],
+    [
+     7.5,
+     12.04,
+     246408
+    ],
+    [
+     8.6,
+     13.55,
+     250448
+    ],
+    [
+     9.7,
+     15.06,
+     253564
+    ],
+    [
+     10.7,
+     16.39,
+     253784
+    ],
+    [
+     11.8,
+     18.04,
+     275264
+    ],
+    [
+     12.9,
+     19.27,
+     275420
+    ],
+    [
+     13.9,
+     20.4,
+     275592
+    ],
+    [
+     15.0,
+     21.58,
+     275852
+    ],
+    [
+     16.1,
+     22.86,
+     276028
+    ],
+    [
+     17.1,
+     23.97,
+     276152
+    ]
+   ]
+  }
+ ]
+}

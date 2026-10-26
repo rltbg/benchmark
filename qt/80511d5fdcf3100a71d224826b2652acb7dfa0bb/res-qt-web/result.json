@@ -1,0 +1,56 @@
+{
+ "stack": "qt",
+ "platform": "web",
+ "status": "fail",
+ "build_seconds": 0.0,
+ "artifacts": [
+  {
+   "path": "out-mt/qtspike.wasm",
+   "bytes": 26093036,
+   "gzip": 8942762,
+   "brotli": 6443384
+  },
+  {
+   "path": "out-mt/qtspike.js",
+   "bytes": 269504,
+   "gzip": 60454,
+   "brotli": 52168
+  },
+  {
+   "path": "out-mt/qtloader.js",
+   "bytes": 13437,
+   "gzip": 4505,
+   "brotli": 3801
+  },
+  {
+   "path": "out-mt/qtspike.html",
+   "bytes": 2993,
+   "gzip": 1201,
+   "brotli": 881
+  },
+  {
+   "path": "out-st/qtspike.wasm",
+   "missing": true
+  },
+  {
+   "path": "out-st/qtspike.js",
+   "missing": true
+  },
+  {
+   "path": "out-st/qtloader.js",
+   "missing": true
+  },
+  {
+   "path": "out-st/qtspike.html",
+   "missing": true
+  }
+ ],
+ "notes": [
+  "ex\u00e9cution: skipped",
+  "warnings build: 1",
+  "artefacts: out-mt = multithread, out-st = singlethread"
+ ],
+ "runner": "Linux/X64",
+ "sha": "80511d5fdcf3100a71d224826b2652acb7dfa0bb",
+ "date": "2026-10-26T15:57:28Z"
+}

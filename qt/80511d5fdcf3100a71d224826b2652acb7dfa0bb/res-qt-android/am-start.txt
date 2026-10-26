@@ -1,0 +1,7 @@
+Starting: Intent { cmp=org.example.qtspike/org.qtproject.qt.android.bindings.QtActivity (has extras) }
+Status: ok
+LaunchState: COLD
+Activity: org.example.qtspike/org.qtproject.qt.android.bindings.QtActivity
+TotalTime: 4571
+WaitTime: 4783
+Complete

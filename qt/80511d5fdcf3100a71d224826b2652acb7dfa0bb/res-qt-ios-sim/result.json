@@ -1,0 +1,28 @@
+{
+ "stack": "qt",
+ "platform": "ios-sim",
+ "status": "ok",
+ "build_seconds": 66.0,
+ "artifacts": [
+  {
+   "path": "build-ios/Release-iphonesimulator/qtspike.app",
+   "bytes": 30921384,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "qtspike-ios.tar",
+   "bytes": 30928384,
+   "gzip": 10704212,
+   "brotli": 7628105
+  }
+ ],
+ "notes": [
+  "ex\u00e9cution: success",
+  "warnings build: 8",
+  "simulateur, non sign\u00e9, Qt statique (frameworks .a)"
+ ],
+ "runner": "macOS/ARM64",
+ "sha": "80511d5fdcf3100a71d224826b2652acb7dfa0bb",
+ "date": "2026-10-26T16:05:37Z"
+}

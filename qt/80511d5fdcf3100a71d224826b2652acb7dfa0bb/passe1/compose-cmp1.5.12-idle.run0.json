@@ -1,0 +1,1 @@
+{"stack":"compose","scenario":"idle","duration_s":20.0,"frames":0,"frame_ms":[],"ops":{"jvm_start_to_main_ms":69,"sum_heights":8799584},"checksum":"7030eed9","notes":"idle: shell + first page, no animation, no redraw loop; JVM sleeps duration after first composition (+1s settle). frame_ms empty."}

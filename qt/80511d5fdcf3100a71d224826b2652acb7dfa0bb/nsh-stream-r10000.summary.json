@@ -1,0 +1,1599 @@
+{
+ "summary": {
+  "tag": "nsh-stream-r10000",
+  "stack": "nsh",
+  "scenario": "stream",
+  "runs": 10,
+  "ok_runs": 10,
+  "oom_runs": 0,
+  "markers_ok": 10,
+  "agg": {
+   "fps_mean": {
+    "median": 59.84145789077262,
+    "p95": 60.017886706993075,
+    "min": 59.64123932050304,
+    "max": 60.017886706993075,
+    "n": 10
+   },
+   "frame_p50": {
+    "median": 16.6586365,
+    "p95": 16.725124,
+    "min": 16.611907,
+    "max": 16.725124,
+    "n": 10
+   },
+   "frame_p95": {
+    "median": 18.162253,
+    "p95": 19.06267,
+    "min": 17.976017,
+    "max": 19.06267,
+    "n": 10
+   },
+   "frame_p99": {
+    "median": 20.5478265,
+    "p95": 25.78745,
+    "min": 19.835917,
+    "max": 25.78745,
+    "n": 10
+   },
+   "frame_max": {
+    "median": 36.335930000000005,
+    "p95": 73.905379,
+    "min": 23.473013,
+    "max": 73.905379,
+    "n": 10
+   },
+   "dropped_gt16_7": {
+    "median": 395.0,
+    "p95": 429,
+    "min": 360,
+    "max": 429,
+    "n": 10
+   },
+   "dropped_gt8_3": {
+    "median": 833.5,
+    "p95": 837,
+    "min": 826,
+    "max": 837,
+    "n": 10
+   },
+   "dropped_gt25": {
+    "median": 2.5,
+    "p95": 10,
+    "min": 0,
+    "max": 10,
+    "n": 10
+   },
+   "rss_kb_median": {
+    "median": 121452.0,
+    "p95": 121724,
+    "min": 121076.0,
+    "max": 121724,
+    "n": 10
+   },
+   "rss_kb_peak": {
+    "median": 121594.0,
+    "p95": 121848,
+    "min": 121220,
+    "max": 121848,
+    "n": 10
+   },
+   "pss_kb_median": {
+    "median": 96777.5,
+    "p95": 97003,
+    "min": 96363.0,
+    "max": 97003,
+    "n": 10
+   },
+   "pss_kb_peak": {
+    "median": 96853.5,
+    "p95": 97069,
+    "min": 96449,
+    "max": 97069,
+    "n": 10
+   },
+   "cpu_pct_core_mean": {
+    "median": 20.297339695764524,
+    "p95": 24.858112168995625,
+    "min": 19.678299398435776,
+    "max": 24.858112168995625,
+    "n": 10
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 23.565999278272642,
+    "p95": 30.258270326844062,
+    "min": 22.020213190453852,
+    "max": 30.258270326844062,
+    "n": 10
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.1803245835000666,
+    "p95": 2.2176068449999775,
+    "min": 2.081516044000068,
+    "max": 2.2176068449999775,
+    "n": 10
+   },
+   "wall_s": {
+    "median": 16.18260459000004,
+    "p95": 16.263492262,
+    "min": 16.109267018999958,
+    "max": 16.263492262,
+    "n": 10
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 16.180411317999983,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.194430243999932,
+   "frames": 832,
+   "ops": {
+    "final_offset": 20656.314453125,
+    "list_content_height_reported": 8799457.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 24.509323,
+     "mean": 4.237339074429768,
+     "n": 833,
+     "p50": 3.977894,
+     "p95": 6.19416
+    },
+    "paints_without_change": 5,
+    "rate": 10000,
+    "rows_drawn": 905,
+    "sum_heights": 8799584,
+    "updates_applied": 139852,
+    "updates_dropped": 0,
+    "updates_generated": 139911
+   },
+   "checksum": "fdf0a5b1",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.64123932050304,
+   "frame_p50": 16.725124,
+   "frame_p95": 18.823508,
+   "frame_p99": 25.78745,
+   "frame_max": 34.551377,
+   "dropped_gt16_7": 429,
+   "dropped_gt8_3": 826,
+   "dropped_gt25": 10,
+   "dropped_ms_gt16_7": 465.9746910000003,
+   "window": "markers",
+   "rss_kb_median": 121452,
+   "rss_kb_peak": 121604,
+   "pss_kb_median": 96804,
+   "pss_kb_peak": 96898,
+   "pss_kb_first_quarter": 93168,
+   "pss_kb_last_quarter": 96832,
+   "cpu_pct_core_mean": 24.858112168995625,
+   "cpu_pct_core_peak_1s": 30.258270326844062,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3500,
+     662
+    ],
+    [
+     1.0,
+     0.14,
+     113524,
+     90518
+    ],
+    [
+     2.1,
+     0.16,
+     113524,
+     90518
+    ],
+    [
+     3.1,
+     0.38,
+     117764,
+     93116
+    ],
+    [
+     4.2,
+     0.6,
+     117832,
+     93184
+    ],
+    [
+     5.2,
+     0.82,
+     117904,
+     93256
+    ],
+    [
+     6.3,
+     1.05,
+     118044,
+     93396
+    ],
+    [
+     7.3,
+     1.26,
+     121420,
+     96772
+    ],
+    [
+     8.3,
+     1.49,
+     121452,
+     96804
+    ],
+    [
+     9.4,
+     1.72,
+     121452,
+     96804
+    ],
+    [
+     10.4,
+     2.01,
+     121452,
+     96804
+    ],
+    [
+     11.5,
+     2.32,
+     121460,
+     96812
+    ],
+    [
+     12.6,
+     2.61,
+     121472,
+     96824
+    ],
+    [
+     13.6,
+     2.91,
+     121480,
+     96832
+    ],
+    [
+     14.7,
+     3.23,
+     121480,
+     96832
+    ],
+    [
+     15.8,
+     3.54,
+     121604,
+     96898
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 16.263492262,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.2176068449999775,
+   "frames": 834,
+   "ops": {
+    "final_offset": 20764.216796875,
+    "list_content_height_reported": 8799457.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 21.024156,
+     "mean": 4.145437663473048,
+     "n": 835,
+     "p50": 3.756385,
+     "p95": 6.225071
+    },
+    "paints_without_change": 4,
+    "rate": 10000,
+    "rows_drawn": 902,
+    "sum_heights": 8799584,
+    "updates_applied": 139838,
+    "updates_dropped": 0,
+    "updates_generated": 139922
+   },
+   "checksum": "3a4517eb",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.816236075346936,
+   "frame_p50": 16.700065,
+   "frame_p95": 19.06267,
+   "frame_p99": 23.059732,
+   "frame_max": 33.300016,
+   "dropped_gt16_7": 418,
+   "dropped_gt8_3": 833,
+   "dropped_gt25": 5,
+   "dropped_ms_gt16_7": 462.2044890000003,
+   "window": "markers",
+   "rss_kb_median": 121586.0,
+   "rss_kb_peak": 121720,
+   "pss_kb_median": 96869.0,
+   "pss_kb_peak": 96945,
+   "pss_kb_first_quarter": 93219,
+   "pss_kb_last_quarter": 96879,
+   "cpu_pct_core_mean": 23.52584452436159,
+   "cpu_pct_core_peak_1s": 29.291577279046013,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2696,
+     2201
+    ],
+    [
+     1.1,
+     0.21,
+     113732,
+     90661
+    ],
+    [
+     2.1,
+     0.23,
+     113732,
+     90661
+    ],
+    [
+     3.2,
+     0.53,
+     117880,
+     93163
+    ],
+    [
+     4.2,
+     0.8,
+     117952,
+     93235
+    ],
+    [
+     5.3,
+     1.1,
+     118028,
+     93311
+    ],
+    [
+     6.4,
+     1.39,
+     118176,
+     93459
+    ],
+    [
+     7.4,
+     1.67,
+     121544,
+     96827
+    ],
+    [
+     8.5,
+     1.92,
+     121580,
+     96863
+    ],
+    [
+     9.5,
+     2.16,
+     121592,
+     96875
+    ],
+    [
+     10.5,
+     2.37,
+     121592,
+     96875
+    ],
+    [
+     11.6,
+     2.59,
+     121592,
+     96875
+    ],
+    [
+     12.6,
+     2.81,
+     121592,
+     96875
+    ],
+    [
+     13.7,
+     3.02,
+     121592,
+     96875
+    ],
+    [
+     14.7,
+     3.24,
+     121596,
+     96879
+    ],
+    [
+     15.7,
+     3.45,
+     121720,
+     96945
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 16.19958586900009,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.181159618000038,
+   "frames": 832,
+   "ops": {
+    "final_offset": 20656.232421875,
+    "list_content_height_reported": 8799457.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 50.082663,
+     "mean": 3.4550448439375754,
+     "n": 833,
+     "p50": 3.230869,
+     "p95": 4.549809
+    },
+    "paints_without_change": 4,
+    "rate": 10000,
+    "rows_drawn": 897,
+    "sum_heights": 8799584,
+    "updates_applied": 139850,
+    "updates_dropped": 0,
+    "updates_generated": 139886
+   },
+   "checksum": "c50a7737",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.65617180437992,
+   "frame_p50": 16.647972,
+   "frame_p95": 18.178811,
+   "frame_p99": 20.931385,
+   "frame_max": 64.417589,
+   "dropped_gt16_7": 389,
+   "dropped_gt8_3": 832,
+   "dropped_gt25": 3,
+   "dropped_ms_gt16_7": 330.19896800000026,
+   "window": "markers",
+   "rss_kb_median": 121724,
+   "rss_kb_peak": 121848,
+   "pss_kb_median": 97003,
+   "pss_kb_peak": 97069,
+   "pss_kb_first_quarter": 93339,
+   "pss_kb_last_quarter": 97003,
+   "cpu_pct_core_mean": 20.266109187340092,
+   "cpu_pct_core_peak_1s": 23.055468832570945,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3440,
+     855
+    ],
+    [
+     1.0,
+     0.15,
+     113836,
+     90757
+    ],
+    [
+     2.1,
+     0.16,
+     113836,
+     90757
+    ],
+    [
+     3.1,
+     0.38,
+     118016,
+     93295
+    ],
+    [
+     4.2,
+     0.58,
+     118084,
+     93363
+    ],
+    [
+     5.2,
+     0.78,
+     118152,
+     93431
+    ],
+    [
+     6.2,
+     0.97,
+     118288,
+     93567
+    ],
+    [
+     7.3,
+     1.2,
+     121668,
+     96947
+    ],
+    [
+     8.3,
+     1.43,
+     121712,
+     96991
+    ],
+    [
+     9.3,
+     1.64,
+     121724,
+     97003
+    ],
+    [
+     10.4,
+     1.84,
+     121724,
+     97003
+    ],
+    [
+     11.4,
+     2.05,
+     121724,
+     97003
+    ],
+    [
+     12.5,
+     2.27,
+     121724,
+     97003
+    ],
+    [
+     13.5,
+     2.48,
+     121724,
+     97003
+    ],
+    [
+     14.5,
+     2.68,
+     121724,
+     97003
+    ],
+    [
+     15.6,
+     2.9,
+     121728,
+     97007
+    ]
+   ]
+  },
+  {
+   "run": 3,
+   "rc": 0,
+   "wall_s": 16.194315378000056,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1794895490000954,
+   "frames": 837,
+   "ops": {
+    "final_offset": 20540.974609375,
+    "list_content_height_reported": 8799489.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 13.18876,
+     "mean": 3.300789291169449,
+     "n": 838,
+     "p50": 3.124723,
+     "p95": 4.284534
+    },
+    "paints_without_change": 2,
+    "rate": 10000,
+    "rows_drawn": 885,
+    "sum_heights": 8799584,
+    "updates_applied": 139850,
+    "updates_dropped": 0,
+    "updates_generated": 140004
+   },
+   "checksum": "c50a7737",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 60.017886706993075,
+   "frame_p50": 16.641327,
+   "frame_p95": 17.993323,
+   "frame_p99": 20.998676,
+   "frame_max": 26.685671,
+   "dropped_gt16_7": 370,
+   "dropped_gt8_3": 836,
+   "dropped_gt25": 2,
+   "dropped_ms_gt16_7": 276.32615400000026,
+   "window": "markers",
+   "rss_kb_median": 121248,
+   "rss_kb_peak": 121392,
+   "pss_kb_median": 96598,
+   "pss_kb_peak": 96684,
+   "pss_kb_first_quarter": 92947,
+   "pss_kb_last_quarter": 96610,
+   "cpu_pct_core_mean": 20.12738860746484,
+   "cpu_pct_core_peak_1s": 22.167053907911853,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3284,
+     820
+    ],
+    [
+     1.0,
+     0.13,
+     113404,
+     90415
+    ],
+    [
+     2.1,
+     0.15,
+     113404,
+     90415
+    ],
+    [
+     3.1,
+     0.35,
+     117532,
+     92903
+    ],
+    [
+     4.1,
+     0.57,
+     117600,
+     92971
+    ],
+    [
+     5.2,
+     0.77,
+     117676,
+     93047
+    ],
+    [
+     6.2,
+     0.96,
+     117828,
+     93178
+    ],
+    [
+     7.3,
+     1.19,
+     121216,
+     96566
+    ],
+    [
+     8.3,
+     1.4,
+     121248,
+     96598
+    ],
+    [
+     9.3,
+     1.6,
+     121248,
+     96598
+    ],
+    [
+     10.4,
+     1.79,
+     121252,
+     96602
+    ],
+    [
+     11.4,
+     2.01,
+     121256,
+     96606
+    ],
+    [
+     12.5,
+     2.23,
+     121256,
+     96606
+    ],
+    [
+     13.5,
+     2.44,
+     121256,
+     96606
+    ],
+    [
+     14.5,
+     2.65,
+     121260,
+     96610
+    ],
+    [
+     15.6,
+     2.86,
+     121272,
+     96622
+    ]
+   ]
+  },
+  {
+   "run": 4,
+   "rc": 0,
+   "wall_s": 16.184797862000096,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1706877740000436,
+   "frames": 837,
+   "ops": {
+    "final_offset": 20580.787109375,
+    "list_content_height_reported": 8799449.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 10.87702,
+     "mean": 3.294330866348448,
+     "n": 838,
+     "p50": 3.16872,
+     "p95": 4.308306
+    },
+    "paints_without_change": 2,
+    "rate": 10000,
+    "rows_drawn": 894,
+    "sum_heights": 8799584,
+    "updates_applied": 139846,
+    "updates_dropped": 0,
+    "updates_generated": 139876
+   },
+   "checksum": "b6a1ff1d",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 60.00969828133616,
+   "frame_p50": 16.668791,
+   "frame_p95": 18.107138,
+   "frame_p99": 19.835917,
+   "frame_max": 23.473013,
+   "dropped_gt16_7": 401,
+   "dropped_gt8_3": 837,
+   "dropped_gt25": 0,
+   "dropped_ms_gt16_7": 272.56469600000025,
+   "window": "markers",
+   "rss_kb_median": 121364,
+   "rss_kb_peak": 121504,
+   "pss_kb_median": 96686,
+   "pss_kb_peak": 96768,
+   "pss_kb_first_quarter": 93046,
+   "pss_kb_last_quarter": 96706,
+   "cpu_pct_core_mean": 19.912615884767707,
+   "cpu_pct_core_peak_1s": 23.128872481575478,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3444,
+     708
+    ],
+    [
+     1.0,
+     0.14,
+     113516,
+     90480
+    ],
+    [
+     2.1,
+     0.15,
+     113516,
+     90480
+    ],
+    [
+     3.1,
+     0.34,
+     117676,
+     92998
+    ],
+    [
+     4.1,
+     0.54,
+     117740,
+     93062
+    ],
+    [
+     5.2,
+     0.74,
+     117808,
+     93130
+    ],
+    [
+     6.2,
+     0.96,
+     117948,
+     93270
+    ],
+    [
+     7.3,
+     1.18,
+     121328,
+     96650
+    ],
+    [
+     8.3,
+     1.41,
+     121360,
+     96682
+    ],
+    [
+     9.3,
+     1.62,
+     121364,
+     96686
+    ],
+    [
+     10.4,
+     1.83,
+     121376,
+     96698
+    ],
+    [
+     11.4,
+     2.03,
+     121376,
+     96698
+    ],
+    [
+     12.5,
+     2.23,
+     121376,
+     96698
+    ],
+    [
+     13.5,
+     2.43,
+     121376,
+     96698
+    ],
+    [
+     14.5,
+     2.65,
+     121384,
+     96706
+    ],
+    [
+     15.6,
+     2.84,
+     121384,
+     96706
+    ]
+   ]
+  },
+  {
+   "run": 5,
+   "rc": 0,
+   "wall_s": 16.196610048000025,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1708463569999594,
+   "frames": 834,
+   "ops": {
+    "final_offset": 20713.69140625,
+    "list_content_height_reported": 8799457.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 29.148981,
+     "mean": 3.268077128143711,
+     "n": 835,
+     "p50": 3.096699,
+     "p95": 4.193664
+    },
+    "paints_without_change": 4,
+    "rate": 10000,
+    "rows_drawn": 904,
+    "sum_heights": 8799584,
+    "updates_applied": 139844,
+    "updates_dropped": 0,
+    "updates_generated": 139915
+   },
+   "checksum": "3733311c",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.79600960852786,
+   "frame_p50": 16.611907,
+   "frame_p95": 18.128136,
+   "frame_p99": 20.501397,
+   "frame_max": 41.771919,
+   "dropped_gt16_7": 360,
+   "dropped_gt8_3": 834,
+   "dropped_gt25": 2,
+   "dropped_ms_gt16_7": 287.4352930000003,
+   "window": "markers",
+   "rss_kb_median": 121508,
+   "rss_kb_peak": 121644,
+   "pss_kb_median": 96796,
+   "pss_kb_peak": 96874,
+   "pss_kb_first_quarter": 93156,
+   "pss_kb_last_quarter": 96808,
+   "cpu_pct_core_mean": 19.678299398435776,
+   "cpu_pct_core_peak_1s": 22.020213190453852,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3388,
+     692
+    ],
+    [
+     1.0,
+     0.13,
+     113620,
+     90550
+    ],
+    [
+     2.1,
+     0.14,
+     113620,
+     90550
+    ],
+    [
+     3.1,
+     0.34,
+     117816,
+     93104
+    ],
+    [
+     4.1,
+     0.54,
+     117880,
+     93168
+    ],
+    [
+     5.2,
+     0.75,
+     117960,
+     93248
+    ],
+    [
+     6.2,
+     0.95,
+     118096,
+     93384
+    ],
+    [
+     7.3,
+     1.15,
+     121468,
+     96756
+    ],
+    [
+     8.3,
+     1.36,
+     121504,
+     96792
+    ],
+    [
+     9.3,
+     1.57,
+     121508,
+     96796
+    ],
+    [
+     10.4,
+     1.77,
+     121512,
+     96800
+    ],
+    [
+     11.4,
+     2.0,
+     121512,
+     96800
+    ],
+    [
+     12.5,
+     2.2,
+     121520,
+     96808
+    ],
+    [
+     13.5,
+     2.41,
+     121520,
+     96808
+    ],
+    [
+     14.5,
+     2.61,
+     121520,
+     96808
+    ],
+    [
+     15.6,
+     2.82,
+     121644,
+     96874
+    ]
+   ]
+  },
+  {
+   "run": 6,
+   "rc": 0,
+   "wall_s": 16.138703733999932,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1815547940000215,
+   "frames": 836,
+   "ops": {
+    "final_offset": 20368.013671875,
+    "list_content_height_reported": 8799457.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 13.79944,
+     "mean": 3.6506550250896077,
+     "n": 837,
+     "p50": 3.464112,
+     "p95": 4.922608
+    },
+    "paints_without_change": 2,
+    "rate": 10000,
+    "rows_drawn": 901,
+    "sum_heights": 8799584,
+    "updates_applied": 139846,
+    "updates_dropped": 0,
+    "updates_generated": 139925
+   },
+   "checksum": "b6a1ff1d",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.94245954666172,
+   "frame_p50": 16.670365,
+   "frame_p95": 18.145695,
+   "frame_p99": 20.09554,
+   "frame_max": 38.120483,
+   "dropped_gt16_7": 405,
+   "dropped_gt8_3": 835,
+   "dropped_gt25": 3,
+   "dropped_ms_gt16_7": 305.51183000000026,
+   "window": "markers",
+   "rss_kb_median": 121076.0,
+   "rss_kb_peak": 121220,
+   "pss_kb_median": 96363.0,
+   "pss_kb_peak": 96449,
+   "pss_kb_first_quarter": 92723,
+   "pss_kb_last_quarter": 96379,
+   "cpu_pct_core_mean": 21.654638454335394,
+   "cpu_pct_core_peak_1s": 24.027515919101948,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3464,
+     743
+    ],
+    [
+     1.0,
+     0.14,
+     113256,
+     90183
+    ],
+    [
+     2.1,
+     0.16,
+     113256,
+     90183
+    ],
+    [
+     3.1,
+     0.38,
+     117388,
+     92675
+    ],
+    [
+     4.2,
+     0.59,
+     117456,
+     92743
+    ],
+    [
+     5.2,
+     0.81,
+     117536,
+     92823
+    ],
+    [
+     6.2,
+     1.03,
+     117672,
+     92959
+    ],
+    [
+     7.3,
+     1.26,
+     121048,
+     96335
+    ],
+    [
+     8.3,
+     1.49,
+     121076,
+     96363
+    ],
+    [
+     9.4,
+     1.74,
+     121076,
+     96363
+    ],
+    [
+     10.4,
+     1.98,
+     121080,
+     96367
+    ],
+    [
+     11.5,
+     2.22,
+     121084,
+     96371
+    ],
+    [
+     12.5,
+     2.44,
+     121084,
+     96371
+    ],
+    [
+     13.5,
+     2.64,
+     121088,
+     96375
+    ],
+    [
+     14.6,
+     2.87,
+     121092,
+     96379
+    ],
+    [
+     15.6,
+     3.08,
+     121220,
+     96449
+    ]
+   ]
+  },
+  {
+   "run": 7,
+   "rc": 0,
+   "wall_s": 16.110506509999936,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1841371379999828,
+   "frames": 835,
+   "ops": {
+    "final_offset": 20488.455078125,
+    "list_content_height_reported": 8799513.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 34.891119,
+     "mean": 3.424606301435407,
+     "n": 836,
+     "p50": 3.215426,
+     "p95": 4.509722
+    },
+    "paints_without_change": 3,
+    "rate": 10000,
+    "rows_drawn": 883,
+    "sum_heights": 8799584,
+    "updates_applied": 139859,
+    "updates_dropped": 0,
+    "updates_generated": 139947
+   },
+   "checksum": "b13859da",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.8666797061983,
+   "frame_p50": 16.648031,
+   "frame_p95": 18.195426,
+   "frame_p99": 20.360767,
+   "frame_max": 49.395291,
+   "dropped_gt16_7": 382,
+   "dropped_gt8_3": 833,
+   "dropped_gt25": 3,
+   "dropped_ms_gt16_7": 303.51980300000025,
+   "window": "markers",
+   "rss_kb_median": 121348.0,
+   "rss_kb_peak": 121492,
+   "pss_kb_median": 96643.0,
+   "pss_kb_peak": 96729,
+   "pss_kb_first_quarter": 93015,
+   "pss_kb_last_quarter": 96655,
+   "cpu_pct_core_mean": 20.328570204188956,
+   "cpu_pct_core_peak_1s": 24.003126074969803,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3456,
+     704
+    ],
+    [
+     1.0,
+     0.14,
+     113512,
+     90447
+    ],
+    [
+     2.1,
+     0.16,
+     113512,
+     90447
+    ],
+    [
+     3.1,
+     0.36,
+     117664,
+     92959
+    ],
+    [
+     4.2,
+     0.57,
+     117736,
+     93031
+    ],
+    [
+     5.2,
+     0.78,
+     117808,
+     93103
+    ],
+    [
+     6.2,
+     1.01,
+     117940,
+     93235
+    ],
+    [
+     7.3,
+     1.23,
+     121320,
+     96615
+    ],
+    [
+     8.3,
+     1.45,
+     121348,
+     96643
+    ],
+    [
+     9.4,
+     1.68,
+     121356,
+     96651
+    ],
+    [
+     10.4,
+     1.88,
+     121356,
+     96651
+    ],
+    [
+     11.4,
+     2.08,
+     121356,
+     96651
+    ],
+    [
+     12.5,
+     2.29,
+     121356,
+     96651
+    ],
+    [
+     13.5,
+     2.48,
+     121360,
+     96655
+    ],
+    [
+     14.6,
+     2.7,
+     121360,
+     96655
+    ],
+    [
+     15.6,
+     2.9,
+     121492,
+     96729
+    ]
+   ]
+  },
+  {
+   "run": 8,
+   "rc": 0,
+   "wall_s": 16.12450620000004,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.081516044000068,
+   "frames": 833,
+   "ops": {
+    "final_offset": 20610.35546875,
+    "list_content_height_reported": 8799449.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 60.233194,
+     "mean": 3.494306214628296,
+     "n": 834,
+     "p50": 3.256128,
+     "p95": 4.664029
+    },
+    "paints_without_change": 3,
+    "rate": 10000,
+    "rows_drawn": 895,
+    "sum_heights": 8799584,
+    "updates_applied": 139843,
+    "updates_dropped": 0,
+    "updates_generated": 139873
+   },
+   "checksum": "90670f84",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.72685622620274,
+   "frame_p50": 16.685344,
+   "frame_p95": 18.182587,
+   "frame_p99": 20.594256,
+   "frame_max": 73.905379,
+   "dropped_gt16_7": 406,
+   "dropped_gt8_3": 833,
+   "dropped_gt25": 2,
+   "dropped_ms_gt16_7": 335.73580400000026,
+   "window": "markers",
+   "rss_kb_median": 121496,
+   "rss_kb_peak": 121628,
+   "pss_kb_median": 96866,
+   "pss_kb_peak": 96940,
+   "pss_kb_first_quarter": 93218,
+   "pss_kb_last_quarter": 96878,
+   "cpu_pct_core_mean": 20.804790922317856,
+   "cpu_pct_core_peak_1s": 25.92879991109647,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3408,
+     606
+    ],
+    [
+     1.0,
+     0.12,
+     113680,
+     90690
+    ],
+    [
+     2.1,
+     0.14,
+     113680,
+     90690
+    ],
+    [
+     3.1,
+     0.36,
+     117800,
+     93170
+    ],
+    [
+     4.2,
+     0.57,
+     117860,
+     93230
+    ],
+    [
+     5.2,
+     0.79,
+     117936,
+     93306
+    ],
+    [
+     6.2,
+     1.05,
+     121352,
+     96722
+    ],
+    [
+     7.3,
+     1.27,
+     121456,
+     96826
+    ],
+    [
+     8.3,
+     1.5,
+     121496,
+     96866
+    ],
+    [
+     9.4,
+     1.7,
+     121500,
+     96870
+    ],
+    [
+     10.4,
+     1.9,
+     121500,
+     96870
+    ],
+    [
+     11.4,
+     2.13,
+     121500,
+     96870
+    ],
+    [
+     12.5,
+     2.33,
+     121500,
+     96870
+    ],
+    [
+     13.5,
+     2.53,
+     121500,
+     96870
+    ],
+    [
+     14.6,
+     2.74,
+     121508,
+     96878
+    ],
+    [
+     15.6,
+     2.96,
+     121628,
+     96940
+    ]
+   ]
+  },
+  {
+   "run": 9,
+   "rc": 0,
+   "wall_s": 16.109267018999958,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.175711944999989,
+   "frames": 835,
+   "ops": {
+    "final_offset": 20557.77734375,
+    "list_content_height_reported": 8799489.0,
+    "pacing": "60",
+    "paint_phase_ms": {
+     "max": 17.171892,
+     "mean": 3.3484243098086077,
+     "n": 836,
+     "p50": 3.163956,
+     "p95": 4.285378
+    },
+    "paints_without_change": 3,
+    "rate": 10000,
+    "rows_drawn": 890,
+    "sum_heights": 8799584,
+    "updates_applied": 139677,
+    "updates_dropped": 0,
+    "updates_generated": 139843
+   },
+   "checksum": "10b0e38d",
+   "unsupported": null,
+   "version": "nsh-core/nsh-base/nsh-platform-linux 0.2.0 (crates.io, = git tag v0.2.0 669b62b); gtk4-rs 0.11.5; GTK 4.14.5 (system, runtime); rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+   "fps_mean": 59.94814757191416,
+   "frame_p50": 16.648482,
+   "frame_p95": 17.976017,
+   "frame_p99": 19.889397,
+   "frame_max": 30.752898,
+   "dropped_gt16_7": 381,
+   "dropped_gt8_3": 835,
+   "dropped_gt25": 1,
+   "dropped_ms_gt16_7": 260.54931800000026,
+   "window": "markers",
+   "rss_kb_median": 121452.0,
+   "rss_kb_peak": 121584,
+   "pss_kb_median": 96759.0,
+   "pss_kb_peak": 96833,
+   "pss_kb_first_quarter": 93123,
+   "pss_kb_last_quarter": 96763,
+   "cpu_pct_core_mean": 20.245766165303756,
+   "cpu_pct_core_peak_1s": 22.15559343849557,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3452,
+     621
+    ],
+    [
+     1.0,
+     0.14,
+     113640,
+     90587
+    ],
+    [
+     2.1,
+     0.15,
+     113640,
+     90587
+    ],
+    [
+     3.1,
+     0.36,
+     117768,
+     93075
+    ],
+    [
+     4.2,
+     0.57,
+     117840,
+     93147
+    ],
+    [
+     5.2,
+     0.77,
+     117912,
+     93219
+    ],
+    [
+     6.2,
+     0.99,
+     118044,
+     93351
+    ],
+    [
+     7.3,
+     1.19,
+     121424,
+     96731
+    ],
+    [
+     8.3,
+     1.42,
+     121452,
+     96759
+    ],
+    [
+     9.4,
+     1.62,
+     121456,
+     96763
+    ],
+    [
+     10.4,
+     1.83,
+     121456,
+     96763
+    ],
+    [
+     11.4,
+     2.06,
+     121456,
+     96763
+    ],
+    [
+     12.5,
+     2.27,
+     121456,
+     96763
+    ],
+    [
+     13.5,
+     2.47,
+     121456,
+     96763
+    ],
+    [
+     14.6,
+     2.67,
+     121460,
+     96767
+    ],
+    [
+     15.6,
+     2.88,
+     121584,
+     96833
+    ]
+   ]
+  }
+ ]
+}

@@ -1,0 +1,8 @@
+--------- beginning of main
+10-26 16:03:50.237  4151  4221 I SPIKE   : SPIKE:selftest ok
+10-26 16:03:52.153  4151  4221 I SPIKE   : SPIKE:ready platform=android stack=qt core=fstar-pulse-c
+10-26 16:03:52.657  4151  4221 I SPIKE   : SPIKE:autorun start
+10-26 16:03:56.582  4151  4221 I SPIKE   : SPIKE:fps tab=canvas value=3
+10-26 16:03:57.450  4151  4221 I SPIKE   : SPIKE:fps tab=canvas value=5
+10-26 16:03:59.182  4151  4221 I SPIKE   : SPIKE:heavy start
+10-26 16:03:59.285  4151  4221 I SPIKE   : SPIKE:heavy done iters=634000 thread=worker max_frame_gap_ms=209

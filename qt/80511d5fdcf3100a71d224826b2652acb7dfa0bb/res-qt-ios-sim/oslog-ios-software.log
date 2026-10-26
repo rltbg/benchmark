@@ -1,0 +1,4 @@
+getpwuid_r did not find a match for uid 501
+Timestamp               Ty Process[PID:TID]
+2026-10-26 16:01:43.160 Df log[13315:0] [com.apple.log:] log run noninteractively, parent: 8285 (launchd_sim), args: 'log' 'show' '--last' '2m' '--predicate' 'eventMessage CONTAINS "SPIKE:"' '--style' 'compact'
+2026-10-26 16:02:42.794 Df log[14762:0] [com.apple.log:] log run noninteractively, parent: 8285 (launchd_sim), args: 'log' 'show' '--last' '2m' '--predicate' 'eventMessage CONTAINS "SPIKE:"' '--style' 'compact'
