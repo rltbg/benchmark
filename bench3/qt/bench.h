@@ -133,9 +133,12 @@ struct ListCtl {
     int firstVisible() const { int i = 0; QMetaObject::invokeMethod(lv, "indexAt", Q_RETURN_ARG(int, i), Q_ARG(qreal, 100.0), Q_ARG(qreal, lv->property("contentY").toDouble() + 1)); return std::max(0, i); }
 };
 
+struct Flow { UpdateSink *sink = nullptr; RowModel *model = nullptr; ListCtl *ctl = nullptr; std::thread gen; std::vector<Ev> buf;
+              uint64_t applied = 0, applied0 = 0, structural = 0, structural0 = 0, gen0 = 0, drop0 = 0, sigCount = 0; uint64_t rate = 0; bool core = false; };
+struct FnStat { std::atomic<uint64_t> calls{0}, bytes{0}, ns{0}; };
+
 class Bench : public QObject {
     Q_OBJECT
-    struct Flow;
     QML_NAMED_ELEMENT(App)
     QML_SINGLETON
     QML_UNCREATABLE("provided from C++ with QQmlEngine::setExternalSingletonInstance")
@@ -150,7 +153,9 @@ class Bench : public QObject {
     Q_PROPERTY(bool interactive READ interactive CONSTANT)
     Q_PROPERTY(int richK READ richK CONSTANT)
     Q_PROPERTY(bool layerBlur READ layerBlur CONSTANT)
+    Q_PROPERTY(int leafStart READ leafStart CONSTANT)
 public:
+    enum Profile { Fling, Rich20k, Slow3k };
     enum Sc { Idle, ListScale, ListRich, ListMutate, ListReset, TextBig, TextLabels, TextEdit, TextRich, GfxShapes, GfxPaths, GfxChart, GfxImages, GfxLayers,
               UiTree, UiBind, UiAnim, FfiCalls, FfiCallbacks, FfiBlock, LatLoad, LatWheel, Soak, MemMin, Unknown };
     explicit Bench(const Args &a) : a(a) { init(); }
@@ -165,6 +170,7 @@ public:
     bool interactive() const { return sc == LatWheel; }
     int richK() const { return sc == ListRich ? N : 0; }
     bool layerBlur() const { return a.v("effect") == "blur"; }
+    int leafStart() const { return N < 2 ? 0 : (N - 2) / 10 + 1; }
     void setView(QQuickView *v) { view = v; }
     QQuickView *view = nullptr;
     ImagesItem *imagesItem = nullptr;
@@ -231,6 +237,7 @@ public:
         } else if (role == "textedit") te = o;
     }
     Q_INVOKABLE void setReady() { if (!ready) { ready = true; } }
+    Q_INVOKABLE void editorChanged() { if (ready) toggleSquare(); }
     Q_INVOKABLE void toggleSquare() { white = !white; if (measuring) ++keyEvents; emit squareChanged(); }
     Q_INVOKABLE void focusEditor() { if (te) QMetaObject::invokeMethod(te, "forceActiveFocus"); }
     Q_INVOKABLE QString variant(const QString &k, const QString &def = {}) const { return a.v(k, def); }
@@ -250,7 +257,7 @@ public:
         QObject::connect(view, &QQuickWindow::frameSwapped, this, [this] { onFrameSwapped(); }, Qt::DirectConnection);
         QObject::connect(view, &QWindow::widthChanged, this, [this] { onResize(); });
         QObject::connect(view, &QWindow::heightChanged, this, [this] { onResize(); });
-        if (sc == TextEdit) QTimer::singleShot(0, this, [this] { focusEditor(); });
+        if (sc == TextEdit || sc == Soak) QTimer::singleShot(0, this, [this] { focusEditor(); });
         if (ticked()) view->update();
     }
 
@@ -364,14 +371,11 @@ public:
     double setupMs = 0, ttfdMs = -1, layoutMs = 0, stallMax = 0; int keyEvents = 0, resizes = 0, resetsDone = 0; double lastResetT = 0;
     std::atomic<bool> ticks{false}, tickPending{false}, stopAll{false};
     // update flows (L3 / F2 / I1 mutate / M1): native or Qt-side producer -> UpdateSink -> UI-thread batch application
-    struct Flow { UpdateSink *sink = nullptr; RowModel *model = nullptr; ListCtl *ctl = nullptr; std::thread gen; std::vector<Ev> buf;
-                  uint64_t applied = 0, applied0 = 0, structural = 0, structural0 = 0, gen0 = 0, drop0 = 0, signals = 0; uint64_t rate = 0; bool core = false; };
     Flow flows[2]; int nflows = 0;
-    enum Profile { Fling, Rich20k, Slow3k } profile = Slow3k;
+    Profile profile = Slow3k;
     HeightIndex hidx[2]; int curIdx = 0; std::thread idxThread; int resetGen = 0; double nextResetT = 0; uint32_t xorData = 0;
     // F1 / F3 / loads
     std::vector<std::thread> workers; std::atomic<uint64_t> heavyCalls{0}, busyAcc{0}; uint64_t heavy0 = 0;
-    struct FnStat { std::atomic<uint64_t> calls{0}, bytes{0}, ns{0}; };
     FnStat fs[2][4];     // [phase][noop,add,hash,fill]
     std::atomic<int> phase{0}; qint64 phaseSwitchNs = 0; bool phase2Started = false; QElapsedTimer uiHeavyTimer; double uiHeavyLastT = -1;
     int textBytes = 0; std::atomic<bool> textLoading{false};

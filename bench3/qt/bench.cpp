@@ -79,7 +79,7 @@ void Bench::startFfiWorkers(int k) { for (int i = 0; i < k; ++i) workers.emplace
 void Bench::ffiWorker() {
     using clk = std::chrono::steady_clock;
     const int bytes = std::max(1, N);
-    std::vector<uint8_t> buf(size_t(bytes)); core_fill(buf.data(), size_t(bytes), 1);   // buffer created once, on the stack side
+    std::vector<uint8_t> buf(static_cast<size_t>(bytes), uint8_t(0)); core_fill(buf.data(), size_t(bytes), 1);   // buffer created once, on the stack side
     const QString sel = a.v("fn", "all");
     const bool use[4] = {sel == "all" || sel == "noop", sel == "all" || sel == "add", sel == "all" || sel == "hash", sel == "all" || sel == "fill"};
     const uint64_t perBatchBuf = std::max<uint64_t>(1, std::min<uint64_t>(200000, (4u << 20) / uint64_t(bytes)));
@@ -130,7 +130,7 @@ void Bench::loadText(QObject *edit, const QString &mode) {
         QMetaObject::invokeMethod(this, [this] { setReady(); }, Qt::QueuedConnection);
         return;
     }
-    const bool edit3 = sc == TextEdit;
+    const bool edit3 = sc == TextEdit || sc == Soak;
     const QString path = a.assets + (edit3 ? QStringLiteral("/text1mb.txt") : QString("/text%1mb.txt").arg(std::max(1, N)));
     ttfdBase = nowNs();
     const QString lmode = a.v("load", "async");

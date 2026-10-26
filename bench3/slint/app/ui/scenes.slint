@@ -1,5 +1,5 @@
 import { Bench, ShapeData, PathData, ImgItem, MoverData, GroupData, RowData } from "bench.slint";
-import { PoolRow, PoolDense, RowBody } from "rows.slint";
+import { PoolRow, PoolDense, RowBody, DenseBody } from "rows.slint";
 import { ListView } from "std-widgets.slint";
 
 // ---------------------------------------------------------------- listes
@@ -47,6 +47,17 @@ export component NativeList inherits Rectangle {
     ListView {
         content-y <=> Bench.lv-y;
         for r in Bench.lv-rows: RowBody {
+            d: r;
+            width: root.width - 14px;
+        }
+    }
+}
+
+export component NativeListDense inherits Rectangle {
+    clip: true;
+    ListView {
+        content-y <=> Bench.lv-y;
+        for r in Bench.lv-rows: DenseBody {
             d: r;
             width: root.width - 14px;
         }
@@ -217,12 +228,26 @@ export component LabelsView inherits Rectangle {
     background: #ffffff;
     clip: true;
     for s[i] in Bench.labels: Text {
-        x: mod(i, 26) * 48px;
-        y: floor(i / 26) * 14px;
-        width: 48px;
+        x: mod(i, 11) * 112px;
+        y: floor(i / 11) * 14px;
+        width: 112px;
         text: s;
         font-size: 11px;
         color: #202020;
+    }
+}
+
+export component RichView inherits Rectangle {
+    out property <length> content-h: st.preferred-height;
+    clip: true;
+    background: #ffffff;
+    st := StyledText {
+        y: -Bench.scroll-y;
+        width: parent.width - 20px;
+        x: 10px;
+        text: Bench.rich;
+        default-font-size: 14px;
+        default-color: #202020;
     }
 }
 

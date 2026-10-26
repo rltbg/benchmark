@@ -10,6 +10,7 @@ open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Input
 open Avalonia.Media
 open Avalonia.Themes.Simple
+open Avalonia.Rendering.Composition
 open Util
 open Harness
 
@@ -25,6 +26,11 @@ let makeScenario (a: Args) : Scenario =
     match a.Scenario with
     | "list-scale" | "list-rich" | "list-mutate" | "list-reset" | "ffi-callbacks" | "ffi-block" | "latency-load" | "latency-wheel" ->
         ListScenarios.ListScn(a) :> Scenario
+    | "gfx-shapes" -> Gfx.ShapesScn(a) :> Scenario
+    | "gfx-chart" -> Gfx.ChartScn(a) :> Scenario
+    | "gfx-paths" -> Gfx.PathsScn(a) :> Scenario
+    | "gfx-images" -> Gfx.ImagesScn(a) :> Scenario
+    | "gfx-layers" -> Gfx.LayersScn(a) :> Scenario
     | _ -> failwith ("scenario inconnu: " + a.Scenario)
 
 let writeUnsupported (a: Args) (reason: string) =
@@ -79,6 +85,9 @@ let main argv =
                                   // garde le framebuffer logiciel entre frames : evite l'allocation de 3,7 Mo (UnmanagedBlob
                                   // + GC.AddMemoryPressure => GC gen2 a chaque frame) et le blit complet
                                   UseRetainedFramebuffer = Nullable true))
+        // zones sales multi-rectangles (defaut : une seule boite englobante) : CompositionOptions public, nul par defaut
+        // (Rendering/Composition/CompositionOptions.cs:11 ; Server/ServerCompositionTarget.cs:65). --variant dirty=single pour le desactiver.
+        .With(CompositionOptions(UseRegionDirtyRectClipping = Nullable (theArgs.Variant("dirty", "region") <> "single")))
         .With(FontManagerOptions(FontFallbacks = [| FontFallback(FontFamily = FontFamily("Noto Color Emoji"),
                                                                  UnicodeRange = UnicodeRange.Parse("U+1F000-1FAFF, U+200D, U+FE0F")) |]))
         .StartWithClassicDesktopLifetime(argv)

@@ -4,6 +4,7 @@
 //  - QSGRenderNode (shapes only, software backend only): the node draws straight into the software renderer's QPainter.
 // QSGGeometryNode-based items are not drawn by the software adaptation (docs: qtquick-visualcanvas-adaptations-software), so
 // they are not used.
+#include <QElapsedTimer>
 #include <QHash>
 #include <QImage>
 #include <QImageReader>
@@ -203,7 +204,7 @@ public:
         p->setRenderHint(QPainter::Antialiasing, true);
         p->translate((width() - 1000) / 2, 5); p->setClipRect(QRectF(0, 0, 1000, 600));
         p->fillRect(QRectF(0, 0, 1000, 600), QColor(255, 255, 255));
-        QPen pen(QColor(0), 2); if (dashed) pen.setStyle(Qt::DashLine);
+        QPen pen(QColor(0, 0, 0), 2); if (dashed) pen.setStyle(Qt::DashLine);
         p->setBrush(Qt::NoBrush);
         for (int i = 0; i < n; ++i) {
             pen.setColor(col[size_t(i)]); p->setPen(pen);
