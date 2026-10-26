@@ -355,3 +355,6 @@ verify avalonia-aot 10:17:22
 verify avalonia-jit 10:18:54
 verify compose-jvm 10:20:27
 verify flutter 10:21:59
+verify egui 10:23:31
+verify nsh 10:25:03
+=== 10:25:03 slint stress d=600 runs=1 
