@@ -158,6 +158,8 @@ def one_run(a, i, tag):
     cmd = a.cmd.replace("${ROOT}", ROOT).split() + ["--scenario", a.scenario, "--duration", str(a.duration), "--out", out, "--assets", a.assets]
     if a.rate: cmd += ["--rate", str(a.rate)]
     if a.shapes: cmd += ["--shapes", str(a.shapes)]
+    if a.n is not None: cmd += ["--n", str(a.n)]
+    for v in a.variant: cmd += ["--variant", v]
     if a.cpus: cmd = ["taskset", "-c", a.cpus] + cmd
     cg = Cgroup(f"bench-{os.getpid()}-{i}", a.mem_limit, a.cpu_quota) if (a.mem_limit or a.cpu_quota) else None
     t0 = time.perf_counter()
@@ -238,8 +240,10 @@ def main():
     ap.add_argument("--cpus"); ap.add_argument("--cpu-quota", type=float); ap.add_argument("--mem-limit", type=float)
     ap.add_argument("--outdir", default=os.path.join(ROOT, "results")); ap.add_argument("--assets", default=os.path.join(ROOT, "assets"))
     ap.add_argument("--env", action="append", default=[])
+    ap.add_argument("--n", type=int, help="paramètre d'échelle du scénario v3 (--n N)")
+    ap.add_argument("--variant", action="append", default=[], help="k=v, transmis tel quel à l'app (v3)")
     a = ap.parse_args(); os.makedirs(a.outdir, exist_ok=True)
-    tag = (f"{a.stack}-{a.scenario}" + (f"-r{a.rate}" if a.rate else "") + (f"-s{a.shapes}" if a.shapes else "")
+    tag = (f"{a.stack}-{a.scenario}" + (f"-r{a.rate}" if a.rate else "") + (f"-s{a.shapes}" if a.shapes else "") + (f"-n{a.n}" if a.n is not None else "") + "".join("-" + v.replace("=", "") for v in a.variant)
            + (f"-cpu{a.cpus}" if a.cpus else "") + (f"-q{a.cpu_quota}" if a.cpu_quota else "") + (f"-m{int(a.mem_limit)}" if a.mem_limit else ""))
     runs = []
     for i in range(a.runs):
