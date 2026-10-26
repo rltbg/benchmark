@@ -1,0 +1,13 @@
+=== 19:55:56 slint latency-load lat-key-idle --n 100000 --variant load=idle --latency key --cpuhog 0
+SUMMARY {"tag": "slint-latency-load-n100000-loadidle", "stack": "slint", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 8.201567823664927, "p95": 8.203320842238103, "min": 8.19734676359012, "max": 8.203320842238103, "n": 3}, "frame
+=== 19:56:47 slint latency-wheel lat-wheel-idle --n 100000 --variant load=idle --latency wheel --cpuhog 0
+SUMMARY {"tag": "slint-latency-wheel-n100000-loadidle", "stack": "slint", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.87815283033532, "p95": 51.23594018978873, "min": 50.400561956970385, "max": 51.23594018978873, "n": 3}, "f
+=== 19:57:38 slint latency-load lat-key-fling --n 100000 --variant load=fling --latency key --cpuhog 0
+SUMMARY {"tag": "slint-latency-load-n100000-loadfling", "stack": "slint", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.97531152375502, "p95": 62.00486502242963, "min": 61.93506383874316, "max": 62.00486502242963, "n": 3}, "fra
+=== 19:58:29 slint latency-wheel lat-wheel-fling --n 100000 --variant load=fling --latency wheel --cpuhog 0
+SUMMARY {"tag": "slint-latency-wheel-n100000-loadfling", "stack": "slint", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.474139234037814, "p95": 50.55919584725875, "min": 50.47335492570065, "max": 50.55919584725875, "n": 3}, "
+=== 19:59:19 slint latency-load lat-key-heavy --n 100000 --variant load=heavy --latency key --cpuhog 0
+SUMMARY {"tag": "slint-latency-load-n100000-loadheavy", "stack": "slint", "scenario": "latency-load", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 8.205608099131796, "p95": 8.207521947951316, "min": 8.198662563031538, "max": 8.207521947951316, "n": 3}, "fra
+=== 20:00:10 slint latency-wheel lat-wheel-heavy --n 100000 --variant load=heavy --latency wheel --cpuhog 0
+SUMMARY {"tag": "slint-latency-wheel-n100000-loadheavy", "stack": "slint", "scenario": "latency-wheel", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 50.63696422631571, "p95": 50.91453053491932, "min": 50.50829696583301, "max": 50.91453053491932, "n": 3}, "f
+=== 20:01:01 slint latency-load lat-key-mutate --n 100000 --variant load=mutate --latency key --cpuhog 0

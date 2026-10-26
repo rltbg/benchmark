@@ -18,11 +18,13 @@ extra_of() { grep -v '^#' harness/stacks3.tsv | awk -F'\t' -v n="$1" '$1==n{prin
 has() { case " $PHASES " in *" $1 "*) return 0;; esac; return 1; }
 rb() { # stack scenario duration runs tag [args...]
   local s=$1 sc=$2 d=$3 r=$4 tag=$5; shift 5
+  [ -f "$OUT/done/$s.$tag" ] && return   # reprise après redémarrage du conteneur
   echo "=== $(date +%T) $s $sc $tag $*"
   mkdir -p "$OUT/runs/$s"
   # shellcheck disable=SC2046
   python3 -I harness/run_bench.py --stack "$s" --cmd "$(cmd_of "$s")" --scenario "$sc" --duration "$d" --runs "$r" \
     --outdir "$OUT/runs/$s" $(extra_of "$s") "$@" 2>&1 | grep -E "^SUMMARY|Traceback|Error" | cut -c1-300
+  mkdir -p "$OUT/done"; touch "$OUT/done/$s.$tag"
 }
 if has lat; then for s in $STACKS; do for load in idle fling heavy mutate cpuhog; do
   hog=0; [ $load = cpuhog ] && hog=3
