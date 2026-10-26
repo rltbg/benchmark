@@ -1,0 +1,12 @@
+Picked up JAVA_TOOL_OPTIONS: -Djavax.net.ssl.trustStore=/etc/ssl/certs/java/cacerts -Djavax.net.ssl.trustStoreType=JKS -Dhttps.proxyHost=127.0.0.1 -Dhttps.proxyPort=35239 -Dhttp.nonProxyHosts=localhost|127.0.0.1|::1|127.*|0.*|::|169.254.*|api.anthropic.com|api-staging.anthropic.com|api-pr-preview.anthropic.com|mcp-proxy.anthropic.com|mcp-proxy-staging.anthropic.com|registry.npmjs.org|jsr.io|npm.jsr.io|pypi.org|files.pythonhosted.org|index.crates.io|proxy.golang.org|host.docker.internal|10.*|172.16.*|172.17.*|172.18.*|172.19.*|172.20.*|172.21.*|172.22.*|172.23.*|172.24.*|172.25.*|172.26.*|172.27.*|172.28.*|172.29.*|172.30.*|172.31.*|192.168.*|100.64.0.0/10|*.svc.cluster.local|*.svc.cluster.local -Djdk.http.auth.tunneling.disabledSchemes= -Djdk.http.auth.proxying.disabledSchemes= -XX:AOTCacheOutput=/home/user/benchmark/stacks/compose/build/aot/app.aot
+BENCH:measure_start
+BENCH:measure_end
+Temporary AOTConfiguration recorded: /home/user/benchmark/stacks/compose/build/aot/app.aot.config
+Launching child process /home/user/benchmark/stacks/compose/build/compose/binaries/main/app/app/lib/runtime/bin/java to assemble AOT cache /home/user/benchmark/stacks/compose/build/aot/app.aot using configuration /home/user/benchmark/stacks/compose/build/aot/app.aot.config
+[9.146s][error][aot] java.io.IOException: Cannot run program "/home/user/benchmark/stacks/compose/build/compose/binaries/main/app/app/lib/runtime/bin/java": Exec failed, error: 2 (No such file or directory) 
+[9.146s][error][aot] An error has occurred while writing the shared archive file.
+[9.146s][error][aot] Unexpected exception, use -Xlog:aot,exceptions=trace for detail
+
+real	0m9.517s
+user	0m10.755s
+sys	0m2.712s

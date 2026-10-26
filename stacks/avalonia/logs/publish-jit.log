@@ -1,8 +1,8 @@
   Determining projects to restore...
-  Restored /home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj (in 462 ms).
+  Restored /home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj (in 416 ms).
   AvaloniaBench -> /home/user/benchmark/stacks/avalonia/artifacts/jit/bin/AvaloniaBench/release_linux-x64/avalonia-bench.dll
   AvaloniaBench -> /home/user/benchmark/stacks/avalonia/out/jit/
 
-real	0m7.901s
-user	0m7.340s
-sys	0m0.769s
+real	0m8.113s
+user	0m7.510s
+sys	0m0.890s

@@ -1099,7 +1099,7 @@ let buildWindow () : Window =
                 (tb :> Control), (fun () -> findScrollViewer tb), (fun () -> tb.Focus() |> ignore; tb.SelectAll()), "TextBox", tDoc
             else
                 let ed = AvaloniaEdit.TextEditor(IsReadOnly = true, WordWrap = true, FontSize = 14.0, ShowLineNumbers = false,
-                                                 FontFamily = FontFamily("Noto Sans, Noto Color Emoji"), Background = Brushes.White)
+                                                 FontFamily = FontFamily("Noto Sans"), Background = Brushes.White)
                 ed.Document <- AvaloniaEdit.Document.TextDocument(text)
                 let tDoc = Stopwatch.GetTimestamp()
                 // NB : TextEditor.ScrollToVerticalOffset est un no-op dans AvaloniaEdit 12.0.0 (corps commente) -> ScrollViewer du template
@@ -1187,4 +1187,8 @@ let main argv =
                                   // garde le framebuffer logiciel entre frames : evite l'allocation de 3,7 Mo (UnmanagedBlob
                                   // + GC.AddMemoryPressure => GC gen2 a chaque frame) et le blit complet ; option publique documentee
                                   UseRetainedFramebuffer = Nullable true))
+        // emoji en couleur : sans repli explicite, le repli systeme (fontconfig) choisit une police monochrome ;
+        // FontManagerOptions.FontFallbacks est consulte avant tout autre repli (doc API FontManagerOptions)
+        .With(FontManagerOptions(FontFallbacks = [| FontFallback(FontFamily = FontFamily("Noto Color Emoji"),
+                                                                 UnicodeRange = UnicodeRange.Parse("U+1F000-1FAFF, U+200D, U+FE0F")) |]))
         .StartWithClassicDesktopLifetime(argv)

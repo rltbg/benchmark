@@ -1,0 +1,6 @@
+default ["'jvm_start_to_main_ms': 156", "'startup_to_first_frame_ms': 1392"]
+aot ["'jvm_start_to_main_ms': 59", "'startup_to_first_frame_ms': 324"]
+default ["'jvm_start_to_main_ms': 134", "'startup_to_first_frame_ms': 1379"]
+aot ["'jvm_start_to_main_ms': 53", "'startup_to_first_frame_ms': 294"]
+default ["'jvm_start_to_main_ms': 125", "'startup_to_first_frame_ms': 1264"]
+aot ["'jvm_start_to_main_ms': 85", "'startup_to_first_frame_ms': 407"]
