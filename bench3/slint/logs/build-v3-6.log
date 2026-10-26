@@ -59,3 +59,5 @@ warning: method `capacity` is never used
 23 |     pub fn capacity(&self) -> usize { self.mask + 1 }
    |            ^^^^^^^^
 
+warning: `slintapp` (bin "slintapp") generated 5 warnings
+    Finished `release` profile [optimized] target(s) in 2m 51s

@@ -1,0 +1,8 @@
+I1 load=idle                                   rc=0 n=    0 fps=  0.0 p50=   0.0 p99=   0.0 max=   0.0 gt25=   0 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=61.5 ui_stall_ms_max=46.5
+I1 load=fling                                  rc=0 n=  492 fps= 61.4 p50=  16.3 p99=  19.0 max=  23.8 gt25=   0 gc=0/0/0 pause=0.0 alloc=51MB setup_ms=48.0 ui_stall_ms_max=12.1
+I1 load=heavy                                  rc=0 n=    0 fps=  0.0 p50=   0.0 p99=   0.0 max=   0.0 gt25=   0 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=57.5 ui_stall_ms_max=10.0
+I1 load=mutate                                 rc=0 n=  494 fps= 61.7 p50=  16.2 p99=  19.6 max=  22.0 gt25=   0 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=59.4 ui_stall_ms_max=11.5 updates_generated=810789 updates_applied=810789
+I2 wheel idle                                  rc=0 n=    0 fps=  0.0 p50=   0.0 p99=   0.0 max=   0.0 gt25=   0 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=75.3 ui_stall_ms_max=8.7
+L1 vsp model=oc N=1M (materialise)             rc=0 n=  474 fps= 59.0 p50=  16.3 p99=  24.5 max= 195.4 gt25=   4 gc=3/3/1 pause=260.098 alloc=213MB setup_ms=612.9 ui_stall_ms_max=183.7
+L1 vsp model=list N=1M                         rc=0 n=  485 fps= 60.4 p50=  16.4 p99=  21.1 max=  91.6 gt25=   3 gc=2/1/0 pause=107.313 alloc=223MB setup_ms=60.5 ui_stall_ms_max=80.6
+idle                                           rc=0 n=    0 fps=  0.0 p50=   0.0 p99=   0.0 max=   0.0 gt25=   0 gc=0/0/0 pause=0.0 alloc=0MB 
