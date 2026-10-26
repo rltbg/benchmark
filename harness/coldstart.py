@@ -24,7 +24,7 @@ for i in range(runs):
     env = dict(os.environ, DISPLAY=disp, LIBGL_ALWAYS_SOFTWARE="1"); env.update(dict(envx))
     out = os.path.join(d,"o.json")
     t0 = time.perf_counter()
-    p = subprocess.Popen(cmd+["--scenario","idle","--duration","6","--out",out,"--assets",os.path.join(ROOT,"assets")], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    p = subprocess.Popen(cmd+["--scenario",os.environ.get("CS_SCENARIO","idle"),"--duration","6","--out",out,"--assets",os.path.join(ROOT,"assets")], env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     tfirst = None
     while time.perf_counter()-t0 < 20:
         if bytes(m[j]^m[j+1]^m[j+2] for j in idx) != st0: tfirst = (time.perf_counter()-t0)*1000; break

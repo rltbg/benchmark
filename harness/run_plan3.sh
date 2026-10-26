@@ -54,6 +54,6 @@ if has memmin; then for s in $STACKS; do for sc in "list-scale 100000" "text-big
     case "$r" in *"ok_runs\": 1"*"fps_mean\": {\"median\": 5[89]"*|*"ok_runs\": 1"*"fps_mean\": {\"median\": 6"*) hi=$mid;; *) lo=$mid;; esac
   done; echo "MEMMIN $s $1 $2 : entre $lo et $hi Mo"; done; done; fi
 if has cold; then for s in $STACKS; do for n in 1000 100000; do
-  echo "cold $s ui-tree $n"; python3 -I harness/coldstart.py "$s" "$(cmd_of "$s") --n $n" 5 --drop 2>&1 | tail -1
+  echo "cold $s ui-tree $n"; export CS_SCENARIO=ui-tree; python3 -I harness/coldstart.py "$s" "$(cmd_of "$s") --n $n" 5 --drop 2>&1 | tail -1
   python3 -I harness/coldstart.py "$s" "$(cmd_of "$s") --n $n" 5 2>&1 | tail -1; done; done; fi
 echo "=== DONE $(date +%T)"
