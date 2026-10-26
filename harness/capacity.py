@@ -26,12 +26,13 @@ SCENARIOS = {
     "gfx-chart":    dict(values=[10_000, 100_000, 1_000_000]),
     "gfx-images":   dict(start=10, max=20_000),
     "gfx-layers":   dict(start=4, max=2_000),
-    "ui-tree":      dict(values=[1_000, 10_000, 100_000, 500_000]),
+    "ui-tree":      dict(values=[1_000, 10_000, 100_000, 500_000], resize=True),
     "ui-bind":      dict(start=1_000, max=1_000_000),
     "ui-anim":      dict(start=100, max=100_000),
     "ffi-callbacks": dict(start=10_000, max=20_000_000, flow=True),
 }
 FPS_MIN, MISS_MAX, P99_MAX = 58.5, 1.0, 33.0
+RESIZE_P95_MAX = 100.0  # ui-tree : frame de redimensionnement interactive (p95 <= 100 ms)
 
 
 def evaluate(res, spec):
@@ -44,6 +45,14 @@ def evaluate(res, spec):
     for k in ("updates_generated", "updates_applied", "updates_dropped", "setup_ms", "ui_stall_ms_max", "time_to_first_display_ms", "pacing", "not_rendered"):
         if k in ops: m[k] = ops[k]
     reasons = []
+    if spec.get("resize"):  # arbre statique : seules les frames après redimensionnement comptent (ops.resize_frame_ms)
+        rf = sorted(ops.get("resize_frame_ms") or [])
+        m["resize_p95_ms"] = rf[min(len(rf), max(1, -(-95 * len(rf) // 100))) - 1] if rf else None
+        if res.get("unsupported"): reasons.append("unsupported")
+        if res.get("rc") != 0: reasons.append(f"rc={res.get('rc')}")
+        if not rf: reasons.append("aucune frame de redimensionnement")
+        elif m["resize_p95_ms"] > RESIZE_P95_MAX: reasons.append(f"redim. p95 {m['resize_p95_ms']:.0f} ms > {RESIZE_P95_MAX:.0f}")
+        return (not reasons), m, reasons
     if res.get("unsupported"): reasons.append("unsupported")
     if res.get("rc") != 0: reasons.append(f"rc={res.get('rc')}")
     if not res.get("markers"): reasons.append("marqueurs absents")
