@@ -8,13 +8,13 @@ mod scen;
 use canvas::Canvas;
 use data::*;
 use egui::{Color32, FontId, Key, Pos2, Rect, Vec2};
-use std::fmt::Write as _;
 use std::io::Write as _;
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 use std::sync::{Arc, OnceLock};
 use std::time::{Duration, Instant};
 
 const WARMUP: f64 = 2.0;
+const FRAME_60: f64 = 1.0 / 60.0;
 const VERSION: &str = "egui 0.37.0 / eframe 0.37.0 / epaint 0.37.0 / wgpu 30.0.1 / glow 0.17.0 / winit 0.30.13 / image 0.25.10 / rustc 1.99.1";
 static PROC_START: OnceLock<Instant> = OnceLock::new();
 
@@ -118,6 +118,7 @@ enum Rend { Wgpu, Glow }
 struct App {
     a: Args,
     rend: Rend,
+    pacing60: bool,
     m0: Option<Instant>,
     hook_no: u64,
     last_counted: Option<Instant>,
@@ -152,7 +153,7 @@ fn rss_kb() -> u64 {
 }
 
 impl App {
-    fn new(cc: &eframe::CreationContext<'_>, a: Args, rend: Rend) -> Self {
+    fn new(cc: &eframe::CreationContext<'_>, a: Args, rend: Rend, pacing60: bool) -> Self {
         cc.egui_ctx.set_pixels_per_point(1.0);
         let mut gpu_info = String::new();
         if let Some(rs) = cc.wgpu_render_state.as_ref() {
@@ -174,7 +175,7 @@ impl App {
             _ => {}
         }
         App {
-            a, rend, m0: None, hook_no: 0, last_counted: None, changed: false, frame_ms: Vec::new(),
+            a, rend, pacing60, m0: None, hook_no: 0, last_counted: None, changed: false, frame_ms: Vec::new(),
             cpu_usage_sum: 0.0, cpu_usage_n: 0, unchanged: 0, t: 0.0, ttfd_ms: None, model: ListModel::new(), stream: None, canvas, text, images, nav, core: None, burner: None,
             last_off: -1.0, final_off: 0.0, samples: Vec::new(), next_sample: 10.0, base_applied: 0, shown_imgs: 0, gpu_info, square_white: false, key_events: 0,
         }
@@ -250,6 +251,7 @@ impl App {
             let s: Vec<String> = self.samples.iter().map(|(t, h, r)| format!("{{\"t\":{t:.1},\"native_heap_kb\":{h},\"rss_kb\":{r}}}")).collect();
             ops.push(format!("\"heap_samples\":[{}]", s.join(",")));
         }
+        ops.push(format!("\"pacing\":\"{}\"", if self.pacing60 { "60" } else { "uncapped" }));
         ops.push(format!("\"unchanged_frames_excluded\":{},\"frame_cpu_usage_ms_mean\":{:.3}", self.unchanged, if self.cpu_usage_n > 0 { self.cpu_usage_sum / self.cpu_usage_n as f64 * 1000.0 } else { 0.0 }));
         let nr: Vec<String> = not_rendered.iter().map(|s| json_str(s)).collect();
         ops.push(format!("\"not_rendered\":[{}]", nr.join(",")));
@@ -261,8 +263,9 @@ impl App {
             Rend::Glow => ("glow", "glow_options.vsync = false (glutin SwapInterval::DontWait)"),
         };
         let notes = format!(
-            "egui/eframe 0.37.0, renderer {rname} ({}), {vs}. frame_ms[k] = intervalle entre deux appels consécutifs de App::raw_input_hook (premier code applicatif après le retour de present/swap_buffers de la frame précédente ; eframe n'expose aucun hook post-présentation), comptés seulement si la frame précédente avait un contenu changé ; request_repaint() à chaque frame (redessin continu, pas de plafond observé).{extra} Warm-up 2 s non mesuré.",
-            self.gpu_info
+            "egui/eframe 0.37.0, renderer {rname} ({}), {vs}. frame_ms[k] = intervalle entre deux appels consécutifs de App::raw_input_hook (premier code applicatif après le retour de present/swap_buffers de la frame précédente ; eframe n'expose aucun hook post-présentation), comptés seulement si la frame précédente avait un contenu changé ; {}.{extra} Warm-up 2 s non mesuré.",
+            self.gpu_info,
+            if self.pacing60 { "pacing 60 (BENCH_PACING=60) : le vsync n'est pas effectif sous Xvfb (AutoVsync/SwapInterval::Wait mesurés > 60 fps), donc cadence par l'API publique Context::request_repaint_after vers la prochaine échéance d'une grille fixe de 16,667 ms (frame en retard = repaint immédiat)" } else { "pacing uncapped (BENCH_PACING=uncapped) : Context::request_repaint() à chaque frame, redessin continu sans plafond" }
         );
         let fm: Vec<String> = self.frame_ms.iter().map(|x| format!("{x:.3}")).collect();
         let version = format!("{VERSION} / renderer {rname}");
@@ -349,7 +352,18 @@ impl eframe::App for App {
             if let Some(c) = frame.info().cpu_usage { if self.m0.is_some() { self.cpu_usage_sum += c as f64; self.cpu_usage_n += 1; } }
             if let Some(im) = &mut self.images { if im.poll(ctx) { self.changed = true; } }
         }
-        if self.a.scenario != "idle" { ctx.request_repaint(); }
+        if self.a.scenario != "idle" {
+            if self.pacing60 && ctx.current_pass_index() == 0 {
+                // grille fixe de 16,667 ms depuis le démarrage : pas de dérive ; frame en retard -> repaint immédiat
+                let st = *PROC_START.get().unwrap();
+                let el = st.elapsed().as_secs_f64();
+                let k = (el / FRAME_60).floor() + 1.0;
+                let wait = (k * FRAME_60 - el).max(0.0);
+                ctx.request_repaint_after(Duration::from_secs_f64(wait));
+            } else if !self.pacing60 {
+                ctx.request_repaint();
+            }
+        }
     }
 
     fn ui(&mut self, ui: &mut egui::Ui, _frame: &mut eframe::Frame) {
@@ -423,6 +437,9 @@ impl eframe::App for App {
 fn main() {
     PROC_START.get_or_init(Instant::now);
     let a = parse_args();
+    // BENCH_PACING=60 (défaut) : request_repaint_after vers la prochaine échéance d'une grille 16,667 ms ;
+    // BENCH_PACING=uncapped : request_repaint() à chaque frame.
+    let pacing60 = std::env::var("BENCH_PACING").as_deref() != Ok("uncapped");
     let rend = match std::env::var("EGUI_BENCH_RENDERER").as_deref() { Ok("glow") => Rend::Glow, _ => Rend::Wgpu };
     if a.scenario == "idle" {
         // idle : aucune animation ni request_repaint ; ce thread place les marqueurs et écrit le JSON
@@ -435,8 +452,8 @@ fn main() {
             marker("BENCH:measure_end");
             let rn = if rend == Rend::Glow { "glow" } else { "wgpu" };
             let notes = format!("egui/eframe 0.37.0 renderer {rn} ; aucune frame redemandée (pas de request_repaint) : coquille (barre de titre + 1re page de liste + barre d'état) dessinée par les frames initiales d'eframe avant la mesure ; 0 frame pendant la mesure.");
-            let json = format!("{{\"stack\":\"egui\",\"version\":{},\"scenario\":\"idle\",\"duration_s\":{:.1},\"frames\":0,\"frame_ms\":[],\"ops\":{{\"sum_heights\":{},\"not_rendered\":[]}},\"checksum\":\"{:08x}\",\"notes\":{},\"unsupported\":null}}",
-                json_str(&format!("{VERSION} / renderer {rn}")), a2.duration, ListModel::new().total(), fnv(ListModel::new().total()), json_str(&notes));
+            let json = format!("{{\"stack\":\"egui\",\"version\":{},\"scenario\":\"idle\",\"duration_s\":{:.1},\"frames\":0,\"frame_ms\":[],\"ops\":{{\"sum_heights\":{},\"not_rendered\":[],\"pacing\":\"{}\"}},\"checksum\":\"{:08x}\",\"notes\":{},\"unsupported\":null}}",
+                json_str(&format!("{VERSION} / renderer {rn}")), a2.duration, ListModel::new().total(), if pacing60 { "60" } else { "uncapped" }, fnv(ListModel::new().total()), json_str(&notes));
             std::fs::write(&a2.out, json).unwrap();
             std::process::exit(0);
         });
@@ -456,5 +473,5 @@ fn main() {
     }
     if std::env::var("EGUI_BENCH_PRESENT").as_deref() == Ok("vsync") { opts.glow_options.vsync = true; }
     let a2 = a.clone();
-    eframe::run_native("egui bench", opts, Box::new(move |cc| Ok(Box::new(App::new(cc, a2.clone(), rend))))).unwrap();
+    eframe::run_native("egui bench", opts, Box::new(move |cc| Ok(Box::new(App::new(cc, a2.clone(), rend, pacing60))))).unwrap();
 }

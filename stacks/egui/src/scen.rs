@@ -106,7 +106,6 @@ pub fn ping(x: f64, max: f64) -> f64 {
 
 // ---------------------------------------------------------------- images
 pub struct Images {
-    dir: String,
     req_tx: Sender<usize>,
     res_rx: Receiver<(usize, ColorImage, f64)>,
     pub tex: Vec<Option<TextureHandle>>,
@@ -136,7 +135,7 @@ impl Images {
                 }
             });
         }
-        Self { dir: dir.into(), req_tx, res_rx, tex: (0..N_IMG).map(|_| None).collect(), requested: vec![false; N_IMG], decoded: 0, decode_total_ms: 0.0 }
+        Self { req_tx, res_rx, tex: (0..N_IMG).map(|_| None).collect(), requested: vec![false; N_IMG], decoded: 0, decode_total_ms: 0.0 }
     }
     /// Recupere les images decodees (max 16 uploads de textures 128x128 par frame).
     pub fn poll(&mut self, ctx: &egui::Context) -> bool {
@@ -160,7 +159,6 @@ impl Images {
             let _ = self.req_tx.send(i);
         }
     }
-    pub fn dir(&self) -> &str { &self.dir }
     /// Grille 9 colonnes, vignettes 128x128 ; vue = origine monde (ox, oy), echelle s (zoom/pan scripte).
     pub fn draw(&mut self, ui: &mut Ui, ox: f32, oy: f32, s: f32) -> usize {
         let area = ui.max_rect();

@@ -1,0 +1,1 @@
+{"stack": "flutter", "scenario": "stream", "toplevels_before": 0, "big_window_during": [{"w": 1280, "h": 720, "name": "\"benchapp\": (\"dev.bench.benchapp\" \"Dev.b"}], "toplevels_after": 0, "distinct_colors": 703, "nonbackground_pct": 14.5, "pixels_changed_between_captures_pct": 11.5, "png": "/home/user/benchmark/results/verification/flutter-stream.png"}
