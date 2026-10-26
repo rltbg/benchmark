@@ -194,7 +194,7 @@ Tailles wasm : non mesurées.
 
 - **Slint** : la plus légère (24 Mo de PSS, 99 ms de démarrage, 21 Mo sur disque) ; mémoire parfaitement stable sous stress ; 10 Mo facturés sous pression mémoire. Faiblesses : premier affichage du texte de 1 Mo en 2,1 s ; emoji en monochrome ; pas d'API canvas (un `Rectangle` par forme) ; liste à hauteur variable à virtualiser soi-même. Licence GPL, Royalty-free (attribution obligatoire) ou commerciale.
 - **Qt 6.12** : meilleure tenue sous charge (canvas 13,3 FPS, stress 12,2, ½ cœur 7,0 FPS en canvas), latence la plus basse, mémoire stable. Faiblesses : texte avec emoji couleur à 23 FPS, 96 Mo sur disque, deux langages, licence LGPL ou commerciale.
-- **Avalonia AOT** : 43 Mo de PSS, 131 ms de démarrage, 38 Mo sur disque, un seul langage (F#), texte de 1 Mo fluide via AvaloniaEdit. Faiblesses : latence clavier de 27 ms, dérive de +51 Mo en stress (à confirmer), plafond de 60 Hz non réglable publiquement.
+- **Avalonia AOT** (UI en F# écrit à la main ; scénario `core` = cœur Rust commun appelé par P/Invoke, sans code issu de F\*) : 43 Mo de PSS, 131 ms de démarrage, 38 Mo sur disque, un seul langage (F#), texte de 1 Mo fluide via AvaloniaEdit. Faiblesses : latence clavier de 27 ms, dérive de +51 Mo en stress (à confirmer), plafond de 60 Hz non réglable publiquement.
 - **NSH 0.2.0** : CPU bas (17 %), mais **canvas avec ombres documentées injouable** (0,2 FPS, gel du thread GTK) et stress à 0,8 FPS ; projet de quelques semaines.
 - **Compose 1.12.2 (JVM)** : tient 60 Hz en défilement, mais à 57-76 % d'un cœur ; 163 Mo de PSS ; 1,7 s de démarrage (0,3-0,4 s avec cache AOT du JDK 25, en variante) ; **OOM à 128 Mo** ; dérive de +84 Mo et 2,1 s de pauses GC en stress ; régression du scénario images liée à Skia/Skiko.
 - **Flutter 3.47.8** : en rendu logiciel, ne tient pas 60 FPS en défilement (55, 6 % de frames manquées) ; 212 Mo de PSS ; **OOM à 128 Mo** ; 829 Mo en stress. Non représentatif d'un appareil avec GPU.
@@ -217,7 +217,7 @@ Priorités : 1) performance (CPU, RAM, disque, démarrage, tenue sous charge), 2
 **Classement sur les preuves actuelles :**
 1. **Slint** : meilleur rapport performance/empreinte, cœur Rust lié directement.
 2. **Qt** : la plus robuste sous charge.
-3. **Avalonia AOT** : un seul langage, et la seule stack où la porte F\* → F# donne un cœur vérifié dans le même langage que l'UI.
+3. **Avalonia AOT** : un seul langage pour l'UI (F#), et la seule stack pour laquelle la porte F\* → F# *pourrait* fournir un cœur vérifié dans le même langage. Attention : l'app Avalonia mesurée ici appelle le cœur **Rust** par P/Invoke, comme les autres stacks ; l'intégration du code F# extrait par F\* dans Avalonia NativeAOT est en cours de test (variante `fstar`).
 4. NSH, puis Compose, puis Flutter.
 
 **Ce qui ferait changer le classement :**
