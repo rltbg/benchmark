@@ -1,13 +1,5 @@
-Resolving dependencies...
-Downloading packages...
-  material_color_utilities 0.13.0 (0.13.1 available)
-  meta 1.18.3 (1.19.0 available)
-  vector_math 2.4.0 (2.4.3 available)
-Got dependencies!
-3 packages have newer versions incompatible with dependency constraints.
-Try `flutter pub outdated` for more information.
-[  +42 ms] Unable to locate an Android SDK.
-[  +15 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[  +36 ms] Unable to locate an Android SDK.
+[   +9 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
 [        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
 [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
@@ -30,7 +22,7 @@ Try `flutter pub outdated` for more information.
 [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
-[  +10 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[   +9 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
@@ -43,7 +35,7 @@ Try `flutter pub outdated` for more information.
 [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
-[  +35 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[  +33 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
 [        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
 [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
@@ -54,7 +46,7 @@ Try `flutter pub outdated` for more information.
 [        ] Artifact Instance of 'FlutterSdk' is not required, skipping update.
 [        ] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
-[   +1 ms] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
+[        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'MacOSFuchsiaSDKArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FlutterRunnerSDKArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FlutterRunnerDebugSymbols' is not required, skipping update.
@@ -66,20 +58,20 @@ Try `flutter pub outdated` for more information.
 [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
 [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
-[   +8 ms] Skipping pub get: version match.
-[  +86 ms] Skipping generating generated_plugin_registrant.h because it is up-to-date.
-[   +8 ms] Skipping generating generated_plugin_registrant.cc because it is up-to-date.
-[   +2 ms] Skipping generating generated_plugins.cmake because it is up-to-date.
-[  +27 ms] Building Linux application...
+[   +6 ms] Skipping pub get: version match.
+[  +78 ms] Skipping generating generated_plugin_registrant.h because it is up-to-date.
+[   +4 ms] Skipping generating generated_plugin_registrant.cc because it is up-to-date.
+[   +1 ms] Skipping generating generated_plugins.cmake because it is up-to-date.
+[  +20 ms] Building Linux application...
 [   +3 ms] executing: [/home/user/eval/stacks/flutter/app/build/linux/x64/release/] cmake -G Ninja -DCMAKE_BUILD_TYPE=Release -DFLUTTER_TARGET_PLATFORM=linux-x64 /home/user/eval/stacks/flutter/app/linux
-[  +41 ms] -- Configuring done (0.0s)
-[   +3 ms] -- Generating done (0.0s)
-[  +10 ms] -- Build files have been written to: /home/user/eval/stacks/flutter/app/build/linux/x64/release
-[   +6 ms] executing: ninja -C /home/user/eval/stacks/flutter/app/build/linux/x64/release install
-[   +7 ms] ninja: Entering directory `/home/user/eval/stacks/flutter/app/build/linux/x64/release'
-[+14953 ms] [1/5] Generating /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/libflutter_linux_gtk.so, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_engine.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_call.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_response.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_value.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_view.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/flutter_linux.h, _phony_
-[        ] [  +44 ms] Unable to locate an Android SDK.
-[        ] [  +11 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
+[  +40 ms] -- Configuring done (0.0s)
+[   +5 ms] -- Generating done (0.0s)
+[   +9 ms] -- Build files have been written to: /home/user/eval/stacks/flutter/app/build/linux/x64/release
+[   +8 ms] executing: ninja -C /home/user/eval/stacks/flutter/app/build/linux/x64/release install
+[  +12 ms] ninja: Entering directory `/home/user/eval/stacks/flutter/app/build/linux/x64/release'
+[+15622 ms] [1/5] Generating /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/libflutter_linux_gtk.so, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_basic_message_channel.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_binary_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_binary_messenger.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_dart_project.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_engine.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_json_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_json_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_call.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_channel.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_method_response.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_plugin_registrar.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_plugin_registry.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_standard_message_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_standard_method_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_string_codec.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_value.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/fl_view.h, /home/user/eval/stacks/flutter/app/linux/flutter/ephemeral/flutter_linux/flutter_linux.h, _phony_
+[        ] [  +70 ms] Unable to locate an Android SDK.
+[        ] [  +16 ms] Artifact Instance of 'MaterialFonts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'GradleWrapper' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
@@ -102,13 +94,13 @@ Try `flutter pub outdated` for more information.
 [        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
-[        ] [   +9 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
+[        ] [  +13 ms] Artifact Instance of 'AndroidGenSnapshotArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'AndroidInternalBuildArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'IOSEngineArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'FlutterWebSdk' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'FlutterEngineStamp' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'LegacyCanvasKitRemover' is not required, skipping update.
-[        ] [   +3 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
+[        ] [   +2 ms] Artifact Instance of 'WindowsEngineArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'MacOSEngineArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'LinuxEngineArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'LinuxFuchsiaSDKArtifacts' is not required, skipping update.
@@ -138,36 +130,36 @@ Try `flutter pub outdated` for more information.
 [        ] [        ] Artifact Instance of 'IosUsbArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'FontSubsetArtifacts' is not required, skipping update.
 [        ] [        ] Artifact Instance of 'PubDependencies' is not required, skipping update.
-[        ] [  +13 ms] Initializing file store
-[        ] [   +8 ms] Done initializing file store
-[        ] [  +70 ms] Skipping target: build_hooks
-[        ] [   +1 ms] Skipping target: gen_dart_plugin_registrant
-[        ] [ +230 ms] Skipping target: unpack_linux
+[        ] [  +15 ms] Initializing file store
+[        ] [  +12 ms] Done initializing file store
+[        ] [ +101 ms] Skipping target: build_hooks
+[        ] [   +2 ms] Skipping target: gen_dart_plugin_registrant
+[        ] [ +229 ms] Skipping target: unpack_linux
 [        ] [        ] Skipping target: gen_localizations
-[        ] [ +224 ms] kernel_snapshot_program: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: /home/user/eval/stacks/flutter/app/lib/scenarios.dart}
-[  +12 ms] [  +11 ms] /home/user/eval/stacks/flutter/sdk/bin/cache/dart-sdk/bin/dartaotruntime /home/user/eval/stacks/flutter/sdk/bin/cache/dart-sdk/bin/snapshots/frontend_server_aot.dart.snapshot --sdk-root /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/common/flutter_patched_sdk_product/ --target=flutter --no-print-incremental-dependencies -DFLUTTER_BUILD_NAME=1.0.0 -DFLUTTER_BUILD_NUMBER=1 -DFLUTTER_VERSION=3.47.8 -DFLUTTER_CHANNEL=stable -DFLUTTER_GIT_URL=https://github.com/flutter/flutter -DFLUTTER_FRAMEWORK_REVISION=737ba8f885 -DFLUTTER_ENGINE_REVISION=cf636b1dfb -DFLUTTER_DART_VERSION=3.13.7 -Ddart.vm.profile=false -Ddart.vm.product=true --delete-tostring-package-uri=dart:ui --delete-tostring-package-uri=package:flutter --aot --tfa --target-os linux --packages /home/user/eval/stacks/flutter/app/.dart_tool/package_config.json --output-dill /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.dill --depfile /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/kernel_snapshot_program.d --verbosity=error --recorded-uses=/home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/recorded_uses.json package:benchapp/main.dart
-[        ] [+7560 ms] kernel_snapshot_program: Complete
-[        ] [ +265 ms] Skipping target: link_hooks
-[        ] [  +21 ms] Skipping target: install_code_assets
+[        ] [ +208 ms] kernel_snapshot_program: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: /home/user/eval/stacks/flutter/app/lib/scenarios.dart}
+[  +15 ms] [  +11 ms] /home/user/eval/stacks/flutter/sdk/bin/cache/dart-sdk/bin/dartaotruntime /home/user/eval/stacks/flutter/sdk/bin/cache/dart-sdk/bin/snapshots/frontend_server_aot.dart.snapshot --sdk-root /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/common/flutter_patched_sdk_product/ --target=flutter --no-print-incremental-dependencies -DFLUTTER_BUILD_NAME=1.0.0 -DFLUTTER_BUILD_NUMBER=1 -DFLUTTER_VERSION=3.47.8 -DFLUTTER_CHANNEL=stable -DFLUTTER_GIT_URL=https://github.com/flutter/flutter -DFLUTTER_FRAMEWORK_REVISION=737ba8f885 -DFLUTTER_ENGINE_REVISION=cf636b1dfb -DFLUTTER_DART_VERSION=3.13.7 -Ddart.vm.profile=false -Ddart.vm.product=true --delete-tostring-package-uri=dart:ui --delete-tostring-package-uri=package:flutter --aot --tfa --target-os linux --packages /home/user/eval/stacks/flutter/app/.dart_tool/package_config.json --output-dill /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.dill --depfile /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/kernel_snapshot_program.d --verbosity=error --recorded-uses=/home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/recorded_uses.json package:benchapp/main.dart
+[        ] [+7843 ms] kernel_snapshot_program: Complete
+[        ] [ +261 ms] Skipping target: link_hooks
+[        ] [  +23 ms] Skipping target: install_code_assets
 [        ] [        ] aot_elf_release: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.dill}
-[        ] [   +2 ms] targetingApplePlatform = false
+[        ] [   +1 ms] targetingApplePlatform = false
 [        ] [        ] extractAppleDebugSymbols = true
 [        ] [        ] targetingAndroidPlatform = false
 [        ] [        ] Will strip AOT snapshot during build.
 [   +1 ms] [   +1 ms] executing: /home/user/eval/stacks/flutter/sdk/bin/cache/artifacts/engine/linux-x64-release/gen_snapshot --deterministic --snapshot_kind=app-aot-elf --elf=/home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.so --strip /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.dill
-[        ] [+5832 ms] aot_elf_release: Complete
-[        ] [  +51 ms] linux_aot_bundle: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.so}
+[        ] [+6117 ms] aot_elf_release: Complete
+[        ] [  +42 ms] linux_aot_bundle: Starting due to {InvalidatedReasonKind.inputChanged: The following inputs have updated contents: /home/user/eval/stacks/flutter/app/.dart_tool/flutter_build/049b41bb4c612cd004827249be2611f8/app.so}
 [        ] [   +4 ms] linux_aot_bundle: Complete
-[        ] [  +35 ms] Skipping target: release_bundle_linux-x64_assets
+[        ] [  +31 ms] Skipping target: release_bundle_linux-x64_assets
 [        ] [        ] Persisting file store
-[        ] [   +7 ms] Done persisting file store
-[        ] [  +13 ms] build succeeded.
-[        ] [   +1 ms] "flutter assemble" took 14,442ms.
+[        ] [   +6 ms] Done persisting file store
+[        ] [  +16 ms] build succeeded.
+[        ] [   +1 ms] "flutter assemble" took 15,019ms.
 [        ] [   +2 ms] Running 1 shutdown hook
 [        ] [        ] Shutdown hooks complete
 [        ] [        ] exiting with code 0
 [        ] [1/2] Install the project...
-[        ] -- Install configuration: "Release"
+[   +3 ms] -- Install configuration: "Release"
 [        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/benchapp
 [        ] -- Set non-toolchain portion of runtime path of "/home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/benchapp" to "$ORIGIN/lib"
 [        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/icudtl.dat
@@ -183,38 +175,32 @@ Try `flutter pub outdated` for more information.
 [        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/shaders/stretch_effect.frag
 [        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/data/flutter_assets/shaders/ink_sparkle.frag
 [        ] -- Installing: /home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/lib/libapp.so
-[   +1 ms] Building Linux application... (completed in 15.1s)
+[   +1 ms] Building Linux application... (completed in 15.7s)
 [   +2 ms] ✓ Built build/linux/x64/release/bundle/benchapp
-[        ] "flutter linux" took 15,245ms.
+[        ] "flutter linux" took 15,901ms.
 [   +1 ms] Running 1 shutdown hook
 [        ] Shutdown hooks complete
 [        ] exiting with code 0
 	Command being timed: "flutter build linux --release -v"
-	User time (seconds): 17.48
-	System time (seconds): 1.30
-	Percent of CPU this job got: 121%
-	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:15.40
+	User time (seconds): 17.01
+	System time (seconds): 1.31
+	Percent of CPU this job got: 114%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:16.03
 	Average shared text size (kbytes): 0
 	Average unshared data size (kbytes): 0
 	Average stack size (kbytes): 0
 	Average total size (kbytes): 0
-	Maximum resident set size (kbytes): 409212
+	Maximum resident set size (kbytes): 421732
 	Average resident set size (kbytes): 0
 	Major (requiring I/O) page faults: 0
-	Minor (reclaiming a frame) page faults: 411141
-	Voluntary context switches: 7593
-	Involuntary context switches: 662
+	Minor (reclaiming a frame) page faults: 413340
+	Voluntary context switches: 7817
+	Involuntary context switches: 2060
 	Swaps: 0
 	File system inputs: 0
-	File system outputs: 96504
+	File system outputs: 96336
 	Socket messages sent: 0
 	Socket messages received: 0
 	Signals delivered: 0
 	Page size (bytes): 4096
 	Exit status: 0
-total 40
-drwxr-xr-x 4 root root  4096 Oct 25 18:30 .
-drwxr-xr-x 7 root root  4096 Oct 25 18:30 ..
--rwxr-xr-x 1 root root 23840 Oct 25 18:25 benchapp
-drwxr-xr-x 3 root root  4096 Oct 25 18:30 data
-drwxr-xr-x 2 root root  4096 Oct 25 18:30 lib

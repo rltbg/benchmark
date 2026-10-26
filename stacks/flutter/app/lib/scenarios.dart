@@ -4,9 +4,9 @@ import 'dart:developer' show Timeline;
 import 'dart:ffi' show Uint64Pointer;
 import 'dart:io';
 import 'dart:math' as m;
-import 'dart:ui' as ui;
 
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'bench.dart';
@@ -59,7 +59,11 @@ class Host extends StatefulWidget {
 class _HostState extends State<Host> with SingleTickerProviderStateMixin {
   late final Cfg cfg = widget.cfg;
   late final String sc = cfg.scenario;
-  late final bool hasList = const {'idle', 'list', 'stream', 'stress'}.contains(sc);
+  late final bool hasList = const {'idle', 'list', 'stream', 'stress', 'input'}.contains(sc);
+  late final bool hasInput = sc == 'input';
+  final ValueNotifier<bool> squareWhite = ValueNotifier(false);
+  final FocusNode focus = FocusNode(debugLabel: 'bench');
+  int keyEvents = 0, keyEvents0 = 0;
   late final bool animated = sc != 'idle';
   late final bool hasStream = sc == 'stream' || sc == 'stress';
   late final bool hasCore = sc == 'core' || sc == 'stress';
@@ -78,7 +82,7 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
     super.initState();
     final b = Bench.I;
     if (hasStream) ps = PriceStream(sc == 'stress' ? 5000 : cfg.rate);
-    if (hasCore) CoreWorkers.start(cfg.core);
+    if (hasCore) CoreWorkers.start(coreLibPath());
     if (sc == 'canvas') {
       scene = Scene(
           n: cfg.shapes, ox: 20, oy: 10, rw: 1000, rh: 600, shadows: true, graph: true,
@@ -107,6 +111,7 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
       app0 = shm[3];
       calls0 = shm[0];
       heavy0 = shm[2];
+      keyEvents0 = keyEvents;
     });
     b.endHooks.add((ops) {
       final secs = (b.endUs - b.startUs) / 1e6;
@@ -124,14 +129,25 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
         ops['updates_applied'] = shm[3] - app0;
         ops['rate'] = sc == 'stress' ? 5000 : cfg.rate;
       }
+      if (hasInput) {
+        ops['key_events'] = keyEvents - keyEvents0;
+        ops['square_white'] = squareWhite.value;
+      }
       if (scene != null) {
         ops['shapes'] = scene!.n;
+        ops['not_rendered'] = <String>[];
+        ops['canvas_mode'] = canvasDirect ? 'direct' : 'atlas';
+        if (!canvasDirect) {
+          ops['atlas_px'] = [scene!.atlasW, scene!.atlasH];
+          ops['atlas_record_ms'] = scene!.atlasBuildMs;
+        }
         ops['checksum'] = hexOf(fnv((scene!.x[0] * 100).round() ^ (scene!.y[scene!.n - 1] * 100).round()));
       }
       if (hasCore) {
         ops['calls_per_s'] = (shm[0] - calls0) / secs;
         ops['heavy_calls'] = shm[2] - heavy0;
-        ops['core_lib'] = cfg.core;
+        ops['core_lib'] = coreLibPath();
+        ops['core_acc'] = shm[8];
       }
       if (sc == 'stress') ops['heap_samples'] = heap;
       ps?.stop();
@@ -147,8 +163,21 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
     if (sc == 'stress') {
       b.extraNotes.add('managed_heap_kb is null: the Dart VM service/heap stats are not available in product AOT release; rss_kb (ProcessInfo.currentRss, whole process) is given instead.');
     }
-    b.extraNotes.add('list = ListView.builder with real per-row heights (itemExtent/prototypeItem not applicable to variable heights); '
-        'scroll set by ScrollController.jumpTo in a Ticker callback from the closed-form script; during warm-up the script time is frozen at 0.');
+    if (hasList) {
+      b.extraNotes.add('list = ListView.builder(itemExtentBuilder: known per-row heights h(i)) (SliverVariedExtentList); '
+          'scroll set by ScrollController.jumpTo in a Ticker callback from the closed-form script.');
+    }
+    if (hasInput) {
+      b.extraNotes.add('input: Focus(autofocus) onKeyEvent, KeyDownEvent of LogicalKeyboardKey.space toggles a 200x200 square at (100,100) '
+          'black/white (ValueListenableBuilder -> ColoredBox), drawn over the scrolling list; key repeats ignored.');
+    }
+    if (scene != null) {
+      b.extraNotes.add(canvasDirect
+          ? 'canvas (BENCH_CANVAS_MODE=direct): per shape drawRect/drawCircle/drawRRect with its own gradient Paint, MaskFilter.blur(sigma 4) shadow at (2,2) for 1 in 10, clipRRect 1000x600 r16, graph drawRawPoints(polygon) 10000 pts stroke 1 px.'
+          : 'canvas: every shape (own 2-colour linear gradient, and for 1 in 10 its MaskFilter.blur(sigma 4) shadow at offset (2,2)) is recorded once into a sprite atlas '
+              '(PictureRecorder + Picture.toImageSync, ${scene!.atlasW}x${scene!.atlasH} px); each frame = one Canvas.drawRawAtlas of all shapes in z-order '
+              '(translation-only RSTransforms, bilinear sampling) inside clipRRect 1000x600 r16; graph drawRawPoints(polygon) 10000 pts stroke 1 px rebuilt per frame.');
+    }
   }
 
   void _tick(Duration _) {
@@ -168,6 +197,7 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
   void dispose() {
     ticker?.dispose();
     heapTimer?.cancel();
+    focus.dispose();
     super.dispose();
   }
 
@@ -181,6 +211,8 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
             controller: ctrl,
             physics: const ClampingScrollPhysics(),
             itemCount: kRows,
+            // heights are known in advance: the documented idiom for varied extents
+            itemExtentBuilder: (i, _) => i < kRows ? rowHeights[i].toDouble() : null,
             itemBuilder: (c, i) => RowItem(i),
           ),
         ),
@@ -201,6 +233,36 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
         return ColoredBox(
             color: _bg,
             child: Row(children: [_list(880), SizedBox(width: 400, child: panel(400, 720))]));
+      case 'input':
+        return Focus(
+          focusNode: focus,
+          autofocus: true,
+          onKeyEvent: (node, e) {
+            if (e is KeyDownEvent && e.logicalKey == LogicalKeyboardKey.space) {
+              keyEvents++;
+              squareWhite.value = !squareWhite.value;
+              return KeyEventResult.handled;
+            }
+            return e.logicalKey == LogicalKeyboardKey.space ? KeyEventResult.handled : KeyEventResult.ignored;
+          },
+          child: ColoredBox(
+            color: _bg,
+            child: Stack(children: [
+              _list(1280),
+              Positioned(
+                left: 100,
+                top: 100,
+                width: 200,
+                height: 200,
+                child: ValueListenableBuilder<bool>(
+                  valueListenable: squareWhite,
+                  builder: (c, white, _) =>
+                      ColoredBox(color: white ? const Color(0xFFFFFFFF) : const Color(0xFF000000)),
+                ),
+              ),
+            ]),
+          ),
+        );
       default:
         return ColoredBox(color: _bg, child: _list(1280));
     }
@@ -299,68 +361,40 @@ class _TextState extends State<TextScenario> with SingleTickerProviderStateMixin
 }
 
 // ===================================================================== images
-class ImageStore {
-  final String dir;
-  final Map<int, ui.Image> done = {};
-  final Set<int> pending = {};
-  int decoded = 0;
+/// Decode statistics. Images are shown with the documented idiom
+/// Image(image: ResizeImage(FileImage(f), width: 128, height: 128)): the engine decodes them
+/// at 128x128 on its own image-decoding threads (not the UI isolate) and ImageCache keeps them.
+class ImageStats {
+  final Set<int> decoded = {};
+  final Map<int, int> requestedUs = {};
   double decodeMs = 0;
-  ImageStore(this.dir);
-
-  ui.Image? get(int i, VoidCallback cb) {
-    final d = done[i];
-    if (d != null) return d;
-    if (pending.add(i)) _load(i, cb);
-    return null;
-  }
-
-  int _inFlight = 0;
-  final List<Completer<void>> _waiters = [];
-
-  Future<void> _load(int i, VoidCallback cb) async {
-    // at most 4 concurrent loads so that per-image time is not dominated by queueing
-    while (_inFlight >= 4) {
-      final c = Completer<void>();
-      _waiters.add(c);
-      await c.future;
-    }
-    _inFlight++;
-    final sw = Stopwatch()..start();
-    final bytes = await File('$dir/images/img${i.toString().padLeft(3, '0')}.png').readAsBytes();
-    final codec = await ui.instantiateImageCodec(bytes, targetWidth: 128, targetHeight: 128);
-    final fr = await codec.getNextFrame();
-    codec.dispose();
-    decodeMs += sw.elapsedMicroseconds / 1000.0;
-    decoded++;
-    done[i] = fr.image;
-    _inFlight--;
-    if (_waiters.isNotEmpty) _waiters.removeAt(0).complete();
-    cb();
-  }
 }
 
-class ImageCell extends StatefulWidget {
+class ImageCell extends StatelessWidget {
   final int i;
-  final ImageStore store;
-  const ImageCell(this.i, this.store, {super.key});
-  @override
-  State<ImageCell> createState() => _ImageCellState();
-}
+  final String dir;
+  final ImageStats st;
+  const ImageCell(this.i, this.dir, this.st, {super.key});
 
-class _ImageCellState extends State<ImageCell> {
-  ui.Image? img;
   @override
-  void initState() {
-    super.initState();
-    img = widget.store.get(widget.i, () {
-      if (mounted) setState(() => img = widget.store.done[widget.i]);
-    });
+  Widget build(BuildContext context) {
+    st.requestedUs.putIfAbsent(i, () => Timeline.now);
+    return Image(
+      image: ResizeImage(FileImage(File('$dir/images/img${i.toString().padLeft(3, '0')}.png')),
+          width: 128, height: 128),
+      width: 128,
+      height: 128,
+      fit: BoxFit.cover,
+      filterQuality: FilterQuality.low,
+      gaplessPlayback: true,
+      frameBuilder: (c, child, frame, sync) {
+        if (frame != null && st.decoded.add(i)) {
+          st.decodeMs += (Timeline.now - st.requestedUs[i]!) / 1000.0;
+        }
+        return frame == null ? const ColoredBox(color: Color(0xFF21262D)) : child;
+      },
+    );
   }
-
-  @override
-  Widget build(BuildContext context) => img == null
-      ? const ColoredBox(color: Color(0xFF21262D))
-      : RawImage(image: img, width: 128, height: 128, fit: BoxFit.cover, filterQuality: FilterQuality.low);
 }
 
 class ImagesScenario extends StatefulWidget {
@@ -371,7 +405,8 @@ class ImagesScenario extends StatefulWidget {
 }
 
 class _ImagesState extends State<ImagesScenario> with SingleTickerProviderStateMixin {
-  late final ImageStore store = ImageStore(widget.cfg.assets);
+  final ImageStats store = ImageStats();
+  late final String dir = widget.cfg.assets;
   final ScrollController ctrl = ScrollController();
   late final Ticker ticker;
   final ValueNotifier<Matrix4> xf = ValueNotifier(Matrix4.identity());
@@ -400,13 +435,13 @@ class _ImagesState extends State<ImagesScenario> with SingleTickerProviderStateM
         ..translateByDouble(-640.0, -360.0, 0.0, 1.0);
     })..start();
     b.endHooks.add((ops) {
-      ops['images_decoded'] = store.decoded;
+      ops['images_decoded'] = store.decoded.length;
       ops['decode_total_ms'] = store.decodeMs;
       ops['final_offset'] = ctrl.hasClients ? ctrl.offset : 0.0;
-      ops['checksum'] = hexOf(fnv(store.decoded));
+      ops['checksum'] = hexOf(fnv(store.decoded.length));
     });
-    b.extraNotes.add('images: custom async loader (File.readAsBytes + ui.instantiateImageCodec(targetWidth/Height 128) + getNextFrame; decoding runs on the engine IO thread pool, '
-        'not the UI isolate). decode_total_ms = sum over images of wall time read+decode (max 4 loads in flight; timer starts when a slot is taken; wall time incl. event-loop hops and CPU contention with the llvmpipe raster threads); counters are for the whole run incl. warm-up. '
+    b.extraNotes.add('images: Image(ResizeImage(FileImage, width 128, height 128)) per cell (decode at 128x128 by the engine off the UI isolate, kept in ImageCache). '
+        'decode_total_ms = sum over images of wall time from first build of the cell to its first frame (file read + decode + scheduling, incl. CPU contention with llvmpipe); counters cover the whole run incl. warm-up. '
         'GridView.builder 10 columns x 128 px; scroll = triangle wave over the grid at 3000 px/s; zoom 1->3->1 over 6 s (Transform) with a sinusoidal pan; during warm-up the script is frozen at t=0.');
   }
 
@@ -427,7 +462,7 @@ class _ImagesState extends State<ImagesScenario> with SingleTickerProviderStateM
               controller: ctrl,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 10),
               itemCount: 600,
-              itemBuilder: (c, i) => ImageCell(i, store),
+              itemBuilder: (c, i) => ImageCell(i, dir, store),
             ),
           ),
         ),

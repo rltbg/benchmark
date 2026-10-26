@@ -5,7 +5,7 @@ import 'dart:isolate';
 import 'dart:typed_data';
 
 import 'package:ffi/ffi.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/widgets.dart' hide Size;
 
 const int kRows = 100000;
 
@@ -58,7 +58,8 @@ final Float64List prices = () {
 
 // ---------------------------------------------------------------- shared memory counters
 // 0 core calls, 1 core stop, 2 heavy calls, 3 stream applied, 4 stream generated,
-// 5 stream dropped, 6 stream stop, 7 busy-thread stop
+// 5 stream dropped, 6 stream stop, 7 busy-thread stop, 8 core accumulator (published result),
+// 9 heavy accumulator
 final Pointer<Uint64> shm = calloc<Uint64>(16);
 
 // ---------------------------------------------------------------- rows
@@ -228,11 +229,12 @@ void _producer(List a) {
 }
 
 // ---------------------------------------------------------------- core FFI workers
-typedef _ValC = Int32 Function(Pointer<Uint8>, IntPtr);
+// size_t is mapped with the ABI-specific `Size` type (dart:ffi), not IntPtr.
+typedef _ValC = Int32 Function(Pointer<Uint8>, Size);
 typedef _ValD = int Function(Pointer<Uint8>, int);
-typedef _ParC = Int32 Function(Pointer<Uint8>, IntPtr, Pointer<Uint8>, IntPtr, Pointer<IntPtr>);
-typedef _ParD = int Function(Pointer<Uint8>, int, Pointer<Uint8>, int, Pointer<IntPtr>);
-typedef _HashC = Uint32 Function(Pointer<Uint8>, IntPtr);
+typedef _ParC = Int32 Function(Pointer<Uint8>, Size, Pointer<Uint8>, Size, Pointer<Size>);
+typedef _ParD = int Function(Pointer<Uint8>, int, Pointer<Uint8>, int, Pointer<Size>);
+typedef _HashC = Uint32 Function(Pointer<Uint8>, Size);
 typedef _HashD = int Function(Pointer<Uint8>, int);
 typedef _HeavyC = Uint64 Function(Uint32);
 typedef _HeavyD = int Function(int);
@@ -257,18 +259,18 @@ void _tight(List a) {
   final f = calloc<Uint8>(8);
   f.asTypedList(8).setAll(0, [0xA5, 1, 5, 0x68, 0x65, 0x6c, 0x6c, 0x6f]);
   final o = calloc<Uint8>(64);
-  final ol = calloc<IntPtr>(1);
+  final ol = calloc<Size>(1);
   var n = 0, acc = 0;
   while (s[1] == 0) {
     for (var k = 0; k < 4096; k++) {
       acc += validate(f, 8);
       acc += parse(f, 8, o, 64, ol) + ol.value;
-      acc += hash(f, 8) & 1;
+      acc += hash(f, 8);
     }
     n += 4096;
     s[0] = n;
+    s[8] = acc; // publish the accumulated result so the calls cannot be elided
   }
-  if (acc == -1) print(acc);
 }
 
 void _heavy(List a) {
@@ -281,13 +283,13 @@ void _heavy(List a) {
   while (s[1] == 0) {
     if (sw.elapsedMilliseconds >= next) {
       acc ^= heavy(100);
+      s[9] = acc;
       s[2] = s[2] + 1;
       next += 1000;
     } else {
       sleep(const Duration(milliseconds: 5));
     }
   }
-  if (acc == -1) print(acc);
 }
 
 /// nav scenario: background thread keeping ~1 core busy with integer maths.

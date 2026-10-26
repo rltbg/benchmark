@@ -3,18 +3,13 @@
 use std::{cell::RefCell, rc::Rc, sync::Arc, sync::atomic::Ordering::Relaxed, time::Duration};
 
 use nsh_core::{
-    Bounds, Point, Points, Size,
+    Bounds, ModalAnimation, Point, Points, Size,
     canvas::CanvasGradient,
-    color::{Rgba, rgb},
+    color::rgb,
     ui::{ScrollEvent, prelude::*},
-    ModalAnimation,
 };
 
 use crate::shared::*;
-
-pub fn unsupported(_scenario: &str) -> Option<&'static str> {
-    None
-}
 
 fn pt(x: f32, y: f32) -> Point<Points> {
     Point::new(px(x), px(y))
@@ -63,6 +58,19 @@ fn chrome(body: impl IntoElement, status: String) -> impl IntoElement {
         )
 }
 
+/// Runs `f` once, on the first engine frame of the measured window.
+fn at_measure_start(f: impl FnOnce() + 'static) {
+    std::mem::forget(spawn(async move {
+        loop {
+            next_frame().await;
+            if measured_t().is_some() {
+                break;
+            }
+        }
+        f();
+    }));
+}
+
 /// The scenario root.
 #[component]
 pub fn Bench() -> impl IntoElement {
@@ -72,21 +80,45 @@ pub fn Bench() -> impl IntoElement {
         "idle" => chrome(list_pane(false, false), rows).into_element(),
         "list" => chrome(list_pane(true, false), rows).into_element(),
         "stream" => chrome(list_pane(true, true), rows).into_element(),
+        "input" => {
+            // The square over the scrolling list; Space toggles black / white through
+            // the app's keymap (`on_key`, docs: nsh/keymap), the normal key path.
+            let black = signal(true);
+            on_key("space", move |_| {
+                KEY_EVENTS.fetch_add(1, Relaxed);
+                black.update(|b| *b = !*b);
+            });
+            view()
+                .flex_1()
+                .child(chrome(list_pane(true, false), rows))
+                .child(
+                    view()
+                        .absolute()
+                        .left(px(100.0))
+                        .top(px(100.0))
+                        .w(px(200.0))
+                        .h(px(200.0))
+                        .bg(move || if black.get() { col(0x000000) } else { col(0xffffff) }),
+                )
+                .into_element()
+        }
         "canvas" => view()
             .flex_1()
             .bg(col(BG))
+            .p(px(10.0))
             .child(canvas_pane(cfg().shapes, 1000.0, 600.0, true, true))
             .into_element(),
         "core" => {
-            spawn_core_threads();
+            at_measure_start(spawn_core_threads);
             view()
                 .flex_1()
                 .bg(col(BG))
+                .p(px(10.0))
                 .child(canvas_pane(1000, 1000.0, 600.0, false, false))
                 .into_element()
         }
         "stress" => {
-            spawn_core_threads();
+            at_measure_start(spawn_core_threads);
             view()
                 .flex_1()
                 .flex_row()
@@ -101,7 +133,7 @@ pub fn Bench() -> impl IntoElement {
                 )
                 .into_element()
         }
-        "text" => chrome(text_pane(), "1 MB text".to_owned()).into_element(),
+        "text" => chrome(text_pane(), "text1mb.txt (1 MB)".to_owned()).into_element(),
         "images" => chrome(images_pane(), "600 images".to_owned()).into_element(),
         "nav" => nav_pane().into_element(),
         _ => view().into_element(),
@@ -122,27 +154,38 @@ fn quote(i: usize) -> String {
     format!("Quote {i} \u{2014} {p:.2}")
 }
 
+/// Scripted velocity (px/s) at time t of the measured window: 4 s at 3000 px/s
+/// down, then alternating flings v0 = 20000 px/s, v(t) = v0 exp(-2t), 1.5 s each.
+fn script_v(t: f64) -> f64 {
+    if t < 4.0 {
+        3000.0
+    } else {
+        let k = ((t - 4.0) / 1.5).floor();
+        let tau = t - 4.0 - k * 1.5;
+        let s = if (k as i64) % 2 == 0 { 1.0 } else { -1.0 };
+        s * 20000.0 * (-2.0 * tau).exp()
+    }
+}
+
 /// A virtualized, recycled list of 100 000 rows of 48..128 pt.
 /// `scripted`: the scripted scroll runs; `stream`: prices update.
 fn list_pane(scripted: bool, stream: bool) -> impl IntoElement {
-    let prices: Rc<RefCell<Vec<u32>>> = Rc::new(RefCell::new(
-        (0..100_000u32).map(|i| fnv(i + 7) % 100_000).collect(),
-    ));
+    // Price per row, in cents (price = cents / 100.0); initial = the subtitle's quote.
+    let prices: Rc<RefCell<Vec<u32>>> =
+        Rc::new(RefCell::new((0..100_000u32).map(|i| fnv(i + 7) % 100_000).collect()));
     let version = signal(0u64);
     let list = element_ref();
     let limit = Rc::new(std::cell::Cell::new(f32::MAX));
-    let offset = Rc::new(std::cell::Cell::new(0.0f32));
 
     if scripted {
         let list = list.clone();
         let prices = prices.clone();
         let limit = limit.clone();
-        let offset = offset.clone();
         let rate = if cfg().scenario == "stress" { 5000 } else { cfg().rate };
         std::mem::forget(spawn(async move {
             let mut started = false;
             let mut last_t = 0.0f64;
-            let mut pos = 0.0f32;
+            let mut pos = 0.0f64;
             loop {
                 next_frame().await;
                 let Some(t) = measured_t() else { continue };
@@ -153,24 +196,16 @@ fn list_pane(scripted: bool, stream: bool) -> impl IntoElement {
                         spawn_producer(rate);
                     }
                 }
-                // Scripted velocity: 4 s at 3000 px/s, then alternating flings.
+                // Integrate the scripted velocity over the real frame interval (midpoint).
                 let dt = t - last_t;
                 last_t = t;
                 if dt > 0.0 {
-                    let mid = t - dt / 2.0;
-                    let v = if mid < 4.0 {
-                        3000.0
-                    } else {
-                        let k = ((mid - 4.0) / 1.5).floor();
-                        let tau = mid - 4.0 - k * 1.5;
-                        let s = if (k as i64) % 2 == 0 { 1.0 } else { -1.0 };
-                        s * 20000.0 * (-2.0 * tau).exp()
-                    };
-                    pos = (pos + (v * dt) as f32).clamp(0.0, limit.get().max(0.0));
-                    list.scroll_to_offset(px(pos), false);
-                    offset.set(pos);
+                    let v = script_v(t - dt / 2.0);
+                    pos = (pos + v * dt).clamp(0.0, limit.get().max(0.0) as f64);
+                    list.scroll_to_offset(px(pos as f32), false);
                 }
                 if stream {
+                    // Apply the queue's batch once per frame.
                     let batch = std::mem::take(&mut *QUEUE.lock().unwrap());
                     if !batch.is_empty() {
                         let mut p = prices.borrow_mut();
@@ -187,6 +222,9 @@ fn list_pane(scripted: bool, stream: bool) -> impl IntoElement {
     }
 
     let row_prices = prices.clone();
+    // Docs (Lists): rows not measured yet count at the estimated size; the exact mean
+    // row height of the data model is the closest estimate there is.
+    let mean_h = sum_heights() as f32 / 100_000.0;
     virtual_list(100_000usize, move |at| {
         let prices = row_prices.clone();
         view()
@@ -217,15 +255,14 @@ fn list_pane(scripted: bool, stream: bool) -> impl IntoElement {
                         })
                         .text_size(px(15.0))
                         .font_weight(FontWeight::SEMIBOLD)
-                        .text_color(col(TEXT)),
+                        .text_color(col(TEXT))
+                        .number_of_lines(1),
                     )
                     .child(
-                        text(move || {
-                            let q = quote(at.index());
-                            format!("{q}  {q}  {q}")
-                        })
-                        .text_size(px(12.0))
-                        .text_color(col(MUTED)),
+                        text(move || quote(at.index()))
+                            .text_size(px(12.0))
+                            .text_color(col(MUTED))
+                            .number_of_lines(1),
                     ),
             )
             .child(
@@ -234,14 +271,15 @@ fn list_pane(scripted: bool, stream: bool) -> impl IntoElement {
                     let c = prices.borrow()[at.index()];
                     format!("{:.2}", c as f64 / 100.0)
                 })
-                .w(px(90.0))
+                .w(px(110.0))
+                .flex_shrink_0()
                 .text_right()
                 .tabular_nums()
                 .text_size(px(15.0))
                 .text_color(col(TEXT)),
             )
     })
-    .estimated_item_size(px(88.0))
+    .estimated_item_size(px(mean_h))
     .on_scroll(move |e: &ScrollEvent| {
         f64_store(&FINAL_OFFSET, e.offset.y.0 as f64);
         f64_store(&CONTENT_H, e.content_size.height.0 as f64);
@@ -253,148 +291,94 @@ fn list_pane(scripted: bool, stream: bool) -> impl IntoElement {
 
 // -------------------------------------------------------------- canvas ----
 
-#[derive(Clone)]
-struct Shape {
-    x: f32,
-    y: f32,
-    vx: f32,
-    vy: f32,
-    w: f32,
-    h: f32,
-    kind: u8,
-    shadow: bool,
-    grad: Arc<CanvasGradient>,
-    flat: Hsla,
+/// The canvas is recorded once; every number that moves is a native animated
+/// value (docs: Canvas, "Driving drawings with animated values"; Performance:
+/// "keep data that changes every frame in animated values rather than signals"),
+/// so the GTK thread redraws each frame without the engine re-recording.
+/// Each shape bounces on both axes: position = triangle wave of (|v| t + phase)
+/// with period 2L, i.e. `((t*|v| + s) mod 2L)` interpolated through [0, L, 2L] -> [0, L, 0].
+fn bounce(clock: &AnimatedValue, x0: f32, v: f32, l: f32) -> AnimatedNode {
+    let l = l.max(1.0);
+    let s = if v >= 0.0 { x0 } else { 2.0 * l - x0 };
+    clock
+        .mul(v.abs())
+        .add(s)
+        .modulo(2.0 * l)
+        .interpolate(&[0.0, l, 2.0 * l], &[0.0, l, 0.0])
 }
 
-fn make_shapes(n: usize, w: f32, h: f32) -> Vec<Shape> {
-    (0..n)
-        .map(|i| {
-            let f = fnv(i as u32);
-            let g = fnv(i as u32 + 1_000_003);
-            let size = 16.0 + (f % 25) as f32;
-            let c1 = col(f & 0xffffff);
-            let c2 = col(g & 0xffffff);
-            let grad = CanvasGradient::linear(pt(0.0, 0.0), pt(size, size))
-                .add_color_stop(Percentage(0.0), c1)
-                .add_color_stop(Percentage(1.0), c2);
-            let ang = (g % 360) as f32 * std::f32::consts::PI / 180.0;
-            let speed = 60.0 + (f % 140) as f32;
-            Shape {
-                x: (fnv(i as u32 + 77) as f32 / u32::MAX as f32) * (w - size),
-                y: (fnv(i as u32 + 78) as f32 / u32::MAX as f32) * (h - size),
-                vx: ang.cos() * speed,
-                vy: ang.sin() * speed,
-                w: size,
-                h: size,
-                kind: (i % 3) as u8,
-                shadow: i % 10 == 0,
-                grad: Arc::new(grad),
-                flat: c1,
-            }
-        })
-        .collect()
-}
+fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoElement {
+    // The clock, in seconds, played natively on the UI thread.
+    let clock = animated_value(0.0);
+    clock.timing(100_000.0, 100_000_000.0, Easing::Linear);
+    let shadow_clip = diag("SHADOW_CLIP");
+    let shadow_color: Hsla = col(0x000000).opacity(0.35);
 
-fn step_shapes(shapes: &mut [Shape], dt: f32, w: f32, h: f32) {
-    for s in shapes {
-        s.x += s.vx * dt;
-        s.y += s.vy * dt;
-        if s.x < 0.0 {
-            s.x = -s.x;
-            s.vx = -s.vx;
-        } else if s.x > w - s.w {
-            s.x = 2.0 * (w - s.w) - s.x;
-            s.vx = -s.vx;
-        }
-        if s.y < 0.0 {
-            s.y = -s.y;
-            s.vy = -s.vy;
-        } else if s.y > h - s.h {
-            s.y = 2.0 * (h - s.h) - s.y;
-            s.vy = -s.vy;
-        }
-    }
-}
-
-fn draw_shapes(shapes: &[Shape], w: f32, h: f32, rich: bool) -> Painter {
     let mut p = Painter::new()
         .save()
         .begin_path()
         .round_rect(Bounds::new(pt(0.0, 0.0), Size::new(px(w), px(h))), px(16.0))
         .clip();
-    let naive_shadow = diag("NAIVE_SHADOW");
-    let shadow_color = rgb(0x000000).into_hsla_alpha(0.35);
-    for s in shapes {
+    for i in 0..n {
+        let f = fnv(i as u32);
+        let g = fnv(i as u32 + 1_000_003);
+        let size = 16.0 + (f % 25) as f32;
+        let ang = (g % 360) as f32 * std::f32::consts::PI / 180.0;
+        let speed = 60.0 + (f % 140) as f32;
+        let (vx, vy) = (ang.cos() * speed, ang.sin() * speed);
+        let x0 = (fnv(i as u32 + 77) as f32 / u32::MAX as f32) * (w - size);
+        let y0 = (fnv(i as u32 + 78) as f32 / u32::MAX as f32) * (h - size);
+        let xn = bounce(&clock, x0, vx, w - size);
+        let yn = bounce(&clock, y0, vy, h - size);
+        let c1 = col(f & 0xffffff);
+        let shadow = rich && i % 10 == 0;
         p = p.save();
-        if rich && s.shadow && !diag("NOSHADOW") && !naive_shadow {
-            // NSH's Linux canvas allocates and blurs a shadow mask as large as
-            // the current clip's extents for every shadowed draw; clipping to
-            // the shape's box (+ blur spread) first keeps that mask small.
+        if shadow && shadow_clip {
+            // Diagnostic only (BENCH_SHADOW_CLIP=1): bounds NSH's per-shadow mask, which is as
+            // large as the current clip, to the shape's box + blur. Not the documented usage.
             p = p
+                .translate(&xn, &yn)
                 .begin_path()
-                .rect(Bounds::new(pt(s.x - 16.0, s.y - 16.0), Size::new(px(s.w + 32.0), px(s.h + 32.0))))
+                .rect(Bounds::new(pt(-16.0, -16.0), Size::new(px(size + 32.0), px(size + 32.0))))
                 .clip();
+        } else {
+            p = p.translate(&xn, &yn);
         }
-        p = p.translate(s.x, s.y);
         if rich {
-            if s.shadow && !diag("NOSHADOW") {
+            if shadow {
                 p = p.shadow(shadow_color, px(8.0), pt(2.0, 2.0));
             }
-            if diag("FLAT") { p = p.fill_color(s.flat); } else { p = p.fill_style(s.grad.clone()); }
+            let grad = CanvasGradient::linear(pt(0.0, 0.0), pt(size, size))
+                .add_color_stop(Percentage(0.0), c1)
+                .add_color_stop(Percentage(1.0), col(g & 0xffffff));
+            p = p.fill_style(Arc::new(grad));
         } else {
-            p = p.fill_color(s.flat);
+            p = p.fill_color(c1);
         }
         p = p.begin_path();
-        let b = Bounds::new(pt(0.0, 0.0), Size::new(px(s.w), px(s.h)));
-        p = match s.kind {
+        let b = Bounds::new(pt(0.0, 0.0), Size::new(px(size), px(size)));
+        p = match i % 3 {
             0 => p.rect(b),
-            1 => p.arc(s.w / 2.0, s.h / 2.0, s.w / 2.0, 0.0, std::f32::consts::TAU),
-            _ => p.round_rect(b, px(s.w / 4.0)),
+            1 => p.arc(size / 2.0, size / 2.0, size / 2.0, 0.0, std::f32::consts::TAU),
+            _ => p.round_rect(b, px(size / 4.0)),
         };
         p = p.fill().restore();
     }
-    p.restore()
-}
-
-trait HslaAlpha {
-    fn into_hsla_alpha(self, a: f32) -> Hsla;
-}
-impl HslaAlpha for Rgba {
-    fn into_hsla_alpha(self, a: f32) -> Hsla {
-        Hsla::from(self).opacity(a)
-    }
-}
-
-fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoElement {
-    let tick = signal(0u64);
-    let shapes = Rc::new(RefCell::new(make_shapes(n, w, h)));
-    let last = Rc::new(std::cell::Cell::new(None::<std::time::Instant>));
-    std::mem::forget(spawn(async move {
-        loop {
-            next_frame().await;
-            tick.update(|t| *t += 1);
-        }
-    }));
-    let shapes2 = shapes.clone();
-    let main = canvas(move || {
-        tick.get();
-        let t0 = std::time::Instant::now();
-        let now = std::time::Instant::now();
-        let dt = last.replace(Some(now)).map_or(0.016, |l| (now - l).as_secs_f32()).min(0.1);
-        let mut s = shapes2.borrow_mut();
-        step_shapes(&mut s, dt, w, h);
-        let p = draw_shapes(&s, w, h, rich);
-        CANVAS_RECORD_US.fetch_add(t0.elapsed().as_micros() as u64, Relaxed);
-        CANVAS_FRAMES.fetch_add(1, Relaxed);
-        p
-    })
-    .w(px(w))
-    .h(px(h));
+    let drawing = p.restore();
+    let main = canvas(drawing).w(px(w)).h(px(h)).flex_shrink_0();
     let mut col_view = view().child(main);
     if graph {
+        // The polyline gains one point per engine frame: its data changes every frame, so
+        // it is a canvas of its own (docs: Canvas, Performance: split what changes often).
+        let tick = signal(0u64);
+        std::mem::forget(spawn(async move {
+            loop {
+                next_frame().await;
+                tick.update(|t| *t += 1);
+            }
+        }));
         let ring: Rc<RefCell<std::collections::VecDeque<f32>>> =
-            Rc::new(RefCell::new((0..10_000).map(|i| wave(i)).collect()));
+            Rc::new(RefCell::new((0..10_000).map(wave).collect()));
         let phase = Rc::new(std::cell::Cell::new(10_000u32));
         let gw = w;
         col_view = col_view.child(
@@ -406,6 +390,8 @@ fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoEl
                 phase.set(k + 1);
                 r.push_back(wave(k));
                 let mut p = Painter::new()
+                    .fill_color(col(0xffffff))
+                    .fill_rect(0.0, 0.0, gw, 100.0)
                     .stroke_color(col(0x2f6fed))
                     .line_width(1.0)
                     .begin_path();
@@ -418,7 +404,8 @@ fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoEl
                 p.stroke()
             })
             .w(px(w))
-            .h(px(100.0)),
+            .h(px(100.0))
+            .flex_shrink_0(),
         );
     }
     col_view
@@ -436,65 +423,55 @@ fn wave(i: u32) -> f32 {
 
 // ---------------------------------------------------------------- text ----
 
-/// 1 MB of text in NSH's `Editor` (read only, soft wrap): the one component of
-/// `nsh/base` that virtualizes the rows of a long text and selects in it.
+/// 1 MB of text: one selectable `text` in a native scroll view (docs: Text, selection;
+/// Scrolling, scrolling from code). NSH 0.2.0 has no long-text component (the Editor came
+/// after the release) and no programmatic text selection.
 fn text_pane() -> impl IntoElement {
     let path = format!("{}/text1mb.txt", cfg().assets);
     let content: SharedString = std::fs::read_to_string(&path).unwrap_or_default().into();
-    let r = component_ref::<nsh_base::Editor>();
-    let r2 = r;
-    let created = std::time::Instant::now();
-    std::mem::forget(spawn(async move {
-        let mut max: Option<f32> = None;
-        let mut shown = false;
-        let mut selected = false;
-        let mut last = std::time::Instant::now();
-        let mut worst_gap = 0.0f64;
-        loop {
-            next_frame().await;
-            let now = std::time::Instant::now();
-            if !shown {
-                worst_gap = worst_gap.max((now - last).as_secs_f64() * 1000.0);
-                TEXT_LAYOUT_MS.store(worst_gap as u64, Relaxed);
+    TEXT_BYTES.store(content.len() as u64, Relaxed);
+    let made = std::time::Instant::now();
+    let height = Rc::new(std::cell::Cell::new(0.0f32));
+    let viewport = Rc::new(std::cell::Cell::new(0.0f32));
+    let sc = element_ref();
+    {
+        let sc = sc.clone();
+        let height = height.clone();
+        let viewport = viewport.clone();
+        std::mem::forget(spawn(async move {
+            loop {
+                next_frame().await;
+                let Some(t) = measured_t() else { continue };
+                let m = (height.get() - viewport.get()).max(1.0);
+                // 3000 px/s back and forth between the top and the end.
+                let d = (t as f32 * 3000.0) % (2.0 * m);
+                let y = if d < m { d } else { 2.0 * m - d };
+                sc.scroll_to(pt(0.0, y), false);
             }
-            last = now;
-            let Some(api) = r2.api::<nsh_base::EditorApi>() else { continue };
-            if !shown {
-                let v = api.visible_range();
-                if v.end.line > v.start.line {
-                    shown = true;
-                    TEXT_FIRST_MS.store(now_ns() / 1_000_000, Relaxed);
-                }
-            }
-            let Some(t) = measured_t() else { continue };
-            if max.is_none() {
-                // The end of the text is where an offset far past it is clamped to.
-                api.set_scroll_offset(pt(0.0, 1.0e9));
-                max = Some(api.scroll_offset().y.0.max(1.0));
-            }
-            let m = max.unwrap();
-            // 3000 px/s back and forth.
-            let d = (t as f32 * 3000.0) % (2.0 * m);
-            let y = if d < m { d } else { 2.0 * m - d };
-            api.set_scroll_offset(pt(0.0, y));
-            if t >= 5.0 && !selected {
-                selected = true;
-                api.focus();
-                api.run(nsh_base::EditorCommand::SelectAll);
-            }
-            if selected {
-                TEXT_SEL.store(api.selected_text().len() as u64, Relaxed);
-            }
-        }
-    }));
-    let _ = created;
-    nsh_base::editor()
-        .value(move || Some(content.clone()))
-        .read_only(true)
-        .soft_wrap(true)
-        .line_numbers(false)
+        }));
+    }
+    let h2 = height.clone();
+    scroll()
         .flex_1()
-        .component_ref(&r)
+        .bg(col(0xffffff))
+        .on_layout(move |b: &Bounds<Points>| viewport.set(b.size.height.0))
+        .on_scroll(move |e: &ScrollEvent| f64_store(&CONTENT_H, e.content_size.height.0 as f64))
+        .child(
+            text(content)
+                .selectable(true)
+                .text_size(px(14.0))
+                .text_color(col(TEXT))
+                .p(px(16.0))
+                .on_layout(move |b: &Bounds<Points>| {
+                    if TEXT_LAID_MS.load(Relaxed) == 0 {
+                        // From building the element to its first layout (Pango, engine thread).
+                        f64_store(&TEXT_LAYOUT_MS, made.elapsed().as_secs_f64() * 1000.0);
+                        TEXT_LAID_MS.store(now_ns() / 1_000_000 + 1, Relaxed);
+                    }
+                    h2.set(b.size.height.0);
+                }),
+        )
+        .element_ref(&sc)
 }
 
 // -------------------------------------------------------------- images ----
@@ -506,24 +483,26 @@ fn images_pane() -> impl IntoElement {
     let list2 = list.clone();
     std::mem::forget(spawn(async move {
         let mut started = false;
-        let mut limit = 0.0f32;
+        let limit = 60.0 * 128.0 - 656.0;
         loop {
             next_frame().await;
             let Some(t) = measured_t() else { continue };
             if !started {
                 started = true;
-                // Zoom 1 -> 3 -> 1 over 6 s with a pan, played natively.
+                // Zoom 1 -> 3 -> 1 over 6 s with a pan, played natively (animated values).
                 let z = zoom.clone();
                 let p = pan.clone();
                 std::mem::forget(spawn(async move {
-                    for _ in 0..1000 {
+                    loop {
                         p.timing(-200.0, 3000.0, Easing::Linear);
                         z.timing(3.0, 3000.0, Easing::Linear).await;
                         p.timing(0.0, 3000.0, Easing::Linear);
                         z.timing(1.0, 3000.0, Easing::Linear).await;
+                        if STOP.load(Relaxed) {
+                            break;
+                        }
                     }
                 }));
-                limit = 60.0 * 128.0 - 656.0;
             }
             // 3000 px/s down then up (triangle wave over the grid).
             let d = (t as f32 * 3000.0) % (2.0 * limit);
@@ -532,34 +511,32 @@ fn images_pane() -> impl IntoElement {
         }
     }));
     view().flex_1().overflow_hidden().child(
-        view()
+        view().flex_1().bind_scale(&zoom).bind_translate_x(&pan).child(
+            virtual_list(600usize, move |at| {
+                let started = Rc::new(std::cell::Cell::new(None::<std::time::Instant>));
+                let s1 = started.clone();
+                let s2 = started.clone();
+                image(move || format!("asset:/images/img{:03}.png", at.index()))
+                    .w(px(128.0))
+                    .h(px(128.0))
+                    .resize_mode(ResizeMode::Cover)
+                    .fade_duration(0.0)
+                    .on_load_start(move || s1.set(Some(std::time::Instant::now())))
+                    .on_load_end(move || {
+                        // load start -> load end: queue + decode off the main thread + texture.
+                        if let Some(t0) = s2.take() {
+                            IMAGES_DECODED.fetch_add(1, Relaxed);
+                            DECODE_US.fetch_add(t0.elapsed().as_micros() as u64, Relaxed);
+                            let i = at.index();
+                            IMAGES_SEEN.lock().unwrap()[i / 64] |= 1 << (i % 64);
+                        }
+                    })
+            })
+            .columns(10)
+            .estimated_item_size(px(128.0))
             .flex_1()
-            .bind_scale(&zoom)
-            .bind_translate_x(&pan)
-            .child(
-                virtual_list(600usize, move |at| {
-                    let started = Rc::new(std::cell::Cell::new(None::<std::time::Instant>));
-                    let s1 = started.clone();
-                    let s2 = started.clone();
-                    image(move || format!("asset:/images/img{:03}.png", at.index()))
-                        .w(px(128.0))
-                        .h(px(128.0))
-                        .resize_mode(ResizeMode::Cover)
-                        .fade_duration(0.0)
-                        .on_load_start(move || s1.set(Some(std::time::Instant::now())))
-                        .on_load_end(move || {
-                            // load start -> load end: request, queue, worker decode, texture.
-                            if let Some(t0) = s2.take() {
-                                IMAGES_DECODED.fetch_add(1, Relaxed);
-                                DECODE_US.fetch_add(t0.elapsed().as_micros() as u64, Relaxed);
-                            }
-                        })
-                })
-                .columns(10)
-                .estimated_item_size(px(128.0))
-                .flex_1()
-                .element_ref(&list),
-            ),
+            .element_ref(&list),
+        ),
     )
 }
 
@@ -573,66 +550,60 @@ fn screen_view(n: u32, color: u32) -> impl IntoElement {
         .justify_center()
         .gap(px(12.0))
         .child(text(format!("Screen {n}")).text_size(px(32.0)).text_color(col(0xffffff)))
-        .child(
-            view().w(px(300.0)).h(px(200.0)).rounded(px(16.0)).bg(col(0xffffff)).opacity(0.25),
-        )
+        .child(view().w(px(300.0)).h(px(200.0)).rounded(px(16.0)).bg(col(0xffffff)).opacity(0.25))
 }
 
 fn nav_pane() -> impl IntoElement {
     let routes = signal(Vec::<u32>::new());
     let modal = signal(false);
-    // A background thread keeps about one core busy during the run.
-    std::mem::forget(spawn(async move {
-        loop {
-            next_frame().await;
-            if measured_t().is_some() {
-                break;
-            }
-        }
-        std::thread::spawn(|| {
-            let mut x: u64 = 1;
-            while !STOP.load(Relaxed) {
-                for _ in 0..100_000 {
-                    x = std::hint::black_box(x.wrapping_mul(6364136223846793005).wrapping_add(1442695040888963407));
+    at_measure_start(move || {
+        // A background thread keeps about one core busy during the run.
+        std::thread::Builder::new()
+            .name("burner".into())
+            .spawn(|| {
+                let mut x: u64 = 1;
+                while !STOP.load(Relaxed) {
+                    for _ in 0..100_000 {
+                        x = std::hint::black_box(x.wrapping_mul(6364136223846793005).wrapping_add(1442695040888963407));
+                    }
                 }
+                CORE_SINK.fetch_add(x, Relaxed);
+            })
+            .unwrap();
+        std::mem::forget(spawn(async move {
+            let step = |ms: u64| timer(Duration::from_millis(ms));
+            // 5 cycles: push, push, modal in/out (fade 200 ms), pop, pop = 20 slides of 300 ms.
+            for _cycle in 0..5 {
+                routes.update(|r| r.push(1));
+                step(350).await;
+                TRANSITIONS.fetch_add(1, Relaxed);
+                routes.update(|r| r.push(2));
+                step(350).await;
+                TRANSITIONS.fetch_add(1, Relaxed);
+                modal.set(true);
+                step(250).await;
+                modal.set(false);
+                step(250).await;
+                MODALS.fetch_add(1, Relaxed);
+                routes.update(|r| {
+                    r.pop();
+                });
+                step(350).await;
+                TRANSITIONS.fetch_add(1, Relaxed);
+                routes.update(|r| {
+                    r.pop();
+                });
+                step(350).await;
+                TRANSITIONS.fetch_add(1, Relaxed);
             }
-            CORE_SINK.fetch_add(x, Relaxed);
-        });
-        let step = |ms: u64| timer(Duration::from_millis(ms));
-        for _cycle in 0..5 {
-            routes.update(|r| r.push(1));
-            step(350).await;
-            TRANSITIONS.fetch_add(1, Relaxed);
-            routes.update(|r| r.push(2));
-            step(350).await;
-            TRANSITIONS.fetch_add(1, Relaxed);
-            modal.set(true);
-            step(250).await;
-            modal.set(false);
-            step(250).await;
-            routes.update(|r| {
-                r.pop();
-            });
-            step(350).await;
-            TRANSITIONS.fetch_add(1, Relaxed);
-            routes.update(|r| {
-                r.pop();
-            });
-            step(350).await;
-            TRANSITIONS.fetch_add(1, Relaxed);
-        }
-    }));
+        }));
+    });
     view()
         .flex_1()
         .child(
             nsh_base::nav_stack()
                 .flex_1()
-                .child(
-                    nsh_base::nav_page()
-                        .title("A")
-                        .header(view().h(px(0.0)))
-                        .child(screen_view(0, 0x2f6fed)),
-                )
+                .child(nsh_base::nav_page().title("A").header(view().h(px(0.0))).child(screen_view(0, 0x2f6fed)))
                 .child(each(
                     move || routes.get(),
                     |id: &u32| *id,

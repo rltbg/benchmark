@@ -98,7 +98,7 @@ fun Shell(content: @Composable () -> Unit) {
 }
 
 /** Scénario input : état du carré (noir/blanc) basculé par le chemin d'événements clavier normal (Window.onKeyEvent). */
-class InputState { val white = mutableStateOf(false); var keyEvents = 0L }
+class InputState { val white = mutableStateOf(false); var keyEvents = 0L; var refocus = 0 }
 
 fun main(argv: Array<String>) {
     // Plafond Skiko (limiteur au taux de rafraîchissement pour le rendu logiciel) : désactivé par propriété publique,
@@ -124,6 +124,18 @@ fun main(argv: Array<String>) {
             LaunchedEffect(Unit) {
                 run.ops["render_api"] = window.renderApi.name
                 run.ops["vsync_enabled"] = System.getProperty("skiko.vsync.enabled")
+                if (args.scenario == "input") {
+                    // Sans WM, XToolkit garde le focus clavier X sur sa fenêtre FocusProxy ; un XSetInputFocus externe sur la
+                    // toplevel (harnais : xdotool windowfocus) est vu comme une perte de focus et AWT ignore ensuite les touches.
+                    // Ré-demande publique du focus (Window.toFront + Component.requestFocus sur le dernier propriétaire) quand le focus part hors de l'app.
+                    window.addWindowFocusListener(object : java.awt.event.WindowAdapter() {
+                        override fun windowLostFocus(e: java.awt.event.WindowEvent) {
+                            if (e.oppositeWindow != null) return
+                            val owner = window.mostRecentFocusOwner   // composant Compose qui avait le focus
+                            java.awt.EventQueue.invokeLater { input.refocus++; window.toFront(); (owner ?: window).requestFocus() }
+                        }
+                    })
+                }
             }
             Root(run, input)
         }

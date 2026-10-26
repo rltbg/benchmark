@@ -1,4 +1,4 @@
-// Harness: CLI parsing, frame-timing collection, JSON output.
+// Harness side: CLI parsing, portable paths, measure markers, frame timings, JSON output.
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer' show Timeline;
@@ -7,28 +7,65 @@ import 'dart:ui' as ui;
 
 import 'package:flutter/scheduler.dart';
 
+/// Versions injected by the flutter tool as dart-defines (FLUTTER_VERSION etc.).
+const String kFlutterVersion = String.fromEnvironment('FLUTTER_VERSION', defaultValue: '?');
+const String kFlutterFw = String.fromEnvironment('FLUTTER_FRAMEWORK_REVISION', defaultValue: '?');
+const String kFlutterEngine = String.fromEnvironment('FLUTTER_ENGINE_REVISION', defaultValue: '?');
+const String kFfiVersion = String.fromEnvironment('BENCH_FFI_VERSION', defaultValue: '?');
+
+/// Renderer chosen by the runner (linux/runner/my_application.cc) through the documented
+/// fl_dart_project_set_enable_impeller() API; BENCH_FLUTTER_IMPELLER=0 selects Skia (OpenGL).
+bool get impellerEnabled => Platform.environment['BENCH_FLUTTER_IMPELLER'] != '0';
+
+/// Repository root: $BENCH_ROOT, else the first ancestor of the executable containing core/benchcore.h.
+String benchRoot() {
+  final env = Platform.environment['BENCH_ROOT'];
+  if (env != null && env.isNotEmpty) return env;
+  var d = File(Platform.resolvedExecutable).parent;
+  while (true) {
+    if (File('${d.path}/core/benchcore.h').existsSync()) return d.path;
+    final p = d.parent;
+    if (p.path == d.path) return Directory.current.path;
+    d = p;
+  }
+}
+
+/// C-ABI core: $BENCHCORE_LIB, else $BENCH_ROOT/core/target/release/libbenchcore.so.
+String coreLibPath() {
+  final env = Platform.environment['BENCHCORE_LIB'];
+  if (env != null && env.isNotEmpty) return env;
+  return '${benchRoot()}/core/target/release/libbenchcore.so';
+}
+
 class Cfg {
   String scenario = 'idle';
   double duration = 10;
-  String out = '/tmp/flutter-bench.json';
+  String out = 'flutter-bench.json';
   int rate = 1000;
   int shapes = 5000;
-  String assets = '/home/user/eval/assets';
-  String core = '/home/user/eval/core/target/release/libbenchcore.so';
+  String? assetsArg;
   bool durationGiven = false;
+
+  String get assets => assetsArg ?? '${benchRoot()}/assets';
 
   static Cfg parse(List<String> a) {
     final c = Cfg();
     for (var i = 0; i < a.length; i++) {
       String v() => a[++i];
       switch (a[i]) {
-        case '--scenario': c.scenario = v();
-        case '--duration': c.duration = double.parse(v()); c.durationGiven = true;
-        case '--out': c.out = v();
-        case '--rate': c.rate = int.parse(v());
-        case '--shapes': c.shapes = int.parse(v());
-        case '--assets': c.assets = v();
-        case '--core': c.core = v();
+        case '--scenario':
+          c.scenario = v();
+        case '--duration':
+          c.duration = double.parse(v());
+          c.durationGiven = true;
+        case '--out':
+          c.out = v();
+        case '--rate':
+          c.rate = int.parse(v());
+        case '--shapes':
+          c.shapes = int.parse(v());
+        case '--assets':
+          c.assetsArg = v();
       }
     }
     if (c.scenario == 'stress' && !c.durationGiven) c.duration = 600;
@@ -61,6 +98,7 @@ class Bench {
   final int mainUs = Timeline.now;
   int startUs = 0, endUs = 0;
   bool measuring = false;
+  bool ended = false;
   int ticks = 0; // ticker callbacks inside the measured window
   // [vsyncStart, buildStart, buildFinish, rasterStart, rasterFinish]
   final List<List<int>> frames = [];
@@ -68,6 +106,7 @@ class Bench {
   final List<void Function(Map<String, Object?> ops)> endHooks = [];
   final Map<String, Object?> ops = {};
   final List<String> extraNotes = [];
+  Object? unsupported;
   Map<String, Object?> Function(List<List<int>> inWindow)? finishExtra;
 
   Bench(this.cfg);
@@ -92,7 +131,13 @@ class Bench {
     }
   }
 
-  void _startMeasure() {
+  Future<void> _marker(String m) async {
+    stdout.writeln(m);
+    await stdout.flush();
+  }
+
+  Future<void> _startMeasure() async {
+    await _marker('BENCH:measure_start');
     startUs = Timeline.now;
     measuring = true;
     for (final h in startHooks) {
@@ -101,14 +146,22 @@ class Bench {
     Timer(Duration(microseconds: (cfg.duration * 1e6).round()), _endMeasure);
   }
 
-  void _endMeasure() {
+  Future<void> _endMeasure() async {
     endUs = Timeline.now;
     measuring = false;
+    ended = true;
     for (final h in endHooks) {
       h(ops);
     }
-    // FrameTiming reports are batched by the engine: wait for the tail.
-    Timer(const Duration(milliseconds: 800), _finish);
+    await _marker('BENCH:measure_end');
+    // FrameTiming is batched in release mode and delivered "within about 1 second"
+    // (PlatformDispatcher.onReportTimings doc): wait until a timing past the window
+    // has arrived, at most 1.5 s.
+    final sw = Stopwatch()..start();
+    while (sw.elapsedMilliseconds < 1500 && !frames.any((f) => f[4] > endUs)) {
+      await Future<void>.delayed(const Duration(milliseconds: 50));
+    }
+    _finish();
   }
 
   void _finish() {
@@ -121,21 +174,23 @@ class Bench {
     ops['frames_ticks'] = ticks;
     ops['build_ms'] = stats([for (final f in inW) (f[2] - f[1]) / 1000.0]);
     ops['raster_ms'] = stats([for (final f in inW) (f[4] - f[3]) / 1000.0]);
-    ops['total_span_ms'] = stats([for (final f in inW) (f[4] - f[1]) / 1000.0]);
     ops['vsync_to_rasterfinish_ms'] = stats([for (final f in inW) (f[4] - f[0]) / 1000.0]);
-    ops['clock_check_main_to_firstframe_ms'] =
-        frames.isEmpty ? null : (frames.first[4] - mainUs) / 1000.0;
+    // Dart: no public GC statistics API in product (AOT release) mode, the VM service is absent.
+    ops['gc'] = null;
     if (finishExtra != null) ops.addAll(finishExtra!(inW));
-    final impeller = Platform.environment['FLUTTER_ENGINE_SWITCH_1'] ?? 'default-backend';
-    final notes = 'Flutter Dart-AOT release, Linux GTK embedder. '
-        'frame_ms = interval between consecutive FrameTiming rasterFinish timestamps (engine raster thread finished the frame, '
-        'frame handed to the GTK/GL presenter; NOT a guaranteed screen-update timestamp; no visibility into X11 present). '
-        'Only frames the engine actually rasterized are reported (a frame with no dirty layer is never produced, so no empty frames are counted); '
-        'continuous redraw by a Ticker that dirties the scene every tick. Frames filtered to rasterFinish within the measured window '
-        '[start,end] after a 2 s warm-up; timings are batched by the engine so 800 ms extra were waited. '
-        'Engine switches env: $impeller. ${extraNotes.join(' ')}';
+    final renderer = impellerEnabled ? 'Impeller (OpenGL ES backend, default)' : 'Skia (OpenGL), via fl_dart_project_set_enable_impeller(FALSE)';
+    final notes = 'Flutter Dart-AOT release, Linux GTK3 embedder, renderer: $renderer, GL = Mesa (llvmpipe under Xvfb). '
+        'frame_ms = interval between consecutive FrameTiming rasterFinish timestamps (SchedulerBinding.addTimingsCallback; '
+        'raster thread finished the frame and handed it to the GTK GL compositor; latest public post-render signal, not an X11 present timestamp). '
+        'Only frames the engine rasterized are counted (Flutter produces no frame when nothing is dirty; every animated frame changes content). '
+        'Cadence cap ~60 Hz: the Linux embedder registers no vsync callback, so the engine uses its fallback vsync waiter with a fixed 1/60 s tick '
+        '(engine source shell/common/vsync_waiter_fallback.cc); no public option to disable it, kept. '
+        'gc = null: Dart exposes no GC counters in AOT release. Warm-up 2 s; script time frozen at 0 during warm-up. '
+        '${extraNotes.join(' ')}';
     final doc = {
       'stack': 'flutter',
+      'version': 'Flutter $kFlutterVersion (framework $kFlutterFw, engine $kFlutterEngine), Dart ${Platform.version.split(' ').first}, '
+          'package:ffi $kFfiVersion, ${impellerEnabled ? 'Impeller-GLES' : 'Skia-GL'}',
       'scenario': cfg.scenario,
       'duration_s': cfg.duration,
       'frames': inW.length,
@@ -143,6 +198,7 @@ class Bench {
       'ops': ops,
       'checksum': (ops['checksum'] ?? '0').toString(),
       'notes': notes,
+      'unsupported': unsupported,
     };
     File(cfg.out).writeAsStringSync(jsonEncode(doc));
     exit(0);

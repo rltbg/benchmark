@@ -56,6 +56,8 @@ class Shapes(val n: Int, val areaW: Float, val areaH: Float, val withShadow: Boo
     }
 }
 
+val DIAG_SH: String? = System.getenv("BENCH_DIAG_SHADOW")
+
 class Graph {
     val vals = FloatArray(10_000); var head = 0; var frame = 0
     fun push() {
@@ -110,7 +112,7 @@ fun ShapesCanvas(modifier: Modifier, shapes: Shapes, graph: Graph?, tick: Mutabl
                     for (i in 0 until s.n) {
                         val kind = i % 3
                         translate(s.x[i], s.y[i]) {
-                            if (s.withShadow && i % 10 == 0) {
+                            if (s.withShadow && i % 10 == 0 && DIAG_SH != "none") {
                                 val p = shadowPainters[kind * 1000 + s.sz[i]]!!
                                 with(p) { draw(Size(s.w[i], s.h[i])) }
                             }

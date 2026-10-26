@@ -142,11 +142,11 @@ class ListSc(val state: LazyListState, val prices: PriceStore, val counter: Coun
             run.ops["rate"] = stream.rate
             run.ops["updates_generated"] = stream.generated.get(); run.ops["updates_applied"] = stream.applied; run.ops["updates_dropped"] = stream.dropped.get()
         }
-        if (input != null) run.ops["key_events"] = input.keyEvents
+        if (input != null) { run.ops["key_events"] = input.keyEvents; run.ops["focus_rerequests"] = input.refocus }
         run.notes = FRAME_NOTE + " LazyColumn (variable heights 48..128, key=index, single contentType), scripted scroll via " +
             "ScrollableState.scroll { scrollBy(v(t)*dt) } each frame; final_offset = sum of consumed px (clamped). rows_drawn = " +
             "executions of the row drawBehind block (Compose may reuse recorded row layers: not 'rows rasterized per frame')." +
-            (if (input != null) " input: Window(onKeyEvent) toggles a mutableState read only in the square's drawBehind (draw-phase invalidation)." else "")
+            (if (input != null) " input: Window(onKeyEvent) toggles a mutableState read only in the square's drawBehind (draw-phase invalidation). Without a WM, an external XSetInputFocus on the toplevel (harness xdotool windowfocus) makes AWT/XToolkit drop keyboard focus (it keeps X focus on its FocusProxy child); the app then re-requests focus via Window.toFront() + requestFocus() on the window's mostRecentFocusOwner (the Compose component) (public AWT API), counted in focus_rerequests." else "")
     }
 }
 

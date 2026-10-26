@@ -60,18 +60,29 @@ pub static TRANSITIONS: AtomicU64 = AtomicU64::new(0);
 pub static TEXT_FIRST_MS: AtomicU64 = AtomicU64::new(0);
 pub static TEXT_SEL: AtomicU64 = AtomicU64::new(0);
 pub static TEXT_LAYOUT_MS: AtomicU64 = AtomicU64::new(0);
-pub static CANVAS_RECORD_US: AtomicU64 = AtomicU64::new(0);
-pub static CANVAS_FRAMES: AtomicU64 = AtomicU64::new(0);
-pub static CANVAS_OPS: AtomicU64 = AtomicU64::new(0);
+pub static TEXT_BYTES: AtomicU64 = AtomicU64::new(0);
+/// Process ms (+1) at which the 1 MB text was first laid out (engine); 0 before.
+pub static TEXT_LAID_MS: AtomicU64 = AtomicU64::new(0);
+pub static KEY_EVENTS: AtomicU64 = AtomicU64::new(0);
+pub static MODALS: AtomicU64 = AtomicU64::new(0);
+/// Folded into the checksum (row prices applied, key toggles...).
+pub static CHECK: AtomicU64 = AtomicU64::new(0);
+/// Which of the 600 images finished loading at least once (bit set).
+pub static IMAGES_SEEN: Mutex<[u64; 10]> = Mutex::new([0; 10]);
+
+pub fn distinct_images() -> u32 {
+    IMAGES_SEEN.lock().unwrap().iter().map(|w| w.count_ones()).sum()
+}
 pub static SCRIPT_NOTE: Mutex<String> = Mutex::new(String::new());
 
-/// The stream's bounded queue (100 000 updates): (row, price in cents).
+/// The stream's bounded queue (100 000 updates): (row, price in cents, i.e. x of the spec's x / 100.0).
 pub static QUEUE: Mutex<VecDeque<(u32, u32)>> = Mutex::new(VecDeque::new());
 pub const QUEUE_CAP: usize = 100_000;
 
-/// Zeroes the counters that accumulate from process start, at the start of the measured window.
+/// Zeroes the counters that accumulate from process start, at the start of the measured window
+/// (the producer and the core threads start with the measured window, so they count nothing before).
 pub fn reset_counters() {
-    for a in [&CALLS, &HEAVY, &ROWS_BOUND, &APPLIED, &GENERATED, &DROPPED, &CANVAS_FRAMES, &CANVAS_RECORD_US, &TRANSITIONS] {
+    for a in [&CALLS, &HEAVY, &ROWS_BOUND, &APPLIED, &GENERATED, &DROPPED, &TRANSITIONS, &MODALS, &KEY_EVENTS, &IMAGES_DECODED, &DECODE_US] {
         a.store(0, Relaxed);
     }
 }
@@ -118,7 +129,8 @@ pub fn spawn_producer(rate: u32) {
                         x ^= x << 13;
                         x ^= x >> 17;
                         x ^= x << 5;
-                        batch.push((x % 100_000, x / 100));
+                        // price = x / 100.0 (spec), kept in cents: x
+                        batch.push((x % 100_000, x));
                         made += 1;
                     }
                     GENERATED.fetch_add(batch.len() as u64, Relaxed);
