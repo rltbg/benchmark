@@ -1,0 +1,466 @@
+name: spike-qt
+# Spike multiplateforme Qt 6.12.0 (C++ + QML) : Linux, Windows, macOS, iOS (simulateur), Android, web (wasm).
+# Déclencheur unique : push sur ci/qt. Résultats : branche ci-results (action publish-results).
+on:
+  push:
+    branches: ['ci/qt']
+
+permissions:
+  contents: read
+
+env:
+  QT_VERSION: '6.12.0'
+  EMSDK_VERSION: '5.0.5'            # « Qt for WebAssembly » : Emscripten 5.0.5 pour Qt 6.12.0
+  NDK_VERSION: '27.2.12479018'      # « Configure development environment (Android) » : NDK de Qt 6.12
+  JDK_VERSION: '21'                 # même page : JDK 21 ou plus
+
+jobs:
+  # ------------------------------------------------------------------ Linux x64
+  linux:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - name: Dépendances système (xcb, Xvfb)
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq xvfb libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 \
+            libxcb-shape0 libxcb-xinerama0 libxcb-xkb1 libxkbcommon-x11-0 libxcb-randr0 libxcb-sync1 libxcb-xfixes0 \
+            libfontconfig1 libgl1 libegl1 libgl1-mesa-dri libglx-mesa0
+      - name: Qt (install-qt-action)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: linux
+          target: desktop
+          arch: linux_gcc_64
+          cache: true
+      - name: Build (release) + déploiement
+        id: build
+        shell: bash
+        run: |
+          mkdir -p res; SECONDS=0
+          { gcc --version | head -1; cmake --version | head -1; ninja --version; "$QT_ROOT_DIR/bin/qmake" -v | tail -1; } > res/versions.txt 2>&1
+          cmake -S spikes/qt -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR" 2>&1 | tee res/build.log
+          cmake --build build 2>&1 | tee -a res/build.log
+          cmake --install build --prefix deploy 2>&1 | tee -a res/build.log
+          echo $SECONDS > build_seconds
+          tar -cf qtspike-linux.tar deploy
+      - name: Exécution sous Xvfb (rendu logiciel puis GL Mesa llvmpipe)
+        id: run
+        if: steps.build.outcome == 'success'
+        shell: bash
+        run: |
+          rc=0
+          xvfb-run -a -s "-screen 0 1280x800x24" bash spikes/qt/ci/run-desktop.sh deploy/bin/qtspike res software QT_QUICK_BACKEND=software || rc=1
+          xvfb-run -a -s "-screen 0 1280x800x24" bash spikes/qt/ci/run-desktop.sh deploy/bin/qtspike res opengl-llvmpipe QSG_INFO=1 || rc=1
+          exit $rc
+      - name: Résultat
+        if: always()
+        shell: bash
+        env:
+          ST: ${{ steps.build.outcome == 'success' && 'ok' || 'fail' }}
+          RUN: ${{ steps.run.outcome }}
+        run: |
+          mkdir -p res; python3 -m venv "$RUNNER_TEMP/v"; "$RUNNER_TEMP/v/bin/pip" -q install brotli
+          "$RUNNER_TEMP/v/bin/python" ci/record.py --stack qt --platform linux --status "$ST" --seconds "$(cat build_seconds 2>/dev/null || echo 0)" \
+            --artifact deploy --artifact qtspike-linux.tar --note "exécution: $RUN" --note "warnings build: $(grep -ci 'warning' res/build.log || true)" \
+            --note "rendu: software (QT_QUICK_BACKEND=software) et GL llvmpipe" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-qt-linux
+          path: res
+      - name: Échec si build/exécution KO
+        if: steps.build.outcome == 'failure' || steps.run.outcome == 'failure'
+        run: exit 1
+
+  # ------------------------------------------------------------------ Windows x64
+  windows:
+    runs-on: windows-2025
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - name: Qt (install-qt-action)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: windows
+          target: desktop
+          arch: win64_msvc2022_64
+          cache: true
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: Build (release) + déploiement (windeployqt)
+        id: build
+        shell: bash
+        run: |
+          mkdir -p res; SECONDS=0
+          python -m pip install --quiet ninja
+          { cl 2>&1 | head -1; cmake --version | head -1; ninja --version; "$QT_ROOT_DIR/bin/qmake" -v | tail -1; } > res/versions.txt 2>&1
+          cmake -S spikes/qt -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR" 2>&1 | tee res/build.log
+          cmake --build build 2>&1 | tee -a res/build.log
+          cmake --install build --prefix deploy 2>&1 | tee -a res/build.log
+          echo $SECONDS > build_seconds
+          tar -cf qtspike-windows.tar deploy
+      - name: Exécution (D3D11/WARP par défaut, puis rendu logiciel)
+        id: run
+        if: steps.build.outcome == 'success'
+        shell: bash
+        run: |
+          rc=0
+          bash spikes/qt/ci/run-desktop.sh deploy/bin/qtspike.exe res default QSG_INFO=1 || rc=1
+          bash spikes/qt/ci/run-desktop.sh deploy/bin/qtspike.exe res software QT_QUICK_BACKEND=software || rc=1
+          exit $rc
+      - name: Capture d'écran du bureau (PowerShell)
+        if: always()
+        shell: pwsh
+        run: |
+          Add-Type -AssemblyName System.Windows.Forms,System.Drawing
+          $b=[System.Windows.Forms.SystemInformation]::VirtualScreen
+          $bmp=New-Object System.Drawing.Bitmap $b.Width,$b.Height
+          [System.Drawing.Graphics]::FromImage($bmp).CopyFromScreen($b.Location,[System.Drawing.Point]::Empty,$b.Size)
+          New-Item -ItemType Directory -Force res | Out-Null
+          $bmp.Save("res/windows-desktop.png")
+      - name: Résultat
+        if: always()
+        shell: bash
+        env:
+          ST: ${{ steps.build.outcome == 'success' && 'ok' || 'fail' }}
+          RUN: ${{ steps.run.outcome }}
+        run: |
+          mkdir -p res; python -m pip install --quiet brotli
+          python ci/record.py --stack qt --platform windows --status "$ST" --seconds "$(cat build_seconds 2>/dev/null || echo 0)" \
+            --artifact deploy --artifact qtspike-windows.tar --note "exécution: $RUN" --note "warnings build: $(grep -ci 'warning' res/build.log || true)" \
+            --note "rendu: défaut (D3D11) et software" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-qt-windows
+          path: res
+      - name: Échec si build/exécution KO
+        if: steps.build.outcome == 'failure' || steps.run.outcome == 'failure'
+        shell: bash
+        run: exit 1
+
+  # ------------------------------------------------------------------ macOS arm64
+  macos:
+    runs-on: macos-26
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - name: Qt (install-qt-action)
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: mac
+          target: desktop
+          arch: clang_64
+          cache: true
+      - name: Build (release, arm64) + déploiement (macdeployqt)
+        id: build
+        shell: bash
+        run: |
+          mkdir -p res; SECONDS=0
+          { clang --version | head -1; xcodebuild -version | head -2; cmake --version | head -1; ninja --version || true; "$QT_ROOT_DIR/bin/qmake" -v | tail -1; } > res/versions.txt 2>&1
+          command -v ninja >/dev/null || brew install ninja
+          cmake -S spikes/qt -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DCMAKE_PREFIX_PATH="$QT_ROOT_DIR" -DCMAKE_OSX_ARCHITECTURES=arm64 2>&1 | tee res/build.log
+          cmake --build build 2>&1 | tee -a res/build.log
+          cmake --install build --prefix deploy 2>&1 | tee -a res/build.log
+          echo $SECONDS > build_seconds
+          tar -cf qtspike-macos.tar deploy
+      - name: Exécution (Metal par défaut, puis rendu logiciel)
+        id: run
+        if: steps.build.outcome == 'success'
+        shell: bash
+        run: |
+          rc=0
+          bash spikes/qt/ci/run-desktop.sh deploy/qtspike.app/Contents/MacOS/qtspike res default QSG_INFO=1 || rc=1
+          bash spikes/qt/ci/run-desktop.sh deploy/qtspike.app/Contents/MacOS/qtspike res software QT_QUICK_BACKEND=software || rc=1
+          screencapture -x res/macos-desktop.png || true
+          exit $rc
+      - name: Résultat
+        if: always()
+        shell: bash
+        env:
+          ST: ${{ steps.build.outcome == 'success' && 'ok' || 'fail' }}
+          RUN: ${{ steps.run.outcome }}
+        run: |
+          mkdir -p res; python3 -m venv "$RUNNER_TEMP/v"; "$RUNNER_TEMP/v/bin/pip" -q install brotli
+          "$RUNNER_TEMP/v/bin/python" ci/record.py --stack qt --platform macos --status "$ST" --seconds "$(cat build_seconds 2>/dev/null || echo 0)" \
+            --artifact deploy/qtspike.app --artifact qtspike-macos.tar --note "exécution: $RUN" --note "warnings build: $(grep -ci 'warning' res/build.log || true)" \
+            --note "rendu: défaut (Metal) et software" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-qt-macos
+          path: res
+      - name: Échec si build/exécution KO
+        if: steps.build.outcome == 'failure' || steps.run.outcome == 'failure'
+        run: exit 1
+
+  # ------------------------------------------------------------------ iOS (simulateur arm64)
+  ios-sim:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - name: "Qt hôte (bureau macOS ; moc, rcc, qmlcachegen, qmlimportscanner)"
+        id: host
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          host: mac
+          target: desktop
+          arch: clang_64
+          cache: true
+      - name: Qt pour iOS simulateur arm64 (archives officielles download.qt.io, sha1 vérifié)
+        id: qtios
+        shell: bash
+        run: |
+          # aqtinstall 3.3.0 ne connaît pas le kit « qt6_6120_simulator_arm64 » (nouveau en 6.12) : téléchargement direct
+          mkdir -p res; python3 -m venv "$RUNNER_TEMP/v"; "$RUNNER_TEMP/v/bin/pip" -q install py7zr
+          base=https://download.qt.io/online/qtsdkrepository/mac_x64/ios/qt6_6120/qt6_6120_simulator_arm64/qt.qt6.6120.qtforios.simulator_arm64
+          stamp=202609280346
+          dest="$RUNNER_TEMP/Qt/6.12.0/ios_simulator_arm64"; mkdir -p "$dest" "$RUNNER_TEMP/dl"
+          for m in qtbase qtdeclarative; do
+            f="6.12.0-0-${stamp}${m}-MacOS-MacOS_26-Clang-IOS-IOS_ANY-ARM64-Simulator.7z"
+            curl -fsSL -o "$RUNNER_TEMP/dl/$m.7z" "$base/$f"
+            exp=$(curl -fsSL "$base/$f.sha1" | awk '{print $1}')
+            got=$(shasum -a 1 "$RUNNER_TEMP/dl/$m.7z" | awk '{print $1}')
+            echo "$m sha1 attendu=$exp obtenu=$got"; [ "$exp" = "$got" ]
+            "$RUNNER_TEMP/v/bin/python" -c "import py7zr,sys; py7zr.SevenZipFile(sys.argv[1]).extractall(sys.argv[2])" "$RUNNER_TEMP/dl/$m.7z" "$dest"
+          done
+          chmod +x "$dest"/bin/* "$dest"/libexec/* 2>/dev/null || true
+          echo "root=$dest" >> "$GITHUB_OUTPUT"
+          ls "$dest" "$dest/bin" | head -40
+      - name: Build (release, simulateur arm64, Qt statique) — générateur Xcode
+        id: build
+        shell: bash
+        run: |
+          SECONDS=0
+          { xcodebuild -version | head -2; cmake --version | head -1; xcrun --sdk iphonesimulator --show-sdk-version; "${{ steps.host.outputs.qt-root-dir }}/bin/qmake" -v | tail -1; } > res/versions.txt 2>&1
+          "${{ steps.qtios.outputs.root }}/bin/qt-cmake" -S spikes/qt -B build-ios -G Xcode \
+            -DQT_HOST_PATH="${{ steps.host.outputs.qt-root-dir }}" \
+            -DCMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_ALLOWED=NO 2>&1 | tee res/build.log
+          cmake --build build-ios --config Release -- -destination "generic/platform=iOS Simulator" 2>&1 | tee -a res/build.log
+          echo $SECONDS > build_seconds
+          app=$(find build-ios -name 'qtspike.app' -path '*Release-iphonesimulator*' | head -1); echo "app=$app"
+          echo "app=$app" >> "$GITHUB_OUTPUT"
+          [ -n "$app" ]
+          tar -cf qtspike-ios.tar "$app"
+          ls "${{ steps.qtios.outputs.root }}/lib" | head -20 >> res/versions.txt
+      - name: Exécution dans le simulateur (Metal par défaut, puis rendu logiciel)
+        id: run
+        if: steps.build.outcome == 'success'
+        shell: bash
+        run: |
+          rc=0
+          bash spikes/qt/ci/ios-run.sh "${{ steps.build.outputs.app }}" res ios-default || rc=1
+          SIMCTL_CHILD_QT_QUICK_BACKEND=software bash spikes/qt/ci/ios-run.sh "${{ steps.build.outputs.app }}" res ios-software || rc=1
+          exit $rc
+      - name: Résultat
+        if: always()
+        shell: bash
+        env:
+          ST: ${{ steps.build.outcome == 'success' && 'ok' || 'fail' }}
+          RUN: ${{ steps.run.outcome }}
+          APP: ${{ steps.build.outputs.app }}
+        run: |
+          mkdir -p res; python3 -m venv "$RUNNER_TEMP/v"; "$RUNNER_TEMP/v/bin/pip" -q install brotli
+          "$RUNNER_TEMP/v/bin/python" ci/record.py --stack qt --platform ios-sim --status "$ST" --seconds "$(cat build_seconds 2>/dev/null || echo 0)" \
+            --artifact "${APP:-missing.app}" --artifact qtspike-ios.tar --note "exécution: $RUN" --note "warnings build: $(grep -ci 'warning' res/build.log || true)" \
+            --note "simulateur, non signé, Qt statique (frameworks .a)" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-qt-ios-sim
+          path: res
+      - name: Échec si build/exécution KO
+        if: steps.build.outcome == 'failure' || steps.run.outcome == 'failure'
+        run: exit 1
+
+  # ------------------------------------------------------------------ Android (APK arm64-v8a + x86_64, émulateur KVM)
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: ${{ env.JDK_VERSION }}
+      - name: SDK / NDK exigés par Qt 6.12 (sdkmanager)
+        shell: bash
+        run: |
+          SDKM="$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager"
+          yes | "$SDKM" --licenses > /dev/null || true
+          "$SDKM" "platform-tools" "platforms;android-36" "build-tools;36.0.0" "ndk;${NDK_VERSION}" 2>&1 | tail -5
+      - name: Qt Android arm64-v8a (+ Qt bureau hôte automatique)
+        id: qt_arm64
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          target: android
+          arch: android_arm64_v8a
+          cache: true
+      - name: Qt Android x86_64 (émulateur)
+        id: qt_x64
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          target: android
+          arch: android_x86_64
+          cache: true
+      - name: Build APK (arm64-v8a, x86_64) + AAB (arm64-v8a), release
+        id: build
+        shell: bash
+        run: |
+          mkdir -p res; SECONDS=0
+          { java -version 2>&1 | head -1; cmake --version | head -1; echo "NDK $NDK_VERSION"; echo "QT_HOST_PATH=${{ steps.qt_arm64.outputs.qt-host-path }}"; } > res/versions.txt
+          for abi in arm64_v8a x86_64; do
+            case $abi in arm64_v8a) qt="${{ steps.qt_arm64.outputs.qt-root-dir }}";; x86_64) qt="${{ steps.qt_x64.outputs.qt-root-dir }}";; esac
+            t=$SECONDS
+            "$qt/bin/qt-cmake" -S spikes/qt -B build-$abi -G Ninja -DCMAKE_BUILD_TYPE=Release \
+              -DANDROID_SDK_ROOT="$ANDROID_HOME" -DANDROID_NDK_ROOT="$ANDROID_HOME/ndk/$NDK_VERSION" \
+              -DQT_HOST_PATH="${{ steps.qt_arm64.outputs.qt-host-path }}" 2>&1 | tee -a res/build.log
+            cmake --build build-$abi --target apk 2>&1 | tee -a res/build.log
+            echo "build $abi: $((SECONDS-t)) s" | tee -a res/versions.txt
+          done
+          cmake --build build-arm64_v8a --target aab 2>&1 | tee -a res/build.log || echo "aab KO" >> res/versions.txt
+          echo $SECONDS > build_seconds
+          # signature jetable (clé générée à la volée, jamais publiée) : nécessaire seulement pour installer l'APK release sur l'émulateur
+          keytool -genkeypair -keystore ci.keystore -alias ci -keyalg RSA -keysize 2048 -validity 3650 -storepass android -keypass android -dname "CN=ci" 2>&1 | tail -1
+          BT=$(ls -d "$ANDROID_HOME"/build-tools/36.0.0)
+          for abi in arm64_v8a x86_64; do
+            u=$(find build-$abi -name '*.apk' | grep -i release | head -1); echo "apk $abi non signé: $u"
+            [ -n "$u" ]
+            "$BT/apksigner" sign --ks ci.keystore --ks-pass pass:android --out qtspike-$abi.apk "$u"
+          done
+          find build-arm64_v8a -name '*.aab' | head -1 | xargs -I{} cp {} qtspike-arm64_v8a.aab || true
+      - name: Exécution dans l'émulateur (API 34, x86_64, KVM)
+        id: run
+        if: steps.build.outcome == 'success'
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules; sudo udevadm trigger --name-match=kvm
+      - uses: reactivecircus/android-emulator-runner@v2
+        id: emu
+        if: steps.build.outcome == 'success'
+        with:
+          api-level: 34
+          arch: x86_64
+          target: google_apis
+          force-avd-creation: true
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: bash spikes/qt/ci/android-run.sh qtspike-x86_64.apk res
+      - name: Résultat
+        if: always()
+        shell: bash
+        env:
+          ST: ${{ steps.build.outcome == 'success' && 'ok' || 'fail' }}
+          RUN: ${{ steps.emu.outcome }}
+        run: |
+          mkdir -p res; python3 -m venv "$RUNNER_TEMP/v"; "$RUNNER_TEMP/v/bin/pip" -q install brotli
+          "$RUNNER_TEMP/v/bin/python" ci/record.py --stack qt --platform android --status "$ST" --seconds "$(cat build_seconds 2>/dev/null || echo 0)" \
+            --artifact qtspike-arm64_v8a.apk --artifact qtspike-x86_64.apk --artifact qtspike-arm64_v8a.aab \
+            --note "émulateur: $RUN" --note "warnings build: $(grep -ci 'warning' res/build.log || true)" \
+            --note "APK release signé avec une clé jetable (apksigner)" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-qt-android
+          path: res
+      - name: Échec si build/exécution KO
+        if: steps.build.outcome == 'failure' || steps.emu.outcome == 'failure'
+        run: exit 1
+
+  # ------------------------------------------------------------------ Web (WebAssembly, Chrome headless)
+  web:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v7
+      - name: Qt wasm multithread (+ Qt bureau hôte automatique)
+        id: qt_mt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          target: wasm
+          arch: wasm_multithread
+          cache: true
+      - name: Qt wasm singlethread
+        id: qt_st
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: ${{ env.QT_VERSION }}
+          target: wasm
+          arch: wasm_singlethread
+          cache: true
+      - uses: mymindstorm/setup-emsdk@v16
+        with:
+          version: ${{ env.EMSDK_VERSION }}
+          actions-cache-folder: emsdk-cache
+      - name: Build (release) wasm multithread et singlethread
+        id: build
+        shell: bash
+        run: |
+          mkdir -p res out-mt out-st; SECONDS=0
+          { emcc --version | head -1; cmake --version | head -1; echo "QT_HOST_PATH=${{ steps.qt_mt.outputs.qt-host-path }}"; } > res/versions.txt 2>&1
+          for k in mt st; do
+            case $k in mt) qt="${{ steps.qt_mt.outputs.qt-root-dir }}";; st) qt="${{ steps.qt_st.outputs.qt-root-dir }}";; esac
+            t=$SECONDS
+            "$qt/bin/qt-cmake" -S spikes/qt -B build-$k -G Ninja -DCMAKE_BUILD_TYPE=Release \
+              -DQT_HOST_PATH="${{ steps.qt_mt.outputs.qt-host-path }}" 2>&1 | tee -a res/build.log
+            cmake --build build-$k 2>&1 | tee -a res/build.log
+            echo "build $k: $((SECONDS-t)) s" | tee -a res/versions.txt
+            cp build-$k/qtspike.html build-$k/qtspike.js build-$k/qtspike.wasm build-$k/qtloader.js out-$k/
+            ls -la out-$k | tee -a res/versions.txt
+          done
+          echo $SECONDS > build_seconds
+      - name: Exécution dans Chrome headless (Playwright, Chrome du runner)
+        id: run
+        if: steps.build.outcome == 'success'
+        shell: bash
+        run: |
+          python3 -m venv "$RUNNER_TEMP/v"; "$RUNNER_TEMP/v/bin/pip" -q install playwright
+          google-chrome --version | tee -a res/versions.txt
+          rc=0
+          "$RUNNER_TEMP/v/bin/python" spikes/qt/ci/web_run.py out-mt qtspike.html res web-multithread || rc=1
+          "$RUNNER_TEMP/v/bin/python" spikes/qt/ci/web_run.py out-st qtspike.html res web-singlethread || rc=1
+          exit $rc
+      - name: Résultat
+        if: always()
+        shell: bash
+        env:
+          ST: ${{ steps.build.outcome == 'success' && 'ok' || 'fail' }}
+          RUN: ${{ steps.run.outcome }}
+        run: |
+          mkdir -p res; python3 -m venv "$RUNNER_TEMP/v"; "$RUNNER_TEMP/v/bin/pip" -q install brotli
+          "$RUNNER_TEMP/v/bin/python" ci/record.py --stack qt --platform web --status "$ST" --seconds "$(cat build_seconds 2>/dev/null || echo 0)" \
+            --artifact out-mt/qtspike.wasm --artifact out-mt/qtspike.js --artifact out-mt/qtloader.js --artifact out-mt/qtspike.html \
+            --artifact out-st/qtspike.wasm --artifact out-st/qtspike.js --artifact out-st/qtloader.js --artifact out-st/qtspike.html \
+            --note "exécution: $RUN" --note "warnings build: $(grep -ci 'warning' res/build.log || true)" \
+            --note "artefacts: out-mt = multithread, out-st = singlethread" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-qt-web
+          path: res
+      - name: Échec si build/exécution KO
+        if: steps.build.outcome == 'failure' || steps.run.outcome == 'failure'
+        run: exit 1
+
+  # ------------------------------------------------------------------ Publication dans ci-results
+  publish:
+    if: always()
+    needs: [linux, windows, macos, ios-sim, android, web]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/publish-results
+        with:
+          stack: qt
