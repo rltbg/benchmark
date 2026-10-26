@@ -154,6 +154,8 @@ let fnvSeq (n: int64) (f: int64 -> uint32) =
 
 /// checksum de premier niveau du JSON (fixe par le scenario)
 let mutable checksumValue = "0"
+/// horodatage (Stopwatch) de la fin de rendu de la premiere frame (lu par T1)
+let mutable firstRenderedTs = 0L
 
 // ---------------------------------------------------------------- driver de frames
 let FRAME_NOTE =
@@ -196,6 +198,7 @@ type Driver(top: Window, sc: Scenario, args: Args, notes: string, mainStart: int
         lock gate (fun () ->
             if not firstRendered then
                 firstRendered <- true
+                firstRenderedTs <- now
                 setupMs <- float (now - mainStart) * 1000.0 / freq
             // plusieurs batches rendus dans la meme passe = une seule frame
             if now - lastRendered > int64 (freq * 0.0001) then

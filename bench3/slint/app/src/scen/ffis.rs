@@ -135,6 +135,38 @@ pub fn build_list_ffi(args: &Args, app: &MainWindow, _renderer: &str) -> Result<
     }))
 }
 
+impl ListFfi {
+    /// applique les événements reçus (appelé une fois par frame, et une dernière fois avant le décompte final)
+    fn drain_events(&mut self) {
+        let ctx = unsafe { &*self.ctx };
+        match self.src {
+            Src::Queue => {
+                let mut n = 0u64;
+                let mut inn = self.inner.borrow_mut();
+                ctx.q.drain(usize::MAX, |(i, p)| {
+                    inn.apply_price(i as usize, p);
+                    n += 1;
+                });
+                drop(inn);
+                self.drained += n;
+            }
+            Src::Coalesce => {
+                let mut inn = self.inner.borrow_mut();
+                let mut u = 0u64;
+                for i in 0..ctx.dirty.len() {
+                    if ctx.dirty[i].load(Ordering::Relaxed) && ctx.dirty[i].swap(false, Ordering::Acquire) {
+                        let p = f64::from_bits(ctx.latest[i].load(Ordering::Relaxed));
+                        inn.apply_price(i, p);
+                        u += 1;
+                    }
+                }
+                drop(inn);
+                self.applied_unique += u;
+            }
+            Src::Invoke => {}
+        }
+    }
+}
 impl Scenario for ListFfi {
     fn begin_measure(&mut self, app: &MainWindow) {
         self.sc.reset();
@@ -156,34 +188,7 @@ impl Scenario for ListFfi {
     }
     fn step(&mut self, t: f64, app: &MainWindow, measuring: bool) {
         if measuring && self.scenario == "ffi-callbacks" {
-            let ctx = unsafe { &*self.ctx };
-            match self.src {
-                Src::Queue => {
-                    let inner = &self.inner;
-                    let mut n = 0u64;
-                    let mut inn = inner.borrow_mut();
-                    ctx.q.drain(usize::MAX, |(i, p)| {
-                        inn.apply_price(i as usize, p);
-                        n += 1;
-                    });
-                    drop(inn);
-                    self.drained += n;
-                }
-                Src::Coalesce => {
-                    let mut inn = self.inner.borrow_mut();
-                    let mut u = 0u64;
-                    for i in 0..ctx.dirty.len() {
-                        if ctx.dirty[i].load(Ordering::Relaxed) && ctx.dirty[i].swap(false, Ordering::Acquire) {
-                            let p = f64::from_bits(ctx.latest[i].load(Ordering::Relaxed));
-                            inn.apply_price(i, p);
-                            u += 1;
-                        }
-                    }
-                    drop(inn);
-                    self.applied_unique += u;
-                }
-                Src::Invoke => {}
-            }
+            self.drain_events();
         }
         if measuring && self.scenario == "ffi-block" && self.on_ui && t >= self.next_ui_heavy {
             // variante `ui` : appel sur le fil UI, une fois par seconde (gel mesuré par ui_stall_ms_max)
@@ -201,8 +206,14 @@ impl Scenario for ListFfi {
         ops.insert("sum_heights".into(), sum_heights(100_000, false).into());
         ops.insert("checksum_data".into(), format!("{:08x}", checksum_heights(100_000, false)).into());
         if self.scenario == "ffi-callbacks" {
-            let produced = (self.core.producer_produced)();
-            self.produced = produced;
+            // fin de mesure : arrêt du producteur, puis dernier lot (les événements émis depuis la dernière frame ne
+            // sont pas « perdus » ; sans cela le retard d'une frame ferait 99,86 % sur 12 s)
+            if self.started {
+                self.produced = (self.core.producer_stop)();
+                self.started = false;
+            }
+            self.drain_events();
+            let produced = self.produced;
             let ctx = unsafe { &*self.ctx };
             let (applied, extra): (u64, Value) = match self.src {
                 Src::Queue => (self.drained, json!({"mechanism": "lock-free SPSC ring (2^21 x 16 B) drained once per frame on the UI thread, every event applied individually"})),

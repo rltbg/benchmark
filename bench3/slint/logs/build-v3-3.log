@@ -1,0 +1,441 @@
+   Compiling proc-macro2 v1.0.107
+   Compiling quote v1.0.47
+   Compiling unicode-ident v1.0.27
+   Compiling cfg-if v1.0.5
+   Compiling libc v0.2.191
+   Compiling pkg-config v0.3.34
+   Compiling syn v3.0.9
+   Compiling syn v2.0.119
+   Compiling synstructure v0.14.0
+   Compiling bytemuck_derive v1.12.1
+   Compiling autocfg v1.5.1
+   Compiling zerofrom-derive v0.1.8
+   Compiling portable-atomic v1.15.0
+   Compiling bitflags v2.13.2
+   Compiling critical-section v1.2.0
+   Compiling yoke-derive v0.8.4
+   Compiling once_cell v1.21.4
+   Compiling zerovec-derive v0.11.7
+   Compiling displaydoc v0.2.7
+   Compiling memchr v2.8.3
+   Compiling smallvec v1.16.4
+   Compiling log v0.4.34
+   Compiling libm v0.2.16
+   Compiling num-traits v0.2.19
+   Compiling serde_core v1.0.229
+   Compiling libloading v0.8.9
+   Compiling crc32fast v1.5.3
+   Compiling version_check v0.9.5
+   Compiling cfg_aliases v0.2.2
+   Compiling bytemuck v1.25.2
+   Compiling rustix v1.1.5
+   Compiling dlib v0.5.3
+   Compiling stable_deref_trait v1.2.1
+   Compiling arrayvec v0.7.8
+   Compiling winnow v1.0.4
+   Compiling linux-raw-sys v0.12.1
+   Compiling zerofrom v0.1.8
+   Compiling thiserror-impl v2.0.21
+   Compiling icu_properties_data v2.4.0
+   Compiling foldhash v0.2.0
+   Compiling yoke v0.8.4
+   Compiling toml_parser v1.1.5+spec-1.1.0
+   Compiling toml_datetime v1.1.2+spec-1.1.0
+   Compiling icu_normalizer_data v2.4.0
+   Compiling icu_locale_fallback_data v2.4.0
+   Compiling toml_writer v1.1.3+spec-1.1.0
+   Compiling simd-adler32 v0.3.10
+   Compiling find-msvc-tools v0.1.15
+   Compiling shlex v2.0.1
+   Compiling cc v1.10.0
+   Compiling hashbrown v0.17.1
+   Compiling pin-project-lite v0.2.17
+   Compiling adler2 v2.0.1
+   Compiling zerovec v0.11.9
+   Compiling writeable v0.6.4
+   Compiling miniz_oxide v0.9.1
+   Compiling equivalent v1.0.3
+   Compiling flate2 v1.1.10
+   Compiling wayland-sys v0.31.11
+   Compiling heck v0.5.0
+   Compiling icu_decimal_data v2.4.0
+   Compiling tinystr v0.8.5
+   Compiling litemap v0.8.3
+   Compiling serde v1.0.229
+   Compiling thiserror v2.0.21
+   Compiling indexmap v2.14.2
+   Compiling icu_locale_core v2.4.0
+   Compiling potential_utf v0.1.6
+   Compiling wayland-backend v0.3.17
+   Compiling zerotrie v0.2.5
+   Compiling memoffset v0.9.1
+   Compiling slab v0.4.12
+   Compiling pulldown-cmark v0.13.5
+   Compiling unicode-segmentation v1.13.3
+   Compiling convert_case v0.10.0
+   Compiling icu_provider v2.4.0
+   Compiling toml_edit v0.25.17+spec-1.1.0
+   Compiling serde_derive v1.0.229
+   Compiling unicode-xid v0.2.6
+   Compiling downcast-rs v1.2.1
+   Compiling scoped-tls v1.0.1
+   Compiling derive_more-impl v2.1.1
+   Compiling proc-macro-crate v3.5.0
+   Compiling font-types v0.12.7
+   Compiling quick-xml v0.41.0
+   Compiling zmij v1.0.23
+   Compiling wayland-client v0.31.15
+   Compiling zerocopy v0.8.63
+   Compiling either v1.19.0
+   Compiling futures-core v0.3.34
+   Compiling wayland-scanner v0.31.11
+   Compiling read-fonts v0.41.0
+   Compiling zerocopy-derive v0.8.63
+   Compiling utf8_iter v1.0.4
+   Compiling float-cmp v0.9.0
+   Compiling strict-num v0.1.1
+   Compiling icu_collections v2.4.0
+   Compiling slotmap v1.1.1
+   Compiling serde_json v1.0.154
+   Compiling raw-window-handle v0.6.2
+   Compiling arrayref v0.3.9
+   Compiling parking v2.2.1
+   Compiling polycool v0.4.0
+   Compiling miniz_oxide v0.8.9
+   Compiling fdeflate v0.3.7
+   Compiling futures-io v0.3.34
+   Compiling parking_lot_core v0.9.12
+   Compiling khronos_api v3.1.0
+   Compiling rustc-hash v1.1.0
+   Compiling tiny-skia-path v0.12.0
+   Compiling naga-types v30.0.1
+   Compiling png v0.18.1
+   Compiling kurbo v0.13.1
+   Compiling skrifa v0.44.0
+   Compiling strum_macros v0.28.0
+   Compiling naga v30.0.1
+   Compiling memmap2 v0.9.12
+   Compiling yeslogic-fontconfig-sys v6.0.1
+   Compiling bit-vec v0.9.1
+   Compiling glob v0.3.4
+   Compiling siphasher v1.0.4
+   Compiling tinyvec v1.13.3
+   Compiling scopeguard v1.2.0
+   Compiling ash v0.38.0+1.3.281
+   Compiling unicode-width v0.2.2
+   Compiling byteorder-lite v0.1.0
+   Compiling allocator-api2 v0.2.21
+   Compiling crossbeam-utils v0.8.23
+   Compiling fastrand v2.5.0
+   Compiling zune-core v0.5.3
+   Compiling zune-jpeg v0.5.15
+   Compiling hashbrown v0.16.1
+   Compiling codespan-reporting v0.13.1
+   Compiling lock_api v0.4.14
+   Compiling fontdb v0.24.0
+   Compiling svgtypes v0.16.1
+   Compiling clang-sys v1.9.1
+   Compiling bit-set v0.10.0
+   Compiling icu_properties v2.4.0
+   Compiling half v2.7.1
+   Compiling harfrust v0.12.0
+   Compiling polling v3.11.0
+   Compiling simplecss v0.2.2
+   Compiling roxmltree v0.21.2
+   Compiling spirv v0.4.0+sdk-1.4.341.0
+   Compiling color_quant v1.1.0
+   Compiling prettyplease v0.2.37
+   Compiling unicode-bidi v0.3.18
+   Compiling unicode-script v0.5.8
+   Compiling pico-args v0.5.0
+   Compiling static_assertions v1.1.0
+   Compiling semver v1.0.28
+   Compiling unicode-vo v0.1.0
+   Compiling base64 v0.23.1
+   Compiling weezl v0.1.12
+   Compiling xml-rs v0.8.29
+   Compiling xmlwriter v0.1.0
+   Compiling itoa v1.0.18
+   Compiling quick-error v2.0.1
+   Compiling imagesize v0.15.0
+   Compiling data-url v0.3.2
+   Compiling usvg v0.48.1
+   Compiling gl_generator v0.14.0
+   Compiling image-webp v0.2.4
+   Compiling gif v0.14.2
+   Compiling rustc_version v0.4.1
+   Compiling wgpu-types v30.0.1
+   Compiling parking_lot v0.12.5
+   Compiling icu_locale_fallback v2.4.0
+   Compiling icu_normalizer v2.4.0
+   Compiling tiny-skia v0.12.0
+   Compiling fixed_decimal v0.7.3
+   Compiling rgb v0.8.53
+   Compiling wgpu-hal v30.0.1
+   Compiling aho-corasick v1.1.5
+   Compiling enumflags2_derive v0.7.12
+   Compiling minimal-lexical v0.2.1
+   Compiling parlance v0.1.1
+   Compiling unicase v2.10.0
+   Compiling crossbeam-epoch v0.9.21
+   Compiling linebender_resource_handle v0.1.1
+   Compiling presser v0.3.1
+   Compiling regex-syntax v0.8.11
+   Compiling regex-automata v0.4.18
+   Compiling gpu-allocator v0.28.0
+   Compiling fontique v0.11.1
+   Compiling nom v7.1.3
+   Compiling resvg v0.48.1
+   Compiling icu_decimal v2.4.0
+   Compiling concurrent-queue v2.5.0
+   Compiling wgpu-naga-bridge v30.0.1
+   Compiling field-offset v0.3.6
+   Compiling zvariant_utils v4.2.0
+   Compiling event-listener v5.4.2
+   Compiling wayland-protocols v0.32.13
+   Compiling derive_more v2.1.1
+   Compiling ordered-float v5.5.1
+   Compiling euclid v0.22.14
+   Compiling renderdoc-sys v1.1.0
+   Compiling bindgen v0.72.1
+   Compiling htmlparser v0.2.1
+   Compiling profiling v1.0.18
+   Compiling thiserror v1.0.69
+   Compiling rustix v0.38.44
+   Compiling crossbeam-deque v0.8.8
+   Compiling icu_segmenter_data v2.4.0
+   Compiling i-slint-common v1.18.1
+   Compiling lyon_geom v1.0.20
+   Compiling event-listener-strategy v0.5.4
+   Compiling zvariant_derive v5.15.1
+   Compiling cexpr v0.6.0
+   Compiling regex v1.13.1
+   Compiling xattr v1.6.1
+   Compiling futures-lite v2.6.1
+   Compiling itertools v0.13.0
+   Compiling filetime v0.2.29
+   Compiling serde_spanned v1.1.2
+   Compiling wgpu-core v30.0.1
+   Compiling tracing-core v0.1.36
+   Compiling tracing-attributes v0.1.31
+   Compiling thiserror-impl v1.0.69
+   Compiling x11-dl v2.21.0
+   Compiling litrs v1.0.1
+   Compiling linux-raw-sys v0.4.15
+   Compiling rayon-core v1.13.0
+   Compiling as-raw-xcb-connection v1.0.1
+   Compiling rustversion v1.0.23
+   Compiling rustc-hash v2.1.3
+   Compiling shlex v1.3.0
+   Compiling document-features v0.2.12
+   Compiling tracing v0.1.44
+   Compiling toml v1.1.8+spec-1.1.0
+   Compiling tar v0.4.46
+   Compiling idna_adapter v1.2.2
+   Compiling lyon_path v1.0.19
+   Compiling wgpu-core-deps-windows-linux-android v30.0.1
+   Compiling wayland-protocols-wlr v0.3.12
+   Compiling snafu-derive v0.8.9
+   Compiling gethostname v1.1.0
+   Compiling wgpu v30.0.1
+   Compiling async-io v2.6.0
+   Compiling const-field-offset-macro v0.2.1
+   Compiling percent-encoding v2.3.2
+   Compiling x11rb-protocol v0.13.2
+   Compiling rspolib v0.1.2
+   Compiling pxfm v0.1.30
+   Compiling foldhash v0.1.5
+   Compiling moxcms v0.8.1
+   Compiling x11rb v0.13.2
+   Compiling form_urlencoded v1.2.2
+   Compiling hashbrown v0.15.5
+   Compiling const-field-offset v0.2.1
+   Compiling snafu v0.8.9
+   Compiling icu_segmenter v2.4.0
+   Compiling idna v1.1.0
+   Compiling skia-bindings v0.153.3
+   Compiling calloop v0.13.0
+   Compiling enumflags2 v0.7.12
+   Compiling glutin_glx_sys v0.6.1
+   Compiling glutin_egl_sys v0.7.1
+   Compiling parley_data v0.11.1
+   Compiling zcheapstr v1.1.0
+   Compiling num_enum_derive v0.7.6
+   Compiling errno v0.3.14
+   Compiling vtable-macro v0.5.0
+   Compiling pin-project-internal v1.1.13
+   Compiling tiny-xlib v0.2.5
+   Compiling getrandom v0.3.4
+   Compiling async-task v4.7.1
+   Compiling i-slint-compiler v1.18.1
+   Compiling countme v3.0.1
+   Compiling smithay-client-toolkit v0.19.2
+   Compiling zeno v0.3.3
+   Compiling ttf-parser v0.25.1
+   Compiling iana-time-zone v0.1.65
+   Compiling endi v1.1.1
+   Compiling hashbrown v0.14.5
+   Compiling lazy_static v1.5.1
+   Compiling fixedbitset v0.5.7
+   Compiling xkeysym v0.2.1
+   Compiling yazi v0.2.1
+   Compiling natord v1.0.9
+   Compiling futures-sink v0.3.34
+   Compiling anstyle v1.0.14
+   Compiling text-size v1.1.1
+   Compiling cursor-icon v1.2.0
+   Compiling unicode-linebreak v0.1.5
+   Compiling xcursor v0.3.11
+   Compiling wayland-cursor v0.31.14
+   Compiling swash v0.2.10
+   Compiling rowan v0.17.0
+   Compiling wayland-csd-frame v0.3.0
+   Compiling annotate-snippets v0.12.17
+   Compiling futures-channel v0.3.34
+   Compiling petgraph v0.8.3
+   Compiling owned_ttf_parser v0.25.1
+   Compiling zvariant v5.15.1
+   Compiling chrono v0.4.45
+   Compiling pin-project v1.1.13
+   Compiling num_enum v0.7.6
+   Compiling vtable v0.5.0
+   Compiling signal-hook-registry v1.4.8
+   Compiling parley v0.11.1
+   Compiling lyon_extra v1.1.0
+   Compiling calloop-wayland-source v0.3.0
+   Compiling url v2.5.8
+   Compiling rayon v1.12.0
+   Compiling image v0.25.10
+   Compiling lyon_algorithms v1.0.22
+   Compiling async-channel v2.5.0
+   Compiling taffy v0.10.1
+   Compiling i-slint-core-macros v1.18.1
+   Compiling clru v0.6.3
+   Compiling strum v0.28.0
+   Compiling tiny-skia-path v0.11.4
+   Compiling itertools v0.15.0
+   Compiling nom v8.0.0
+   Compiling glutin v0.32.3
+   Compiling ahash v0.8.12
+   Compiling futures-macro v0.3.34
+   Compiling pin-weak v1.1.0
+   Compiling atomic-waker v1.1.2
+   Compiling ab_glyph_rasterizer v0.1.10
+   Compiling futures-task v0.3.34
+   Compiling typed-index-collections v3.5.0
+   Compiling ctor v0.10.1
+   Compiling smol_str v0.3.7
+   Compiling by_address v1.2.1
+   Compiling sys-locale v0.3.2
+   Compiling pin-utils v0.1.1
+   Compiling spin_on v0.1.1
+   Compiling i-slint-core v1.18.1
+   Compiling futures-util v0.3.34
+   Compiling ab_glyph v0.2.32
+   Compiling piper v0.2.5
+   Compiling tree_magic_mini v3.2.2
+   Compiling tiny-skia v0.11.4
+   Compiling async-signal v0.2.14
+   Compiling zbus_names v4.3.5
+   Compiling async-lock v3.4.2
+   Compiling winit v0.30.13
+   Compiling i-slint-renderer-skia v1.18.1
+   Compiling os_pipe v1.2.3
+   Compiling wl-clipboard-rs v0.9.4
+   Compiling async-process v2.5.0
+   Compiling zbus_macros v5.19.0
+   Compiling skia-safe v0.153.3
+   Compiling sctk-adwaita v0.10.1
+   Compiling blocking v1.7.0
+   Compiling futures-executor v0.3.34
+   Compiling softbuffer v0.4.8
+   Compiling xkbcommon-dl v0.4.2
+   Compiling async-executor v1.14.0
+   Compiling async-broadcast v0.7.2
+   Compiling wayland-protocols-plasma v0.3.12
+   Compiling uuid v1.29.0
+   Compiling ordered-stream v0.2.0
+   Compiling i-slint-backend-winit v1.18.1
+   Compiling serde_repr v0.1.21
+   Compiling async-recursion v1.2.0
+   Compiling async-trait v0.1.92
+   Compiling glow v0.18.0
+   Compiling scoped-tls-hkt v0.1.5
+   Compiling dpi v0.1.2
+   Compiling smol_str v0.2.2
+   Compiling hex v0.4.3
+   Compiling zbus v5.19.0
+   Compiling futures v0.3.34
+   Compiling webbrowser v1.2.5
+   Compiling arboard v3.7.0
+   Compiling i-slint-renderer-software v1.18.1
+   Compiling i-slint-backend-selector v1.18.1
+   Compiling imgref v1.12.3
+   Compiling slint-build v1.18.1
+   Compiling slintapp v0.3.0 (/home/user/benchmark/bench3/slint/app)
+   Compiling slint-macros v1.18.1
+   Compiling slint v1.18.1
+warning: slintapp@0.3.0: warning: The property 'viewport-height' has been deprecated. Please use 'content-height' instead
+warning: slintapp@0.3.0:    --> /home/user/benchmark/bench3/slint/app/ui/scenes.slint:321:9
+warning: slintapp@0.3.0:     |
+warning: slintapp@0.3.0: 321 |         viewport-height: Bench.tree-n * 23px;
+warning: slintapp@0.3.0:     |         ^^^^^^^^^^^^^^^
+   Compiling benchcore v0.1.0 (/home/user/benchmark/core)
+warning: struct `Counters` is never constructed
+   --> src/data.rs:185:12
+    |
+185 | pub struct Counters {
+    |            ^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `add_gen`, `add_drop`, `generated_n`, and `drp` are never used
+   --> src/data.rs:190:12
+    |
+189 | impl Counters {
+    | ------------- methods in this implementation
+190 |     pub fn add_gen(&self, n: u64) { self.generated.fetch_add(n, Ordering::Relaxed); }
+    |            ^^^^^^^
+191 |     pub fn add_drop(&self, n: u64) { self.dropped.fetch_add(n, Ordering::Relaxed); }
+    |            ^^^^^^^^
+192 |     pub fn generated_n(&self) -> u64 { self.generated.load(Ordering::Relaxed) }
+    |            ^^^^^^^^^^^
+193 |     pub fn drp(&self) -> u64 { self.dropped.load(Ordering::Relaxed) }
+    |            ^^^
+
+warning: fields `validate`, `parse`, and `producer_produced` are never read
+  --> src/ffi.rs:21:9
+   |
+20 | pub struct Core {
+   |            ---- fields in this struct
+21 |     pub validate: ValidateFn,
+   |         ^^^^^^^^
+22 |     pub parse: ParseFn,
+   |         ^^^^^
+...
+30 |     pub producer_produced: ProdCountFn,
+   |         ^^^^^^^^^^^^^^^^^
+   |
+   = note: `Core` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: field `scenario` is never read
+   --> src/scen/lists.rs:221:5
+    |
+215 | pub struct ListSc {
+    |            ------ field in this struct
+...
+221 |     scenario: String,
+    |     ^^^^^^^^
+
+warning: method `capacity` is never used
+  --> src/spsc.rs:23:12
+   |
+16 | impl<T: Copy + Default> Spsc<T> {
+   | ------------------------------- method in this implementation
+...
+23 |     pub fn capacity(&self) -> usize { self.mask + 1 }
+   |            ^^^^^^^^
+
+warning: `slintapp` (bin "slintapp") generated 5 warnings
+    Finished `release` profile [optimized] target(s) in 8m 40s
+done

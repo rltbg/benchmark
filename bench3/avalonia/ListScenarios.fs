@@ -92,7 +92,9 @@ type MutateProducer(valueRate: int64, structRate: int64, ring: Native.SpscRing) 
                 Volatile.Write(&dropped, drops)
                 Thread.Sleep 1), IsBackground = true, Name = "mutate-producer")
         thread.Start()
-    member _.Stop() = Volatile.Write(&stop, true)
+    member _.Stop() =
+        Volatile.Write(&stop, true)
+        if not (isNull thread) then thread.Join 500 |> ignore
 
 // ---------------------------------------------------------------- scenario liste generique
 type ListScn(args: Args) =
@@ -115,7 +117,26 @@ type ListScn(args: Args) =
     let total0 = store.Total
     let canvasView = if impl = "canvas" then CanvasListView(store, np) else Unchecked.defaultof<_>
     let panelView = if impl = "panel" then PanelListView(store, np) else Unchecked.defaultof<_>
-    let viewCtl : Control = if impl = "canvas" then canvasView :> Control else panelView :> Control
+    // voie vsp : modele "list" (liste virtuelle O(1), Reset groupe par frame) ou "oc" (ObservableCollection<RowItem> materialisee, une notification par operation)
+    let vspModel = args.Variant("model", (if mutableMode then "oc" else "list"))
+    let vspRecycle = args.Variant("recycle", "1") = "1"
+    let vspList = if impl = "vsp" && vspModel = "list" then Vsp.StoreList(store) else null
+    let hfun (id: int) = if dense then hDense id else hStd id
+    let oc : System.Collections.ObjectModel.ObservableCollection<RowItem> =
+        if impl = "vsp" && vspModel = "oc" then
+            System.Collections.ObjectModel.ObservableCollection<RowItem>(Seq.init nRows (fun i -> RowItem(i, hfun i, initialPrice i)))
+        else null
+    let mutable ocNextId = nRows
+    let vspView =
+        if impl = "vsp" then
+            Vsp.VspListView((if isNull oc then (vspList :> System.Collections.IEnumerable) else (oc :> System.Collections.IEnumerable)), dense, np, vspRecycle,
+                            float (args.Variant("cache", "0")))
+        else Unchecked.defaultof<_>
+    let viewCtl : Control =
+        match impl with
+        | "canvas" -> canvasView :> Control
+        | "vsp" -> vspView.Control
+        | _ -> panelView :> Control
     let status, shell = mkShell ("Bench - " + sid) viewCtl "..."
     // vitesse de defilement par scenario
     let script (t: float) (maxOff: float) =
@@ -162,19 +183,31 @@ type ListScn(args: Args) =
     let mutable lastWheel = 0L
     let mutable square : Square = null
     let scripted = not (sid = "latency-wheel" || (sid = "latency-load" && load <> "fling"))
-    let firstRow () = if impl = "canvas" then canvasView.FirstRow else panelView.FirstRow
-    let maxOffset () = if impl = "canvas" then canvasView.MaxOffset else panelView.MaxOffset
+    let firstRow () = match impl with "canvas" -> canvasView.FirstRow | "vsp" -> max 0 vspView.FirstRealized | _ -> panelView.FirstRow
+    let maxOffset () = match impl with "canvas" -> canvasView.MaxOffset | "vsp" -> vspView.MaxOffset | _ -> panelView.MaxOffset
     let setOffset (o: float) =
         offset <- o
-        if impl = "canvas" then
+        match impl with
+        | "canvas" ->
             canvasView.Offset <- o
             canvasView.InvalidateVisual()
-        else
+        | "vsp" -> vspView.Scroll.Offset <- Vector(0.0, o)
+        | _ ->
             panelView.Offset <- o
             panelView.InvalidateMeasure()
+    let refreshView () =
+        match impl with
+        | "canvas" -> canvasView.InvalidateVisual()
+        | "vsp" -> if not (isNull vspList) then vspList.NotifyReset()
+        | _ -> panelView.InvalidateMeasure()
     let setStore (s: RowStore) =
         store <- s
-        if impl = "canvas" then canvasView.Store <- s else panelView.Store <- s
+        match impl with
+        | "canvas" -> canvasView.Store <- s
+        | "vsp" ->
+            vspList.Store <- s
+            vspList.NotifyReset()
+        | _ -> panelView.Store <- s
     let startHeavyThread (ms: uint32) =
         heavyThread <- Thread((fun () ->
             while not (Volatile.Read(&heavyStop)) do
@@ -182,7 +215,37 @@ type ListScn(args: Args) =
                 Interlocked.Increment(&heavyCalls) |> ignore), IsBackground = true, Name = "core-heavy")
         heavyThread.Start()
     /// applique les operations en attente (thread UI, une fois par frame)
+    let drainOc () =
+        let avail = ring.Available
+        if avail > 0 then
+            let buf = ring.Buf
+            let mask = ring.Mask
+            let mutable tail = ring.Tail
+            let fr = firstRow ()
+            for _ in 1 .. avail do
+                let r = &buf.[int (tail &&& mask)]
+                let cnt = oc.Count
+                match r.Kind with
+                | 0 -> if r.Idx < cnt then oc.[r.Idx].Price <- r.Price
+                | 1 ->
+                    let p = fr + 1 + (r.Idx % max 1 (cnt - fr - 1))
+                    let id = ocNextId
+                    ocNextId <- ocNextId + 1
+                    oc.Insert(p, RowItem(id, hfun id, r.Price))
+                    structOps <- structOps + 1L
+                | 2 ->
+                    if cnt > 1000 then oc.RemoveAt(fr + 1 + (r.Idx % max 1 (cnt - fr - 1)))
+                    structOps <- structOps + 1L
+                | _ ->
+                    let span = max 1 (cnt - fr - 1)
+                    oc.Move(fr + 1 + (r.Idx % span), fr + 1 + (r.Aux % span))
+                    structOps <- structOps + 1L
+                tail <- tail + 1L
+            ring.Advance avail
+            applied <- applied + int64 avail
     let drain () =
+        if not (isNull oc) then drainOc ()
+        else
         let avail = ring.Available
         if avail > 0 then
             let buf = ring.Buf
@@ -211,6 +274,7 @@ type ListScn(args: Args) =
             ring.Advance avail
             applied <- applied + int64 avail
             store.Commit()
+            if impl = "vsp" then vspList.NotifyReset()
     let drainCb () =
         let ring = Native.CallbackSink.Ring
         let avail = ring.Available
@@ -221,16 +285,18 @@ type ListScn(args: Args) =
             let cnt = store.Count
             for _ in 1 .. avail do
                 let r = &buf.[int (tail &&& mask)]
-                if r.Idx < cnt then store.SetPrice(r.Idx, r.Price)
+                if not (isNull oc) then (if r.Idx < oc.Count then oc.[r.Idx].Price <- r.Price)
+                elif r.Idx < cnt then store.SetPrice(r.Idx, r.Price)
                 tail <- tail + 1L
             ring.Advance avail
             cbApplied <- cbApplied + int64 avail
+            if impl = "vsp" && isNull oc then vspList.NotifyReset()
     member _.Store = store
     override _.Content = shell
     override _.SetSquare(s) = square <- s
     override _.OnWindow(w: Window) =
         if sid = "latency-wheel" || sid = "latency-load" then
-            viewCtl.PointerWheelChanged.Add(fun e ->
+            w.PointerWheelChanged.Add(fun e ->
                 // 100 px par cran (delta.Y = +-1)
                 wheelDelta <- wheelDelta - e.Delta.Y * 100.0
                 globalDirty <- true
@@ -242,6 +308,10 @@ type ListScn(args: Args) =
         if not (isNull producer) then producer.Start()
         match sid with
         | "ffi-callbacks" ->
+            if args.Variant("transfer", "ring") = "post" then
+                Native.CallbackSink.SetPost(Action<int, float>(fun i p ->
+                    cbApplied <- cbApplied + 1L
+                    if i < store.Count then store.SetPrice(i, p)))
             let rate = uint64 (if args.NGiven then args.N else 10000L)
             cbStarted <- Native.CallbackSink.Start(1 <<< 21, rate, 100000u)
         | "ffi-block" ->
@@ -267,10 +337,11 @@ type ListScn(args: Args) =
                 setOffset o
             if not (isNull ring) then
                 drain ()
-                if impl = "canvas" then canvasView.InvalidateVisual() else panelView.InvalidateMeasure()
+                if impl <> "vsp" then refreshView ()
             if sid = "ffi-callbacks" && cbStarted then
-                drainCb ()
-                if impl = "canvas" then canvasView.InvalidateVisual() else panelView.InvalidateMeasure()
+                if args.Variant("transfer", "ring") = "ring" then drainCb ()
+                else refreshView ()
+                if impl <> "vsp" then refreshView ()
             if heavyOnUi && not heavyUiDone && t >= 3.0 then
                 // F3 variante ui : core_heavy sur le thread UI (gel mesure)
                 heavyUiDone <- true
@@ -296,16 +367,22 @@ type ListScn(args: Args) =
         animating <- scripted || not (isNull ring) || sid = "ffi-callbacks"
     override _.Animating = animating
     override _.Finish() =
-        if not (isNull producer) then producer.Stop()
-        if cbStarted then Native.CallbackSink.Stop() |> ignore
+        // arret des producteurs puis dernier drainage : les evenements encore en file sont appliques et comptes
+        if not (isNull producer) then
+            producer.Stop()
+            drain ()
+        if cbStarted then
+            Native.CallbackSink.Stop() |> ignore
+            drainCb ()
         Volatile.Write(&heavyStop, true)
     override this.Ops sb =
         kvI sb "sum_heights" total0
         kvI sb "sum_heights_final" store.Total
-        kvI sb "rows" (int64 store.Count)
+        kvI sb "rows" (int64 (if isNull oc then store.Count else oc.Count))
         kvF sb "final_offset" offset
         kvF sb "model_build_ms" storeMs
-        kvI sb "rows_drawn" (if impl = "canvas" then canvasView.RowsDrawn else panelView.RowsDrawn)
+        if impl <> "vsp" then kvI sb "rows_drawn" (if impl = "canvas" then canvasView.RowsDrawn else panelView.RowsDrawn)
+        if impl = "vsp" then kvS sb "vsp_model" (if isNull oc then "list" else "oc")
         if impl = "panel" then kvI sb "rebinds" panelView.Rebinds
         kvS sb "impl" impl
         if sid = "list-rich" then kvI sb "K" (int64 K)
@@ -330,6 +407,7 @@ type ListScn(args: Args) =
             kvI sb "updates_applied" cbApplied
             kvI sb "updates_dropped" Native.CallbackSink.Dropped
             kvS sb "callback" "delegate+GetFunctionPointerForDelegate"
+            kvS sb "transfer" (args.Variant("transfer", "ring"))
         if sid = "list-reset" then
             kvI sb "rebuilds" rebuilds
             kvFArr sb "rebuild_ms" rebuildMs
@@ -340,4 +418,9 @@ type ListScn(args: Args) =
             kvS sb "load" load
             kvI sb "heavy_calls" heavyCalls
         if not (isNull square) then kvI sb "key_events" square.Keys
-    override _.Notes = "liste: impl=" + impl + " (" + (if impl = "canvas" then "Control custom + ICustomDrawOperation/Skia lease" else "panneau virtualise maison de controles pooles") + ")."
+    override _.Notes =
+        "liste: impl=" + impl + " ("
+        + (match impl with
+           | "canvas" -> "Control custom + ICustomDrawOperation/Skia lease"
+           | "vsp" -> "ItemsControl + VirtualizingStackPanel (CacheLength " + args.Variant("cache", "0") + ", recyclage " + (if vspRecycle then "oui" else "non") + "), modele " + (if isNull oc then "liste virtuelle a Reset groupe" else "ObservableCollection") + " ; extent estime par le panneau, positions non exactes"
+           | _ -> "panneau virtualise maison de controles pooles, extent exact") + ")."

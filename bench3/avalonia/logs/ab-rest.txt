@@ -1,0 +1,39 @@
+L1 panel n=100k                                rc=0 n=  492 fps= 61.3 p50=  16.2 p99=  25.5 max=  30.6 gt25=   6 gc=0/0/0 pause=0.0 alloc=50MB setup_ms=85.7 ui_stall_ms_max=18.7
+L1 canvas n=10M                                rc=0 n=  480 fps= 59.9 p50=  16.5 p99=  33.7 max=  42.7 gt25=  12 gc=0/0/0 pause=0.0 alloc=9MB setup_ms=101.8 ui_stall_ms_max=16.9
+L1 panel n=10M                                 rc=0 n=  491 fps= 61.1 p50=  16.5 p99=  23.5 max=  32.7 gt25=   2 gc=0/0/0 pause=0.0 alloc=51MB setup_ms=164.2 ui_stall_ms_max=10.4
+L1 vsp(list) n=10M                             rc=0 n=  486 fps= 60.7 p50=  16.2 p99=  24.5 max=  63.4 gt25=   4 gc=2/1/0 pause=89.206 alloc=222MB setup_ms=272.4 ui_stall_ms_max=52.0
+L1 vsp(list) n=1M cache=1                      rc=0 n=  481 fps= 60.0 p50=  16.2 p99=  26.3 max=  97.5 gt25=   8 gc=2/1/0 pause=136.828 alloc=279MB setup_ms=60.7 ui_stall_ms_max=85.7
+L1 vsp no-recycle n=1M                         rc=0 n=  486 fps= 60.6 p50=  16.3 p99=  24.1 max=  75.4 gt25=   4 gc=3/2/1 pause=100.427 alloc=345MB setup_ms=66.0 ui_stall_ms_max=65.4
+L2 panel K=6                                   rc=0 n=  478 fps= 59.6 p50=  16.3 p99=  26.5 max= 124.7 gt25=   5 gc=1/0/0 pause=104.013 alloc=150MB setup_ms=77.7 ui_stall_ms_max=110.7
+L2 panel K=24                                  rc=0 n=  475 fps= 59.3 p50=  16.3 p99=  28.0 max= 105.9 gt25=   9 gc=4/3/1 pause=215.986 alloc=356MB setup_ms=77.6 ui_stall_ms_max=100.4
+L2 panel K=48                                  rc=0 n=  471 fps= 58.7 p50=  16.3 p99=  31.2 max= 117.5 gt25=  12 gc=4/3/1 pause=223.565 alloc=631MB setup_ms=90.7 ui_stall_ms_max=106.7
+L2 panel K=96                                  rc=0 n=  228 fps= 28.4 p50=  31.3 p99= 108.2 max= 231.0 gt25= 151 gc=8/6/1 pause=353.434 alloc=1001MB setup_ms=147.9 ui_stall_ms_max=92.9
+L2 canvas K=96                                 rc=0 n=  486 fps= 60.6 p50=  16.3 p99=  24.6 max=  56.7 gt25=   4 gc=1/0/0 pause=35.779 alloc=115MB setup_ms=65.1 ui_stall_ms_max=38.3
+L2 vsp K=24                                    rc=0 n=  386 fps= 48.2 p50=  16.8 p99=  99.7 max= 123.2 gt25=  65 gc=9/9/4 pause=623.728 alloc=1193MB setup_ms=78.1 ui_stall_ms_max=114.1
+L2 vsp K=96                                    rc=0 n=  107 fps= 13.2 p50=  63.2 p99= 199.3 max= 209.9 gt25= 102 gc=23/23/7 pause=1608.093 alloc=2073MB setup_ms=144.2 ui_stall_ms_max=203.4
+L3 panel 100k/s                                rc=0 n=  490 fps= 61.1 p50=  16.2 p99=  22.8 max=  42.8 gt25=   3 gc=0/0/0 pause=0.0 alloc=11MB setup_ms=66.3 ui_stall_ms_max=27.5 updates_generated=810048 updates_applied=810048
+L3 panel 1M/s                                  rc=0 n=  491 fps= 61.2 p50=  16.2 p99=  22.9 max=  28.0 gt25=   3 gc=0/0/0 pause=0.0 alloc=14MB setup_ms=73.7 ui_stall_ms_max=15.1 updates_generated=8106989 updates_applied=8106989
+L3 canvas 1M/s                                 rc=0 n=  491 fps= 61.2 p50=  16.2 p99=  23.6 max=  29.5 gt25=   2 gc=0/0/0 pause=0.0 alloc=9MB setup_ms=71.7 ui_stall_ms_max=16.7 updates_generated=8100953 updates_applied=8100953
+L3 vsp(oc) 100k/s                              rc=0 n=  493 fps= 61.4 p50=  16.1 p99=  22.5 max=  23.5 gt25=   0 gc=0/0/0 pause=0.0 alloc=31MB setup_ms=121.1 ui_stall_ms_max=15.5 updates_generated=810464 updates_applied=810464
+L3 vsp(oc) 1M/s                                rc=0 n=  480 fps= 59.8 p50=  16.3 p99=  29.7 max=  38.5 gt25=  15 gc=0/0/0 pause=0.0 alloc=48MB setup_ms=93.9 ui_stall_ms_max=27.5 updates_generated=8106802 updates_applied=8106802
+L3 vsp(list,reset) 100k/s                      rc=0 n=  485 fps= 60.5 p50=  16.3 p99=  24.4 max=  93.5 gt25=   4 gc=2/1/0 pause=114.667 alloc=337MB setup_ms=82.4 ui_stall_ms_max=84.8 updates_generated=809681 updates_applied=809681
+L4 panel 100k                                  rc=0 n=  490 fps= 61.1 p50=  16.3 p99=  22.2 max=  24.8 gt25=   0 gc=0/0/0 pause=0.0 alloc=10MB setup_ms=60.5 ui_stall_ms_max=13.1 rebuild_ms=4.1
+L4 panel 1M                                    rc=0 n=  490 fps= 61.2 p50=  16.2 p99=  24.3 max=  48.5 gt25=   4 gc=0/0/0 pause=0.0 alloc=11MB setup_ms=62.5 ui_stall_ms_max=41.0 rebuild_ms=6.9
+L4 canvas 1M                                   rc=0 n=  486 fps= 60.6 p50=  16.4 p99=  22.4 max=  62.8 gt25=   4 gc=0/0/0 pause=0.0 alloc=9MB setup_ms=105.7 ui_stall_ms_max=52.5 rebuild_ms=5.9
+L4 vsp 1M                                      rc=0 n=  487 fps= 60.7 p50=  16.4 p99=  24.0 max=  51.1 gt25=   4 gc=0/0/0 pause=0.0 alloc=31MB setup_ms=64.6 ui_stall_ms_max=25.9 rebuild_ms=7.6
+F2 ring 100k/s                                 rc=0 n=  492 fps= 61.3 p50=  16.2 p99=  21.8 max=  34.3 gt25=   1 gc=1/1/1 pause=0.826 alloc=11MB setup_ms=67.9 ui_stall_ms_max=9.3 updates_generated=801690 updates_applied=801690
+F2 post 100k/s                                 rc=0 n=  492 fps= 61.3 p50=  16.3 p99=  22.2 max=  27.7 gt25=   3 gc=4/2/1 pause=16.811 alloc=427MB setup_ms=64.6 ui_stall_ms_max=16.2 updates_generated=800524 updates_applied=800524
+F2 ring 1M/s                                   rc=0 n=  492 fps= 61.5 p50=  16.2 p99=  22.6 max=  29.3 gt25=   2 gc=1/1/1 pause=7.504 alloc=13MB setup_ms=93.8 ui_stall_ms_max=12.1 updates_generated=8011163 updates_applied=8011163
+F2 post 1M/s                                   rc=124 NO-JSON
+F2 ring 10M/s                                  rc=0 n=  486 fps= 60.5 p50=  16.3 p99=  26.7 max= 108.6 gt25=   5 gc=1/1/1 pause=27.121 alloc=23MB setup_ms=76.3 ui_stall_ms_max=57.5 updates_generated=80125487 updates_applied=80125487
+F3 bg 100ms                                    rc=0 n=  490 fps= 61.0 p50=  16.3 p99=  22.8 max=  29.9 gt25=   2 gc=0/0/0 pause=0.0 alloc=10MB setup_ms=69.4 ui_stall_ms_max=11.4
+F3 bg 1000ms                                   rc=0 n=  491 fps= 61.1 p50=  16.3 p99=  22.4 max=  24.5 gt25=   0 gc=0/0/0 pause=0.0 alloc=10MB setup_ms=62.6 ui_stall_ms_max=9.9
+F3 ui 100ms                                    rc=0 n=  486 fps= 60.6 p50=  16.3 p99=  20.3 max= 115.0 gt25=   2 gc=0/0/0 pause=0.0 alloc=10MB setup_ms=68.1 ui_stall_ms_max=103.7 heavy_ui_ms=100.0
+F3 ui 1000ms                                   rc=0 n=  431 fps= 53.8 p50=  16.3 p99=  20.3 max=1004.2 gt25=   1 gc=0/0/0 pause=0.0 alloc=10MB setup_ms=65.4 ui_stall_ms_max=1003.1 heavy_ui_ms=1000.0
+F1 noop 1T                                     rc=0 n=  492 fps= 61.3 p50=  16.3 p99=  22.5 max=  30.4 gt25=   2 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=45.3 ui_stall_ms_max=10.8 calls_per_s=577574828.1 mb_per_s=0.0
+F1 noop 1T gct                                 rc=0 n=  489 fps= 61.0 p50=  16.3 p99=  25.9 max=  52.2 gt25=   5 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=47.9 ui_stall_ms_max=44.2 calls_per_s=265371594.2 mb_per_s=0.0
+F1 noop 4T                                     rc=0 n=  443 fps= 55.3 p50=  17.7 p99=  30.7 max=  36.6 gt25=  29 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=45.4 ui_stall_ms_max=17.1 calls_per_s=1361911516.2 mb_per_s=0.0
+F1 add 1T                                      rc=0 n=  492 fps= 61.4 p50=  16.2 p99=  21.7 max=  30.5 gt25=   1 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=46.5 ui_stall_ms_max=12.3 calls_per_s=637556309.1 mb_per_s=0.0
+F1 hash 8B 1T                                  rc=0 n=  492 fps= 61.3 p50=  16.3 p99=  20.5 max=  28.4 gt25=   2 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=41.2 ui_stall_ms_max=12.0 calls_per_s=256222263.7 mb_per_s=1954.8
+F1 hash 1KB 1T                                 rc=0 n=  489 fps= 60.9 p50=  16.3 p99=  21.0 max=  72.6 gt25=   1 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=41.3 ui_stall_ms_max=72.2 calls_per_s=749084.7 mb_per_s=731.5
+F1 hash 64KB 1T                                rc=0 n=  493 fps= 61.4 p50=  16.2 p99=  21.1 max=  22.7 gt25=   0 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=43.5 ui_stall_ms_max=9.3 calls_per_s=11156.6 mb_per_s=697.3

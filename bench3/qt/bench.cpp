@@ -2,6 +2,8 @@
 #include <QImageReader>
 #include <QMetaProperty>
 #include <fcntl.h>
+#include <functional>
+#include <memory>
 
 // ======================= background producers / workers =======================
 static void coreCb(void *user, uint32_t index, double price) {   // runs on the core's producer thread
@@ -70,9 +72,29 @@ void Bench::flowApply(Flow &f) {
     f.sink->drain(f.buf);
     if (f.buf.empty()) return;
     const int first = f.ctl->lv ? f.ctl->firstVisible() : 0;
-    const size_t k = f.model->applyEvents(f.buf.data(), f.buf.size(), first);
+    const size_t k = f.model->applyEvents(f.buf.data(), f.buf.size(), first, a.v("group", "1") != "0");
     f.applied += k;
     for (const Ev &e : f.buf) if (e.kind) ++f.structural;
+}
+
+// G1 idiom A (impl=items): one QML Rectangle per shape, moved from C++ each frame (QQuickItem::setPosition); Item.clip is rectangular only.
+void Bench::shapesReady() {
+    if (!shapesHost || !shapeItems.empty()) return;
+    const QString f = a.v("feature", "solid"); const bool all = f == "all";
+    itemsSim.init(N, f == "gradient" || all, false, false);
+    shapeItems.clear();
+    for (QQuickItem *c : shapesHost->childItems()) {
+        if (c->inherits("QQuickRepeater")) continue;
+        const size_t i = shapeItems.size(); if (i >= size_t(N)) break;
+        c->setWidth(itemsSim.w[i]); c->setHeight(itemsSim.h[i]);
+        c->setProperty("radius", itemsSim.type[i] == 0 ? 0.0 : itemsSim.type[i] == 1 ? double(itemsSim.w[i]) / 2 : 8.0);
+        shapeItems.push_back(c);
+    }
+    setReady();
+}
+void Bench::stepItems(double dt) {
+    itemsSim.step(dt);
+    for (size_t i = 0; i < shapeItems.size(); ++i) shapeItems[i]->setPosition(QPointF(double(itemsSim.x[i]), double(itemsSim.y[i])));
 }
 
 void Bench::startFfiWorkers(int k) { for (int i = 0; i < k; ++i) workers.emplace_back([this] { ffiWorker(); }); }
@@ -142,6 +164,26 @@ void Bench::loadText(QObject *edit, const QString &mode) {
         edit->setProperty("text", txt); (void)edit->property("contentHeight");
         layoutMs = t.nsecsElapsed() / 1e6; textShown = true; setReady();
         if (edit3) { edit->setProperty("cursorPosition", txt.size() / 2); }
+        return;
+    }
+    if (lmode == "chunked" && doc) {   // progressive: worker decodes, the UI thread appends 256 KB chunks with QTextCursor, one per event-loop turn
+        textLoading = true;
+        std::thread([this, edit, doc, path] {
+            QFile f(path); auto *txt = new QString;
+            if (f.open(QIODevice::ReadOnly)) { *txt = QString::fromUtf8(f.readAll()); textBytes = int(f.size()); }
+            QMetaObject::invokeMethod(this, [this, edit, doc, txt] {
+                auto step = std::make_shared<std::function<void(qsizetype)>>();
+                *step = [this, edit, doc, txt, step](qsizetype pos) {
+                    QTextCursor cur(doc); cur.movePosition(QTextCursor::End);
+                    const qsizetype len = std::min<qsizetype>(262144, txt->size() - pos);
+                    cur.insertText(txt->mid(pos, len)); (void)edit->property("contentHeight");
+                    if (!textShown) textShown = true;
+                    if (pos + len < txt->size()) QTimer::singleShot(0, this, [step, pos, len] { (*step)(pos + len); });
+                    else { textLoading = false; layoutMs = (nowNs() - ttfdBase) / 1e6; delete txt; setReady(); }
+                };
+                (*step)(0);
+            }, Qt::QueuedConnection);
+        }).detach();
         return;
     }
     // default: file read + UTF-8 decoding on a worker thread; the UI thread only builds the document (+ layout)
@@ -224,6 +266,7 @@ void Bench::scenarioTick(double t, double dt) {
     case UiBind: { ++counter; for (Cell *c : cellModel.cells) c->setValue(counter); break; }
     case GfxShapes: case GfxPaths: case GfxChart: case GfxImages:
         for (GfxBase *g : gfx) g->step(dt);
+        if (!shapeItems.empty()) stepItems(dt);
         for (QQuickItem *r : renderItems) { auto *ri = static_cast<ShapesRenderItem *>(r); ri->sim.step(dt); ri->update(); }
         break;
     case FfiCalls:
@@ -250,6 +293,12 @@ void Bench::beginMeasure(qint64 now) {
     t0Ns = now; stallMax = 0; lastStallNs = now; keyEvents = 0; resizeMs.clear(); rebuildMs.clear(); resetCallMs.clear(); resizes = 0;
     nextResetT = 2.0; counter = 0; selected = false;
     for (auto &c : listCtl) if (c.lv) { c.pos = c.shown = c.prevD = 0; QMetaObject::invokeMethod(c.lv, "positionViewAtBeginning"); c.realigns = c.jumps = 0; }
+    if (listCtl[0].lv && listCtl[0].hi && !a.v("from").isEmpty()) {   // variant from=<fraction of the list>: start the script deep inside the list (float32 matrix precision check)
+        ListCtl &c = listCtl[0]; const double off = std::clamp(a.v("from").toDouble(), 0.0, 0.99) * double(c.hi->total);
+        const auto [idx, rem] = c.hi->rowAt(off);
+        QMetaObject::invokeMethod(c.lv, "positionViewAtIndex", Q_ARG(int, idx), Q_ARG(int, 0));
+        c.lv->setProperty("contentY", c.lv->property("contentY").toDouble() + rem); c.pos = c.shown = off; startOffset = off;
+    }
     for (int i = 0; i < nflows; ++i) { Flow &f = flows[i]; f.gen0 = f.sink->generated; f.drop0 = f.sink->dropped; f.applied0 = f.applied; f.structural0 = f.structural; }
     heavy0 = heavyCalls; rowsBound0 = model.rowsBound; lastTickNs = 0;
     if (sc == ListReset) { hidx[1].build(N, uint32_t(N), false); curIdx = 0; hidx[0] = hindex; }   // generation 0 = initial index (kept), 1 prebuilt
@@ -268,13 +317,13 @@ void Bench::finish() {
     QJsonObject ops; const Sc s = sc;
     ops["n"] = N;
     { QJsonObject v; for (auto it = a.var.begin(); it != a.var.end(); ++it) v[it.key()] = it.value(); ops["variant"] = v; }
-    ops["ui_stall_ms_max"] = stallMax; ops["setup_ms"] = setupMs;
+    ops["ui_stall_ms_max"] = stallMax; ops["ui_stall_ms_max_incl_warmup"] = stallMaxAll; ops["setup_ms"] = setupMs;
     uint32_t ck = 0;
     const bool listy = s == ListScale || s == ListRich || s == ListMutate || s == ListReset || s == FfiCallbacks || s == FfiBlock || s == LatLoad || s == LatWheel || s == Idle || s == Soak || s == MemMin;
     if (listy) {
         ops["sum_heights"] = qint64(hindex.total); ops["rows_bound"] = qint64(model.rowsBound - rowsBound0);
         ops["checksum_data"] = QString::asprintf("%08x", hindex.xorFnv); xorData = hindex.xorFnv;
-        ops["final_offset"] = listCtl[0].pos;
+        ops["final_offset"] = listCtl[0].pos; ops["start_offset"] = startOffset;
         if (listCtl[0].hi && listCtl[0].lv) { ops["top_row_y_error_px"] = listCtl[0].topRowError(); ops["list_realigns"] = qint64(listCtl[0].realigns); ops["list_jumps"] = qint64(listCtl[0].jumps); }
         if (listCtl[0].lv) ops["listview_contentHeight_estimate"] = listCtl[0].lv->property("contentHeight").toDouble();
         ck ^= fnv(uint32_t(listCtl[0].pos));
@@ -302,11 +351,14 @@ void Bench::finish() {
         QString info = gfx[0]->info(); if (!info.isEmpty()) ops["info"] = info;
         if (imagesItem && imagesItem->bigSide == 0) { ops["images_decoded"] = 600; ops["decode_total_ms"] = imagesItem->decodeNs / 1e6; }
     }
+    if (!shapeItems.empty()) { uint32_t x = 0; for (int i = 0; i < N; ++i) x ^= fnv(uint32_t(i)); ops["checksum_data"] = QString::asprintf("%08x", x); ops["state_checksum"] = QString::asprintf("%08x", fnv(uint32_t(itemsSim.checksumPos()))); }
     if (s == GfxShapes || s == FfiCalls || s == Soak) {
-        const QString f = a.v("feature", "solid"); QJsonArray nr;
-        if (f == "shadow" || f == "all") ops["shadow_impl"] = "pre-blurred sprite cached per (type,size), composited with QPainter::drawImage (QPainter has no blur; MultiEffect/ShaderEffect are not rendered by the software adaptation)";
-        ops["not_rendered"] = nr;
+        const QString f = a.v("feature", "solid"); QJsonArray nr; const bool items = a.v("impl") == "items";
+        if (f == "shadow" || f == "all") nr.push_back("drop shadow (blur 8 px): no QPainter blur API; MultiEffect/ShaderEffect not rendered by the software adaptation; not emulated");
+        if ((f == "clip" || f == "all") && items) nr.push_back("rounded clip (Item.clip is rectangular only; rectangular clip used)");
+        ops["not_rendered"] = nr; ops["shapes_idiom"] = items ? "items (one Rectangle per shape)" : a.v("impl") == "render" ? "QSGRenderNode" : "QQuickPaintedItem";
     } else ops["not_rendered"] = notRendered;
+    if (s == GfxLayers && a.v("effect") == "blur") { QJsonArray nr; nr.push_back("MultiEffect blur 4 px (ShaderEffect-based: not rendered by the software adaptation)"); ops["not_rendered"] = nr; }
     if (s == TextLabels || s == UiBind || s == UiTree || s == UiAnim || s == GfxLayers) { uint32_t x = 0; for (int i = 0; i < N; ++i) x ^= fnv(uint32_t(i)); ops["checksum_data"] = QString::asprintf("%08x", x); xorData = x; }
     if (s == UiBind) ops["counter_final"] = qint64(counter);
     if (s == FfiCalls) {
@@ -326,7 +378,7 @@ void Bench::finish() {
         }
         ops["ffi_phases"] = ph; ops["buffer_bytes"] = std::max(1, N);
     }
-    if (s == FfiBlock || s == LatLoad || s == LatWheel) { ops["heavy_calls"] = qint64(heavyCalls - heavy0); ops["heavy_ms"] = N; ops["heavy_where"] = heavyOnUi() ? "ui" : "bg"; }
+    if (s == FfiBlock || s == LatLoad || s == LatWheel) { ops["heavy_calls"] = qint64(heavyCalls - heavy0); ops["heavy_ms"] = (s == FfiBlock) ? N : 100; ops["heavy_where"] = heavyOnUi() ? "ui" : "bg"; }
     if (s == LatLoad || s == LatWheel) ops["load"] = a.v("load", "idle");
     ops["heap_inuse_bytes_end"] = qint64(mallinfo2().uordblks); ops["alloc_bytes"] = QJsonValue::Null;
     ops["graphics_api"] = graphicsApiName();

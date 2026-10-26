@@ -97,7 +97,7 @@ public:
 
 // Exact scripted scroll of one ListView (see OPTIMIZATION-LOG L1).
 struct ListCtl {
-    QQuickItem *lv = nullptr; const HeightIndex *hi = nullptr; double pos = 0, shown = 0, prevD = 0; qint64 realigns = 0, jumps = 0;
+    QQuickItem *lv = nullptr; const HeightIndex *hi = nullptr; double pos = 0, shown = 0, prevD = 0, stepFrac = 0.5; qint64 realigns = 0, jumps = 0;
     double viewH() const { return lv->height(); }
     void reset(double d) { pos = shown = 0; prevD = d; }
     void drive(double d) {
@@ -107,7 +107,7 @@ struct ListCtl {
         const double target = std::clamp(pos + (d - prevD), 0.0, std::max(0.0, maxOff)); prevD = d;
         const double delta = target - shown; pos = shown = target;
         double cy = lv->property("contentY").toDouble();
-        const double maxStep = vh * 0.5;
+        const double maxStep = vh * stepFrac;
         if (std::abs(delta) <= maxStep) { cy += delta; lv->setProperty("contentY", cy); }
         else if (hi) {
             // big jump (fling): ask the view for the exact row, then add the offset inside the row (positionViewAtIndex is public)
@@ -155,7 +155,7 @@ class Bench : public QObject {
     Q_PROPERTY(int richK READ richK CONSTANT)
     Q_PROPERTY(bool layerBlur READ layerBlur CONSTANT)
     Q_PROPERTY(int leafStart READ leafStart CONSTANT)
-    Q_PROPERTY(QQmlComponent *nodeComp READ nodeComp WRITE setNodeComp)
+    Q_PROPERTY(QQmlComponent *nodeComp READ nodeComp WRITE setNodeComp NOTIFY nodeCompChanged)
 public:
     enum Profile { Fling, Rich20k, Slow3k };
     enum Sc { Idle, ListScale, ListRich, ListMutate, ListReset, TextBig, TextLabels, TextEdit, TextRich, GfxShapes, GfxPaths, GfxChart, GfxImages, GfxLayers,
@@ -173,7 +173,7 @@ public:
     int richK() const { return sc == ListRich ? N : 0; }
     bool layerBlur() const { return a.v("effect") == "blur"; }
     QQmlComponent *nodeComp() const { return m_nodeComp; }
-    void setNodeComp(QQmlComponent *c) { m_nodeComp = c; }
+    void setNodeComp(QQmlComponent *c) { m_nodeComp = c; emit nodeCompChanged(); }
     int leafStart() const { return N < 2 ? 0 : (N - 2) / 10 + 1; }
     void setView(QQuickView *v) { view = v; }
     QQuickView *view = nullptr;
@@ -227,6 +227,7 @@ public:
         ready = !needReady;
         listCtl[0].hi = (model.isExplicit() ? nullptr : &hindex);
         const QString load = a.v("load", "idle");
+        listCtl[0].stepFrac = listCtl[1].stepFrac = a.v("step", "0.5").toDouble();
         profile = (sc == ListScale || ((sc == LatLoad || sc == LatWheel) && load == "fling")) ? Fling : sc == ListRich ? Rich20k : Slow3k;
         xorData = hindex.xorFnv;
     }
@@ -234,6 +235,7 @@ public:
     Q_INVOKABLE void registerItem(const QString &role, QObject *o) {
         items[role] = o;
         if (role == "list") listCtl[0].lv = qobject_cast<QQuickItem *>(o);
+        else if (role == "shapesItems") { shapesHost = qobject_cast<QQuickItem *>(o); }
         else if (role == "list2") listCtl[1].lv = qobject_cast<QQuickItem *>(o);
         else if (role == "gfx" || role == "gfx2") {
             if (auto *g = qobject_cast<GfxBase *>(o)) gfx.push_back(g); else if (auto *r = qobject_cast<ShapesRenderItem *>(o)) renderItems.push_back(r);
@@ -244,11 +246,14 @@ public:
     Q_INVOKABLE void editorChanged() { if (ready) toggleSquare(); }
     Q_INVOKABLE void toggleSquare() { white = !white; if (measuring) ++keyEvents; emit squareChanged(); }
     Q_INVOKABLE void focusEditor() { if (te) QMetaObject::invokeMethod(te, "forceActiveFocus"); }
+    Q_INVOKABLE QColor fnvColor(int i) const { const uint32_t f = fnv(uint32_t(i)); return QColor(int(f & 255), int((f >> 8) & 255), int((f >> 16) & 255)); }
+    Q_INVOKABLE void shapesReady();
     Q_INVOKABLE QString variant(const QString &k, const QString &def = {}) const { return a.v(k, def); }
     // T1/T3/T4: fill the TextEdit (QML calls this once the item exists)
     Q_INVOKABLE void loadText(QObject *edit, const QString &mode);
     Q_INVOKABLE void layoutDone(QObject *flick) { (void)flick; }
 signals:
+    void nodeCompChanged();
     void squareChanged();
     void frame();
 public:
@@ -267,9 +272,11 @@ public:
 
 private:
     // ---------- init helpers ----------
+    bool role_items_host(QObject *o) { return o == items.value("shapesItems"); }
     void initGfx(QObject *o) {
         const bool g1 = sc == GfxShapes || sc == FfiCalls || sc == Soak;
         const QString f = a.v("feature", sc == Soak ? "gradient" : "solid");
+        if (role_items_host(o)) return;
         if (auto *s = qobject_cast<ShapesItem *>(o)) {
             const int cnt = sc == FfiCalls ? 1000 : (sc == Soak ? 500 : N);
             const bool all = f == "all";
@@ -292,12 +299,14 @@ private:
     void ffiWorker();
     void startFfiWorkers(int k);
     void doReset();
+    void stepItems(double dt);
     void onResize() {
         if (!measuring || resizePendingNs) return;
         resizePendingNs = nowNs(); ++resizes;
     }
     void stallTick() {
         const qint64 now = nowNs();
+        if (lastStallNs) stallMaxAll = std::max(stallMaxAll, (now - lastStallNs) / 1e6);
         if (measuring && lastStallNs) stallMax = std::max(stallMax, (now - lastStallNs) / 1e6);
         lastStallNs = now;
         if (!ticked()) lifecycle(now);
@@ -364,7 +373,7 @@ public:
         return QString("Qt %1 (runtime %2, aqtinstall linux_gcc_64 from download.qt.io), g++ %3, CMake 4.4.4, Ninja 1.13.2")
             .arg(QT_VERSION_STR, qVersion(), __VERSION__);
     }
-    QQmlComponent *m_nodeComp = nullptr;
+    QQmlComponent *m_nodeComp = nullptr; QQuickItem *shapesHost = nullptr; ShapeSim itemsSim; std::vector<QQuickItem *> shapeItems;
     Args a; Sc sc = Unknown; int N = 0; QString paneName;
     RowModel model, model2; LabelModel labelModel; CellModel cellModel; HeightIndex hindex;
     ListCtl listCtl[2]; QHash<QString, QObject *> items; std::vector<GfxBase *> gfx; QObject *te = nullptr;
@@ -373,7 +382,7 @@ public:
     static constexpr qint64 PERIOD_NS = 16666667;
     QMutex fm; std::vector<double> frames, resizeMs, rebuildMs, resetCallMs;
     bool measuring = false, finished = false, needReady = false, ready = true, setupDone = false, white = false, textShown = false, selected = false;
-    double setupMs = 0, ttfdMs = -1, layoutMs = 0, stallMax = 0; int keyEvents = 0, resizes = 0, resetsDone = 0; double lastResetT = 0;
+    double setupMs = 0, ttfdMs = -1, layoutMs = 0, stallMax = 0, stallMaxAll = 0; int keyEvents = 0, resizes = 0, resetsDone = 0; double lastResetT = 0;
     std::atomic<bool> ticks{false}, tickPending{false}, stopAll{false};
     // update flows (L3 / F2 / I1 mutate / M1): native or Qt-side producer -> UpdateSink -> UI-thread batch application
     Flow flows[2]; int nflows = 0;
@@ -384,6 +393,6 @@ public:
     FnStat fs[2][4];     // [phase][noop,add,hash,fill]
     std::atomic<int> phase{0}; qint64 phaseSwitchNs = 0; bool phase2Started = false; QElapsedTimer uiHeavyTimer; double uiHeavyLastT = -1;
     int textBytes = 0; std::atomic<bool> textLoading{false};
-    uint64_t counter = 0, rowsBound0 = 0; double lastScriptT = 0; bool ffiStarted = false; std::vector<QQuickItem *> renderItems; QJsonArray notRendered; QString unsupported;
+    uint64_t counter = 0, rowsBound0 = 0; double lastScriptT = 0, startOffset = 0; bool ffiStarted = false; std::vector<QQuickItem *> renderItems; QJsonArray notRendered; QString unsupported;
     bool heavyOnUi() const { return a.v("where") == "ui" || a.var.contains("ui"); }
 };

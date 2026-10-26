@@ -28,7 +28,7 @@ qt_add_qml_module(qtbench
   URI Bench
   VERSION 1.0
   QML_FILES qml/Main.qml qml/Shell.qml qml/ListPane.qml qml/TextPane.qml qml/LabelsPane.qml qml/GfxPane.qml qml/LayersPane.qml
-            qml/AnimPane.qml qml/TreePane.qml qml/TreeNode.qml qml/TreeLeaf.qml qml/CompositePane.qml
+            qml/AnimPane.qml qml/TreePane.qml qml/TreeNode.qml qml/TreeNodeP.qml qml/TreeLeaf.qml qml/CompositePane.qml
   SOURCES bench.h model.h gfx.h common.h
 )
 target_include_directories(qtbench PRIVATE "${CORE_DIR}")

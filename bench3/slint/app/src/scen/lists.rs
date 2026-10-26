@@ -195,7 +195,7 @@ enum Extra {
 struct ResetState {
     n: usize,
     next_at: f64,
-    gen: u32,
+    generation: u32,
     build_ms: Vec<f64>,
     swap_ms: Vec<f64>,
     on_ui: bool,
@@ -326,7 +326,7 @@ pub fn build_static(args: &Args, app: &MainWindow, renderer: &str) -> Result<Box
     let mut extra = Extra::None;
     if sc == "list-reset" {
         let (tx, rx) = std::sync::mpsc::channel();
-        extra = Extra::Reset(ResetState { n, next_at: 2.0, gen: 0, build_ms: vec![], swap_ms: vec![], on_ui: args.var("build") == Some("ui"), rx, tx, in_flight: false });
+        extra = Extra::Reset(ResetState { n, next_at: 2.0, generation: 0, build_ms: vec![], swap_ms: vec![], on_ui: args.var("build") == Some("ui"), rx, tx, in_flight: false });
     }
     if sc == "latency-load" && load == "heavy" {
         // core_heavy(100) en boucle sur un fil de fond
@@ -397,13 +397,13 @@ impl ListSc {
         // 2. nouveau remplacement toutes les 2 s
         if t >= rs.next_at && !rs.in_flight {
             rs.next_at += 2.0;
-            rs.gen += 1;
-            let (n, gen) = (rs.n, rs.gen);
+            rs.generation += 1;
+            let (n, generation) = (rs.n, rs.generation);
             let work = move || -> ResetResult {
                 let t0 = Instant::now();
                 let data = match imp {
                     Impl::Pool => ResetData::Pre(Prefix::build(n, dense)),
-                    Impl::Native => ResetData::Ids((0..n as u32).map(|i| i.wrapping_add(gen * 7919)).collect()),
+                    Impl::Native => ResetData::Ids((0..n as u32).map(|i| i.wrapping_add(generation * 7919)).collect()),
                 };
                 ResetResult { data, build_ms: t0.elapsed().as_secs_f64() * 1000.0 }
             };
@@ -607,7 +607,7 @@ pub struct MutateSc {
     model: Rc<MutModel>,
     q: Arc<Spsc<Op>>,
     stop: Arc<AtomicBool>,
-    gen: Arc<AtomicU64>,
+    generation: Arc<AtomicU64>,
     dropped: Arc<AtomicU64>,
     gen0: u64,
     drop0: u64,
@@ -640,9 +640,9 @@ pub fn build_mutate(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, 
     let q = Spsc::<Op>::new(1 << 20); // file bornée à 1 Mi (spec : 1 M)
     let stop = Arc::new(AtomicBool::new(false));
     let started = Arc::new(AtomicBool::new(false));
-    let gen = Arc::new(AtomicU64::new(0));
+    let generation = Arc::new(AtomicU64::new(0));
     let dropped = Arc::new(AtomicU64::new(0));
-    let (q2, s2, st2, g2, d2) = (q.clone(), stop.clone(), started.clone(), gen.clone(), dropped.clone());
+    let (q2, s2, st2, g2, d2) = (q.clone(), stop.clone(), started.clone(), generation.clone(), dropped.clone());
     let producer = std::thread::spawn(move || {
         // attend le début de la mesure : le producteur démarre quand `started` passe à true
         while !st2.load(Ordering::Acquire) {
@@ -689,7 +689,7 @@ pub fn build_mutate(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, 
         model,
         q,
         stop,
-        gen,
+        generation,
         dropped,
         gen0: 0,
         drop0: 0,
@@ -710,14 +710,9 @@ pub fn build_mutate(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, 
     }))
 }
 
-impl Scenario for MutateSc {
-    fn begin_measure(&mut self, app: &MainWindow) {
-        self.sc.reset();
-        app.global::<Bench>().set_lv_y(0.0);
-        self.started.store(true, Ordering::Release);
-    }
-    fn step(&mut self, t: f64, app: &MainWindow, measuring: bool) {
-        // 1. lots d'opérations appliquées à chaque frame (file lock-free drainée sur le fil UI)
+impl MutateSc {
+    /// lot d'opérations appliqué à chaque frame (file lock-free drainée sur le fil UI)
+    fn drain_ops(&mut self) {
         let fv = (self.final_offset / self.avg_h) as usize;
         let mut batch = 0usize;
         let model = self.model.clone();
@@ -735,6 +730,16 @@ impl Scenario for MutateSc {
         self.applied += applied;
         self.structural_applied += st;
         self.max_batch = self.max_batch.max(batch);
+    }
+}
+impl Scenario for MutateSc {
+    fn begin_measure(&mut self, app: &MainWindow) {
+        self.sc.reset();
+        app.global::<Bench>().set_lv_y(0.0);
+        self.started.store(true, Ordering::Release);
+    }
+    fn step(&mut self, t: f64, app: &MainWindow, measuring: bool) {
+        self.drain_ops();
         // 2. défilement 3 000 px/s
         let total = self.model.recs.borrow().len() as f64 * self.avg_h;
         let off = self.sc.advance(if measuring { t } else { 0.0 }, (total - VIEW_H).max(0.0));
@@ -742,7 +747,7 @@ impl Scenario for MutateSc {
         app.global::<Bench>().set_lv_y(-(off as f32));
     }
     fn ops(&mut self, _t: f64, _app: &MainWindow, ops: &mut Map<String, Value>) {
-        let generated = self.gen.load(Ordering::Relaxed);
+        let generated = self.generation.load(Ordering::Relaxed);
         let dropped = self.dropped.load(Ordering::Relaxed);
         // opérations encore en file à la fin : appliquées au prochain lot, non perdues, mais non appliquées au décompte
         ops.insert("updates_generated".into(), (generated - self.gen0).into());

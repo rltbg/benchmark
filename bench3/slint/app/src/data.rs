@@ -189,7 +189,7 @@ pub struct Counters {
 impl Counters {
     pub fn add_gen(&self, n: u64) { self.generated.fetch_add(n, Ordering::Relaxed); }
     pub fn add_drop(&self, n: u64) { self.dropped.fetch_add(n, Ordering::Relaxed); }
-    pub fn gen(&self) -> u64 { self.generated.load(Ordering::Relaxed) }
+    pub fn generated_n(&self) -> u64 { self.generated.load(Ordering::Relaxed) }
     pub fn drp(&self) -> u64 { self.dropped.load(Ordering::Relaxed) }
 }
 

@@ -10,6 +10,8 @@ export global Bench {
     // ---- commun
     in property <string> scn;
     in property <string> variant;
+    in property <string> mode;           // choix interne d'un scénario (ex. arbre : layout | manual)
+    in property <bool> edit-nowrap;
     in property <bool> chrome: true;
     in property <string> status: "ready";
     in property <float> t;               // temps de scénario (s), poussé une fois par frame

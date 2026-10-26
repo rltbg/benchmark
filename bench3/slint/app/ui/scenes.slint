@@ -76,20 +76,20 @@ component ShapeBase inherits Rectangle {
     y: Bench.shape-bind ? lim-y - abs(lim-y - mod(s.y0 + s.vy * Bench.t, 2 * lim-y)) : s.y;
 }
 component ShapeSolid inherits ShapeBase {
-    background: s.c1;
+    background: self.s.c1;
 }
 component ShapeGrad inherits ShapeBase {
-    background: @linear-gradient(90deg, s.c1, s.c2);
+    background: @linear-gradient(90deg, self.s.c1, self.s.c2);
 }
 component ShapeShadow inherits ShapeBase {
-    background: s.c1;
+    background: self.s.c1;
     drop-shadow-blur: 8px;
     drop-shadow-offset-x: 2px;
     drop-shadow-offset-y: 2px;
     drop-shadow-color: #00000090;
 }
 component ShapeAll inherits ShapeBase {
-    background: @linear-gradient(90deg, s.c1, s.c2);
+    background: @linear-gradient(90deg, self.s.c1, self.s.c2);
     drop-shadow-blur: 8px;
     drop-shadow-offset-x: 2px;
     drop-shadow-offset-y: 2px;
@@ -295,15 +295,34 @@ component TreeRow inherits HorizontalLayout {
         id: root.id * 10 + k;
     }
 }
+// variante `manual` : mêmes éléments, positions calculées par liaisons (aucun layout engine)
+component TreeRowManual inherits Rectangle {
+    in property <int> id;
+    height: 22px;
+    for k in 10: TreeLeaf {
+        id: root.id * 10 + k;
+        x: root.width / 10 * k;
+        width: root.width / 10 - 1px;
+        height: 22px;
+    }
+}
 export component TreeView inherits Rectangle {
     background: #ffffff;
     clip: true;
-    Flickable {
+    if Bench.mode != "manual": Flickable {
         VerticalLayout {
             spacing: 1px;
             for c in Bench.tree-n: TreeRow {
                 id: c;
             }
+        }
+    }
+    if Bench.mode == "manual": Flickable {
+        viewport-height: Bench.tree-n * 23px;
+        for c in Bench.tree-n: TreeRowManual {
+            id: c;
+            y: c * 23px;
+            width: root.width;
         }
     }
 }

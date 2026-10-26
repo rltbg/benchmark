@@ -1,0 +1,18 @@
+G1 skia solid n=1000                           rc=0 n=  489 fps= 60.9 p50=  16.3 p99=  23.6 max=  39.7 gt25=   4 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=44.4 ui_stall_ms_max=15.2
+G1 skia gradient n=1000                        rc=0 n=  307 fps= 38.2 p50=  25.6 p99=  34.2 max=  44.6 gt25= 199 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=52.9 ui_stall_ms_max=9.9
+G1 skia gradient shader=perdraw n=1000         rc=0 n=  305 fps= 37.9 p50=  25.8 p99=  34.7 max=  38.6 gt25= 208 gc=0/0/0 pause=0.0 alloc=82MB setup_ms=57.8 ui_stall_ms_max=12.6
+G1 skia shadow n=1000                          rc=0 n=  296 fps= 36.8 p50=  26.3 p99=  39.6 max=  41.5 gt25= 228 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=71.6 ui_stall_ms_max=8.6
+G1 skia clip natural n=1000                    rc=0 n=  492 fps= 61.4 p50=  16.2 p99=  24.4 max=  26.7 gt25=   3 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=48.8 ui_stall_ms_max=10.3
+G1 skia clip corner-opt n=1000                 rc=0 n=  492 fps= 61.3 p50=  16.2 p99=  24.4 max=  34.5 gt25=   3 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=51.5 ui_stall_ms_max=21.8
+G1 skia all n=1000                             rc=0 n=  146 fps= 18.1 p50=  54.3 p99=  71.0 max=  73.6 gt25= 146 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=95.7 ui_stall_ms_max=11.3
+G1 avalonia solid n=1000                       rc=0 n=  491 fps= 61.2 p50=  16.3 p99=  24.1 max=  29.5 gt25=   3 gc=0/0/0 pause=0.0 alloc=58MB setup_ms=48.2 ui_stall_ms_max=12.1
+G1 avalonia gradient n=1000                    rc=0 n=  265 fps= 32.9 p50=  28.9 p99=  50.8 max=  93.1 gt25= 260 gc=1/0/0 pause=54.92 alloc=124MB setup_ms=67.2 ui_stall_ms_max=62.3
+G1 avalonia shadow n=1000                      rc=0 n=  115 fps= 14.2 p50=  66.5 p99= 102.1 max= 103.2 gt25= 115 gc=0/0/0 pause=0.0 alloc=32MB setup_ms=100.0 ui_stall_ms_max=36.7
+G1 avalonia clip n=1000                        rc=0 n=  491 fps= 61.1 p50=  16.3 p99=  22.1 max=  28.7 gt25=   1 gc=0/0/0 pause=0.0 alloc=58MB setup_ms=50.8 ui_stall_ms_max=10.5
+G1 avalonia all n=1000                         rc=0 n=   76 fps=  9.3 p50= 104.9 p99= 151.5 max= 151.5 gt25=  76 gc=0/0/0 pause=0.0 alloc=48MB setup_ms=158.5 ui_stall_ms_max=40.4
+G1 skia solid n=5000                           rc=0 n=  267 fps= 33.2 p50=  28.8 p99=  45.8 max=  50.2 gt25= 234 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=76.7 ui_stall_ms_max=13.2
+G1 skia solid n=5000 dirty=single              rc=0 n=  283 fps= 35.2 p50=  27.3 p99=  45.1 max=  50.5 gt25= 231 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=58.0 ui_stall_ms_max=11.8
+G1 skia solid n=5000 retained=0                rc=0 n=  242 fps= 30.1 p50=  31.5 p99=  45.0 max=  68.3 gt25= 242 gc=121/121/121 pause=142.285 alloc=4MB setup_ms=64.1 ui_stall_ms_max=15.5
+L1 panel n=1M dirty=single                     rc=0 n=  489 fps= 60.9 p50=  16.3 p99=  21.9 max=  57.6 gt25=   2 gc=0/0/0 pause=0.0 alloc=50MB setup_ms=64.0 ui_stall_ms_max=49.0
+L1 panel n=1M retained=0                       rc=0 n=  493 fps= 61.4 p50=  16.6 p99=  24.1 max=  39.4 gt25=   3 gc=247/247/247 pause=626.324 alloc=56MB setup_ms=67.8 ui_stall_ms_max=22.2
+L1 panel n=1M                                  rc=0 n=  493 fps= 61.5 p50=  16.2 p99=  19.5 max=  21.0 gt25=   0 gc=0/0/0 pause=0.0 alloc=51MB setup_ms=75.2 ui_stall_ms_max=9.9

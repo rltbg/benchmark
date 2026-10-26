@@ -63,7 +63,6 @@ type TextBigScn(args: Args) =
         w.Measure(Size(1280.0, 720.0))
         w.Arrange(Rect(0.0, 0.0, 1280.0, 720.0))
         layoutMs <- ticksToMs (Stopwatch.GetTimestamp() - tl)
-    member _.SetFirst(v: float) = firstMs <- t0 |> fun _ -> v
     override _.Begin() = sv <- findScrollViewer ed
     override _.OnFrame(t, dt) =
         if t >= 0.0 && not (isNull sv) then
@@ -80,7 +79,7 @@ type TextBigScn(args: Args) =
                 if ed.CanSelectAll then ed.SelectAll() else ed.Select(0, ed.Document.TextLength)
                 selMs <- ticksToMs (Stopwatch.GetTimestamp() - s0)
     override _.Ops sb =
-        kvF sb "time_to_first_display_ms" firstMs
+        kvF sb "time_to_first_display_ms" (ticksToMs (firstRenderedTs - t0))
         kvF sb "layout_ms" layoutMs
         kvF sb "file_read_ms" (ms tRead)
         kvF sb "document_load_ms" (ms tDoc - ms tRead)
@@ -97,7 +96,6 @@ type TextBigScn(args: Args) =
         "T1: AvaloniaEdit.TextEditor 12.0.0 (rope + virtualisation de lignes), IsReadOnly, WordWrap, fichier lu en UTF-8 sur le thread UI avant l'affichage ; "
         + "time_to_first_display_ms = de l'ouverture du fichier a la fin de rendu de la 1re frame ; layout_ms = Measure+Arrange explicites de la fenetre ; "
         + "defilement via ScrollViewer.Offset (TextEditor.ScrollToVerticalOffset est sans effet en 12.0.0), aller-retour 30000 px/s sur [0,min(extent,300000)] ; tout selectionner a t=5 s (TextEditor.SelectAll)."
-    member this.Origin = t0
 
 // ---------------------------------------------------------------- T3
 type TextEditScn(args: Args) =
@@ -166,11 +164,12 @@ type LabelsOp(bounds: Rect, texts: string[], cols: int, cw: float32, ch: float32
                     c.DrawText(texts.[i], x + 1.0f, y + ch - 3.0f, font, paint)
             Stats.addRender (Stopwatch.GetTimestamp() - t0)
 
+[<AllowNullLiteral>]
 type LabelsCanvas(n: int, cols: int, rows: int) as this =
     inherit Control()
     let cw = 1280.0f / float32 cols
     let ch = 720.0f / float32 rows
-    let font = new SKFont(Sk.typeface.Value, max 4.0f (min 14.0f (ch * 0.7f)))
+    let font = new SKFont(Sk.typeface.Value, max 3.0f (min 14.0f (min (ch * 0.7f) (cw / 8.0f))))
     let paint = new SKPaint(IsAntialias = true, Color = SKColors.Black)
     let bg = new SKPaint(Color = SKColors.White)
     let snaps = [| Array.create n ""; Array.create n ""; Array.create n "" |]
@@ -191,7 +190,7 @@ type TextLabelsScn(args: Args) =
     let cols, rows = grid n
     let cw = 1280.0 / float cols
     let ch = 720.0 / float rows
-    let fsz = max 4.0 (min 14.0 (ch * 0.7))
+    let fsz = max 3.0 (min 14.0 (min (ch * 0.7) (cw / 8.0)))
     let blocks : TextBlock[] =
         if impl = "widgets" then
             Array.init n (fun i ->

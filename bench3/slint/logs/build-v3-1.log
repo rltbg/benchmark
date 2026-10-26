@@ -1,0 +1,77 @@
+rustc 1.99.1 (58cf8f9c3 2026-10-13)
+cargo 1.99.1 (5f94df478 2026-08-27)
+   Compiling slotmap v1.1.1
+   Compiling swash v0.2.10
+   Compiling fontdb v0.24.0
+   Compiling usvg v0.48.1
+   Compiling resvg v0.48.1
+   Compiling i-slint-common v1.18.1
+   Compiling taffy v0.10.1
+   Compiling benchcore v0.1.0 (/home/user/benchmark/core)
+   Compiling i-slint-core v1.18.1
+   Compiling i-slint-renderer-skia v1.18.1
+   Compiling i-slint-renderer-software v1.18.1
+   Compiling i-slint-backend-winit v1.18.1
+   Compiling i-slint-backend-selector v1.18.1
+   Compiling slint v1.18.1
+   Compiling slintapp v0.3.0 (/home/user/benchmark/bench3/slint/app)
+warning: struct `Counters` is never constructed
+   --> src/data.rs:185:12
+    |
+185 | pub struct Counters {
+    |            ^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: methods `add_gen`, `add_drop`, `generated_n`, and `drp` are never used
+   --> src/data.rs:190:12
+    |
+189 | impl Counters {
+    | ------------- methods in this implementation
+190 |     pub fn add_gen(&self, n: u64) { self.generated.fetch_add(n, Ordering::Relaxed); }
+    |            ^^^^^^^
+191 |     pub fn add_drop(&self, n: u64) { self.dropped.fetch_add(n, Ordering::Relaxed); }
+    |            ^^^^^^^^
+192 |     pub fn generated_n(&self) -> u64 { self.generated.load(Ordering::Relaxed) }
+    |            ^^^^^^^^^^^
+193 |     pub fn drp(&self) -> u64 { self.dropped.load(Ordering::Relaxed) }
+    |            ^^^
+
+warning: fields `validate` and `parse` are never read
+  --> src/ffi.rs:21:9
+   |
+20 | pub struct Core {
+   |            ---- fields in this struct
+21 |     pub validate: ValidateFn,
+   |         ^^^^^^^^
+22 |     pub parse: ParseFn,
+   |         ^^^^^
+   |
+   = note: `Core` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+
+warning: field `scenario` is never read
+   --> src/scen/lists.rs:221:5
+    |
+215 | pub struct ListSc {
+    |            ------ field in this struct
+...
+221 |     scenario: String,
+    |     ^^^^^^^^
+
+warning: method `capacity` is never used
+  --> src/spsc.rs:23:12
+   |
+16 | impl<T: Copy + Default> Spsc<T> {
+   | ------------------------------- method in this implementation
+...
+23 |     pub fn capacity(&self) -> usize { self.mask + 1 }
+   |            ^^^^^^^^
+
+warning: `slintapp` (bin "slintapp") generated 5 warnings
+    Finished `release` profile [optimized] target(s) in 3m 42s
+build_seconds=222
+-rwxr-xr-x 2 root root 23133128 Oct 26 16:53 target/release/slintapp
+
+real	3m42.366s
+user	3m47.232s
+sys	0m8.779s

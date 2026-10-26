@@ -29,4 +29,4 @@ lto = "fat"
 codegen-units = 1
 panic = "abort"
 debug = false
-strip = true
+strip = false  # symboles conservés pour perf ; `strip` ne change pas le code généré

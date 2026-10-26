@@ -4,7 +4,7 @@ use super::Scenario;
 use crate::data::*;
 use crate::{Args, Bench, MainWindow};
 use serde_json::{Map, Value};
-use slint::{Color, ComponentHandle, ModelRc, SharedString, VecModel};
+use slint::{Color, ComponentHandle, Model, ModelRc, SharedString, VecModel};
 use std::fmt::Write;
 use std::rc::Rc;
 
@@ -18,6 +18,8 @@ pub fn build_tree(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, St
     b.set_chrome(false);
     b.set_tree_n(leaves.div_ceil(10) as i32);
     b.set_scn("tree".into());
+    let manual = args.pick("layout", &["layout", "manual"], "layout") == "manual";
+    b.set_mode((if manual { "manual" } else { "layout" }).into());
     Ok(Box::new(TreeSc { leaves }))
 }
 impl Scenario for TreeSc {

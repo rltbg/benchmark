@@ -38,7 +38,7 @@ public:
 struct ShapeSim {
     int n = 0; bool grad = false, shadow = false, clip = false;
     std::vector<float> x, y, vx, vy, w, h; std::vector<uint8_t> type; std::vector<QBrush> brush; std::vector<QColor> col;
-    QHash<int, QImage> shadows; double W = 1000, H = 600;
+    double W = 1000, H = 600;   // shadow: not rendered by Qt Quick software (no blur API in QPainter, MultiEffect/ShaderEffect not rendered): flag only, NOT emulated
     void init(int count, bool g, bool s, bool c) {
         n = count; grad = g; shadow = s; clip = c;
         x.resize(size_t(n)); y.resize(size_t(n)); vx.resize(size_t(n)); vy.resize(size_t(n)); w.resize(size_t(n)); h.resize(size_t(n));
@@ -70,39 +70,18 @@ struct ShapeSim {
         }
     }
     double checksumPos() const { double s = 0; for (int i = 0; i < n; ++i) s += double(x[size_t(i)]) + double(y[size_t(i)]); return s; }
-    // Drop shadow: QPainter has no blur API and Qt Quick's own blur (MultiEffect / ShaderEffect) is not rendered by the software
-    // adaptation, so each (type,size) shadow is blurred once (3 box passes ~ 8 px) into a sprite which is composited every frame.
-    const QImage &shadowFor(int i) {
-        const int key = type[size_t(i)] * 1000 + int(w[size_t(i)]);
-        auto it = shadows.find(key); if (it != shadows.end()) return *it;
-        const int pad = 14, iw = int(w[size_t(i)]) + 2 * pad, ih = int(h[size_t(i)]) + 2 * pad;
-        QImage img(iw, ih, QImage::Format_ARGB32_Premultiplied); img.fill(0);
-        { QPainter p(&img); p.setRenderHint(QPainter::Antialiasing); p.setPen(Qt::NoPen); p.setBrush(QColor(0, 0, 0, 110));
-          const QRectF r(pad, pad, w[size_t(i)], h[size_t(i)]);
-          if (type[size_t(i)] == 0) p.drawRect(r); else if (type[size_t(i)] == 1) p.drawEllipse(r); else p.drawRoundedRect(r, 8, 8); }
-        std::vector<float> a(size_t(iw * ih)), b(size_t(iw * ih));
-        for (int yy = 0; yy < ih; ++yy) { const QRgb *l = reinterpret_cast<const QRgb *>(img.constScanLine(yy)); for (int xx = 0; xx < iw; ++xx) a[size_t(yy * iw + xx)] = float(qAlpha(l[xx])); }
-        const int R = 3;
-        for (int pass = 0; pass < 3; ++pass) {
-            for (int yy = 0; yy < ih; ++yy) for (int xx = 0; xx < iw; ++xx) { float s = 0; for (int k = -R; k <= R; ++k) { int q = xx + k; if (q >= 0 && q < iw) s += a[size_t(yy * iw + q)]; } b[size_t(yy * iw + xx)] = s / (2 * R + 1); }
-            for (int yy = 0; yy < ih; ++yy) for (int xx = 0; xx < iw; ++xx) { float s = 0; for (int k = -R; k <= R; ++k) { int q = yy + k; if (q >= 0 && q < ih) s += b[size_t(q * iw + xx)]; } a[size_t(yy * iw + xx)] = s / (2 * R + 1); }
-        }
-        for (int yy = 0; yy < ih; ++yy) { QRgb *l = reinterpret_cast<QRgb *>(img.scanLine(yy)); for (int xx = 0; xx < iw; ++xx) l[xx] = uint32_t(a[size_t(yy * iw + xx)] + 0.5f) << 24; }
-        return shadows.insert(key, img).value();
-    }
     // Draw in item coordinates; the play area is 1000x600 centred horizontally at y = 5 (clamped to the item size).
     void paint(QPainter *p, double iw, double ih) {
         const double cw = std::min(1000.0, iw), ch = std::max(50.0, std::min(600.0, ih - 10));
         if (cw != W || ch != H) { W = cw; H = ch; for (int i = 0; i < n; ++i) { x[size_t(i)] = std::fmod(std::abs(x[size_t(i)]), std::max(1.0f, float(W) - w[size_t(i)])); y[size_t(i)] = std::fmod(std::abs(y[size_t(i)]), std::max(1.0f, float(H) - h[size_t(i)])); } }
         const QRectF cr((iw - cw) / 2, 5, cw, ch);
         p->setRenderHint(QPainter::Antialiasing, true); p->setPen(Qt::NoPen);
-        p->fillRect(cr, QColor(255, 255, 255));
         p->save();
         if (clip) { QPainterPath cp; cp.addRoundedRect(cr, 24, 24); p->fillPath(cp, QColor(255, 255, 255)); p->setClipPath(cp, Qt::IntersectClip); }
+        else p->fillRect(cr, QColor(255, 255, 255));
         p->translate(cr.topLeft());
         for (int i = 0; i < n; ++i) {
             const size_t k = size_t(i);
-            if (shadow && i % 10 == 0) p->drawImage(QPointF(x[k] + 2 - 14, y[k] + 2 - 14), shadowFor(i));
             if (grad) p->setBrush(brush[k]); else p->setBrush(col[k]);
             const QRectF r(x[k], y[k], w[k], h[k]);
             if (type[k] == 0) p->drawRect(r); else if (type[k] == 1) p->drawEllipse(r); else p->drawRoundedRect(r, 8, 8);

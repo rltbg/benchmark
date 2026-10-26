@@ -336,6 +336,24 @@ type CanvasListView(store0: RowStore, np: int) as this =
 let fontFamily = FontFamily("Noto Sans")
 let inline brush (r: byte, g: byte, b: byte) = SolidColorBrush(Color.FromRgb(r, g, b))
 
+/// Element de liste (voie vsp) : view-model leger INotifyPropertyChanged (le prix change par flux)
+[<AllowNullLiteral>]
+type RowItem(id: int, h: int, price0: float) =
+    static let pcArgs = System.ComponentModel.PropertyChangedEventArgs("Price")
+    let ev = Event<System.ComponentModel.PropertyChangedEventHandler, System.ComponentModel.PropertyChangedEventArgs>()
+    let mutable price = price0
+    member _.Id = id
+    member _.Height = h
+    member this.Price
+        with get () = price
+        and set (v: float) =
+            if v <> price then
+                price <- v
+                ev.Trigger(this, pcArgs)
+    interface System.ComponentModel.INotifyPropertyChanged with
+        [<CLIEvent>]
+        member _.PropertyChanged = ev.Publish
+
 /// Une ligne retenue : controles enfants a positions fixes (pas de Grid : layout O(enfants) sans resolution de tailles)
 type RowView(dense: bool, np: int) as this =
     inherit Panel()
@@ -356,15 +374,20 @@ type RowView(dense: bool, np: int) as this =
     let puceBrushes : SolidColorBrush[] = Array.init np (fun _ -> SolidColorBrush(Colors.Black))
     let puceRects : Border[] = Array.init np (fun k -> Border(Background = puceBrushes.[k], CornerRadius = CornerRadius(4.0)))
     let puceTexts : TextBlock[] = Array.init np (fun _ -> TextBlock(FontFamily = fontFamily, FontSize = 8.0, Foreground = Brushes.Black))
-    // positions fixes (rects) ; assignees dans Bind/Measure
-    let rects : Rect[] = Array.zeroCreate (if dense then 12 + 2 * np else 5)
+    let rects : Rect[] = Array.zeroCreate (if dense then 9 + 2 * np else 5)
     let onBrush = SolidColorBrush(Color.FromRgb(60uy, 170uy, 90uy))
     let offBrush = SolidColorBrush(Color.FromRgb(170uy, 170uy, 180uy))
     let mutable boundId = -1
     let mutable boundPrice = nan
     let mutable boundH = -1.0
-    let mutable boundW = -1.0
-    let mutable boundVer = -1
+    let mutable laidH = -1.0
+    let mutable laidW = -1.0
+    let mutable on = false
+    let mutable item : RowItem = null
+    let onItemChanged = System.ComponentModel.PropertyChangedEventHandler(fun _ _ ->
+        if not (isNull item) && item.Price <> boundPrice then
+            priceT.Text <- priceOf item.Price
+            boundPrice <- item.Price)
     do
         this.ClipToBounds <- true
         this.Children.Add past
@@ -382,33 +405,45 @@ type RowView(dense: bool, np: int) as this =
                 this.Children.Add puceTexts.[k]
     member _.BoundId = boundId
     member _.BoundPrice = boundPrice
-    member this.Bind(id: int, price: float, h: float, w: float) =
-        let idChanged = id <> boundId
-        if idChanged then
+    /// (re)lie la ligne : identite (textes, couleurs), prix, hauteur. Les rects sont calcules au Measure (largeur disponible).
+    member this.Bind(id: int, price: float, h: float) =
+        if id <> boundId then
             let (r, g, b) = rgbOf id
             pastBrush.Color <- Color.FromRgb(r, g, b)
             title.Text <- titleOf id
             if dense then
-                sub.Text <- quoteOf id
-                let frac = float (fnv (id + 3) % 100u) / 100.0
-                progFill.Width <- Dense.progW * frac
-                let on = (fnv (id + 5) &&& 1u) = 1u
+                sub.Text <- (let q = quoteOf id in q + "  " + q + "  " + q)
+                progFill.Width <- Dense.progW * (float (fnv (id + 3) % 100u) / 100.0)
+                on <- (fnv (id + 5) &&& 1u) = 1u
                 togBg.Background <- (if on then onBrush else offBrush)
-                // position du bouton : calculee en arrange
-                togKnob.Tag <- (if on then box 1 else box 0)
                 for k in 0 .. np - 1 do
                     let (r, g, b) = rgbOf (id * 131 + k)
                     puceBrushes.[k].Color <- Color.FromRgb(r, g, b)
                     puceTexts.[k].Text <- puceText id k
+                laidH <- -1.0   // la position du bouton depend de on
             else
                 sub.Text <- subtitleStd id
             boundId <- id
         if price <> boundPrice then
             priceT.Text <- priceOf price
             boundPrice <- price
-        if h <> boundH || w <> boundW then
+        if h <> boundH then
             boundH <- h
-            boundW <- w
+            this.InvalidateMeasure()
+    override this.OnDataContextChanged(e: EventArgs) =
+        base.OnDataContextChanged e
+        // voie vsp : le conteneur recycle recoit un nouvel element (DataContext) -> rebind + abonnement au prix
+        if not (isNull item) then (item :> System.ComponentModel.INotifyPropertyChanged).PropertyChanged.RemoveHandler onItemChanged
+        item <- (match this.DataContext with :? RowItem as r -> r | _ -> null)
+        if not (isNull item) then
+            (item :> System.ComponentModel.INotifyPropertyChanged).PropertyChanged.AddHandler onItemChanged
+            this.Bind(item.Id, item.Price, float item.Height)
+    override this.MeasureOverride(avail: Size) =
+        let w = if Double.IsInfinity avail.Width then 1280.0 else avail.Width
+        let h = boundH
+        if w <> laidW || h <> laidH then
+            laidW <- w
+            laidH <- h
             if dense then
                 let cy = h * 0.5
                 rects.[0] <- Rect(Dense.pastX, cy - Dense.pastD / 2.0, Dense.pastD, Dense.pastD)
@@ -420,7 +455,6 @@ type RowView(dense: bool, np: int) as this =
                 rects.[5] <- Rect(Dense.progX, cy - 3.0, Dense.progW, 6.0)
                 rects.[6] <- Rect(Dense.progX, cy - 3.0, progFill.Width, 6.0)
                 rects.[7] <- Rect(Dense.togX, cy - 7.0, Dense.togW, 14.0)
-                let on = (match togKnob.Tag with :? int as v -> v = 1 | _ -> false)
                 rects.[8] <- Rect(Dense.togX + (if on then Dense.togW - 12.0 else 2.0), cy - 5.0, 10.0, 10.0)
                 let pitch = Dense.pitch np
                 for k in 0 .. np - 1 do
@@ -434,13 +468,10 @@ type RowView(dense: bool, np: int) as this =
                 rects.[2] <- Rect(64.0, 28.0, max 10.0 (w - 64.0 - STD_W_RESERVE), 18.0)
                 rects.[3] <- Rect(w - 16.0 - 100.0, h * 0.5 - 10.0, 100.0, 20.0)
                 rects.[4] <- Rect(0.0, h - 1.0, w, 1.0)
-            this.InvalidateMeasure()
-    override this.MeasureOverride(avail: Size) =
         let ch = this.Children
         for i in 0 .. ch.Count - 1 do
-            let r = rects.[i]
-            ch.[i].Measure(r.Size)
-        Size(boundW, boundH)
+            ch.[i].Measure(rects.[i].Size)
+        Size(w, h)
     override this.ArrangeOverride(fin: Size) =
         let ch = this.Children
         for i in 0 .. ch.Count - 1 do
@@ -489,7 +520,7 @@ type PanelListView(store0: RowStore, np: int) as this =
             let pr = store.Price p
             if slotPos.[slot] <> p || rv.BoundId <> id || rv.BoundPrice <> pr then
                 this.Rebinds <- this.Rebinds + 1L
-            rv.Bind(id, pr, hh, w)
+            rv.Bind(id, pr, hh)
             slotPos.[slot] <- p
             rv.IsVisible <- true
             rv.Measure(Size(w, hh))

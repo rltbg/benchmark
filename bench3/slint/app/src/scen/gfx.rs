@@ -5,7 +5,7 @@ use super::{software_not_rendered, Scenario};
 use crate::data::*;
 use crate::{Args, Bench, GroupData, ImgItem, MainWindow, MoverData, PathData, ShapeData};
 use serde_json::{json, Map, Value};
-use slint::{Color, ComponentHandle, Image, ModelRc, Rgba8Pixel, SharedPixelBuffer, VecModel};
+use slint::{Color, ComponentHandle, Image, Model, ModelRc, Rgba8Pixel, SharedPixelBuffer, VecModel};
 use std::rc::Rc;
 use std::time::Instant;
 

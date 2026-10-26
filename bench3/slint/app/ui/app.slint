@@ -120,15 +120,13 @@ export component MainWindow inherits Window {
     }
     rich-view := RichView {
         visible: Bench.scn == "text-rich";
-        y: 36px;
         width: root.width;
-        height: root.height - 60px;
+        height: root.height;
     }
     te := TextEdit {
         visible: Bench.scn == "text-big";
-        y: 36px;
         width: root.width;
-        height: root.height - 60px;
+        height: root.height;
         read-only: true;
         text: Bench.big-text;
         wrap: word-wrap;
@@ -136,11 +134,10 @@ export component MainWindow inherits Window {
     }
     ed := TextEdit {
         visible: Bench.scn == "text-edit";
-        y: 36px;
         width: root.width;
-        height: root.height - 60px;
+        height: root.height;
         text: Bench.edit-text;
-        wrap: word-wrap;
+        wrap: Bench.edit-nowrap ? no-wrap : word-wrap;
         font-size: 14px;
         edited(s) => {
             Bench.sq-white = !Bench.sq-white;

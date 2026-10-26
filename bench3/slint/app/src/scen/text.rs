@@ -3,7 +3,7 @@ use super::Scenario;
 use crate::data::*;
 use crate::{Args, Bench, MainWindow};
 use serde_json::{json, Map, Value};
-use slint::{ComponentHandle, ModelRc, SharedString, StyledText, VecModel};
+use slint::{ComponentHandle, Model, ModelRc, SharedString, StyledText, VecModel};
 use std::fmt::Write;
 use std::rc::Rc;
 use std::time::{Duration, Instant};
@@ -65,8 +65,11 @@ impl Scenario for BigSc {
     fn ops(&mut self, _t: f64, _app: &MainWindow, ops: &mut Map<String, Value>) {
         ops.insert("megabytes".into(), self.mb.into());
         ops.insert("bytes".into(), self.bytes.into());
-        ops.insert("time_to_first_display_ms".into(), self.first_display_ms.unwrap_or(-1.0).into());
-        ops.insert("layout_ms".into(), self.layout_ms.into());
+        let fd = self.first_display_ms.unwrap_or(-1.0);
+        ops.insert("time_to_first_display_ms".into(), fd.into());
+        // la mise en page n'a pas lieu pendant le dessin (la 1re frame ne dure que `first_frame_ms`) mais pendant show()
+        ops.insert("first_frame_ms".into(), self.layout_ms.into());
+        ops.insert("layout_ms".into(), (fd - self.layout_ms).max(0.0).into());
         ops.insert("content_height".into(), (self.content_h as f64).into());
         ops.insert("final_offset".into(), self.final_off.into());
         ops.insert("select_all".into(), self.selected_all.into());
@@ -125,6 +128,7 @@ pub fn build_edit(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, St
     let b = app.global::<Bench>();
     b.set_chrome(false);
     b.set_edit_text(SharedString::from(t.as_str()));
+    b.set_edit_nowrap(args.pick("wrap", &["none", "word"], "word") == "none");
     b.set_scn("text-edit".into());
     Ok(Box::new(EditSc { mid: mid as i32, len }))
 }
@@ -221,7 +225,7 @@ impl Scenario for RichSc {
     }
     fn step(&mut self, t: f64, app: &MainWindow, measuring: bool) {
         self.content_h = app.get_rich_h();
-        let max = (self.content_h - 660.0).max(0.0) as f64;
+        let max = (self.content_h - 720.0).max(0.0) as f64;
         let off = self.sc.advance(if measuring { t } else { 0.0 }, max);
         self.final_off = off;
         app.global::<Bench>().set_scroll_y(off as f32);

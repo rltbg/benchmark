@@ -11,6 +11,7 @@ open System.Threading
 open Avalonia
 open Avalonia.Controls
 open Avalonia.Media
+open Avalonia.Media.Immutable
 open Avalonia.Platform
 open Avalonia.Rendering.SceneGraph
 open Avalonia.Skia
@@ -65,11 +66,11 @@ type ShapesModel(n: int, areaW: float32, areaH: float32) =
             p.[2 * i + 1] <- y.[i]
     member _.Current = snaps.[cur]
 
-type ShapesRender(model: ShapesModel, f: ShapesFeatures, clipW: float32, clipH: float32) =
+type ShapesRender(model: ShapesModel, f: ShapesFeatures, clipW: float32, clipH: float32, shaderPerDraw: bool) =
     let n = model.N
     // gradient : un shader par forme (couleurs propres), cree une fois, en coordonnees locales
     let gradPaints : SKPaint[] =
-        if f.Gradient then
+        if f.Gradient && not shaderPerDraw then
             Array.init n (fun i ->
                 let s = model.Sizes.[i]
                 let (r1, g1, b1) = rgbOf (i * 2 + 1)
@@ -92,7 +93,14 @@ type ShapesRender(model: ShapesModel, f: ShapesFeatures, clipW: float32, clipH: 
         let s = model.Sizes.[i]
         let k = model.Kinds.[i]
         if f.Shadow then this.Shape(c, k, px + 2.0f, py + 2.0f, s, shadowP)
-        if f.Gradient then
+        if f.Gradient && shaderPerDraw then
+            // v0 naive (comparaison) : un shader et un SKPaint crees puis detruits a chaque dessin de forme
+            let (r1, g1, b1) = rgbOf (i * 2 + 1)
+            let (r2, g2, b2) = rgbOf (i * 2 + 2)
+            use sh = SKShader.CreateLinearGradient(SKPoint(px, py), SKPoint(px + s, py + s), [| SKColor(r1, g1, b1); SKColor(r2, g2, b2) |], [| 0.0f; 1.0f |], SKShaderTileMode.Clamp)
+            use pt = new SKPaint(IsAntialias = true, Shader = sh)
+            this.Shape(c, k, px, py, s, pt)
+        elif f.Gradient then
             // shader en coordonnees locales : translation du canvas (pas de shader recree par frame)
             c.Translate(px, py)
             this.Shape(c, k, 0.0f, 0.0f, s, gradPaints.[i])
@@ -160,6 +168,38 @@ type ShapesView(model: ShapesModel, r: ShapesRender) as this =
     override this.Render(ctx: DrawingContext) =
         ctx.Custom(new ShapesOp(Rect(0.0, 0.0, float model.AreaW, float model.AreaH), r, model.Current))
 
+/// Voie "avalonia" : primitives du DrawingContext public (DrawRectangle + BoxShadows + brosses immuables), sans Skia direct
+type AvaloniaShapesView(model: ShapesModel, f: ShapesFeatures, clipW: float, clipH: float) as this =
+    inherit Control()
+    let n = model.N
+    let brushes : IBrush[] =
+        Array.init n (fun i ->
+            let (r1, g1, b1) = rgbOf (i * 2 + 1)
+            if f.Gradient then
+                let (r2, g2, b2) = rgbOf (i * 2 + 2)
+                ImmutableLinearGradientBrush([| ImmutableGradientStop(0.0, Color.FromRgb(r1, g1, b1)); ImmutableGradientStop(1.0, Color.FromRgb(r2, g2, b2)) |],
+                                             1.0, null, Nullable<RelativePoint>(), GradientSpreadMethod.Pad, Nullable(RelativePoint.TopLeft), Nullable(RelativePoint.BottomRight)) :> IBrush
+            else ImmutableSolidColorBrush(Color.FromRgb(r1, g1, b1)) :> IBrush)
+    let shadows = BoxShadows(BoxShadow(OffsetX = 2.0, OffsetY = 2.0, Blur = 8.0, Spread = 0.0, Color = Color.FromArgb(120uy, 0uy, 0uy, 0uy)))
+    let bg = ImmutableSolidColorBrush(Color.FromRgb(24uy, 28uy, 38uy))
+    let clipBg = ImmutableSolidColorBrush(Color.FromRgb(238uy, 240uy, 246uy))
+    do this.ClipToBounds <- true
+    override this.Render(ctx: DrawingContext) =
+        let snap = model.Current
+        ctx.DrawRectangle(bg, null, Rect(0.0, 0.0, float model.AreaW, float model.AreaH))
+        use clip = if f.Clip then ctx.PushClip(RoundedRect(Rect(0.0, 0.0, clipW, clipH), 16.0)) else Unchecked.defaultof<_>
+        if f.Clip then ctx.DrawRectangle(clipBg, null, Rect(0.0, 0.0, clipW, clipH))
+        for i in 0 .. n - 1 do
+            let s = float model.Sizes.[i]
+            let x = float snap.Pos.[2 * i]
+            let y = float snap.Pos.[2 * i + 1]
+            let rr =
+                match model.Kinds.[i] with
+                | 0 -> RoundedRect(Rect(x, y, s, s * 0.7))
+                | 1 -> RoundedRect(Rect(x, y, s, s), s * 0.5)
+                | _ -> RoundedRect(Rect(x, y, s, s * 0.8), s * 0.25)
+            if f.Shadow then ctx.DrawRectangle(brushes.[i], null, rr, shadows) else ctx.DrawRectangle(brushes.[i], null, rr)
+
 /// G1 : N formes animees, variantes feature=solid|gradient|shadow|clip|all
 type ShapesScn(args: Args) =
     inherit Scenario()
@@ -170,16 +210,20 @@ type ShapesScn(args: Args) =
           Clip = (feature = "clip" || feature = "all"); ClipCornerOpt = (args.Variant("clipopt", "natural") = "corner") }
     let clipW, clipH = if f.Clip then 1000.0f, 600.0f else 1280.0f, 720.0f
     let model = ShapesModel(n, clipW, clipH)
-    let render = ShapesRender(model, f, clipW, clipH)
-    let view = ShapesView(model, render)
+    let impl = args.Variant("impl", "skia")
+    let render = ShapesRender(model, f, clipW, clipH, (args.Variant("shader", "cached") = "perdraw"))
+    let view : Control =
+        if impl = "avalonia" then AvaloniaShapesView(model, f, float clipW, float clipH) :> Control
+        else ShapesView(model, render) :> Control
     let mutable sq : Square = null
     do model.Reset()
-    override _.Content = view :> Control
+    override _.Content = view
     override _.SetSquare(s) = sq <- s
     override _.OnFrame(t, dt) =
         model.Step(float32 dt)
         view.InvalidateVisual()
     override _.Ops sb =
+        kvS sb "impl" impl
         kvI sb "shapes" (int64 n)
         kvS sb "feature" feature
         kvRaw sb "not_rendered" "[]"

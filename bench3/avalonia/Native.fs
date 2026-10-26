@@ -15,6 +15,7 @@ open System.Runtime.CompilerServices
 open System.Runtime.InteropServices
 open System.Threading
 open Util
+open Avalonia.Threading
 
 [<assembly: DisableRuntimeMarshalling>]
 do ()
@@ -108,12 +109,22 @@ type CallbackSink() =
     static let mutable received = 0L
     static let mutable dropped = 0L
     static let mutable pinned : CoreCb = null
+    static let mutable postMode = false
+    static let mutable postHandler : Action<int, float> = null
+    static member SetPost(h: Action<int, float>) =
+        postMode <- true
+        postHandler <- h
     static member Ring = ring
     static member Received = Volatile.Read(&received)
     static member Dropped = Volatile.Read(&dropped)
     /// appele depuis le thread producteur natif : une ecriture dans la file SPSC, jamais de verrou ni d'allocation
     static member OnItem(_user: nativeint, index: uint32, price: float) : unit =
-        if ring.TryEnqueue(0, int index, 0, price) then received <- received + 1L   // seul le producteur ecrit received
+        if postMode then
+            // variante de comparaison (hors recommandation) : un Dispatcher.Post par evenement
+            let h = postHandler
+            Dispatcher.UIThread.Post((fun () -> h.Invoke(int index, price)), DispatcherPriority.Default)
+            received <- received + 1L
+        elif ring.TryEnqueue(0, int index, 0, price) then received <- received + 1L   // seul le producteur ecrit received
         else Interlocked.Increment(&dropped) |> ignore
     static member Start(capacity: int, rate: uint64, range: uint32) : bool =
         ring <- SpscRing(capacity)

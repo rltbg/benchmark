@@ -37,8 +37,12 @@
     <Compile Include="Native.fs" />
     <Compile Include="Harness.fs" />
     <Compile Include="ListsCore.fs" />
+    <Compile Include="Vsp.fs" />
     <Compile Include="ListScenarios.fs" />
     <Compile Include="Gfx.fs" />
+    <Compile Include="Text.fs" />
+    <Compile Include="Ui.fs" />
+    <Compile Include="Ffi.fs" />
     <Compile Include="TextStyles.fs" />
     <Compile Include="Program.fs" />
     <!-- TextStyles.axaml : inclus implicitement comme AvaloniaXaml par Avalonia.Build -->

@@ -14,8 +14,8 @@ Item {
         id: lv
         anchors.fill: parent
         model: pane.mdl
-        cacheBuffer: 600
-        reuseItems: true
+        cacheBuffer: parseInt(App.variant("cache", "600"))   // explicit setting (default 320 px)
+        reuseItems: App.variant("reuse", "1") !== "0"          // explicit setting (Qt default: false)
         clip: true
         interactive: pane.interactive
         boundsBehavior: Flickable.StopAtBounds
