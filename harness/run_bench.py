@@ -75,7 +75,9 @@ class Cgroup:
     def stats(self):
         if not self.mem:
             return {}
-        d = {"mem_failcnt": int(open(f"{self.mem}/memory.failcnt").read())}
+        d = {"mem_failcnt": int(open(f"{self.mem}/memory.failcnt").read()),
+             # pic réellement facturé au cgroup (les bibliothèques partagées déjà en cache ne le sont pas)
+             "mem_charged_peak_kb": int(open(f"{self.mem}/memory.max_usage_in_bytes").read()) // 1024}
         for line in open(f"{self.mem}/memory.oom_control"):
             k, v = line.split()
             if k == "oom_kill":

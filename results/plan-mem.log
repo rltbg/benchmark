@@ -1,0 +1,3 @@
+=== 11:47:35 slint list mem=128
+SUMMARY {"tag": "slint-list-m128", "stack": "slint", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.95427083454199, "p95": 62.01088485873622, "min": 61.645044621377586, "max": 62.01088485873622, "n": 3}, "frame_p50": {"median": 16.18411
+=== 11:48:26 slint stream mem=128

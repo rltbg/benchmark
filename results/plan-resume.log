@@ -358,3 +358,20 @@ verify flutter 10:21:59
 verify egui 10:23:31
 verify nsh 10:25:03
 === 10:25:03 slint stress d=600 runs=1 
+SUMMARY {"tag": "slint-stress", "stack": "slint", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 9.53665801583348, "p95": 9.53665801583348, "min": 9.53665801583348, "max": 9.53665801583348, "n": 1}, "frame_p50": {"median": 98.951681, "p95": 98.951681, "min": 98.951681, "max": 98.951681, "n": 1}, "frame_p95": {"median": 144.213825999999
+=== 10:35:06 qt-software stress d=600 runs=1 
+SUMMARY {"tag": "qt-software-stress", "stack": "qt-software", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 12.166898712649045, "p95": 12.166898712649045, "min": 12.166898712649045, "max": 12.166898712649045, "n": 1}, "frame_p50": {"median": 79.825883, "p95": 79.825883, "min": 79.825883, "max": 79.825883, "n": 1}, "frame_p95": {"media
+=== 10:45:09 avalonia-aot stress d=600 runs=1 
+SUMMARY {"tag": "avalonia-aot-stress", "stack": "avalonia-aot", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 7.414976286880841, "p95": 7.414976286880841, "min": 7.414976286880841, "max": 7.414976286880841, "n": 1}, "frame_p50": {"median": 131.866, "p95": 131.866, "min": 131.866, "max": 131.866, "n": 1}, "frame_p95": {"median": 160.22
+=== 10:55:12 avalonia-jit stress d=600 runs=1 
+SUMMARY {"tag": "avalonia-jit-stress", "stack": "avalonia-jit", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 7.3277427499104135, "p95": 7.3277427499104135, "min": 7.3277427499104135, "max": 7.3277427499104135, "n": 1}, "frame_p50": {"median": 134.29, "p95": 134.29, "min": 134.29, "max": 134.29, "n": 1}, "frame_p95": {"median": 161.88
+=== 11:05:16 compose-jvm stress d=600 runs=1 
+SUMMARY {"tag": "compose-jvm-stress", "stack": "compose-jvm", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 3.278942413281312, "p95": 3.278942413281312, "min": 3.278942413281312, "max": 3.278942413281312, "n": 1}, "frame_p50": {"median": 286.979, "p95": 286.979, "min": 286.979, "max": 286.979, "n": 1}, "frame_p95": {"median": 431.843,
+=== 11:15:21 flutter stress d=600 runs=1 
+SUMMARY {"tag": "flutter-stress", "stack": "flutter", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 8.113113532371438, "p95": 8.113113532371438, "min": 8.113113532371438, "max": 8.113113532371438, "n": 1}, "frame_p50": {"median": 121.856, "p95": 121.856, "min": 121.856, "max": 121.856, "n": 1}, "frame_p95": {"median": 151.77, "p95": 1
+=== 11:25:25 egui stress d=600 runs=1 
+SUMMARY {"tag": "egui-stress", "stack": "egui", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 6.358232173859448, "p95": 6.358232173859448, "min": 6.358232173859448, "max": 6.358232173859448, "n": 1}, "frame_p50": {"median": 155.378, "p95": 155.378, "min": 155.378, "max": 155.378, "n": 1}, "frame_p95": {"median": 186.134, "p95": 186.13
+=== 11:35:28 nsh stress d=600 runs=1 
+SUMMARY {"tag": "nsh-stress", "stack": "nsh", "scenario": "stress", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 0.818909611558433, "p95": 0.818909611558433, "min": 0.818909611558433, "max": 0.818909611558433, "n": 1}, "frame_p50": {"median": 2092.532325, "p95": 2092.532325, "min": 2092.532325, "max": 2092.532325, "n": 1}, "frame_p95": {"median": 2682.660
+=== DONE 11:45:33
+=== RESUME DONE 11:45:33
