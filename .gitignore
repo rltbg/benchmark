@@ -27,3 +27,8 @@ stacks/flutter/pub-cache/
 **/krml-clean/
 **/karamel-clean/
 *.log.tmp
+
+# CI spike avalonia
+res/
+work/
+spikes/avalonia/ci/package-lock.json

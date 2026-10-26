@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
+  <!-- Tete Browser en F# (essai 1). Build : dotnet publish -c Release [-p:RunAOTCompilation=true]. Necessite le workload wasm-tools. -->
+  <PropertyGroup>
+    <TargetFramework>net10.0-browser</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <OverrideHtmlAssetPlaceholders>true</OverrideHtmlAssetPlaceholders>
+    <WasmBuildNative>true</WasmBuildNative>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
+    <ProjectReference Include="../Spike.Ui/Spike.Ui.fsproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <StaticWebAssetFingerprintPattern Include="JS" Pattern="*.js" Expression="#[.{fingerprint}]!" />
+  </ItemGroup>
+</Project>

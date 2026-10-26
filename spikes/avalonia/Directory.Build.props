@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <AvaloniaVersion>12.1.4</AvaloniaVersion>
+    <LangVersion>latest</LangVersion>
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <DebugType>none</DebugType>
+    <AVALONIA_TELEMETRY_OPTOUT>1</AVALONIA_TELEMETRY_OPTOUT>
+  </PropertyGroup>
+</Project>

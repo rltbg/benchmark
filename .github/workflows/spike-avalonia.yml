@@ -1,0 +1,168 @@
+name: spike-avalonia
+on:
+  push:
+    branches: ['ci/avalonia']
+permissions:
+  contents: read
+env:
+  DOTNET_VERSION: 10.0.403
+  DOTNET_CLI_TELEMETRY_OPTOUT: 1
+  DOTNET_NOLOGO: 1
+  AVALONIA_TELEMETRY_OPTOUT: 1
+
+jobs:
+  desktop:
+    name: desktop-${{ matrix.plat }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { plat: linux,   os: ubuntu-24.04, rid: linux-x64, variants: 1 }
+          - { plat: windows, os: windows-2025, rid: win-x64,   variants: 0 }
+          - { plat: macos,   os: macos-26,     rid: osx-arm64, variants: 0 }
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: dependances Linux (Xvfb, ImageMagick pour les captures)
+        if: matrix.plat == 'linux'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq xvfb imagemagick
+      - name: build + execution + enregistrement
+        shell: bash
+        run: bash spikes/avalonia/ci/desktop.sh ${{ matrix.plat }} ${{ matrix.rid }} ${{ matrix.variants }}
+      - name: resultat de secours
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p res
+          [ -f res/result.json ] || python3 ci/record.py --stack avalonia --platform ${{ matrix.plat }} --status fail --note "job interrompu avant l'enregistrement (voir journaux)" --out res || python ci/record.py --stack avalonia --platform ${{ matrix.plat }} --status fail --note "job interrompu" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-avalonia-${{ matrix.plat }}
+          path: res/
+          if-no-files-found: warn
+
+  android:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: build APK x86_64 + arm64-v8a
+        run: bash spikes/avalonia/ci/android-build.sh
+      - name: KVM
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules && sudo udevadm trigger --name-match=kvm
+      - name: emulateur Android (KVM) - installer, lancer, logcat, captures
+        if: hashFiles('work/apk-x64.apk') != ''
+        uses: reactivecircus/android-emulator-runner@v2.38.0
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          disable-animations: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          script: bash spikes/avalonia/ci/android-run.sh work/apk-x64.apk res/run
+      - name: enregistrement
+        if: always()
+        run: |
+          bash spikes/avalonia/ci/record-generic.sh android "$(cat work/secs-x64 2>/dev/null || echo 0)" res/run \
+            --artifact work/apk-x64.apk --artifact work/apk-arm64.apk || python3 ci/record.py --stack avalonia --platform android --status fail --note "enregistrement en echec" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-avalonia-android
+          path: res/
+          if-no-files-found: warn
+
+  ios:
+    runs-on: macos-26
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: build simulateur arm64 (Mono) + variante NativeAOT
+        run: bash spikes/avalonia/ci/ios-build.sh
+      - name: simulateur - installer, lancer, captures (Mono)
+        run: |
+          [ -d work/Spike.app ] && bash spikes/avalonia/ci/ios-run.sh work/Spike.app res/run || echo "pas de .app"
+      - name: simulateur - variante NativeAOT
+        continue-on-error: true
+        run: |
+          [ -d work/Spike-aot.app ] && bash spikes/avalonia/ci/ios-run.sh work/Spike-aot.app res/run-nativeaot || echo "pas de .app NativeAOT"
+      - name: enregistrement
+        if: always()
+        run: |
+          [ -d work/Spike.app ] && ditto -c -k --keepParent work/Spike.app work/Spike.app.zip
+          [ -d work/Spike-aot.app ] && ditto -c -k --keepParent work/Spike-aot.app work/Spike-aot.app.zip
+          arts=(); [ -d work/Spike.app ] && arts+=(--artifact work/Spike.app.zip --artifact work/Spike.app); [ -d work/Spike-aot.app ] && arts+=(--artifact work/Spike-aot.app.zip --artifact work/Spike-aot.app)
+          bash spikes/avalonia/ci/record-generic.sh ios-sim "$(cat work/secs 2>/dev/null || echo 0)" res/run "${arts[@]}" || python3 ci/record.py --stack avalonia --platform ios-sim --status fail --note "enregistrement en echec" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-avalonia-ios-sim
+          path: res/
+          if-no-files-found: warn
+
+  web:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: ${{ env.DOTNET_VERSION }}
+      - name: Playwright (pilote Chrome deja installe sur le runner)
+        run: cd spikes/avalonia/ci && npm install --no-audit --no-fund
+      - name: build wasm (sans AOT) + AOT wasm
+        run: bash spikes/avalonia/ci/web-build.sh
+      - name: Chrome headless (sans AOT)
+        run: |
+          [ -d work/web-jit ] && node spikes/avalonia/ci/web-run.mjs work/web-jit res/run || echo "pas de build"
+      - name: Chrome headless (AOT)
+        continue-on-error: true
+        run: |
+          [ -d work/web-aot ] && node spikes/avalonia/ci/web-run.mjs work/web-aot res/run-aot || echo "pas de build AOT"
+      - name: enregistrement
+        if: always()
+        run: |
+          arts=()
+          for v in jit aot; do
+            d=work/web-$v; [ -d "$d" ] || continue
+            n=$(find "$d" -name 'dotnet.native*.wasm' | head -1); [ -n "$n" ] && arts+=(--artifact "$n")
+            arts+=(--artifact "$d")
+          done
+          bash spikes/avalonia/ci/record-generic.sh web "$(cat work/secs-jit 2>/dev/null || echo 0)" res/run "${arts[@]}" || python3 ci/record.py --stack avalonia --platform web --status fail --note "enregistrement en echec" --out res
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: res-avalonia-web
+          path: res/
+          if-no-files-found: warn
+
+  publish:
+    needs: [desktop, android, ios, web]
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ./.github/actions/publish-results
+        with:
+          stack: avalonia

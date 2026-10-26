@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Bibliotheque F# partagee : TOUTE l'UI du spike (code unique pour les 6 plateformes). -->
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <IsAotCompatible>true</IsAotCompatible>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <NoWarn>$(NoWarn);3390</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Coeur extrait par F* (backend Custard), inclus TEL QUEL depuis le depot (aucune copie, aucune modification) -->
+    <Compile Include="../../../fstar/extracted/FStarCustard.fs" Link="fstar/FStarCustard.fs" />
+    <Compile Include="../../../fstar/extracted/Core.fs" Link="fstar/Core.fs" />
+    <Compile Include="Ui.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+  </ItemGroup>
+</Project>

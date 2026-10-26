@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- REPLI : tete Android en C# (quelques lignes) ; toute l'UI reste la bibliotheque F# Spike.Ui -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>24</SupportedOSPlatformVersion>
+    <Nullable>disable</Nullable>
+    <ApplicationId>net.rltbg.spike.avalonia</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+  </PropertyGroup>
+  <ItemGroup>
+    <AndroidResource Include="Icon.png"><Link>Resources\drawable\Icon.png</Link></AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia.Android" Version="$(AvaloniaVersion)" />
+    <ProjectReference Include="../../Spike.Ui/Spike.Ui.fsproj" />
+  </ItemGroup>
+</Project>
