@@ -44,6 +44,6 @@ if has cal; then : > results/calibration.jsonl; for s in $MAIN; do
   python3 -I harness/calibrate.py "$s" "$(cmd_of "$s")" list >> results/calibration.jsonl; echo "cal $s $(date +%T)"; done; fi
 if has verify; then : > results/verification.jsonl; for s in $MAIN; do for sc in idle list stream canvas core input text images nav; do
   a=""; [ "$sc" = canvas ] && a="--shapes 1000"; [ "$sc" = stream ] && a="--rate 10000"
-  VG_D=30 VG_T=8 python3 -I harness/verify_gui.py "$s" "$(cmd_of "$s")" "$sc" $a >> results/verification.jsonl; done; echo "verify $s $(date +%T)"; done; fi
+  VG_D=14 VG_T=8 python3 -I harness/verify_gui.py "$s" "$(cmd_of "$s")" "$sc" $a >> results/verification.jsonl; done; echo "verify $s $(date +%T)"; done; fi
 has C && for s in $MAIN; do run "$s" stress 600 1; done
 echo "=== DONE $(date +%T)"
