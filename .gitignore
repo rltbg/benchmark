@@ -9,3 +9,5 @@ bin/
 *.a
 *.so
 *.jar
+__pycache__/
+*.pyc
