@@ -24,16 +24,6 @@ rb() { # stack scenario duration runs tag [args...]
   python3 -I harness/run_bench.py --stack "$s" --cmd "$(cmd_of "$s")" --scenario "$sc" --duration "$d" --runs "$r" \
     --outdir "$OUT/runs/$s" $(extra_of "$s") "$@" 2>&1 | grep -E "^SUMMARY|Traceback|Error" | cut -c1-300
 }
-capone() { # stack scenario [args...] : saute si déjà mesuré
-  local s=$1 sc=$2; shift 2
-  local name="$sc"; for a in "$@"; do case "$a" in feature=*) name="$sc-${a//=/}";; esac; done
-  [ -f "$OUT/capacity/$s/$name.json" ] && return
-  python3 -I harness/capacity.py --stack "$s" --scenario "$sc" --duration 8 --confirm 2 "$@" 2>&1 | grep -E "RÉSULTAT|Traceback"
-}
-if has cap; then for s in $STACKS; do case "$s" in slint-direct) continue;; esac
-  for sc in list-scale list-rich list-mutate list-reset text-big text-labels text-rich gfx-shapes gfx-paths \
-    gfx-chart gfx-images gfx-layers ui-tree ui-bind ui-anim ffi-callbacks; do capone "$s" "$sc"; done
-  capone "$s" gfx-shapes --variant feature=gradient; capone "$s" gfx-shapes --variant feature=shadow; done; fi
 if has lat; then for s in $STACKS; do for load in idle fling heavy mutate cpuhog; do
   hog=0; [ $load = cpuhog ] && hog=3
   rb "$s" latency-load 14 3 "lat-key-$load" --n 100000 --variant load=$load --latency key --cpuhog $hog
@@ -48,6 +38,16 @@ if has ffi; then for s in $STACKS; do
   rb "$s" ffi-block 14 3 ffi-block-ui --n 1000 --variant where=ui; done; fi
 if has edit; then for s in $STACKS; do
   rb "$s" text-edit 14 3 text-edit-1mb --n 1 --latency key; done; fi
+capone() { # stack scenario [args...] : saute si déjà mesuré
+  local s=$1 sc=$2; shift 2
+  local name="$sc"; for a in "$@"; do case "$a" in feature=*) name="$sc-${a//=/}";; esac; done
+  [ -f "$OUT/capacity/$s/$name.json" ] && return
+  python3 -I harness/capacity.py --stack "$s" --scenario "$sc" --duration 8 --confirm 2 "$@" 2>&1 | grep -E "RÉSULTAT|Traceback"
+}
+if has cap; then for s in $STACKS; do case "$s" in slint-direct) continue;; esac
+  for sc in list-scale list-rich list-mutate list-reset text-big text-labels text-rich gfx-shapes gfx-paths \
+    gfx-chart gfx-images gfx-layers ui-tree ui-bind ui-anim ffi-callbacks; do capone "$s" "$sc"; done
+  capone "$s" gfx-shapes --variant feature=gradient; capone "$s" gfx-shapes --variant feature=shadow; done; fi
 if has soak; then for s in $STACKS; do
   rb "$s" list-mutate 600 1 soak --n 20000; done; fi
 if has memmin; then for s in $STACKS; do for sc in "list-scale 100000" "text-big 1"; do set -- $sc

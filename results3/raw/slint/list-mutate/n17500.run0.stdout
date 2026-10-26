@@ -1,0 +1,3 @@
+Error watching for xdg desktop settings: Failed to connect to address `unix:path=/run/user/0/bus`: No such file or directory (os error 2)
+BENCH:measure_start
+X connection to :100 broken (explicit kill or server shutdown).

@@ -1,0 +1,1 @@
+=== 19:55:56 slint latency-load lat-key-idle --n 100000 --variant load=idle --latency key --cpuhog 0
