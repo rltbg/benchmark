@@ -37,3 +37,5 @@ F1 add 1T                                      rc=0 n=  492 fps= 61.4 p50=  16.2
 F1 hash 8B 1T                                  rc=0 n=  492 fps= 61.3 p50=  16.3 p99=  20.5 max=  28.4 gt25=   2 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=41.2 ui_stall_ms_max=12.0 calls_per_s=256222263.7 mb_per_s=1954.8
 F1 hash 1KB 1T                                 rc=0 n=  489 fps= 60.9 p50=  16.3 p99=  21.0 max=  72.6 gt25=   1 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=41.3 ui_stall_ms_max=72.2 calls_per_s=749084.7 mb_per_s=731.5
 F1 hash 64KB 1T                                rc=0 n=  493 fps= 61.4 p50=  16.2 p99=  21.1 max=  22.7 gt25=   0 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=43.5 ui_stall_ms_max=9.3 calls_per_s=11156.6 mb_per_s=697.3
+F1 hash 1MB 4T                                 rc=0 n=  457 fps= 56.7 p50=  17.4 p99=  29.6 max=  33.7 gt25=  16 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=46.4 ui_stall_ms_max=20.0 calls_per_s=2284.6 mb_per_s=2284.6
+F1 fill 64KB 1T                                rc=0 n=  487 fps= 60.6 p50=  16.3 p99=  23.6 max=  49.5 gt25=   3 gc=0/0/0 pause=0.0 alloc=5MB setup_ms=41.4 ui_stall_ms_max=32.5 calls_per_s=7433.3 mb_per_s=464.6
