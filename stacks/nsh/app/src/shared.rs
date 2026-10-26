@@ -58,7 +58,6 @@ pub static IMAGES_DECODED: AtomicU64 = AtomicU64::new(0);
 pub static DECODE_US: AtomicU64 = AtomicU64::new(0);
 pub static TRANSITIONS: AtomicU64 = AtomicU64::new(0);
 pub static TEXT_FIRST_MS: AtomicU64 = AtomicU64::new(0);
-pub static TEXT_SEL: AtomicU64 = AtomicU64::new(0);
 pub static TEXT_LAYOUT_MS: AtomicU64 = AtomicU64::new(0);
 pub static TEXT_BYTES: AtomicU64 = AtomicU64::new(0);
 /// Process ms (+1) at which the 1 MB text was first laid out (engine); 0 before.

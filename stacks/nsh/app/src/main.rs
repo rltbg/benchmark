@@ -74,7 +74,25 @@ fn marker(m: &str) {
     let _ = out.flush();
 }
 
+/// BENCH_PACING (spec v2.1): "60" (default) = GTK's native GdkFrameClock cadence;
+/// "uncapped" = GDK_DEBUG=no-vsync, the documented GTK option "Repaint instantly"
+/// (https://docs.gtk.org/gtk4/running.html, GDK_DEBUG), set before GTK starts.
+fn pacing() -> &'static str {
+    match std::env::var("BENCH_PACING").as_deref() {
+        Ok("uncapped") => "uncapped",
+        _ => "60",
+    }
+}
+
 fn main() -> glib::ExitCode {
+    if pacing() == "uncapped" {
+        let cur = std::env::var("GDK_DEBUG").unwrap_or_default();
+        if !cur.split([',', ':', ' ']).any(|f| f == "no-vsync") {
+            let v = if cur.is_empty() { "no-vsync".to_owned() } else { format!("{cur},no-vsync") };
+            // SAFETY: first statement of main, before any thread exists.
+            unsafe { std::env::set_var("GDK_DEBUG", v) };
+        }
+    }
     let cfg = parse_args();
     let _ = T0.get_or_init(std::time::Instant::now);
     let _ = CFG.set(cfg);
@@ -193,6 +211,7 @@ fn write_json() {
     let frames: Vec<f64> = FRAMES.with(|f| f.borrow().clone());
     let mut ops = serde_json::Map::new();
     let sc = c.scenario.as_str();
+    ops.insert("pacing".into(), json!(pacing()));
     if matches!(sc, "list" | "stream" | "stress" | "idle" | "input") {
         ops.insert("sum_heights".into(), json!(sum_heights()));
         ops.insert("list_content_height_reported".into(), json!(f64_load(&CONTENT_H)));
@@ -266,9 +285,11 @@ fn write_json() {
             "NSH 0.2.0 GTK4 backend, Rust-only app (no QuickJS). Frame end = GdkFrameClock after-paint on the GTK main thread \
              (last public post-render signal: GSK render done, X11 frame submitted; presentation not reported without a compositor). \
              Only painted frames counted: the clock paints only when a mounted batch, a scroll or a native animation invalidated a widget. \
-             Rate capped by GdkFrameClock's 60 Hz timer (no public GTK API to lift it; GDK_DEBUG={} ). \
+             Pacing {}: 60 = GdkFrameClock's own 60 Hz timer (no widget/frame-clock API changes it); uncapped = GDK_DEBUG=no-vsync \
+             (documented GTK env option, GDK_DEBUG={}). \
              Rust components run on the NSH engine thread, GTK on the main thread, one batch hop per commit. Warm-up 2 s excluded. \
              GSK_RENDERER={}. {}",
+            pacing(),
             std::env::var("GDK_DEBUG").unwrap_or_else(|_| "(unset)".into()),
             std::env::var("GSK_RENDERER").unwrap_or_else(|_| "(default)".into()),
             note
