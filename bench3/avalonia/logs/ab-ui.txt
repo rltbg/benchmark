@@ -1,3 +1,7 @@
 U2 compiled n=1000                             rc=0 n=  339 fps= 42.3 p50=  17.9 p99=  54.9 max=  65.2 gt25= 142 gc=12/0/0 pause=304.953 alloc=1658MB setup_ms=114.6 ui_stall_ms_max=58.7
 U2 compiled n=5000                             rc=0 n=   71 fps=  8.6 p50= 101.7 p99= 244.9 max= 244.9 gt25=  71 gc=13/13/0 pause=1249.108 alloc=1735MB setup_ms=307.7 ui_stall_ms_max=221.5
 U2 manual n=1000                               rc=0 n=  419 fps= 52.2 p50=  16.3 p99=  52.0 max=  55.7 gt25=  62 gc=14/0/0 pause=329.976 alloc=2005MB setup_ms=77.2 ui_stall_ms_max=47.7
+U2 manual n=5000                               rc=0 n=   71 fps=  8.7 p50= 103.3 p99= 220.9 max= 220.9 gt25=  71 gc=12/10/0 pause=1074.515 alloc=1696MB setup_ms=297.8 ui_stall_ms_max=207.2
+U2 reflection n=1000                           rc=0 n=  361 fps= 44.9 p50=  17.2 p99=  59.2 max=  75.7 gt25= 117 gc=14/12/1 pause=330.993 alloc=1778MB setup_ms=74.5 ui_stall_ms_max=66.5
+U3 composition n=1000                          rc=0 n=  492 fps= 61.3 p50=  16.3 p99=  21.5 max=  25.1 gt25=   1 gc=0/0/0 pause=0.0 alloc=4MB setup_ms=65.0 ui_stall_ms_max=7.7
+U3 composition n=10000                         rc=0 n=   87 fps= 10.7 p50=  89.3 p99= 125.8 max= 125.8 gt25=  87 gc=0/0/0 pause=0.0 alloc=3MB setup_ms=408.8 ui_stall_ms_max=10.3

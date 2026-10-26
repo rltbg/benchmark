@@ -17,6 +17,7 @@ export component RowBody inherits Rectangle {
         x: 60px;
         y: 6px;
         width: parent.width - 60px - 130px;
+        height: Bench.explicit ? 20px : self.preferred-height;
         text: d.title;
         font-size: 16px;
         font-weight: 700;
@@ -43,6 +44,7 @@ export component RowBody inherits Rectangle {
         x: parent.width - 120px;
         y: (parent.height - 20px) / 2;
         width: 108px;
+        height: Bench.explicit ? 20px : self.preferred-height;
         horizontal-alignment: right;
         text: d.price;
         font-size: 16px;
@@ -74,6 +76,7 @@ export component DenseBody inherits Rectangle {
         x: 32px;
         y: (parent.height - 14px) / 2;
         width: 110px;
+        height: Bench.explicit ? 14px : self.preferred-height;
         text: d.title;
         font-size: 12px;
         font-weight: 700;
@@ -135,6 +138,7 @@ export component DenseBody inherits Rectangle {
         x: parent.width - 80px;
         y: (parent.height - 14px) / 2;
         width: 72px;
+        height: Bench.explicit ? 14px : self.preferred-height;
         horizontal-alignment: right;
         text: d.price;
         font-size: 12px;
@@ -149,6 +153,8 @@ export component DenseBody inherits Rectangle {
         border-radius: 4px;
         background: Colors.hsv(mod(d.hue + p * 37, 360), 0.55, 0.95, 1.0);
         Text {
+            width: parent.width;
+            height: Bench.explicit ? parent.height : self.preferred-height;
             text: "c" + p;
             font-size: 8px;
             color: #202020;

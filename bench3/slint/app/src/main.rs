@@ -445,14 +445,35 @@ fn main() {
     let app = MainWindow::new().unwrap();
     let keys = Rc::new(Cell::new(0u64));
     {
+        // variante `direct` : en plus du chemin normal, demande une frame tout de suite par l'API winit publique
+        // (le TimerBasedFrameThrottle de Slint attend sinon 16 ms avant la 1re frame suivant un événement)
+        let direct = args.has("direct");
+        let redraw = {
+            let w = app.as_weak();
+            move || {
+                if direct {
+                    if let Some(a) = w.upgrade() {
+                        a.window().with_winit_window(|w: &winit::window::Window| w.request_redraw());
+                    }
+                }
+            }
+        };
         let k = keys.clone();
-        app.global::<Bench>().on_space_pressed(move || k.set(k.get() + 1));
+        let r1 = redraw.clone();
+        app.global::<Bench>().on_space_pressed(move || {
+            k.set(k.get() + 1);
+            r1();
+        });
         let k = keys.clone();
-        app.global::<Bench>().on_edited_text(move || k.set(k.get() + 1));
+        app.global::<Bench>().on_edited_text(move || {
+            k.set(k.get() + 1);
+            redraw();
+        });
     }
     let b = app.global::<Bench>();
     b.set_scn(args.scenario.clone().into());
     b.set_variant(args.variant_string().into());
+    b.set_explicit(args.var("sizes") != Some("implicit"));
     let is_idle = args.scenario == "idle";
     b.set_square(!is_idle);
     let sc = match scen::build(&args, &app, &renderer) {

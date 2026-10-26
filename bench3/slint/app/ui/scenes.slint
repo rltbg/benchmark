@@ -231,6 +231,7 @@ export component LabelsView inherits Rectangle {
         x: mod(i, 11) * 112px;
         y: floor(i / 11) * 14px;
         width: 112px;
+        height: Bench.explicit ? 14px : self.preferred-height;
         text: s;
         font-size: 11px;
         color: #202020;
@@ -259,6 +260,7 @@ export component BindModelView inherits Rectangle {
         x: mod(i, 26) * 48px;
         y: floor(i / 26) * 14px;
         width: 48px;
+        height: Bench.explicit ? 14px : self.preferred-height;
         text: s;
         font-size: 11px;
         color: #202020;
@@ -271,6 +273,7 @@ export component BindDerivedView inherits Rectangle {
         x: mod(i, 26) * 48px;
         y: floor(i / 26) * 14px;
         width: 48px;
+        height: Bench.explicit ? 14px : self.preferred-height;
         text: Bench.tick + i;
         font-size: 11px;
         color: #202020;
@@ -281,6 +284,8 @@ component TreeLeaf inherits Rectangle {
     in property <int> id;
     background: Colors.hsv(mod(id * 37, 360), 0.35, 0.95, 1.0);
     Text {
+        width: parent.width;
+        height: Bench.explicit ? parent.height : self.preferred-height;
         text: id;
         font-size: 9px;
         color: #202020;

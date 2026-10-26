@@ -312,13 +312,25 @@ pub fn build_images(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, 
     let mut handles = vec![];
     for k in 0..3usize {
         let p = p.clone();
+        let premul = args.var("premul") != Some("off");
         handles.push(std::thread::spawn(move || {
             let mut out = vec![];
             let mut i = k;
             while i < nd {
                 out.push((i, image::open(p.join(format!("img{:03}.png", i))).ok().map(|im| {
-                    let im = im.into_rgba8();
+                    let mut im = im.into_rgba8();
                     let (w, h) = im.dimensions();
+                    if premul {
+                        // Slint stocke/blende en alpha prémultiplié : le faire une fois hors du fil UI
+                        for p in im.pixels_mut() {
+                            let a = p.0[3] as u32;
+                            if a != 255 {
+                                for c in 0..3 {
+                                    p.0[c] = ((p.0[c] as u32 * a + 127) / 255) as u8;
+                                }
+                            }
+                        }
+                    }
                     (im.into_raw(), w, h)
                 })));
                 i += 3;
@@ -330,7 +342,8 @@ pub fn build_images(args: &Args, app: &MainWindow) -> Result<Box<dyn Scenario>, 
     for h in handles {
         for (i, r) in h.join().unwrap() {
             if let Some((raw, w, hh)) = r {
-                decoded[i] = Some(Image::from_rgba8(SharedPixelBuffer::<Rgba8Pixel>::clone_from_slice(&raw, w, hh)));
+                let pb = SharedPixelBuffer::<Rgba8Pixel>::clone_from_slice(&raw, w, hh);
+                decoded[i] = Some(if args.var("premul") != Some("off") { Image::from_rgba8_premultiplied(pb) } else { Image::from_rgba8(pb) });
             }
         }
     }
