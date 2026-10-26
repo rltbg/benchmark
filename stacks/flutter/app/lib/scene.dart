@@ -56,8 +56,13 @@ class Scene extends ChangeNotifier {
   late final RRect clipRR;
 
   // atlas mode
-  ui.Image? atlas;
-  late final Float32List spriteRects = Float32List(4 * n); // l t r b in the atlas
+  // Atlas pages; sprites are assigned to pages in index order, so drawing page after page
+  // keeps the z-order. pageStart[p]..pageStart[p+1] = shapes of page p.
+  static final int pageSize = int.tryParse(Platform.environment['BENCH_ATLAS_PAGE'] ?? '') ?? 512;
+  final List<ui.Image> pages = [];
+  final List<int> pageStart = [0];
+  ui.Image? get atlas => pages.isEmpty ? null : pages.first;
+  late final Float32List spriteRects = Float32List(4 * n); // l t r b in its page
   late final Float32List padLT = Float32List(n); // sprite origin offset vs. shape origin
   late final Float32List xforms = Float32List(4 * n); // RSTransform scos ssin tx ty
   int atlasW = 0, atlasH = 0;
@@ -136,8 +141,9 @@ class Scene extends ChangeNotifier {
     final sw0 = Stopwatch()..start();
     // shelf packing; shadow margin = offset 2 + 3 sigma, 2 px transparent gutter against bleeding
     const gutter = 2.0;
-    final maxW = n > 2000 ? 4096.0 : 2048.0;
+    final maxW = pageSize.toDouble(), maxH = pageSize.toDouble();
     var cx = 0.0, cy = 0.0, rowH = 0.0;
+    final pageH = <int>[];
     final ox0 = Float32List(n), oy0 = Float32List(n);
     for (var i = 0; i < n; i++) {
       final lt = hasShadow[i] != 0 ? 3 * blurSigma - 2 + 1 : 1.0; // left/top margin
@@ -146,6 +152,14 @@ class Scene extends ChangeNotifier {
       if (cx + spw > maxW) {
         cx = 0;
         cy += rowH + gutter;
+        rowH = 0;
+      }
+      if (cy + sph > maxH) {
+        // page full: start a new page
+        pageH.add(cy.ceil());
+        pageStart.add(i);
+        cx = 0;
+        cy = 0;
         rowH = 0;
       }
       spriteRects[4 * i] = cx;
@@ -158,19 +172,23 @@ class Scene extends ChangeNotifier {
       cx += spw + gutter;
       rowH = m.max(rowH, sph);
     }
+    pageH.add((cy + rowH).ceil());
+    pageStart.add(n);
     atlasW = maxW.toInt();
-    atlasH = (cy + rowH).ceil();
-    final rec = ui.PictureRecorder();
-    final c = Canvas(rec);
-    for (var i = 0; i < n; i++) {
-      c.save();
-      c.translate(ox0[i], oy0[i]);
-      _paintShape(c, i);
-      c.restore();
+    atlasH = pageH.reduce((a, b) => a + b);
+    for (var p = 0; p < pageH.length; p++) {
+      final rec = ui.PictureRecorder();
+      final c = Canvas(rec);
+      for (var i = pageStart[p]; i < pageStart[p + 1]; i++) {
+        c.save();
+        c.translate(ox0[i], oy0[i]);
+        _paintShape(c, i);
+        c.restore();
+      }
+      final pic = rec.endRecording();
+      pages.add(pic.toImageSync(atlasW, pageH[p]));
+      pic.dispose();
     }
-    final pic = rec.endRecording();
-    atlas = pic.toImageSync(atlasW, atlasH);
-    pic.dispose();
     atlasBuildMs = sw0.elapsedMicroseconds / 1000.0;
   }
 
@@ -222,13 +240,16 @@ class Scene extends ChangeNotifier {
     c.save();
     c.clipRRect(clipRR);
     c.drawRRect(clipRR, bgPaint);
-    final a = atlas;
-    if (a != null) {
+    if (pages.isNotEmpty) {
       for (var i = 0; i < n; i++) {
         xforms[4 * i + 2] = ox + x[i] - padLT[i];
         xforms[4 * i + 3] = oy + y[i] - padLT[i];
       }
-      c.drawRawAtlas(a, xforms, spriteRects, null, null, clipRR.outerRect, atlasPaint);
+      for (var p = 0; p < pages.length; p++) {
+        final a = pageStart[p], b = pageStart[p + 1];
+        c.drawRawAtlas(pages[p], Float32List.sublistView(xforms, 4 * a, 4 * b),
+            Float32List.sublistView(spriteRects, 4 * a, 4 * b), null, null, clipRR.outerRect, atlasPaint);
+      }
     } else {
       for (var i = 0; i < n; i++) {
         c.save();

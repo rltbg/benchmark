@@ -139,6 +139,7 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
         ops['canvas_mode'] = canvasDirect ? 'direct' : 'atlas';
         if (!canvasDirect) {
           ops['atlas_px'] = [scene!.atlasW, scene!.atlasH];
+          ops['atlas_pages'] = scene!.pages.length;
           ops['atlas_record_ms'] = scene!.atlasBuildMs;
         }
         ops['checksum'] = hexOf(fnv((scene!.x[0] * 100).round() ^ (scene!.y[scene!.n - 1] * 100).round()));
@@ -175,7 +176,7 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
       b.extraNotes.add(canvasDirect
           ? 'canvas (BENCH_CANVAS_MODE=direct): per shape drawRect/drawCircle/drawRRect with its own gradient Paint, MaskFilter.blur(sigma 4) shadow at (2,2) for 1 in 10, clipRRect 1000x600 r16, graph drawRawPoints(polygon) 10000 pts stroke 1 px.'
           : 'canvas: every shape (own 2-colour linear gradient, and for 1 in 10 its MaskFilter.blur(sigma 4) shadow at offset (2,2)) is recorded once into a sprite atlas '
-              '(PictureRecorder + Picture.toImageSync, ${scene!.atlasW}x${scene!.atlasH} px); each frame = one Canvas.drawRawAtlas of all shapes in z-order '
+              '(PictureRecorder + Picture.toImageSync, ${scene!.pages.length} page(s) ${scene!.atlasW} px wide, ${scene!.atlasH} px total height, sprites assigned to pages in index order); each frame = one Canvas.drawRawAtlas per page, pages in order = shapes in z-order '
               '(translation-only RSTransforms, bilinear sampling) inside clipRRect 1000x600 r16; graph drawRawPoints(polygon) 10000 pts stroke 1 px rebuilt per frame.');
     }
   }

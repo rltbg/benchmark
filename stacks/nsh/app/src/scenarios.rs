@@ -291,12 +291,8 @@ fn list_pane(scripted: bool, stream: bool) -> impl IntoElement {
 
 // -------------------------------------------------------------- canvas ----
 
-/// The canvas is recorded once; every number that moves is a native animated
-/// value (docs: Canvas, "Driving drawings with animated values"; Performance:
-/// "keep data that changes every frame in animated values rather than signals"),
-/// so the GTK thread redraws each frame without the engine re-recording.
-/// Each shape bounces on both axes: position = triangle wave of (|v| t + phase)
-/// with period 2L, i.e. `((t*|v| + s) mod 2L)` interpolated through [0, L, 2L] -> [0, L, 0].
+/// Bounce on one axis as an animated node: triangle wave of (|v| t + phase) with
+/// period 2L, i.e. `((t*|v| + s) mod 2L)` interpolated through [0, L, 2L] -> [0, L, 0].
 fn bounce(clock: &AnimatedValue, x0: f32, v: f32, l: f32) -> AnimatedNode {
     let l = l.max(1.0);
     let s = if v >= 0.0 { x0 } else { 2.0 * l - x0 };
@@ -406,9 +402,12 @@ fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoEl
             })
             .collect(),
     );
-    let main = if diag("RERECORD") {
-        // Diagnostic (BENCH_RERECORD=1): positions computed on the engine thread and the
-        // drawing recorded again every engine frame (a signal per frame).
+    let main = if !diag("ANIMATED") {
+        // Default: the documented "redraw from signals" pattern (docs: Canvas element, When it
+        // redraws): positions computed on the engine thread, the drawing re-recorded every engine
+        // frame. The alternative the Performance page suggests (animated values, BENCH_ANIMATED=1
+        // below) was measured slower on NSH 0.2.0 / Linux: same replay cost, plus a multi-second
+        // stall building 2 x N animated nodes, and slower per frame at 1 000 shapes.
         let tick = signal(0u64);
         std::mem::forget(spawn(async move {
             loop {
@@ -427,7 +426,8 @@ fn canvas_pane(n: usize, w: f32, h: f32, rich: bool, graph: bool) -> impl IntoEl
             })
         })
     } else {
-        // The clock, in seconds, played natively on the UI thread.
+        // Diagnostic (BENCH_ANIMATED=1): positions as native animated values; the drawing is
+        // recorded once and the GTK thread redraws it as the clock (seconds) advances.
         let clock = animated_value(0.0);
         clock.timing(100_000.0, 100_000_000.0, Easing::Linear);
         let nodes: Vec<(AnimatedNode, AnimatedNode)> = defs
