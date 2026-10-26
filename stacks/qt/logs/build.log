@@ -120,3 +120,144 @@ for more information.
 [29/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_Main_qml.cpp.o
 [30/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_Shell_qml.cpp.o
 [31/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_ListPane_qml.cpp.o
+[32/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_TextPane_qml.cpp.o
+[33/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_ImagesPane_qml.cpp.o
+[34/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_CanvasPane_qml.cpp.o
+[35/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_CanvasJs_qml.cpp.o
+[36/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_NavPane_qml.cpp.o
+[37/40] Building CXX object CMakeFiles/qtbench.dir/build/.qt/rcc/qrc_qtbench_raw_qml_0.cpp.o
+[38/40] Building CXX object CMakeFiles/qtbench.dir/build/.qt/rcc/qrc_qtbench_raw_qml_0_extra_qmldirs.cpp.o
+[39/40] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_NavScreen_qml.cpp.o
+[40/40] Linking CXX executable qtbench
+
+real	0m29.787s
+user	0m43.950s
+sys	0m3.690s
+-- Install configuration: "Release"
+-- Installing: /home/user/benchmark/stacks/qt/deploy/bin/qtbench
+-- Set non-toolchain portion of runtime path of "/home/user/benchmark/stacks/qt/deploy/bin/qtbench" to "$ORIGIN:$ORIGIN/../lib"
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/libqtquick2plugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQml/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQml/libqmlplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQml/Models/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQml/Models/libmodelsplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQml/WorkerScript/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQml/WorkerScript/libworkerscriptplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Controls/Basic/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Templates/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Templates/libqtquicktemplates2plugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Controls/impl/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Controls/Basic/impl/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Shapes/qmldir
+-- Installing: /home/user/benchmark/stacks/qt/deploy/qml/QtQuick/Shapes/libqmlshapesplugin.so
+-- Writing /home/user/benchmark/stacks/qt/deploy/bin/qt.conf
+-- Running generic Qt deploy tool on /home/user/benchmark/stacks/qt/build/qtbench
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Core.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Core.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6DBus.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6DBus.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Gui.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Gui.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Network.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Network.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6OpenGL.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6OpenGL.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Qml.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Qml.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QmlMeta.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QmlMeta.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QmlModels.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QmlModels.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QmlWorkerScript.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QmlWorkerScript.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Quick.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Quick.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickControls2.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickControls2.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickControls2Basic.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickControls2Basic.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickControls2BasicStyleImpl.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickControls2BasicStyleImpl.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickControls2Impl.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickControls2Impl.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickShapes.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickShapes.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickTemplates2.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6QuickTemplates2.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libicudata.so.73
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libicudata.so.73.2
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libicui18n.so.73
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libicui18n.so.73.2
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libicuuc.so.73
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libicuuc.so.73.2
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6EglFSDeviceIntegration.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6EglFSDeviceIntegration.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6EglFsKmsGbmSupport.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6EglFsKmsGbmSupport.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6EglFsKmsSupport.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6EglFsKmsSupport.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Svg.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6Svg.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6WaylandClient.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6WaylandClient.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6WlShellIntegration.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6WlShellIntegration.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6XcbQpa.so.6
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libQt6XcbQpa.so.6.12.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/egldeviceintegrations/libqeglfs-emu-integration.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/egldeviceintegrations/libqeglfs-x11-integration.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/generic/libqevdevkeyboardplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/generic/libqevdevmouseplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/generic/libqevdevtabletplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/generic/libqevdevtouchplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/generic/libqtuiotouchplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/iconengines/libqsvgicon.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/imageformats/libqgif.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/imageformats/libqico.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/imageformats/libqjpeg.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/imageformats/libqsvg.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/networkinformation/libqconnman.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/networkinformation/libqglib.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/networkinformation/libqnetworkmanager.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/platformthemes/libqgtk3.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/platformthemes/libqxdgdesktopportal.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_debugger.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_inspector.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_local.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_messages.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_native.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_nativedebugger.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_preview.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_profiler.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_quickeventreplay.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_quickprofiler.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_server.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/qmltooling/libqmldbg_tcp.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/tls/libqcertonlybackend.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/tls/libqopensslbackend.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-decoration-client/libbradient.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-graphics-integration-client/libdmabuf-server.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-graphics-integration-client/libdrm-egl-server.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-graphics-integration-client/libqt-plugin-wayland-egl.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-graphics-integration-client/libshm-emulation-server.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-graphics-integration-client/libvulkan-server.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-shell-integration/libfullscreen-shell-v1.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-shell-integration/libwl-shell-plugin.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/wayland-shell-integration/libxdg-shell.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/xcbglintegrations/libqxcb-egl-integration.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/xcbglintegrations/libqxcb-glx-integration.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/plugins/platforms/libqxcb.so
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libxcb-cursor.so.0
+-- Installing: /home/user/benchmark/stacks/qt/deploy/lib/libxcb-cursor.so.0.0.0
+
+real	0m0.644s
+user	0m0.290s
+sys	0m0.243s
