@@ -1,0 +1,8 @@
+aot rust rc 0 markers True impl rust calls/s 89238229 heavy 8 fps 49.3 cpu% 202 rssMB 45.0 gc 0 0.0
+aot fstar rc 0 markers True impl fstar calls/s 6257022 heavy 8 fps 48.2 cpu% 200 rssMB 175.8 gc 56 34.967
+aot fsharp rc 0 markers True impl fsharp calls/s 57124043 heavy 8 fps 48.2 cpu% 201 rssMB 45.0 gc 0 0.0
+jit rust rc 0 markers True impl rust calls/s 73246833 heavy 9 fps 47.4 cpu% 195 rssMB 84.5 gc 0 0.0
+jit fstar rc 0 markers True impl fstar calls/s 6836820 heavy 8 fps 51.9 cpu% 205 rssMB 213.9 gc 61 28.328
+jit fsharp rc 0 markers True impl fsharp calls/s 106104049 heavy 8 fps 49.2 cpu% 204 rssMB 84.3 gc 0 0.0
+aot fsharp repeat 1 56063059
+aot fsharp repeat 2 60236452

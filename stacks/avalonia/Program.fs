@@ -41,13 +41,19 @@ let inv = CultureInfo.InvariantCulture
 // ---------------------------------------------------------------- versions (epinglees dans AvaloniaBench.fsproj / build.sh)
 let PKG_VERSIONS = "Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simple 12.1.4), Avalonia.AvaloniaEdit 12.0.0, SkiaSharp 3.119.4, HarfBuzzSharp 8.3.1.3, FSharp.Core 10.1.403, .NET SDK 10.0.403"
 let isAot = not RuntimeFeature.IsDynamicCodeSupported
+/// provenance du coeur selectionne (BENCH_CORE_IMPL) pour le champ JSON version
+let coreImplVersion () =
+    match Environment.GetEnvironmentVariable "BENCH_CORE_IMPL" with
+    | "fstar" -> "fstar (F* v2026.10.25 commit 362e792b, extraction Custard fstar/extracted @27073d5, Core.fs sha256 0af40710aae1)"
+    | "fsharp" -> "fsharp (temoin F# ecrit a la main)"
+    | _ -> "rust (core/ libbenchcore C-ABI)"
 let versionString () =
     let avInfo =
         try
             let a = typeof<Application>.Assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()
             if isNull a then "?" else a.InformationalVersion.Split('+').[0]
         with _ -> "?"
-    PKG_VERSIONS + ", runtime " + RuntimeInformation.FrameworkDescription + ", " + (if isAot then "NativeAOT" else "JIT (CoreCLR, self-contained)")
+    PKG_VERSIONS + ", core " + coreImplVersion () + ", runtime " + RuntimeInformation.FrameworkDescription + ", " + (if isAot then "NativeAOT" else "JIT (CoreCLR, self-contained)")
     + ", Avalonia assembly " + avInfo
 
 // ---------------------------------------------------------------- donnees communes
@@ -495,8 +501,105 @@ type Stream(rate: int) =
     member _.ResetCounters() =
         bG <- Volatile.Read(&generated); bD <- Volatile.Read(&dropped); bA <- applied
 
-// ---------------------------------------------------------------- coeur C-ABI (threads de fond)
-type CoreRunner(suppress: bool) =
+// ---------------------------------------------------------------- coeur : rust (C-ABI) / fstar (F# extrait par F*) / fsharp (temoin)
+/// Provenance du coeur F* (fichiers inclus tels quels depuis $(BENCH_ROOT)/fstar/extracted, voir AvaloniaBench.fsproj)
+let FSTAR_PROVENANCE =
+    "coeur fstar: F* v2026.10.25 (commit 362e792b3aa882f1766b95c7450e3fe63081163d), backend Custard --codegen FSharp, "
+    + "fstar/extracted/Core.fs sha256 0af40710aae1 + FStarCustard.fs sha256 772c090479f7 (commit depot 27073d5)"
+
+let mutable coreVerifyNote = ""
+
+/// Coeur F# ecrit a la main (temoin sans FFI) : memes regles que core/src/lib.rs
+module FsCore =
+    let MAGIC = 0xA5uy
+    let VERSION = 1uy
+    let MAX_PAYLOAD = 64
+    let validate (b: ReadOnlySpan<byte>) : bool =
+        b.Length >= 3 && b.[0] = MAGIC && b.[1] = VERSION && int b.[2] <= MAX_PAYLOAD && b.Length - 3 = int b.[2]
+    /// copie le payload dans out ; renvoie sa longueur, ou -1 si trame invalide / capacite insuffisante
+    let parse (b: ReadOnlySpan<byte>) (out: Span<byte>) : int =
+        if not (validate b) then -1
+        else
+            let m = b.Length - 3
+            if m > out.Length then -1
+            else
+                b.Slice(3).CopyTo(out)
+                m
+    /// FNV-1a 32 bits
+    let hash (b: ReadOnlySpan<byte>) : uint32 =
+        let mutable h = 2166136261u
+        for i in 0 .. b.Length - 1 do
+            h <- (h ^^^ uint32 b.[i]) * 16777619u
+        h
+
+/// Adaptateur de comparaison : (validate, payload parse ou null, hash de la trame) pour une implementation
+let coreTriplet (impl: string) (f: byte[]) : bool * byte[] * uint32 =
+    match impl with
+    | "fsharp" ->
+        let out = Array.zeroCreate<byte> 64
+        let m = FsCore.parse (ReadOnlySpan f) (Span out)
+        FsCore.validate (ReadOnlySpan f), (if m < 0 then null else Array.sub out 0 m), FsCore.hash (ReadOnlySpan f)
+    | "fstar" ->
+        let l = List.ofArray f
+        Core.core_validate l, (match Core.core_parse l with Some p -> Array.ofList p | None -> null), Core.core_hash l
+    | _ ->
+        let n = f.Length
+        let p = Marshal.AllocHGlobal(max 1 n)
+        let o = Marshal.AllocHGlobal 64
+        let ol = Marshal.AllocHGlobal 8
+        try
+            if n > 0 then Marshal.Copy(f, 0, p, n)
+            let v = Native.core_validate (p, unativeint n) = 1
+            let ok = Native.core_parse (p, unativeint n, o, 64un, ol) = 1
+            let payload =
+                if ok then
+                    let m = int (Marshal.ReadInt64 ol)
+                    let r = Array.zeroCreate<byte> m
+                    Marshal.Copy(o, r, 0, m)
+                    r
+                else null
+            v, payload, Native.core_hash (p, unativeint n)
+        finally
+            Marshal.FreeHGlobal p; Marshal.FreeHGlobal o; Marshal.FreeHGlobal ol
+
+/// Verification d'equivalence au demarrage du scenario : vecteurs FNV officiels + trames valides/invalides,
+/// comparees a la reference Rust (C-ABI) et aux valeurs attendues ; echoue bruyamment (exit 3) sinon.
+let verifyCore (impl: string) : string =
+    let ascii (s: string) = Text.Encoding.ASCII.GetBytes s
+    let frame (p: byte[]) = Array.append [| 0xA5uy; 1uy; byte p.Length |] p
+    let errs = ResizeArray<string>()
+    // vecteurs FNV-1a 32 (hash d'octets bruts)
+    for (inp, exp) in [ ascii "", 0x811C9DC5u; ascii "a", 0xE40C292Cu; ascii "foobar", 0xBF9CF968u ] do
+        let _, _, h = coreTriplet impl inp
+        if h <> exp then errs.Add("hash(" + Text.Encoding.ASCII.GetString inp + ")=" + h.ToString("x8") + " attendu " + exp.ToString("x8"))
+    let hello = frame (ascii "hello")
+    let cases =
+        [ "hello", hello, true
+          "n=4 (longueur inexacte)", (let g = Array.copy hello in g.[2] <- 4uy; g), false
+          "n=65 (> 64)", frame (Array.zeroCreate 65), false
+          "payload 64", frame (Array.init 64 byte), true
+          "payload vide", frame [||], true
+          "mauvais magic", (let g = Array.copy hello in g.[0] <- 0xA4uy; g), false
+          "mauvaise version", (let g = Array.copy hello in g.[1] <- 2uy; g), false
+          "trop court", [| 0xA5uy; 1uy |], false
+          "vide", [||], false
+          "octet en trop", Array.append hello [| 0uy |], false ]
+    for (name, f, expValid) in cases do
+        let (v, p, h) = coreTriplet impl f
+        let (rv, rp, rh) = coreTriplet "rust" f
+        if v <> expValid || v <> rv then errs.Add(name + ": validate=" + string v + " rust=" + string rv + " attendu=" + string expValid)
+        if (isNull p) <> (isNull rp) || (not (isNull p) && p <> rp) then errs.Add(name + ": parse differe de rust")
+        if not (isNull p) && p <> f.[3..] then errs.Add(name + ": payload incorrect")
+        if h <> rh then errs.Add(name + ": hash=" + h.ToString("x8") + " rust=" + rh.ToString("x8"))
+    if errs.Count > 0 then
+        let msg = "BENCH_CORE_IMPL=" + impl + " : equivalence avec le coeur Rust ECHOUEE : " + String.Join(" ; ", errs)
+        Console.Error.WriteLine msg
+        Console.Error.Flush()
+        exit 3
+    "equivalence " + impl + "/rust verifiee au demarrage (3 vecteurs FNV + " + string (List.length cases) + " trames)"
+
+// ---------------------------------------------------------------- coeur (threads de fond)
+type CoreRunner(suppress: bool, impl: string) =
     let mutable stop = false
     let mutable calls = 0L
     let mutable heavy = 0L
@@ -504,35 +607,62 @@ type CoreRunner(suppress: bool) =
     let mutable baseCalls = 0L
     let mutable baseHeavy = 0L
     let sw = Stopwatch()
+    member _.Impl = impl
     member _.Start() =
         let worker = Thread((fun () ->
-            let f = Marshal.AllocHGlobal 8
-            let o = Marshal.AllocHGlobal 64
-            let ol = Marshal.AllocHGlobal 8
             let src = [| 0xA5uy; 1uy; 5uy; byte 'h'; byte 'e'; byte 'l'; byte 'l'; byte 'o' |]
-            Marshal.Copy(src, 0, f, 8)
             let mutable local = 0L
             let mutable a = 0UL
-            if suppress then
+            // 1 call = 1 triplet validate+parse+hash sur la trame de 8 octets ; resultat accumule et publie
+            match impl with
+            | "fsharp" ->
+                let out = Array.zeroCreate<byte> 64
                 while not (Volatile.Read(&stop)) do
                     for _ in 1 .. 1000 do
-                        a <- a + uint64 (Native.core_validate_s (f, 8un))
-                        a <- a + uint64 (Native.core_parse_s (f, 8un, o, 64un, ol))
-                        a <- a + uint64 (Native.core_hash_s (f, 8un))
+                        let f = ReadOnlySpan<byte>(src)
+                        a <- a + (if FsCore.validate f then 1UL else 0UL)
+                        a <- a + (if FsCore.parse f (Span<byte>(out)) >= 0 then 1UL else 0UL)
+                        a <- a + uint64 (FsCore.hash f)
                     local <- local + 1000L
                     Volatile.Write(&calls, local)
-                    Volatile.Write(&acc, a)   // resultat accumule et publie : la boucle ne peut pas etre eliminee
-            else
+                    Volatile.Write(&acc, a)
+            | "fstar" ->
+                // le code extrait travaille sur list<uint8> : trame construite une fois, reutilisee
+                let l : uint8 list = List.ofArray src
                 while not (Volatile.Read(&stop)) do
                     for _ in 1 .. 1000 do
-                        a <- a + uint64 (Native.core_validate (f, 8un))
-                        a <- a + uint64 (Native.core_parse (f, 8un, o, 64un, ol))
-                        a <- a + uint64 (Native.core_hash (f, 8un))
+                        a <- a + (if Core.core_validate l then 1UL else 0UL)
+                        a <- a + (match Core.core_parse l with Some _ -> 1UL | None -> 0UL)
+                        a <- a + uint64 (Core.core_hash l)
                     local <- local + 1000L
                     Volatile.Write(&calls, local)
-                    Volatile.Write(&acc, a)), IsBackground = true, Name = "core-worker")
+                    Volatile.Write(&acc, a)
+            | _ ->
+                let f = Marshal.AllocHGlobal 8
+                let o = Marshal.AllocHGlobal 64
+                let ol = Marshal.AllocHGlobal 8
+                Marshal.Copy(src, 0, f, 8)
+                if suppress then
+                    while not (Volatile.Read(&stop)) do
+                        for _ in 1 .. 1000 do
+                            a <- a + uint64 (Native.core_validate_s (f, 8un))
+                            a <- a + uint64 (Native.core_parse_s (f, 8un, o, 64un, ol))
+                            a <- a + uint64 (Native.core_hash_s (f, 8un))
+                        local <- local + 1000L
+                        Volatile.Write(&calls, local)
+                        Volatile.Write(&acc, a)   // resultat accumule et publie : la boucle ne peut pas etre eliminee
+                else
+                    while not (Volatile.Read(&stop)) do
+                        for _ in 1 .. 1000 do
+                            a <- a + uint64 (Native.core_validate (f, 8un))
+                            a <- a + uint64 (Native.core_parse (f, 8un, o, 64un, ol))
+                            a <- a + uint64 (Native.core_hash (f, 8un))
+                        local <- local + 1000L
+                        Volatile.Write(&calls, local)
+                        Volatile.Write(&acc, a)), IsBackground = true, Name = "core-worker")
         let hv = Thread((fun () ->
-            // core_heavy(100) toutes les 1 s (echeances absolues)
+            // core_heavy(100) toutes les 1 s (echeances absolues) : toujours l'appel Rust (generateur de charge de fond,
+            // hors du coeur mesure), quelle que soit BENCH_CORE_IMPL
             let t = Stopwatch.StartNew()
             let mutable k = 0L
             while not (Volatile.Read(&stop)) do
@@ -640,9 +770,15 @@ type CoreScenario(model: ShapesModel, view: ShapesView, core: CoreRunner, suppre
     override _.Ops sb =
         kvF sb "calls_per_s" core.CallsPerS
         kvI sb "heavy_calls" core.Heavy
-        kvS sb "suppress_gc_transition" (if suppress then "true" else "false")
+        kvS sb "core_impl" core.Impl
+        kvS sb "suppress_gc_transition" (if suppress && core.Impl = "rust" then "true" else "false")
         kvS sb "acc" (core.Acc.ToString("x", inv))
-    override _.Notes = "core: DllImport blittable" + (if suppress then " + SuppressGCTransition (validate/parse/hash)" else " (avec transition GC)") + ", " + coreLinkNote + " ; UI 1000 formes."
+    override _.Notes =
+        (match core.Impl with
+         | "fstar" -> "core: impl fstar = Core.core_validate/core_parse/core_hash extraits (list<uint8>, trame construite une fois ; parse renvoie la queue de liste sans copie) ; " + FSTAR_PROVENANCE
+         | "fsharp" -> "core: impl fsharp = coeur F# ecrit a la main (ReadOnlySpan<byte>, sans FFI ; parse copie le payload)"
+         | _ -> "core: impl rust = DllImport blittable" + (if suppress then " + SuppressGCTransition (validate/parse/hash)" else " (avec transition GC)") + ", " + coreLinkNote)
+        + " ; " + coreVerifyNote + " ; core_heavy(100)/s = appel Rust (charge de fond hors coeur mesure) ; UI 1000 formes."
 
 type StressScenario(list: ListScenario, model: ShapesModel, view: ShapesView, core: CoreRunner) =
     inherit Scenario()
@@ -661,6 +797,7 @@ type StressScenario(list: ListScenario, model: ShapesModel, view: ShapesView, co
     override _.Finish() = list.Finish(); core.Stop()
     override _.Ops sb =
         list.Ops sb
+        kvS sb "core_impl" core.Impl
         kvF sb "calls_per_s" core.CallsPerS
         kvI sb "heavy_calls" core.Heavy
         kvRaw sb "not_rendered" "[]"
@@ -1021,7 +1158,13 @@ let buildWindow () : Window =
     let mutable sc : Scenario = Unchecked.defaultof<Scenario>
     let mutable idle = false
     let mutable onFirst : float -> unit = ignore
-    let core () = CoreRunner(a.SuppressGc)
+    let core () =
+        let impl = match Environment.GetEnvironmentVariable "BENCH_CORE_IMPL" with
+                   | null | "" -> "rust"
+                   | "rust" | "fstar" | "fsharp" as v -> v
+                   | v -> Console.Error.WriteLine("BENCH_CORE_IMPL inconnu: " + v + " (rust|fstar|fsharp)"); exit 3
+        coreVerifyNote <- verifyCore impl
+        CoreRunner(a.SuppressGc, impl)
     match a.Scenario with
     | "idle" ->
         let lv = ListView()

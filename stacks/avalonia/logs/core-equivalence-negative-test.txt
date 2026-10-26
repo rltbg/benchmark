@@ -1,0 +1,4 @@
+Test negatif (2026-10-26) : FsCore.hash mute temporairement (prime 16777619u -> 16777617u), build JIT dev, BENCH_CORE_IMPL=fsharp, scenario core :
+BENCH_CORE_IMPL=fsharp : equivalence avec le coeur Rust ECHOUEE : hash(a)=e1d2ede4 attendu e40c292c ; hash(foobar)=bffbf4c2 attendu bf9cf968 ; hello: hash=07bd9fe6 rust=833246ea ; n=4 (longueur inexacte): hash=ce237227 rust=04c3d2db ; n=65 (> 64): hash=85bfa0b0 rust=a6a18402 ; payload 64: hash=cab8f...
+(processus termine par exit 3 avant l'ouverture de la fenetre ; mutation annulee ensuite)
+BENCH_CORE_IMPL=bogus -> "BENCH_CORE_IMPL inconnu: bogus (rust|fstar|fsharp)", rc=3

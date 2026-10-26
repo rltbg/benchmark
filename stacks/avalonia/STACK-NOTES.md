@@ -18,7 +18,7 @@ Champ JSON `version` (exemple) : `Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simp
   - `avalonia-aot	${ROOT}/stacks/avalonia/out/aot/avalonia-bench`
   - `avalonia-jit	${ROOT}/stacks/avalonia/out/jit/avalonia-bench`
 - Options hors spec : `--no-suppress-gc-transition` (core/stress), `--text-control textbox` (ancienne voie TextBox, pour comparaison). `run1.sh <aot|jit> <scenario> <durée>` : fumée manuelle.
-- Code : `Program.fs` 1194 lignes, `TextStyles.fs` 10, `TextStyles.axaml` 7, fsproj 50, build.sh 22.
+- Code : `Program.fs` 1337 lignes (dont ~145 pour les cœurs sélectionnables), `TextStyles.fs` 10, `TextStyles.axaml` 7, fsproj 53, build.sh 22 ; + `fstar/extracted/{FStarCustard,Core}.fs` (288 + 59 lignes, inclus par chemin, non copiés).
 
 ## Définition de frame (notes JSON)
 `frame_ms[i]` = intervalle entre deux **fins de rendu** consécutives du thread de rendu : `CompositionBatch.Rendered` (API publique, obtenue par `Compositor.RequestCompositionBatchCommitAsync()` dans le callback `TopLevel.RequestAnimationFrame` qui modifie le contenu ; continuation synchrone horodatée sur le thread de rendu). Dans Avalonia 12.1.4, `Rendered` est signalé après `Render()` de toutes les cibles, c.-à-d. après le raster Skia et le present X11 (`XPutImage` + `XSync`) (`ServerCompositor.RenderReentrancySafe`, `X11FramebufferSurface.Blit`). Une frame = un batch qui porte une modification (nav : seulement pendant les transitions). À la fin, l'app attend le `Rendered` des batches déjà commités avant `BENCH:measure_end`.
@@ -54,6 +54,19 @@ Champ JSON `version` (exemple) : `Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simp
 ## Fumée harnais (8 s, 1 run, machine partagée load ~6 : pas des mesures) — `logs/smoke-summary.txt`
 AOT : idle RSS 46,6 Mo CPU 0 % ; list 61,1 FPS p95 18,9 ms CPU 12 % RSS 51,4 Mo ; stream-10k 60,5 FPS 0 drop ; canvas 10,4 FPS ; text 58,2 FPS ttfd 127 ms layout 42 ms RSS 120 Mo (3 GC, pause max 92 ms) ; images 60,9 FPS 600 décodées ; nav 58,4 FPS 16 transitions/8 s ; core 51,7 FPS 111 M/s 8 heavy ; input 61 FPS latence p50/p95 29,3/35,2 ms 0 perdu ; stress 4,8 FPS. Tous : rc 0, `markers: True`, `sum_heights` 8 799 584, gc 0 (sauf text).
 JIT : idle RSS 83,5 Mo ; list 58,7 FPS ; canvas 10,0 ; text 47,7 FPS ttfd 711 ms ; core 35,7 FPS 58,6 M/s ; input p50 29,1 ms ; stress 3,6 FPS.
+
+## Cœur : rust / fstar / fsharp (variable `BENCH_CORE_IMPL`, même binaire)
+- `rust` (défaut, comportement inchangé) : P/Invoke vers `libbenchcore` (AOT : `.a` liée statiquement ; `SuppressGCTransition`).
+- `fstar` : code F# **extrait par F\* v2026.10.25** (commit 362e792b3aa882f1766b95c7450e3fe63081163d, backend Custard `--codegen FSharp`) : `$(BENCH_ROOT)/fstar/extracted/FStarCustard.fs` puis `Core.fs` inclus dans le fsproj par `Compile Include` (lien, aucune copie, **aucune modification** ; sha256 Core.fs 0af40710aae1…, FStarCustard.fs 772c090479f7…, commit dépôt 27073d5). Compile tel quel en JIT et en NativeAOT : **0 warning F# et 0 nouveau warning AOT/trim** (liste détaillée `TrimmerSingleWarn=false` identique avant/après : 39 lignes uniques, toutes FSharp.Core ; `logs/publish-aot-singlewarn-false-v3-core.log`). Le code extrait travaille sur `list<uint8>` (et `bigint` pour la longueur) : la trame « hello » est construite une fois en liste et réutilisée ; `core_parse` renvoie la queue de liste (`Some rest`, pas de copie), `core_hash` est appliqué à la trame entière (comme `core_hash(f, 8)` côté Rust).
+- `fsharp` : témoin F# écrit à la main, sans FFI (`ReadOnlySpan<byte>`, mêmes règles que `core/src/lib.rs` : magic 0xA5, version 1, n ≤ 64, longueur exacte ; FNV-1a 32 ; `parse` copie le payload dans un tampon de 64 octets).
+- 1 call = 1 triplet validate+parse+hash sur la même trame de 8 octets ; résultat accumulé (validate 0/1 + parse 0/1 + hash) et publié (`ops.acc`). `core_heavy(100)` toutes les 1 s reste **l'appel Rust** dans les 3 variantes (générateur de charge de fond, hors du cœur mesuré).
+- **Équivalence vérifiée au démarrage** du scénario core (et stress) pour la variante choisie : vecteurs FNV 0x811C9DC5 (""), 0xE40C292C ("a"), 0xBF9CF968 ("foobar") + 10 trames (hello, n inexact, n=65, payload 64, vide, magic/version faux, trop court, vide, octet en trop) comparées à Rust (validate, payload parse, hash). Échec → message sur stderr et `exit 3` (test négatif par mutation du premier FNV : `logs/core-equivalence-negative-test.txt`). Valeur inconnue → `exit 3`.
+- JSON : `ops.core_impl`, notes (provenance), `version` contient `core rust|fstar (F* v2026.10.25 commit 362e792b, extraction … Core.fs sha256 …)|fsharp`.
+- Fumée harnais (8 s, 1 run, load ~1,9, **non officiel**, `logs/smoke-core-impl.txt`) — calls/s : AOT rust 89,2 M, fstar 6,26 M, fsharp 57,1 M (répétitions 56,1 / 60,2 M) ; JIT rust 73,2 M, fstar 6,84 M, fsharp 106,1 M. fstar alloue (listes, options, bigint de `length`) : 56 GC (35 ms de pauses) en 8 s en AOT, RSS 176 Mo contre 45 Mo. Observation non investiguée : le témoin F# est ~2x plus rapide en JIT (PGO dynamique/tiering) qu'en NativeAOT.
+- Lignes `harness/stacks.tsv` :
+  - `avalonia-aot	${ROOT}/stacks/avalonia/out/aot/avalonia-bench`
+  - `avalonia-aot-fstar	${ROOT}/stacks/avalonia/out/aot/avalonia-bench	--env BENCH_CORE_IMPL=fstar`
+  - `avalonia-aot-fsharp	${ROOT}/stacks/avalonia/out/aot/avalonia-bench	--env BENCH_CORE_IMPL=fsharp`
 
 ## Déploiement
 - `out/aot` 37,8 Mo : `avalonia-bench` 25,6 Mo + `libSkiaSharp.so` 11,2 Mo + `libHarfBuzzSharp.so` 2,8 Mo. `ldd avalonia-bench` : libm, libgcc_s, libc (X11/fontconfig chargés par dlopen). `ldd libSkiaSharp.so` : libpthread, libfontconfig, libdl, libm, libc, libfreetype, libexpat, libz, libbz2, libpng16, libbrotlidec/common.

@@ -1,11 +1,11 @@
   Determining projects to restore...
-  Restored /home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj (in 1.17 sec).
+  Restored /home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj (in 2.46 sec).
   AvaloniaBench -> /home/user/benchmark/stacks/avalonia/artifacts/aot/bin/AvaloniaBench/release_linux-x64/avalonia-bench.dll
   Generating native code
 /root/.nuget/packages/fsharp.core/10.1.403/lib/netstandard2.1/FSharp.Core.dll : warning IL3053: Assembly 'FSharp.Core' produced AOT analysis warnings. [/home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj]
 /root/.nuget/packages/fsharp.core/10.1.403/lib/netstandard2.1/FSharp.Core.dll : warning IL2104: Assembly 'FSharp.Core' produced trim warnings. For more information see https://aka.ms/il2104 [/home/user/benchmark/stacks/avalonia/AvaloniaBench.fsproj]
   AvaloniaBench -> /home/user/benchmark/stacks/avalonia/out/aot/
 
-real	0m58.721s
-user	1m38.664s
-sys	0m3.702s
+real	1m32.813s
+user	1m48.816s
+sys	0m15.107s

@@ -18,3 +18,5 @@ egui-glow	${ROOT}/stacks/egui/target/release/egui_bench	--env EGUI_BENCH_RENDERE
 flutter	${ROOT}/stacks/flutter/app/build/linux/x64/release/bundle/benchapp	
 flutter-skia	${ROOT}/stacks/flutter/app/build/linux/x64/release/bundle/benchapp	--env BENCH_FLUTTER_IMPELLER=0
 nsh	${ROOT}/stacks/nsh/run.sh	
+avalonia-aot-fstar	${ROOT}/stacks/avalonia/out/aot/avalonia-bench	--env BENCH_CORE_IMPL=fstar
+avalonia-aot-fsharp	${ROOT}/stacks/avalonia/out/aot/avalonia-bench	--env BENCH_CORE_IMPL=fsharp

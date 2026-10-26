@@ -34,6 +34,9 @@
     <NativeLibrary Include="$([MSBuild]::NormalizePath('$(BenchRoot)', 'core', 'target', 'release', 'libbenchcore.a'))" />
   </ItemGroup>
   <ItemGroup>
+    <!-- Coeur extrait par F* v2026.10.25 (backend Custard), inclus TEL QUEL depuis le depot (pas de copie) -->
+    <Compile Include="$([MSBuild]::NormalizePath('$(BenchRoot)', 'fstar', 'extracted', 'FStarCustard.fs'))" Link="fstar/FStarCustard.fs" />
+    <Compile Include="$([MSBuild]::NormalizePath('$(BenchRoot)', 'fstar', 'extracted', 'Core.fs'))" Link="fstar/Core.fs" />
     <Compile Include="TextStyles.fs" />
     <Compile Include="Program.fs" />
     <!-- TextStyles.axaml : inclus implicitement comme AvaloniaXaml par Avalonia.Build -->
