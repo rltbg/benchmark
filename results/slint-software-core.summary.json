@@ -1,0 +1,567 @@
+{
+ "summary": {
+  "tag": "slint-software-core",
+  "stack": "slint-software",
+  "scenario": "core",
+  "runs": 3,
+  "ok_runs": 3,
+  "oom_runs": 0,
+  "markers_ok": 3,
+  "agg": {
+   "fps_mean": {
+    "median": 61.99804434684672,
+    "p95": 62.050932140847976,
+    "min": 61.91333013293845,
+    "max": 62.050932140847976,
+    "n": 3
+   },
+   "frame_p50": {
+    "median": 16.042410999999998,
+    "p95": 16.043618,
+    "min": 16.032336,
+    "max": 16.043618,
+    "n": 3
+   },
+   "frame_p95": {
+    "median": 17.877869,
+    "p95": 17.893098,
+    "min": 17.863141,
+    "max": 17.893098,
+    "n": 3
+   },
+   "frame_p99": {
+    "median": 19.73151,
+    "p95": 19.913475,
+    "min": 18.806736,
+    "max": 19.913475,
+    "n": 3
+   },
+   "frame_max": {
+    "median": 26.577532,
+    "p95": 47.055239,
+    "min": 24.787055,
+    "max": 47.055239,
+    "n": 3
+   },
+   "dropped_gt16_7": {
+    "median": 202,
+    "p95": 225,
+    "min": 198,
+    "max": 225,
+    "n": 3
+   },
+   "dropped_gt8_3": {
+    "median": 866,
+    "p95": 868,
+    "min": 865,
+    "max": 868,
+    "n": 3
+   },
+   "dropped_gt25": {
+    "median": 1,
+    "p95": 2,
+    "min": 0,
+    "max": 2,
+    "n": 3
+   },
+   "rss_kb_median": {
+    "median": 22996,
+    "p95": 23056.0,
+    "min": 22644,
+    "max": 23056.0,
+    "n": 3
+   },
+   "rss_kb_peak": {
+    "median": 22996,
+    "p95": 23064,
+    "min": 22644,
+    "max": 23064,
+    "n": 3
+   },
+   "pss_kb_median": {
+    "median": 18139,
+    "p95": 18192.0,
+    "min": 17804,
+    "max": 18192.0,
+    "n": 3
+   },
+   "pss_kb_peak": {
+    "median": 18139,
+    "p95": 18200,
+    "min": 17804,
+    "max": 18200,
+    "n": 3
+   },
+   "cpu_pct_core_mean": {
+    "median": 139.55775848097065,
+    "p95": 139.74260660969728,
+    "min": 138.8235502477193,
+    "max": 139.74260660969728,
+    "n": 3
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 144.59596689242784,
+    "p95": 145.12582088820886,
+    "min": 144.33564419250226,
+    "max": 145.12582088820886,
+    "n": 3
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.060423303999869,
+    "p95": 2.0942562289999387,
+    "min": 2.0523178830001143,
+    "max": 2.0942562289999387,
+    "n": 3
+   },
+   "wall_s": {
+    "median": 16.120315523000045,
+    "p95": 16.130233385999873,
+    "min": 16.07197227300003,
+    "max": 16.130233385999873,
+    "n": 3
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 16.130233385999873,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.060423303999869,
+   "frames": 866,
+   "ops": {
+    "app_step_ms_mean": 0.2072713773731116,
+    "calls": 1060622336,
+    "calls_per_s": 75736755.6004352,
+    "draw_ms_mean": 4.323479149942329,
+    "graph_points": 0,
+    "heavy_calls": 14,
+    "max_frame_stall_ms": 47.055239,
+    "not_rendered": [
+     "drop_shadow",
+     "linear_gradient_with_border_radius (circles and rounded rects drawn as square gradients)",
+     "rounded_clip (clip of the rounded panel is rectangular)"
+    ],
+    "pacing": "60",
+    "shadows_rendered": false,
+    "shapes": 1000,
+    "sum_heights": 8799584
+   },
+   "checksum": "c7ed0417",
+   "unsupported": null,
+   "version": "slint 1.18.1 (backend winit 0.30.13 x11, renderer software (i-slint-renderer-software 1.18.1), softbuffer 0.4.8); rustc 1.99.1 (58cf8f9c3 2026-10-13); image 0.25.10",
+   "fps_mean": 61.91333013293845,
+   "frame_p50": 16.043618,
+   "frame_p95": 17.877869,
+   "frame_p99": 18.806736,
+   "frame_max": 47.055239,
+   "dropped_gt16_7": 198,
+   "dropped_gt8_3": 866,
+   "dropped_gt25": 1,
+   "dropped_ms_gt16_7": 168.55110300000013,
+   "window": "markers",
+   "rss_kb_median": 22996,
+   "rss_kb_peak": 22996,
+   "pss_kb_median": 18139,
+   "pss_kb_peak": 18139,
+   "pss_kb_first_quarter": 18123.0,
+   "pss_kb_last_quarter": 18139.0,
+   "cpu_pct_core_mean": 138.8235502477193,
+   "cpu_pct_core_peak_1s": 145.12582088820886,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     1632,
+     737
+    ],
+    [
+     1.0,
+     1.39,
+     22976,
+     18119
+    ],
+    [
+     2.1,
+     2.88,
+     22976,
+     18119
+    ],
+    [
+     3.1,
+     4.33,
+     22980,
+     18123
+    ],
+    [
+     4.1,
+     5.79,
+     22980,
+     18123
+    ],
+    [
+     5.1,
+     7.25,
+     22984,
+     18127
+    ],
+    [
+     6.2,
+     8.66,
+     22984,
+     18127
+    ],
+    [
+     7.2,
+     10.09,
+     22992,
+     18135
+    ],
+    [
+     8.2,
+     11.54,
+     22992,
+     18135
+    ],
+    [
+     9.2,
+     12.94,
+     22996,
+     18139
+    ],
+    [
+     10.3,
+     14.35,
+     22996,
+     18139
+    ],
+    [
+     11.3,
+     15.81,
+     22996,
+     18139
+    ],
+    [
+     12.3,
+     17.25,
+     22996,
+     18139
+    ],
+    [
+     13.4,
+     18.67,
+     22996,
+     18139
+    ],
+    [
+     14.4,
+     20.08,
+     22996,
+     18139
+    ],
+    [
+     15.4,
+     21.48,
+     22996,
+     18139
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 16.120315523000045,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.0523178830001143,
+   "frames": 867,
+   "ops": {
+    "app_step_ms_mean": 0.21272134890965674,
+    "calls": 1079029760,
+    "calls_per_s": 77068887.07648675,
+    "draw_ms_mean": 4.437612908986176,
+    "graph_points": 0,
+    "heavy_calls": 14,
+    "max_frame_stall_ms": 24.787055,
+    "not_rendered": [
+     "drop_shadow",
+     "linear_gradient_with_border_radius (circles and rounded rects drawn as square gradients)",
+     "rounded_clip (clip of the rounded panel is rectangular)"
+    ],
+    "pacing": "60",
+    "shadows_rendered": false,
+    "shapes": 1000,
+    "sum_heights": 8799584
+   },
+   "checksum": "663a2bb1",
+   "unsupported": null,
+   "version": "slint 1.18.1 (backend winit 0.30.13 x11, renderer software (i-slint-renderer-software 1.18.1), softbuffer 0.4.8); rustc 1.99.1 (58cf8f9c3 2026-10-13); image 0.25.10",
+   "fps_mean": 61.99804434684672,
+   "frame_p50": 16.032336,
+   "frame_p95": 17.893098,
+   "frame_p99": 19.73151,
+   "frame_max": 24.787055,
+   "dropped_gt16_7": 225,
+   "dropped_gt8_3": 865,
+   "dropped_gt25": 0,
+   "dropped_ms_gt16_7": 172.92890100000014,
+   "window": "markers",
+   "rss_kb_median": 22644,
+   "rss_kb_peak": 22644,
+   "pss_kb_median": 17804,
+   "pss_kb_peak": 17804,
+   "pss_kb_first_quarter": 17788.0,
+   "pss_kb_last_quarter": 17804.0,
+   "cpu_pct_core_mean": 139.55775848097065,
+   "cpu_pct_core_peak_1s": 144.59596689242784,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2260,
+     1079
+    ],
+    [
+     1.0,
+     1.4,
+     22624,
+     17784
+    ],
+    [
+     2.1,
+     2.85,
+     22624,
+     17784
+    ],
+    [
+     3.1,
+     4.34,
+     22628,
+     17788
+    ],
+    [
+     4.1,
+     5.8,
+     22628,
+     17788
+    ],
+    [
+     5.1,
+     7.28,
+     22632,
+     17792
+    ],
+    [
+     6.2,
+     8.72,
+     22632,
+     17792
+    ],
+    [
+     7.2,
+     10.13,
+     22636,
+     17796
+    ],
+    [
+     8.2,
+     11.55,
+     22636,
+     17796
+    ],
+    [
+     9.2,
+     12.97,
+     22644,
+     17804
+    ],
+    [
+     10.3,
+     14.38,
+     22644,
+     17804
+    ],
+    [
+     11.3,
+     15.79,
+     22644,
+     17804
+    ],
+    [
+     12.3,
+     17.2,
+     22644,
+     17804
+    ],
+    [
+     13.4,
+     18.64,
+     22644,
+     17804
+    ],
+    [
+     14.4,
+     20.08,
+     22644,
+     17804
+    ],
+    [
+     15.4,
+     21.51,
+     22644,
+     17804
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 16.07197227300003,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.0942562289999387,
+   "frames": 868,
+   "ops": {
+    "app_step_ms_mean": 0.20705371058732608,
+    "calls": 1006159872,
+    "calls_per_s": 71845681.88391927,
+    "draw_ms_mean": 4.4498645155351015,
+    "graph_points": 0,
+    "heavy_calls": 14,
+    "max_frame_stall_ms": 26.577532,
+    "not_rendered": [
+     "drop_shadow",
+     "linear_gradient_with_border_radius (circles and rounded rects drawn as square gradients)",
+     "rounded_clip (clip of the rounded panel is rectangular)"
+    ],
+    "pacing": "60",
+    "shadows_rendered": false,
+    "shapes": 1000,
+    "sum_heights": 8799584
+   },
+   "checksum": "7caf5ed7",
+   "unsupported": null,
+   "version": "slint 1.18.1 (backend winit 0.30.13 x11, renderer software (i-slint-renderer-software 1.18.1), softbuffer 0.4.8); rustc 1.99.1 (58cf8f9c3 2026-10-13); image 0.25.10",
+   "fps_mean": 62.050932140847976,
+   "frame_p50": 16.042410999999998,
+   "frame_p95": 17.863141,
+   "frame_p99": 19.913475,
+   "frame_max": 26.577532,
+   "dropped_gt16_7": 202,
+   "dropped_gt8_3": 868,
+   "dropped_gt25": 2,
+   "dropped_ms_gt16_7": 178.38381800000013,
+   "window": "markers",
+   "rss_kb_median": 23056.0,
+   "rss_kb_peak": 23064,
+   "pss_kb_median": 18192.0,
+   "pss_kb_peak": 18200,
+   "pss_kb_first_quarter": 18176.0,
+   "pss_kb_last_quarter": 18192.0,
+   "cpu_pct_core_mean": 139.74260660969728,
+   "cpu_pct_core_peak_1s": 144.33564419250226,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     1720,
+     773
+    ],
+    [
+     1.1,
+     1.49,
+     22972,
+     18108
+    ],
+    [
+     2.1,
+     2.92,
+     23036,
+     18172
+    ],
+    [
+     3.1,
+     4.37,
+     23040,
+     18176
+    ],
+    [
+     4.2,
+     5.81,
+     23040,
+     18176
+    ],
+    [
+     5.2,
+     7.27,
+     23044,
+     18180
+    ],
+    [
+     6.2,
+     8.7,
+     23044,
+     18180
+    ],
+    [
+     7.2,
+     10.16,
+     23048,
+     18184
+    ],
+    [
+     8.3,
+     11.61,
+     23048,
+     18184
+    ],
+    [
+     9.3,
+     13.05,
+     23056,
+     18192
+    ],
+    [
+     10.3,
+     14.47,
+     23056,
+     18192
+    ],
+    [
+     11.3,
+     15.94,
+     23056,
+     18192
+    ],
+    [
+     12.4,
+     17.35,
+     23056,
+     18192
+    ],
+    [
+     13.4,
+     18.76,
+     23056,
+     18192
+    ],
+    [
+     14.4,
+     20.2,
+     23056,
+     18192
+    ],
+    [
+     15.5,
+     21.63,
+     23056,
+     18192
+    ]
+   ]
+  }
+ ]
+}
