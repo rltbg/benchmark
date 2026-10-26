@@ -202,7 +202,7 @@ impl Scenario for ListFfi {
         app.global::<Bench>().set_scroll_y(local);
         let _ = VIEW_H;
     }
-    fn ops(&mut self, _t: f64, _app: &MainWindow, ops: &mut Map<String, Value>) {
+    fn ops(&mut self, t: f64, _app: &MainWindow, ops: &mut Map<String, Value>) {
         ops.insert("sum_heights".into(), sum_heights(100_000, false).into());
         ops.insert("checksum_data".into(), format!("{:08x}", checksum_heights(100_000, false)).into());
         if self.scenario == "ffi-callbacks" {
@@ -230,6 +230,9 @@ impl Scenario for ListFfi {
             ops.insert("src_detail".into(), extra);
             ops.insert("rows_visible_updated".into(), self.inner.borrow().price_applied.into());
             ops.insert("rate".into(), self.rate.into());
+            // débit réellement émis (un rappel bloquant, comme invoke_from_event_loop sous charge, ralentit le producteur natif)
+            ops.insert("rate_achieved_per_s".into(), (produced as f64 / t.max(1e-9)).into());
+            ops.insert("rate_fraction".into(), (produced as f64 / (self.rate as f64 * t.max(1e-9))).into());
         } else {
             ops.insert("heavy_ms".into(), self.heavy_ms.into());
             ops.insert("heavy_calls".into(), (self.heavy_calls.load(Ordering::Relaxed) + self.ui_heavy_calls).into());
