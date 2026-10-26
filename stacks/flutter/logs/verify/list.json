@@ -1,0 +1,1 @@
+{"stack": "flutter", "scenario": "list", "toplevels_before": 0, "big_window_during": [{"w": 1280, "h": 720, "name": "\"benchapp\": (\"dev.bench.benchapp\" \"Dev.b"}], "toplevels_after": 0, "distinct_colors": 678, "nonbackground_pct": 14.5, "pixels_changed_between_captures_pct": 11.3, "png": "/home/user/benchmark/results/verification/flutter-list.png"}

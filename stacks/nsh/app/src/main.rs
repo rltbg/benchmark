@@ -1,6 +1,7 @@
 //! NSH (Native Shell) reference app: GTK 4 backend, Rust-only app (no QuickJS).
 //! This file is the host: CLI, window, frame measurement, markers, JSON output.
 
+mod probe;
 mod scenarios;
 mod shared;
 
@@ -118,7 +119,7 @@ fn main() -> glib::ExitCode {
             size: (1280, 720),
             ..Default::default()
         });
-        window.set_child(Some(&view.widget()));
+        window.set_child(Some(&probe::Probe::new(&view.widget())));
         view.load(App::Rust(Root::new::<scenarios::Bench>(|| ())));
         // The window keeps the view; closing it stops the app (docs: Linux, Embedding in a GTK app).
         let keep = Rc::new(RefCell::new(Some(Rc::clone(&view))));
@@ -135,8 +136,8 @@ fn main() -> glib::ExitCode {
         // Frame end = GdkFrameClock `after-paint`, the last phase of a GTK frame
         // (GSK has rendered and the surface's frame has been ended / submitted to X11;
         // the X server's presentation is not reported back without a compositor).
-        // The frame clock paints only when a widget was invalidated (a mounted batch,
-        // a scroll, a native animation step), so a tick alone paints nothing.
+        // A frame counts only if some widget was snapshotted again in it (probe.rs):
+        // a mounted batch, a scroll or a native animation step invalidated it.
         if let Some(clock) = window.frame_clock() {
             clock.connect_before_paint(|_| {
                 BEFORE.with(|b| *b.borrow_mut() = Some(now_ns()));
@@ -147,7 +148,14 @@ fn main() -> glib::ExitCode {
                 if TEXT_LAID_MS.load(Relaxed) != 0 && TEXT_FIRST_MS.load(Relaxed) == 0 {
                     TEXT_FIRST_MS.store((now_ns() / 1_000_000).max(1), Relaxed);
                 }
+                // Only frames that redrew something count (see probe.rs).
+                let drew = probe::take();
                 if START_NS.load(Relaxed) == 0 || STOP.load(Relaxed) {
+                    return;
+                }
+                if !drew {
+                    EMPTY_PAINTS.fetch_add(1, Relaxed);
+                    BEFORE.with(|b| b.borrow_mut().take());
                     return;
                 }
                 let now = now_ns();
@@ -212,6 +220,7 @@ fn write_json() {
     let mut ops = serde_json::Map::new();
     let sc = c.scenario.as_str();
     ops.insert("pacing".into(), json!(pacing()));
+    ops.insert("paints_without_change".into(), json!(EMPTY_PAINTS.load(Relaxed)));
     if matches!(sc, "list" | "stream" | "stress" | "idle" | "input") {
         ops.insert("sum_heights".into(), json!(sum_heights()));
         ops.insert("list_content_height_reported".into(), json!(f64_load(&CONTENT_H)));
@@ -284,7 +293,7 @@ fn write_json() {
         "notes": format!(
             "NSH 0.2.0 GTK4 backend, Rust-only app (no QuickJS). Frame end = GdkFrameClock after-paint on the GTK main thread \
              (last public post-render signal: GSK render done, X11 frame submitted; presentation not reported without a compositor). \
-             Only painted frames counted: the clock paints only when a mounted batch, a scroll or a native animation invalidated a widget. \
+             Only frames whose snapshot ran again (a widget was invalidated: mounted batch, scroll, native animation) are counted; paints that redrew nothing go to ops.paints_without_change. \
              Pacing {}: 60 = GdkFrameClock's own 60 Hz timer (no widget/frame-clock API changes it); uncapped = GDK_DEBUG=no-vsync \
              (documented GTK env option, GDK_DEBUG={}). \
              Rust components run on the NSH engine thread, GTK on the main thread, one batch hop per commit. Warm-up 2 s excluded. \

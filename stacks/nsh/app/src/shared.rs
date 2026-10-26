@@ -62,6 +62,7 @@ pub static TEXT_LAYOUT_MS: AtomicU64 = AtomicU64::new(0);
 pub static TEXT_BYTES: AtomicU64 = AtomicU64::new(0);
 /// Process ms (+1) at which the 1 MB text was first laid out (engine); 0 before.
 pub static TEXT_LAID_MS: AtomicU64 = AtomicU64::new(0);
+pub static EMPTY_PAINTS: AtomicU64 = AtomicU64::new(0);
 pub static KEY_EVENTS: AtomicU64 = AtomicU64::new(0);
 pub static MODALS: AtomicU64 = AtomicU64::new(0);
 /// Folded into the checksum (row prices applied, key toggles...).
@@ -81,7 +82,7 @@ pub const QUEUE_CAP: usize = 100_000;
 /// Zeroes the counters that accumulate from process start, at the start of the measured window
 /// (the producer and the core threads start with the measured window, so they count nothing before).
 pub fn reset_counters() {
-    for a in [&CALLS, &HEAVY, &ROWS_BOUND, &APPLIED, &GENERATED, &DROPPED, &TRANSITIONS, &MODALS, &KEY_EVENTS, &IMAGES_DECODED, &DECODE_US] {
+    for a in [&CALLS, &HEAVY, &ROWS_BOUND, &APPLIED, &GENERATED, &DROPPED, &TRANSITIONS, &MODALS, &KEY_EVENTS, &EMPTY_PAINTS, &IMAGES_DECODED, &DECODE_US] {
         a.store(0, Relaxed);
     }
 }
