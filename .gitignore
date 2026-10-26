@@ -27,3 +27,6 @@ stacks/flutter/pub-cache/
 **/krml-clean/
 **/karamel-clean/
 *.log.tmp
+bench3/qt/build/
+bench3/qt/deploy/
+bench3/qt/logs/
