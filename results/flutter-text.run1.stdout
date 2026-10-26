@@ -4,3 +4,4 @@
 
 ** (dev.bench.benchapp:12091): CRITICAL **: 08:39:59.888: void fl_gnome_settings_set_interface_settings(FlGnomeSettings *, GSettings *): assertion 'G_IS_SETTINGS(settings)' failed
 BENCH:measure_start
+BENCH:measure_end

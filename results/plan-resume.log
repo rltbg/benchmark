@@ -164,3 +164,7 @@ SUMMARY {"tag": "flutter-stream-r1000", "stack": "flutter", "scenario": "stream"
 === 08:38:06 flutter canvas d=14 runs=5 --shapes 20000
 SUMMARY {"tag": "flutter-canvas-s20000", "stack": "flutter", "scenario": "canvas", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropped_gt25": null, "rss_kb_median": {"median": 756572, "p95": 767208.0, "min": 676770.0, "max": 767208.0, "n
 === 08:39:39 flutter text d=14 runs=5 
+SUMMARY {"tag": "flutter-text", "stack": "flutter", "scenario": "text", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 31.88102630027409, "p95": 32.78203212524626, "min": 30.328204099657906, "max": 32.78203212524626, "n": 5}, "frame_p50": {"median": 31.294, "p95": 33.111, "min": 30.974, "max": 33.111, "n": 5}, "frame_p95": {"median": 46.261, "p95": 46.515, 
+=== 08:41:11 flutter images d=14 runs=5 
+SUMMARY {"tag": "flutter-images", "stack": "flutter", "scenario": "images", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 50.545584896779054, "p95": 52.65145502224417, "min": 41.62049616351277, "max": 52.65145502224417, "n": 5}, "frame_p50": {"median": 19.879, "p95": 22.631, "min": 19.232, "max": 22.631, "n": 5}, "frame_p95": {"median": 35.721, "p95": 39.5
+=== 08:42:40 flutter nav d=14 runs=5 
