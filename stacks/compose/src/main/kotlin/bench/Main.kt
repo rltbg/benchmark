@@ -108,6 +108,9 @@ fun main(argv: Array<String>) {
     val run = Run(args)
     run.ops["jvm_start_to_main_ms"] = (System.currentTimeMillis() - ManagementFactory.getRuntimeMXBean().startTime)
     val input = InputState()
+    if (System.getenv("BENCH_DEBUG_KEYS") == "1") java.awt.Toolkit.getDefaultToolkit().addAWTEventListener({ e ->
+        System.err.println("AWT ${System.nanoTime() / 1000000} ${e.id} ${e.javaClass.simpleName} ${(e as? java.awt.event.KeyEvent)?.keyCode} src=${e.source.javaClass.simpleName}")
+    }, java.awt.AWTEvent.KEY_EVENT_MASK or java.awt.AWTEvent.FOCUS_EVENT_MASK or java.awt.AWTEvent.WINDOW_FOCUS_EVENT_MASK)
     application {
         val state = rememberWindowState(size = DpSize(1280.dp, 720.dp), position = WindowPosition(0.dp, 0.dp))
         Window(

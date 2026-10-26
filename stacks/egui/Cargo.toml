@@ -1,18 +1,17 @@
 [package]
 name = "egui_bench"
-version = "0.1.0"
-edition = "2021"
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.95"
 
+# Versions épinglées (=x.y.z) : dernières stables vérifiées sur index.crates.io le 2026-10-26.
+# eframe : features par défaut (renderer par défaut = wgpu, `system_fonts` pour le repli CJK/emoji)
+# + `glow` pour la variante secondaire, choisie à l'exécution (EGUI_BENCH_RENDERER=glow).
 [dependencies]
-eframe = { version = "=0.37.0", default-features = false, features = ["x11", "default_fonts"] }
+eframe = { version = "=0.37.0", features = ["glow"] }
 egui = "=0.37.0"
-image = { version = "0.25", default-features = false, features = ["png"] }
+image = { version = "=0.25.10", default-features = false, features = ["png"] }
 benchcore = { path = "../../core" }
-
-[features]
-default = ["glow"]
-glow = ["eframe/glow"]
-wgpu = ["eframe/wgpu"]
 
 [profile.release]
 opt-level = 3

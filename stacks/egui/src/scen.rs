@@ -18,10 +18,10 @@ pub fn paint_row(p: &Painter, m: &ListModel, i: usize, x0: f32, x1: f32, y: f32)
     p.text(Pos2::new(x0 + 64.0, y + 8.0), Align2::LEFT_TOP, format!("Item #{i}"), FontId::proportional(17.0), Color32::WHITE);
     let q = fnv(i as u32 + 7) % 100000;
     let sub = format!("Quote {} \u{2014} {}.{:02}", i, q / 100, q % 100);
-    let sub3 = format!("{sub}   {sub}   {sub}   {sub}");
-    let pc = p.with_clip_rect(r.intersect(p.clip_rect()));
-    let g = pc.layout(sub3, FontId::proportional(13.0), Color32::from_gray(170), (x1 - x0 - 200.0).max(100.0));
-    pc.galley(Pos2::new(x0 + 64.0, y + 32.0), g, Color32::from_gray(170));
+    // sous-titre sur une ligne, clippé à la zone texte (à gauche du prix)
+    let tr = Rect::from_min_max(Pos2::new(x0 + 64.0, y), Pos2::new(x1 - 120.0, y + h));
+    let pc = p.with_clip_rect(tr.intersect(p.clip_rect()));
+    pc.text(Pos2::new(x0 + 64.0, y + 30.0), Align2::LEFT_TOP, sub, FontId::proportional(13.0), Color32::from_gray(170));
     let pr = m.prices[i];
     p.text(Pos2::new(x1 - 12.0, y + h / 2.0), Align2::RIGHT_CENTER, format!("{}.{:02}", pr / 100, pr % 100), FontId::monospace(16.0), Color32::from_rgb(120, 230, 150));
 }
@@ -49,67 +49,59 @@ pub fn draw_list(ui: &mut Ui, m: &mut ListModel, off: f64) {
 }
 
 // ---------------------------------------------------------------- texte
+/// Texte 1 Mo : idiome documenté de `TextEdit` pour un texte « sélectionnable mais non éditable »
+/// (`TextEdit::multiline(&mut &str)`, cf. docs.rs/egui/0.37.0/egui/widgets/text_edit/struct.TextEdit.html),
+/// dans une `ScrollArea` verticale ; un seul Galley pour tout le Mo (mis en cache par egui, lignes
+/// hors clip éliminées par `coarse_tessellation_culling`).
 pub struct TextView {
     pub text: String,
-    pub lines: Vec<(usize, usize)>,
-    pub layout_ms: f64,
+    pub load_ms: f64,
+    pub layout_ms: Option<f64>,
+    pub content_h: f32,
+    pub select_all_done: bool,
+    pub selected_chars: usize,
+    pub galley_rows: usize,
 }
 impl TextView {
     pub fn load(path: &str) -> Self {
         let t = Instant::now();
-        let text = std::fs::read_to_string(path).expect("text1mb.txt");
-        let mut lines = Vec::new();
-        let mut s = 0;
-        for (i, b) in text.bytes().enumerate() {
-            if b == b'\n' {
-                lines.push((s, i));
-                s = i + 1;
-            }
-        }
-        if s < text.len() {
-            lines.push((s, text.len()));
-        }
-        Self { text, lines, layout_ms: t.elapsed().as_secs_f64() * 1000.0 }
+        let text = std::fs::read_to_string(path).unwrap_or_else(|e| panic!("text1mb.txt ({path}): {e}"));
+        Self { text, load_ms: t.elapsed().as_secs_f64() * 1000.0, layout_ms: None, content_h: 0.0, select_all_done: false, selected_chars: 0, galley_rows: 0 }
     }
-    /// Un Label selectionnable par ligne, virtualise par ScrollArea::show_rows (hauteurs uniformes). Retourne l'offset scripte applique.
-    pub fn draw(&self, ui: &mut Ui, t: f64) -> f64 {
-        let n = self.lines.len();
-        let row_h = ui.text_style_height(&egui::TextStyle::Body);
+    /// Retourne l'offset scripté appliqué (aller-retour 3000 px/s).
+    pub fn draw(&mut self, ui: &mut Ui, t: f64, measuring: bool) -> f64 {
         let view_h = ui.available_height() as f64;
-        let max = (n as f64 * row_h as f64 - view_h).max(0.0);
-        let x = t * 3000.0;
-        let m = x.rem_euclid(2.0 * max);
-        let off = if m > max { 2.0 * max - m } else { m }; // aller-retour continu a 3000 px/s
-        ui.spacing_mut().item_spacing.y = 0.0;
-        egui::ScrollArea::vertical().id_salt("text").auto_shrink([false, false]).vertical_scroll_offset(off as f32).show_rows(ui, row_h, n, |ui, range| {
-            for i in range {
-                let (a, b) = self.lines[i];
-                ui.add(egui::Label::new(&self.text[a..b]).truncate().selectable(true));
+        let max = (self.content_h as f64 - view_h).max(0.0);
+        let off = ping(t * 3000.0, max);
+        let want_select = measuring && t >= 5.0 && !self.select_all_done;
+        let t0 = Instant::now();
+        let text = &self.text;
+        let out = egui::ScrollArea::vertical().id_salt("text").auto_shrink([false, false]).animated(false).vertical_scroll_offset(off as f32).show(ui, |ui| {
+            let mut s: &str = text;
+            let out = egui::TextEdit::multiline(&mut s).id_salt("text1mb").desired_width(f32::INFINITY).font(egui::TextStyle::Body).show(ui);
+            if want_select {
+                // « tout sélectionner » par API publique : focus + TextEditState::cursor (CCursorRange::select_all)
+                out.response.request_focus();
+                let mut st = out.state.clone();
+                st.cursor.set_char_range(Some(egui::text::CCursorRange::select_all(&out.galley)));
+                st.store(ui.ctx(), out.response.id);
             }
+            (out.galley.rows.len(), out.cursor_range.map(|r| { let r = r.as_sorted_char_range(); r.end.0 - r.start.0 }).unwrap_or(0))
         });
+        if self.layout_ms.is_none() { self.layout_ms = Some(t0.elapsed().as_secs_f64() * 1000.0); }
+        if want_select { self.select_all_done = true; }
+        self.galley_rows = out.inner.0;
+        self.selected_chars = out.inner.1;
+        self.content_h = out.content_size.y;
         off
     }
 }
-/// Ajoute des polices de repli systeme (CJK, arabe/hebreu via DejaVu) : egui n'embarque que Ubuntu-Light + emoji.
-pub fn install_fallback_fonts(ctx: &egui::Context) -> Vec<String> {
-    let mut fonts = egui::FontDefinitions::default();
-    let mut loaded = Vec::new();
-    for (name, path, idx) in [
-        ("noto-cjk", "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc", 0u32),
-        ("dejavu", "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 0),
-    ] {
-        if let Ok(bytes) = std::fs::read(path) {
-            let mut fd = egui::FontData::from_owned(bytes);
-            fd.index = idx;
-            fonts.font_data.insert(name.into(), Arc::new(fd));
-            for fam in [egui::FontFamily::Proportional, egui::FontFamily::Monospace] {
-                fonts.families.get_mut(&fam).unwrap().push(name.into());
-            }
-            loaded.push(name.to_string());
-        }
-    }
-    ctx.set_fonts(fonts);
-    loaded
+
+/// aller-retour 0..max
+pub fn ping(x: f64, max: f64) -> f64 {
+    if max <= 0.0 { return 0.0; }
+    let m = x.rem_euclid(2.0 * max);
+    if m > max { 2.0 * max - m } else { m }
 }
 
 // ---------------------------------------------------------------- images
@@ -137,7 +129,8 @@ impl Images {
                 let t = Instant::now();
                 let path = format!("{d}/images/img{i:03}.png");
                 if let Ok(img) = image::open(&path) {
-                    let img = img.to_rgba8();
+                    // vignette 128x128 (spec) calculée hors thread UI
+                    let img = image::imageops::resize(&img.to_rgba8(), 128, 128, image::imageops::FilterType::Triangle);
                     let ci = ColorImage::from_rgba_unmultiplied([img.width() as usize, img.height() as usize], img.as_raw());
                     let _ = tx.send((i, ci, t.elapsed().as_secs_f64() * 1000.0));
                 }
@@ -145,10 +138,10 @@ impl Images {
         }
         Self { dir: dir.into(), req_tx, res_rx, tex: (0..N_IMG).map(|_| None).collect(), requested: vec![false; N_IMG], decoded: 0, decode_total_ms: 0.0 }
     }
-    /// Recupere les images decodees (max 6 uploads de textures par frame).
+    /// Recupere les images decodees (max 16 uploads de textures 128x128 par frame).
     pub fn poll(&mut self, ctx: &egui::Context) -> bool {
         let mut any = false;
-        for _ in 0..6 {
+        for _ in 0..16 {
             match self.res_rx.try_recv() {
                 Ok((i, ci, ms)) => {
                     self.tex[i] = Some(ctx.load_texture(format!("img{i}"), ci, TextureOptions::LINEAR));
@@ -258,7 +251,7 @@ impl Nav {
         let w = area.width();
         let sl = |x: f32| area.translate(Vec2::new(x, 0.0));
         match st {
-            Step::Push(a, b) => { Self::screen(&p, sl(-e * w * 0.3), a, t); Self::screen(&p, sl((1.0 - e) * w), b, t); p.rect_filled(sl((1.0 - e) * w), 0.0, Color32::TRANSPARENT); }
+            Step::Push(a, b) => { Self::screen(&p, sl(-e * w * 0.3), a, t); Self::screen(&p, sl((1.0 - e) * w), b, t); }
             Step::Pop(a, b) => { Self::screen(&p, sl(-(1.0 - e) * w * 0.3), b, t); Self::screen(&p, sl(e * w), a, t); }
             Step::Modal => {
                 let idx = (self.cur / 6) % 3;
