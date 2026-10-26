@@ -1,70 +1,70 @@
-# Avalonia 12.1.4 + F# + .NET 10 (NativeAOT et JIT) - notes de stack
+# Avalonia 12.1.4 + F# + .NET 10 (NativeAOT et JIT) — notes de stack (passe v2, 2026-10-26)
 
-## Versions
-- .NET SDK 10.0.113 (paquet Ubuntu, runtime 10.0.13, ILCompiler 10.0.13 depuis le cache NuGet / library-packs), F# 10 (FSharp.Core 10.0.113 implicite).
-- Avalonia 12.1.4 (derniere stable sur NuGet au 2026-10-25), Avalonia.X11 12.1.4, Avalonia.Skia 12.1.4, Avalonia.HarfBuzz 12.1.4, Avalonia.Themes.Simple 12.1.4.
-  Dependances : SkiaSharp 3.119.4 (libSkiaSharp.so 11.2 Mo), HarfBuzzSharp 8.3.1.3, Tmds.DBus.Protocol, MicroCom.Runtime.
-- Avalonia.Desktop N'est PAS reference (il tire Win32/Native/Dialogs inutiles) : `UseX11().UseSkia().UseHarfBuzz()` seulement. Theme : Simple (le plus leger).
-- Approche UI : F# pur en code, sans XAML applicatif, sans Avalonia.FuncUI, sans bindings (donc aucun probleme de reflexion de bindings en AOT). Controles custom dessines via `DrawingContext.Custom(ICustomDrawOperation)` + `ISkiaSharpApiLeaseFeature` (SkiaSharp direct : SKCanvas, SKFont, shaders/paints caches).
+## Versions (vérifiées le 2026-10-26)
+| composant | version | source |
+|---|---|---|
+| .NET SDK | 10.0.403 (`/opt/dotnet10`, `dotnet --version`) ; runtime 10.0.14 ; ILCompiler 10.0.14 (dernière 10.0.x stable sur NuGet) | `dotnet --list-sdks/--list-runtimes`, api.nuget.org flatcontainer `microsoft.dotnet.ilcompiler` |
+| F# / FSharp.Core | FSharp.Core **10.1.403** (publié 2026-10-25, dernière stable listée ; 11.0.100 est *non listé* sur NuGet, 11.0.101 est une RC) — même version que celle livrée par le SDK (`sdk/10.0.403/FSharp/library-packs`), épinglée explicitement | api.nuget.org registration `fsharp.core` |
+| Avalonia, Avalonia.X11, Avalonia.Skia, Avalonia.HarfBuzz, Avalonia.Themes.Simple | **12.1.4** (dernière stable) | api.nuget.org flatcontainer |
+| Avalonia.AvaloniaEdit | **12.0.0** (dernière stable, propriétaire `avaloniaui`, MIT, dépend d'Avalonia ≥ 12.0.0) | api.nuget.org ; tag git `12.0.0` de github.com/AvaloniaUI/AvaloniaEdit |
+| SkiaSharp / HarfBuzzSharp | 3.119.4 / 8.3.1.3 (versions exactes imposées par Avalonia.Skia 12.1.4 ; SkiaSharp 4.153.1 existe mais est une version majeure non supportée par Avalonia 12.1.4 → non forcée) | nuspec Avalonia.Skia 12.1.4 |
+
+Champ JSON `version` (exemple) : `Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simple 12.1.4), Avalonia.AvaloniaEdit 12.0.0, SkiaSharp 3.119.4, HarfBuzzSharp 8.3.1.3, FSharp.Core 10.1.403, .NET SDK 10.0.403, runtime .NET 10.0.14, NativeAOT, Avalonia assembly 12.1.4` (runtime et version d'assembly Avalonia lus à l'exécution).
 
 ## Build / lancement
-- `./build.sh` (3 publishes, logs bruts dans `logs/publish-*.log`) -> `out/aot/`, `out/aot-static/`, `out/jit/`.
-  - AOT : `dotnet publish -c Release -r linux-x64 -p:PublishAot=true -m:2` (1 min 07 s, 2 cores).
-  - JIT : `dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishAot=false -m:2` (7 s) - meme code.
-  - AOT-static : AOT + `-p:LinkCoreStatic=true` : `<DirectPInvoke Include="benchcore"/>` + `<NativeLibrary Include=.../libbenchcore.a>` (1 min 05 s). Fonctionne (ldd ne montre plus libbenchcore.so, +0.3 Mo).
-- Commande harnais : `/home/user/eval/stacks/avalonia/out/aot/avalonia-bench` (ou `out/jit/...`, `out/aot-static/...`). Stack names JSON : `avalonia-aot` / `avalonia-jit` (detecte via RuntimeFeature.IsDynamicCodeSupported).
-- Option hors spec : `--suppress-gc-transition` (core/stress : bascule sur les P/Invoke SuppressGCTransition), `--capped` (garde le timer 60 Hz d'Avalonia).
-- `libbenchcore.so` est copie a cote du binaire (resolu par NativeLibrary.SetDllImportResolver sur AppContext.BaseDirectory, fallback sur /home/user/eval/core/target/release).
-- Code applicatif : `Program.fs` 927 lignes (+ fsproj 41, build.sh 14). Helper de fumee : `run1.sh`.
+- `./build.sh` (vérifie le SDK 10.0.403, `-m:2`) → `out/aot/` (NativeAOT, `libbenchcore.a` liée statiquement) et `out/jit/` (self-contained JIT, `libbenchcore.so` résolue par `BENCHCORE_LIB` puis `$BENCH_ROOT/core/target/release/libbenchcore.so`, `BENCH_ROOT` sinon déduit en remontant depuis le binaire jusqu'à `core/benchcore.h`). Logs : `logs/publish-aot.log`, `logs/publish-jit.log`, `logs/warnings.txt`.
+- Temps de build (machine partagée, load ~6) : AOT 58,7 s–1 min 22 s, JIT 8,2 s.
+- Lignes `harness/stacks.tsv` (à reporter, le fichier n'est pas dans mon dossier) :
+  - `avalonia-aot	${ROOT}/stacks/avalonia/out/aot/avalonia-bench`
+  - `avalonia-jit	${ROOT}/stacks/avalonia/out/jit/avalonia-bench`
+- Options hors spec : `--no-suppress-gc-transition` (core/stress), `--text-control textbox` (ancienne voie TextBox, pour comparaison). `run1.sh <aot|jit> <scenario> <durée>` : fumée manuelle.
+- Code : `Program.fs` 1194 lignes, `TextStyles.fs` 10, `TextStyles.axaml` 7, fsproj 50, build.sh 22.
 
-## Rendu logiciel / plateforme
-`X11PlatformOptions(RenderingMode = [| X11RenderingMode.Software |])` (nom exact verifie dans 12.1.4 ; valeurs Software/Glx/Egl/Vulkan) + `.UseSkia()`. Pas de GPU. Fenetre 1280x720, `WindowDecorations.None`, position (0,0) (sans WM, sinon placee a (10,10)).
+## Définition de frame (notes JSON)
+`frame_ms[i]` = intervalle entre deux **fins de rendu** consécutives du thread de rendu : `CompositionBatch.Rendered` (API publique, obtenue par `Compositor.RequestCompositionBatchCommitAsync()` dans le callback `TopLevel.RequestAnimationFrame` qui modifie le contenu ; continuation synchrone horodatée sur le thread de rendu). Dans Avalonia 12.1.4, `Rendered` est signalé après `Render()` de toutes les cibles, c.-à-d. après le raster Skia et le present X11 (`XPutImage` + `XSync`) (`ServerCompositor.RenderReentrancySafe`, `X11FramebufferSurface.Blit`). Une frame = un batch qui porte une modification (nav : seulement pendant les transitions). À la fin, l'app attend le `Rendered` des batches déjà commités avant `BENCH:measure_end`.
 
-## Mesure des frames (important)
-- `frame_ms` = intervalle entre callbacks `TopLevel.RequestAnimationFrame` consecutifs (thread UI, debut de frame, chaque callback redemande le suivant). Le commit compositeur suivant attend le batch precedent cote thread de rendu, donc l'intervalle inclut le raster logiciel + present X11 (verifie : render_ops ~ frames). Ce n'est PAS un timestamp de fin de swap observable.
-- `ops.render_op_ms_mean` : duree moyenne de `ICustomDrawOperation.Render` sur le thread de rendu (dessin de nos controles seul, hors flush/XPutImage).
-- PACING 60 Hz : Avalonia/X11 cree `SleepLoopRenderTimer(60)` DANS le constructeur d'AvaloniaX11Platform puis cree le Compositor immediatement ; IRenderTimer/IRenderLoop sont `[PrivateApi]` (absents des assemblies de reference). Sans contournement : ~60 FPS plafonnes (mesure : p50 16.4 ms). Contournement : `AvaloniaAccessUnstablePrivateApis=true` + reflexion sur `DefaultRenderLoop.Timer` (internal) pour mettre `SleepLoopRenderTimer.DesiredFps = 100000` => ticks enchaines sans attente (~150-190 FPS en liste). `[DynamicDependency]` + `UnconditionalSuppressMessage IL2075` : fonctionne en NativeAOT (verifie). `--capped` restaure le comportement Avalonia par defaut. Ceci est un ecart "hors chemin public" a mentionner dans les comparatifs.
-- Warm-up 2 s non mesure (meme script, frames non enregistrees), puis `duration` s.
+**Plafond 60 Hz conservé** : X11 crée `SleepLoopRenderTimer(DesiredFps = max(60, taux XRandR max))` dans `AvaloniaX11Platform.Initialize` (X11Platform.cs l. 82-115, tag 12.1.4) ; ni `X11PlatformOptions` ni `CompositionOptions` n'exposent de FPS (`ShouldRenderOnUIThread` → `UiThreadRenderTimer(60)`). Le contournement v1 (réflexion sur `DefaultRenderLoop.Timer`, `AvaloniaAccessUnstablePrivateApis`) est **supprimé**. Mesuré : p50 ≈ 16,4 ms.
 
-## Scenarios
-| scenario | etat | notes |
+## Revue (écarts trouvés → correction, avec justification)
+1. **API privée pour lever le plafond 60 Hz** (`AvaloniaAccessUnstablePrivateApis`, `AvaloniaLocator`, réflexion `DefaultRenderLoop.Timer`, `--capped`) → supprimé, plafond documenté. Brief v2 ; https://docs.avaloniaui.net/api/avalonia/x11platformoptions, https://docs.avaloniaui.net/api/avalonia/rendering/composition/compositionoptions (aucune option FPS).
+2. **Mesure de frame au début de frame** (intervalle entre callbacks RAF) → fin de rendu `CompositionBatch.Rendered` (voir plus haut). Source Avalonia 12.1.4 `Rendering/Composition/Transport/Batch.cs` (doc XML : « Indicates that batch got rendered on the render thread »).
+3. **GC gen2 à chaque frame** (bug de perf trouvé) : avec `UseRetainedFramebuffer` par défaut (false), X11 alloue un framebuffer de 3,7 Mo (`UnmanagedBlob` + `GC.AddMemoryPressure`) à chaque frame : 117 GC gen2 en 4 s (list, JIT). → `X11PlatformOptions.UseRetainedFramebuffer = true` (option publique documentée : « improving performance by saving a blit ») : 0 GC dans list/stream/canvas/core/stress. https://docs.avaloniaui.net/api/avalonia/x11platformoptions
+4. **Canvas** : shaders de dégradé déjà créés une fois par forme (OK) ; la liste recréait 6 `SKPaint` par frame → `SKPaint`/`SKFont` partagés créés une fois (doc : « Reuse Pen, Brush… avoid allocations », https://docs.avaloniaui.net/docs/graphics-animation/custom-rendering). L'approche `ICustomDrawOperation` + `ISkiaSharpApiLeaseFeature` est celle de la doc (même page, section « ICustomDrawOperation for SkiaSharp »). Profil (JIT, 5000 formes, ms/frame de Render) : complet 150-190 ; sans clip rrect AA 72-84 ; sans dégradé 26-53 ; sans ombre −25 ; sans graphe −10. Le clip **rrect AA** force un masque de couverture pour chaque forme dans le raster Skia CPU → clip rectangle (bords entiers, couverture 0/1 identique) pour toutes les formes et clip rrect AA seulement pour les formes (ombre comprise) qui touchent un des 4 coins de rayon 16 : rendu identique, **render ≈ 88-96 ms au lieu de ≈ 150-190** (≈10 FPS au lieu de ≈6). Le coût restant est le dégradé par forme (raster CPU) ; pas de cache de sprites (ce serait changer la méthode de rendu). Le graphe est pré-rempli (historique de 10 000 points) pour être visible sur toute la largeur.
+5. **Texte 1 Mo** : `TextBox` ne virtualise pas (AOT, mesuré : layout_ms 14 160, time_to_first_display 15 310 ms, `SelectAll` 42,7 s, 5,9 FPS). La doc Avalonia ne propose comme contrôle de document virtualisé que `RichTextEditor` (Avalonia **Pro**, licence : https://docs.avaloniaui.net/controls/documents/richtexteditor/) ; `TextBox`/`SelectableTextBlock` n'ont aucune guidance pour gros textes (https://docs.avaloniaui.net/controls/input/text-input/textbox, .../selectabletextblock). Voie retenue : **AvaloniaEdit 12.0.0** (paquet AvaloniaUI, README : « Line virtualization », document en rope) en `IsReadOnly`, `WordWrap` : AOT layout_ms 42-54, time_to_first_display 127-151 ms, ~58 FPS. Bug AvaloniaEdit 12.0.0 : `TextEditor.ScrollToVerticalOffset` est un no-op (corps commenté) → `ScrollViewer.Offset` du template. Styles AvaloniaEdit chargés par XAML compilé (`TextStyles.axaml`, x:Class) : un `StyleInclude` créé en code donne IL2026 puis `XamlLoadException` en NativeAOT (doc : « Avoid dynamic XAML loading at runtime », https://docs.avaloniaui.net/docs/deployment/native-aot).
+6. **Emoji monochromes / ZWJ non fusionnés** (capture) → `FontManagerOptions.FontFallbacks` = Noto Color Emoji pour U+1F000-1FAFF, U+200D, U+FE0F (« A fallback is fulfilled before anything else », https://docs.avaloniaui.net/api/avalonia/media/fontmanageroptions). Vérifié sur capture : CJK, arabe/hébreu (RTL), emoji couleur, famille ZWJ.
+7. **Liste** : `VirtualizingStackPanel` est documenté comme optimisé pour hauteurs uniformes (extent estimé, sauts de scrollbar avec hauteurs variables : https://docs.avaloniaui.net/docs/app-development/performance#variable-height-items) ; le source 12.1.4 calcule l'extent = réalisé + restant × `_lastEstimatedElementSizeU`. La spec exige un extent exact (`sum_heights` = 8 799 584) et un offset scripté au pixel → panneau virtualisé maison conservé (recherche binaire sur préfixe des hauteurs). `ItemsRepeater` (Avalonia.Controls.ItemsRepeater 12.0.0) n'est pas dans la doc 12.x.
+8. **P/Invoke** : `LibraryImport` est un générateur de source **C#** (« recognizes the LibraryImportAttribute in C# code », https://learn.microsoft.com/en-us/dotnet/standard/native-interop/pinvoke-source-generation) → indisponible en F# ; `DllImport` blittable + `[<assembly: DisableRuntimeMarshalling>]` (aucun stub de marshalling, https://learn.microsoft.com/en-us/dotnet/standard/native-interop/disabled-marshalling). **NativeAOT : liaison statique** `DirectPInvoke` + `NativeLibrary libbenchcore.a` (https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/interop), désormais la variante AOT par défaut (vérifié : aucun `libbenchcore` dans `/proc/PID/maps`). `SuppressGCTransition` **par défaut** sur validate/parse/hash (conditions de la doc remplies : < 1 µs, pas d'I/O, pas de callback, pas d'exception, pas de verrou : https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.suppressgctransitionattribute) ; jamais sur `core_heavy` (100 ms). Mesuré AOT statique : 111 M triplets/s avec, 38,6 M sans (`--no-suppress-gc-transition`) ; JIT dynamique : 36-59 M/s.
+9. **Chemins absolus** `/home/user/eval/...` (Program.fs, fsproj, build.sh, run1.sh) → `BENCH_ROOT`/`--assets`/`BENCHCORE_LIB`, fsproj `$(BENCH_ROOT)` ou chemin relatif au projet.
+10. **Spec v2** : marqueurs `BENCH:measure_start/end` (stdout + flush) ; scénario `input` (Border 200×200 en (100,100) au-dessus de la liste, `Window.KeyDown`, Key.Space → noir/blanc, `ops.key_events`) ; `ops.gc` (`GC.CollectionCount(0..2)`, `GC.GetTotalPauseDuration()` en delta sur la fenêtre mesurée, `pause_ms_max` = max des `GC.GetGCMemoryInfo(kind).PauseDurations` relevées à chaque frame quand le compteur change : borne inférieure si plusieurs GC du même type entre deux frames) ; `ops.not_rendered: []` (canvas/stress) ; `unsupported: null` (scénario inconnu → `unsupported`) ; `version`.
+11. Divers : `idle` dormait `duration+2 s` sans marqueurs → warm-up 2 s puis `duration` entre marqueurs ; `nav` bouclait sans fin → 20 transitions + 10 modales ; `core_heavy` toutes les 1 s à échéances absolues (au lieu de 100 ms + 900 ms de sommeil) ; accumulateur core publié (`ops.acc`) ; checksum déterministe (FNV-1a des hauteurs) au lieu de `fnv xor frames` ; images : pan ajouté au zoom 1→3→1 ; GC par défaut (concurrent) au lieu de `ConcurrentGarbageCollection=false` non justifié ; `IsAotCompatible=true` (doc Avalonia NativeAOT) ; FSharp.Core épinglé.
+
+## Scénarios (état)
+| scénario | état | remarques |
 |---|---|---|
-| idle | OK | coquille (titre, ListView 1re page, statut), DispatcherTimer, aucun redessin ; sleep duration+2 s (warm-up inclus). frame_ms vide. |
-| list | OK | ListView custom (Control + ICustomDrawOperation/Skia), virtualisee par recherche binaire sur le prefix des hauteurs (VirtualizingStackPanel non utilise : hauteurs variables = mesure par item, pas teste). 100k lignes, sum_heights=8799584 verifie. Script de scroll exact de la spec (3000 px/s 4 s puis 6+ flings, clamp). rows_drawn = lignes dessinees cumulees. |
-| stream | OK | thread producteur (xorshift32 seed 0x2545F491, pacing Stopwatch + Sleep(1)) -> `System.Threading.Channels` borne 100k (TryWrite ; drop+compte si plein) -> UI draine par lot a chaque frame (callback RAF). updates_dropped=0 a 10 000/s. NB : le drain est dans le callback de frame, pas via Dispatcher.UIThread.Post. |
-| canvas | OK (lent) | N formes (SKCanvas direct, shader degrade lineaire par forme en cache, ombre = SKMaskFilter blur sigma 4 offset (2,2) comme BoxShadow d'Avalonia, 1/10 formes), clip rrect AA 1000x600, graphe polyline 10 000 points (DrawPoints Polygon) 1000x100 a y=610. Formes rebondissent dans la fenetre 1280x720 (clip 1000x600 en haut a gauche). Positions copiees par frame dans un anneau de 3 snapshots (thread de rendu asynchrone). |
-| core | OK | P/Invoke statique `DllImport` (blittable, nativeint) ; thread worker validate+parse+hash en boucle serree, thread `core_heavy(100)` chaque ~1 s, UI anime 1000 formes (gradient + clip, sans ombre ni graphe). max_frame_stall_ms = max(frame_ms). |
-| stress | OK | liste 880 px + panneau lateral 400x720 (formes 5000 par defaut, clip 380x600, graphe 380x100) + stream 5000/s + core ; echantillons `heap_samples` (GC.GetTotalMemory) toutes les 10 s ; duree 600 s par defaut. Teste 12 s seulement. |
-| text | OK mais injouable | `TextBox` readonly/AcceptsReturn/Wrap avec 1 Mo : layout_ms ~12-13 s (JIT et AOT), time_to_first_display ~12.4-13.3 s, 1 stall de 35-42 s (SelectAll a t=5 s), ~1 FPS. Defilement via le ScrollViewer interne (Offset). Resultat tel quel (pas de vue virtualisee custom). |
-| images | OK | `ImageGrid` custom (DrawingContext.DrawImage), 600 vignettes 128 px, `Bitmap.DecodeToWidth(128)` sur 2 threads de fond (demarre au warm-up, compteurs sur toute la vie du process), scroll 3000 px/s aller-retour + zoom 1->3->1 sur 6 s (PushTransform). 600 decodees : decode_total_ms 3.3 s (AOT) / 8.2 s (JIT) cumules. |
-| nav | OK | 3 ecrans (Grid + ListView statiques), `PageSlide(300 ms)` push,push,pop,pop, `CrossFade(200 ms)` modale ouverture+fermeture toutes les 2 transitions, thread de calcul ~1 coeur. transitions_done=12 en 6 s (AOT). Boucle repetee jusqu'a duration (pas limitee a 20). |
+| idle | OK | coquille, aucun redessin (verify : 0 % de pixels changés) |
+| list / stream | OK | 60 FPS plafonnés ; stream 10 000/s : 0 drop, `System.Threading.Channels` borné 100k (TryWrite → drop+compte), drain par lot à chaque frame |
+| canvas | OK, lent | 5 000 formes ≈ 10 FPS, 20 000 ≈ 2,9 FPS (AOT) ; `not_rendered: []` |
+| text | OK | AvaloniaEdit ; sélection totale à t=5 s visible sur capture |
+| images | OK | `Bitmap.DecodeToWidth(128)` sur 2 threads (démarrés au lancement ; compteurs sur toute la vie du process) |
+| nav | OK | PageSlide 300 ms ×20, CrossFade 200 ms modale toutes les 2 transitions, thread ~1 cœur |
+| core | OK | UI 1000 formes |
+| input | OK | latence externe p50 ≈ 29 ms (≈ 2 frames à 60 Hz), 0 perdu |
+| stress | OK (8 s testées seulement) | ≈ 4-5 FPS ; `heap_samples` toutes les 10 s |
 
-## Resultats de fumee bruts (machine chargee par d'autres agents : load avg ~5 sur 4 vCPU, a ne pas prendre comme mesures officielles)
-AOT : list ~177 FPS (p50 5.5 ms, p95 7.9) ; stream 10 000/s ~180 FPS ; canvas 5000 formes ~8.6 FPS (p50 113 ms, render_op 119 ms) ; canvas 20000 (JIT, bruit) ~1.5 FPS ; core ~40 FPS (UI 1000 formes) avec 35 M triplets/s ; stress ~5.5 FPS ; images ~104 FPS ; nav ~120 FPS.
-JIT : list ~150 FPS ; stream 10 000/s ~177 FPS (harnais, 8 s : CPU moyen 88 %, RSS 94 Mo).
-Canvas : le cout dominant est le degrade par forme (Skia CPU : ~18 us/forme ; sans degrade 31 ms au lieu de ~120 ms pour 5000) puis le clip AA (-25 ms sans), le graphe 10k points et l'ombre (~12 ms) sont minoritaires. Pas de cache de sprites (non fidele a la spec).
-P/Invoke core (6 s, 2 runs, bruit eleve) : dynamique 20-28 M/s ; dynamique+SuppressGCTransition 29-44 M/s ; statique (DirectPInvoke .a) 35-40 M/s ; statique+SuppressGCTransition 86-91 M/s.
+## Fumée harnais (8 s, 1 run, machine partagée load ~6 : pas des mesures) — `logs/smoke-summary.txt`
+AOT : idle RSS 46,6 Mo CPU 0 % ; list 61,1 FPS p95 18,9 ms CPU 12 % RSS 51,4 Mo ; stream-10k 60,5 FPS 0 drop ; canvas 10,4 FPS ; text 58,2 FPS ttfd 127 ms layout 42 ms RSS 120 Mo (3 GC, pause max 92 ms) ; images 60,9 FPS 600 décodées ; nav 58,4 FPS 16 transitions/8 s ; core 51,7 FPS 111 M/s 8 heavy ; input 61 FPS latence p50/p95 29,3/35,2 ms 0 perdu ; stress 4,8 FPS. Tous : rc 0, `markers: True`, `sum_heights` 8 799 584, gc 0 (sauf text).
+JIT : idle RSS 83,5 Mo ; list 58,7 FPS ; canvas 10,0 ; text 47,7 FPS ttfd 711 ms ; core 35,7 FPS 58,6 M/s ; input p50 29,1 ms ; stress 3,6 FPS.
 
-## Taille / demarrage / RSS (fumee)
-- out/aot : 34.2 Mo = avalonia-bench 19.8 Mo + libSkiaSharp.so 11.2 Mo + libHarfBuzzSharp.so 2.8 Mo + libbenchcore.so 0.4 Mo (out/aot-static : 34.1 Mo, sans libbenchcore.so).
-- out/jit : 106.9 Mo (runtime self-contained complet ; pas de trimming) ; apphost 78 Ko + ~170 dlls.
-- `ldd avalonia-bench` (AOT) : libm, libc seulement (X11/fontconfig/etc. charges par dlopen). `ldd libSkiaSharp.so` : libfontconfig, libfreetype, libexpat, libz, libbz2, libpng16, libbrotlidec/common, libpthread, libdl, libm, libc. libHarfBuzzSharp.so : libc/libm/libpthread. X11 charge dynamiquement libX11 etc.
-- Demarrage jusqu'a la 1re frame (wall - warm-up 2 s, `list --duration 0.3`) : AOT ~0.07 s, JIT ~1.1 s.
-- RSS (max, /usr/bin/time) : idle AOT 48.7-50 Mo, JIT 88 Mo ; list AOT 52.7 Mo, JIT 98.8 Mo ; canvas AOT 55 Mo, JIT 95 Mo.
+## Déploiement
+- `out/aot` 37,8 Mo : `avalonia-bench` 25,6 Mo + `libSkiaSharp.so` 11,2 Mo + `libHarfBuzzSharp.so` 2,8 Mo. `ldd avalonia-bench` : libm, libgcc_s, libc (X11/fontconfig chargés par dlopen). `ldd libSkiaSharp.so` : libpthread, libfontconfig, libdl, libm, libc, libfreetype, libexpat, libz, libbz2, libpng16, libbrotlidec/common.
+- `out/jit` 102,2 Mo (217 fichiers, runtime self-contained non trimé) ; `ldd` apphost : libdl, libpthread, libstdc++, libm, libgcc_s, libc.
 
-## Warnings / erreurs AOT exacts (publish-aot.log)
-- `FSharp.Core.dll : warning IL2104: Assembly 'FSharp.Core' produced trim warnings.` et `warning IL3053: Assembly 'FSharp.Core' produced AOT analysis warnings.` (FSharp.Core 10.0.113, netstandard2.1).
-- `warning AVA3001: AvaloniaAccessUnstablePrivateApis is Enabled ...` (voulu).
-- `ILC : Trim analysis warning IL2075: AvaloniaBench.uncapRenderTimer(): 'this' argument does not satisfy 'DynamicallyAccessedMemberTypes.PublicProperties', 'DynamicallyAccessedMemberTypes.NonPublicProperties' in call to 'System.Type.GetProperty(String,BindingFlags)'...` -> resolu par DynamicDependency + UnconditionalSuppressMessage (plus present dans le build final).
-- `warning FS0760` (new IDisposable) : cosmetique. Aucune erreur AOT ; aucun warning IL venant d'Avalonia (assemblies annotes trim/AOT-compatibles) ; pas de reflexion de bindings (aucun binding, aucun XAML applicatif ; le theme Simple est du XAML precompile). Aucun printf/sprintf F# (reflexion).
-- Voir aussi `logs/errors-encountered.txt` : erreurs de compilation/execution exactes de la mise au point (PrivateApi, UseHarfBuzz, WindowDecorations...). `logs/restore.log`, `logs/build.sh.out`.
-- Bruit reseau : la telemetrie de build d'Avalonia.BuildServices tente `av-build-tel-api-v1.avaloniaui.net:443` (bloque par le proxy, sans consequence ; `AVALONIA_TELEMETRY_OPTOUT=1` dans build.sh).
+## Warnings AOT exacts (`logs/warnings.txt`, détail `logs/publish-aot-singlewarn-false.log`)
+- `FSharp.Core.dll : warning IL2104: Assembly 'FSharp.Core' produced trim warnings.` et `warning IL3053: Assembly 'FSharp.Core' produced AOT analysis warnings.` — détail (TrimmerSingleWarn=false) : IL3050/IL2060/IL2070/IL2072/IL2075/IL2080/IL2067 dans `PrintfImpl`, `StructuredPrintfImpl`, `FSharp.Reflection.Impl` (atteints via `ToString()` généré des records/options F#, jamais appelé). Aucun warning venant d'Avalonia/AvaloniaEdit ni du code de l'app. Erreurs de mise au point : `logs/errors-encountered-v2.txt` ; passe v1 : `logs/v1-first-pass/`.
 
-## Ecarts a la spec / limites
-- Liste : pas de VirtualizingStackPanel/ItemsControl (non verifie pour 100k hauteurs variables) ; panneau custom.
-- Texte de liste dessine via SkiaSharp (SKFont.DrawText, sans shaping HarfBuzz), pas via TextLayout/GlyphRun d'Avalonia : plus rapide, moins "idiomatique Avalonia", pas de bidi/complexe.
-- Stream : drain dans le callback de frame (pas de Dispatcher.UIThread.Post).
-- Pacing : voir plus haut (reflexion sur API privee). Pas de mesure de la vraie fin de present X11.
-- Les snapshots de prix de la liste sont copies a la creation de l'op ; les positions des formes sont partagees via un anneau de 3 buffers (course benigne possible si le rendu prend >2 frames de retard).
-- `--duration` de `idle` = duration + 2 s de sommeil. `text` : le stall de SelectAll depasse `duration` (le programme sort apres la fin de la frame bloquee). Checksum = fnv(sumH) xor frames (non deterministe).
-- A (non) fait : ni IME, ni mesures officielles, ni 600 s de stress complets (12 s testes).
+## Écarts / limites restants
+- Plafond 60 Hz non désactivable publiquement sur X11 (gardé) ; FPS des scénarios légers = 60.
+- Texte de liste via `SKFont.DrawText` (pas de shaping HarfBuzz ; contenu ASCII + « — ») ; texte du scénario `text` : shaping complet Avalonia/HarfBuzz.
+- Canvas limité par le dégradé linéaire par forme en raster CPU.
+- `pause_ms_max` : borne inférieure (voir revue 10). `text` : défilement aller-retour sur [0, min(extent, 30 000 px)].
+- Pas d'IME réelle, pas de mesures officielles, stress 600 s non exécuté.

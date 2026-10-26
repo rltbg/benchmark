@@ -20,6 +20,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(PublishAot)' == 'true'">
     <IlcOptimizationPreference>Speed</IlcOptimizationPreference>
+    <!-- recommande par https://docs.avaloniaui.net/docs/deployment/native-aot -->
+    <IsAotCompatible>true</IsAotCompatible>
     <StripSymbols>true</StripSymbols>
   </PropertyGroup>
   <!-- NativeAOT : liaison statique de libbenchcore.a (DirectPInvoke + NativeLibrary), cf.

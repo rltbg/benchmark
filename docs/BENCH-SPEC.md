@@ -22,6 +22,12 @@ Le harnais mesure CPU, RSS et PSS **entre ces deux marqueurs**, de l'extérieur 
 - `frame_ms[i]` = temps entre deux **fins de présentation** consécutives (retour de swap/present/commit, ou le signal post-rendu le plus tardif exposé publiquement). Documenter l'événement exact dans `notes`.
 - Ne compter que les frames dont le **contenu a changé**. Ne jamais gonfler les FPS.
 
+## Cadence (variable `BENCH_PACING`) — ajout v2.1
+Sans cadence commune, une stack plafonnée à 60 Hz et une stack sans plafond ne sont pas comparables (la seconde consomme ~100 % d'un cœur quoi qu'il arrive).
+- `BENCH_PACING=60` (**défaut, mesure principale**) : animation cadencée à 60 Hz. Utiliser la cadence native de la stack si elle existe (vsync, frame clock, timer de rendu) ; sinon une API publique (timer, `request_repaint_after`, `QT_QPA_UPDATE_IDLE_TIME`…) visant une frame toutes les 16,667 ms. Une frame qui dépasse son échéance est une frame manquée (mesurée par le harnais : frames > 16,7 ms et > 25 ms).
+- `BENCH_PACING=uncapped` : le plus vite possible, uniquement par API publique. Si la stack ne le permet pas, garder 60 Hz et écrire `ops.pacing = "60-only"`.
+- Écrire dans `ops.pacing` le mode effectif (`"60"`, `"uncapped"`, `"60-only"`) et le mécanisme utilisé dans `notes`.
+
 ## JSON de sortie
 ```
 {"stack":"slint","version":"<versions exactes>","scenario":"list","duration_s":10.0,"frames":N,"frame_ms":[...],

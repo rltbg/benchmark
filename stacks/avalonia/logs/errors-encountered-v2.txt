@@ -1,0 +1,34 @@
+Erreurs / constats exacts de la passe v2 (2026-10-26, SDK 10.0.403, Avalonia 12.1.4, AvaloniaEdit 12.0.0)
+
+1. Publication NativeAOT avec StyleInclude cree en code (App.Initialize) :
+   ILC : Trim analysis warning IL2026: AvaloniaBench.App.Initialize(): Using member 'Avalonia.Markup.Xaml.Styling.StyleInclude.StyleInclude(Uri)' which has 'RequiresUnreferencedCodeAttribute' can break functionality when trimming application code. StyleInclude and ResourceInclude use AvaloniaXamlLoader.Load which dynamically loads referenced assembly with Avalonia resources. Note, StyleInclude and ResourceInclude defined in XAML are resolved compile time and are safe with trimming and AOT.
+   Execution AOT (scenario text) :
+   Unhandled exception. Avalonia.Markup.Xaml.XamlLoadException: No precompiled XAML found for avares://AvaloniaEdit/Themes/Simple/AvaloniaEdit.xaml (baseUri: avares://avalonia-bench/), make sure to specify x:Class and include your XAML file as AvaloniaResource
+      at Avalonia.Markup.Xaml.AvaloniaXamlLoader.Load(IServiceProvider, Uri, Uri) + 0x585
+      at Avalonia.Markup.Xaml.Styling.StyleInclude.get_Loaded() + 0x30
+   -> TextStyles.axaml (x:Class) + TextStyles.fs : StyleInclude resolu a la compilation.
+
+2. TextStyles.axaml ajoute explicitement en <AvaloniaXaml Include=...> :
+   TextStyles.axaml : Avalonia error AVLN2002: Duplicate x:Class directive, AvaloniaBench.TextStyles is already used in /TextStyles.axaml
+   -> l'item est deja inclus implicitement par Avalonia.Build ; item explicite supprime.
+
+3. x:Class="AvaloniaBench.TextStyles" alors que le type F# etait dans le module AvaloniaBench (type imbrique AvaloniaBench+TextStyles) :
+   TextStyles.axaml(3,2,3,2): Avalonia error AVLN2000: Unable to find type `AvaloniaBench.TextStyles` Line 3, position 2.
+   -> type deplace dans namespace AvaloniaBenchUi (TextStyles.fs).
+
+4. AvaloniaEdit 12.0.0 : TextEditor.ScrollToVerticalOffset(double) est un no-op (corps commente dans TextEditor.cs, tag 12.0.0, l. 836-841)
+   -> defilement par ScrollViewer.Offset du template (PART_ScrollViewer).
+
+5. GC : avec X11PlatformOptions.UseRetainedFramebuffer par defaut (false), X11FramebufferSurface cree un RetainedFramebuffer
+   (UnmanagedBlob 1280x720x4 = 3,7 Mo + GC.AddMemoryPressure) a CHAQUE frame puis le libere : mesure list 4 s JIT =
+   117 GC gen2 (gc.collections=117, pause_ms_total=147.8). Avec UseRetainedFramebuffer=true : 0 GC.
+
+6. Emoji : avec FontFamily "Noto Sans" (ou "Noto Sans, Noto Color Emoji"), le repli systeme choisit une police monochrome
+   et 👩‍👩‍👧‍👦 est rendu en 4 glyphes separes (capture verify_gui). Avec FontManagerOptions.FontFallbacks
+   (Noto Color Emoji pour U+1F000-1FAFF, U+200D, U+FE0F) : emoji en couleur et sequence ZWJ fusionnee.
+
+7. FSharp.Core 10.1.403 (publication AOT) : warning IL2104 / IL3053 (detail : logs/publish-aot-singlewarn-false.log, 52 lignes,
+   toutes dans PrintfImpl / StructuredPrintfImpl / FSharp.Reflection.Impl, atteintes seulement via ToString() des records/options F#,
+   jamais appele par l'app).
+
+8. Une instance Xvfb privee (:251) a disparu en cours de session (XOpenDisplay failed) : relancee ; pas d'impact sur les resultats.

@@ -5,3 +5,5 @@ slint	${ROOT}/stacks/slint/app/target/release/slintapp
 slint-software	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=software
 slint-femtovg	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=femtovg
 slint-throttled	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_THROTTLE=1
+avalonia-aot	${ROOT}/stacks/avalonia/out/aot/avalonia-bench	
+avalonia-jit	${ROOT}/stacks/avalonia/out/jit/avalonia-bench	
