@@ -6,7 +6,7 @@ taskset / cgroup (quota CPU, limite mémoire) ; latence d'entrée externe pour l
 usage: run_bench.py --stack NAME --cmd "APP [args]" --scenario S --duration D --runs N
                     [--rate R] [--shapes N] [--cpus 0] [--cpu-quota 0.5] [--mem-limit 256] [--env K=V]
 `${ROOT}` dans --cmd est remplacé par la racine du dépôt."""
-import argparse, json, math, mmap, os, random, statistics, subprocess, sys, tempfile, time
+import argparse, json, math, mmap, os, random, statistics, subprocess, sys, tempfile, threading, time
 
 ROOT = os.environ.get("BENCH_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CLK = os.sysconf("SC_CLK_TCK")
@@ -106,32 +106,48 @@ class FrameBuffer:
         return bytes(self.m[k] ^ self.m[k + 1] ^ self.m[k + 2] for k in self.idx)
 
 
-def input_latency(fb, disp, n=40, seed=7):
+def input_latency(fb, disp, stop, result, n=40, seed=7):
+    """Envoie jusqu'à n appuis sur Espace (XTest) à intervalles aléatoires et mesure le délai jusqu'au changement
+    des pixels du carré. S'arrête dès que `stop` est levé (fin de la mesure de l'app) : un appui envoyé après
+    n'est ni compté ni déclaré perdu. Tourne dans un thread pour ne pas bloquer l'échantillonnage CPU/RAM."""
     rnd = random.Random(seed)
     env = dict(os.environ, DISPLAY=disp)
     xd = subprocess.Popen(["xdotool", "-"], stdin=subprocess.PIPE, env=env, text=True)
-    xd.stdin.write("mousemove 640 360\n"); xd.stdin.flush(); time.sleep(0.5)
+    # sans gestionnaire de fenêtres, certains toolkits ignorent le clavier tant qu'ils n'ont pas reçu FocusIn :
+    # le harnais donne le focus (XSetInputFocus) à la plus grande fenêtre de premier niveau, pour toutes les stacks
+    wid = None
+    for l in subprocess.run(["xwininfo", "-root", "-tree"], capture_output=True, text=True, env=env).stdout.splitlines():
+        l = l.strip()
+        if l.startswith("0x") and "1280x720" in l:
+            wid = l.split()[0]; break
+    xd.stdin.write("mousemove 640 360\n" + (f"windowfocus {wid}\n" if wid else "")); xd.stdin.flush(); time.sleep(0.5)
     lat, lost = [], 0
     for _ in range(n):
-        time.sleep(rnd.uniform(0.15, 0.35))
+        if stop.wait(rnd.uniform(0.15, 0.35)):
+            break
         before = fb.square(); t0 = time.perf_counter()
         xd.stdin.write("key space\n"); xd.stdin.flush()
         while True:
             now = time.perf_counter()
             if fb.square() != before:
                 lat.append((now - t0) * 1000); break
+            if stop.is_set():
+                break  # la mesure s'est terminée pendant l'attente : appui non compté
             if now - t0 > 1.0:
                 lost += 1; break
             time.sleep(0.00025)
     xd.stdin.close(); xd.wait()
-    return lat, lost
+    result["lat"], result["lost"] = lat, lost
 
 
 def one_run(a, i, tag):
     out = f"{a.outdir}/{tag}.run{i}.json"; so = f"{a.outdir}/{tag}.run{i}.stdout"
     for f in (out,):
         if os.path.exists(f): os.remove(f)
-    disp = f":{90 + i % 9}"; fbdir = tempfile.mkdtemp(prefix="fb")
+    n = 90 + i % 9
+    while os.path.exists(f"/tmp/.X11-unix/X{n}") or os.path.exists(f"/tmp/.X{n}-lock"):
+        n += 10  # display occupé par un autre processus : en prendre un libre
+    disp = f":{n}"; fbdir = tempfile.mkdtemp(prefix="fb")
     xargs = ["Xvfb", disp, "-screen", "0", "1280x720x24", "-nolisten", "tcp"] + (["-fbdir", fbdir] if a.scenario == "input" else [])
     xv = subprocess.Popen(xargs, stderr=subprocess.DEVNULL); time.sleep(0.8)
     env = dict(os.environ, DISPLAY=disp, LIBGL_ALWAYS_SOFTWARE="1", BENCH_ROOT=ROOT)
@@ -144,8 +160,8 @@ def one_run(a, i, tag):
     cg = Cgroup(f"bench-{os.getpid()}-{i}", a.mem_limit, a.cpu_quota) if (a.mem_limit or a.cpu_quota) else None
     t0 = time.perf_counter()
     p = subprocess.Popen(cmd, env=env, stdout=open(so, "w"), stderr=subprocess.STDOUT, preexec_fn=cg.enter if cg else None)
-    samples, last, marks, seen = [], {}, {}, 0
-    lat = lost = None; fb = None
+    samples, last, marks = [], {}, {}
+    lat = lost = None; inp = None; stop = threading.Event(); result = {}
     while p.poll() is None:
         now = time.perf_counter() - t0
         if now > a.duration + 120:
@@ -160,14 +176,16 @@ def one_run(a, i, tag):
         try:
             txt = open(so, errors="replace").read()
             if START in txt and "start" not in marks: marks["start"] = now
-            if END in txt and "end" not in marks: marks["end"] = now
+            if END in txt and "end" not in marks: marks["end"] = now; stop.set()
         except OSError:
             pass
-        if a.scenario == "input" and "start" in marks and lat is None:
-            fb = fb or FrameBuffer(fbdir)
-            lat, lost = input_latency(fb, disp)
+        if a.scenario == "input" and "start" in marks and inp is None:
+            inp = threading.Thread(target=input_latency, args=(FrameBuffer(fbdir), disp, stop, result), daemon=True); inp.start()
         time.sleep(0.1)
     rc = p.wait(); wall = time.perf_counter() - t0
+    stop.set()
+    if inp is not None:
+        inp.join(timeout=5); lat, lost = result.get("lat"), result.get("lost")
     # l'app peut imprimer le marqueur de fin puis quitter entre deux lectures : relire une dernière fois
     try:
         txt = open(so, errors="replace").read()

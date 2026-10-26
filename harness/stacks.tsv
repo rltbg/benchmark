@@ -1,14 +1,7 @@
-# nom<TAB>commande (passée à --cmd)<TAB>options harnais supplémentaires
-slint	/home/user/eval/stacks/slint/app/target/release/slintapp	
-slint-femtovg	/home/user/eval/stacks/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=femtovg
-avalonia-aot	/home/user/eval/stacks/avalonia/out/aot/avalonia-bench	
-avalonia-jit	/home/user/eval/stacks/avalonia/out/jit/avalonia-bench	
-compose-jvm	/home/user/eval/stacks/compose/run.sh	
-qt-software	/home/user/eval/stacks/qt/build/qtbench	
-qt-opengl	/home/user/eval/stacks/qt/build/qtbench --backend opengl	
-flutter	/home/user/eval/stacks/flutter/app/build/linux/x64/release/bundle/benchapp	
-egui-glow	/home/user/eval/stacks/egui/target/release/egui_bench	
-egui-wgpu	/home/user/eval/stacks/egui/target-wgpu/release/egui_bench	
-nsh-gtk	/home/user/eval/stacks/nsh/run.sh	
-iced-natural	/home/user/eval/stacks/iced/target/release/iced_bench	
-iced-fulldamage	/home/user/eval/stacks/iced/target/release/iced_bench	--env ICED_FULL_DAMAGE=1
+# nom<TAB>commande (${ROOT} = racine du dépôt)<TAB>options harnais supplémentaires
+qt-software	${ROOT}/stacks/qt/deploy/bin/qtbench	
+qt-opengl	${ROOT}/stacks/qt/deploy/bin/qtbench --backend opengl	
+slint	${ROOT}/stacks/slint/app/target/release/slintapp	
+slint-software	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=software
+slint-femtovg	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=femtovg
+slint-throttled	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_THROTTLE=1
