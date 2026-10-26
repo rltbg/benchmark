@@ -1,0 +1,232 @@
+{
+ "summary": {
+  "tag": "slint-text",
+  "stack": "slint",
+  "scenario": "text",
+  "runs": 1,
+  "ok_runs": 1,
+  "oom_runs": 0,
+  "markers_ok": 1,
+  "agg": {
+   "fps_mean": {
+    "median": 239.42279734087336,
+    "p95": 239.42279734087336,
+    "min": 239.42279734087336,
+    "max": 239.42279734087336,
+    "n": 1
+   },
+   "frame_p50": {
+    "median": 3.826295,
+    "p95": 3.826295,
+    "min": 3.826295,
+    "max": 3.826295,
+    "n": 1
+   },
+   "frame_p95": {
+    "median": 6.464051,
+    "p95": 6.464051,
+    "min": 6.464051,
+    "max": 6.464051,
+    "n": 1
+   },
+   "frame_p99": {
+    "median": 8.897011,
+    "p95": 8.897011,
+    "min": 8.897011,
+    "max": 8.897011,
+    "n": 1
+   },
+   "frame_max": {
+    "median": 14.879994,
+    "p95": 14.879994,
+    "min": 14.879994,
+    "max": 14.879994,
+    "n": 1
+   },
+   "dropped_gt16_7": {
+    "median": 0,
+    "p95": 0,
+    "min": 0,
+    "max": 0,
+    "n": 1
+   },
+   "dropped_gt8_3": {
+    "median": 37,
+    "p95": 37,
+    "min": 37,
+    "max": 37,
+    "n": 1
+   },
+   "dropped_gt25": {
+    "median": 0,
+    "p95": 0,
+    "min": 0,
+    "max": 0,
+    "n": 1
+   },
+   "rss_kb_median": {
+    "median": 187820,
+    "p95": 187820,
+    "min": 187820,
+    "max": 187820,
+    "n": 1
+   },
+   "rss_kb_peak": {
+    "median": 188124,
+    "p95": 188124,
+    "min": 188124,
+    "max": 188124,
+    "n": 1
+   },
+   "pss_kb_median": {
+    "median": 180350,
+    "p95": 180350,
+    "min": 180350,
+    "max": 180350,
+    "n": 1
+   },
+   "pss_kb_peak": {
+    "median": 181877,
+    "p95": 181877,
+    "min": 181877,
+    "max": 181877,
+    "n": 1
+   },
+   "cpu_pct_core_mean": {
+    "median": 80.86732945534186,
+    "p95": 80.86732945534186,
+    "min": 80.86732945534186,
+    "max": 80.86732945534186,
+    "n": 1
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 85.36270952850191,
+    "p95": 85.36270952850191,
+    "min": 85.36270952850191,
+    "max": 85.36270952850191,
+    "n": 1
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.1236556129997552,
+    "p95": 2.1236556129997552,
+    "min": 2.1236556129997552,
+    "max": 2.1236556129997552,
+    "n": 1
+   },
+   "wall_s": {
+    "median": 10.07569974199987,
+    "p95": 10.07569974199987,
+    "min": 10.07569974199987,
+    "max": 10.07569974199987,
+    "n": 1
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 10.07569974199987,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.1236556129997552,
+   "frames": 1916,
+   "ops": {
+    "app_step_ms_mean": 0.0021800678142931615,
+    "draw_ms_mean": 3.762875026082424,
+    "layout_ms": 1921.4937730000001,
+    "max_scroll_px": 161951.0,
+    "not_rendered": [],
+    "select_all_called": true,
+    "set_text_ms": 1.224204,
+    "sum_heights": 8799584,
+    "time_to_first_display_ms": 1933.930704
+   },
+   "checksum": "00000000",
+   "unsupported": null,
+   "version": "slint 1.18.1 (backend winit 0.30.13 x11, renderer skia-software via skia-safe/skia-bindings 0.153.3, softbuffer 0.4.8); rustc 1.99.1 (58cf8f9c3 2026-10-13); image 0.25.10",
+   "fps_mean": 239.42279734087336,
+   "frame_p50": 3.826295,
+   "frame_p95": 6.464051,
+   "frame_p99": 8.897011,
+   "frame_max": 14.879994,
+   "dropped_gt16_7": 0,
+   "dropped_gt8_3": 37,
+   "dropped_gt25": 0,
+   "dropped_ms_gt16_7": 0,
+   "window": "markers",
+   "rss_kb_median": 187820,
+   "rss_kb_peak": 188124,
+   "pss_kb_median": 180350,
+   "pss_kb_peak": 181877,
+   "pss_kb_first_quarter": 180050,
+   "pss_kb_last_quarter": 180350,
+   "cpu_pct_core_mean": 80.86732945534186,
+   "cpu_pct_core_peak_1s": 85.36270952850191,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2044,
+     169
+    ],
+    [
+     1.1,
+     0.97,
+     99452,
+     93509
+    ],
+    [
+     2.1,
+     1.94,
+     187820,
+     180050
+    ],
+    [
+     3.2,
+     2.82,
+     187820,
+     180050
+    ],
+    [
+     4.4,
+     3.8,
+     187820,
+     180050
+    ],
+    [
+     5.5,
+     4.7,
+     187820,
+     180047
+    ],
+    [
+     6.6,
+     5.61,
+     187820,
+     181573
+    ],
+    [
+     7.7,
+     6.49,
+     188124,
+     180350
+    ],
+    [
+     8.8,
+     7.38,
+     188124,
+     180350
+    ],
+    [
+     10.0,
+     8.28,
+     188124,
+     180350
+    ]
+   ]
+  }
+ ]
+}

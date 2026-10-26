@@ -1,0 +1,168 @@
+{
+ "summary": {
+  "tag": "slint-idle",
+  "stack": "slint",
+  "scenario": "idle",
+  "runs": 1,
+  "ok_runs": 1,
+  "oom_runs": 0,
+  "markers_ok": 1,
+  "agg": {
+   "fps_mean": null,
+   "frame_p50": null,
+   "frame_p95": null,
+   "frame_p99": null,
+   "frame_max": null,
+   "dropped_gt16_7": null,
+   "dropped_gt8_3": null,
+   "dropped_gt25": null,
+   "rss_kb_median": {
+    "median": 28692,
+    "p95": 28692,
+    "min": 28692,
+    "max": 28692,
+    "n": 1
+   },
+   "rss_kb_peak": {
+    "median": 28692,
+    "p95": 28692,
+    "min": 28692,
+    "max": 28692,
+    "n": 1
+   },
+   "pss_kb_median": {
+    "median": 22034,
+    "p95": 22034,
+    "min": 22034,
+    "max": 22034,
+    "n": 1
+   },
+   "pss_kb_peak": {
+    "median": 23008,
+    "p95": 23008,
+    "min": 23008,
+    "max": 23008,
+    "n": 1
+   },
+   "cpu_pct_core_mean": {
+    "median": 0.0,
+    "p95": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 0.0,
+    "p95": 0.0,
+    "min": 0.0,
+    "max": 0.0,
+    "n": 1
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.0814550360000794,
+    "p95": 2.0814550360000794,
+    "min": 2.0814550360000794,
+    "max": 2.0814550360000794,
+    "n": 1
+   },
+   "wall_s": {
+    "median": 10.06793262500014,
+    "p95": 10.06793262500014,
+    "min": 10.06793262500014,
+    "max": 10.06793262500014,
+    "n": 1
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 10.06793262500014,
+   "markers": true,
+   "oom": false,
+   "startup_to_measure_s": 2.0814550360000794,
+   "frames": 0,
+   "ops": {
+    "not_rendered": [],
+    "sum_heights": 8799584
+   },
+   "checksum": "00000000",
+   "unsupported": null,
+   "version": "slint 1.18.1 (backend winit 0.30.13 x11, renderer skia-software via skia-safe/skia-bindings 0.153.3, softbuffer 0.4.8); rustc 1.99.1 (58cf8f9c3 2026-10-13); image 0.25.10",
+   "window": "markers",
+   "rss_kb_median": 28692,
+   "rss_kb_peak": 28692,
+   "pss_kb_median": 22034,
+   "pss_kb_peak": 23008,
+   "pss_kb_first_quarter": 22034,
+   "pss_kb_last_quarter": 20760,
+   "cpu_pct_core_mean": 0.0,
+   "cpu_pct_core_peak_1s": 0.0,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2044,
+     195
+    ],
+    [
+     1.0,
+     0.04,
+     28692,
+     22005
+    ],
+    [
+     2.1,
+     0.04,
+     28692,
+     22005
+    ],
+    [
+     3.1,
+     0.04,
+     28692,
+     22034
+    ],
+    [
+     4.1,
+     0.04,
+     28692,
+     22034
+    ],
+    [
+     5.2,
+     0.04,
+     28692,
+     22041
+    ],
+    [
+     6.2,
+     0.04,
+     28692,
+     22214
+    ],
+    [
+     7.2,
+     0.04,
+     28692,
+     22214
+    ],
+    [
+     8.3,
+     0.04,
+     28692,
+     20760
+    ],
+    [
+     9.3,
+     0.04,
+     28692,
+     20760
+    ]
+   ]
+  }
+ ]
+}
