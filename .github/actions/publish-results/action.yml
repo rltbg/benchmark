@@ -1,0 +1,36 @@
+name: publish-results
+description: Publie les résultats d'une exécution dans la branche ci-results (clé = stack/sha), avec nouvelles tentatives.
+inputs:
+  stack:
+    description: nom de la stack (slint, qt, avalonia)
+    required: true
+runs:
+  using: composite
+  steps:
+    - uses: actions/download-artifact@v8
+      with:
+        path: results
+        pattern: res-${{ inputs.stack }}-*
+    - name: commit dans ci-results
+      shell: bash
+      env:
+        GH_TOKEN: ${{ github.token }}
+        REPO: ${{ github.repository }}
+        SHA: ${{ github.sha }}
+        RUN_ID: ${{ github.run_id }}
+        STACK: ${{ inputs.stack }}
+      run: |
+        set -u
+        git config --global user.name "ci-bot"; git config --global user.email "ci-bot@users.noreply.github.com"
+        for attempt in 1 2 3 4 5 6 7 8; do
+          rm -rf out; git init -q out; cd out
+          git remote add origin "https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+          if git fetch -q --depth 1 origin ci-results 2>/dev/null; then git checkout -q -B ci-results FETCH_HEAD; else git checkout -q -b ci-results; fi
+          d="${STACK}/${SHA}"; mkdir -p "$d"
+          cp -r ../results/* "$d/" 2>/dev/null || true
+          echo "run_id=${RUN_ID} sha=${SHA} date=$(date -u +%FT%TZ)" > "$d/DONE"
+          git add -A; git commit -q -m "${STACK} ${SHA:0:8} run ${RUN_ID} [skip ci]" || true
+          if git push -q origin ci-results 2>/dev/null; then echo "publié (tentative $attempt)"; exit 0; fi
+          cd ..; sleep $((RANDOM % 10 + 3))
+        done
+        echo "échec de publication après 8 tentatives"; exit 1
