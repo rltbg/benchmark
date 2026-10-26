@@ -1,0 +1,12 @@
+{
+ "label": "web-multithread",
+ "cross_origin_isolated": true,
+ "js_heap": {
+  "used": 5752406,
+  "total": 7073202
+ },
+ "ready_s": 120.75493025779724,
+ "done_s": 120.7561902999878,
+ "ok_ready": false,
+ "ok_done": false
+}

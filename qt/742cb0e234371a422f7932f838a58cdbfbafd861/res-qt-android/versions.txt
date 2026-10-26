@@ -1,0 +1,6 @@
+openjdk version "21.0.12.1" 2026-08-18 LTS
+cmake version 3.31.6
+NDK 27.2.12479018
+QT_HOST_PATH=/home/runner/work/benchmark/Qt/6.12.0/gcc_64
+build arm64_v8a: 89 s
+build x86_64: 20 s

@@ -1,0 +1,28 @@
+{
+ "stack": "qt",
+ "platform": "macos",
+ "status": "ok",
+ "build_seconds": 52.0,
+ "artifacts": [
+  {
+   "path": "deploy/qtspike.app",
+   "bytes": 184032992,
+   "gzip": null,
+   "brotli": null
+  },
+  {
+   "path": "qtspike-macos.tar",
+   "bytes": 96129536,
+   "gzip": 36663868,
+   "brotli": 25814447
+  }
+ ],
+ "notes": [
+  "ex\u00e9cution: success",
+  "warnings build: 1",
+  "rendu: d\u00e9faut (Metal) et software"
+ ],
+ "runner": "macOS/ARM64",
+ "sha": "742cb0e234371a422f7932f838a58cdbfbafd861",
+ "date": "2026-10-26T16:17:45Z"
+}

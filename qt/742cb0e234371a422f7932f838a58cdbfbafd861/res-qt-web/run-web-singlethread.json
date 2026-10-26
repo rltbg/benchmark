@@ -1,0 +1,12 @@
+{
+ "label": "web-singlethread",
+ "cross_origin_isolated": true,
+ "js_heap": {
+  "used": 4856904,
+  "total": 5216928
+ },
+ "ready_s": 120.31354022026062,
+ "done_s": 120.31506681442261,
+ "ok_ready": false,
+ "ok_done": false
+}

@@ -1,0 +1,223 @@
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Found OpenGL: /usr/lib/x86_64-linux-gnu/libOpenGL.so
+-- Found WrapOpenGL: TRUE
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Could NOT find Qt6TaskTree (missing: Qt6TaskTree_DIR)
+CMake Warning at /usr/local/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package):
+  Found package configuration file:
+
+    /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6QmlAssetDownloaderPrivate/Qt6QmlAssetDownloaderPrivateConfig.cmake
+
+  but it set Qt6QmlAssetDownloaderPrivate_FOUND to FALSE so package
+  "Qt6QmlAssetDownloaderPrivate" is considered to be NOT FOUND.  Reason given
+  by package:
+
+  Qt6QmlAssetDownloaderPrivate could not be found because dependency
+  Qt6TaskTree could not be found.
+
+  Configuring with --debug-find-pkg=Qt6TaskTree might reveal details why the
+  package was not found.
+
+  Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+  of the path variables that find_package uses to try and find the package.
+
+Call Stack (most recent call first):
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlAssetDownloaderPrivatepluginDependencies.cmake:22 (_qt_internal_find_qt_dependencies)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6Qml/QmlPlugins/Qt6QmlAssetDownloaderPrivatepluginConfig.cmake:40 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:638 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake:6 (__qt_internal_include_qml_plugin_packages)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake:199 (include)
+  /usr/local/share/cmake-3.31/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:40 (include)
+  /home/runner/work/benchmark/Qt/6.12.0/gcc_64/lib/cmake/Qt6/Qt6Config.cmake:257 (find_package)
+  CMakeLists.txt:9 (find_package)
+
+
+-- Could NOT find WrapVulkanHeaders (missing: Vulkan_INCLUDE_DIR) 
+-- Configuring done (8.7s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/runner/work/benchmark/benchmark/build
+[1/35] Copying qtspike qml sources into build dir
+[2/35] Copying qtspike qml resources into build dir
+[3/35] Populating .qmlls.build.ini file at /home/runner/work/benchmark/benchmark/build/.qt/.qmlls.build.ini
+[4/35] Running qmlimportscanner for qtspike
+[5/35] Generating qt.conf part for qtspike
+[6/35] Generating qt.conf file
+[7/35] Automatic MOC and UIC for target custard
+[8/35] Building CXX object CMakeFiles/custard.dir/custard_autogen/mocs_compilation.cpp.o
+[9/35] Building C object CMakeFiles/custard.dir/home/runner/work/benchmark/benchmark/stacks/karamel/gen/Custard.c.o
+[10/35] Linking CXX static library libcustard.a
+[11/35] Automatic MOC and UIC for target qtspike
+[12/35] Running AUTOMOC file extraction for target qtspike
+[13/35] Running rcc for resource qmake_Spike
+[14/35] Running rcc for resource qtspike_raw_qml_0
+[15/35] Generating .rcc/qmlcache/qtspike_qmlcache_loader.cpp
+[16/35] Running rcc for resource qtspike_raw_qml_0_extra_qmldirs
+[17/35] Running moc --collect-json for target qtspike
+[18/35] Automatic QML type registration for target qtspike
+[19/35] Generating .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp, .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.aotstats
+[20/35] Generating .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.aotstats
+[21/35] Generating .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.aotstats
+[22/35] Generating .rcc/qmlcache/qtspike_qml_Main_qml.cpp, .rcc/qmlcache/qtspike_qml_Main_qml.cpp.aotstats
+[23/35] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qmake_Spike.cpp.o
+[24/35] Building CXX object CMakeFiles/qtspike.dir/src/main.cpp.o
+[25/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qmlcache_loader.cpp.o
+[26/35] Building CXX object CMakeFiles/qtspike.dir/src/spike.cpp.o
+[27/35] Building CXX object CMakeFiles/qtspike.dir/qtspike_autogen/mocs_compilation.cpp.o
+[28/35] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0.cpp.o
+[29/35] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp.o
+[30/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_Main_qml.cpp.o
+[31/35] Building CXX object CMakeFiles/qtspike.dir/qtspike_qmltyperegistrations.cpp.o
+[32/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.o
+[33/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.o
+[34/35] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.o
+[35/35] Linking CXX executable qtspike
+-- Install configuration: "Release"
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/bin/qtspike
+-- Set non-toolchain portion of runtime path of "deploy/bin/qtspike" to "$ORIGIN:$ORIGIN/../lib"
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/libqtquick2plugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQml/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQml/libqmlplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQml/Models/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQml/Models/libmodelsplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQml/WorkerScript/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQml/WorkerScript/libworkerscriptplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Controls/Basic/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Layouts/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Layouts/libqquicklayoutsplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Templates/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Templates/libqtquicktemplates2plugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Controls/impl/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Controls/Basic/impl/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Shapes/qmldir
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/qml/QtQuick/Shapes/libqmlshapesplugin.so
+-- Writing /home/runner/work/benchmark/benchmark/deploy/bin/qt.conf
+-- Running generic Qt deploy tool on /home/runner/work/benchmark/benchmark/build/qtspike
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Core.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Core.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6DBus.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6DBus.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Gui.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Gui.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Network.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Network.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6OpenGL.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6OpenGL.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Qml.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Qml.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QmlMeta.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QmlMeta.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QmlModels.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QmlModels.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QmlWorkerScript.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QmlWorkerScript.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Quick.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Quick.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickControls2.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickControls2.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickControls2Basic.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickControls2Basic.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickControls2BasicStyleImpl.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickControls2BasicStyleImpl.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickControls2Impl.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickControls2Impl.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickLayouts.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickLayouts.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickShapes.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickShapes.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickTemplates2.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6QuickTemplates2.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libicudata.so.73
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libicudata.so.73.2
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libicui18n.so.73
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libicui18n.so.73.2
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libicuuc.so.73
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libicuuc.so.73.2
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6EglFSDeviceIntegration.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6EglFSDeviceIntegration.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6EglFsKmsGbmSupport.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6EglFsKmsGbmSupport.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6EglFsKmsSupport.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6EglFsKmsSupport.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Svg.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6Svg.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6WaylandClient.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6WaylandClient.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6WlShellIntegration.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6WlShellIntegration.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6XcbQpa.so.6
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/lib/libQt6XcbQpa.so.6.12.0
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/egldeviceintegrations/libqeglfs-emu-integration.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/egldeviceintegrations/libqeglfs-x11-integration.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/generic/libqevdevkeyboardplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/generic/libqevdevmouseplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/generic/libqevdevtabletplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/generic/libqevdevtouchplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/generic/libqtuiotouchplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/iconengines/libqsvgicon.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/imageformats/libqgif.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/imageformats/libqico.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/imageformats/libqjpeg.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/imageformats/libqsvg.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/networkinformation/libqconnman.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/networkinformation/libqglib.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/networkinformation/libqnetworkmanager.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/platformthemes/libqgtk3.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/platformthemes/libqxdgdesktopportal.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_debugger.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_inspector.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_local.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_messages.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_native.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_nativedebugger.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_preview.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_profiler.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_quickeventreplay.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_quickprofiler.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_server.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/qmltooling/libqmldbg_tcp.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/tls/libqcertonlybackend.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/tls/libqopensslbackend.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-decoration-client/libadwaita.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-decoration-client/libbradient.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-graphics-integration-client/libdmabuf-server.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-graphics-integration-client/libdrm-egl-server.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-graphics-integration-client/libqt-plugin-wayland-egl.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-graphics-integration-client/libshm-emulation-server.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-graphics-integration-client/libvulkan-server.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-shell-integration/libfullscreen-shell-v1.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-shell-integration/libivi-shell.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-shell-integration/libqt-shell.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-shell-integration/libwl-shell-plugin.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/wayland-shell-integration/libxdg-shell.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/xcbglintegrations/libqxcb-egl-integration.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/xcbglintegrations/libqxcb-glx-integration.so
+-- Installing: /home/runner/work/benchmark/benchmark/deploy/plugins/platforms/libqxcb.so

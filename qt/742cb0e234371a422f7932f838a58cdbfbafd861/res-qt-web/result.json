@@ -1,0 +1,64 @@
+{
+ "stack": "qt",
+ "platform": "web",
+ "status": "ok",
+ "build_seconds": 190.0,
+ "artifacts": [
+  {
+   "path": "out-mt/qtspike.wasm",
+   "bytes": 26093036,
+   "gzip": 8942759,
+   "brotli": 6443206
+  },
+  {
+   "path": "out-mt/qtspike.js",
+   "bytes": 269504,
+   "gzip": 60454,
+   "brotli": 52168
+  },
+  {
+   "path": "out-mt/qtloader.js",
+   "bytes": 13437,
+   "gzip": 4505,
+   "brotli": 3801
+  },
+  {
+   "path": "out-mt/qtspike.html",
+   "bytes": 2993,
+   "gzip": 1201,
+   "brotli": 881
+  },
+  {
+   "path": "out-st/qtspike.wasm",
+   "bytes": 25131783,
+   "gzip": 8497762,
+   "brotli": 6135522
+  },
+  {
+   "path": "out-st/qtspike.js",
+   "bytes": 239718,
+   "gzip": 54995,
+   "brotli": 47778
+  },
+  {
+   "path": "out-st/qtloader.js",
+   "bytes": 13775,
+   "gzip": 4526,
+   "brotli": 3819
+  },
+  {
+   "path": "out-st/qtspike.html",
+   "bytes": 2993,
+   "gzip": 1201,
+   "brotli": 881
+  }
+ ],
+ "notes": [
+  "ex\u00e9cution: failure",
+  "warnings build: 1",
+  "artefacts: out-mt = multithread, out-st = singlethread"
+ ],
+ "runner": "Linux/X64",
+ "sha": "742cb0e234371a422f7932f838a58cdbfbafd861",
+ "date": "2026-10-26T16:28:06Z"
+}

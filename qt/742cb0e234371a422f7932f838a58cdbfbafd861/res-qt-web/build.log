@@ -1,0 +1,122 @@
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Using Qt bundled ZLIB.
+-- Found WrapZLIB: TRUE (found version "6.12.0")
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Using Qt bundled PCRE2.
+-- Found WrapPCRE2: TRUE (found version "6.12.0")
+-- Performing Test HAVE_GETTIME
+-- Performing Test HAVE_GETTIME - Success
+-- Performing Test HAVE_SHM_OPEN_SHM_UNLINK
+-- Performing Test HAVE_SHM_OPEN_SHM_UNLINK - Success
+-- Found WrapRt: TRUE
+-- Found GLESv2: ON
+-- Performing Test HAVE_EGL
+-- Performing Test HAVE_EGL - Success
+-- Found EGL: /home/runner/work/benchmark/benchmark/emsdk-cache/emsdk-main/upstream/emscripten/cache/sysroot/include (found version "1.5")
+-- Using Qt bundled PNG.
+-- Found WrapPNG: TRUE (found version "6.12.0")
+-- Using Qt bundled Harfbuzz.
+-- Found WrapHarfbuzz: TRUE (found version "6.12.0")
+-- Using Qt bundled Freetype.
+-- Found WrapFreetype: TRUE (found version "6.12.0")
+-- Using Qt bundled Jpeg.
+-- Found WrapJpeg: TRUE (found version "6.12.0")
+-- Configuring done (6.9s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/runner/work/benchmark/benchmark/build-mt
+[1/32] Copying qtspike qml resources into build dir
+[2/32] Copying qtspike qml sources into build dir
+[3/32] Populating .qmlls.build.ini file at /home/runner/work/benchmark/benchmark/build-mt/.qt/.qmlls.build.ini
+[4/32] Automatic MOC and UIC for target custard
+[5/32] Building CXX object CMakeFiles/custard.dir/custard_autogen/mocs_compilation.cpp.o
+[6/32] Building C object CMakeFiles/custard.dir/home/runner/work/benchmark/benchmark/stacks/karamel/gen/Custard.c.o
+[7/32] Linking CXX static library libcustard.a
+[8/32] Automatic MOC and UIC for target qtspike
+[9/32] Running rcc for resource qmake_Spike
+[10/32] Running AUTOMOC file extraction for target qtspike
+[11/32] Running rcc for resource qtspike_raw_qml_0
+[12/32] Running rcc for resource qtspike_raw_qml_0_extra_qmldirs
+[13/32] Running moc --collect-json for target qtspike
+[14/32] Generating .rcc/qmlcache/qtspike_qmlcache_loader.cpp
+[15/32] Automatic QML type registration for target qtspike
+[16/32] Generating .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.aotstats
+[17/32] Generating .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp, .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.aotstats
+[18/32] Generating .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.aotstats
+[19/32] Generating .rcc/qmlcache/qtspike_qml_Main_qml.cpp, .rcc/qmlcache/qtspike_qml_Main_qml.cpp.aotstats
+[20/32] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qmake_Spike.cpp.o
+[21/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qmlcache_loader.cpp.o
+[22/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_Main_qml.cpp.o
+[23/32] Building CXX object CMakeFiles/qtspike.dir/src/main.cpp.o
+[24/32] Building CXX object CMakeFiles/qtspike.dir/qtspike_qmltyperegistrations.cpp.o
+[25/32] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0.cpp.o
+[26/32] Building CXX object CMakeFiles/qtspike.dir/qtspike_autogen/mocs_compilation.cpp.o
+[27/32] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp.o
+[28/32] Building CXX object CMakeFiles/qtspike.dir/src/spike.cpp.o
+[29/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.o
+[30/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.o
+[31/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.o
+[32/32] Linking CXX executable qtspike.js
+em++: warning: -pthread + ALLOW_MEMORY_GROWTH may run non-wasm code slowly, see https://github.com/WebAssembly/design/issues/1271 [-Wpthreads-mem-growth]
+-- Using Qt bundled ZLIB.
+-- Found WrapZLIB: TRUE (found version "6.12.0")
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Using Qt bundled PCRE2.
+-- Found WrapPCRE2: TRUE (found version "6.12.0")
+-- Performing Test HAVE_GETTIME
+-- Performing Test HAVE_GETTIME - Success
+-- Performing Test HAVE_SHM_OPEN_SHM_UNLINK
+-- Performing Test HAVE_SHM_OPEN_SHM_UNLINK - Success
+-- Found WrapRt: TRUE
+-- Found GLESv2: ON
+-- Performing Test HAVE_EGL
+-- Performing Test HAVE_EGL - Success
+-- Found EGL: /home/runner/work/benchmark/benchmark/emsdk-cache/emsdk-main/upstream/emscripten/cache/sysroot/include (found version "1.5")
+-- Using Qt bundled PNG.
+-- Found WrapPNG: TRUE (found version "6.12.0")
+-- Using Qt bundled Harfbuzz.
+-- Found WrapHarfbuzz: TRUE (found version "6.12.0")
+-- Using Qt bundled Freetype.
+-- Found WrapFreetype: TRUE (found version "6.12.0")
+-- Using Qt bundled Jpeg.
+-- Found WrapJpeg: TRUE (found version "6.12.0")
+-- Configuring done (5.4s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/runner/work/benchmark/benchmark/build-st
+[1/32] Copying qtspike qml resources into build dir
+[2/32] Copying qtspike qml sources into build dir
+[3/32] Populating .qmlls.build.ini file at /home/runner/work/benchmark/benchmark/build-st/.qt/.qmlls.build.ini
+[4/32] Automatic MOC and UIC for target custard
+[5/32] Building CXX object CMakeFiles/custard.dir/custard_autogen/mocs_compilation.cpp.o
+[6/32] Building C object CMakeFiles/custard.dir/home/runner/work/benchmark/benchmark/stacks/karamel/gen/Custard.c.o
+[7/32] Linking CXX static library libcustard.a
+[8/32] Automatic MOC and UIC for target qtspike
+[9/32] Running AUTOMOC file extraction for target qtspike
+[10/32] Running rcc for resource qmake_Spike
+[11/32] Running rcc for resource qtspike_raw_qml_0_extra_qmldirs
+[12/32] Running rcc for resource qtspike_raw_qml_0
+[13/32] Running moc --collect-json for target qtspike
+[14/32] Generating .rcc/qmlcache/qtspike_qmlcache_loader.cpp
+[15/32] Automatic QML type registration for target qtspike
+[16/32] Generating .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.aotstats
+[17/32] Generating .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp, .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.aotstats
+[18/32] Generating .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp, .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.aotstats
+[19/32] Generating .rcc/qmlcache/qtspike_qml_Main_qml.cpp, .rcc/qmlcache/qtspike_qml_Main_qml.cpp.aotstats
+[20/32] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qmake_Spike.cpp.o
+[21/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qmlcache_loader.cpp.o
+[22/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_Main_qml.cpp.o
+[23/32] Building CXX object CMakeFiles/qtspike.dir/src/main.cpp.o
+[24/32] Building CXX object CMakeFiles/qtspike.dir/src/spike.cpp.o
+[25/32] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0.cpp.o
+[26/32] Building CXX object CMakeFiles/qtspike.dir/.qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp.o
+[27/32] Building CXX object CMakeFiles/qtspike.dir/qtspike_qmltyperegistrations.cpp.o
+[28/32] Building CXX object CMakeFiles/qtspike.dir/qtspike_autogen/mocs_compilation.cpp.o
+[29/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp.o
+[30/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_ListTab_qml.cpp.o
+[31/32] Building CXX object CMakeFiles/qtspike.dir/.rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp.o
+[32/32] Linking CXX executable qtspike.js

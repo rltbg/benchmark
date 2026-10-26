@@ -1,0 +1,673 @@
+-- The C compiler identification is AppleClang 21.0.0.21000101
+-- The CXX compiler identification is AppleClang 21.0.0.21000101
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE
+-- Found ZLIB: /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/usr/lib/libz.tbd (found version "1.2.12")
+-- Found WrapSystemZLIB: TRUE (found version "1.2.12")
+-- Using system ZLIB.
+-- Found WrapZLIB: TRUE (found version "1.2.12")
+-- Performing Test HAVE_STDATOMIC
+-- Performing Test HAVE_STDATOMIC - Success
+-- Found WrapAtomic: TRUE
+-- Looking for backtrace
+-- Looking for backtrace - found
+-- backtrace facility detected in default set of libraries
+-- Found Backtrace: /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/usr/include
+-- Using Qt bundled PCRE2.
+-- Found WrapPCRE2: TRUE (found version "6.12.0")
+-- Performing Test HAVE_GETTIME
+-- Performing Test HAVE_GETTIME - Success
+-- Performing Test HAVE_SHM_OPEN_SHM_UNLINK
+-- Performing Test HAVE_SHM_OPEN_SHM_UNLINK - Success
+-- Found WrapRt: TRUE
+-- Performing Test HAVE_EGL
+-- Performing Test HAVE_EGL - Failed
+-- Could NOT find EGL (missing: EGL_INCLUDE_DIR HAVE_EGL EGL_LIBRARY) 
+-- Performing Test HAVE_GLESv2
+-- Performing Test HAVE_GLESv2 - Success
+-- Found GLESv2: /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/System/Library/Frameworks/OpenGLES.framework
+-- Using Qt bundled PNG.
+-- Found WrapPNG: TRUE (found version "6.12.0")
+-- Using Qt bundled Harfbuzz.
+-- Found WrapHarfbuzz: TRUE (found version "6.12.0")
+-- Using Qt bundled Freetype.
+-- Found WrapFreetype: TRUE (found version "6.12.0")
+-- Using Qt bundled Jpeg.
+-- Found WrapJpeg: TRUE (found version "6.12.0")
+-- Performing Test HAVE_LIBRESOLV_FUNCTIONS
+-- Performing Test HAVE_LIBRESOLV_FUNCTIONS - Success
+-- Found WrapResolv: TRUE
+-- Could NOT find Qt6Svg (missing: Qt6Svg_DIR)
+CMake Warning at /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package):
+  Found package configuration file:
+
+    /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6QuickVectorImageGeneratorPrivate/Qt6QuickVectorImageGeneratorPrivateConfig.cmake
+
+  but it set Qt6QuickVectorImageGeneratorPrivate_FOUND to FALSE so package
+  "Qt6QuickVectorImageGeneratorPrivate" is considered to be NOT FOUND.
+  Reason given by package:
+
+  Qt6QuickVectorImageGeneratorPrivate could not be found because dependency
+  Qt6Svg could not be found.
+
+  Configuring with --debug-find-pkg=Qt6Svg might reveal details why the
+  package was not found.
+
+  Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+  of the path variables that find_package uses to try and find the package.
+
+Call Stack (most recent call first):
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6QuickVectorImageHelpers/Qt6QuickVectorImageHelpersDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6QuickVectorImageHelpers/Qt6QuickVectorImageHelpersConfig.cmake:40 (include)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginDependencies.cmake:22 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginConfig.cmake:40 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:638 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake:6 (__qt_internal_include_qml_plugin_packages)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake:199 (include)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:40 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/Qt6Config.cmake:257 (find_package)
+  CMakeLists.txt:9 (find_package)
+
+
+CMake Warning at /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package):
+  Found package configuration file:
+
+    /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6QuickVectorImageHelpers/Qt6QuickVectorImageHelpersConfig.cmake
+
+  but it set Qt6QuickVectorImageHelpers_FOUND to FALSE so package
+  "Qt6QuickVectorImageHelpers" is considered to be NOT FOUND.  Reason given
+  by package:
+
+  Qt6QuickVectorImageHelpers could not be found because dependency
+  Qt6QuickVectorImageGeneratorPrivate could not be found.
+
+  Configuring with --debug-find-pkg=Qt6QuickVectorImageGeneratorPrivate might
+  reveal details why the package was not found.
+
+  Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+  of the path variables that find_package uses to try and find the package.
+
+Call Stack (most recent call first):
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginDependencies.cmake:22 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagehelperspluginConfig.cmake:40 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:638 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake:6 (__qt_internal_include_qml_plugin_packages)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake:199 (include)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:40 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/Qt6Config.cmake:257 (find_package)
+  CMakeLists.txt:9 (find_package)
+
+
+-- Could NOT find Qt6Svg (missing: Qt6Svg_DIR)
+CMake Warning at /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package):
+  Found package configuration file:
+
+    /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6QuickVectorImageGeneratorPrivate/Qt6QuickVectorImageGeneratorPrivateConfig.cmake
+
+  but it set Qt6QuickVectorImageGeneratorPrivate_FOUND to FALSE so package
+  "Qt6QuickVectorImageGeneratorPrivate" is considered to be NOT FOUND.
+  Reason given by package:
+
+  Qt6QuickVectorImageGeneratorPrivate could not be found because dependency
+  Qt6Svg could not be found.
+
+  Configuring with --debug-find-pkg=Qt6Svg might reveal details why the
+  package was not found.
+
+  Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+  of the path variables that find_package uses to try and find the package.
+
+Call Stack (most recent call first):
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6QuickVectorImage/Qt6QuickVectorImageDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6QuickVectorImage/Qt6QuickVectorImageConfig.cmake:40 (include)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginDependencies.cmake:22 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginConfig.cmake:40 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:638 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake:6 (__qt_internal_include_qml_plugin_packages)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake:199 (include)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:40 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/Qt6Config.cmake:257 (find_package)
+  CMakeLists.txt:9 (find_package)
+
+
+CMake Warning at /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package):
+  Found package configuration file:
+
+    /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6QuickVectorImage/Qt6QuickVectorImageConfig.cmake
+
+  but it set Qt6QuickVectorImage_FOUND to FALSE so package
+  "Qt6QuickVectorImage" is considered to be NOT FOUND.  Reason given by
+  package:
+
+  Qt6QuickVectorImage could not be found because dependency
+  Qt6QuickVectorImageGeneratorPrivate could not be found.
+
+  Configuring with --debug-find-pkg=Qt6QuickVectorImageGeneratorPrivate might
+  reveal details why the package was not found.
+
+  Configuring with -DQT_DEBUG_FIND_PACKAGE=ON will print the values of some
+  of the path variables that find_package uses to try and find the package.
+
+Call Stack (most recent call first):
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginDependencies.cmake:22 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/QmlPlugins/Qt6qquickvectorimagepluginConfig.cmake:40 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicPluginHelpers.cmake:638 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/Qt6QmlPlugins.cmake:6 (__qt_internal_include_qml_plugin_packages)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Qml/Qt6QmlConfig.cmake:199 (include)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:93 (find_package)
+  /opt/homebrew/share/cmake/Modules/CMakeFindDependencyMacro.cmake:125 (__find_dependency_common)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:142 (find_dependency)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Quick/Qt6QuickDependencies.cmake:51 (_qt_internal_find_qt_dependencies)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6Quick/Qt6QuickConfig.cmake:40 (include)
+  /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/cmake/Qt6/Qt6Config.cmake:257 (find_package)
+  CMakeLists.txt:9 (find_package)
+
+
+-- Configuring done (61.6s)
+-- Generating done (0.7s)
+-- Build files have been written to: /Users/runner/work/benchmark/benchmark/build-ios
+Command line invocation:
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/xcodebuild -project qtspike.xcodeproj build -configuration Release -parallelizeTargets -hideShellScriptEnvironment -destination "generic/platform=iOS Simulator" -target ALL_BUILD
+
+--- xcodebuild: WARNING: Ignoring provided run destination because no scheme was passed.
+ComputePackagePrebuildTargetDependencyGraph
+
+CreateBuildRequest
+
+SendProjectDescription
+
+CreateBuildOperation
+
+ComputeTargetDependencyGraph
+note: Building targets in dependency order
+note: Target dependency graph (11 targets)
+    Target 'ALL_BUILD' in project 'qtspike'
+        ➜ Explicit dependency on target 'qtspike' in project 'qtspike'
+        ➜ Explicit dependency on target 'custard' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'qtspike' in project 'qtspike'
+        ➜ Explicit dependency on target 'qtspike_autogen_timestamp_deps' in project 'qtspike'
+        ➜ Explicit dependency on target 'qtspike_autogen' in project 'qtspike'
+        ➜ Explicit dependency on target 'qtspike_copy_qml' in project 'qtspike'
+        ➜ Explicit dependency on target 'qtspike_copy_res' in project 'qtspike'
+        ➜ Explicit dependency on target 'generate_qmlls_build_ini_file' in project 'qtspike'
+        ➜ Explicit dependency on target 'custard' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'qtspike_autogen' in project 'qtspike'
+        ➜ Explicit dependency on target 'qtspike_autogen_timestamp_deps' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'qtspike_autogen_timestamp_deps' in project 'qtspike'
+        ➜ Explicit dependency on target 'qtspike_copy_qml' in project 'qtspike'
+        ➜ Explicit dependency on target 'qtspike_copy_res' in project 'qtspike'
+        ➜ Explicit dependency on target 'generate_qmlls_build_ini_file' in project 'qtspike'
+        ➜ Explicit dependency on target 'custard' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'custard' in project 'qtspike'
+        ➜ Explicit dependency on target 'custard_autogen' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'custard_autogen' in project 'qtspike'
+        ➜ Explicit dependency on target 'custard_autogen_timestamp_deps' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'custard_autogen_timestamp_deps' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'generate_qmlls_build_ini_file' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'qtspike_copy_res' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'qtspike_copy_qml' in project 'qtspike'
+        ➜ Explicit dependency on target 'ZERO_CHECK' in project 'qtspike'
+    Target 'ZERO_CHECK' in project 'qtspike' (no dependencies)
+
+GatherProvisioningInputs
+
+CreateBuildDescription
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c++ -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/ibtool --version --output-format xml1
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -v -E -dM -arch arm64 -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -x c -c /dev/null
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld -version_details
+
+ExecuteExternalTool /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -V
+
+Build description signature: 8bb48155589ba566b2ee9d1465e214a7
+Build description path: /Users/runner/work/benchmark/benchmark/build-ios/build/XCBuildData/8bb48155589ba566b2ee9d1465e214a7.xcbuilddata
+CreateBuildDirectory /Users/runner/work/benchmark/benchmark/build-ios/build
+    cd /Users/runner/work/benchmark/benchmark/build-ios/qtspike.xcodeproj
+    builtin-create-build-directory /Users/runner/work/benchmark/benchmark/build-ios/build
+
+CreateBuildDirectory /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator
+    cd /Users/runner/work/benchmark/benchmark/build-ios/qtspike.xcodeproj
+    builtin-create-build-directory /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator
+
+ClangStatCache /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache
+    cd /Users/runner/work/benchmark/benchmark/build-ios/qtspike.xcodeproj
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang-stat-cache /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -o /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache
+
+CreateBuildDirectory /Users/runner/work/benchmark/benchmark/build-ios/build/SwiftExplicitPrecompiledModules
+    cd /Users/runner/work/benchmark/benchmark/build-ios/qtspike.xcodeproj
+    builtin-create-build-directory /Users/runner/work/benchmark/benchmark/build-ios/build/SwiftExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/runner/work/benchmark/benchmark/build-ios/build/Release-iphonesimulator
+    cd /Users/runner/work/benchmark/benchmark/build-ios/qtspike.xcodeproj
+    builtin-create-build-directory /Users/runner/work/benchmark/benchmark/build-ios/build/Release-iphonesimulator
+
+CreateBuildDirectory /Users/runner/work/benchmark/benchmark/build-ios/build/ExplicitPrecompiledModules
+    cd /Users/runner/work/benchmark/benchmark/build-ios/qtspike.xcodeproj
+    builtin-create-build-directory /Users/runner/work/benchmark/benchmark/build-ios/build/ExplicitPrecompiledModules
+
+CreateBuildDirectory /Users/runner/work/benchmark/benchmark/build-ios/build/EagerLinkingTBDs/Release-iphonesimulator
+    cd /Users/runner/work/benchmark/benchmark/build-ios/qtspike.xcodeproj
+    builtin-create-build-directory /Users/runner/work/benchmark/benchmark/build-ios/build/EagerLinkingTBDs/Release-iphonesimulator
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_res.build/Script-86A8B84482E9496300A45BAA.sh (in target 'qtspike_copy_res' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_res.build/Script-86A8B84482E9496300A45BAA.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_res.build/Script-A99A93347701B0B7A9EC5B7E.sh (in target 'qtspike_copy_res' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_res.build/Script-A99A93347701B0B7A9EC5B7E.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_qml.build/Script-CF7ED0C45D1C80BCFA9ECB0D.sh (in target 'qtspike_copy_qml' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_qml.build/Script-CF7ED0C45D1C80BCFA9ECB0D.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_qml.build/Script-454C5FB1DDF52B158FCA4A59.sh (in target 'qtspike_copy_qml' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_qml.build/Script-454C5FB1DDF52B158FCA4A59.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_autogen.build/Script-C2241FD70C08C9055F45D0E2.sh (in target 'qtspike_autogen' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_autogen.build/Script-C2241FD70C08C9055F45D0E2.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_autogen.build/Script-3175666CF7DA9B0BF1B828F0.sh (in target 'qtspike_autogen' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_autogen.build/Script-3175666CF7DA9B0BF1B828F0.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike.DependencyStaticMetadataFileList (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike.DependencyMetadataFileList (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-FE62D542AC8A57BBA80C00E9.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-FE62D542AC8A57BBA80C00E9.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-E2BA0656CB83CF899CD5A9A8.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-E2BA0656CB83CF899CD5A9A8.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-E0F9724D27B3177718516608.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-E0F9724D27B3177718516608.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-DD79324701700775A1285F47.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-DD79324701700775A1285F47.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-BF25ED77DAD51212BE7896BC.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-BF25ED77DAD51212BE7896BC.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-BD4DAE98346826F30F440204.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-BD4DAE98346826F30F440204.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-8C5BFA3A9D0A2564313EF2A9.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-8C5BFA3A9D0A2564313EF2A9.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-81DFADF28E4F3CDE4A08D850.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-81DFADF28E4F3CDE4A08D850.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-7E998486EF9EA1615F90B157.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-7E998486EF9EA1615F90B157.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-1D509006F46197D81DCA6499.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-1D509006F46197D81DCA6499.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-138B73C8A4AA0174090E8FEF.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-138B73C8A4AA0174090E8FEF.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike.LinkFileList (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+-fpascal-strings -O3 '-DCMAKE_INTDIR="Release-iphonesimulator"' -DQT_CORE_LIB -DQT_NO_DEBUG -DQT_QML_LIB -DQT_QMLINTEGRATION_LIB -DQT_NETWORK_LIB -DQT_QUICK_LIB -DQT_GUI_LIB -DQT_OPENGL_LIB -g -I/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/include -I/Users/runner/work/benchmark/benchmark/build-ios/qtspike_autogen/include_Release -I/Users/runner/work/benchmark/benchmark/spikes/qt -I/Users/runner/work/benchmark/benchmark/spikes/qt/src -I/Users/runner/work/benchmark/benchmark/stacks/karamel/gen -I/Users/runner/work/benchmark/benchmark/spikes/qt/core -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include/QtQml -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include/QtCore -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/mkspecs/macx-ios-clang -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include/QtQmlIntegration -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include/QtNetwork -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include/QtQuick -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include/QtGui -isystem /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include/QtOpenGL -I/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/DerivedSources-normal/arm64 -I/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/DerivedSources/arm64 -I/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/DerivedSources -F/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator -iframework /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib -DNDEBUG '-std=gnu++17' -idirafter /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/include
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/generate_qmlls_build_ini_file.build/Script-C145E3A9AE44B445C7F8E814.sh (in target 'generate_qmlls_build_ini_file' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/generate_qmlls_build_ini_file.build/Script-C145E3A9AE44B445C7F8E814.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/generate_qmlls_build_ini_file.build/Script-9CD7F2667DC7F8192E78C84D.sh (in target 'generate_qmlls_build_ini_file' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/generate_qmlls_build_ini_file.build/Script-9CD7F2667DC7F8192E78C84D.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/custard_autogen.build/Script-503DFD1E2FCB0266C3C88ABD.sh (in target 'custard_autogen' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/custard_autogen.build/Script-503DFD1E2FCB0266C3C88ABD.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/custard_autogen.build/Script-0F4074F5218A92A3F70F3C42.sh (in target 'custard_autogen' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/custard_autogen.build/Script-0F4074F5218A92A3F70F3C42.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/custard.DependencyStaticMetadataFileList (in target 'custard' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/custard.DependencyStaticMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/custard.DependencyMetadataFileList (in target 'custard' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/custard.DependencyMetadataFileList
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/custard.LinkFileList (in target 'custard' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/custard.LinkFileList
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp (in target 'custard' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+-fpascal-strings -O3 '-DCMAKE_INTDIR="Release-iphonesimulator"' -I/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/include -I/Users/runner/work/benchmark/benchmark/build-ios/custard_autogen/include_Release -I/Users/runner/work/benchmark/benchmark/stacks/karamel/gen -I/Users/runner/work/benchmark/benchmark/spikes/qt/core -I/Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/DerivedSources-normal/arm64 -I/Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/DerivedSources/arm64 -I/Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/DerivedSources -F/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator -DNDEBUG '-std=gnu++17' -fPIC
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp (in target 'custard' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp
+-fpascal-strings -O3 '-DCMAKE_INTDIR="Release-iphonesimulator"' -I/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/include -I/Users/runner/work/benchmark/benchmark/build-ios/custard_autogen/include_Release -I/Users/runner/work/benchmark/benchmark/stacks/karamel/gen -I/Users/runner/work/benchmark/benchmark/spikes/qt/core -I/Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/DerivedSources-normal/arm64 -I/Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/DerivedSources/arm64 -I/Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/DerivedSources -F/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator -DNDEBUG -fPIC
+MkDir /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/mkdir -p /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app
+
+note: Run script build phase 'Generate CMakeFiles/ZERO_CHECK' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ZERO_CHECK' from project 'qtspike')
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/ZERO_CHECK.build/Script-F68A51776641B8A85B1CD209.sh (in target 'ZERO_CHECK' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/ZERO_CHECK.build/Script-F68A51776641B8A85B1CD209.sh
+
+WriteAuxiliaryFile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/ALL_BUILD.build/Script-5BCA08C07625D4D5D57C828A.sh (in target 'ALL_BUILD' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    write-file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/ALL_BUILD.build/Script-5BCA08C07625D4D5D57C828A.sh
+
+PhaseScriptExecution Generate\ CMakeFiles/ZERO_CHECK /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/ZERO_CHECK.build/Script-F68A51776641B8A85B1CD209.sh (in target 'ZERO_CHECK' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/ZERO_CHECK.build/Script-F68A51776641B8A85B1CD209.sh
+make: `/Users/runner/work/benchmark/benchmark/build-ios/CMakeFiles/cmake.check_cache' is up to date.
+
+PhaseScriptExecution Generate\ .qt/qtspike_res.txt /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_res.build/Script-86A8B84482E9496300A45BAA.sh (in target 'qtspike_copy_res' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_res.build/Script-86A8B84482E9496300A45BAA.sh
+
+PhaseScriptExecution Generate\ .qt/qtspike_qml.txt /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_qml.build/Script-CF7ED0C45D1C80BCFA9ECB0D.sh (in target 'qtspike_copy_qml' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_qml.build/Script-CF7ED0C45D1C80BCFA9ECB0D.sh
+
+PhaseScriptExecution Generate\ .qt/.qmlls.build.ini /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/generate_qmlls_build_ini_file.build/Script-9CD7F2667DC7F8192E78C84D.sh (in target 'generate_qmlls_build_ini_file' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/generate_qmlls_build_ini_file.build/Script-9CD7F2667DC7F8192E78C84D.sh
+
+PhaseScriptExecution Generate\ CMakeFiles/qtspike_copy_res /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_res.build/Script-A99A93347701B0B7A9EC5B7E.sh (in target 'qtspike_copy_res' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_res.build/Script-A99A93347701B0B7A9EC5B7E.sh
+
+PhaseScriptExecution Generate\ custard_autogen/mocs_compilation.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/custard_autogen.build/Script-503DFD1E2FCB0266C3C88ABD.sh (in target 'custard_autogen' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/custard_autogen.build/Script-503DFD1E2FCB0266C3C88ABD.sh
+
+PhaseScriptExecution Generate\ CMakeFiles/qtspike_copy_qml /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_qml.build/Script-454C5FB1DDF52B158FCA4A59.sh (in target 'qtspike_copy_qml' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_copy_qml.build/Script-454C5FB1DDF52B158FCA4A59.sh
+
+PhaseScriptExecution Generate\ CMakeFiles/generate_qmlls_build_ini_file /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/generate_qmlls_build_ini_file.build/Script-C145E3A9AE44B445C7F8E814.sh (in target 'generate_qmlls_build_ini_file' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/generate_qmlls_build_ini_file.build/Script-C145E3A9AE44B445C7F8E814.sh
+
+PhaseScriptExecution Generate\ CMakeFiles/custard_autogen /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/custard_autogen.build/Script-0F4074F5218A92A3F70F3C42.sh (in target 'custard_autogen' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/custard_autogen.build/Script-0F4074F5218A92A3F70F3C42.sh
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/Custard.o /Users/runner/work/benchmark/benchmark/stacks/karamel/gen/Custard.c normal arm64 c com.apple.compilers.llvm.clang.1_0.compiler (in target 'custard' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wpointer-sign -Wno-newline-eof -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Wno-sign-conversion -Wno-infinite-recursion -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/7187679823f38a2a940e0043cdf9d637-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/Custard.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/Custard.dia -c /Users/runner/work/benchmark/benchmark/stacks/karamel/gen/Custard.c -o /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/Custard.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/mocs_compilation.o /Users/runner/work/benchmark/benchmark/build-ios/custard_autogen/mocs_compilation.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'custard' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/mocs_compilation.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/mocs_compilation.dia -c /Users/runner/work/benchmark/benchmark/build-ios/custard_autogen/mocs_compilation.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/mocs_compilation.o
+
+Libtool /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/libcustard.a normal (in target 'custard' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/libtool -static -arch_only arm64 -D -syslibroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -L/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator -filelist /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/custard.LinkFileList -dependency_info /Users/runner/work/benchmark/benchmark/build-ios/build/custard.build/Release-iphonesimulator/Objects-normal/arm64/custard_libtool_dependency_info.dat -o /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/libcustard.a
+libtool: warning: 'mocs_compilation.o' has no symbols
+
+PhaseScriptExecution Generate\ qtspike_autogen/mocs_compilation.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_autogen.build/Script-C2241FD70C08C9055F45D0E2.sh (in target 'qtspike_autogen' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_autogen.build/Script-C2241FD70C08C9055F45D0E2.sh
+
+PhaseScriptExecution Generate\ CMakeFiles/qtspike_autogen /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_autogen.build/Script-3175666CF7DA9B0BF1B828F0.sh (in target 'qtspike_autogen' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/qtspike_autogen.build/Script-3175666CF7DA9B0BF1B828F0.sh
+
+PhaseScriptExecution Generate\ meta_types/qtspike_json_file_list.txt /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-8C5BFA3A9D0A2564313EF2A9.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-8C5BFA3A9D0A2564313EF2A9.sh
+
+PhaseScriptExecution Generate\ meta_types/qt6qtspike_metatypes.json /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-FE62D542AC8A57BBA80C00E9.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-FE62D542AC8A57BBA80C00E9.sh
+
+PhaseScriptExecution Generate\ Spike/qtspike.qmltypes /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-E0F9724D27B3177718516608.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-E0F9724D27B3177718516608.sh
+
+PhaseScriptExecution Generate\ .qt/rcc/qrc_qmake_Spike.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-1D509006F46197D81DCA6499.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-1D509006F46197D81DCA6499.sh
+
+PhaseScriptExecution Generate\ .rcc/qmlcache/qtspike_qmlcache_loader.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-DD79324701700775A1285F47.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-DD79324701700775A1285F47.sh
+
+PhaseScriptExecution Generate\ .rcc/qmlcache/qtspike_qml_Main_qml.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-81DFADF28E4F3CDE4A08D850.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-81DFADF28E4F3CDE4A08D850.sh
+
+PhaseScriptExecution Generate\ .rcc/qmlcache/qtspike_qml_ListTab_qml.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-7E998486EF9EA1615F90B157.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-7E998486EF9EA1615F90B157.sh
+
+PhaseScriptExecution Generate\ .rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-BF25ED77DAD51212BE7896BC.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-BF25ED77DAD51212BE7896BC.sh
+
+PhaseScriptExecution Generate\ .rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-138B73C8A4AA0174090E8FEF.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-138B73C8A4AA0174090E8FEF.sh
+
+PhaseScriptExecution Generate\ .qt/rcc/qrc_qtspike_raw_qml_0.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-BD4DAE98346826F30F440204.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-BD4DAE98346826F30F440204.sh
+
+PhaseScriptExecution Generate\ .qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-E2BA0656CB83CF899CD5A9A8.sh (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Script-E2BA0656CB83CF899CD5A9A8.sh
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/spike.o /Users/runner/work/benchmark/benchmark/spikes/qt/src/spike.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/spike.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/spike.dia -c /Users/runner/work/benchmark/benchmark/spikes/qt/src/spike.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/spike.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qmltyperegistrations.o /Users/runner/work/benchmark/benchmark/build-ios/qtspike_qmltyperegistrations.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qmltyperegistrations.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qmltyperegistrations.dia -c /Users/runner/work/benchmark/benchmark/build-ios/qtspike_qmltyperegistrations.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qmltyperegistrations.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qmlcache_loader.o /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qmlcache_loader.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qmlcache_loader.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qmlcache_loader.dia -c /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qmlcache_loader.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qmlcache_loader.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_Main_qml.o /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qml_Main_qml.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_Main_qml.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_Main_qml.dia -c /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qml_Main_qml.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_Main_qml.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_ListTab_qml.o /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qml_ListTab_qml.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_ListTab_qml.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_ListTab_qml.dia -c /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qml_ListTab_qml.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_ListTab_qml.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_CoreTab_qml.o /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_CoreTab_qml.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_CoreTab_qml.dia -c /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qml_CoreTab_qml.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_CoreTab_qml.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_CanvasTab_qml.o /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_CanvasTab_qml.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_CanvasTab_qml.dia -c /Users/runner/work/benchmark/benchmark/build-ios/.rcc/qmlcache/qtspike_qml_CanvasTab_qml.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_qml_CanvasTab_qml.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qtspike_raw_qml_0_extra_qmldirs.o /Users/runner/work/benchmark/benchmark/build-ios/.qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -DCMAKE_SKIP_PRECOMPILE_HEADERS -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qtspike_raw_qml_0_extra_qmldirs.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qtspike_raw_qml_0_extra_qmldirs.dia -c /Users/runner/work/benchmark/benchmark/build-ios/.qt/rcc/qrc_qtspike_raw_qml_0_extra_qmldirs.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qtspike_raw_qml_0_extra_qmldirs.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qtspike_raw_qml_0.o /Users/runner/work/benchmark/benchmark/build-ios/.qt/rcc/qrc_qtspike_raw_qml_0.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -DCMAKE_SKIP_PRECOMPILE_HEADERS -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qtspike_raw_qml_0.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qtspike_raw_qml_0.dia -c /Users/runner/work/benchmark/benchmark/build-ios/.qt/rcc/qrc_qtspike_raw_qml_0.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qtspike_raw_qml_0.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qmake_Spike.o /Users/runner/work/benchmark/benchmark/build-ios/.qt/rcc/qrc_qmake_Spike.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -DCMAKE_SKIP_PRECOMPILE_HEADERS -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qmake_Spike.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qmake_Spike.dia -c /Users/runner/work/benchmark/benchmark/build-ios/.qt/rcc/qrc_qmake_Spike.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qrc_qmake_Spike.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/mocs_compilation.o /Users/runner/work/benchmark/benchmark/build-ios/qtspike_autogen/mocs_compilation.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/mocs_compilation.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/mocs_compilation.dia -c /Users/runner/work/benchmark/benchmark/build-ios/qtspike_autogen/mocs_compilation.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/mocs_compilation.o
+
+CompileC /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/main.o /Users/runner/work/benchmark/benchmark/spikes/qt/src/main.cpp normal arm64 c++ com.apple.compilers.llvm.clang.1_0.compiler (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    
+    Using response file: /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp
+    
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -x c++ -ivfsstatcache /var/folders/n6/hn37q6pj7sj_9dmqqc2113800000gn/C/com.apple.DeveloperTools/26.6-17F113/Xcode/SDKStatCaches.noindex/iphonesimulator26.5-23F81a-688ef53f1462e2c8f657fdc38a81448ff45c64a1807a658693f2a61704f17a36.sdkstatcache -target arm64-apple-ios18-simulator -fmessage-length\=0 -fdiagnostics-show-note-include-stack -fmacro-backtrace-limit\=0 -fno-color-diagnostics -Wno-trigraphs -Wno-missing-field-initializers -Wno-missing-prototypes -Wno-return-type -Wno-non-virtual-dtor -Wno-overloaded-virtual -Wno-exit-time-destructors -Wno-missing-braces -Wparentheses -Wswitch -Wno-unused-function -Wno-unused-label -Wno-unused-parameter -Wno-unused-variable -Wunused-value -Wno-empty-body -Wno-uninitialized -Wno-unknown-pragmas -Wno-shadow -Wno-four-char-constants -Wno-conversion -Wno-constant-conversion -Wno-int-conversion -Wno-bool-conversion -Wno-enum-conversion -Wno-float-conversion -Wno-non-literal-null-conversion -Wno-objc-literal-conversion -Wshorten-64-to-32 -Wno-newline-eof -Wno-c++11-extensions -Wno-implicit-fallthrough -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -fstrict-aliasing -Wdeprecated-declarations -Winvalid-offsetof -Wno-sign-conversion -Wno-infinite-recursion -Wno-move -Wno-comma -Wno-block-capture-autoreleasing -Wno-strict-prototypes -Wno-range-loop-analysis -Wno-semicolon-before-method-body @/Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/82b82416624d2658e5098eb0a28c15c5-common-args.resp -MMD -MT dependencies -MF /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/main.d --serialize-diagnostics /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/main.dia -c /Users/runner/work/benchmark/benchmark/spikes/qt/src/main.cpp -o /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/main.o
+
+CompileStoryboard /Users/runner/work/benchmark/benchmark/build-ios/.qt/launch_screen_storyboards/qtspike/LaunchScreen.storyboard (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/ibtool --errors --warnings --notices --module qtspike --output-partial-info-plist /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/LaunchScreen-SBPartialInfo.plist --auto-activate-custom-fonts --target-device iphone --target-device ipad --minimum-deployment-target 18 --output-format human-readable-text /Users/runner/work/benchmark/benchmark/build-ios/.qt/launch_screen_storyboards/qtspike/LaunchScreen.storyboard --compilation-directory /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator
+
+ProcessInfoPlistFile /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app/Info.plist /Users/runner/work/benchmark/benchmark/build-ios/CMakeFiles/qtspike.dir/Info.plist (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    builtin-infoPlistUtility /Users/runner/work/benchmark/benchmark/build-ios/CMakeFiles/qtspike.dir/Info.plist -producttype com.apple.product-type.application -genpkginfo /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -additionalcontentfile /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/LaunchScreen-SBPartialInfo.plist -o /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app/Info.plist
+
+LinkStoryboards (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /Applications/Xcode_26.6.app/Contents/Developer/usr/bin/ibtool --errors --warnings --notices --module qtspike --target-device iphone --target-device ipad --minimum-deployment-target 18 --output-format human-readable-text --link /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/LaunchScreen.storyboardc
+
+Ld /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app/qtspike normal (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -Xlinker -reproducible -target arm64-apple-ios18-simulator -isysroot /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk -O3 -L/Users/runner/work/benchmark/benchmark/build-ios/build/EagerLinkingTBDs/Release-iphonesimulator -L/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator -F/Users/runner/work/benchmark/benchmark/build-ios/build/EagerLinkingTBDs/Release-iphonesimulator -F/Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator -iframework /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib -filelist /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike.LinkFileList -Xlinker -rpath -Xlinker @executable_path/Frameworks -Xlinker -dead_strip -Xlinker -object_path_lto -Xlinker /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_lto.o -Xlinker -objc_abi_version -Xlinker 2 -Xlinker -dependency_info -Xlinker /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/Objects-normal/arm64/qtspike_dependency_info.dat -e _qt_main_wrapper -Xlinker -no_warn_duplicate_libraries -Wl,-e,_qt_main_wrapper -Wl,-search_paths_first -Wl,-headerpad_max_install_names /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QDebugMessageServiceFactoryPlugin_init/QDebugMessageServiceFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QLocalClientConnectionFactoryPlugin_init/QLocalClientConnectionFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQmlDebugServerFactoryPlugin_init/QQmlDebugServerFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQmlDebuggerServiceFactoryPlugin_init/QQmlDebuggerServiceFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQmlInspectorServiceFactoryPlugin_init/QQmlInspectorServiceFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQmlNativeDebugConnectorFactoryPlugin_init/QQmlNativeDebugConnectorFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQmlNativeDebugServiceFactoryPlugin_init/QQmlNativeDebugServiceFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQmlPreviewServiceFactoryPlugin_init/QQmlPreviewServiceFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQmlProfilerServiceFactoryPlugin_init/QQmlProfilerServiceFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQuickEventReplayServiceFactoryPlugin_init/QQuickEventReplayServiceFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QQuickProfilerAdapterFactoryPlugin_init/QQuickProfilerAdapterFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/objects-Release/QTcpServerConnectionFactoryPlugin_init/QTcpServerConnectionFactoryPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/networkinformation/objects-Release/QAppleNetworkInformationPlugin_init/QAppleNetworkInformationPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/tls/objects-Release/QSecureTransportBackendPlugin_init/QSecureTransportBackendPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/imageformats/objects-Release/QGifPlugin_init/QGifPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/imageformats/objects-Release/QICOPlugin_init/QICOPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/platforms/objects-Release/QIOSIntegrationPlugin_init/QIOSIntegrationPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/imageformats/objects-Release/QJpegPlugin_init/QJpegPlugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QML/objects-Release/Qml_resources_1/.qt/rcc/qrc_qmake_QML_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/objects-Release/Quick_resources_1/.qt/rcc/qrc_qmake_QtQuick_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_2/.qt/rcc/qrc_scenegraph_shaders_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_3/.qt/rcc/qrc_scenegraph_curve_shaders_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_4/.qt/rcc/qrc_scenegraph_curve_shaders_derivatives_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_5/.qt/rcc/qrc_scenegraph_curve_shaders_expanding_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_6/.qt/rcc/qrc_scenegraph_curve_shaders_lg_expanding_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_7/.qt/rcc/qrc_scenegraph_curve_shaders_rg_expanding_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_8/.qt/rcc/qrc_scenegraph_curve_shaders_cg_expanding_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_9/.qt/rcc/qrc_scenegraph_curve_shaders_lg_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_10/.qt/rcc/qrc_scenegraph_curve_shaders_lg_derivatives_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_11/.qt/rcc/qrc_scenegraph_curve_shaders_rg_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_12/.qt/rcc/qrc_scenegraph_curve_shaders_rg_derivatives_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_13/.qt/rcc/qrc_scenegraph_curve_shaders_cg_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_14/.qt/rcc/qrc_scenegraph_curve_shaders_cg_derivatives_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_15/.qt/rcc/qrc_scenegraph_curve_shaders_tf_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Quick_resources_16/.qt/rcc/qrc_scenegraph_curve_shaders_tf_derivatives_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/objects-Release/qtquick2plugin_init/qtquick2plugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/objects-Release/qmlplugin_init/qmlplugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/Models/objects-Release/modelsplugin_init/modelsplugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/WorkerScript/objects-Release/workerscriptplugin_init/workerscriptplugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/Basic/objects-Release/qtquickcontrols2basicstyleplugin_init/qtquickcontrols2basicstyleplugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Layouts/objects-Release/qquicklayoutsplugin_init/qquicklayoutsplugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Templates/objects-Release/qtquicktemplates2plugin_init/qtquicktemplates2plugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/impl/objects-Release/qtquickcontrols2implplugin_init/qtquickcontrols2implplugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/Basic/impl/objects-Release/qtquickcontrols2basicstyleimplplugin_init/qtquickcontrols2basicstyleimplplugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Shapes/objects-Release/qmlshapesplugin_init/qmlshapesplugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Gui_resources_1/.qt/rcc/qrc_qpdf_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/Gui_resources_2/.qt/rcc/qrc_gui_shaders_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/Models/objects-Release/QmlModels_resources_1/.qt/rcc/qrc_qmake_QtQml_Models_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/objects-Release/QmlMeta_resources_1/.qt/rcc/qrc_qmake_QtQml_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/WorkerScript/objects-Release/QmlWorkerScript_resources_1/.qt/rcc/qrc_qmake_QtQml_WorkerScript_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/Basic/objects-Release/QuickControls2Basic_resources_1/.qt/rcc/qrc_qmake_QtQuick_Controls_Basic_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/Basic/objects-Release/QuickControls2Basic_resources_2/.qt/rcc/qrc_QuickControls2Basic_raw_qml_0_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/QuickControls2Basic_resources_3/.qt/rcc/qrc_qtquickcontrols2basicstyle_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/objects-Release/QuickControls2_resources_1/.qt/rcc/qrc_qmake_QtQuick_Controls_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/objects-Release/qtquickcontrols2plugin_init/qtquickcontrols2plugin_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/qtquickcontrols2plugin_resources_1/.qt/rcc/qrc_indirectBasic_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Layouts/objects-Release/QuickLayouts_resources_1/.qt/rcc/qrc_qmake_QtQuick_Layouts_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Templates/objects-Release/QuickTemplates2_resources_1/.qt/rcc/qrc_qmake_QtQuick_Templates_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/impl/objects-Release/QuickControls2Impl_resources_1/.qt/rcc/qrc_qmake_QtQuick_Controls_impl_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/impl/objects-Release/QuickControls2Impl_resources_2/.qt/rcc/qrc_QuickControls2Impl_raw_qml_0_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/Basic/impl/objects-Release/QuickControls2BasicStyleImpl_resources_1/.qt/rcc/qrc_qmake_QtQuick_Controls_Basic_impl_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/Basic/impl/objects-Release/QuickControls2BasicStyleImpl_resources_2/.qt/rcc/qrc_QuickControls2BasicStyleImpl_raw_qml_0_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Shapes/objects-Release/QuickShapes_resources_1/.qt/rcc/qrc_qmake_QtQuick_Shapes_init.cpp.o /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/objects-Release/QuickShapes_resources_2/.qt/rcc/qrc_qtquickshapes_shaders_init.cpp.o /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/libcustard.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/Basic/libqtquickcontrols2basicstyleplugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Layouts/libqquicklayoutsplugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/Basic/impl/libqtquickcontrols2basicstyleimplplugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Shapes/libqmlshapesplugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_messages.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_local.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_server.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_debugger.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_inspector.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_native.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_nativedebugger.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_preview.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_profiler.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_quickeventreplay.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_quickprofiler.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/qmltooling/libqmldbg_tcp.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/networkinformation/libqapplenetworkinformation.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/tls/libqsecuretransportbackend.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/imageformats/libqgif.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/imageformats/libqico.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/platforms/libqios.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/plugins/imageformats/libqjpeg.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQuickControls2Basic.framework/QtQuickControls2Basic /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQuickControls2BasicStyleImpl.framework/QtQuickControls2BasicStyleImpl /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/libqtquickcontrols2plugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Controls/impl/libqtquickcontrols2implplugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/Templates/libqtquicktemplates2plugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQuickControls2.framework/QtQuickControls2 /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQuickControls2Impl.framework/QtQuickControls2Impl /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQuickTemplates2.framework/QtQuickTemplates2 /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQuickLayouts.framework/QtQuickLayouts /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQuick/libqtquick2plugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/libqmlplugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/Models/libmodelsplugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/qml/QtQml/WorkerScript/libworkerscriptplugin.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQuickShapes.framework/QtQuickShapes /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/libQt6QmlPreview.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQuick.framework/QtQuick /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQmlMeta.framework/QtQmlMeta /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQmlModels.framework/QtQmlModels /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQmlWorkerScript.framework/QtQmlWorkerScript /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/libQt6PacketProtocol.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtQml.framework/QtQml /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtNetwork.framework/QtNetwork -framework CFNetwork -framework Network /Applications/Xcode_26.6.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator26.5.sdk/usr/lib/libresolv.tbd -framework Security /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtOpenGL.framework/QtOpenGL -framework AudioToolbox -framework Photos /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtGui.framework/QtGui /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/QtCore.framework/QtCore -framework IOKit -framework UniformTypeIdentifiers -lm /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/libQt6BundledPcre2.a -framework MobileCoreServices /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/libQt6EntryPoint.a -framework OpenGLES -framework ImageIO -framework CoreFoundation -framework CoreGraphics -framework CoreText -framework Foundation -framework Metal -framework QuartzCore -framework UIKit /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/libQt6BundledHarfbuzz.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/libQt6BundledFreetype.a /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/libQt6BundledLibpng.a -lz /Users/runner/work/_temp/Qt/6.12.0/ios_simulator_arm64/lib/libQt6BundledLibjpeg.a -o /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app/qtspike
+
+GenerateDSYMFile /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app.dSYM /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app/qtspike (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /Applications/Xcode_26.6.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/dsymutil /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app/qtspike -o /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app.dSYM
+
+RegisterExecutionPolicyException /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    builtin-RegisterExecutionPolicyException /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app
+
+Validate /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    builtin-validationUtility /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app -shallow-bundle -infoplist-subpath Info.plist
+
+Touch /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app (in target 'qtspike' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /usr/bin/touch -c /Users/runner/work/benchmark/benchmark/build-ios/Release-iphonesimulator/qtspike.app
+
+PhaseScriptExecution Generate\ CMakeFiles/ALL_BUILD /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/ALL_BUILD.build/Script-5BCA08C07625D4D5D57C828A.sh (in target 'ALL_BUILD' from project 'qtspike')
+    cd /Users/runner/work/benchmark/benchmark/spikes/qt
+    /bin/sh -c /Users/runner/work/benchmark/benchmark/build-ios/build/qtspike.build/Release-iphonesimulator/ALL_BUILD.build/Script-5BCA08C07625D4D5D57C828A.sh
+Build all projects
+
+note: Run script build phase 'Generate CMakeFiles/qtspike_copy_res' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'qtspike_copy_res' from project 'qtspike')
+note: Run script build phase 'Generate CMakeFiles/qtspike_copy_qml' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'qtspike_copy_qml' from project 'qtspike')
+note: Run script build phase 'Generate CMakeFiles/qtspike_autogen' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'qtspike_autogen' from project 'qtspike')
+note: Run script build phase 'Generate CMakeFiles/generate_qmlls_build_ini_file' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'generate_qmlls_build_ini_file' from project 'qtspike')
+note: Run script build phase 'Generate CMakeFiles/custard_autogen' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'custard_autogen' from project 'qtspike')
+note: Run script build phase 'Generate CMakeFiles/ALL_BUILD' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'ALL_BUILD' from project 'qtspike')
+** BUILD SUCCEEDED **
+

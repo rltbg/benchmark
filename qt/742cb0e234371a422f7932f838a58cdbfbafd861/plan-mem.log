@@ -1,0 +1,65 @@
+=== 11:47:35 slint list mem=128
+SUMMARY {"tag": "slint-list-m128", "stack": "slint", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.95427083454199, "p95": 62.01088485873622, "min": 61.645044621377586, "max": 62.01088485873622, "n": 3}, "frame_p50": {"median": 16.18411
+=== 11:48:26 slint stream mem=128
+SUMMARY {"tag": "slint-stream-r10000-m128", "stack": "slint", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.86154622818655, "p95": 61.93906307263146, "min": 61.78526372937169, "max": 61.93906307263146, "n": 3}, "frame_p50": {"median"
+=== 11:49:17 slint list mem=96
+SUMMARY {"tag": "slint-list-m96", "stack": "slint", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.88267729410554, "p95": 61.98740891630995, "min": 61.55256491878944, "max": 61.98740891630995, "n": 3}, "frame_p50": {"median": 16.172298,
+=== 11:50:08 slint stream mem=96
+SUMMARY {"tag": "slint-stream-r10000-m96", "stack": "slint", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.98948208112898, "p95": 62.00970769841455, "min": 61.83818851610901, "max": 62.00970769841455, "n": 3}, "frame_p50": {"median":
+=== 11:50:58 qt-software list mem=128
+SUMMARY {"tag": "qt-software-list-m128", "stack": "qt-software", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.06213171833186, "p95": 60.06330782773011, "min": 59.9196237467166, "max": 60.06330782773011, "n": 3}, "frame_p50": {"median"
+=== 11:51:49 qt-software stream mem=128
+SUMMARY {"tag": "qt-software-stream-r10000-m128", "stack": "qt-software", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.057483093341624, "p95": 60.064758847605596, "min": 59.849371574417255, "max": 60.064758847605596, "n": 3}, "frame
+=== 11:52:40 qt-software list mem=96
+SUMMARY {"tag": "qt-software-list-m96", "stack": "qt-software", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.06173045124911, "p95": 60.06199278517046, "min": 59.99145336901703, "max": 60.06199278517046, "n": 3}, "frame_p50": {"median"
+=== 11:53:31 qt-software stream mem=96
+SUMMARY {"tag": "qt-software-stream-r10000-m96", "stack": "qt-software", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.990743869581394, "p95": 60.06391092085436, "min": 59.91834800731209, "max": 60.06391092085436, "n": 3}, "frame_p50
+=== 11:54:22 avalonia-aot list mem=128
+SUMMARY {"tag": "avalonia-aot-list-m128", "stack": "avalonia-aot", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.33022403360325, "p95": 61.34760135872097, "min": 60.35235933138432, "max": 61.34760135872097, "n": 3}, "frame_p50": {"medi
+=== 11:55:13 avalonia-aot stream mem=128
+SUMMARY {"tag": "avalonia-aot-stream-r10000-m128", "stack": "avalonia-aot", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.260386452483054, "p95": 61.3087697133537, "min": 61.018349201311864, "max": 61.3087697133537, "n": 3}, "frame_p
+=== 11:56:04 avalonia-aot list mem=96
+SUMMARY {"tag": "avalonia-aot-list-m96", "stack": "avalonia-aot", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.21752754022629, "p95": 61.295118820231465, "min": 61.19107791293066, "max": 61.295118820231465, "n": 3}, "frame_p50": {"med
+=== 11:56:55 avalonia-aot stream mem=96
+SUMMARY {"tag": "avalonia-aot-stream-r10000-m96", "stack": "avalonia-aot", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.26108110617687, "p95": 61.318876338721196, "min": 61.256389223239744, "max": 61.318876338721196, "n": 3}, "frame
+=== 11:57:46 avalonia-jit list mem=128
+SUMMARY {"tag": "avalonia-jit-list-m128", "stack": "avalonia-jit", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.202985336107105, "p95": 61.209608881300234, "min": 61.07139609639048, "max": 61.209608881300234, "n": 3}, "frame_p50": {"m
+=== 11:58:40 avalonia-jit stream mem=128
+SUMMARY {"tag": "avalonia-jit-stream-r10000-m128", "stack": "avalonia-jit", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.279440526555184, "p95": 61.36196739596078, "min": 61.27126242980999, "max": 61.36196739596078, "n": 3}, "frame_
+=== 11:59:33 avalonia-jit list mem=96
+SUMMARY {"tag": "avalonia-jit-list-m96", "stack": "avalonia-jit", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.09708405076662, "p95": 61.18778323864085, "min": 61.08246539093883, "max": 61.18778323864085, "n": 3}, "frame_p50": {"media
+=== 12:00:26 avalonia-jit stream mem=96
+SUMMARY {"tag": "avalonia-jit-stream-r10000-m96", "stack": "avalonia-jit", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 61.293493702770604, "p95": 61.29959707632285, "min": 61.145886745417535, "max": 61.29959707632285, "n": 3}, "frame_
+=== 12:01:19 compose-jvm list mem=128
+SUMMARY {"tag": "compose-jvm-list-m128", "stack": "compose-jvm", "scenario": "list", "runs": 3, "ok_runs": 0, "oom_runs": 3, "markers_ok": 0, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropped_
+=== 12:01:43 compose-jvm stream mem=128
+SUMMARY {"tag": "compose-jvm-stream-r10000-m128", "stack": "compose-jvm", "scenario": "stream", "runs": 3, "ok_runs": 0, "oom_runs": 3, "markers_ok": 0, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null
+=== 12:02:05 compose-jvm list mem=96
+SUMMARY {"tag": "compose-jvm-list-m96", "stack": "compose-jvm", "scenario": "list", "runs": 3, "ok_runs": 0, "oom_runs": 3, "markers_ok": 0, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropped_g
+=== 12:02:13 compose-jvm stream mem=96
+SUMMARY {"tag": "compose-jvm-stream-r10000-m96", "stack": "compose-jvm", "scenario": "stream", "runs": 3, "ok_runs": 0, "oom_runs": 3, "markers_ok": 0, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null,
+=== 12:02:22 flutter list mem=128
+SUMMARY {"tag": "flutter-list-m128", "stack": "flutter", "scenario": "list", "runs": 3, "ok_runs": 0, "oom_runs": 3, "markers_ok": 0, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropped_gt25": n
+=== 12:02:26 flutter stream mem=128
+SUMMARY {"tag": "flutter-stream-r10000-m128", "stack": "flutter", "scenario": "stream", "runs": 3, "ok_runs": 0, "oom_runs": 3, "markers_ok": 0, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropp
+=== 12:02:31 flutter list mem=96
+SUMMARY {"tag": "flutter-list-m96", "stack": "flutter", "scenario": "list", "runs": 3, "ok_runs": 0, "oom_runs": 3, "markers_ok": 0, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropped_gt25": nu
+=== 12:02:35 flutter stream mem=96
+SUMMARY {"tag": "flutter-stream-r10000-m96", "stack": "flutter", "scenario": "stream", "runs": 3, "ok_runs": 0, "oom_runs": 3, "markers_ok": 0, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "droppe
+=== 12:02:39 egui list mem=128
+SUMMARY {"tag": "egui-list-m128", "stack": "egui", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.386436751696095, "p95": 59.71400420540874, "min": 59.35608292709059, "max": 59.71400420540874, "n": 3}, "frame_p50": {"median": 16.67, "p9
+=== 12:03:30 egui stream mem=128
+SUMMARY {"tag": "egui-stream-r10000-m128", "stack": "egui", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.8569761127094, "p95": 59.93017706299468, "min": 58.8584415954105, "max": 59.93017706299468, "n": 3}, "frame_p50": {"median": 16
+=== 12:04:20 egui list mem=96
+SUMMARY {"tag": "egui-list-m96", "stack": "egui", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.85685212386112, "p95": 59.92808344274911, "min": 59.5705427589865, "max": 59.92808344274911, "n": 3}, "frame_p50": {"median": 16.668, "p95"
+=== 12:05:11 egui stream mem=96
+SUMMARY {"tag": "egui-stream-r10000-m96", "stack": "egui", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.92929199677124, "p95": 59.92988203801553, "min": 59.92887298902959, "max": 59.92988203801553, "n": 3}, "frame_p50": {"median": 1
+=== 12:06:02 nsh list mem=128
+SUMMARY {"tag": "nsh-list-m128", "stack": "nsh", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.94185091376802, "p95": 59.94442256447128, "min": 58.937282124180385, "max": 59.94442256447128, "n": 3}, "frame_p50": {"median": 16.644719, "
+=== 12:06:53 nsh stream mem=128
+SUMMARY {"tag": "nsh-stream-r10000-m128", "stack": "nsh", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 59.869107245904345, "p95": 60.008038793021306, "min": 59.72479985071857, "max": 60.008038793021306, "n": 3}, "frame_p50": {"median":
+=== 12:07:44 nsh list mem=96
+SUMMARY {"tag": "nsh-list-m96", "stack": "nsh", "scenario": "list", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.01488260674666, "p95": 60.02509305340926, "min": 59.5871697281304, "max": 60.02509305340926, "n": 3}, "frame_p50": {"median": 16.68068, "p95"
+=== 12:08:35 nsh stream mem=96
+SUMMARY {"tag": "nsh-stream-r10000-m96", "stack": "nsh", "scenario": "stream", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 60.00810482368718, "p95": 60.01152504776222, "min": 60.007888748897585, "max": 60.01152504776222, "n": 3}, "frame_p50": {"median": 16
+=== MEM DONE 12:09:26

@@ -1,0 +1,1275 @@
+{
+ "summary": {
+  "tag": "iced-fulldamage-core",
+  "stack": "iced-fulldamage",
+  "scenario": "core",
+  "runs": 10,
+  "ok_runs": 10,
+  "agg": {
+   "fps_mean": {
+    "median": 31.33916331645605,
+    "p95": 33.04026216413289,
+    "min": 28.749237663670016,
+    "max": 33.04026216413289
+   },
+   "frame_p95": {
+    "median": 45.777,
+    "p95": 52.571,
+    "min": 35.17,
+    "max": 52.571
+   },
+   "frame_p99": {
+    "median": 51.3755,
+    "p95": 60.224,
+    "min": 48.623,
+    "max": 60.224
+   },
+   "frame_max": {
+    "median": 60.066,
+    "p95": 121.165,
+    "min": 49.871,
+    "max": 121.165
+   },
+   "dropped_gt16_7": {
+    "median": 438.0,
+    "p95": 462,
+    "min": 402,
+    "max": 462
+   },
+   "dropped_gt8_3": {
+    "median": 438.0,
+    "p95": 462,
+    "min": 402,
+    "max": 462
+   },
+   "rss_kb_median": {
+    "median": 17974.0,
+    "p95": 18044,
+    "min": 17876,
+    "max": 18044
+   },
+   "rss_kb_peak": {
+    "median": 17996.0,
+    "p95": 18068,
+    "min": 17896,
+    "max": 18068
+   },
+   "rss_kb_last_quarter": {
+    "median": 17988.0,
+    "p95": 18068,
+    "min": 17888,
+    "max": 18068
+   },
+   "cpu_pct_core_mean": {
+    "median": 193.56910680132734,
+    "p95": 194.30132296212332,
+    "min": 192.85520033811318,
+    "max": 194.30132296212332
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 226.00000000000006,
+    "p95": 234.99999999999977,
+    "min": 224.0000000000002,
+    "max": 234.99999999999977
+   },
+   "wall_s": {
+    "median": 16.160243810500106,
+    "p95": 16.20701540599839,
+    "min": 16.095233943000494,
+    "max": 16.20701540599839
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 16.095233943000494,
+   "frames": 419,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 153178966,
+    "core_calls_total": 2145910784,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 55.373,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 31.16,
+    "redraw_start_interval_p95_ms": 50.221,
+    "frame_events": 419,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 418
+   },
+   "checksum": "0f69ad692021470b",
+   "fps_mean": 29.908966101292034,
+   "frame_p50": 31.153,
+   "frame_p95": 50.222,
+   "frame_p99": 53.602,
+   "frame_max": 55.373,
+   "dropped_gt16_7": 418,
+   "dropped_gt8_3": 418,
+   "dropped_ms_gt16_7": 7028.577,
+   "rss_kb_median": 17956.0,
+   "rss_kb_peak": 17988,
+   "rss_kb_first_quarter": 17892,
+   "rss_kb_last_quarter": 17984,
+   "cpu_pct_core_mean": 192.9221332541379,
+   "cpu_pct_core_peak_1s": 226.00000000000017,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     7088
+    ],
+    [
+     1.1,
+     1.04,
+     17884
+    ],
+    [
+     2.2,
+     2.31,
+     17916
+    ],
+    [
+     3.3,
+     4.53,
+     17940
+    ],
+    [
+     4.4,
+     6.69,
+     17940
+    ],
+    [
+     5.4,
+     8.85,
+     17948
+    ],
+    [
+     6.5,
+     11.05,
+     17956
+    ],
+    [
+     7.6,
+     13.26,
+     17956
+    ],
+    [
+     8.6,
+     15.48,
+     17964
+    ],
+    [
+     9.7,
+     17.7,
+     17964
+    ],
+    [
+     10.8,
+     19.91,
+     17976
+    ],
+    [
+     11.8,
+     22.14,
+     17984
+    ],
+    [
+     12.9,
+     24.33,
+     17984
+    ],
+    [
+     14.0,
+     26.57,
+     17984
+    ],
+    [
+     15.0,
+     28.8,
+     17988
+    ]
+   ]
+  },
+  {
+   "run": 1,
+   "rc": 0,
+   "wall_s": 16.156676455997513,
+   "frames": 429,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 159618191,
+    "core_calls_total": 2236760064,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 121.165,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 30.695,
+    "redraw_start_interval_p95_ms": 46.967,
+    "frame_events": 429,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 428
+   },
+   "checksum": "fbff9c9c01b3fcd3",
+   "fps_mean": 30.61400562926625,
+   "frame_p50": 30.694,
+   "frame_p95": 46.963,
+   "frame_p99": 51.411,
+   "frame_max": 121.165,
+   "dropped_gt16_7": 428,
+   "dropped_gt8_3": 428,
+   "dropped_ms_gt16_7": 6865.594,
+   "rss_kb_median": 17876,
+   "rss_kb_peak": 17896,
+   "rss_kb_first_quarter": 17804,
+   "rss_kb_last_quarter": 17888,
+   "cpu_pct_core_mean": 193.02125161383395,
+   "cpu_pct_core_peak_1s": 225.0,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     7060
+    ],
+    [
+     1.1,
+     1.05,
+     17800
+    ],
+    [
+     2.1,
+     2.21,
+     17828
+    ],
+    [
+     3.2,
+     4.4,
+     17852
+    ],
+    [
+     4.3,
+     6.58,
+     17856
+    ],
+    [
+     5.4,
+     8.77,
+     17864
+    ],
+    [
+     6.4,
+     11.0,
+     17864
+    ],
+    [
+     7.5,
+     13.23,
+     17876
+    ],
+    [
+     8.6,
+     15.45,
+     17876
+    ],
+    [
+     9.6,
+     17.66,
+     17876
+    ],
+    [
+     10.7,
+     19.88,
+     17884
+    ],
+    [
+     11.8,
+     22.1,
+     17888
+    ],
+    [
+     12.8,
+     24.34,
+     17888
+    ],
+    [
+     13.9,
+     26.56,
+     17888
+    ],
+    [
+     15.0,
+     28.76,
+     17892
+    ],
+    [
+     16.1,
+     30.98,
+     17896
+    ]
+   ]
+  },
+  {
+   "run": 2,
+   "rc": 0,
+   "wall_s": 16.17339112499758,
+   "frames": 444,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 156080596,
+    "core_calls_total": 2186366976,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 85.939,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 30.334,
+    "redraw_start_interval_p95_ms": 40.193,
+    "frame_events": 444,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 443
+   },
+   "checksum": "1db98c34ecd09deb",
+   "fps_mean": 31.696313904301974,
+   "frame_p50": 30.33,
+   "frame_p95": 40.161,
+   "frame_p99": 51.007,
+   "frame_max": 85.939,
+   "dropped_gt16_7": 443,
+   "dropped_gt8_3": 443,
+   "dropped_ms_gt16_7": 6609.838000000001,
+   "rss_kb_median": 18028,
+   "rss_kb_peak": 18044,
+   "rss_kb_first_quarter": 17968,
+   "rss_kb_last_quarter": 18044,
+   "cpu_pct_core_mean": 193.56963571014995,
+   "cpu_pct_core_peak_1s": 234.0,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     7112
+    ],
+    [
+     1.1,
+     1.04,
+     17956
+    ],
+    [
+     2.1,
+     2.18,
+     17992
+    ],
+    [
+     3.2,
+     4.34,
+     18008
+    ],
+    [
+     4.3,
+     6.54,
+     18016
+    ],
+    [
+     5.3,
+     8.76,
+     18024
+    ],
+    [
+     6.5,
+     11.07,
+     18028
+    ],
+    [
+     7.5,
+     13.31,
+     18028
+    ],
+    [
+     8.6,
+     15.54,
+     18032
+    ],
+    [
+     9.7,
+     17.77,
+     18032
+    ],
+    [
+     10.7,
+     20.0,
+     18044
+    ],
+    [
+     11.8,
+     22.23,
+     18044
+    ],
+    [
+     12.9,
+     24.44,
+     18044
+    ],
+    [
+     13.9,
+     26.65,
+     18044
+    ],
+    [
+     15.0,
+     28.87,
+     18044
+    ],
+    [
+     16.1,
+     31.1,
+     18044
+    ]
+   ]
+  },
+  {
+   "run": 3,
+   "rc": 0,
+   "wall_s": 16.1638111650027,
+   "frames": 434,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 157780490,
+    "core_calls_total": 2210209792,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 53.444,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 30.649,
+    "redraw_start_interval_p95_ms": 47.56,
+    "frame_events": 434,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 433
+   },
+   "checksum": "3f8921eeaf8396bb",
+   "fps_mean": 30.98201272861013,
+   "frame_p50": 30.65,
+   "frame_p95": 47.558,
+   "frame_p99": 51.673,
+   "frame_max": 53.444,
+   "dropped_gt16_7": 433,
+   "dropped_gt8_3": 433,
+   "dropped_ms_gt16_7": 6777.028,
+   "rss_kb_median": 18044,
+   "rss_kb_peak": 18068,
+   "rss_kb_first_quarter": 17984,
+   "rss_kb_last_quarter": 18068,
+   "cpu_pct_core_mean": 193.79419899367042,
+   "cpu_pct_core_peak_1s": 226.00000000000017,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     6920
+    ],
+    [
+     1.1,
+     1.06,
+     17968
+    ],
+    [
+     2.2,
+     2.25,
+     18008
+    ],
+    [
+     3.2,
+     4.43,
+     18020
+    ],
+    [
+     4.3,
+     6.62,
+     18024
+    ],
+    [
+     5.4,
+     8.82,
+     18028
+    ],
+    [
+     6.4,
+     11.02,
+     18036
+    ],
+    [
+     7.5,
+     13.24,
+     18040
+    ],
+    [
+     8.6,
+     15.47,
+     18048
+    ],
+    [
+     9.6,
+     17.71,
+     18048
+    ],
+    [
+     10.7,
+     19.92,
+     18056
+    ],
+    [
+     11.8,
+     22.16,
+     18056
+    ],
+    [
+     12.8,
+     24.41,
+     18064
+    ],
+    [
+     13.9,
+     26.64,
+     18068
+    ],
+    [
+     15.0,
+     28.87,
+     18068
+    ],
+    [
+     16.1,
+     31.11,
+     18068
+    ]
+   ]
+  },
+  {
+   "run": 4,
+   "rc": 0,
+   "wall_s": 16.199316616999567,
+   "frames": 448,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 159379586,
+    "core_calls_total": 2233884672,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 55.621,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 30.288,
+    "redraw_start_interval_p95_ms": 39.484,
+    "frame_events": 448,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 447
+   },
+   "checksum": "639062dedcec1633",
+   "fps_mean": 31.963185259834656,
+   "frame_p50": 30.27,
+   "frame_p95": 39.495,
+   "frame_p99": 51.243,
+   "frame_max": 55.621,
+   "dropped_gt16_7": 447,
+   "dropped_gt8_3": 447,
+   "dropped_ms_gt16_7": 6551.225,
+   "rss_kb_median": 17980,
+   "rss_kb_peak": 17996,
+   "rss_kb_first_quarter": 17908,
+   "rss_kb_last_quarter": 17988,
+   "cpu_pct_core_mean": 194.2636186028735,
+   "cpu_pct_core_peak_1s": 227.99999999999977,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     7312
+    ],
+    [
+     1.1,
+     1.06,
+     17908
+    ],
+    [
+     2.2,
+     2.28,
+     17936
+    ],
+    [
+     3.2,
+     4.5,
+     17944
+    ],
+    [
+     4.3,
+     6.71,
+     17956
+    ],
+    [
+     5.4,
+     8.9,
+     17968
+    ],
+    [
+     6.4,
+     11.13,
+     17972
+    ],
+    [
+     7.5,
+     13.38,
+     17976
+    ],
+    [
+     8.6,
+     15.61,
+     17980
+    ],
+    [
+     9.7,
+     17.85,
+     17984
+    ],
+    [
+     10.7,
+     20.06,
+     17988
+    ],
+    [
+     11.8,
+     22.31,
+     17988
+    ],
+    [
+     12.9,
+     24.55,
+     17988
+    ],
+    [
+     14.0,
+     26.79,
+     17988
+    ],
+    [
+     15.0,
+     29.04,
+     17992
+    ],
+    [
+     16.1,
+     31.26,
+     0
+    ]
+   ]
+  },
+  {
+   "run": 5,
+   "rc": 0,
+   "wall_s": 16.116744317998382,
+   "frames": 448,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 157656925,
+    "core_calls_total": 2208661504,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 60.887,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 30.015,
+    "redraw_start_interval_p95_ms": 44.591,
+    "frame_events": 448,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 447
+   },
+   "checksum": "79495d06694e2b3b",
+   "fps_mean": 31.978768381992097,
+   "frame_p50": 30.014,
+   "frame_p95": 44.591,
+   "frame_p99": 50.964,
+   "frame_max": 60.887,
+   "dropped_gt16_7": 447,
+   "dropped_gt8_3": 447,
+   "dropped_ms_gt16_7": 6544.395,
+   "rss_kb_median": 17972,
+   "rss_kb_peak": 17992,
+   "rss_kb_first_quarter": 17900,
+   "rss_kb_last_quarter": 17984,
+   "cpu_pct_core_mean": 193.74487888076476,
+   "cpu_pct_core_peak_1s": 225.9999999999999,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     6592
+    ],
+    [
+     1.1,
+     1.06,
+     17892
+    ],
+    [
+     2.1,
+     2.21,
+     17924
+    ],
+    [
+     3.2,
+     4.4,
+     17932
+    ],
+    [
+     4.3,
+     6.62,
+     17952
+    ],
+    [
+     5.4,
+     8.86,
+     17956
+    ],
+    [
+     6.4,
+     11.08,
+     17968
+    ],
+    [
+     7.5,
+     13.27,
+     17968
+    ],
+    [
+     8.6,
+     15.48,
+     17972
+    ],
+    [
+     9.6,
+     17.7,
+     17976
+    ],
+    [
+     10.7,
+     19.9,
+     17980
+    ],
+    [
+     11.7,
+     22.1,
+     17980
+    ],
+    [
+     12.8,
+     24.3,
+     17984
+    ],
+    [
+     13.9,
+     26.53,
+     17984
+    ],
+    [
+     14.9,
+     28.77,
+     17988
+    ],
+    [
+     16.0,
+     31.02,
+     17992
+    ]
+   ]
+  },
+  {
+   "run": 6,
+   "rc": 0,
+   "wall_s": 16.132516452002164,
+   "frames": 411,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 155696942,
+    "core_calls_total": 2180112384,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 83.184,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 31.584,
+    "redraw_start_interval_p95_ms": 48.954,
+    "frame_events": 411,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 410
+   },
+   "checksum": "ba82fe216ef90c43",
+   "fps_mean": 29.352389866583746,
+   "frame_p50": 31.563,
+   "frame_p95": 48.945,
+   "frame_p99": 60.224,
+   "frame_max": 83.184,
+   "dropped_gt16_7": 410,
+   "dropped_gt8_3": 410,
+   "dropped_ms_gt16_7": 7155.267000000001,
+   "rss_kb_median": 18016.0,
+   "rss_kb_peak": 18036,
+   "rss_kb_first_quarter": 17944,
+   "rss_kb_last_quarter": 18036,
+   "cpu_pct_core_mean": 193.56857789250472,
+   "cpu_pct_core_peak_1s": 234.99999999999977,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     7076
+    ],
+    [
+     1.1,
+     1.05,
+     17940
+    ],
+    [
+     2.1,
+     2.19,
+     17968
+    ],
+    [
+     3.2,
+     4.38,
+     17992
+    ],
+    [
+     4.3,
+     6.58,
+     17996
+    ],
+    [
+     5.3,
+     8.82,
+     18004
+    ],
+    [
+     6.4,
+     11.06,
+     18012
+    ],
+    [
+     7.5,
+     13.3,
+     18016
+    ],
+    [
+     8.6,
+     15.56,
+     18016
+    ],
+    [
+     9.6,
+     17.8,
+     18020
+    ],
+    [
+     10.7,
+     20.02,
+     18020
+    ],
+    [
+     11.8,
+     22.23,
+     18028
+    ],
+    [
+     12.8,
+     24.47,
+     18032
+    ],
+    [
+     14.0,
+     26.77,
+     18036
+    ],
+    [
+     15.1,
+     29.02,
+     18036
+    ]
+   ]
+  },
+  {
+   "run": 7,
+   "rc": 0,
+   "wall_s": 16.20701540599839,
+   "frames": 403,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 149376002,
+    "core_calls_total": 2093916160,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 60.109,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 31.53,
+    "redraw_start_interval_p95_ms": 52.654,
+    "frame_events": 403,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 402
+   },
+   "checksum": "b9412b5797f325cb",
+   "fps_mean": 28.749237663670016,
+   "frame_p50": 31.502,
+   "frame_p95": 52.571,
+   "frame_p99": 54.596,
+   "frame_max": 60.109,
+   "dropped_gt16_7": 402,
+   "dropped_gt8_3": 402,
+   "dropped_ms_gt16_7": 7304.363,
+   "rss_kb_median": 17972.0,
+   "rss_kb_peak": 17996,
+   "rss_kb_first_quarter": 17920.0,
+   "rss_kb_last_quarter": 17988.0,
+   "cpu_pct_core_mean": 192.85520033811318,
+   "cpu_pct_core_peak_1s": 225.99999999999997,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     7132
+    ],
+    [
+     1.1,
+     1.04,
+     17904
+    ],
+    [
+     2.1,
+     2.17,
+     17944
+    ],
+    [
+     3.2,
+     4.39,
+     17952
+    ],
+    [
+     4.3,
+     6.58,
+     17956
+    ],
+    [
+     5.4,
+     8.8,
+     17960
+    ],
+    [
+     6.4,
+     11.02,
+     17964
+    ],
+    [
+     7.5,
+     13.2,
+     17972
+    ],
+    [
+     8.5,
+     15.43,
+     17972
+    ],
+    [
+     9.6,
+     17.65,
+     17972
+    ],
+    [
+     10.7,
+     19.88,
+     17980
+    ],
+    [
+     11.8,
+     22.08,
+     17984
+    ],
+    [
+     12.8,
+     24.29,
+     17988
+    ],
+    [
+     13.9,
+     26.47,
+     17988
+    ],
+    [
+     14.9,
+     28.65,
+     17992
+    ],
+    [
+     16.0,
+     30.84,
+     17992
+    ]
+   ]
+  },
+  {
+   "run": 8,
+   "rc": 0,
+   "wall_s": 16.193439148002653,
+   "frames": 447,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 159208274,
+    "core_calls_total": 2230259712,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 60.023,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 30.247,
+    "redraw_start_interval_p95_ms": 44.384,
+    "frame_events": 447,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 446
+   },
+   "checksum": "8f722cdae4ac827b",
+   "fps_mean": 31.909332380384082,
+   "frame_p50": 30.244,
+   "frame_p95": 44.391,
+   "frame_p99": 51.34,
+   "frame_max": 60.023,
+   "dropped_gt16_7": 446,
+   "dropped_gt8_3": 446,
+   "dropped_ms_gt16_7": 6560.241,
+   "rss_kb_median": 17900.0,
+   "rss_kb_peak": 17916,
+   "rss_kb_first_quarter": 17844.0,
+   "rss_kb_last_quarter": 17916.0,
+   "cpu_pct_core_mean": 193.3923146200213,
+   "cpu_pct_core_peak_1s": 224.0000000000002,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     6832
+    ],
+    [
+     1.1,
+     1.05,
+     17828
+    ],
+    [
+     2.1,
+     2.17,
+     17868
+    ],
+    [
+     3.2,
+     4.38,
+     17884
+    ],
+    [
+     4.3,
+     6.58,
+     17884
+    ],
+    [
+     5.3,
+     8.8,
+     17888
+    ],
+    [
+     6.4,
+     11.04,
+     17896
+    ],
+    [
+     7.5,
+     13.26,
+     17900
+    ],
+    [
+     8.5,
+     15.49,
+     17900
+    ],
+    [
+     9.6,
+     17.65,
+     17904
+    ],
+    [
+     10.7,
+     19.83,
+     17908
+    ],
+    [
+     11.7,
+     22.05,
+     17908
+    ],
+    [
+     12.8,
+     24.24,
+     17916
+    ],
+    [
+     13.8,
+     26.45,
+     17916
+    ],
+    [
+     14.9,
+     28.68,
+     17916
+    ],
+    [
+     16.0,
+     30.9,
+     17916
+    ]
+   ]
+  },
+  {
+   "run": 9,
+   "rc": 0,
+   "wall_s": 16.107224374001817,
+   "frames": 463,
+   "ops": {
+    "shapes": 1000,
+    "shadows": 0,
+    "graph_points": 0,
+    "clip": "rectangulaire (bornes du widget canvas) ; arrondi 1000x600 non supporte",
+    "shadow_impl": "Quad.shadow (fill_quad) hors canvas, sous les formes",
+    "calls_per_s": 161845895,
+    "core_calls_total": 2267979776,
+    "heavy_calls": 13,
+    "max_frame_stall_ms": 49.871,
+    "unchanged_frames_excluded": 0,
+    "redraw_start_interval_p50_ms": 29.511,
+    "redraw_start_interval_p95_ms": 34.988,
+    "frame_events": 463,
+    "frames_without_custom_draw": 1,
+    "custom_draws": 462
+   },
+   "checksum": "ac6898207ba75f53",
+   "fps_mean": 33.04026216413289,
+   "frame_p50": 29.499,
+   "frame_p95": 35.17,
+   "frame_p99": 48.623,
+   "frame_max": 49.871,
+   "dropped_gt16_7": 462,
+   "dropped_gt8_3": 462,
+   "dropped_ms_gt16_7": 6297.8060000000005,
+   "rss_kb_median": 17976,
+   "rss_kb_peak": 18000,
+   "rss_kb_first_quarter": 17912,
+   "rss_kb_last_quarter": 17996,
+   "cpu_pct_core_mean": 194.30132296212332,
+   "cpu_pct_core_peak_1s": 225.0,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     6896
+    ],
+    [
+     1.1,
+     1.04,
+     17900
+    ],
+    [
+     2.1,
+     2.27,
+     17940
+    ],
+    [
+     3.2,
+     4.48,
+     17952
+    ],
+    [
+     4.3,
+     6.67,
+     17960
+    ],
+    [
+     5.3,
+     8.86,
+     17964
+    ],
+    [
+     6.4,
+     11.08,
+     17968
+    ],
+    [
+     7.5,
+     13.31,
+     17976
+    ],
+    [
+     8.5,
+     15.54,
+     17976
+    ],
+    [
+     9.6,
+     17.74,
+     17980
+    ],
+    [
+     10.7,
+     19.96,
+     17992
+    ],
+    [
+     11.7,
+     22.19,
+     17996
+    ],
+    [
+     12.8,
+     24.42,
+     17996
+    ],
+    [
+     13.9,
+     26.63,
+     17996
+    ],
+    [
+     14.9,
+     28.86,
+     17996
+    ],
+    [
+     16.0,
+     31.09,
+     18000
+    ]
+   ]
+  }
+ ]
+}

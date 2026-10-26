@@ -1,0 +1,10 @@
+[error] Failed to load resource: the server responded with a status of 404 (File not found)
+[error] Failed to load resource: the server responded with a status of 404 (File not found)
+[error] SPIKE:selftest ok
+[error] SPIKE:ready platform=web stack=qt core=fstar-pulse-c
+[error] SPIKE:autorun start
+[error] SPIKE:fps tab=canvas value=22
+[error] SPIKE:fps tab=canvas value=23
+[error] SPIKE:heavy start
+[error] SPIKE:heavy done iters=1489000 thread=worker max_frame_gap_ms=185
+[error] SPIKE:done

@@ -1,0 +1,24 @@
+{
+ "stack": "qt",
+ "platform": "windows",
+ "status": "fail",
+ "build_seconds": 0.0,
+ "artifacts": [
+  {
+   "path": "deploy",
+   "missing": true
+  },
+  {
+   "path": "qtspike-windows.tar",
+   "missing": true
+  }
+ ],
+ "notes": [
+  "ex\u00e9cution: skipped",
+  "warnings build: ",
+  "rendu: d\u00e9faut (D3D11) et software"
+ ],
+ "runner": "Windows/X64",
+ "sha": "742cb0e234371a422f7932f838a58cdbfbafd861",
+ "date": "2026-10-26T16:12:52Z"
+}

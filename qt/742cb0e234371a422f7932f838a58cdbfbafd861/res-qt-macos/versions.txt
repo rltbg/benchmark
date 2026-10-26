@@ -1,0 +1,6 @@
+Apple clang version 21.0.0 (clang-2100.1.1.101)
+Xcode 26.6
+Build version 17F113
+cmake version 4.4.4
+1.13.2
+Using Qt version 6.12.0 in /Users/runner/work/benchmark/Qt/6.12.0/macos/lib

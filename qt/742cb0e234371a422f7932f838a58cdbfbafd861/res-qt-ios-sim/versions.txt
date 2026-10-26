@@ -1,0 +1,25 @@
+Xcode 26.6
+Build version 17F113
+cmake version 4.4.4
+26.5
+Using Qt version 6.12.0 in /Users/runner/work/benchmark/Qt/6.12.0/macos/lib
+cmake
+libQt6BundledFreetype_debug.a
+libQt6BundledFreetype.a
+libQt6BundledHarfbuzz_debug.a
+libQt6BundledHarfbuzz.a
+libQt6BundledLibjpeg_debug.a
+libQt6BundledLibjpeg.a
+libQt6BundledLibjpeg12bits_debug.a
+libQt6BundledLibjpeg12bits.a
+libQt6BundledLibjpeg16bits_debug.a
+libQt6BundledLibjpeg16bits.a
+libQt6BundledLibpng_debug.a
+libQt6BundledLibpng.a
+libQt6BundledPcre2_debug.a
+libQt6BundledPcre2.a
+libQt6DeviceDiscoverySupport_debug.a
+libQt6DeviceDiscoverySupport_debug.prl
+libQt6DeviceDiscoverySupport.a
+libQt6DeviceDiscoverySupport.prl
+libQt6EntryPoint_debug.a

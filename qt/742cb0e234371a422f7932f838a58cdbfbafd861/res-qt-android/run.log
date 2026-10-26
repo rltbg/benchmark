@@ -1,0 +1,3 @@
+--------- beginning of main
+10-26 16:21:42.059  3004  3192 I SPIKE   : SPIKE:selftest ok
+10-26 16:21:43.967  3004  3192 I SPIKE   : SPIKE:ready platform=android stack=qt core=fstar-pulse-c
