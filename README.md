@@ -14,7 +14,7 @@ Comparaison mesurée de Slint, Qt/QML, Avalonia (F#, NativeAOT et JIT), Compose 
 | `docs/research/` | fiches de recherche (architecture, maturité, licences, contributeurs ; sources avec URL et date) |
 | `docs/fstar/` | rapports des portes F\* (F#/NativeAOT et Low\*→C/KaRaMeL) |
 | `core/` | cœur C-ABI commun en Rust (`validate`, `parse`, `hash`, `heavy`), header C, micro-banc C |
-| `harness/` | harnais de mesure externe (`run_bench.py`), pilotes (`run_all.sh`, `run_resume.sh`, `run_trim2.sh`), démarrage (`coldstart.py`), calibration (`calibrate.py`, `fbwatch.py`), preuve GUI (`verify_gui.py`), agrégation (`aggregate.py`, `synthese.py`), liste des binaires (`stacks.tsv`) |
+| `harness/` | harnais de mesure externe (`run_bench.py`), pilotes (`run_plan.sh`, `resume_v2.sh`, `run_mempressure.sh`), autotest (`selftest_app.py`), démarrage (`coldstart.py`), calibration (`calibrate.py`, `fbwatch.py`), preuve GUI (`verify_gui.py`), agrégation (`aggregate.py`, `synthese.py`), liste des binaires (`stacks.tsv`) |
 | `stacks/<stack>/` | code de l'app de référence par stack (+ `STACK-NOTES.md` et `logs/`) |
 | `fstar/` | spec F\* (`Core.fst`), F# extrait, projets .NET, journaux |
 | `stacks/karamel/` | module Low\* (`Core_Low.fst`), C généré, tests, scripts de build |
