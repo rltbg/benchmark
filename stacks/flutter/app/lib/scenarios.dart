@@ -19,18 +19,20 @@ const _bar = Color(0xFF21262D);
 String hexOf(int v) => (v & 0xFFFFFFFF).toRadixString(16);
 
 Widget _titleBar(String s) => Container(
-    height: 36,
-    color: _bar,
-    padding: const EdgeInsets.symmetric(horizontal: 12),
-    alignment: Alignment.centerLeft,
-    child: Text(s, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)));
+  height: 36,
+  color: _bar,
+  padding: const EdgeInsets.symmetric(horizontal: 12),
+  alignment: Alignment.centerLeft,
+  child: Text(s, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+);
 
 Widget _statusBar(String s) => Container(
-    height: 24,
-    color: _bar,
-    padding: const EdgeInsets.symmetric(horizontal: 12),
-    alignment: Alignment.centerLeft,
-    child: Text(s, style: const TextStyle(fontSize: 12, color: Color(0xFF9AA4B2))));
+  height: 24,
+  color: _bar,
+  padding: const EdgeInsets.symmetric(horizontal: 12),
+  alignment: Alignment.centerLeft,
+  child: Text(s, style: const TextStyle(fontSize: 12, color: Color(0xFF9AA4B2))),
+);
 
 /// Scripted scroll offset: 4 s at 3000 px/s, then 6 alternating flings
 /// (v0 = 20000 px/s, v(t) = v0*exp(-2t), 1.5 s each), then rest.
@@ -85,21 +87,37 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
     if (hasCore) CoreWorkers.start(coreLibPath());
     if (sc == 'canvas') {
       scene = Scene(
-          n: cfg.shapes, ox: 20, oy: 10, rw: 1000, rh: 600, shadows: true, graph: true,
-          gx: 20, gy: 615, gw: 1000, gh: 100);
+        n: cfg.shapes,
+        ox: 20,
+        oy: 10,
+        rw: 1000,
+        rh: 600,
+        shadows: true,
+        graph: true,
+        gx: 20,
+        gy: 615,
+        gw: 1000,
+        gh: 100,
+      );
     } else if (sc == 'core') {
       scene = Scene(n: 1000, ox: 20, oy: 10, rw: 1000, rh: 600, shadows: false, graph: false);
     } else if (sc == 'stress') {
       scene = Scene(
-          n: cfg.shapes, ox: 10, oy: 10, rw: 380, rh: 600, shadows: true, graph: true,
-          gx: 10, gy: 615, gw: 380, gh: 100);
+        n: cfg.shapes,
+        ox: 10,
+        oy: 10,
+        rw: 380,
+        rh: 600,
+        shadows: true,
+        graph: true,
+        gx: 10,
+        gy: 615,
+        gw: 380,
+        gh: 100,
+      );
       viewH = 660;
       heapTimer = Timer.periodic(const Duration(seconds: 10), (_) {
-        heap.add({
-          't': b.measuring ? b.t : -1,
-          'rss_kb': ProcessInfo.currentRss ~/ 1024,
-          'managed_heap_kb': null,
-        });
+        heap.add({'t': b.measuring ? b.t : -1, 'rss_kb': ProcessInfo.currentRss ~/ 1024, 'managed_heap_kb': null});
       });
     }
     if (animated) ticker = createTicker(_tick)..start();
@@ -127,6 +145,8 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
         ops['updates_generated'] = shm[4] - gen0;
         ops['updates_dropped'] = shm[5] - drop0;
         ops['updates_applied'] = shm[3] - app0;
+        // generated before the window but still queued at measure start (applied inside it)
+        ops['updates_backlog_at_start'] = gen0 - drop0 - app0;
         ops['rate'] = sc == 'stress' ? 5000 : cfg.rate;
       }
       if (hasInput) {
@@ -162,22 +182,30 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
       return {'max_frame_stall_ms': mx};
     };
     if (sc == 'stress') {
-      b.extraNotes.add('managed_heap_kb is null: the Dart VM service/heap stats are not available in product AOT release; rss_kb (ProcessInfo.currentRss, whole process) is given instead.');
+      b.extraNotes.add(
+        'managed_heap_kb is null: the Dart VM service/heap stats are not available in product AOT release; rss_kb (ProcessInfo.currentRss, whole process) is given instead.',
+      );
     }
     if (hasList) {
-      b.extraNotes.add('list = ListView.builder(itemExtentBuilder: known per-row heights h(i)) (SliverVariedExtentList); '
-          'scroll set by ScrollController.jumpTo in a Ticker callback from the closed-form script.');
+      b.extraNotes.add(
+        'list = ListView.builder(itemExtentBuilder: known per-row heights h(i)) (SliverVariedExtentList); '
+        'scroll set by ScrollController.jumpTo in a Ticker callback from the closed-form script.',
+      );
     }
     if (hasInput) {
-      b.extraNotes.add('input: Focus(autofocus) onKeyEvent, KeyDownEvent of LogicalKeyboardKey.space toggles a 200x200 square at (100,100) '
-          'black/white (ValueListenableBuilder -> ColoredBox), drawn over the scrolling list; key repeats ignored.');
+      b.extraNotes.add(
+        'input: Focus(autofocus) onKeyEvent, KeyDownEvent of LogicalKeyboardKey.space toggles a 200x200 square at (100,100) '
+        'black/white (ValueListenableBuilder -> ColoredBox), drawn over the scrolling list; key repeats ignored.',
+      );
     }
     if (scene != null) {
-      b.extraNotes.add(canvasDirect
-          ? 'canvas (BENCH_CANVAS_MODE=direct): per shape drawRect/drawCircle/drawRRect with its own gradient Paint, MaskFilter.blur(sigma 4) shadow at (2,2) for 1 in 10, clipRRect 1000x600 r16, graph drawRawPoints(polygon) 10000 pts stroke 1 px.'
-          : 'canvas: every shape (own 2-colour linear gradient, and for 1 in 10 its MaskFilter.blur(sigma 4) shadow at offset (2,2)) is recorded once into a sprite atlas '
-              '(PictureRecorder + Picture.toImageSync, ${scene!.pages.length} page(s) ${scene!.atlasW} px wide, ${scene!.atlasH} px total height, sprites assigned to pages in index order); each frame = one Canvas.drawRawAtlas per page, pages in order = shapes in z-order '
-              '(translation-only RSTransforms, bilinear sampling) inside clipRRect 1000x600 r16; graph drawRawPoints(polygon) 10000 pts stroke 1 px rebuilt per frame.');
+      b.extraNotes.add(
+        canvasDirect
+            ? 'canvas (BENCH_CANVAS_MODE=direct): per shape drawRect/drawCircle/drawRRect with its own gradient Paint, MaskFilter.blur(sigma 4) shadow at (2,2) for 1 in 10, clipRRect 1000x600 r16, graph drawRawPoints(polygon) 10000 pts stroke 1 px.'
+            : 'canvas: every shape (own 2-colour linear gradient, and for 1 in 10 its MaskFilter.blur(sigma 4) shadow at offset (2,2)) is recorded once into a sprite atlas '
+                  '(PictureRecorder + Picture.toImageSync, ${scene!.pages.length} page(s) ${scene!.atlasW} px wide, ${scene!.atlasH} px total height, sprites assigned to pages in index order); each frame = one Canvas.drawRawAtlas per page, pages in order = shapes in z-order '
+                  '(translation-only RSTransforms, bilinear sampling) inside clipRRect 1000x600 r16; graph drawRawPoints(polygon) 10000 pts stroke 1 px rebuilt per frame.',
+      );
     }
   }
 
@@ -205,35 +233,48 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
   Widget _list(double w) {
     return SizedBox(
       width: w,
-      child: Column(children: [
-        _titleBar('Benchmark - $sc'),
-        Expanded(
-          child: ListView.builder(
-            controller: ctrl,
-            physics: const ClampingScrollPhysics(),
-            itemCount: kRows,
-            // heights are known in advance: the documented idiom for varied extents
-            itemExtentBuilder: (i, _) => i < kRows ? rowHeights[i].toDouble() : null,
-            itemBuilder: (c, i) => RowItem(i),
+      child: Column(
+        children: [
+          _titleBar('Benchmark - $sc'),
+          Expanded(
+            child: ListView.builder(
+              controller: ctrl,
+              physics: const ClampingScrollPhysics(),
+              itemCount: kRows,
+              // heights are known in advance: the documented idiom for varied extents
+              itemExtentBuilder: (i, _) => i < kRows ? rowHeights[i].toDouble() : null,
+              itemBuilder: (c, i) => RowItem(i),
+            ),
           ),
-        ),
-        _statusBar('$kRows rows - ${hasStream ? "streaming" : "static"}'),
-      ]),
+          _statusBar('$kRows rows - ${hasStream ? "streaming" : "static"}'),
+        ],
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     Widget panel(double w, double h) => RepaintBoundary(
-        child: SizedBox(width: w, height: h, child: CustomPaint(painter: ScenePainter(scene!))));
+      child: SizedBox(
+        width: w,
+        height: h,
+        child: CustomPaint(painter: ScenePainter(scene!)),
+      ),
+    );
     switch (sc) {
       case 'canvas':
       case 'core':
         return ColoredBox(color: _bg, child: panel(1280, 720));
       case 'stress':
         return ColoredBox(
-            color: _bg,
-            child: Row(children: [_list(880), SizedBox(width: 400, child: panel(400, 720))]));
+          color: _bg,
+          child: Row(
+            children: [
+              _list(880),
+              SizedBox(width: 400, child: panel(400, 720)),
+            ],
+          ),
+        );
       case 'input':
         return Focus(
           focusNode: focus,
@@ -248,20 +289,22 @@ class _HostState extends State<Host> with SingleTickerProviderStateMixin {
           },
           child: ColoredBox(
             color: _bg,
-            child: Stack(children: [
-              _list(1280),
-              Positioned(
-                left: 100,
-                top: 100,
-                width: 200,
-                height: 200,
-                child: ValueListenableBuilder<bool>(
-                  valueListenable: squareWhite,
-                  builder: (c, white, _) =>
-                      ColoredBox(color: white ? const Color(0xFFFFFFFF) : const Color(0xFF000000)),
+            child: Stack(
+              children: [
+                _list(1280),
+                Positioned(
+                  left: 100,
+                  top: 100,
+                  width: 200,
+                  height: 200,
+                  child: ValueListenableBuilder<bool>(
+                    valueListenable: squareWhite,
+                    builder: (c, white, _) =>
+                        ColoredBox(color: white ? const Color(0xFFFFFFFF) : const Color(0xFF000000)),
+                  ),
                 ),
-              ),
-            ]),
+              ],
+            ),
           ),
         );
       default:
@@ -331,10 +374,12 @@ class _TextState extends State<TextScenario> with SingleTickerProviderStateMixin
       r['read_split_ms'] = readMs;
       return r;
     };
-    b.extraNotes.add('text: Flutter has no virtualized single big text view; the file is split into lines (ListView.builder of Text) inside SelectableRegion. '
-        'time_to_first_display_ms = main() entry -> rasterFinish of the first frame that built the text (excludes engine/VM startup before main). '
-        'layout_ms = file read+split + buildDuration of that first frame (Flutter lays out lazily, only the viewport). '
-        'Scroll = triangle wave 0..15000 px at 3000 px/s. Select-all at t=5 s via SelectableRegionState.selectAll(): with a lazy list only built lines are selected.');
+    b.extraNotes.add(
+      'text: Flutter has no virtualized single big text view; the file is split into lines (ListView.builder of Text) inside SelectableRegion. '
+      'time_to_first_display_ms = main() entry -> rasterFinish of the first frame that built the text (excludes engine/VM startup before main). '
+      'layout_ms = file read+split + buildDuration of that first frame (Flutter lays out lazily, only the viewport). '
+      'Scroll = triangle wave 0..15000 px at 3000 px/s. Select-all at t=5 s via SelectableRegionState.selectAll(): with a lazy list only built lines are selected.',
+    );
   }
 
   @override
@@ -348,16 +393,21 @@ class _TextState extends State<TextScenario> with SingleTickerProviderStateMixin
     if (firstBuildUs == 0) firstBuildUs = Timeline.now;
     return ColoredBox(
       color: _bg,
-      child: SelectableRegion(
-        key: key,
-        focusNode: focus,
-        selectionControls: emptyTextSelectionControls,
-        child: ListView.builder(
-          controller: ctrl,
-          itemCount: lines.length,
-          itemBuilder: (c, i) => Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
-            child: Text(lines[i].isEmpty ? ' ' : lines[i], style: const TextStyle(fontSize: 14)),
+      // WidgetsApp provides no DefaultSelectionStyle (MaterialApp does): without it the
+      // selection is not painted, so give it a highlight colour explicitly.
+      child: DefaultSelectionStyle(
+        selectionColor: const Color(0x803390FF),
+        child: SelectableRegion(
+          key: key,
+          focusNode: focus,
+          selectionControls: emptyTextSelectionControls,
+          child: ListView.builder(
+            controller: ctrl,
+            itemCount: lines.length,
+            itemBuilder: (c, i) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 2),
+              child: Text(lines[i].isEmpty ? ' ' : lines[i], style: const TextStyle(fontSize: 14)),
+            ),
           ),
         ),
       ),
@@ -385,8 +435,11 @@ class ImageCell extends StatelessWidget {
   Widget build(BuildContext context) {
     st.requestedUs.putIfAbsent(i, () => Timeline.now);
     return Image(
-      image: ResizeImage(FileImage(File('$dir/images/img${i.toString().padLeft(3, '0')}.png')),
-          width: 128, height: 128),
+      image: ResizeImage(
+        FileImage(File('$dir/images/img${i.toString().padLeft(3, '0')}.png')),
+        width: 128,
+        height: 128,
+      ),
       width: 128,
       height: 128,
       fit: BoxFit.cover,
@@ -445,9 +498,11 @@ class _ImagesState extends State<ImagesScenario> with SingleTickerProviderStateM
       ops['final_offset'] = ctrl.hasClients ? ctrl.offset : 0.0;
       ops['checksum'] = hexOf(fnv(store.decoded.length));
     });
-    b.extraNotes.add('images: Image(ResizeImage(FileImage, width 128, height 128)) per cell (decode at 128x128 by the engine off the UI isolate, kept in ImageCache). '
-        'decode_total_ms = sum over images of wall time from first build of the cell to its first frame (file read + decode + scheduling, incl. CPU contention with llvmpipe); counters cover the whole run incl. warm-up. '
-        'GridView.builder 10 columns x 128 px; scroll = triangle wave over the grid at 3000 px/s; zoom 1->3->1 over 6 s (Transform) with a sinusoidal pan; during warm-up the script is frozen at t=0.');
+    b.extraNotes.add(
+      'images: Image(ResizeImage(FileImage, width 128, height 128)) per cell (decode at 128x128 by the engine off the UI isolate, kept in ImageCache). '
+      'decode_total_ms = sum over images of wall time from first build of the cell to its first frame (file read + decode + scheduling, incl. CPU contention with llvmpipe); counters cover the whole run incl. warm-up. '
+      'GridView.builder 10 columns x 128 px; scroll = triangle wave over the grid at 3000 px/s; zoom 1->3->1 over 6 s (Transform) with a sinusoidal pan; during warm-up the script is frozen at t=0.',
+    );
   }
 
   @override
@@ -458,20 +513,20 @@ class _ImagesState extends State<ImagesScenario> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) => ColoredBox(
-        color: _bg,
-        child: ClipRect(
-          child: ValueListenableBuilder<Matrix4>(
-            valueListenable: xf,
-            builder: (c, mtx, child) => Transform(transform: mtx, child: child),
-            child: GridView.builder(
-              controller: ctrl,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 10),
-              itemCount: 600,
-              itemBuilder: (c, i) => ImageCell(i, dir, store),
-            ),
-          ),
+    color: _bg,
+    child: ClipRect(
+      child: ValueListenableBuilder<Matrix4>(
+        valueListenable: xf,
+        builder: (c, mtx, child) => Transform(transform: mtx, child: child),
+        child: GridView.builder(
+          controller: ctrl,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 10),
+          itemCount: 600,
+          itemBuilder: (c, i) => ImageCell(i, dir, store),
         ),
-      );
+      ),
+    ),
+  );
 }
 
 // ===================================================================== nav
@@ -485,24 +540,23 @@ class NavScreen extends StatelessWidget {
     final base = [const Color(0xFF1F6FEB), const Color(0xFF8957E5), const Color(0xFF238636)][n % 3];
     return ColoredBox(
       color: _bg,
-      child: Column(children: [
-        _titleBar('Screen ${n + 1}'),
-        Expanded(
-          child: ListView.builder(
-            itemCount: 60,
-            itemBuilder: (c, i) => Container(
-              height: 64,
-              margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: base,
+      child: Column(
+        children: [
+          _titleBar('Screen ${n + 1}'),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 60,
+              itemBuilder: (c, i) => Container(
+                height: 64,
+                margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: base),
+                child: Text('Card $i on screen ${n + 1}', style: const TextStyle(fontSize: 16)),
               ),
-              child: Text('Card $i on screen ${n + 1}', style: const TextStyle(fontSize: 16)),
             ),
           ),
-        ),
-      ]),
+        ],
+      ),
     );
   }
 }
@@ -549,21 +603,25 @@ class _NavState extends State<NavScenario> {
       ops['batches_of_20'] = batches;
       ops['checksum'] = hexOf(fnv(transitions * 1000 + modals));
     });
-    b.extraNotes.add('nav: Navigator with PageRouteBuilder slide (300 ms) and RawDialogRoute fade (200 ms); script = push B, push C, pop, pop (4 transitions) x5 = 20 per batch, '
-        'one modal open+close after every cycle; batches repeat until the duration ends. Frames exist only while animating (no idle frames). '
-        'A background Dart isolate spins an integer loop (~1 core).');
+    b.extraNotes.add(
+      'nav: Navigator with PageRouteBuilder slide (300 ms) and RawDialogRoute fade (200 ms); script = push B, push C, pop, pop (4 transitions) x5 = 20 per batch, '
+      'one modal open+close after every cycle; batches repeat until the duration ends. Frames exist only while animating (no idle frames). '
+      'A background Dart isolate spins an integer loop (~1 core).',
+    );
   }
 
   PageRouteBuilder<void> _slide(int n) => PageRouteBuilder<void>(
-        transitionDuration: const Duration(milliseconds: 300),
-        reverseTransitionDuration: const Duration(milliseconds: 300),
-        pageBuilder: (c, a, s) => NavScreen(n),
-        transitionsBuilder: (c, a, s, child) => SlideTransition(
-          position: Tween(begin: const Offset(1, 0), end: Offset.zero)
-              .animate(CurvedAnimation(parent: a, curve: Curves.easeOutCubic)),
-          child: child,
-        ),
-      );
+    transitionDuration: const Duration(milliseconds: 300),
+    reverseTransitionDuration: const Duration(milliseconds: 300),
+    pageBuilder: (c, a, s) => NavScreen(n),
+    transitionsBuilder: (c, a, s, child) => SlideTransition(
+      position: Tween(
+        begin: const Offset(1, 0),
+        end: Offset.zero,
+      ).animate(CurvedAnimation(parent: a, curve: Curves.easeOutCubic)),
+      child: child,
+    ),
+  );
 
   Future<void> _push(int n) async {
     final r = _slide(n);
@@ -591,12 +649,14 @@ class _NavState extends State<NavScenario> {
       transitionDuration: const Duration(milliseconds: 200),
       barrierColor: const Color(0x99000000),
       pageBuilder: (c, a, s) => Center(
-          child: Container(
-              width: 400,
-              height: 240,
-              decoration: BoxDecoration(color: _bar, borderRadius: BorderRadius.circular(16)),
-              alignment: Alignment.center,
-              child: const Text('Modal', style: TextStyle(fontSize: 24)))),
+        child: Container(
+          width: 400,
+          height: 240,
+          decoration: BoxDecoration(color: _bar, borderRadius: BorderRadius.circular(16)),
+          alignment: Alignment.center,
+          child: const Text('Modal', style: TextStyle(fontSize: 24)),
+        ),
+      ),
       transitionBuilder: (c, a, s, child) => FadeTransition(opacity: a, child: child),
     );
     navKey.currentState!.push(r);

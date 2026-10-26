@@ -165,8 +165,7 @@ class Bench {
   }
 
   void _finish() {
-    final inW = frames.where((f) => f[4] >= startUs && f[4] <= endUs).toList()
-      ..sort((a, b) => a[4].compareTo(b[4]));
+    final inW = frames.where((f) => f[4] >= startUs && f[4] <= endUs).toList()..sort((a, b) => a[4].compareTo(b[4]));
     final fm = <double>[];
     for (var i = 1; i < inW.length; i++) {
       fm.add((inW[i][4] - inW[i - 1][4]) / 1000.0);
@@ -182,8 +181,11 @@ class Bench {
     final pacingReq = Platform.environment['BENCH_PACING'] ?? '60';
     ops['pacing'] = pacingReq == 'uncapped' ? '60-only' : '60';
     if (finishExtra != null) ops.addAll(finishExtra!(inW));
-    final renderer = impellerEnabled ? 'Impeller (OpenGL ES backend, default)' : 'Skia (OpenGL), via fl_dart_project_set_enable_impeller(FALSE)';
-    final notes = 'Flutter Dart-AOT release, Linux GTK3 embedder, renderer: $renderer, GL = Mesa (llvmpipe under Xvfb). '
+    final renderer = impellerEnabled
+        ? 'Impeller (OpenGL ES backend, default)'
+        : 'Skia (OpenGL), via fl_dart_project_set_enable_impeller(FALSE)';
+    final notes =
+        'Flutter Dart-AOT release, Linux GTK3 embedder, renderer: $renderer, GL = Mesa (llvmpipe under Xvfb). '
         'frame_ms = interval between consecutive FrameTiming rasterFinish timestamps (SchedulerBinding.addTimingsCallback; '
         'raster thread finished the frame and handed it to the GTK GL compositor; latest public post-render signal, not an X11 present timestamp). '
         'Only frames the engine rasterized are counted (Flutter produces no frame when nothing is dirty; every animated frame changes content). '
@@ -194,7 +196,8 @@ class Bench {
         '${extraNotes.join(' ')}';
     final doc = {
       'stack': 'flutter',
-      'version': 'Flutter $kFlutterVersion (framework $kFlutterFw, engine $kFlutterEngine), Dart ${Platform.version.split(' ').first}, '
+      'version':
+          'Flutter $kFlutterVersion (framework $kFlutterFw, engine $kFlutterEngine), Dart ${Platform.version.split(' ').first}, '
           'package:ffi $kFfiVersion, ${impellerEnabled ? 'Impeller-GLES' : 'Skia-GL'}',
       'scenario': cfg.scenario,
       'duration_s': cfg.duration,

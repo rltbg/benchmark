@@ -42,6 +42,8 @@ class Scene extends ChangeNotifier {
   final Paint shadowPaint = Paint()
     ..color = const Color(0x88000000)
     ..maskFilter = const MaskFilter.blur(BlurStyle.normal, blurSigma);
+  final Paint shadowSolid = Paint()..color = const Color(0x88000000);
+  static final bool perShapeBlur = Platform.environment['BENCH_ATLAS_SHADOW'] == 'mask';
   final Paint bgPaint = Paint()..color = const Color(0xFF161B22);
   final Paint linePaint = Paint()
     ..color = const Color(0xFF58A6FF)
@@ -115,9 +117,9 @@ class Scene extends ChangeNotifier {
   }
 
   /// Paints shape i (and its shadow) with its local origin at the current canvas origin.
-  void _paintShape(Canvas c, int i) {
+  void _paintShape(Canvas c, int i, {bool withShadow = true}) {
     final w = sw[i], h = sh[i];
-    if (hasShadow[i] != 0) {
+    if (withShadow && hasShadow[i] != 0) {
       switch (kind[i]) {
         case 0:
           c.drawRect(Rect.fromLTWH(2, 2, w, h), shadowPaint);
@@ -179,10 +181,40 @@ class Scene extends ChangeNotifier {
     for (var p = 0; p < pageH.length; p++) {
       final rec = ui.PictureRecorder();
       final c = Canvas(rec);
-      for (var i = pageStart[p]; i < pageStart[p + 1]; i++) {
+      final a = pageStart[p], b = pageStart[p + 1];
+      var anyShadow = false;
+      for (var i = a; i < b; i++) {
+        if (hasShadow[i] != 0) anyShadow = true;
+      }
+      if (anyShadow && !perShapeBlur) {
+        // All shadows of the page in one blurred layer (Gaussian sigma 4, same as the per-shape
+        // MaskFilter.blur): the sprites do not overlap, so blur(sum) == sum(blur) per sprite,
+        // with one blur pass per page instead of one per shadow.
+        c.saveLayer(
+          Rect.fromLTWH(0, 0, maxW, pageH[p].toDouble()),
+          Paint()..imageFilter = ui.ImageFilter.blur(sigmaX: blurSigma, sigmaY: blurSigma, tileMode: TileMode.decal),
+        );
+        for (var i = a; i < b; i++) {
+          if (hasShadow[i] == 0) continue;
+          c.save();
+          c.translate(ox0[i] + 2, oy0[i] + 2);
+          final w = sw[i], h = sh[i];
+          switch (kind[i]) {
+            case 0:
+              c.drawRect(Rect.fromLTWH(0, 0, w, h), shadowSolid);
+            case 1:
+              c.drawCircle(Offset(w / 2, w / 2), w / 2, shadowSolid);
+            default:
+              c.drawRRect(rrects[i], shadowSolid);
+          }
+          c.restore();
+        }
+        c.restore();
+      }
+      for (var i = a; i < b; i++) {
         c.save();
         c.translate(ox0[i], oy0[i]);
-        _paintShape(c, i);
+        _paintShape(c, i, withShadow: perShapeBlur);
         c.restore();
       }
       final pic = rec.endRecording();
@@ -247,8 +279,15 @@ class Scene extends ChangeNotifier {
       }
       for (var p = 0; p < pages.length; p++) {
         final a = pageStart[p], b = pageStart[p + 1];
-        c.drawRawAtlas(pages[p], Float32List.sublistView(xforms, 4 * a, 4 * b),
-            Float32List.sublistView(spriteRects, 4 * a, 4 * b), null, null, clipRR.outerRect, atlasPaint);
+        c.drawRawAtlas(
+          pages[p],
+          Float32List.sublistView(xforms, 4 * a, 4 * b),
+          Float32List.sublistView(spriteRects, 4 * a, 4 * b),
+          null,
+          null,
+          clipRR.outerRect,
+          atlasPaint,
+        );
       }
     } else {
       for (var i = 0; i < n; i++) {

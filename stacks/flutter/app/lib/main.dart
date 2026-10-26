@@ -18,17 +18,19 @@ void main(List<String> argv) {
     default:
       home = Host(cfg);
   }
-  runApp(WidgetsApp(
-    color: const Color(0xFF0D1117),
-    debugShowCheckedModeBanner: false,
-    navigatorKey: navKey,
-    pageRouteBuilder: <T>(RouteSettings s, WidgetBuilder b) =>
-        PageRouteBuilder<T>(settings: s, pageBuilder: (c, a, sa) => b(c)),
-    builder: (c, child) => DefaultTextStyle(
-      style: const TextStyle(color: Color(0xFFE6EDF3), fontSize: 14, decoration: TextDecoration.none),
-      child: child!,
+  runApp(
+    WidgetsApp(
+      color: const Color(0xFF0D1117),
+      debugShowCheckedModeBanner: false,
+      navigatorKey: navKey,
+      pageRouteBuilder: <T>(RouteSettings s, WidgetBuilder b) =>
+          PageRouteBuilder<T>(settings: s, pageBuilder: (c, a, sa) => b(c)),
+      builder: (c, child) => DefaultTextStyle(
+        style: const TextStyle(color: Color(0xFFE6EDF3), fontSize: 14, decoration: TextDecoration.none),
+        child: child!,
+      ),
+      home: home,
     ),
-    home: home,
-  ));
+  );
   Bench.I.begin();
 }

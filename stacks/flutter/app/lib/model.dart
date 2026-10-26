@@ -84,33 +84,35 @@ class RowItem extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 12),
-          child: Row(children: [
-            Container(
-              width: 32,
-              height: 32,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Color.fromARGB(255, f & 255, (f >> 8) & 255, (f >> 16) & 255),
+          child: Row(
+            children: [
+              Container(
+                width: 32,
+                height: 32,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Color.fromARGB(255, f & 255, (f >> 8) & 255, (f >> 16) & 255),
+                ),
               ),
-            ),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Item #$i',
-                      maxLines: 1,
-                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-                  Text(List.filled(6, sub).join('  '),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Item #$i', maxLines: 1, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
+                    Text(
+                      List.filled(6, sub).join('  '),
                       maxLines: lines,
                       overflow: TextOverflow.clip,
-                      style: const TextStyle(fontSize: 12, color: Color(0xFF9AA4B2))),
-                ],
+                      style: const TextStyle(fontSize: 12, color: Color(0xFF9AA4B2)),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            SizedBox(width: 90, child: PriceCell(i)),
-          ]),
+              SizedBox(width: 90, child: PriceCell(i)),
+            ],
+          ),
         ),
       ),
     );
@@ -150,11 +152,10 @@ class _PriceCellState extends State<PriceCell> {
 
   @override
   Widget build(BuildContext context) => Text(
-        prices[widget.i].toStringAsFixed(2),
-        textAlign: TextAlign.right,
-        style: const TextStyle(
-            fontSize: 14, color: Color(0xFF7CE38B), fontFeatures: [FontFeature.tabularFigures()]),
-      );
+    prices[widget.i].toStringAsFixed(2),
+    textAlign: TextAlign.right,
+    style: const TextStyle(fontSize: 14, color: Color(0xFF7CE38B), fontFeatures: [FontFeature.tabularFigures()]),
+  );
 }
 
 // ---------------------------------------------------------------- price stream

@@ -322,8 +322,9 @@ fn shape_def(i: usize, w: f32, h: f32) -> ShapeDef {
     let speed = 60.0 + (f % 140) as f32;
     ShapeDef {
         size,
-        x0: (fnv(i as u32 + 77) as f32 / u32::MAX as f32) * (w - size),
-        y0: (fnv(i as u32 + 78) as f32 / u32::MAX as f32) * (h - size),
+        // Positions from a second hash round (fnv of consecutive i are correlated).
+        x0: (fnv(f) as f32 / u32::MAX as f32) * (w - size),
+        y0: (fnv(g) as f32 / u32::MAX as f32) * (h - size),
         vx: ang.cos() * speed,
         vy: ang.sin() * speed,
         c1: col(f & 0xffffff),
@@ -495,55 +496,85 @@ fn wave(i: u32) -> f32 {
 
 // ---------------------------------------------------------------- text ----
 
-/// 1 MB of text: one selectable `text` in a native scroll view (docs: Text, selection;
-/// Scrolling, scrolling from code). NSH 0.2.0 has no long-text component (the Editor came
-/// after the release) and no programmatic text selection.
-fn text_pane() -> impl IntoElement {
+/// 1 MB of text, read only, selectable, scrolled from code.
+/// Default: the documented path for long content (docs: Lists) — a virtualized list of the
+/// file's lines, each a selectable `text`, inside a `SelectionArea` (docs: SelectionArea), so
+/// a selection runs across lines. NSH 0.2.0 has no long-text component (the Editor came after
+/// the release) and no programmatic text selection. BENCH_TEXT_SINGLE=1 (diagnostic): one
+/// selectable `text` of 1 MB in a `scroll` — measured 33.5 s to lay out.
+fn text_pane() -> AnyElement {
     let path = format!("{}/text1mb.txt", cfg().assets);
-    let content: SharedString = std::fs::read_to_string(&path).unwrap_or_default().into();
+    let content = std::fs::read_to_string(&path).unwrap_or_default();
     TEXT_BYTES.store(content.len() as u64, Relaxed);
     let made = std::time::Instant::now();
-    let height = Rc::new(std::cell::Cell::new(0.0f32));
-    let viewport = Rc::new(std::cell::Cell::new(0.0f32));
+    let laid = move |b: &Bounds<Points>| {
+        if TEXT_LAID_MS.load(Relaxed) == 0 && b.size.height.0 > 0.0 {
+            // From building the element to its first layout (Pango, engine thread).
+            f64_store(&TEXT_LAYOUT_MS, made.elapsed().as_secs_f64() * 1000.0);
+            TEXT_LAID_MS.store(now_ns() / 1_000_000 + 1, Relaxed);
+        }
+    };
+    let limit = Rc::new(std::cell::Cell::new(0.0f32));
     let sc = element_ref();
     {
         let sc = sc.clone();
-        let height = height.clone();
-        let viewport = viewport.clone();
+        let limit = limit.clone();
         std::mem::forget(spawn(async move {
             loop {
                 next_frame().await;
                 let Some(t) = measured_t() else { continue };
-                let m = (height.get() - viewport.get()).max(1.0);
+                let m = limit.get().max(1.0);
                 // 3000 px/s back and forth between the top and the end.
                 let d = (t as f32 * 3000.0) % (2.0 * m);
                 let y = if d < m { d } else { 2.0 * m - d };
-                sc.scroll_to(pt(0.0, y), false);
+                sc.scroll_to_offset(px(y), false);
             }
         }));
     }
-    let h2 = height.clone();
-    scroll()
+    let on_scroll = move |e: &ScrollEvent| {
+        f64_store(&CONTENT_H, e.content_size.height.0 as f64);
+        limit.set((e.content_size.height.0 - e.size.height.0).max(0.0));
+    };
+    if diag("TEXT_SINGLE") {
+        let content: SharedString = content.into();
+        return scroll()
+            .flex_1()
+            .bg(col(0xffffff))
+            .on_scroll(on_scroll)
+            .child(
+                text(content)
+                    .selectable(true)
+                    .text_size(px(14.0))
+                    .text_color(col(TEXT))
+                    .p(px(16.0))
+                    .on_layout(laid),
+            )
+            .element_ref(&sc)
+            .into_element();
+    }
+    let lines: Rc<Vec<SharedString>> = Rc::new(content.split('\n').map(|l| SharedString::from(l.to_owned())).collect());
+    let n = lines.len();
+    view()
         .flex_1()
         .bg(col(0xffffff))
-        .on_layout(move |b: &Bounds<Points>| viewport.set(b.size.height.0))
-        .on_scroll(move |e: &ScrollEvent| f64_store(&CONTENT_H, e.content_size.height.0 as f64))
+        .selection_area(true)
         .child(
-            text(content)
-                .selectable(true)
-                .text_size(px(14.0))
-                .text_color(col(TEXT))
-                .p(px(16.0))
-                .on_layout(move |b: &Bounds<Points>| {
-                    if TEXT_LAID_MS.load(Relaxed) == 0 {
-                        // From building the element to its first layout (Pango, engine thread).
-                        f64_store(&TEXT_LAYOUT_MS, made.elapsed().as_secs_f64() * 1000.0);
-                        TEXT_LAID_MS.store(now_ns() / 1_000_000 + 1, Relaxed);
-                    }
-                    h2.set(b.size.height.0);
-                }),
+            virtual_list(n, move |at| {
+                let lines = lines.clone();
+                text(move || lines[at.index()].clone())
+                    .selectable(true)
+                    .text_size(px(14.0))
+                    .text_color(col(TEXT))
+                    .px(px(16.0))
+                    .py(px(1.0))
+                    .on_layout(laid)
+            })
+            .estimated_item_size(px(20.0))
+            .on_scroll(on_scroll)
+            .flex_1()
+            .element_ref(&sc),
         )
-        .element_ref(&sc)
+        .into_element()
 }
 
 // -------------------------------------------------------------- images ----
