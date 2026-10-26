@@ -1,1 +1,3 @@
 === 15:28:35 core impl=rust
+SUMMARY {"tag": "avalonia-aot-core-rust-core", "stack": "avalonia-aot-core-rust", "scenario": "core", "runs": 10, "ok_runs": 10, "oom_runs": 0, "markers_ok": 10, "agg": {"fps_mean": {"median": 49.19649695059498, "p95": 52.689082508393895, "min": 36.93996188564626, "max": 52.689082508393895, "n": 10}
+=== 15:31:34 core impl=fstar
