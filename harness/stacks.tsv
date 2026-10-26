@@ -1,8 +1,9 @@
 # nom<TAB>commande (${ROOT} = racine du dépôt)<TAB>options harnais supplémentaires
 slint	${ROOT}/stacks/slint/app/target/release/slintapp	
+slint-uncapped	${ROOT}/stacks/slint/app/target/release/slintapp	--env BENCH_PACING=uncapped
 slint-software	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=software
+slint-software-uncapped	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=software --env BENCH_PACING=uncapped
 slint-femtovg	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=femtovg
-slint-throttled	${ROOT}/stacks/slint/app/target/release/slintapp	--env SLINTAPP_THROTTLE=1
 avalonia-aot	${ROOT}/stacks/avalonia/out/aot/avalonia-bench	
 avalonia-jit	${ROOT}/stacks/avalonia/out/jit/avalonia-bench	
 qt-software	${ROOT}/stacks/qt/deploy/bin/qtbench	
