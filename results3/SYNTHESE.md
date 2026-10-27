@@ -9,19 +9,19 @@
 | gfx-chart | 100 k (1 M) | 10 k (100 k) | < 100 k |
 | gfx-images | 17 (19) | 80 (145) | 40 (52) |
 | gfx-layers | 27 (28) | 160 (168) | 15 (16) |
-| gfx-paths | – | – | 50 (84) |
+| gfx-paths | 62 (71) | 15 (16) | 50 (84) |
 | gfx-shapes | 2 k (2.625 k) | 1.5 k (1.562 k) | 3 k (3.125 k) |
 | gfx-shapes-featuregradient | 1 k (1.312 k) | 718 (750) | 656 (687) |
 | gfx-shapes-featureshadow | 375 (406) | 1.375 k (1.437 k) | 250 (656) |
-| list-mutate | – | 800 k (840 k) | 77.5 k (80 k) |
+| list-mutate | 7.5 k (10 k) | 800 k (840 k) | 77.5 k (80 k) |
 | list-reset | ≥ 1 M | ≥ 1 M | ≥ 1 M |
 | list-rich | 48 (96) | < 6 | 24 (48) |
 | list-scale | ≥ 6.4 M | ≥ 6.4 M | ≥ 6.4 M |
 | text-big | 1 (10) | < 1 | < 1 |
-| text-labels | 1 k (6.25 k) | – | – |
-| text-rich | ≥ 64 k | – | – |
+| text-labels | 1 k (6.25 k) | 281 (288) | 187 (242) |
+| text-rich | ≥ 64 k | 273 (281) | 484 (500) |
 | ui-anim | 2.6 k (2.7 k) | 225 (231) | 2 k (2.1 k) |
-| ui-bind | 1 k (1.093 k) | – | < 288 |
+| ui-bind | 1 k (1.093 k) | < 515 | < 288 |
 | ui-tree | 10 k (100 k) | 1 k (10 k) | 1 k (10 k) |
 
 #### 2. Latence externe touche→pixel (I1) et molette→pixel (I2) : p50 / p95 en ms, 3 exécutions
