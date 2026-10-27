@@ -103,4 +103,4 @@ Ces écarts doivent être lus comme des corrections de l'analyse par les mesures
 3. Répéter (≥ 5 fois) les points proches du seuil ; expliquer la croissance mémoire d'Avalonia (148 → 205 Mo).
 4. Mesurer sur GPU, mobiles et autres plateformes (hors périmètre de ce cloud).
 
-F* et les variantes v2 sont mis de côté dans `archive/` (voir `archive/README.md`), hors de la comparaison.
+F* (`v1/`) et les stacks v2 (`v2/`) sont rangés à part, hors de la comparaison v3.
