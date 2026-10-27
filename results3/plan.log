@@ -312,3 +312,10 @@ RÉSULTAT avalonia-aot text-labels: N_max=187 premier échec=242
 RÉSULTAT avalonia-aot text-rich: N_max=484 premier échec=500
 === DONE 00:57:58
 --- recap flux 00:58:20
+RÉSULTAT slint list-mutate: N_max=2960000 premier échec=3040000
+RÉSULTAT slint ffi-callbacks: N_max=10240000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT qt list-mutate: N_max=800000 premier échec=840000
+RÉSULTAT qt ffi-callbacks: N_max=10240000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT avalonia-aot list-mutate: N_max=2880000 premier échec=3040000
+RÉSULTAT avalonia-aot ffi-callbacks: N_max=10240000 (non borné : limite de balayage atteinte) premier échec=None
+=== DONE 01:15:08

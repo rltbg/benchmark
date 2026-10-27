@@ -5,7 +5,7 @@
 
 | Scénario | slint | qt | avalonia-aot |
 |---|---|---|---|
-| ffi-callbacks | 155 k (160 k) | ≥ 10.24 M | ≥ 10.24 M |
+| ffi-callbacks | ≥ 10.24 M | ≥ 10.24 M | ≥ 10.24 M |
 | gfx-chart | 100 k (1 M) | 10 k (100 k) | < 100 k |
 | gfx-images | 17 (19) | 80 (145) | 40 (52) |
 | gfx-layers | 27 (28) | 160 (168) | 15 (16) |
@@ -13,7 +13,7 @@
 | gfx-shapes | 2 k (2.625 k) | 1.5 k (1.562 k) | 3 k (3.125 k) |
 | gfx-shapes-featuregradient | 1 k (1.312 k) | 718 (750) | 656 (687) |
 | gfx-shapes-featureshadow | 375 (406) | 1.375 k (1.437 k) | 250 (656) |
-| list-mutate | 7.5 k (10 k) | 800 k (840 k) | 77.5 k (80 k) |
+| list-mutate | 2.96 M (3.04 M) | 800 k (840 k) | 2.88 M (3.04 M) |
 | list-reset | ≥ 1 M | ≥ 1 M | ≥ 1 M |
 | list-rich | 48 (96) | < 6 | 24 (48) |
 | list-scale | ≥ 6.4 M | ≥ 6.4 M | ≥ 6.4 M |
