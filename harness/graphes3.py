@@ -137,4 +137,11 @@ g = []
 for lab, key in (("Début du soak", "pss_kb_first_quarter"), ("Fin du soak", "pss_kb_last_quarter")):
     g.append((lab, {s: (lambda v: (v, "–" if v is None else f"{v:.0f} Mo"))((lambda x: x / 1024 if x else None)(med(summ(s, "list-mutate-n20000"), key))) for s in STACKS}))
 hbar("soak-memoire.svg", "Mémoire pendant 10 minutes de mises à jour continues", "PSS mesuré de l'extérieur (1er et dernier quart de la mesure). Une barre plus longue en bas = la mémoire grossit.", g, STACKS, unit="Mo")
+# 7. empreinte RAM et CPU
+SIT = (("idle", "À vide"), ("list-scale-n100000", "Liste 100 k lignes"), ("gfx-shapes-n500", "500 formes animées"),
+       ("text-labels-n200", "200 étiquettes animées"), ("ui-tree-n1000", "Arbre statique 1 k nœuds"), ("ui-tree-n100000", "Arbre statique 100 k nœuds"))
+g = [(lab, {s: (lambda v: (v, "–" if v is None else f"{v:.0f} Mo"))((lambda x: x / 1024 if x else None)(med(summ(s, tag), "pss_kb_median"))) for s in STACKS}) for tag, lab in SIT]
+hbar("empreinte-ram.svg", "Empreinte mémoire (RAM)", "PSS médian pendant la mesure, en Mo. Plus court = mieux (échelle logarithmique).", g, STACKS, log=True, unit="Mo")
+g = [(lab, {s: (lambda v: (v, "–" if v is None else f"{v:.0f} %"))(med(summ(s, tag), "cpu_pct_core_mean")) for s in STACKS}) for tag, lab in SIT[:4]]
+hbar("empreinte-cpu.svg", "Consommation de processeur", "CPU moyen en % d'un cœur (100 % = un cœur plein ; 4 cœurs disponibles). Plus court = mieux.", g, STACKS, unit="% d'un cœur")
 print("ok", sorted(os.listdir(IMG)))

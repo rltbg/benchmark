@@ -127,5 +127,27 @@ for s in ALL:
             c.append(f"{v[i]['median']:.0f} / {v[i]['p95']:.0f}" if len(v) > i else "–")
     w(f"| {s} | " + " | ".join(c) + " |")
 
+
+# ------------------------------------------------------------ 8. empreinte CPU / RAM
+w("\n#### 8. Empreinte CPU / RAM (mesurée de l'extérieur par /proc entre les marqueurs ; médiane de 5 exécutions, 3 pour ui-tree)\n")
+w("PSS = mémoire réellement attribuée au processus (pages partagées divisées entre leurs utilisateurs) ; pic = maximum sur la mesure. CPU en % d'un cœur (100 = un cœur plein ; 4 cœurs disponibles).\n")
+head(["Situation", "Mesure"] + STACKS)
+FOOT = (("idle", "À vide (fenêtre ouverte, rien ne bouge)"), ("list-scale-n100000", "Liste de 100 k lignes défilant"), ("gfx-shapes-n500", "500 formes animées"),
+        ("text-labels-n200", "200 étiquettes de texte animées"), ("ui-tree-n1000", "Arbre statique 1 k nœuds"), ("ui-tree-n100000", "Arbre statique 100 k nœuds"))
+for tag, lab in FOOT:
+    rows = {s: runs(s, tag) for s in STACKS}
+    for key, name, conv, nd in (("pss_kb_median", "PSS médian (Mo)", 1024, 0), ("pss_kb_peak", "PSS pic (Mo)", 1024, 0), ("cpu_pct_core_mean", "CPU moyen (% cœur)", 1, 0)):
+        if tag.startswith("ui-tree") and key == "cpu_pct_core_mean": continue
+        w(f"| {lab if key == 'pss_kb_median' else ''} | {name} | " + " | ".join(
+            f(med(rows[s], key) / conv if med(rows[s], key) is not None else None, nd) for s in STACKS) + " |")
+w("\nTaille sur disque de ce qu'il faut livrer (binaire + bibliothèques propres à l'app, hors bibliothèques système) :\n")
+import subprocess
+def du(p):
+    p = os.path.join(ROOT, p)
+    if not os.path.exists(p): return None
+    return int(subprocess.run(["du", "-sk", p], capture_output=True, text=True).stdout.split()[0]) / 1024
+head(["", "Slint", "Qt Quick", "Avalonia AOT"])
+w(f"| Taille (Mo) | {f(du('bench3/slint/app/target/release/slintapp'),0)} | {f(du('bench3/qt/deploy'),0)} | {f(du('bench3/avalonia/out'),0)} |")
+
 open(f"{R}/SYNTHESE.md", "w").write("\n".join(out) + "\n")
 print("\n".join(out))
