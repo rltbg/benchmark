@@ -321,3 +321,33 @@ RÉSULTAT avalonia-aot ffi-callbacks: N_max=10240000 (non borné : limite de bal
 === DONE 01:15:08
 --- foot 02:40:36
 === 02:40:36 slint idle foot-idle 
+SUMMARY {"tag": "slint-idle", "stack": "slint", "scenario": "idle", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropped_gt25": null, "rss
+=== 02:42:34 slint list-scale foot-list --n 100000
+SUMMARY {"tag": "slint-list-scale-n100000", "stack": "slint", "scenario": "list-scale", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 62.305133020108094, "p95": 62.37056343421973, "min": 62.215693406564725, "max": 62.37056343421973, "n": 5}, "frame_p50": {"m
+=== 02:43:58 slint gfx-shapes foot-shapes --n 500
+SUMMARY {"tag": "slint-gfx-shapes-n500", "stack": "slint", "scenario": "gfx-shapes", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 62.25585445969583, "p95": 62.35161729971003, "min": 62.18210271074622, "max": 62.35161729971003, "n": 5}, "frame_p50": {"median
+=== 02:45:23 slint text-labels foot-labels --n 200
+SUMMARY {"tag": "slint-text-labels-n200", "stack": "slint", "scenario": "text-labels", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 62.282321634192755, "p95": 62.33806732193389, "min": 62.25094752942692, "max": 62.33806732193389, "n": 5}, "frame_p50": {"med
+=== 02:46:47 slint ui-tree foot-tree1k --n 1000 --resize 20
+SUMMARY {"tag": "slint-ui-tree-n1000", "stack": "slint", "scenario": "ui-tree", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 9.578572817302444, "p95": 9.597768595987699, "min": 9.576476255018761, "max": 9.597768595987699, "n": 3}, "frame_p50": {"median": 10
+=== 02:47:38 slint ui-tree foot-tree100k --n 100000 --resize 20
+SUMMARY {"tag": "slint-ui-tree-n100000", "stack": "slint", "scenario": "ui-tree", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 4.264474772626687, "p95": 4.637524808071824, "min": 3.8973598956201663, "max": 4.637524808071824, "n": 3}, "frame_p50": {"median":
+=== 02:48:42 qt idle foot-idle 
+SUMMARY {"tag": "qt-idle", "stack": "qt", "scenario": "idle", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropped_gt25": null, "rss_kb_me
+=== 02:50:42 qt list-scale foot-list --n 100000
+SUMMARY {"tag": "qt-list-scale-n100000", "stack": "qt", "scenario": "list-scale", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 59.999678547610166, "p95": 60.003432817821306, "min": 59.93199280052704, "max": 60.003432817821306, "n": 5}, "frame_p50": {"median
+=== 02:52:07 qt gfx-shapes foot-shapes --n 500
+SUMMARY {"tag": "qt-gfx-shapes-n500", "stack": "qt", "scenario": "gfx-shapes", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 59.93554757953974, "p95": 60.004434074802305, "min": 59.78747224665449, "max": 60.004434074802305, "n": 5}, "frame_p50": {"median": 1
+=== 02:53:32 qt text-labels foot-labels --n 200
+SUMMARY {"tag": "qt-text-labels-n200", "stack": "qt", "scenario": "text-labels", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 59.99850061604157, "p95": 60.004493813690345, "min": 59.92214740627629, "max": 60.004493813690345, "n": 5}, "frame_p50": {"median":
+=== 02:54:57 qt ui-tree foot-tree1k --n 1000 --resize 20
+SUMMARY {"tag": "qt-ui-tree-n1000", "stack": "qt", "scenario": "ui-tree", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 9.773196620324294, "p95": 9.805927093230368, "min": 9.772167188679722, "max": 9.805927093230368, "n": 3}, "frame_p50": {"median": 95.60099
+=== 02:55:48 qt ui-tree foot-tree100k --n 100000 --resize 20
+SUMMARY {"tag": "qt-ui-tree-n100000", "stack": "qt", "scenario": "ui-tree", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 1.4520581243881951, "p95": 1.6371029462498887, "min": 1.092740344119058, "max": 1.6371029462498887, "n": 3}, "frame_p50": {"median": 296
+=== 02:57:26 avalonia-aot idle foot-idle 
+SUMMARY {"tag": "avalonia-aot-idle", "stack": "avalonia-aot", "scenario": "idle", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": null, "frame_p50": null, "frame_p95": null, "frame_p99": null, "frame_max": null, "dropped_gt16_7": null, "dropped_gt8_3": null, "dropped_gt2
+=== 02:59:22 avalonia-aot list-scale foot-list --n 100000
+SUMMARY {"tag": "avalonia-aot-list-scale-n100000", "stack": "avalonia-aot", "scenario": "list-scale", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 61.37694361212509, "p95": 61.41582084384482, "min": 61.2399776570326, "max": 61.41582084384482, "n": 5}, "fram
+=== 03:00:47 avalonia-aot gfx-shapes foot-shapes --n 500
+SUMMARY {"tag": "avalonia-aot-gfx-shapes-n500", "stack": "avalonia-aot", "scenario": "gfx-shapes", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 61.53134037861239, "p95": 61.659884079417935, "min": 61.496367861855475, "max": 61.659884079417935, "n": 5}, "fra
+=== 03:02:12 avalonia-aot text-labels foot-labels --n 200
