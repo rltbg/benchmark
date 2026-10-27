@@ -1,0 +1,217 @@
+== 2026-10-26T17:11:52+00:00 build with /opt/Qt/6.12.0/gcc_64 / cmake version 4.4.4 / ninja 1.13.2.git.kitware.jobserver-pipe-1 / g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+-- Configuring done (0.4s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/user/benchmark/bench3/qt/build
+[1/35] Automatic MOC and UIC for target qtbench
+[2/35] Running AUTOMOC file extraction for target qtbench
+[3/35] Running moc --collect-json for target qtbench
+[4/35] Automatic QML type registration for target qtbench
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[5/35] Generating .rcc/qmlcache/qtbench_qml_Shell_qml.cpp, .rcc/qmlcache/qtbench_qml_Shell_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[6/35] Generating .rcc/qmlcache/qtbench_qml_Main_qml.cpp, .rcc/qmlcache/qtbench_qml_Main_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[7/35] Generating .rcc/qmlcache/qtbench_qml_ListPane_qml.cpp, .rcc/qmlcache/qtbench_qml_ListPane_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[8/35] Generating .rcc/qmlcache/qtbench_qml_TextPane_qml.cpp, .rcc/qmlcache/qtbench_qml_TextPane_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[9/35] Generating .rcc/qmlcache/qtbench_qml_LabelsPane_qml.cpp, .rcc/qmlcache/qtbench_qml_LabelsPane_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[10/35] Generating .rcc/qmlcache/qtbench_qml_GfxPane_qml.cpp, .rcc/qmlcache/qtbench_qml_GfxPane_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[11/35] Generating .rcc/qmlcache/qtbench_qml_LayersPane_qml.cpp, .rcc/qmlcache/qtbench_qml_LayersPane_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[12/35] Generating .rcc/qmlcache/qtbench_qml_AnimPane_qml.cpp, .rcc/qmlcache/qtbench_qml_AnimPane_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[13/35] Generating .rcc/qmlcache/qtbench_qml_TreePane_qml.cpp, .rcc/qmlcache/qtbench_qml_TreePane_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[14/35] Generating .rcc/qmlcache/qtbench_qml_TreeNodeP_qml.cpp, .rcc/qmlcache/qtbench_qml_TreeNodeP_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[15/35] Generating .rcc/qmlcache/qtbench_qml_TreeNode_qml.cpp, .rcc/qmlcache/qtbench_qml_TreeNode_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[16/35] Generating .rcc/qmlcache/qtbench_qml_TreeLeaf_qml.cpp, .rcc/qmlcache/qtbench_qml_TreeLeaf_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[17/35] Generating .rcc/qmlcache/qtbench_qml_CompositePane_qml.cpp, .rcc/qmlcache/qtbench_qml_CompositePane_qml.cpp.aotstats
+Detected locale "C" with character encoding "ANSI_X3.4-1968", which is not UTF-8.
+Qt depends on a UTF-8 locale, and has switched to "C.UTF-8" instead.
+If this causes problems, reconfigure your locale. See the locale(1) manual
+for more information.
+[18/35] Building CXX object CMakeFiles/qtbench.dir/main.cpp.o
+[19/35] Building CXX object CMakeFiles/qtbench.dir/qtbench_autogen/mocs_compilation.cpp.o
+[20/35] Building CXX object CMakeFiles/qtbench.dir/qtbench_qmltyperegistrations.cpp.o
+[21/35] Building CXX object CMakeFiles/qtbench.dir/bench.cpp.o
+[22/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_Main_qml.cpp.o
+[23/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_Shell_qml.cpp.o
+[24/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_TextPane_qml.cpp.o
+[25/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_ListPane_qml.cpp.o
+[26/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_LabelsPane_qml.cpp.o
+[27/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_GfxPane_qml.cpp.o
+[28/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_LayersPane_qml.cpp.o
+[29/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_AnimPane_qml.cpp.o
+[30/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_TreeNode_qml.cpp.o
+[31/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_TreePane_qml.cpp.o
+[32/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_TreeLeaf_qml.cpp.o
+[33/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_TreeNodeP_qml.cpp.o
+[34/35] Building CXX object CMakeFiles/qtbench.dir/build/.rcc/qmlcache/qtbench_qml_CompositePane_qml.cpp.o
+[35/35] Linking CXX executable qtbench
+
+real	0m41.488s
+user	1m6.376s
+sys	0m4.571s
+-- Install configuration: "Release"
+-- Installing: /home/user/benchmark/bench3/qt/deploy/bin/qtbench
+-- Set non-toolchain portion of runtime path of "/home/user/benchmark/bench3/qt/deploy/bin/qtbench" to "$ORIGIN:$ORIGIN/../lib"
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQuick/qmldir
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQuick/libqtquick2plugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQml/qmldir
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQml/libqmlplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQml/Models/qmldir
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQml/Models/libmodelsplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQml/WorkerScript/qmldir
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQml/WorkerScript/libworkerscriptplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQuick/Layouts/qmldir
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQuick/Layouts/libqquicklayoutsplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQuick/Effects/qmldir
+-- Installing: /home/user/benchmark/bench3/qt/deploy/qml/QtQuick/Effects/libeffectsplugin.so
+-- Writing /home/user/benchmark/bench3/qt/deploy/bin/qt.conf
+-- Running generic Qt deploy tool on /home/user/benchmark/bench3/qt/build/qtbench
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Core.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Core.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6DBus.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6DBus.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Gui.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Gui.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Network.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Network.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6OpenGL.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6OpenGL.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Qml.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Qml.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QmlMeta.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QmlMeta.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QmlModels.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QmlModels.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QmlWorkerScript.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QmlWorkerScript.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Quick.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Quick.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QuickEffects.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QuickEffects.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QuickLayouts.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6QuickLayouts.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libicudata.so.73
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libicudata.so.73.2
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libicui18n.so.73
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libicui18n.so.73.2
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libicuuc.so.73
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libicuuc.so.73.2
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6EglFSDeviceIntegration.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6EglFSDeviceIntegration.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6EglFsKmsGbmSupport.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6EglFsKmsGbmSupport.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6EglFsKmsSupport.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6EglFsKmsSupport.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Svg.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6Svg.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6WaylandClient.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6WaylandClient.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6WlShellIntegration.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6WlShellIntegration.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6XcbQpa.so.6
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libQt6XcbQpa.so.6.12.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/egldeviceintegrations/libqeglfs-emu-integration.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/egldeviceintegrations/libqeglfs-kms-egldevice-integration.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/egldeviceintegrations/libqeglfs-kms-integration.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/egldeviceintegrations/libqeglfs-x11-integration.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/generic/libqevdevkeyboardplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/generic/libqevdevmouseplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/generic/libqevdevtabletplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/generic/libqevdevtouchplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/generic/libqtuiotouchplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/iconengines/libqsvgicon.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/imageformats/libqgif.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/imageformats/libqico.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/imageformats/libqjpeg.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/imageformats/libqsvg.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/networkinformation/libqconnman.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/networkinformation/libqglib.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/networkinformation/libqnetworkmanager.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/platforminputcontexts/libcomposeplatforminputcontextplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/platforminputcontexts/libibusplatforminputcontextplugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/platformthemes/libqgtk3.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/platformthemes/libqxdgdesktopportal.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_debugger.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_inspector.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_local.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_messages.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_native.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_nativedebugger.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_preview.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_profiler.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_quickeventreplay.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_quickprofiler.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_server.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/qmltooling/libqmldbg_tcp.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/tls/libqcertonlybackend.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/tls/libqopensslbackend.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-decoration-client/libbradient.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-graphics-integration-client/libdmabuf-server.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-graphics-integration-client/libdrm-egl-server.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-graphics-integration-client/libqt-plugin-wayland-egl.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-graphics-integration-client/libshm-emulation-server.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-graphics-integration-client/libvulkan-server.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-shell-integration/libfullscreen-shell-v1.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-shell-integration/libwl-shell-plugin.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/wayland-shell-integration/libxdg-shell.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/xcbglintegrations/libqxcb-egl-integration.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/xcbglintegrations/libqxcb-glx-integration.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/plugins/platforms/libqxcb.so
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libxcb-cursor.so.0
+-- Installing: /home/user/benchmark/bench3/qt/deploy/lib/libxcb-cursor.so.0.0.0
+
+real	0m0.641s
+user	0m0.308s
+sys	0m0.255s

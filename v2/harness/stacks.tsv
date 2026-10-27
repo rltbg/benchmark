@@ -1,0 +1,22 @@
+# nom<TAB>commande (${ROOT} = racine du dépôt)<TAB>options harnais supplémentaires
+slint	${ROOT}/v2/slint/app/target/release/slintapp	
+slint-uncapped	${ROOT}/v2/slint/app/target/release/slintapp	--env BENCH_PACING=uncapped
+slint-software	${ROOT}/v2/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=software
+slint-software-uncapped	${ROOT}/v2/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=software --env BENCH_PACING=uncapped
+slint-femtovg	${ROOT}/v2/slint/app/target/release/slintapp	--env SLINTAPP_RENDERER=femtovg
+avalonia-aot	${ROOT}/v2/avalonia/out/aot/avalonia-bench	
+avalonia-jit	${ROOT}/v2/avalonia/out/jit/avalonia-bench	
+qt-software	${ROOT}/v2/qt/deploy/bin/qtbench	
+qt-software-uncapped	${ROOT}/v2/qt/deploy/bin/qtbench	--env BENCH_PACING=uncapped
+qt-opengl	${ROOT}/v2/qt/deploy/bin/qtbench --backend opengl	
+compose-jvm	${ROOT}/v2/compose/run.sh	
+compose-jvm-uncapped	${ROOT}/v2/compose/run.sh	--env BENCH_PACING=uncapped
+compose-jvm-aotcache	${ROOT}/v2/compose/run.sh	--env BENCH_VARIANT=aot
+egui	${ROOT}/v2/egui/target/release/egui_bench	
+egui-uncapped	${ROOT}/v2/egui/target/release/egui_bench	--env BENCH_PACING=uncapped
+egui-glow	${ROOT}/v2/egui/target/release/egui_bench	--env EGUI_BENCH_RENDERER=glow
+flutter	${ROOT}/v2/flutter/app/build/linux/x64/release/bundle/benchapp	
+flutter-skia	${ROOT}/v2/flutter/app/build/linux/x64/release/bundle/benchapp	--env BENCH_FLUTTER_IMPELLER=0
+nsh	${ROOT}/v2/nsh/run.sh	
+avalonia-aot-fstar	${ROOT}/v2/avalonia/out/aot/avalonia-bench	--env BENCH_CORE_IMPL=fstar
+avalonia-aot-fsharp	${ROOT}/v2/avalonia/out/aot/avalonia-bench	--env BENCH_CORE_IMPL=fsharp

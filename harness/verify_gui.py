@@ -3,7 +3,7 @@
  1) une fenêtre X11 visible, appartenant au PID de l'app ou à un de ses enfants (_NET_WM_PID), de taille >= 1000x600 ;
  2) le framebuffer n'est pas vide (couleurs distinctes, part de pixels hors fond) ;
  3) il change entre deux captures espacées (animation réelle) ;
- 4) une capture PNG est enregistrée dans results/verification/ pour inspection.
+ 4) une capture PNG est enregistrée dans v3/results/verification/ (ou $VG_OUT) pour inspection.
 usage: verify_gui.py <stack> "<cmd>" <scenario> [extra args]"""
 import os, sys, os, time, subprocess, json, tempfile, zlib, struct, array, collections
 ROOT = os.environ.get("BENCH_ROOT") or os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -12,7 +12,7 @@ def free_display(n):
     while os.path.exists(f"/tmp/.X11-unix/X{n}") or os.path.exists(f"/tmp/.X{n}-lock"): n += 1
     return f":{n}"
 stack, cmd, sc = sys.argv[1], sys.argv[2].replace("${ROOT}", ROOT).split(), sys.argv[3]; extra = sys.argv[4:]
-OUT = os.path.join(ROOT,"results","verification"); os.makedirs(OUT, exist_ok=True)
+OUT = os.environ.get("VG_OUT") or os.path.join(ROOT,"v3","results","verification"); os.makedirs(OUT, exist_ok=True)
 d = tempfile.mkdtemp(prefix="vg"); disp = free_display(390)
 xv = subprocess.Popen(["Xvfb", disp, "-screen","0","1280x720x24","-fbdir",d,"-nolisten","tcp"], stderr=subprocess.DEVNULL); time.sleep(0.8)
 env = dict(os.environ, DISPLAY=disp, LIBGL_ALWAYS_SOFTWARE="1")

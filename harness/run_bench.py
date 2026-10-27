@@ -271,7 +271,7 @@ def main():
     ap.add_argument("--scenario", required=True); ap.add_argument("--duration", type=float, default=10)
     ap.add_argument("--runs", type=int, default=10); ap.add_argument("--rate", type=int); ap.add_argument("--shapes", type=int)
     ap.add_argument("--cpus"); ap.add_argument("--cpu-quota", type=float); ap.add_argument("--mem-limit", type=float)
-    ap.add_argument("--outdir", default=os.path.join(ROOT, "results")); ap.add_argument("--assets", default=os.path.join(ROOT, "assets"))
+    ap.add_argument("--outdir", default=os.path.join(ROOT, "v3", "results")); ap.add_argument("--assets", default=os.path.join(ROOT, "assets"))
     ap.add_argument("--env", action="append", default=[])
     ap.add_argument("--latency", choices=["key", "wheel"], help="mesure externe touche/molette -> pixel (latency-load, latency-wheel, tout scénario)")
     ap.add_argument("--cpuhog", type=int, default=0, help="K processus à 100 %% de CPU hors de l'app (I1 cpuhog)")

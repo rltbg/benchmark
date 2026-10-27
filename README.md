@@ -1,34 +1,13 @@
-# Banc comparatif de stacks UI natives multiplateformes (rendu logiciel, Linux)
+# Banc comparatif de stacks UI natives multiplateformes
 
-Comparaison mesurée de Slint, Qt/QML, Avalonia (F#, NativeAOT et JIT), Compose Multiplatform (JVM), Flutter, egui et NSH (Rust, GTK 4) sur une app de référence identique, plus deux « portes » de vérification formelle : F\* → F# → NativeAOT et F\* (Pulse) → C via KaRaMeL.
+Trois campagnes, séparées par dossier. Toutes les mesures sont en **rendu logiciel sur VM 4 vCPU sans GPU** : elles ne valent ni pour un GPU, ni pour iOS/Android, ni pour le web.
 
-**Lire d'abord : [`docs/RAPPORT-FINAL.md`](docs/RAPPORT-FINAL.md)** (résultats, limites, audit des versions, verdict, plan de migration depuis KMP).
+| Dossier | Contenu | Rapport |
+|---|---|---|
+| [`v1/`](v1/README.md) | premier passage et portes F\* (F\* → F# → NativeAOT, F\* → C via KaRaMeL) | `v1/fstar-docs/` |
+| [`v2/`](v2/README.md) | app de référence sur 8 stacks (Slint, Qt, Avalonia, Compose, Flutter, egui, NSH…) | [`v2/docs/RAPPORT-FINAL.md`](v2/docs/RAPPORT-FINAL.md) |
+| [`v3/`](v3/README.md) | **face-à-face Slint / Qt Quick / Avalonia AOT**, bancs de limites, empreinte CPU/RAM | [`v3/docs/RAPPORT-V3.md`](v3/docs/RAPPORT-V3.md) |
 
-> Toutes les mesures sont en **rendu logiciel sur une VM de 4 vCPU sans GPU**, à 60 Hz pour toutes les stacks. Elles ne valent ni pour un GPU, ni pour iOS/Android, ni pour wasm. Passe 2 (2026-10-26) : versions à jour, code relu contre la documentation officielle, harnais v2 ; les résultats de la passe 1 sont archivés dans `results/passe1/`.
+Partagé : `core/` (cœur Rust C-ABI + header), `harness/` (harnais de mesure externe commun : `run_bench.py`, `coldstart.py`, `calibrate.py`, `verify_gui.py`, `fbwatch.py`, `gen_assets.py`), `docs/research/` (fiches de recherche avec sources et dates), `assets/` (générés, non versionnés), `logs/`, `toolchains-logs/`.
 
-## Arborescence
-| Chemin | Contenu |
-|---|---|
-| `docs/RAPPORT-FINAL.md` | rapport final |
-| `docs/BENCH-SPEC.md`, `docs/AGENT-BRIEF.md` | spécification de l'app de référence et consignes d'implémentation |
-| `docs/research/` | fiches de recherche (architecture, maturité, licences, contributeurs ; sources avec URL et date) |
-| `docs/fstar/` | rapports des portes F\* (F#/NativeAOT et Low\*→C/KaRaMeL) |
-| `core/` | cœur C-ABI commun en Rust (`validate`, `parse`, `hash`, `heavy`), header C, micro-banc C |
-| `harness/` | harnais de mesure externe (`run_bench.py`), pilotes (`run_plan.sh`, `resume_v2.sh`, `run_mempressure.sh`), autotest (`selftest_app.py`), démarrage (`coldstart.py`), calibration (`calibrate.py`, `fbwatch.py`), preuve GUI (`verify_gui.py`), agrégation (`aggregate.py`, `synthese.py`), liste des binaires (`stacks.tsv`) |
-| `stacks/<stack>/` | code de l'app de référence par stack (+ `STACK-NOTES.md` et `logs/`) |
-| `fstar/` | spec F\* (`Core.fst`), F# extrait, projets .NET, journaux |
-| `stacks/karamel/` | module Low\* (`Core_Low.fst`), C généré, tests, scripts de build |
-| `results/` | JSON bruts de chaque exécution, résumés, `SYNTHESE.md` (générée par `harness/synthese.py`), démarrage, calibration, preuves GUI (`verification/`) ; `results/passe1/` : premier passage archivé |
-| `logs/`, `toolchains-logs/` | journaux réseau et d'installation des outils |
-
-## Reproduire
-1. Générer les assets (non versionnés, 111 Mo) : `python3 -I harness/gen_assets.py assets`
-2. Construire le cœur : `cd core && cargo build --release`
-3. Construire une stack : `stacks/<stack>/build.sh` (dépendances système : Xvfb, Mesa llvmpipe, GTK 3/4, Qt 6, polices Noto, voir `stacks/*/STACK-NOTES.md`)
-4. Mesurer : `harness/run_plan.sh "A B D cold cal verify C" "<stacks>" "<variantes>"` (commandes dans `harness/stacks.tsv`), ou une seule mesure : `python3 -I harness/run_bench.py --stack NAME --cmd "<commande>" --scenario list --duration 14 --runs 10`
-5. Synthèse : `python3 -I harness/synthese.py`
-
-## Hors périmètre / exclu
-- Aucune version web/TypeScript : les variantes NSH TSX/QuickJS et GPUI ont été retirées du dépôt.
-- iced : écarté (mobile hors scope pour ses auteurs) ; ses résultats de la passe 1 restent dans `results/passe1/`.
-- Les binaires, caches de build, dépôts tiers (NSH, KaRaMeL, Flutter SDK) et assets générés ne sont pas versionnés.
+Les binaires, caches de build, dépôts tiers et assets générés ne sont pas versionnés.

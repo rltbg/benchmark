@@ -1,0 +1,7 @@
+# nom<TAB>commande (${ROOT} = racine du dépôt)<TAB>options harnais supplémentaires (--env K=V)
+slint	${ROOT}/v3/slint/run.sh	
+slint-software	${ROOT}/v3/slint/run.sh	--env SLINTAPP_RENDERER=software
+qt	${ROOT}/v3/qt/run.sh	
+qt-opengl	${ROOT}/v3/qt/run.sh --backend opengl	
+avalonia-aot	${ROOT}/v3/avalonia/run.sh	
+slint-direct	${ROOT}/v3/slint/run.sh	--env SLINTAPP_DIRECT=1
