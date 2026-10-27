@@ -319,3 +319,5 @@ RÉSULTAT qt ffi-callbacks: N_max=10240000 (non borné : limite de balayage atte
 RÉSULTAT avalonia-aot list-mutate: N_max=2880000 premier échec=3040000
 RÉSULTAT avalonia-aot ffi-callbacks: N_max=10240000 (non borné : limite de balayage atteinte) premier échec=None
 === DONE 01:15:08
+--- foot 02:40:36
+=== 02:40:36 slint idle foot-idle 
