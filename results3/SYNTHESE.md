@@ -94,3 +94,32 @@ Molette :
 | qt | 275 / 309 | 15184 / 16017 | 197 / 219 | 15182 / 16526 |
 | avalonia-aot | 206 / 295 | 13919 / 14329 | 120 / 130 | 13667 / 13987 |
 | slint-direct | 171 / 263 | 4450 / 4563 | 93 / 104 | 4310 / 4499 |
+
+#### 8. Empreinte CPU / RAM (mesurée de l'extérieur par /proc entre les marqueurs ; médiane de 5 exécutions, 3 pour ui-tree)
+
+PSS = mémoire réellement attribuée au processus (pages partagées divisées entre leurs utilisateurs) ; pic = maximum sur la mesure. CPU en % d'un cœur (100 = un cœur plein ; 4 cœurs disponibles).
+
+| Situation | Mesure | slint | qt | avalonia-aot |
+|---|---|---|---|---|
+| À vide (fenêtre ouverte, rien ne bouge) | PSS médian (Mo) | 21 | 45 | 41 |
+|  | PSS pic (Mo) | 21 | 45 | 41 |
+|  | CPU moyen (% cœur) | 0 | 1 | 0 |
+| Liste de 100 k lignes défilant | PSS médian (Mo) | 22 | 47 | 95 |
+|  | PSS pic (Mo) | 22 | 47 | 137 |
+|  | CPU moyen (% cœur) | 13 | 14 | 17 |
+| 500 formes animées | PSS médian (Mo) | 19 | 45 | 41 |
+|  | PSS pic (Mo) | 19 | 45 | 43 |
+|  | CPU moyen (% cœur) | 22 | 26 | 23 |
+| 200 étiquettes de texte animées | PSS médian (Mo) | 21 | 46 | 301 |
+|  | PSS pic (Mo) | 21 | 46 | 303 |
+|  | CPU moyen (% cœur) | 25 | 27 | 35 |
+| Arbre statique 1 k nœuds | PSS médian (Mo) | 26 | 81 | 87 |
+|  | PSS pic (Mo) | 26 | 92 | 88 |
+| Arbre statique 100 k nœuds | PSS médian (Mo) | 689 | 2614 | 2006 |
+|  | PSS pic (Mo) | 689 | 2631 | 2009 |
+
+Taille sur disque de ce qu'il faut livrer (binaire + bibliothèques propres à l'app, hors bibliothèques système) :
+
+|  | Slint | Qt Quick | Avalonia AOT |
+|---|---|---|---|
+| Taille (Mo) | 28 | 91 | 40 |

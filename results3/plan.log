@@ -351,3 +351,9 @@ SUMMARY {"tag": "avalonia-aot-list-scale-n100000", "stack": "avalonia-aot", "sce
 === 03:00:47 avalonia-aot gfx-shapes foot-shapes --n 500
 SUMMARY {"tag": "avalonia-aot-gfx-shapes-n500", "stack": "avalonia-aot", "scenario": "gfx-shapes", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 61.53134037861239, "p95": 61.659884079417935, "min": 61.496367861855475, "max": 61.659884079417935, "n": 5}, "fra
 === 03:02:12 avalonia-aot text-labels foot-labels --n 200
+SUMMARY {"tag": "avalonia-aot-text-labels-n200", "stack": "avalonia-aot", "scenario": "text-labels", "runs": 5, "ok_runs": 5, "oom_runs": 0, "markers_ok": 5, "agg": {"fps_mean": {"median": 61.049416650001696, "p95": 61.31534388674971, "min": 60.897909005403086, "max": 61.31534388674971, "n": 5}, "fr
+=== 03:03:37 avalonia-aot ui-tree foot-tree1k --n 1000 --resize 20
+SUMMARY {"tag": "avalonia-aot-ui-tree-n1000", "stack": "avalonia-aot", "scenario": "ui-tree", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 31.38131117394347, "p95": 32.19295167516024, "min": 31.088823878703845, "max": 32.19295167516024, "n": 3}, "frame_p50"
+=== 03:04:28 avalonia-aot ui-tree foot-tree100k --n 100000 --resize 20
+SUMMARY {"tag": "avalonia-aot-ui-tree-n100000", "stack": "avalonia-aot", "scenario": "ui-tree", "runs": 3, "ok_runs": 3, "oom_runs": 0, "markers_ok": 3, "agg": {"fps_mean": {"median": 0.2268396954495617, "p95": 0.22746853115039367, "min": 0.21956012884666604, "max": 0.22746853115039367, "n": 3}, "fr
+=== DONE 03:05:52

@@ -29,6 +29,10 @@ Date : 2026-10-27. Branche `bench-v3`. Données : `results3/SYNTHESE.md` (géné
 
 ![Mémoire sur 10 minutes](img/soak-memoire.svg)
 
+![Empreinte mémoire](img/empreinte-ram.svg)
+
+![Consommation CPU](img/empreinte-cpu.svg)
+
 (Graphes générés par `harness/graphes3.py` depuis `results3/`, sans valeur saisie à la main.)
 
 ### Détail
@@ -56,6 +60,7 @@ Voir les tableaux complets dans `results3/SYNTHESE.md`. Résumé par thème (val
 **Édition d'1 Mo (T3), latence par frappe** : Slint 836 ms, Qt 27 ms, Avalonia 30 ms.
 **Quota ½ cœur, 2000 étiquettes** : Slint 30,8 fps, Qt 5,7, Avalonia 8,7 ; listes et formes simples tiennent les trois.
 **Démarrage (premier pixel, `ui-tree`)** : 1 k nœuds 88–197 ms à chaud ; 100 k nœuds : Slint 4,6 s, Avalonia 13,7 s, Qt 15,2 s.
+**Empreinte (PSS médian ; CPU % d'un cœur)** : à vide Slint 21 Mo / Qt 45 / Avalonia 41, CPU ≈ 0 pour les trois ; liste 100 k lignes défilant : 22 / 47 / 95 Mo (Avalonia pic 137), CPU 13 / 14 / 17 % ; 200 étiquettes animées : 21 / 46 / **301** Mo, CPU 25 / 27 / 35 % ; arbre statique 100 k nœuds : 689 / 2 614 / 2 006 Mo. Taille livrée : Slint 28 Mo (un binaire), Avalonia 40 Mo, Qt 91 Mo. Le CPU est élevé par construction (rendu logiciel, pas de GPU) : comparable entre stacks, pas transposable à un appareil réel.
 **Soak 600 s** : PSS Slint 47→48 Mo, Qt 65→66 Mo, Avalonia 148→205 Mo (croissance non expliquée : GC ou fuite, non tranché).
 
 ## 2. Prédictions des analystes contre mesures
