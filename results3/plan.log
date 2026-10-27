@@ -301,3 +301,4 @@ cold slint-direct ui-tree 100000
 {"stack": "slint-direct", "mode": "froid(caches vid\u00e9s)", "runs": 5, "first_pixel_ms": {"median": 4450.31649700104, "p95": 4562.712560998989, "min": 4250.2403769995, "max": 4562.712560998989, "all": [4250, 4450, 4533, 4327, 4563]}}
 {"stack": "slint-direct", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 4309.686638998755, "p95": 4499.405013000796, "min": 4166.921388999981, "max": 4499.405013000796, "all": [4499, 4424, 4310, 4176, 4167]}}
 === DONE 00:40:56
+--- recap cap 00:42:24
