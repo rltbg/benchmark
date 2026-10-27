@@ -8,6 +8,7 @@
 #   edit   : T3 text-edit 1 Mo (latence par frappe)
 #   soak   : list-mutate 20 k/s pendant 600 s (dérive PSS) — composite M1 non implémenté dans toutes les stacks
 #   memmin : plus petite limite cgroup (bissection 24..1024 Mo) pour list-scale 100k et text-big 1
+#   foot   : empreinte CPU/RAM : idle, list-scale 100k, gfx-shapes 500, text-labels 200, ui-tree 1k/100k (5 exécutions)
 #   cold   : démarrage à froid/chaud de ui-tree 1 k et 100 k
 set -u
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"; export BENCH_ROOT="$ROOT"; cd "$ROOT"
@@ -50,6 +51,13 @@ if has cap; then for s in $STACKS; do case "$s" in slint-direct) continue;; esac
   for sc in list-scale list-rich list-mutate list-reset text-big text-labels text-rich gfx-shapes gfx-paths \
     gfx-chart gfx-images gfx-layers ui-tree ui-bind ui-anim ffi-callbacks; do capone "$s" "$sc"; done
   capone "$s" gfx-shapes --variant feature=gradient; capone "$s" gfx-shapes --variant feature=shadow; done; fi
+if has foot; then for s in $STACKS; do case "$s" in slint-direct) continue;; esac
+  rb "$s" idle 20 5 foot-idle
+  rb "$s" list-scale 14 5 foot-list --n 100000
+  rb "$s" gfx-shapes 14 5 foot-shapes --n 500
+  rb "$s" text-labels 14 5 foot-labels --n 200
+  rb "$s" ui-tree 14 3 foot-tree1k --n 1000 --resize 20
+  rb "$s" ui-tree 14 3 foot-tree100k --n 100000 --resize 20; done; fi
 if has soak; then for s in $STACKS; do
   rb "$s" list-mutate 600 1 soak --n 20000; done; fi
 if has memmin; then for s in $STACKS; do for sc in "list-scale 100000" "text-big 1"; do set -- $sc
