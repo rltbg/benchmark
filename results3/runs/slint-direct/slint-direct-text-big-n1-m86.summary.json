@@ -1,0 +1,60 @@
+{
+ "summary": {
+  "tag": "slint-direct-text-big-n1-m86",
+  "stack": "slint-direct",
+  "scenario": "text-big",
+  "runs": 1,
+  "ok_runs": 0,
+  "oom_runs": 1,
+  "markers_ok": 0,
+  "agg": {
+   "fps_mean": null,
+   "frame_p50": null,
+   "frame_p95": null,
+   "frame_p99": null,
+   "frame_max": null,
+   "dropped_gt16_7": null,
+   "dropped_gt8_3": null,
+   "dropped_gt25": null,
+   "rss_kb_median": null,
+   "rss_kb_peak": null,
+   "pss_kb_median": null,
+   "pss_kb_peak": null,
+   "cpu_pct_core_mean": null,
+   "cpu_pct_core_peak_1s": null,
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": null,
+   "wall_s": null
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": -9,
+   "wall_s": 1.0462541859997145,
+   "markers": false,
+   "mem_failcnt": 134,
+   "mem_charged_peak_kb": 88064,
+   "oom_kills": 1,
+   "oom": true,
+   "window": "whole_run",
+   "rss_kb_median": 54828.0,
+   "rss_kb_peak": 102464,
+   "pss_kb_median": 51870.0,
+   "pss_kb_peak": 99506,
+   "pss_kb_first_quarter": 10035.0,
+   "pss_kb_last_quarter": 92144.0,
+   "cpu_pct_core_mean": 96.42222203292178,
+   "cpu_pct_core_peak_1s": null,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     2012,
+     280
+    ]
+   ]
+  }
+ ]
+}

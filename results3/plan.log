@@ -201,3 +201,103 @@ RÉSULTAT avalonia-aot text-big: N_max=None premier échec=1
 RÉSULTAT avalonia-aot text-labels: N_max=None premier échec=500
 RÉSULTAT avalonia-aot text-rich: N_max=None premier échec=1000
 --- reprise 23:14:56
+RÉSULTAT avalonia-aot gfx-shapes: N_max=3000 premier échec=3125
+RÉSULTAT avalonia-aot gfx-paths: N_max=50 premier échec=84
+RÉSULTAT avalonia-aot gfx-chart: N_max=None premier échec=100000
+RÉSULTAT avalonia-aot gfx-images: N_max=40 premier échec=52
+RÉSULTAT avalonia-aot gfx-layers: N_max=15 premier échec=16
+RÉSULTAT avalonia-aot ui-tree: N_max=1000 premier échec=10000
+RÉSULTAT avalonia-aot ui-bind: N_max=None premier échec=288
+RÉSULTAT avalonia-aot ui-anim: N_max=2000 premier échec=2100
+RÉSULTAT avalonia-aot ffi-callbacks: N_max=10240000 (non borné : limite de balayage atteinte) premier échec=None
+RÉSULTAT avalonia-aot gfx-shapes-featuregradient: N_max=656 premier échec=687
+RÉSULTAT avalonia-aot gfx-shapes-featureshadow: N_max=250 premier échec=656
+=== 23:35:50 slint list-mutate soak --n 20000
+SUMMARY {"tag": "slint-list-mutate-n20000", "stack": "slint", "scenario": "list-mutate", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 62.21535589236677, "p95": 62.21535589236677, "min": 62.21535589236677, "max": 62.21535589236677, "n": 1}, "frame_p50": {"me
+=== 23:45:53 qt list-mutate soak --n 20000
+SUMMARY {"tag": "qt-list-mutate-n20000", "stack": "qt", "scenario": "list-mutate", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 59.96009648998581, "p95": 59.96009648998581, "min": 59.96009648998581, "max": 59.96009648998581, "n": 1}, "frame_p50": {"median":
+=== 23:55:56 avalonia-aot list-mutate soak --n 20000
+SUMMARY {"tag": "avalonia-aot-list-mutate-n20000", "stack": "avalonia-aot", "scenario": "list-mutate", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 61.25799073790379, "p95": 61.25799073790379, "min": 61.25799073790379, "max": 61.25799073790379, "n": 1}, "fr
+=== 00:06:00 slint-direct list-mutate soak --n 20000
+SUMMARY {"tag": "slint-direct-list-mutate-n20000", "stack": "slint-direct", "scenario": "list-mutate", "runs": 1, "ok_runs": 1, "oom_runs": 0, "markers_ok": 1, "agg": {"fps_mean": {"median": 62.09508725187693, "p95": 62.09508725187693, "min": 62.09508725187693, "max": 62.09508725187693, "n": 1}, "fr
+memmin slint list-scale 524 -> "ok_runs": 1 "fps_mean": {"median": 62.020863849609434 
+memmin slint list-scale 274 -> "ok_runs": 1 "fps_mean": {"median": 62.073092295234865 
+memmin slint list-scale 149 -> "ok_runs": 1 "fps_mean": {"median": 62.05476164236261 
+memmin slint list-scale 86 -> "ok_runs": 1 "fps_mean": {"median": 62.0783161268696 
+memmin slint list-scale 55 -> "ok_runs": 1 "fps_mean": {"median": 62.27295904363204 
+memmin slint list-scale 39 -> "ok_runs": 1 "fps_mean": {"median": 62.220702271165905 
+MEMMIN slint list-scale 100000 : entre 24 et 39 Mo
+memmin slint text-big 524 -> "ok_runs": 1 "fps_mean": {"median": 62.22863553652605 
+memmin slint text-big 274 -> "ok_runs": 1 "fps_mean": {"median": 62.209067914343606 
+memmin slint text-big 149 -> "ok_runs": 1 "fps_mean": {"median": 62.212303497077095 
+memmin slint text-big 86 -> "ok_runs": 0 
+memmin slint text-big 117 -> "ok_runs": 0 
+memmin slint text-big 133 -> "ok_runs": 1 "fps_mean": {"median": 62.1245775111979 
+MEMMIN slint text-big 1 : entre 117 et 133 Mo
+memmin qt list-scale 524 -> "ok_runs": 1 "fps_mean": {"median": 60.00381077001744 
+memmin qt list-scale 274 -> "ok_runs": 1 "fps_mean": {"median": 60.001844609708 
+memmin qt list-scale 149 -> "ok_runs": 1 "fps_mean": {"median": 59.999039796366766 
+memmin qt list-scale 211 -> "ok_runs": 1 "fps_mean": {"median": 60.002225239525124 
+memmin qt list-scale 180 -> "ok_runs": 1 "fps_mean": {"median": 59.90572444425887 
+memmin qt list-scale 195 -> "ok_runs": 1 "fps_mean": {"median": 60.000568178858295 
+MEMMIN qt list-scale 100000 : entre 180 et 195 Mo
+memmin qt text-big 524 -> "ok_runs": 1 "fps_mean": {"median": 23.042608376333416 
+memmin qt text-big 774 -> "ok_runs": 1 "fps_mean": {"median": 22.45424594521937 
+memmin qt text-big 899 -> "ok_runs": 1 "fps_mean": {"median": 22.378148511871604 
+memmin qt text-big 961 -> "ok_runs": 1 "fps_mean": {"median": 22.931921997907494 
+memmin qt text-big 992 -> "ok_runs": 1 "fps_mean": {"median": 21.977294838682994 
+memmin qt text-big 1008 -> "ok_runs": 1 "fps_mean": {"median": 22.386444774869794 
+MEMMIN qt text-big 1 : entre 1008 et 1024 Mo
+memmin avalonia-aot list-scale 524 -> "ok_runs": 1 "fps_mean": {"median": 61.599337624770506 
+memmin avalonia-aot list-scale 274 -> "ok_runs": 1 "fps_mean": {"median": 61.50788862405354 
+memmin avalonia-aot list-scale 149 -> "ok_runs": 1 "fps_mean": {"median": 61.33347464672443 
+memmin avalonia-aot list-scale 86 -> "ok_runs": 1 "fps_mean": {"median": 61.50543009008523 
+memmin avalonia-aot list-scale 55 -> "ok_runs": 1 "fps_mean": {"median": 61.663569258149316 
+memmin avalonia-aot list-scale 39 -> "ok_runs": 1 "fps_mean": {"median": 61.5249088487501 
+MEMMIN avalonia-aot list-scale 100000 : entre 24 et 39 Mo
+memmin avalonia-aot text-big 524 -> "ok_runs": 1 "fps_mean": {"median": 20.84247061261506 
+memmin avalonia-aot text-big 774 -> "ok_runs": 1 "fps_mean": {"median": 20.996092532423006 
+memmin avalonia-aot text-big 899 -> "ok_runs": 1 "fps_mean": {"median": 21.845508563439356 
+memmin avalonia-aot text-big 961 -> "ok_runs": 1 "fps_mean": {"median": 21.682465390238914 
+memmin avalonia-aot text-big 992 -> "ok_runs": 1 "fps_mean": {"median": 21.524822415220918 
+memmin avalonia-aot text-big 1008 -> "ok_runs": 1 "fps_mean": {"median": 21.95241594320152 
+MEMMIN avalonia-aot text-big 1 : entre 1008 et 1024 Mo
+memmin slint-direct list-scale 524 -> "ok_runs": 1 "fps_mean": {"median": 62.23307051987316 
+memmin slint-direct list-scale 274 -> "ok_runs": 1 "fps_mean": {"median": 62.188988484590084 
+memmin slint-direct list-scale 149 -> "ok_runs": 1 "fps_mean": {"median": 62.01034766671515 
+memmin slint-direct list-scale 86 -> "ok_runs": 1 "fps_mean": {"median": 61.797881245580605 
+memmin slint-direct list-scale 55 -> "ok_runs": 1 "fps_mean": {"median": 62.191564902144954 
+memmin slint-direct list-scale 39 -> "ok_runs": 1 "fps_mean": {"median": 62.19445429162312 
+MEMMIN slint-direct list-scale 100000 : entre 24 et 39 Mo
+memmin slint-direct text-big 524 -> "ok_runs": 1 "fps_mean": {"median": 62.171285962419795 
+memmin slint-direct text-big 274 -> "ok_runs": 1 "fps_mean": {"median": 62.06711686024772 
+memmin slint-direct text-big 149 -> "ok_runs": 1 "fps_mean": {"median": 62.0404457020542 
+memmin slint-direct text-big 86 -> "ok_runs": 0 
+memmin slint-direct text-big 117 -> "ok_runs": 0 
+memmin slint-direct text-big 133 -> "ok_runs": 1 "fps_mean": {"median": 62.209206100222175 
+MEMMIN slint-direct text-big 1 : entre 117 et 133 Mo
+cold slint ui-tree 1000
+{"stack": "slint", "mode": "froid(caches vid\u00e9s)", "runs": 5, "first_pixel_ms": {"median": 166.9490880012745, "p95": 193.33062399891787, "min": 140.49502099987876, "max": 193.33062399891787, "all": [163, 167, 140, 193, 183]}}
+{"stack": "slint", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 88.37478900022688, "p95": 108.55509099928895, "min": 85.95494399924064, "max": 108.55509099928895, "all": [88, 88, 109, 93, 86]}}
+cold slint ui-tree 100000
+{"stack": "slint", "mode": "froid(caches vid\u00e9s)", "runs": 5, "first_pixel_ms": {"median": 4541.921365000235, "p95": 5238.272476999555, "min": 4363.630588999513, "max": 5238.272476999555, "all": [5238, 4947, 4542, 4364, 4467]}}
+{"stack": "slint", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 4645.840255001531, "p95": 5082.058267998946, "min": 4389.558079999915, "max": 5082.058267998946, "all": [4499, 4696, 5082, 4646, 4390]}}
+cold qt ui-tree 1000
+{"stack": "qt", "mode": "froid(caches vid\u00e9s)", "runs": 5, "first_pixel_ms": {"median": 275.000273999467, "p95": 308.97863199970743, "min": 235.19516499982274, "max": 308.97863199970743, "all": [309, 298, 253, 235, 275]}}
+{"stack": "qt", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 196.5985280003224, "p95": 219.10352799932298, "min": 182.90533999970648, "max": 219.10352799932298, "all": [187, 219, 216, 183, 197]}}
+cold qt ui-tree 100000
+{"stack": "qt", "mode": "froid(caches vid\u00e9s)", "runs": 4, "first_pixel_ms": {"median": 15184.008979999817, "p95": 16016.569990999415, "min": 14503.817916998742, "max": 16016.569990999415, "all": [16017, 15591, 14777, 14504]}}
+{"stack": "qt", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 15182.03480199918, "p95": 16526.142729999265, "min": 14741.559558000517, "max": 16526.142729999265, "all": [16067, 15011, 14742, 15182, 16526]}}
+cold avalonia-aot ui-tree 1000
+{"stack": "avalonia-aot", "mode": "froid(caches vid\u00e9s)", "runs": 5, "first_pixel_ms": {"median": 206.28772700001718, "p95": 295.49838800085126, "min": 159.597070000018, "max": 295.49838800085126, "all": [201, 295, 160, 237, 206]}}
+{"stack": "avalonia-aot", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 119.74085099973308, "p95": 130.10255100016366, "min": 99.85304499969061, "max": 130.10255100016366, "all": [130, 125, 100, 120, 117]}}
+cold avalonia-aot ui-tree 100000
+{"stack": "avalonia-aot", "mode": "froid(caches vid\u00e9s)", "runs": 5, "first_pixel_ms": {"median": 13918.964974000119, "p95": 14329.085620000114, "min": 13488.065969999298, "max": 14329.085620000114, "all": [13724, 13488, 13919, 14321, 14329]}}
+{"stack": "avalonia-aot", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 13666.644592000011, "p95": 13987.076990000787, "min": 13297.00659700029, "max": 13987.076990000787, "all": [13861, 13987, 13667, 13426, 13297]}}
+cold slint-direct ui-tree 1000
+{"stack": "slint-direct", "mode": "froid(caches vid\u00e9s)", "runs": 5, "first_pixel_ms": {"median": 171.11797100005788, "p95": 263.4025830011524, "min": 136.1679709989403, "max": 263.4025830011524, "all": [136, 263, 157, 230, 171]}}
+{"stack": "slint-direct", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 93.1733310007985, "p95": 103.83537800043996, "min": 85.34367299944279, "max": 103.83537800043996, "all": [90, 85, 104, 93, 99]}}
+cold slint-direct ui-tree 100000
+{"stack": "slint-direct", "mode": "froid(caches vid\u00e9s)", "runs": 5, "first_pixel_ms": {"median": 4450.31649700104, "p95": 4562.712560998989, "min": 4250.2403769995, "max": 4562.712560998989, "all": [4250, 4450, 4533, 4327, 4563]}}
+{"stack": "slint-direct", "mode": "chaud", "runs": 5, "first_pixel_ms": {"median": 4309.686638998755, "p95": 4499.405013000796, "min": 4166.921388999981, "max": 4499.405013000796, "all": [4499, 4424, 4310, 4176, 4167]}}
+=== DONE 00:40:56

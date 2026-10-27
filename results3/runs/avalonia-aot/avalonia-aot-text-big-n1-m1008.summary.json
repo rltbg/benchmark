@@ -1,0 +1,344 @@
+{
+ "summary": {
+  "tag": "avalonia-aot-text-big-n1-m1008",
+  "stack": "avalonia-aot",
+  "scenario": "text-big",
+  "runs": 1,
+  "ok_runs": 1,
+  "oom_runs": 0,
+  "markers_ok": 1,
+  "agg": {
+   "fps_mean": {
+    "median": 21.95241594320152,
+    "p95": 21.95241594320152,
+    "min": 21.95241594320152,
+    "max": 21.95241594320152,
+    "n": 1
+   },
+   "frame_p50": {
+    "median": 48.222,
+    "p95": 48.222,
+    "min": 48.222,
+    "max": 48.222,
+    "n": 1
+   },
+   "frame_p95": {
+    "median": 64.655,
+    "p95": 64.655,
+    "min": 64.655,
+    "max": 64.655,
+    "n": 1
+   },
+   "frame_p99": {
+    "median": 110.354,
+    "p95": 110.354,
+    "min": 110.354,
+    "max": 110.354,
+    "n": 1
+   },
+   "frame_max": {
+    "median": 133.354,
+    "p95": 133.354,
+    "min": 133.354,
+    "max": 133.354,
+    "n": 1
+   },
+   "dropped_gt16_7": {
+    "median": 438,
+    "p95": 438,
+    "min": 438,
+    "max": 438,
+    "n": 1
+   },
+   "dropped_gt8_3": {
+    "median": 440,
+    "p95": 440,
+    "min": 440,
+    "max": 440,
+    "n": 1
+   },
+   "dropped_gt25": {
+    "median": 438,
+    "p95": 438,
+    "min": 438,
+    "max": 438,
+    "n": 1
+   },
+   "rss_kb_median": {
+    "median": 175632.0,
+    "p95": 175632.0,
+    "min": 175632.0,
+    "max": 175632.0,
+    "n": 1
+   },
+   "rss_kb_peak": {
+    "median": 187808,
+    "p95": 187808,
+    "min": 187808,
+    "max": 187808,
+    "n": 1
+   },
+   "pss_kb_median": {
+    "median": 172662.0,
+    "p95": 172662.0,
+    "min": 172662.0,
+    "max": 172662.0,
+    "n": 1
+   },
+   "pss_kb_peak": {
+    "median": 184840,
+    "p95": 184840,
+    "min": 184840,
+    "max": 184840,
+    "n": 1
+   },
+   "cpu_pct_core_mean": {
+    "median": 91.43509998035917,
+    "p95": 91.43509998035917,
+    "min": 91.43509998035917,
+    "max": 91.43509998035917,
+    "n": 1
+   },
+   "cpu_pct_core_peak_1s": {
+    "median": 98.93757916977353,
+    "p95": 98.93757916977353,
+    "min": 98.93757916977353,
+    "max": 98.93757916977353,
+    "n": 1
+   },
+   "input_latency_ms_p50": null,
+   "input_latency_ms_p95": null,
+   "startup_to_measure_s": {
+    "median": 2.272997894000582,
+    "p95": 2.272997894000582,
+    "min": 2.272997894000582,
+    "max": 2.272997894000582,
+    "n": 1
+   },
+   "wall_s": {
+    "median": 22.2601891230006,
+    "p95": 22.2601891230006,
+    "min": 22.2601891230006,
+    "max": 22.2601891230006,
+    "n": 1
+   }
+  }
+ },
+ "runs": [
+  {
+   "run": 0,
+   "rc": 0,
+   "wall_s": 22.2601891230006,
+   "markers": true,
+   "mem_failcnt": 0,
+   "mem_charged_peak_kb": 154508,
+   "oom_kills": 0,
+   "oom": false,
+   "startup_to_measure_s": 2.272997894000582,
+   "frames": 440,
+   "ops": {
+    "n": 1,
+    "variant": "",
+    "pacing": "60-only",
+    "time_to_first_display_ms": 149.394,
+    "layout_ms": 50.289,
+    "file_read_ms": 9.802,
+    "document_load_ms": 6.056,
+    "chars": 618670,
+    "mb": 1,
+    "extent_height": 212961.01,
+    "select_all_done": 1,
+    "select_all_call_ms": 0.158,
+    "text_control": "AvaloniaEdit.TextEditor",
+    "checksum_data": "5816173b",
+    "key_events": 0,
+    "max_frame_stall_ms": 133.354,
+    "ui_stall_ms_max": 123.477,
+    "ui_stall_ticks": 1018,
+    "ui_stall_gt50ms": 27,
+    "ui_stall_hist_lt8_16_33_50_100_250_1000_ge1000": [
+     580,
+     0,
+     86,
+     325,
+     22,
+     5,
+     0,
+     0
+    ],
+    "setup_ms": 178.14,
+    "gc": {
+     "collections": 14,
+     "gen0": 14,
+     "gen1": 14,
+     "gen2": 3,
+     "gen0_only": 0,
+     "gen1_only": 11,
+     "pause_ms_total": 755.19,
+     "pause_ms_max": 90.554,
+     "alloc_bytes": 1040267344,
+     "heap_bytes": 73446424,
+     "server_gc": false,
+     "latency_mode": "Interactive"
+    },
+    "render_ops": 0,
+    "render_op_ms_mean": 0.0
+   },
+   "checksum": "5816173b",
+   "unsupported": null,
+   "version": "Avalonia 12.1.4 (X11/Skia/HarfBuzz/Themes.Simple 12.1.4), Avalonia.AvaloniaEdit 12.0.0, SkiaSharp 3.119.4, HarfBuzzSharp 8.3.1.3, FSharp.Core 10.1.403, .NET SDK 10.0.403, core rust (core/ libbenchcore C-ABI v2), runtime .NET 10.0.14, NativeAOT, Avalonia assembly 12.1.4",
+   "fps_mean": 21.95241594320152,
+   "frame_p50": 48.222,
+   "frame_p95": 64.655,
+   "frame_p99": 110.354,
+   "frame_max": 133.354,
+   "dropped_gt16_7": 438,
+   "dropped_gt8_3": 440,
+   "dropped_gt25": 438,
+   "dropped_ms_gt16_7": 12699.021,
+   "window": "markers",
+   "rss_kb_median": 175632.0,
+   "rss_kb_peak": 187808,
+   "pss_kb_median": 172662.0,
+   "pss_kb_peak": 184840,
+   "pss_kb_first_quarter": 142374.0,
+   "pss_kb_last_quarter": 172572.0,
+   "cpu_pct_core_mean": 91.43509998035917,
+   "cpu_pct_core_peak_1s": 98.93757916977353,
+   "samples": [
+    [
+     0.0,
+     0.0,
+     3480,
+     806
+    ],
+    [
+     1.0,
+     0.18,
+     64468,
+     61500
+    ],
+    [
+     2.1,
+     0.21,
+     64468,
+     61500
+    ],
+    [
+     3.1,
+     1.04,
+     91624,
+     88656
+    ],
+    [
+     4.1,
+     1.95,
+     126764,
+     123796
+    ],
+    [
+     5.2,
+     2.92,
+     150580,
+     147612
+    ],
+    [
+     6.2,
+     3.89,
+     151452,
+     148484
+    ],
+    [
+     7.3,
+     4.81,
+     183212,
+     180244
+    ],
+    [
+     8.3,
+     5.82,
+     183512,
+     180544
+    ],
+    [
+     9.3,
+     6.75,
+     179624,
+     176656
+    ],
+    [
+     10.4,
+     7.66,
+     179668,
+     176700
+    ],
+    [
+     11.4,
+     8.6,
+     179668,
+     176700
+    ],
+    [
+     12.5,
+     9.53,
+     179688,
+     176720
+    ],
+    [
+     13.5,
+     10.54,
+     175560,
+     172592
+    ],
+    [
+     14.6,
+     11.47,
+     175820,
+     172852
+    ],
+    [
+     15.6,
+     12.41,
+     175836,
+     172868
+    ],
+    [
+     16.6,
+     13.35,
+     176096,
+     173128
+    ],
+    [
+     17.7,
+     14.31,
+     175244,
+     172276
+    ],
+    [
+     18.7,
+     15.26,
+     175392,
+     172424
+    ],
+    [
+     19.8,
+     16.29,
+     175540,
+     172572
+    ],
+    [
+     20.8,
+     17.25,
+     175604,
+     172604
+    ],
+    [
+     21.8,
+     18.18,
+     175668,
+     172668
+    ]
+   ]
+  }
+ ]
+}
