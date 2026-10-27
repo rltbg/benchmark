@@ -4,7 +4,7 @@
 usage: capacity.py --stack NAME --scenario ID [--variant k=v]... [--duration 12] [--outdir DIR]
                    [--cpu-quota Q] [--env K=V] [--n-start N] [--n-max N] [--values a,b,c]
 Le critère « tient 60 Hz » : rc=0, marqueurs, fps >= 58.5, frames > 25 ms <= 1 %, p99 <= 33 ms
-(+ applied/generated >= 0.999 pour les scénarios de flux). Recherche : doublement, bissection
+(+ applied/generated >= 0.99 et pertes explicites <= 0.1 % pour les scénarios de flux). Recherche : doublement, bissection
 (±5 %), 3 confirmations, puis sonde à 2×N_max. Résumé : <outdir>/capacity/<stack>/<scn>.json"""
 import argparse, json, os, sys, types
 
@@ -63,7 +63,11 @@ def evaluate(res, spec):
         if (res.get("frame_p99") or 0) > P99_MAX: reasons.append(f"p99 {res.get('frame_p99'):.1f} ms > {P99_MAX}")
     if spec.get("flow"):
         g, ap_ = ops.get("updates_generated"), ops.get("updates_applied")
-        if not g or ap_ is None or ap_ / g < 0.999: reasons.append(f"appliquées {ap_}/{g} < 99,9 %")
+        # le retard d'une frame de drainage en fin de mesure (≈ 0,2 % à 10 k/s) n'est pas une perte : seuil 99 % appliquées,
+        # et les pertes explicites (file pleine, ops.updates_dropped) doivent rester ≤ 0,1 %
+        dr = ops.get("updates_dropped") or 0
+        if not g or ap_ is None or ap_ / g < 0.99: reasons.append(f"appliquées {ap_}/{g} < 99 %")
+        elif dr / g > 0.001: reasons.append(f"perdues {dr}/{g} > 0,1 %")
     if spec.get("stall_ms") and (ops.get("ui_stall_ms_max") or 0) > spec["stall_ms"]: reasons.append(f"arrêt {ops.get('ui_stall_ms_max')} ms > {spec['stall_ms']}")
     if spec.get("first_display_ms") and (ops.get("time_to_first_display_ms") or 0) > spec["first_display_ms"]:
         reasons.append(f"1er affichage {ops.get('time_to_first_display_ms')} ms > {spec['first_display_ms']}")
