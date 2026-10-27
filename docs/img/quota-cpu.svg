@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" width="900" font-family="Helvetica,Arial,sans-serif" font-size="12">
+<rect width="900" height="420" fill="#fff"/>
+<text x="16" y="26" font-size="17" font-weight="bold" fill="#222">Quand le processeur se raréfie</text>
+<text x="16" y="46" fill="#555">Images par seconde avec le CPU bridé par cgroup (60 = parfait). Plus long = mieux.</text>
+<line x1="230.0" y1="62" x2="230.0" y2="360" stroke="#ddd"/>
+<text x="230.0" y="376" text-anchor="middle" fill="#666">0</text>
+<line x1="346.0" y1="62" x2="346.0" y2="360" stroke="#ddd"/>
+<text x="346.0" y="376" text-anchor="middle" fill="#666">13.4</text>
+<line x1="462.0" y1="62" x2="462.0" y2="360" stroke="#ddd"/>
+<text x="462.0" y="376" text-anchor="middle" fill="#666">26.9</text>
+<line x1="578.0" y1="62" x2="578.0" y2="360" stroke="#ddd"/>
+<text x="578.0" y="376" text-anchor="middle" fill="#666">40.3</text>
+<line x1="694.0" y1="62" x2="694.0" y2="360" stroke="#ddd"/>
+<text x="694.0" y="376" text-anchor="middle" fill="#666">53.8</text>
+<line x1="810.0" y1="62" x2="810.0" y2="360" stroke="#ddd"/>
+<text x="810.0" y="376" text-anchor="middle" fill="#666">67.2</text>
+<text x="220" y="101.0" text-anchor="end" fill="#222">2000 étiquettes, 1 cœur</text>
+<rect x="230" y="70" width="514.4" height="16" fill="#2f6fb0" rx="2"/>
+<text x="749.4" y="82" fill="#444">60 fps</text>
+<rect x="230" y="89" width="104.9" height="16" fill="#3a9a4f" rx="2"/>
+<text x="339.9" y="101" fill="#444">12 fps</text>
+<rect x="230" y="108" width="154.1" height="16" fill="#d9822b" rx="2"/>
+<text x="389.1" y="120" fill="#444">18 fps</text>
+<text x="220" y="171.0" text-anchor="end" fill="#222">2000 étiquettes, ½ cœur</text>
+<rect x="230" y="140" width="265.7" height="16" fill="#2f6fb0" rx="2"/>
+<text x="500.7" y="152" fill="#444">31 fps</text>
+<rect x="230" y="159" width="49.3" height="16" fill="#3a9a4f" rx="2"/>
+<text x="284.3" y="171" fill="#444">6 fps</text>
+<rect x="230" y="178" width="75.3" height="16" fill="#d9822b" rx="2"/>
+<text x="310.3" y="190" fill="#444">9 fps</text>
+<text x="220" y="241.0" text-anchor="end" fill="#222">1000 formes, 1 cœur</text>
+<rect x="230" y="210" width="537.0" height="16" fill="#2f6fb0" rx="2"/>
+<text x="772.0" y="222" fill="#444">62 fps</text>
+<rect x="230" y="229" width="516.0" height="16" fill="#3a9a4f" rx="2"/>
+<text x="751.0" y="241" fill="#444">60 fps</text>
+<rect x="230" y="248" width="529.1" height="16" fill="#d9822b" rx="2"/>
+<text x="764.1" y="260" fill="#444">61 fps</text>
+<text x="220" y="311.0" text-anchor="end" fill="#222">1000 formes, ½ cœur</text>
+<rect x="230" y="280" width="527.0" height="16" fill="#2f6fb0" rx="2"/>
+<text x="762.0" y="292" fill="#444">61 fps</text>
+<rect x="230" y="299" width="500.4" height="16" fill="#3a9a4f" rx="2"/>
+<text x="735.4" y="311" fill="#444">58 fps</text>
+<rect x="230" y="318" width="524.4" height="16" fill="#d9822b" rx="2"/>
+<text x="759.4" y="330" fill="#444">61 fps</text>
+<rect x="230" y="390" width="12" height="12" fill="#2f6fb0" rx="2"/><text x="247" y="400" fill="#222">Slint</text>
+<rect x="390" y="390" width="12" height="12" fill="#3a9a4f" rx="2"/><text x="407" y="400" fill="#222">Qt Quick</text>
+<rect x="550" y="390" width="12" height="12" fill="#d9822b" rx="2"/><text x="567" y="400" fill="#222">Avalonia AOT</text>
+<text x="884" y="412" text-anchor="end" fill="#777" font-size="11">fps</text>
+</svg>

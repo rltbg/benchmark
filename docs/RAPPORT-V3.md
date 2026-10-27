@@ -15,6 +15,24 @@ Date : 2026-10-27. Branche `bench-v3`. Données : `results3/SYNTHESE.md` (géné
 
 ## 1. Résultats
 
+### En images
+
+![Capacité à 60 Hz](img/capacite.svg)
+
+![Latence d'entrée](img/latence.svg)
+
+![Édition d'un document de 1 Mo](img/edition-1mo.svg)
+
+![Dégradation par quota CPU](img/quota-cpu.svg)
+
+![Démarrage](img/demarrage.svg)
+
+![Mémoire sur 10 minutes](img/soak-memoire.svg)
+
+(Graphes générés par `harness/graphes3.py` depuis `results3/`, sans valeur saisie à la main.)
+
+### Détail
+
 Voir les tableaux complets dans `results3/SYNTHESE.md`. Résumé par thème (valeurs mesurées ; « – » = non mesuré).
 
 **Capacité (plus grand N à 60 Hz)** — extraits :
@@ -73,10 +91,11 @@ Ces écarts doivent être lus comme des corrections de l'analyse par les mesures
 - **Avalonia NativeAOT/F#** : le plus fort sur formes pleines et sur tenue des flux de callbacks ; plafond 60 Hz, latence ~26 ms, démarrage lent sur gros arbres, texte en nombre faible ; coût d'écosystème F# (FS0202, quotations, `printf` interdits en AOT). Le gain de F# pour une base de code unique n'est pas mesuré ici.
 - Aucun gagnant global : l'ordre dépend de la charge. Pour une app à gros texte éditable, Slint est le plus risqué ; pour une app à beaucoup d'éléments de texte, Qt et Avalonia le sont.
 
-## 4. Reste à faire
+## 4. Ce qui n'a pas été fait (et ce que cela veut dire)
 
-1. Profilage `perf` (échantillonnage CPU logiciel) des trois écarts les plus surprenants : Qt U1 (9,3 s/frame à 10 k), Avalonia U1 (3 s à 100 k), Slint T3 (836 ms/frappe).
-2. Revue d'équité croisée par stack ; harmonisation de `checksum_data` et de la définition de `ops.updates_applied`.
-3. Répétitions (≥ 5) des points proches du seuil ; expliquer la croissance PSS d'Avalonia sur 600 s.
-4. Mesures sur GPU, mobiles et plateformes autres que Linux (hors périmètre cloud).
-5. Archivage final de F* / variantes v2 (`fstar/`, `stacks/`, `docs/fstar/`), mise à jour du README, fusion de `bench-v3`.
+1. **Profilage `perf`** : jusqu'ici on a mesuré *combien* ça va vite ou lentement, pas *pourquoi*. `perf` est un outil Linux qui observe où un programme passe son temps (quelles fonctions occupent le processeur). L'étape consisterait à le lancer sur les trois cas les plus surprenants (Qt qui met 9 s par frame à redimensionner 10 000 nœuds, Avalonia 3 s pour 100 000, Slint 836 ms par frappe sur 1 Mo) pour désigner la fonction responsable. Utile pour savoir si le défaut est contournable ou structurel ; pas nécessaire pour lire les résultats.
+2. **Revue d'équité croisée** : chaque implémentation a été écrite par un agent spécialiste de sa stack. Le risque est qu'un agent ait mieux optimisé « son » framework qu'un autre. La revue consiste à faire relire chaque implémentation par quelqu'un qui connaît *les autres* stacks, pour vérifier que chacune fait bien le même travail et utilise les bons réglages. Tant qu'elle n'est pas faite, de petits écarts (±20 %) ne sont pas à interpréter.
+3. Répéter (≥ 5 fois) les points proches du seuil ; expliquer la croissance mémoire d'Avalonia (148 → 205 Mo).
+4. Mesurer sur GPU, mobiles et autres plateformes (hors périmètre de ce cloud).
+
+F* et les variantes v2 sont mis de côté dans `archive/` (voir `archive/README.md`), hors de la comparaison.

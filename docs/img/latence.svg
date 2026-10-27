@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 674" width="900" font-family="Helvetica,Arial,sans-serif" font-size="12">
+<rect width="900" height="674" fill="#fff"/>
+<text x="16" y="26" font-size="17" font-weight="bold" fill="#222">Latence d'entrée : du geste au pixel qui change</text>
+<text x="16" y="46" fill="#555">Médiane (sauf dernière ligne : p95). Plus court = mieux (échelle logarithmique). Mesuré de l'extérieur, sur le framebuffer.</text>
+<line x1="230.0" y1="62" x2="230.0" y2="614" stroke="#ddd"/>
+<text x="230.0" y="630" text-anchor="middle" fill="#666">0.1</text>
+<line x1="375.0" y1="62" x2="375.0" y2="614" stroke="#ddd"/>
+<text x="375.0" y="630" text-anchor="middle" fill="#666">1</text>
+<line x1="520.0" y1="62" x2="520.0" y2="614" stroke="#ddd"/>
+<text x="520.0" y="630" text-anchor="middle" fill="#666">10</text>
+<line x1="665.0" y1="62" x2="665.0" y2="614" stroke="#ddd"/>
+<text x="665.0" y="630" text-anchor="middle" fill="#666">100</text>
+<line x1="810.0" y1="62" x2="810.0" y2="614" stroke="#ddd"/>
+<text x="810.0" y="630" text-anchor="middle" fill="#666">1 k</text>
+<text x="220" y="110.5" text-anchor="end" fill="#222">Touche, machine au repos</text>
+<rect x="230" y="70" width="324.9" height="16" fill="#2f6fb0" rx="2"/>
+<text x="559.9" y="82" fill="#444">17.4 ms</text>
+<rect x="230" y="89" width="168.0" height="16" fill="#3a9a4f" rx="2"/>
+<text x="403.0" y="101" fill="#444">1.4 ms</text>
+<rect x="230" y="108" width="351.4" height="16" fill="#d9822b" rx="2"/>
+<text x="586.4" y="120" fill="#444">26.5 ms</text>
+<rect x="230" y="127" width="165.9" height="16" fill="#8fb5de" rx="2"/>
+<text x="400.9" y="139" fill="#444">1.4 ms</text>
+<text x="220" y="199.5" text-anchor="end" fill="#222">Touche, 3 processus à 100 % CPU</text>
+<rect x="230" y="159" width="324.6" height="16" fill="#2f6fb0" rx="2"/>
+<text x="559.6" y="171" fill="#444">17.3 ms</text>
+<rect x="230" y="178" width="140.6" height="16" fill="#3a9a4f" rx="2"/>
+<text x="375.6" y="190" fill="#444">0.9 ms</text>
+<rect x="230" y="197" width="351.7" height="16" fill="#d9822b" rx="2"/>
+<text x="586.7" y="209" fill="#444">26.7 ms</text>
+<rect x="230" y="216" width="147.7" height="16" fill="#8fb5de" rx="2"/>
+<text x="382.7" y="228" fill="#444">1.0 ms</text>
+<text x="220" y="288.5" text-anchor="end" fill="#222">Touche, liste en défilement rapide</text>
+<rect x="230" y="248" width="302.7" height="16" fill="#2f6fb0" rx="2"/>
+<text x="537.7" y="260" fill="#444">12.2 ms</text>
+<rect x="230" y="267" width="154.9" height="16" fill="#3a9a4f" rx="2"/>
+<text x="389.9" y="279" fill="#444">1.2 ms</text>
+<rect x="230" y="286" width="352.9" height="16" fill="#d9822b" rx="2"/>
+<text x="587.9" y="298" fill="#444">27.1 ms</text>
+<rect x="230" y="305" width="224.1" height="16" fill="#8fb5de" rx="2"/>
+<text x="459.1" y="317" fill="#444">3.5 ms</text>
+<text x="220" y="377.5" text-anchor="end" fill="#222">Molette, machine au repos</text>
+<rect x="230" y="337" width="331.9" height="16" fill="#2f6fb0" rx="2"/>
+<text x="566.9" y="349" fill="#444">19.5 ms</text>
+<rect x="230" y="356" width="332.1" height="16" fill="#3a9a4f" rx="2"/>
+<text x="567.1" y="368" fill="#444">19.5 ms</text>
+<rect x="230" y="375" width="357.3" height="16" fill="#d9822b" rx="2"/>
+<text x="592.3" y="387" fill="#444">29.1 ms</text>
+<rect x="230" y="394" width="332.1" height="16" fill="#8fb5de" rx="2"/>
+<text x="567.1" y="406" fill="#444">19.5 ms</text>
+<text x="220" y="466.5" text-anchor="end" fill="#222">Molette, 3 processus à 100 % CPU</text>
+<rect x="230" y="426" width="333.5" height="16" fill="#2f6fb0" rx="2"/>
+<text x="568.5" y="438" fill="#444">19.9 ms</text>
+<rect x="230" y="445" width="369.0" height="16" fill="#3a9a4f" rx="2"/>
+<text x="604.0" y="457" fill="#444">35.1 ms</text>
+<rect x="230" y="464" width="363.4" height="16" fill="#d9822b" rx="2"/>
+<text x="598.4" y="476" fill="#444">32.1 ms</text>
+<rect x="230" y="483" width="333.8" height="16" fill="#8fb5de" rx="2"/>
+<text x="568.8" y="495" fill="#444">20.0 ms</text>
+<text x="220" y="555.5" text-anchor="end" fill="#222">Molette, p95, au repos</text>
+<rect x="230" y="515" width="366.7" height="16" fill="#2f6fb0" rx="2"/>
+<text x="601.7" y="527" fill="#444">33.8 ms</text>
+<rect x="230" y="534" width="488.2" height="16" fill="#3a9a4f" rx="2"/>
+<text x="723.2" y="546" fill="#444">232.8 ms</text>
+<rect x="230" y="553" width="571.3" height="16" fill="#d9822b" rx="2"/>
+<text x="806.3" y="565" fill="#444">871.2 ms</text>
+<rect x="230" y="572" width="368.8" height="16" fill="#8fb5de" rx="2"/>
+<text x="603.8" y="584" fill="#444">34.9 ms</text>
+<rect x="230" y="644" width="12" height="12" fill="#2f6fb0" rx="2"/><text x="247" y="654" fill="#222">Slint</text>
+<rect x="390" y="644" width="12" height="12" fill="#3a9a4f" rx="2"/><text x="407" y="654" fill="#222">Qt Quick</text>
+<rect x="550" y="644" width="12" height="12" fill="#d9822b" rx="2"/><text x="567" y="654" fill="#222">Avalonia AOT</text>
+<rect x="710" y="644" width="12" height="12" fill="#8fb5de" rx="2"/><text x="727" y="654" fill="#222">Slint (winit direct)</text>
+<text x="884" y="666" text-anchor="end" fill="#777" font-size="11">ms</text>
+</svg>
